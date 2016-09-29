@@ -1,0 +1,16 @@
+---
+layout: post
+title: Oh shit, I did something terribly wrong, is there a magic time machine!?!
+---
+
+{% highlight sh %}
+$ git reflog
+# you will see a list of every thing you've done in git, across all branches!
+# each one has an index HEAD@{index}
+# find the one before you broke everything
+$ git reset HEAD@{index}
+# magic time machine
+{% endhighlight %}
+
+
+You can use this to get back stuff you accidentally deleted, or just to remove some stuff you tried that broke the repo.

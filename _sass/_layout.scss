@@ -1,0 +1,58 @@
+// Layout
+//
+// Styles for managing the structural hierarchy of the site.
+
+.social {
+  ul {
+    @include bp-small {
+      text-align: center;
+    }
+    @include bp-medium {
+      text-align: center;
+    }
+  }
+  li {
+    @include bp-small {
+      display: inline-block;
+      padding-right: 1em;
+    }
+    @include bp-medium {
+      display: inline-block;
+      padding-right: 1em;
+    }
+  }
+  i {
+    font-size: 28px;
+  }
+}
+
+footer {
+  margin: 4em 0 0;
+  h2 {
+    margin-bottom: 1em;
+    font-size: 22px;
+  }
+  p {
+    font-size: 18px;
+  }
+  .copyright {
+    margin-top: 4em;
+    color: #d1d1d1;
+    a{
+        color: #d1d1d1;
+    }
+    @include bp-small {
+      text-align: center;
+    }
+    @include bp-medium {
+      text-align: center;
+    }
+  }
+}
+
+
+
+
+.column:last-child:not(:first-child), .columns:last-child:not(:first-child) {
+    float: left;
+}

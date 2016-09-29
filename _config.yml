@@ -1,0 +1,35 @@
+# Permalinks
+permalink:           /:title
+
+# Setup
+title:               oh! shit! git!
+tagline:             "Git is hard: screwing up is easy, & figuring out how to fix your mistakes is fucking impossible. So here are some common bad situations, & how you can get out of them in plain english."
+url:                 https://mesingh.github.io/ohshitgit/
+paginate:            1
+baseurl:             ""
+
+# Assets
+#
+# We specify the directory for Jekyll so we can use @imports.
+sass:
+  sass_dir:          _sass
+  style:            :compressed
+
+# About/contact
+author:
+  name:              Mandeep Singh
+  url:               https://www.msingh.com
+  email:             im@msingh.me
+
+# Custom vars
+version:             1.0.0
+github:
+  repo:              https://github.com/meSingh/ohshitgit
+google_analytics:    UA-XXXXXXXXXX
+twitter:             meSingh9
+github:              meSingh/ohshitgit
+
+# Gems
+gems:
+  - jekyll-paginate
+  - jekyll-gist

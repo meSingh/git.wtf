@@ -1,0 +1,38 @@
+---
+layout: default
+title: Home
+---
+
+
+<div class="content-section">
+
+  <p>
+      Git is hard: screwing up is easy, and figuring out how to fix your mistakes is fucking impossible. So here are some common bad situations and how you can get out of them in plain english*.
+  </p>
+
+  <hr>
+
+</div>
+
+<main>
+  <!-- <h2>Latest Work</h2> -->
+  {% for post in site.posts %}
+    <div class="project-post">
+      <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+      {{ post.content | split:'<!--break-->' | first  }}
+    </div>
+    <hr>
+  {% endfor %}
+</main>
+
+<footer>
+  <h2>Want to Contribute?</h2>
+
+  <p>
+  Send me an <a href="mailto:im@msingh.me?Subject=Oh!%20Shit!%20Git!">Email</a>, ping me on <a href="https://twitter.com/meSingh9">Twitter</a> or submit a pull request on <a href="https://github.com/meSingh/ohshitgit/pulls">Github</a>.
+  </p>
+
+  <p class="copyright">
+    &copy; <time datetime="{{ site.time | date_to_xmlschema }}">{{ site.time | date: '%Y' }}</time> <a href="https://www.khurafatstudio.com">KhurafatSudio</a>. All rights reserved.
+  </p>
+</footer>
