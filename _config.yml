@@ -4,9 +4,9 @@ permalink:           /:title
 # Setup
 title:               oh! shit! git!
 tagline:             "Git is hard: screwing up is easy, & figuring out how to fix your mistakes is fucking impossible. So here are some common bad situations, & how you can get out of them in plain english."
-url:                 https://mesingh.github.io
+url:                 https://ohshitgit.msingh.com
 paginate:            1
-baseurl:             "/ohshitgit"
+baseurl:             ""
 
 # Assets
 #
