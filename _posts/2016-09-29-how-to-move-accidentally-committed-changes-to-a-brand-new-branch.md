@@ -1,6 +1,7 @@
 ---
 layout: post
-title: Oh shit, I accidentally committed something to master that should have been on a brand new branch!
+title: How to move accidentally committed changes to a brand new branch
+source: http://ohshitgit.com/
 ---
 
 {% highlight sh %}
@@ -16,8 +17,6 @@ $ git checkout master
 $ git reset HEAD~ --hard
 # whoola!! you are back on track
 {% endhighlight %}
-
-Note: this doesn't work if you've already pushed to origin, and if you tried other things first, you might need to git reset HEAD@{number} instead of HEAD~. Infinite sadness.
 
 <!--break-->
 

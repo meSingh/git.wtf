@@ -1,6 +1,7 @@
 ---
 layout: post
-title: Oh shit, I need to change the message on my last commit!
+title: How to change the message on last commit?
+source: http://ohshitgit.com/
 ---
 
 {% highlight sh %}

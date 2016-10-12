@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Fuck this noise, I give up.
+source: http://ohshitgit.com/
 ---
 
 {% highlight sh %}

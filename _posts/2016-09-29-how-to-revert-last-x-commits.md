@@ -1,6 +1,7 @@
 ---
 layout: post
-title: Oh shit, I did something terribly wrong, is there a magic time machine!?!
+title: How to revert last X commits
+source: http://ohshitgit.com/
 ---
 
 {% highlight sh %}

@@ -1,6 +1,7 @@
 ---
 layout: post
-title: Oh shit, I tried to run a diff but nothing happened?!
+title: How to run a diff on unstagged changes?
+source: http://ohshitgit.com/
 ---
 
 {% highlight sh %}
