@@ -9,4 +9,4 @@ So here are some common bad situations and how you can get out of them _in plain
 [Visit Website =>>](https://www.githappens.org)
 
 <br><br>
-Originally sourced from [ohshitgit](http://ohshitgit.com), improved, new features added & old one's updated for a better flow.
+Inspired from [ohshitgit](http://ohshitgit.com)

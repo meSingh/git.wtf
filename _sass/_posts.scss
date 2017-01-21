@@ -33,17 +33,23 @@ main h2 {
   display: block;
   margin-top: -.5rem;
   margin-bottom: 1rem;
-  color: #9a9a9a;
+  color: $grayish;
 }
 
+a.source {
+    float: right;
+    font-size: 15px;
+    color: $gray-2;
+    // color: #c36c74;
+}
 
 // Related posts
 .related {
   padding-top: 2rem;
-  padding-bottom: 2rem;
-  margin-bottom: 2rem;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+  // padding-bottom: 2rem;
+  // margin-bottom: 1rem;
+  // border-top: 1px solid #eee;
+  // border-bottom: 1px solid #eee;
 }
 
 .related-posts {

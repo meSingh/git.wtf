@@ -38,6 +38,7 @@ a {
   color: $primary;
   text-decoration: none;
   font-weight: bold;
+  cursor: pointer;
   @include transition(color .2s ease-in-out);
 
   // `:focus` is linked to `:hover` for basic accessibility

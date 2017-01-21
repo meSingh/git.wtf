@@ -21,6 +21,19 @@
 
         {{ content }}
 
+        <footer>
+          <h2>Want to Contribute?</h2>
+
+          <p>Send me an <a href="mailto:{{ site.author.email }}?Subject=Oh!%20Shit!%20Git!">Email</a>, ping me on <a href="https://twitter.com/{{ site.twitter }}">Twitter</a> or submit a pull request on <a href="https://github.com/{{ site.github }}/pulls">Github</a>.</p>
+
+          <p class="copyright">
+
+            Copyright &copy; 2016 - <time datetime="{{ site.time | date_to_xmlschema }}">{{ site.time | date: '%Y' }}</time> <a href="https://www.khurafat.desi">Khurafat</a>. All rights reserved.
+            <span>Made with <?xml version="1.0" encoding="iso-8859-1"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 492.719 492.719" style="enable-background:new 0 0 492.719 492.719;margin-bottom: -2px;" xml:space="preserve" width="20px" height="20px"><g><g id="Icons_18_"><path d="M492.719,166.008c0-73.486-59.573-133.056-133.059-133.056c-47.985,0-89.891,25.484-113.302,63.569    c-23.408-38.085-65.332-63.569-113.316-63.569C59.556,32.952,0,92.522,0,166.008c0,40.009,17.729,75.803,45.671,100.178    l188.545,188.553c3.22,3.22,7.587,5.029,12.142,5.029c4.555,0,8.922-1.809,12.142-5.029l188.545-188.553    C474.988,241.811,492.719,206.017,492.719,166.008z" fill="#D80027"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg> for OpenSource</span>
+          </p>
+
+        </footer>
+
     </div>
 
     <div class="large-1 columns social">
