@@ -2,9 +2,9 @@
 permalink:           /:title
 
 # Setup
-title:               Git! Happens!
+title:               Git WTF!!
 description:             "Git is hard: screwing up is easy, & figuring out how to fix your mistakes is fucking impossible. So here are some common bad situations, & how you can get out of them in plain english."
-url:                 https://www.githappens.org
+url:                 https://git.wtf
 baseurl:
 
 # Assets
@@ -23,10 +23,10 @@ author:
 # Custom vars
 version:             1.0.0
 github:
-  repo:              https://github.com/meSingh/GitHappens.org
+  repo:              https://github.com/meSingh/Git.WTF
 google_analytics:    UA-85622276-1
 twitter:             meSingh9
-github:              meSingh/GitHappens.org
+github:              meSingh/Git.WTF
 
 # Gems
 gems:

@@ -6,7 +6,7 @@ Git is hard: screwing up is easy, and figuring out how to fix your mistakes is f
 
 So here are some common bad situations and how you can get out of them _in plain english_*.
 
-[Visit Website =>>](https://www.githappens.org)
+[Visit Website =>>](https://git.wtf)
 
 <br><br>
 Inspired from [ohshitgit](http://ohshitgit.com)
