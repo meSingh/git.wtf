@@ -1,5 +1,5 @@
 <img src="https://raw.githubusercontent.com/meSingh/ohshitgit/master/ohshit.png" align="right" width="130px"/>
-Git! Happens!
+WTF!! GIT!!
 =============
 
 Git is hard: screwing up is easy, and figuring out how to fix your mistakes is fucking impossible.
