@@ -1,0 +1,14 @@
+.post {
+
+    .content {
+        @apply .my-2;
+
+         p {
+            @apply .mb-2;
+        }
+
+        code {
+            @apply .mx-1;
+        }
+    }
+}
