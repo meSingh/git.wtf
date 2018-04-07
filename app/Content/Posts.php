@@ -133,7 +133,7 @@ class Posts extends Provider
                 ];
             })
             ->sortByDesc(function ($post) {
-                return str_replace('-', '', $post->date);
+                return carbon($post->date)->getTimestamp();
             });
     }
 }
