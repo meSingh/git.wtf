@@ -121,7 +121,7 @@ class Posts extends Provider
                     'url' => route('post', [$slug]),
                     'external_url' => $document->external_url ?? false,
                     'title' => $document->title,
-                    'category' => $document->category ?? 'fuck',
+                    'category' => ucwords(str_replace('-', ' ', $document->category)) ?? 'fuck',
                     'contents' => markdown($document->body()),
                     'summary' => markdown($document->summary ?? $document->body()),
                     'summary_short_formated' => markdown(mb_strimwidth($document->summary ?? $document->body(), 0, 145, '...')),
@@ -132,6 +132,8 @@ class Posts extends Provider
                     'published' => $document->published ?? $published,
                 ];
             })
-            ->sortByDesc('date');
+            ->sortByDesc(function ($post) {
+                return str_replace('-', '', $post->date);
+            });
     }
 }

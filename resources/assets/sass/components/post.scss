@@ -3,8 +3,17 @@
     .content {
         @apply .my-2;
 
-         p {
-            @apply .mb-2;
+        h1, h2, h3, h4, h5, h6 {
+            @apply .block .mt-4 .mb-2 .text-grey-darkest;            
+        }
+
+        p {
+            font-family: 'Noto Sans';
+            @apply .inline-block .mb-3 .text-grey-darkest;
+
+            strong {
+                @apply .font-black;
+            }
         }
 
         code {

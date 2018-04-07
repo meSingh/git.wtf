@@ -11,7 +11,7 @@
     <header class="header min-h-12 md:min-h-16 z-50 max-w-2xl mx-auto flex bg-white shadow-theme md:rounded-md mb-6 sm:mb-10">
 
         <a href="/" class="w-12 md:w-20 h-nav md:h-nav-l flex-none bg-purple text-2xl xl:rounded-l-md flex justify-center items-center">
-            <img src="/images/logo.png" class="logo max-w-10 md:max-w-12">
+            <img src="/images/logo.png" class="logo max-w-8 md:max-w-10">
         </a>
 
         <div class="w-full relative flex">

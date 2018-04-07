@@ -22,6 +22,9 @@
         @else
             {{ $post->author['name'] }}
         @endif
+
+        <span class="text-lg mx-2">&middot;</span>
+        {{ $post->category }}     
     </div>
 
 

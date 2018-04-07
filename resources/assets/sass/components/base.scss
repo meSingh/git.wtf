@@ -7,6 +7,11 @@ a {
     }
 }
 
+p {
+    font-family: 'Noto Sans';
+    @apply .inline-block .mb-3 .text-grey-darkest;
+}
+
 .heading {
     color: #c5c7cb;
 }
