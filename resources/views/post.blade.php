@@ -36,6 +36,7 @@
 
         <div id="hypercomments_widget"></div>
         <script type="text/javascript">
+        document.addEventListener('turbolinks:load', () => {
             _hcwp = window._hcwp || [];
             _hcwp.push({widget:"Stream", widget_id: 103313});
             (function() {
@@ -47,6 +48,7 @@
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hcc, s.nextSibling);
             })();
+        });
         </script>
     </section>
 
