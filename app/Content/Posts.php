@@ -22,10 +22,10 @@ class Posts extends Provider
     public function search($query)
     {
         return $this->all()->filter(function ($post) use ($query) {
-            return strpos($post->title, $query) !== false
-                || strpos($post->contents, $query) !== false
-                || strpos($post->summary, $query) !== false
-                || strpos($post->category, $query) !== false;
+            return stripos($post->title, $query) !== false
+                || stripos($post->contents, $query) !== false
+                || stripos($post->summary, $query) !== false
+                || stripos($post->category, $query) !== false;
             // TDOD: tags & author
         });
     }
