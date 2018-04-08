@@ -21,20 +21,20 @@
             @include('post-content', ['type' => 'single'])
         </article>
 
-        <div class="flex flex-row py-8 my-10 text-xl">
-            <div class="w-1/2 b-r my-10">
+        <div class="flex flex-col lg:flex-row py-8 my-4 lg:my-10 text-xl mx-4 lg:mx-auto">
+            <div class="w-full lg:w-1/2 b-r my-6 lg:my-10">
                 @if($post->previous)
                     <h3><a href="{{ route('post', $post->previous->slug) }}" class="text-grey-darker hover:text-purple no-underline">&laquo; {{ $post->previous->title }}</a></h3>
                 @endif
             </div>
-            <div class="w-1/2 text-right my-10">
+            <div class="w-full lg:w-1/2 b-r my-6 lg:my-10 text-right">
                 @if($post->next)
                     <h3><a href="{{ route('post', $post->next->slug) }}" class="text-grey-darker hover:text-purple no-underline">{{ $post->next->title }} &raquo;</a></h3>
                 @endif
             </div>
         </div>
 
-        <div id="hypercomments_widget"></div>
+        <div id="hypercomments_widget" class="mx-4 lg:mx-auto"></div>
         <script type="text/javascript">
         document.addEventListener('turbolinks:load', () => {
             _hcwp = window._hcwp || [];

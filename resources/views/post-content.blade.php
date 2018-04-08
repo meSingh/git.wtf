@@ -10,7 +10,7 @@
         @endif
     </header>
 
-    <div class="block mb-6 text-sm text-grey">
+    <div class="block mb-6 text-sm text-grey {{ $type == 'single' ? 'mx-6 lg:mx-auto' : ''}}">
         <time datetime="{{ $post->published }}" class="">
             {{ $post->dateShort }}
         </time>
@@ -24,7 +24,7 @@
         @endif
 
         <span class="text-lg mx-2">&middot;</span>
-        {{ $post->category }}     
+        {{ $post->category }}
     </div>
 
 
@@ -43,7 +43,7 @@
     </div>
 
     @if( $type == 'single')
-        <div class="pt-4 min-h-80px">
+        <div class="pt-4 min-h-80px mx-4 lg:mx-auto">
             @foreach($post->tags as $tag)
                 <a href="javascript::void(0)" class="inline-block bg-white rounded-md no-underline hover:text-purple-light px-3 py-1 text-sm font-semibold text-grey-darker mr-2">{{ $tag }}</a>
             @endforeach
