@@ -101,7 +101,7 @@ class Posts extends Provider
                     return [
                         'id' => $post->url,
                         'title' => $post->title,
-                        'updated' => $post->date,
+                        'updated' => $post->updated,
                         'summary' => $post->contents,
                         'link' => $post->url,
                         'author' => isset($post->author['name'])
@@ -126,6 +126,7 @@ class Posts extends Provider
             ->map(function ($path) {
                 $filename = str_after($path, 'posts/');
                 [$date, $slug, $extension] = explode('.', $filename, 3);
+                $updated = Carbon::parse($date);
                 $published = Carbon::parse($date)->toIso8601String();
                 $date = Carbon::createFromFormat('Y-m-d', $date)->formatLocalized('%A, %d %B %Y');
                 $document = YamlFrontMatter::parse($this->disk->get($path));
@@ -150,6 +151,7 @@ class Posts extends Provider
                         ? url($document->preview_image)
                         : url('/images/social.jpg'),
                     'published' => $document->published ?? $published,
+                    'updated' => $updated,
                 ];
             })
             ->sortByDesc(function ($post) {
