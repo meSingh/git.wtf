@@ -18,10 +18,10 @@
     <section class="pt-8 pb-12 mb-8 bg-gray-200 px-3 xl:px-0">
         <div class="max-w-5xl mx-auto">
 
-            <h2 class="text-3xl">Git is hard: screwing up is easy, and figuring out how to fix your mistakes is fucking impossible.</h2>
-            <p> Git documentation has this chicken and egg problem where you can't search for how to get yourself out of a mess, unless you <em>already know the name of the thing you need to know about</em> in order to fix your problem.</p>
+            <h2 class="text-3xl">Git is fucking hard: mistakes happen all the time, finding a solution is sometimes next to impossible.</h2>
+            <p> Git documentation has this needle in the haystack problem, where finding a solution is not just messy but tiresome too <em>unless you already know what you need.</em></p>
 
-            <p>So here are some bad situations I've gotten myself into, and how I eventually got myself out of them <i>in plain english</i>*.</p>
+            <p>So here are several of those tricky situations that you might find yourself in with <i>simple ways to get out peacefully.</i></p>
         </div>
     </section>
 
