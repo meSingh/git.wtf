@@ -1,51 +1,50 @@
-    <header class="mb-1">
-        @if( $type == 'single')
-            <h2 class="text-3xl mx-6 lg:mx-auto">{{ $post->title }}</h2>
-        @else
-            <h2>
-                <a href="{{ route('post', $post->slug) }}" class="text-black no-underline block hover:text-purple-light">
-                    {{ $post->title }}
+
+    <header class="pt-8 pb-12 mb-8 bg-gray-200">
+        <div class="max-w-5xl mx-auto px-3 md:px-0">
+            <h2 class="text-3xl mb-1">{{ $post->title }}</h2>
+
+            <div class="block m-0 text-sm text-gray-500">
+                Written
+                <time datetime="{{ $post->published }}" class="text-gray-600">
+                    {{ $post->dateShort }}
+                </time>
+
+                by
+                @if(isset($post->author['link']) && $post->author['link'] !== '' )
+                    <a href="{{ $post->author['link'] }}" target="_blank" rel="noopener" class="text-indigo-400 no-underline hover:text-indigo-600">
+                        {{ $post->author['name'] }}
+                    </a>
+                @else
+                    {{ $post->author['name'] }}
+                @endif
+
+                in
+                <a href="{{ route('category', $post->category) }}" class="text-orange-400 no-underline hover:text-orange-600">
+                    {{ $post->category_formated }}
                 </a>
-            </h2>
-        @endif
+            </div>
+        </div>
     </header>
 
-    <div class="block mb-6 text-sm text-grey {{ $type == 'single' ? 'mx-6 lg:mx-auto' : ''}}">
-        <time datetime="{{ $post->published }}" class="">
-            {{ $post->dateShort }}
-        </time>
-        <span class="text-lg mx-2">&middot;</span>
-        @if(isset($post->author['link']) && $post->author['link'] !== '' )
-            <a href="{{ $post->author['link'] }}" target="_blank" class="text-grey no-underline hover:text-purple">
-                {{ $post->author['name'] }}
-            </a>
-        @else
-            {{ $post->author['name'] }}
-        @endif
 
-        <span class="text-lg mx-2">&middot;</span>
-        {{ $post->category }}
-    </div>
-
-
-    <div class="{{ $type == 'single' ? 'bg-white shadow-theme xl:rounded-md mb-4 p-6 mt-8' : '' }}">
-        <div class="text-grey-darker leading-tight content">
+    <div class="max-w-5xl mx-auto px-3 md:px-0">
+        <div class="content pb-6 mb-8 border-0 border-b border-gray-200 border-solid ">
             {!! $post->contents !!}
-        </div>
 
-        @if( $type == 'list')
-            <div class="pt-4 min-h-80px">
-                @foreach($post->tags as $tag)
-                    <a href="javascript::void(0)" class="inline-block bg-grey-lighter rounded-md no-underline hover:text-purple-light px-3 py-1 text-sm font-semibold text-grey-darker mr-2">{{ $tag }}</a>
-                @endforeach
-            </div>
-        @endif
+            @if($post->source)
+                <div class="flex justify-center pt-4">
+                    <a href="{{ $post->source }}" target="_blank" rel="noopener" class="text-gray-500 no-underline text-sm w-8" title="Content Source">{{ svg('source') }}</a>
+                </div>
+            @endif
+        </div>
     </div>
 
-    @if( $type == 'single')
-        <div class="pt-4 min-h-80px mx-4 lg:mx-auto">
+    <footer class="max-w-5xl mx-auto flex justify-between px-3 md:px-0">
+        <div class="tags">
             @foreach($post->tags as $tag)
-                <a href="javascript::void(0)" class="inline-block bg-white rounded-md no-underline hover:text-purple-light px-3 py-1 text-sm font-semibold text-grey-darker mr-2">{{ $tag }}</a>
+                <a href="{{ route('tag', $tag) }}" class="inline-block bg-gray-200 rounded no-underline hover:text-purple-400 px-3 py-1 text-sm font-semibold text-gray-800 mr-2">{{ $tag }}</a>
             @endforeach
         </div>
-    @endif
+
+        <a href="https://twitter.com/intent/tweet?text={{ urlencode($post->title) }}&url=https:{{ route('post', $post->slug) }}&&via={{config('me.social.twitter')}}" target="_blank" rel="noopener" class=" text-gray-700 no-underline tweetme">{{ svg('twitter') }} Tweet this article!</a>
+    </footer>

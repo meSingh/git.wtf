@@ -16,40 +16,37 @@
 
 @section('content')
 
-    <section class="max-w-2xl mx-auto md:pt-5 post">
+    <section class="post">
         <article class="mb-6">
             @include('post-content', ['type' => 'single'])
         </article>
+    </section>
 
-        <div class="flex flex-col lg:flex-row py-8 my-4 lg:my-10 text-xl mx-4 lg:mx-auto">
-            <div class="w-full lg:w-1/2 b-r my-6 lg:my-10">
+    <section class="max-w-5xl mx-auto bg-gray-200 shadow-theme mt-6 mb-10 max-w-5xl rounded py-3 px-6">
+        <h3 class="mb-0">Want to Contribute?</h3>
+
+        <p class="mb-4">Send me an <a href="mailto:{{ config('me.email') }}?Subject={{ config('me.name') }}">Email</a>, ping me on <a href="https://twitter.com/{{ config('me.social.twitter') }}" class="text-blue-500 hover:text-blue-300">Twitter</a> or submit a pull request on <a href="https://github.com/{{ config('me.social.github') }}/pulls" class="text-orange-400 hover:text-orange-300">Github</a>.</p>
+
+    </section>
+
+
+    <section class="max-w-5xl mx-auto">
+
+        <div class="flex flex-col md:flex-row text-xl px-3 md:px-0">
+            <div class="w-full md:w-1/2 border-0 md:border-r border-gray-200 border-solid">
                 @if($post->previous)
-                    <h3><a href="{{ route('post', $post->previous->slug) }}" class="text-grey-darker hover:text-purple no-underline">&laquo; {{ $post->previous->title }}</a></h3>
+                    <h3><a href="{{ route('post', $post->previous->slug) }}" class="text-gray-800 hover:text-purple-500 no-underline">
+                    <span class="block text-sm text-gray-500">&laquo; Previous Article</span> {{ $post->previous->title }}</a></h3>
                 @endif
             </div>
-            <div class="w-full lg:w-1/2 b-r my-6 lg:my-10 text-right">
+            <div class="w-full md:w-1/2 text-right">
                 @if($post->next)
-                    <h3><a href="{{ route('post', $post->next->slug) }}" class="text-grey-darker hover:text-purple no-underline">{{ $post->next->title }} &raquo;</a></h3>
+                    <h3><a href="{{ route('post', $post->next->slug) }}" class="text-gray-800 hover:text-purple-500 no-underline"><span class="block text-sm text-gray-500">Next Article &raquo;</span>{{ $post->next->title }} </a></h3>
                 @endif
             </div>
         </div>
 
-        <div id="hypercomments_widget" class="mx-4 lg:mx-auto"></div>
-        <script type="text/javascript">
-        document.addEventListener('turbolinks:load', () => {
-            _hcwp = window._hcwp || [];
-            _hcwp.push({widget:"Stream", widget_id: 103313});
-            (function() {
-            if("HC_LOAD_INIT" in window)return;
-            HC_LOAD_INIT = true;
-            var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
-            var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
-            hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/103313/"+lang+"/widget.js";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hcc, s.nextSibling);
-            })();
-        });
-        </script>
+
     </section>
 
 

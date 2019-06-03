@@ -26,6 +26,20 @@ return [
         'github' => 'meSingh/git.wtf'
     ],
 
+    'authors' => [
+        'msingh' => [
+            'name' => 'Mandeep Singh',
+            'link' => 'https://www.msingh.com'
+        ]
+    ],
+
+    // 'categories' => [
+    //     'solving-mistories' => 'Solving Mistories',
+    //     'mistakes-correction' => 'Mistakes Correction',
+    //     'acidents-recovery' => 'Acidents Recovery',
+    //     'fuck' => 'Fuck'
+    // ],
+
     'seo' => [
         'title' => 'GIT.WTF!?! - Figure out ways to fix GIT screw-ups',
         'description' => 'Git is hard: screwing up is easy, and figuring out how to fix your mistakes is fucking impossible. So here are some common bad situations and how you can get out of them in plain english*.'

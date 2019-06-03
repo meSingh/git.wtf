@@ -16,7 +16,7 @@ function markdown($markdown)
 function svg($filename)
 {
     $contents = @file_get_contents(
-        base_path("resources/assets/svg/{$filename}.svg")
+        base_path("resources/svg/{$filename}.svg")
     );
 
     return new HtmlString($contents);

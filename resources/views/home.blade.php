@@ -15,19 +15,41 @@
 @endsection
 
 @section('content')
-    <section class="max-w-2xl mx-auto md:pt-5">
+    <section class="pt-8 pb-12 mb-8 bg-gray-200 px-3 xl:px-0">
+        <div class="max-w-5xl mx-auto">
+
+            <h2 class="text-3xl">Git is hard: screwing up is easy, and figuring out how to fix your mistakes is fucking impossible.</h2>
+            <p> Git documentation has this chicken and egg problem where you can't search for how to get yourself out of a mess, unless you <em>already know the name of the thing you need to know about</em> in order to fix your problem.</p>
+
+            <p>So here are some bad situations I've gotten myself into, and how I eventually got myself out of them <i>in plain english</i>*.</p>
+        </div>
+    </section>
+
+    <section class="max-w-5xl mx-auto">
 
         @forelse($posts as $post)
-            <article class="bg-white shadow-theme xl:rounded-md mb-8 p-6 post">
-                @include('post-content', ['type' => 'list'])
+            <article class="mb-2 py-4 px-3 post">
+                @include('post-list', ['type' => 'list'])
             </article>
+
+
+            @if( $loop->index == 4)
+                <section class="bg-gray-200 shadow-theme my-6 max-w-5xl rounded py-3 px-6">
+                    <h3 class="mb-0">Want to Contribute?</h3>
+
+                    <p class="mb-4">Send me an <a href="mailto:{{ config('me.email') }}?Subject={{ config('me.name') }}">Email</a>, ping me on <a href="https://twitter.com/{{ config('me.social.twitter') }}" class="text-blue-500 hover:text-blue-300">Twitter</a> or submit a pull request on <a href="https://github.com/{{ config('me.social.github') }}/pulls" class="text-orange-400 hover:text-orange-300">Github</a>.</p>
+
+                </section>
+            @endif
         @empty
-            <section class="bg-white shadow-theme xl:rounded-md mb-8 p-8 text-center">
+            <section class="bg-white shadow-theme xl:rounded mb-8 p-8 text-center">
                 <h3 class="font-normal">No articles found!!</h3>
-                <a href="{{ route('home') }}" class="text-sm text-purple-dark hover:text-purple-dark border-2 border-purple py-1 px-2 font-semibold rounded mt-4 inline-block no-underline">« Go Home</a>
+                <a href="{{ route('home') }}" class="text-sm text-purple-600 hover:text-purple-600 border-2 border-purple-500 py-1 px-2 font-semibold rounded mt-4 inline-block no-underline">« Go Home</a>
             </section>
         @endforelse
 
-        {!! $posts->appends(['query' => $query])->links() !!}
+        <div class="mb-12">
+            {!! $posts->appends(['query' => $query])->links() !!}
+        </div>
     </section>
 @endsection

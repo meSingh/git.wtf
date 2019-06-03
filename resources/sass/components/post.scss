@@ -1,0 +1,37 @@
+.post {
+
+    .content {
+
+
+        h1, h2, h3, h4, h5, h6 {
+            @apply .block .mt-4 .mb-2;
+        }
+
+        p {
+
+            @apply .inline-block .mb-3;
+
+            strong {
+                @apply .font-black;
+            }
+        }
+
+        code {
+            @apply .mx-1;
+        }
+    }
+
+    .tweetme {
+        svg {
+            @apply -mb-1;
+        }
+    }
+}
+
+pre {
+    background: #FFFFFF !important;
+}
+
+blockquote {
+    @apply .bg-gray-100 .shadow-theme .mx-0 .my-6 .rounded .py-1 .px-6
+}

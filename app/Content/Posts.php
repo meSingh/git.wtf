@@ -3,6 +3,8 @@
 namespace App\Content;
 
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 class Posts extends Provider
@@ -35,6 +37,22 @@ class Posts extends Provider
         return $this->all()
             ->filter(function ($post) {
                 return $post->published;
+            });
+    }
+
+    public function tag($name)
+    {
+        return $this->all()
+            ->filter(function ($post) use ($name) {
+                return in_array($name, $post->tags);
+            });
+    }
+
+    public function category($name)
+    {
+        return $this->all()
+            ->filter(function ($post) use ($name) {
+                return $name == $post->category;
             });
     }
 
@@ -116,12 +134,14 @@ class Posts extends Provider
                     'path' => $path,
                     'date' => $date,
                     'tags' => $document->tags ?? [],
-                    'author' => $document->author ?? ['name' => 'Origin Unknown', 'link' => ''],
+                    'author' => config('me.authors')[$document->author ?? 'msingh'],
                     'slug' => $slug,
+                    'source' => $document->source ?? '',
                     'url' => route('post', [$slug]),
                     'external_url' => $document->external_url ?? false,
                     'title' => $document->title,
-                    'category' => ucwords(str_replace('-', ' ', $document->category)) ?? 'fuck',
+                    'category' => $document->category ?? 'what-the-fuck',
+                    'category_formated' => ucwords(str_replace('-', ' ', $document->category ?? 'what-the-fuck')),
                     'contents' => markdown($document->body()),
                     'summary' => markdown($document->summary ?? $document->body()),
                     'summary_short_formated' => markdown(mb_strimwidth($document->summary ?? $document->body(), 0, 145, '...')),
