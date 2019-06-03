@@ -8,7 +8,7 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=7.2",
+        "php": ">=7.1",
         "fideloper/proxy": "~4.0",
         "krenor/http2-pusher": "^1.0",
         "laravel-frontend-presets/tailwindcss": "^1.0.0",
