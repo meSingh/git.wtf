@@ -10,7 +10,6 @@
     "require": {
         "php": ">=7.1",
         "fideloper/proxy": "~4.0",
-        "krenor/http2-pusher": "^1.0",
         "laravel-frontend-presets/tailwindcss": "^1.0.0",
         "laravel/framework": "5.8.*",
         "league/commonmark": "^0.15.0",
@@ -18,6 +17,7 @@
         "spatie/laravel-feed": "^2.0",
         "spatie/laravel-responsecache": "^4.0",
         "spatie/laravel-robots-middleware": "^1.0",
+        "spatie/laravel-sitemap": "^5.3",
         "spatie/yaml-front-matter": "^2.0.0"
     },
     "require-dev": {
