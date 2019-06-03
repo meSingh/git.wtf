@@ -1,3 +1,5 @@
-@include('errors.error', [
-    'message' => 'Looks like this page doesn\'t exist.',
-])
+@extends('errors::minimal')
+
+@section('title', __('Not Found'))
+@section('code', '404')
+@section('message', __('Not Found'))
