@@ -46,5 +46,5 @@
             @endforeach
         </div>
 
-        <a href="https://twitter.com/intent/tweet?text={{ urlencode($post->title) }}&url=https:{{ route('post', $post->slug) }}&&via={{config('me.social.twitter')}}" target="_blank" rel="noopener" class=" text-gray-700 no-underline tweetme">{{ svg('twitter') }} Tweet this article!</a>
+        <a href="https://twitter.com/intent/tweet?text={{ urlencode($post->title) }}&url={{ route('post', $post->slug) }}&&via={{config('me.social.twitter')}}" target="_blank" rel="noopener" class=" text-gray-700 no-underline tweetme">{{ svg('twitter') }} Tweet this article!</a>
     </footer>
