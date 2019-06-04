@@ -15,8 +15,8 @@
 @endsection
 
 @section('content')
-    <section class="pt-8 pb-12 mb-8 bg-gray-200 px-3 xl:px-0">
-        <div class="max-w-5xl mx-auto">
+    <section class="pt-8 pb-12 mb-8 bg-gray-200">
+        <div class="max-w-5xl mx-auto px-3">
 
             <h2 class="text-3xl">Git is fucking hard: mistakes happen all the time, finding a solution is sometimes next to impossible.</h2>
             <p> Git documentation has this needle in the haystack problem, where finding a solution is not just messy but tiresome too <em>unless you already know what you need.</em></p>
