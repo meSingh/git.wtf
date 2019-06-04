@@ -11,11 +11,12 @@
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
-    "dependencies": {},
+    "dependencies": {
+        "puppeteer": "^1.17.0"
+    },
     "devDependencies": {
-        "axios": "^0.19.0",
         "@fullhuman/postcss-purgecss": "^1.2.0",
-        "prismjs": "^1.16.0",
+        "axios": "^0.19.0",
         "babel-preset-env": "^1.7.0",
         "browser-sync": "^2.26.5",
         "browser-sync-webpack-plugin": "2.0.1",
@@ -26,6 +27,7 @@
         "laravel-mix-tailwind": "^0.1.0",
         "lodash": "^4.17.11",
         "popper.js": "^1.15.0",
+        "prismjs": "^1.16.0",
         "resolve-url-loader": "^3.1.0",
         "sass": "^1.20.1",
         "sass-loader": "^7.1.0",
