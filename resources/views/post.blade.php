@@ -25,7 +25,7 @@
 
 
     <section class="max-w-5xl mx-auto relative">
-        <div id="disqus_thread" style="margin-top: -95px;overflow: hidden;position: relative;" ></div>
+        <div id="disqus_thread" style="margin-top: -97px;overflow: hidden;position: relative;" ></div>
         <script>
 
         /**
