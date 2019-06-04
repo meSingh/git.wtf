@@ -16,11 +16,37 @@
 
 @section('content')
 
-    <section class="post">
+    <section class="post bg-white relative" style="z-index: 99999;">
         <article class="mb-6">
             @include('post-content', ['type' => 'single'])
         </article>
     </section>
+
+
+
+    <section class="max-w-5xl mx-auto relative">
+        <div id="disqus_thread" style="margin-top: -95px;overflow: hidden;position: relative;" ></div>
+        <script>
+
+        /**
+        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+        var disqus_config = function () {
+        this.page.url = '{{ url()->current() }}';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = '{{ $post->slug }}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://gitwtf.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </section>
+
 
     <section class="max-w-5xl mx-auto bg-gray-200 shadow-theme mt-6 mb-10 max-w-5xl rounded py-3 px-6">
         <h3 class="mb-0">Want to Contribute?</h3>
