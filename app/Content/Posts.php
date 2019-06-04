@@ -15,7 +15,7 @@ class Posts extends Provider
             return $this->gather();
         });
 
-        return $posts->sortBy('date')->each(function ($post) {
+        return $posts->sortByDesc('updated')->each(function ($post) {
             $date = Carbon::parse($post->date);
             $post->dateShort = $date->format('F Y');
         });
