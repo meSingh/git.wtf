@@ -4,8 +4,21 @@
           box-sizing: border-box;
 }
 
+.easing {
+	  -webkit-transition: all .4s ease-out;
+		-moz-transition: all .4s ease-out;
+		-o-transition: all .4s ease-out;
+	  transition: all .4s ease-out;
+
+	  /* -webkit-transition: color .8s;
+		-moz-transition: color .8s;
+		-o-transition: color .8s;
+	  transition: color .8s; */
+	}
+
+
 a {
-    @apply .text-indigo-600;
+    @apply .text-indigo-600 .easing;
 
     &:hover {
         @apply .text-indigo-500;

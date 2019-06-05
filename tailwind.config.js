@@ -6,6 +6,10 @@ module.exports = {
             },
             fontFamily: {
                 brand: "'Open Sans', sans-serif"
+            },
+            fontSize: {
+                '7xl': '5rem',
+                '8xl': '6rem',
             }
         }
     },
