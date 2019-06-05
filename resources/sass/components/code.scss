@@ -1,8 +1,6 @@
 
 
-pre {
-    @apply .my-6;
-}
+
 
 pre code {
     @apply .text-gray-400 .leading-normal .font-mono .p-4 .block .rounded .border .border-solid .border-gray-400 .bg-gray-900 .shadow-theme .overflow-x-scroll;
@@ -26,23 +24,253 @@ p code {
     @apply .p-1 .border .border-solid .border-gray-300
 }
 
-code[class*="language-"],pre[class*="language-"] {
-    font-family: Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, monospace;
-    font-size:14px;
-    line-height:1.375;
-    direction:ltr;
-    text-align:left;
-    white-space:pre;
-    word-spacing:normal;
-    word-break:normal;
-    -moz-tab-size:4;
-    -o-tab-size:4;
-    tab-size:4;
-    -webkit-hyphens:none;
-    -ms-hyphens:none;
-    hyphens:none;
-    background:#fafaf9;
-    color:#499fbc}pre[class*="language-"]::-moz-selection,pre[class*="language-"] ::-moz-selection,code[class*="language-"]::-moz-selection,code[class*="language-"] ::-moz-selection{text-shadow:none;background:#fafaf9}pre[class*="language-"]::selection,pre[class*="language-"] ::selection,code[class*="language-"]::selection,code[class*="language-"] ::selection{text-shadow:none;background:#fafaf9}pre[class*="language-"]{padding:1em;margin:.5em 0;overflow:auto}:not(pre)>code[class*="language-"]{padding:.1em;border-radius:.3em}.token.comment,.token.prolog,.token.doctype,.token.cdata{color:#c2c1b7}.token.punctuation{color:#c2c1b7}.token.namespace{opacity:.7}.token.tag,.token.operator,.token.number{color:#2f7289}.token.property,.token.function{color:#b7a21a}.token.tag-id,.token.selector,.token.atrule-id{color:#84740b}code.language-javascript,.token.attr-name{color:#b7a21a}code.language-css,code.language-scss,.token.boolean,.token.string,.token.entity,.token.url,.language-css .token.string,.language-scss .token.string,.style .token.string,.token.attr-value,.token.keyword,.token.control,.token.directive,.token.unit,.token.statement,.token.regex,.token.atrule{color:#3e91ac}.token.placeholder,.token.variable{color:#7dc2d9}.token.deleted{text-decoration:line-through}.token.inserted{border-bottom:1px dotted #84740b;text-decoration:none}.token.italic{font-style:italic}.token.important,.token.bold{font-weight:bold}.token.important{color:#b7a21a}.token.entity{cursor:help}pre>code.highlight{outline:0.4em solid #b7a21a;outline-offset:.4em}.line-numbers .line-numbers-rows{border-right-color:#f4f3f1}.line-numbers-rows>span:before{color:#d5d4cd}.line-highlight{background:rgba(132,116,11,0.2);background:-webkit-gradient(linear, left top, right top, color-stop(70%, rgba(132,116,11,0.2)), to(rgba(132,116,11,0)));background:linear-gradient(to right, rgba(132,116,11,0.2) 70%, rgba(132,116,11,0))}
 
-/*# sourceMappingURL=prism-base2tone-lake-light.css.map */
-//https://github.com/atelierbram/Base2Tone-prism
+/** prismjs-themes | https://github.com/heyallan/prismjs-themes#readme */
+
+pre {
+    @apply .my-8;
+}
+
+code[class*=language] {
+    @apply .py-6 .px-16;
+    max-height: inherit;
+    height: 100%;
+    display: block;
+    overflow: auto;
+    color: #f5f5f8;
+    background-color: #28323f
+}
+
+code[class*=language-],
+{
+    font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    -moz-tab-size: 2;
+    tab-size: 2;
+    -webkit-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none
+}
+
+:not(pre)>code[class*=language-] {
+    position: relative;
+    border-radius: 2px;
+    padding: 4px 5px;
+    color: #f5f5f8;
+    display: inline;
+    white-space: normal;
+    background-color: #28323f
+}
+
+.token.block-comment,
+.token.cdata,
+.token.comment,
+.token.doctype,
+.token.prolog {
+    color: #7D8B99
+}
+
+.token.punctuation {
+    color: #f5f5f8
+}
+
+.token.boolean,
+.token.constant,
+.token.deleted,
+.token.function-name,
+.token.number,
+.token.property,
+.token.symbol,
+.token.tag {
+    color: #ec4e8b
+}
+
+.token.attr-name,
+.token.builtin,
+.token.char,
+.token.inserted,
+.token.selector {
+    color: #a6e22e
+}
+
+.token.operator {
+    color: #7D8B99
+}
+
+.token.entity,
+.token.url {
+    color: #AE81FF
+}
+
+.token.delimiter {
+    color: #f5f5f8
+}
+
+.token.keyword {
+    color: #66D9EF
+}
+
+.token.variable {
+    color: #AE81FF
+}
+
+.token.function {
+    color: #ec4e8b
+}
+
+.token.atrule {
+    color: #66D9EF
+}
+
+.token.attr-value {
+    color: #E6DB74
+}
+
+.token.class-name {
+    color: #50525e
+}
+
+.token.important,
+.token.regex,
+.token.string {
+    color: #E6DB74
+}
+
+.token.important {
+    font-weight: 400
+}
+
+.token.bold {
+    font-weight: 700
+}
+
+.token.italic {
+    font-style: italic
+}
+
+.token.entity {
+    cursor: help
+}
+
+.namespace {
+    opacity: .7
+}
+
+.language-css .token.function {
+    color: #AE81FF
+}
+
+.token.cr:before,
+.token.lf:before,
+.token.tab:not(:empty):before {
+    color: #7D8B99
+}
+
+pre[class*=language-].line-numbers {
+    padding-left: 0
+}
+
+pre[class*=language-].line-numbers code {
+    padding-left: 3.8em
+}
+
+pre[class*=language-].line-numbers .line-numbers-rows {
+    left: 0
+}
+
+pre[class*=language-][data-line] {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0
+}
+
+pre[data-line] code {
+    position: relative;
+    padding-left: 4em
+}
+
+pre .line-highlight {
+    margin-top: 0
+}
+/* end if line */
+
+
+div.code-toolbar {
+    @apply .-mx-16;
+	position: relative;
+}
+
+div.code-toolbar > .toolbar {
+	position: absolute;
+	top: 0;
+	right: 5px;
+	transition: opacity 0.3s ease-in-out;
+	// opacity: 0;
+}
+
+div.code-toolbar:hover > .toolbar {
+	opacity: 1;
+}
+
+/* Separate line b/c rules are thrown out if selector is invalid.
+   IE11 and old Edge versions don't support :focus-within. */
+div.code-toolbar:focus-within > .toolbar {
+	opacity: 1;
+}
+
+div.code-toolbar > .toolbar .toolbar-item {
+    display: inline-block;
+}
+
+div.code-toolbar > .toolbar a {
+	cursor: pointer;
+}
+
+div.code-toolbar > .toolbar button {
+	background: none;
+	border: 0;
+	color: inherit;
+	font: inherit;
+	line-height: normal;
+	overflow: visible;
+	padding: 0;
+	-webkit-user-select: none; /* for button */
+	-moz-user-select: none;
+	-ms-user-select: none;
+}
+
+div.code-toolbar > .toolbar a,
+div.code-toolbar > .toolbar button,
+div.code-toolbar > .toolbar span {
+    // opacity: 0;
+	// color: #bbb;
+	font-size: .8em;
+	// padding: 0 .5em;
+	background: #f5f2f0;
+	// background: rgba(224, 224, 224, 0.2);
+	box-shadow: 0 2px 0 0 rgba(0,0,0,0.2);
+    // border-radius: .5em;
+
+    @apply .rounded-bl  .bg-indigo-600 .text-white .py-1 .px-4 .cursor-pointer .mr-1 .-mt-3;
+}
+
+div.code-toolbar > .toolbar a:hover,
+div.code-toolbar > .toolbar a:focus,
+div.code-toolbar > .toolbar button:hover,
+div.code-toolbar > .toolbar button:focus,
+div.code-toolbar > .toolbar span:hover,
+div.code-toolbar > .toolbar span:focus {
+    @apply .bg-indigo-500;
+	text-decoration: none;
+}
+
+
+div.code-toolbar > .toolbar span.show-language {
+    @apply .bg-orange-600 .cursor-default;
+    opacity: 0.7;
+}
