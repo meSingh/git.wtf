@@ -19,6 +19,10 @@
         code {
             @apply .mx-1;
         }
+
+        hr {
+            @apply .block .m-12 .shadow-inner .border-none .h-px .bg-gray-100;
+        }
     }
 
     .tweetme {

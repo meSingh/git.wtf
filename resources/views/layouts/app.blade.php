@@ -6,7 +6,7 @@
     @yield('meta')
 
 </head>
-<body class="font-brand text-gray-700 m-0 relative subpixel-antialiased tracking-wide">
+<body class="font-brand text-gray-700 m-0 relative subpixel-antialiased">
 
 
 
