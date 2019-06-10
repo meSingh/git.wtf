@@ -13,6 +13,9 @@ module.exports = {
             }
         }
     },
+    variants: {
+        margin: ['responsive', 'hover', 'focus']
+    },
     plugins: [
         require('tailwindcss-plugins/pagination')({
             // Costumize the color only. (optional)

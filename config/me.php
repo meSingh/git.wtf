@@ -30,6 +30,10 @@ return [
         'msingh' => [
             'name' => 'Mandeep Singh',
             'link' => 'https://www.msingh.com'
+        ],
+        'bsahil' => [
+            'name' => 'Sahil Bhatacharya',
+            'link' => 'https://bsahil.com'
         ]
     ],
 
