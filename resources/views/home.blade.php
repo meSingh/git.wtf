@@ -25,7 +25,7 @@
         </div>
     </section>
 
-    <section class="max-w-5xl mx-auto">
+    <section class="max-w-5xl mx-auto pt-6 pb-1">
 
         @forelse($posts as $post)
             <article class="mb-2 py-4 px-3 post">

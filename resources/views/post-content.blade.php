@@ -28,7 +28,7 @@
 
 
     <div class="max-w-5xl mx-auto px-3 md:px-0">
-        <div class="content pb-6 mb-8 border-0 border-b border-gray-200 border-solid ">
+        <div class="content py-6 mb-8 border-0 border-b border-gray-200 border-solid ">
             {!! $post->contents !!}
 
             @if($post->source)

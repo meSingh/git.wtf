@@ -36,19 +36,18 @@
         </div>
     </header>
 
-
-
     @yield('content')
 
-    <section class="bg-gray-200 mt-10 max-w-5xl mx-auto rounded p-6">
+    <section class="bg-gray-200 mt-10 py-12 px-6">
+        <div class="max-w-5xl mx-auto">
+            <p class="mt-0 mb-4">Sign up below to receive updates, tips and more handy tutorials when git screws up. It’s good stuff & I don’t spam.</p>
 
-        <p class="mt-0 mb-4">Sign up below to receive updates, tips and more handy tutorials when git screws up. It’s good stuff & I don’t spam.</p>
-
-        <form action="https://khurafatstudio.us13.list-manage.com/subscribe/post?u=00058058733c668eea4891e02&amp;id=d83f6d4784" method="post" class="flex flex-col md:flex-row flex-wrap">
-            <input type="email" placeholder="Enter your email address..." name="EMAIL" class="bg-white px-4 py-2 w-full md:w-3/4 appearance-none border-transparent text-base mr-4 mb-4 md:mb-0">
-            <input type="hidden" name="LOCATION" value="GIT.WTF!?!">
-            <button type="submit" class="bg-indigo-600 hover:bg-indigo-800 flex-1 text-white py-4 font-semibold rounded inline-block no-underline border-none text-base cursor-pointer">Sign me up!</button>
-        </form>
+            <form action="https://khurafatstudio.us13.list-manage.com/subscribe/post?u=00058058733c668eea4891e02&amp;id=d83f6d4784" method="post" class="flex flex-col md:flex-row flex-wrap">
+                <input type="email" placeholder="Enter your email address..." name="EMAIL" class="bg-white px-4 py-2 w-full md:w-3/4 appearance-none border-transparent text-base mr-4 mb-4 md:mb-0">
+                <input type="hidden" name="LOCATION" value="GIT.WTF!?!">
+                <button type="submit" class="bg-indigo-600 hover:bg-indigo-800 flex-1 text-white py-4 font-semibold rounded inline-block no-underline border-none text-base cursor-pointer">Sign me up!</button>
+            </form>
+        </div>
     </section>
 
     @include('layouts.partials.footer')
