@@ -16,7 +16,7 @@
 
 @section('content')
 
-    <article class="post bg-white relative mb-16" style="z-index: 99999;">
+    <article class="post bg-white relative mb-16 overflow-hidden" style="z-index: 99999;">
         @include('post-content', ['type' => 'single'])
     </article>
 

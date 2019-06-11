@@ -6,17 +6,17 @@ pre code {
     @apply .text-gray-400 .leading-normal .font-mono .p-4 .block .rounded .border .border-solid .border-gray-400 .bg-gray-900 .shadow-theme .overflow-x-scroll;
 }
 
-@media (max-width: 600px) {
-    pre code {
-        margin-left: -14.5px;
-        margin-right: -14.5px;
-        padding: 14.5px;
-        padding-right: 7.25px;
-        font-size: .8em;
-        border-left: none;
-        border-right: none
-    }
-}
+// @media (max-width: 600px) {
+//     pre code {
+//         margin-left: -14.5px;
+//         margin-right: -14.5px;
+//         padding: 14.5px;
+//         padding-right: 7.25px;
+//         font-size: .8em;
+//         border-left: none;
+//         border-right: none
+//     }
+// }
 
 p code {
     background: #FAFAF9;
@@ -32,13 +32,19 @@ pre {
 }
 
 code[class*=language] {
-    @apply .py-6 .px-16;
+    @apply .py-6 .px-6;
     max-height: inherit;
     height: 100%;
     display: block;
     overflow: auto;
     color: #f5f5f8;
     background-color: #28323f
+}
+
+@media (min-width: 1024px) {
+    code[class*=language] {
+        @apply .px-16;
+    }
 }
 
 code[class*=language-],
@@ -201,8 +207,14 @@ pre .line-highlight {
 
 
 div.code-toolbar {
-    @apply .-mx-16;
-	position: relative;
+    @apply .-mx-6;
+    position: relative;
+}
+
+@media (min-width: 1024px) {
+    div.code-toolbar {
+        @apply .-mx-16;
+    }
 }
 
 div.code-toolbar > .toolbar {

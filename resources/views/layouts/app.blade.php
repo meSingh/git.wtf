@@ -11,7 +11,7 @@
 
 
     <header class="">
-        <div class="container max-w-5xl flex justify-between mx-auto pb-0 md:pb-3 pt-3 px-3 md:px-0">
+        <div class="container max-w-5xl flex justify-between mx-auto pb-0 md:pb-3 pt-3">
             <a href="/" class="flex justify-center items-center flex-shrink-0 mr-4 no-underline">
                 <span class="w-12 mr-1">@include('layouts/partials/logo')</span>
                 <span class="font-semibold text-xl text-gray-800">GIT.WTF !?!</span>
