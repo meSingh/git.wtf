@@ -23,7 +23,7 @@
 
             <p class="mb-8">So here are several of those tricky situations that you might find yourself in with <i>simple ways to get out peacefully.</i></p>
             <div class="flex justify-center">
-                <a href="{{ route('post', $first->slug) }}" class="bg-indigo-600 hover:bg-indigo-800 w-full md:w-1/3 text-white py-4 font-semibold rounded inline-block text-center hover:text-white no-underline border-none text-base cursor-pointer">Let's Get Started!</a>
+                <a href="{{ route('post', $first->slug) }}" class="bg-indigo-600 hover:bg-indigo-800 w-full md:w-1/3 text-white py-4 font-semibold rounded inline-block text-center hover:text-white no-underline border-none text-base cursor-pointer cta-button-home">Let's Get Started!</a>
             </div>
         </div>
     </section>
