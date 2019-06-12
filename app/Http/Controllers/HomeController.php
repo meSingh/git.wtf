@@ -15,6 +15,7 @@ class HomeController
 
         return view('home', [
             'posts' => $posts,
+            'first' => $posts->first(),
             'query' => $request->get('query') ?? null
         ]);
     }

@@ -21,7 +21,10 @@
             <h2 class="text-3xl">Git is fucking hard: mistakes happen all the time, finding a solution is sometimes next to impossible.</h2>
             <p> Git documentation has this needle in the haystack problem, where finding a solution is not just messy but tiresome too <em>unless you already know what you need.</em></p>
 
-            <p>So here are several of those tricky situations that you might find yourself in with <i>simple ways to get out peacefully.</i></p>
+            <p class="mb-8">So here are several of those tricky situations that you might find yourself in with <i>simple ways to get out peacefully.</i></p>
+            <div class="flex justify-center">
+                <a href="{{ route('post', $first->slug) }}" class="bg-indigo-600 hover:bg-indigo-800 w-full md:w-1/3 text-white py-4 font-semibold rounded inline-block text-center hover:text-white no-underline border-none text-base cursor-pointer">Let's Get Started!</a>
+            </div>
         </div>
     </section>
 
