@@ -16,6 +16,7 @@ return [
 
     'analytics' => [
         'id' => env('ANALYTICS_ID'),
+        'gtm_id' => env('ANALYTICS_GTM_ID')
     ],
 
     'mailgun' => [

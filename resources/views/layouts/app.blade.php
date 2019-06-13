@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
+    @include('layouts.partials.analytics')
     @include('layouts.partials.head')
     @include('layouts.partials.fonts')
     @yield('meta')
 
 </head>
 <body class="font-brand text-gray-700 m-0 relative subpixel-antialiased">
-
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ config('services.analytics.gtm_id') }}"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
 
     <header class="">
@@ -51,7 +55,7 @@
     </section>
 
     @include('layouts.partials.footer')
-    @include('layouts.partials.analytics')
+
 
 </body>
 </html>
