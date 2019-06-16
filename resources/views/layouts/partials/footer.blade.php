@@ -1,5 +1,5 @@
 
-<section class="bg-gray-200 mt-10 py-12 px-6 shadow-inner">
+<section class="bg-gray-200 mt-10 py-16 px-8 shadow-inner">
     <div class="max-w-5xl mx-auto">
         <p class="mt-0 mb-4">Sign up below to receive updates, tips and more handy tutorials when git screws up. It’s good stuff & I don’t spam.</p>
 
@@ -29,7 +29,7 @@
     <a href="http://www.khurafat.desi"
         target="_blank"
         rel="noopener"
-        class="no-underline text-gray-300 text-6xl sm:text-8xl easing font-bold sm:font-semibold block -mb-8 sm:-mb-12 hover:mb-0">
+        class="no-underline text-gray-300 text-6xl sm:text-8xl easing font-bold sm:font-semibold block -mb-8 sm:-mb-12">
         <span class="block text-2xl -mb-8 sm:-mb-12">A PRODUCT BY</span>
         KHURAFAT
     </a>

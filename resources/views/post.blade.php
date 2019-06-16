@@ -16,7 +16,7 @@
 
 @section('content')
 
-    <article class="post bg-white relative mb-16 overflow-hidden" style="z-index: 99999;">
+    <article class="post bg-white relative mb-12 overflow-hidden" style="z-index: 99999;">
         @include('post-content', ['type' => 'single'])
     </article>
 
@@ -42,13 +42,13 @@
             <div class="flex flex-col md:flex-row text-xl px-3 md:px-0">
             <div class="w-full md:w-1/2 border-0 md:border-r border-gray-400 border-solid">
                 @if($post->previous)
-                    <h3><a href="{{ route('post', $post->previous->slug) }}" class="text-gray-800 hover:text-purple-500 no-underline">
+                    <h3><a href="{{ route('post', $post->previous->slug) }}" class="text-gray-800 hover:text-purple-500 no-underline block">
                     <span class="block text-sm text-gray-500">&laquo; Previous Article</span> {{ $post->previous->title }}</a></h3>
                 @endif
             </div>
             <div class="w-full md:w-1/2 text-right">
                 @if($post->next)
-                    <h3><a href="{{ route('post', $post->next->slug) }}" class="text-gray-800 hover:text-purple-500 no-underline"><span class="block text-sm text-gray-500">Next Article &raquo;</span>{{ $post->next->title }} </a></h3>
+                    <h3><a href="{{ route('post', $post->next->slug) }}" class="text-gray-800 hover:text-purple-500 no-underline block"><span class="block text-sm text-gray-500">Next Article &raquo;</span>{{ $post->next->title }} </a></h3>
                 @endif
             </div>
         </div>

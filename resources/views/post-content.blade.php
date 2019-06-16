@@ -28,7 +28,7 @@
 
 
     <div class="max-w-5xl mx-auto px-3 md:px-0">
-        <div class="content py-6 mb-8 border-0 border-b border-gray-200 border-solid text-lg">
+        <div class="content py-6 mb-8 border-0 border-b border-gray-400 border-solid text-lg">
             {!! $post->contents !!}
 
             @if($post->source)
@@ -42,7 +42,7 @@
     <footer class="max-w-5xl mx-auto flex justify-between px-3 md:px-0">
         <div class="tags">
             @foreach($post->tags as $tag)
-                <a href="{{ route('tag', $tag) }}" class="inline-block bg-gray-200 rounded no-underline hover:text-purple-400 px-3 py-1 text-sm font-semibold text-gray-800 mr-2">{{ $tag }}</a>
+                <a href="{{ route('tag', $tag) }}" class="inline-block bg-gray-200 no-underline hover:text-purple-400 px-4 py-1 text-sm font-semibold text-gray-800 mr-2 border border-gray-400 border-solid">{{ $tag }}</a>
             @endforeach
         </div>
 
