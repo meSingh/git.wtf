@@ -7,7 +7,7 @@
     @yield('meta')
 
 </head>
-<body class="font-brand text-gray-700 m-0 relative subpixel-antialiased">
+<body class="font-brand text-base tracking-normal align-middle leading-relaxed text-gray-800 m-0 relative">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ config('services.analytics.gtm_id') }}"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -22,7 +22,7 @@
             </a>
 
             <form action="/" method="get"  class="w-full px-6 py-4 flex hidden md:block">
-                <input value="{{ request()->get('query') }}" name="query" class="transition text-base focus:outline-0 border border-transparent focus:bg-white focus:border-gray-300 placeholder-gray-900 rounded bg-gray-200 py-2 pr-4 px-6 w-full appearance-none" type="text" placeholder="Search for git tips" autocomplete="off" spellcheck="false">
+                <input value="{{ request()->get('query') }}" name="query" class="transition text-base focus:outline-0 border border-transparent focus:bg-white focus:border-gray-300 placeholder-gray-900 rounded bg-gray-200 py-2 pr-4 px-6 w-full appearance-none shadow" type="text" placeholder="Search for git tips" autocomplete="off" spellcheck="false">
             </form>
 
 
@@ -35,24 +35,14 @@
         </div>
         <div class="">
             <form action="/" method="get"  class="w-full px-6 py-4 flex md:hidden">
-                <input value="{{ request()->get('query') }}" name="query" class="transition text-base focus:outline-0 border border-transparent focus:bg-white focus:border-gray-300 placeholder-gray-900 rounded bg-gray-200 py-2 pr-4 px-6 w-full appearance-none" type="text" placeholder="Search for git tips" autocomplete="off" spellcheck="false">
+                <input value="{{ request()->get('query') }}" name="query" class="transition text-base focus:outline-0 border border-transparent focus:bg-white focus:border-gray-300 placeholder-gray-900 rounded bg-gray-200 py-2 pr-4 px-6 w-full appearance-none shadow" type="text" placeholder="Search for git tips" autocomplete="off" spellcheck="false">
             </form>
         </div>
     </header>
 
     @yield('content')
 
-    <section class="bg-gray-200 mt-10 py-12 px-6">
-        <div class="max-w-5xl mx-auto">
-            <p class="mt-0 mb-4">Sign up below to receive updates, tips and more handy tutorials when git screws up. It’s good stuff & I don’t spam.</p>
 
-            <form action="https://khurafatstudio.us13.list-manage.com/subscribe/post?u=00058058733c668eea4891e02&amp;id=d83f6d4784" method="post" class="flex flex-col md:flex-row flex-wrap">
-                <input type="email" placeholder="Enter your email address..." name="EMAIL" class="bg-white px-4 py-2 w-full md:w-3/4 appearance-none border-transparent text-base mr-4 mb-4 md:mb-0">
-                <input type="hidden" name="LOCATION" value="GIT.WTF!?!">
-                <button type="submit" class="bg-indigo-600 hover:bg-indigo-800 flex-1 text-white py-4 font-semibold rounded inline-block no-underline border-none text-base cursor-pointer">Sign me up!</button>
-            </form>
-        </div>
-    </section>
 
     @include('layouts.partials.footer')
 

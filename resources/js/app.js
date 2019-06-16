@@ -4,7 +4,7 @@ import 'prismjs/plugins/toolbar/prism-toolbar.js'
 
 import 'prismjs/components/prism-bash.min.js'
 import './modules/copyToClipboard.js'
-import './modules/showLanguage.js'
+// import './modules/showLanguage.js'
 
 
 import Turbolinks from 'turbolinks';
@@ -16,11 +16,3 @@ document.addEventListener('turbolinks:load', () => {
     Prism.highlightAll();
 
 });
-
-
-
-
-
-
-
-

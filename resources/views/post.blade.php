@@ -20,7 +20,7 @@
         @include('post-content', ['type' => 'single'])
     </article>
 
-    <section class="max-w-5xl mx-auto mb-20d">
+    <!-- <section class="max-w-5xl mx-auto mb-20d">
         <div class="flex flex-col md:flex-row text-xl px-3 md:px-0">
             <div class="w-full md:w-1/2 border-0 md:border-r border-gray-200 border-solid">
                 @if($post->previous)
@@ -34,13 +34,27 @@
                 @endif
             </div>
         </div>
-    </section>
+    </section> -->
 
-    <section class="bg-gray-200 shadow-theme mb-16 rounded py-10 px-6">
+    <section class="bg-gray-200 shadow-inner mb-16 py-10 px-6">
         <div class="max-w-5xl mx-auto">
-            <h3 class="mb-0">Want to Contribute?</h3>
 
-            <p class="mb-4">Send me an <a href="mailto:{{ config('me.email') }}?Subject={{ config('me.name') }}">Email</a>, ping me on <a href="https://twitter.com/{{ config('me.social.twitter') }}" target="_blank" rel="noopener" class="text-blue-500 hover:text-blue-300">Twitter</a> or submit a pull request on <a href="https://github.com/{{ config('me.social.github') }}/pulls" target="_blank" rel="noopener" class="text-orange-400 hover:text-orange-300">Github</a>.</p>
+            <div class="flex flex-col md:flex-row text-xl px-3 md:px-0">
+            <div class="w-full md:w-1/2 border-0 md:border-r border-gray-400 border-solid">
+                @if($post->previous)
+                    <h3><a href="{{ route('post', $post->previous->slug) }}" class="text-gray-800 hover:text-purple-500 no-underline">
+                    <span class="block text-sm text-gray-500">&laquo; Previous Article</span> {{ $post->previous->title }}</a></h3>
+                @endif
+            </div>
+            <div class="w-full md:w-1/2 text-right">
+                @if($post->next)
+                    <h3><a href="{{ route('post', $post->next->slug) }}" class="text-gray-800 hover:text-purple-500 no-underline"><span class="block text-sm text-gray-500">Next Article &raquo;</span>{{ $post->next->title }} </a></h3>
+                @endif
+            </div>
+        </div>
+            <!-- <h3 class="mb-0">Want to Contribute?</h3>
+
+            <p class="mb-4">Send me an <a href="mailto:{{ config('me.email') }}?Subject={{ config('me.name') }}">Email</a>, ping me on <a href="https://twitter.com/{{ config('me.social.twitter') }}" target="_blank" rel="noopener" class="text-blue-500 hover:text-blue-300">Twitter</a> or submit a pull request on <a href="https://github.com/{{ config('me.social.github') }}/pulls" target="_blank" rel="noopener" class="text-orange-400 hover:text-orange-300">Github</a>.</p> -->
         </div>
     </section>
 

@@ -222,7 +222,7 @@ div.code-toolbar > .toolbar {
 	top: 0;
 	right: 5px;
 	transition: opacity 0.3s ease-in-out;
-	// opacity: 0;
+	opacity: 0;
 }
 
 div.code-toolbar:hover > .toolbar {
@@ -267,7 +267,7 @@ div.code-toolbar > .toolbar span {
 	// background: rgba(224, 224, 224, 0.2);
 	box-shadow: 0 2px 0 0 rgba(0,0,0,0.2);
     // border-radius: .5em;
-    @apply .rounded-bl  .bg-indigo-600 .text-white .py-1 .px-4 .cursor-pointer .mr-1 .-mt-3;
+    @apply .rounded-bl  .bg-indigo-600 .text-white .py-1 .px-6 .cursor-pointer .mr-1 .-mt-3;
 }
 
 div.code-toolbar > .toolbar a:hover,
@@ -283,5 +283,5 @@ div.code-toolbar > .toolbar span:focus {
 
 div.code-toolbar > .toolbar span.show-language {
     @apply .bg-orange-600 .cursor-default;
-    opacity: 0.7;
+    // opacity: 0.7;
 }
