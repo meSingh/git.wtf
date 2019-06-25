@@ -19,9 +19,8 @@ pre code {
 // }
 
 p code {
-    background: #FAFAF9;
-    color:#53A4BF;
-    @apply .p-1 .border .border-solid .border-gray-300
+    color: #ec4e8b;
+    @apply .py-1 .px-2 .border .border-solid .border-gray-400 .bg-gray-100 .-mt-1;
 }
 
 

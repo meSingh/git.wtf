@@ -1,3 +1,6 @@
+const { colors } = require('tailwindcss/defaultTheme')
+
+console.log(colors);
 module.exports = {
     theme: {
         extend: {
@@ -10,6 +13,14 @@ module.exports = {
             fontSize: {
                 '7xl': '5rem',
                 '8xl': '6rem',
+            },
+
+            colors: {
+                // gray: {
+                //     ...colors.gray,
+                //     '200': '#FEFEFE',
+                //     '500': '#ECECEC'
+                // }
             }
         }
     },
