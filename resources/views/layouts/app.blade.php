@@ -21,8 +21,8 @@
                 <span class="font-semibold text-xl text-gray-800">GIT.WTF !?!</span>
             </a>
 
-            <form action="/" method="get"  class="w-full px-6 py-4 flex hidden md:block">
-                <input value="{{ request()->get('query') }}" name="query" class="transition text-base focus:outline-0 border border-transparent focus:bg-white focus:border-gray-300 placeholder-gray-900 rounded bg-gray-200 py-2 pr-4 px-6 w-full appearance-none shadow" type="text" placeholder="Search for git tips" autocomplete="off" spellcheck="false">
+            <form action="/" method="get"  class="w-full px-6 pt-5 flex hidden md:block">
+                <input value="{{ request()->get('query') }}" name="query" class="transition text-base focus:outline-none border border-gray-300 border-solid focus:bg-white focus:border-gray-300 placeholder-gray-900 rounded bg-gray-200 py-2 pr-4 px-6 w-full appearance-none" type="text" placeholder="Search for git tips" autocomplete="off" spellcheck="false">
             </form>
 
 
@@ -37,7 +37,7 @@
         </div>
         <div class="">
             <form action="/" method="get"  class="w-full px-6 pt-2 pb-4 flex md:hidden">
-                <input value="{{ request()->get('query') }}" name="query" class="transition text-base focus:outline-0 border border-transparent focus:bg-white focus:border-gray-300 placeholder-gray-900 rounded bg-gray-200 py-2 pr-4 px-6 w-full appearance-none shadow" type="text" placeholder="Search for git tips" autocomplete="off" spellcheck="false">
+                <input value="{{ request()->get('query') }}" name="query" class="transition text-base focus:outline-none border border-gray-300 border-solid focus:bg-white focus:border-gray-300 placeholder-gray-900 rounded bg-gray-200 py-2 pr-4 px-6 w-full appearance-none" type="text" placeholder="Search for git tips" autocomplete="off" spellcheck="false">
             </form>
         </div>
     </header>

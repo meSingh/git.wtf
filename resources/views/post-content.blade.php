@@ -1,7 +1,7 @@
 
     <header class="pt-8 pb-12 mb-8 bg-gray-200 shadow-inner">
         <div class="max-w-5xl mx-auto px-3 md:px-0">
-            <h2 class="text-3xl mb-1 leading-snug">{{ $post->title }}</h2>
+            <h2 class="text-3xl mb-1 leading-tight md:leading-snug font-semibold">{{ $post->title }}</h2>
 
             <div class="block m-0 text-sm text-gray-500">
                 Written
@@ -42,7 +42,7 @@
     <footer class="max-w-5xl mx-auto flex justify-between px-3 md:px-0">
         <div class="tags">
             @foreach($post->tags as $tag)
-                <a href="{{ route('tag', $tag) }}" class="inline-block bg-gray-200 no-underline hover:text-purple-400 px-4 py-1 text-sm font-semibold text-gray-800 mr-2 border border-gray-400 border-solid">{{ $tag }}</a>
+                <a href="{{ route('tag', $tag) }}" class="inline-block bg-gray-200 no-underline hover:text-purple-400 px-4 py-1 text-sm font-semibold text-gray-800 mb-2 mr-2 border border-gray-400 border-solid">{{ $tag }}</a>
             @endforeach
         </div>
 
