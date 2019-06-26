@@ -16,11 +16,11 @@ module.exports = {
             },
 
             colors: {
-                // gray: {
-                //     ...colors.gray,
-                //     '200': '#FEFEFE',
-                //     '500': '#ECECEC'
-                // }
+                gray: {
+                    ...colors.gray,
+                    '200': '#F2F6FB'
+                    // '500': '#ECECEC'
+                }
             }
         }
     },
