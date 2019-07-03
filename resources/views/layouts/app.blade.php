@@ -7,21 +7,22 @@
     @yield('meta')
 
 </head>
-<body class="font-brand text-base tracking-normal align-middle leading-relaxed text-gray-800 m-0 relative">
+<!-- <body class="font-brand text-base tracking-normal align-middle leading-relaxed text-gray-900 m-0 relative bg-gray-200 " style="background: #364f6b"> -->
+<body class="font-sans text-base tracking-wide leading-relaxed text-brand-alt m-0 relative bg-gray-200">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ config('services.analytics.gtm_id') }}"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
 
-    <header class="">
+    <header class="bg-gray-200">
         <div class="container max-w-5xl flex justify-between mx-auto pb-0 md:pb-3 pt-3 px-4 md:px-0">
-            <a href="/" class="flex justify-center items-center flex-shrink-0 mr-4 no-underline">
-                <span class="w-12 mr-1">@include('layouts/partials/logo')</span>
-                <span class="font-semibold text-xl text-gray-800">GIT.WTF !?!</span>
+            <a href="/" class="flex justify-center items-center flex-shrink-0 mr-2 no-underline">
+                <span class="font-semibold text-2xl text-gray-800 mr-1">GIT<span class="text-brand font-bold">.</span>WTF </span>
+                <span class="w-12 mr-1 text-brand">@include('layouts/partials/logo')</span>
             </a>
 
-            <form action="/" method="get"  class="w-full px-6 pt-5 flex hidden md:block">
+            <form action="/" method="get"  class="w-full px-6 pt-5 mr-2 flex hidden md:block">
                 <input value="{{ request()->get('query') }}" name="query" class="transition text-base focus:outline-none border border-gray-300 border-solid focus:bg-white focus:border-gray-300 placeholder-gray-900 rounded bg-gray-200 py-2 pr-4 px-6 w-full appearance-none" type="text" placeholder="Search for git tips" autocomplete="off" spellcheck="false">
             </form>
 
@@ -42,7 +43,9 @@
         </div>
     </header>
 
-    @yield('content')
+    <section class="bg-white">
+        @yield('content')
+    </section>
 
 
 

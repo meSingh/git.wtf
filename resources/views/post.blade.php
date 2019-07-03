@@ -36,19 +36,19 @@
         </div>
     </section> -->
 
-    <section class="bg-gray-200 shadow-inner mb-16 py-10 px-6">
+    <section class="bg-gray-200 mb-16 py-10 px-2 md:px-6 border-0 border-t border-b border-solid border-gray-300">
         <div class="max-w-5xl mx-auto">
 
             <div class="flex flex-col md:flex-row text-xl px-3 md:px-0 leading-tight">
-                <div class="w-full md:w-1/2 border-0 md:border-r border-gray-400 border-solid">
+                <div class="w-full md:w-1/2 border-0 md:border-r border-gray-300 border-solid">
                     @if($post->previous)
-                        <h3><a href="{{ route('post', $post->previous->slug) }}" class="text-gray-800 hover:text-purple-500 no-underline block">
+                        <h3><a href="{{ route('post', $post->previous->slug) }}" class="text-gray-800 no-underline block">
                         <span class="block text-sm text-gray-500">&laquo; Previous Article</span> {{ $post->previous->title }}</a></h3>
                     @endif
                 </div>
                 <div class="w-full md:w-1/2 text-right">
                     @if($post->next)
-                        <h3><a href="{{ route('post', $post->next->slug) }}" class="text-gray-800 hover:text-purple-500 no-underline block"><span class="block text-sm text-gray-500">Next Article &raquo;</span>{{ $post->next->title }} </a></h3>
+                        <h3><a href="{{ route('post', $post->next->slug) }}" class="text-gray-800 no-underline block"><span class="block text-sm text-gray-500">Next Article &raquo;</span>{{ $post->next->title }} </a></h3>
                     @endif
                 </div>
             </div>
@@ -58,7 +58,7 @@
         </div>
     </section>
 
-    <section class="max-w-5xl mx-auto relative mb-16">
+    <section class="max-w-5xl mx-auto relative pb-12">
         <div id="disqus_thread" style="/*margin-top: -97px;*/overflow: hidden;position: relative;" class="px-4"></div>
         <script>
 

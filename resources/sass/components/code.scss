@@ -19,8 +19,8 @@ pre code {
 // }
 
 p code {
-    color: #ec4e8b;
-    @apply .py-1 .px-2 .border .border-solid .border-gray-400 .bg-gray-100 .-mt-1;
+    // color: #ec4e8b;
+    @apply .text-brand .py-1 .px-2 .border .border-solid .border-gray-300 .bg-gray-100 .-mt-1;
 }
 
 
@@ -125,7 +125,8 @@ code[class*=language-],
 }
 
 .token.function {
-    color: #ec4e8b
+    // color: #ec4e8b
+    @apply .text-brand;
 }
 
 .token.atrule {

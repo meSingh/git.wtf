@@ -15,23 +15,23 @@
 @endsection
 
 @section('content')
-    <section class="pt-8 pb-12 mb-8 bg-gray-200 shadow-inner">
-        <div class="max-w-5xl mx-auto px-3">
+    <section class="pt-1 pb-8 mb-16 bg-gray-200 border-0 border-b border-solid border-gray-300">
+        <div class="max-w-5xl mx-auto px-4 md:px-0">
 
-            <h2 class="text-3xl leading-snug">Git is fucking hard: mistakes happen all the time, finding a solution is sometimes next to impossible.</h2>
+            <h2 class="text-3xl leading-snug"><span class="text-brand">Git is fucking hard:</span> mistakes happen all the time, finding a solution is sometimes next to impossible.</h2>
             <p> Git documentation has this needle in the haystack problem, where finding a solution is not just messy but tiresome too <em>unless you already know what you need.</em></p>
 
             <p class="mb-8">So here are several of those tricky situations that you might find yourself in with <i>simple ways to get out peacefully.</i></p>
-            <div class="flex justify-center">
-                <a href="{{ route('post', $first->slug) }}" class="bg-indigo-500 hover:bg-indigo-700 w-full md:w-1/3 text-white py-3 font-semibold rounded inline-block text-center hover:text-white no-underline border-none text-base cursor-pointer cta-button-home shadow-md">Get solutions to your GIT problems!</a>
-            </div>
+            <!-- <div class="flex justify-center"> -->
+                <!-- <a href="{{ route('post', $first->slug) }}" class="bg-indigo-500 hover:bg-indigo-700 w-full md:w-1/3 text-white py-3 font-semibold rounded inline-block text-center hover:text-white no-underline border-none text-base cursor-pointer cta-button-home shadow-md">Get solutions to your GIT problems!</a> -->
+            <!-- </div> -->
         </div>
     </section>
 
-    <section class="max-w-5xl mx-auto pt-6 pb-1">
+    <section class="max-w-5xl mx-auto pb-1">
 
         @forelse($posts as $post)
-            <article class="mb-2 py-4 px-3 post">
+            <article class="mb-4 py-4 px-4 md:px-0 post leading-snug md:leading-relaxed">
                 @include('post-list', ['type' => 'list'])
             </article>
 

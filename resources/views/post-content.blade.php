@@ -1,9 +1,9 @@
 
-    <header class="pt-8 pb-12 mb-8 bg-gray-200 shadow-inner">
-        <div class="max-w-5xl mx-auto px-3 md:px-0">
+    <header class="pt-1 pb-12 mb-8 bg-gray-200 border-0 border-solid border-b border-gray-300">
+        <div class="max-w-5xl mx-auto px-4 md:px-0">
             <h2 class="text-3xl mb-1 leading-tight md:leading-snug font-semibold">{{ $post->title }}</h2>
 
-            <div class="block m-0 text-sm text-gray-500">
+            <p class="block m-0 text-sm text-gray-500">
                 Written
                 <time datetime="{{ $post->published }}" class="text-gray-600">
                     {{ $post->dateShort }}
@@ -11,7 +11,7 @@
 
                 by
                 @if(isset($post->author['link']) && $post->author['link'] !== '' )
-                    <a href="{{ $post->author['link'] }}" target="_blank" rel="noopener" class="text-indigo-400 no-underline hover:text-indigo-600">
+                    <a href="{{ $post->author['link'] }}" target="_blank" rel="noopener" class="text-brand no-underline ">
                         {{ $post->author['name'] }}
                     </a>
                 @else
@@ -19,16 +19,16 @@
                 @endif
 
                 in
-                <a href="{{ route('category', $post->category) }}" class="text-orange-400 no-underline hover:text-orange-600">
+                <a href="{{ route('category', $post->category) }}" class="text-orange-600 no-underline hover:text-orange-600">
                     {{ $post->category_formated }}
                 </a>
-            </div>
+            </p>
         </div>
     </header>
 
 
-    <div class="max-w-5xl mx-auto px-3 md:px-0">
-        <div class="content py-6 mb-8 border-0 border-b border-gray-400 border-solid text-lg">
+    <div class="max-w-5xl mx-auto px-4 md:px-0">
+        <div class="content py-6 mb-8 border-0 border-b border-gray-300 border-solid text-lg">
             {!! $post->contents !!}
 
             @if($post->source)
@@ -39,10 +39,10 @@
         </div>
     </div>
 
-    <footer class="max-w-5xl mx-auto flex justify-between px-3 md:px-0">
-        <div class="tags">
+    <footer class="max-w-5xl mx-auto flex flex-col md:flex-row md:justify-between px-4 md:px-0">
+        <div class="tags mb-8 md:mb-0">
             @foreach($post->tags as $tag)
-                <a href="{{ route('tag', $tag) }}" class="inline-block bg-gray-200 no-underline hover:text-purple-400 px-4 py-1 text-sm font-semibold text-gray-800 mb-2 mr-2 border border-gray-400 border-solid">{{ $tag }}</a>
+                <a href="{{ route('tag', $tag) }}" class="inline-block bg-gray-200 no-underline px-4 py-1 text-sm font-semibold text-gray-800 mb-2 mr-2 border border-gray-400 border-solid">{{ $tag }}</a>
             @endforeach
         </div>
 

@@ -21,34 +21,31 @@ a {
     @apply .text-indigo-600 .easing;
 
     &:hover {
-        @apply .text-indigo-500;
+        // @apply .text-indigo-500;
+        @apply .text-brand;
     }
 }
 
 .footer {
-    @apply .text-gray-500;
-    @apply .max-w-2xl .mx-auto .mt-8 .py-8 .flex .flex-wrap .justify-between .items-center;
+    @apply .max-w-2xl .mx-auto .mt-8 .py-8 .flex .flex-wrap .justify-between .items-center .text-gray-500;
 
     .copyright > a {
-        @apply .text-gray-500;
-        @apply .no-underline .text-lg;
+        @apply .no-underline .text-lg .text-gray-500;
 
-        &:hover {
-            @apply .text-purple-500;
-        }
+        // &:hover {
+        //     @apply .text-purple-500;
+        // }
     }
 
     .links a {
-        @apply .no-underline .mx-1;
+        @apply .no-underline .mx-1 .text-gray-500;
 
         svg {
             @apply .text-gray-500;
-            fill: config('colors.gray');
         }
 
         &:hover svg {
-            @apply .text-purple-500;
-            fill: config('colors.purple');
+            @apply .text-brand;
         }
     }
 }
