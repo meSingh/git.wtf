@@ -42,11 +42,11 @@ module.exports = {
             // color: colors['teal-dark'],
 
             // Costumize styling using @apply. (optional)
-            wrapper: 'flex px-0 justify-between list-none',
+            wrapper: 'flex px-0 py-6 justify-between list-none',
 
-            link: 'bg-gray-200 py-3 px-8 block text-gray-600 no-underline',
+            link: 'bg-gray-200 py-2 px-5 block text-gray-600 no-underline',
             linkHover: 'text-white bg-brand',
-            linkDisabled: 'bg-gray-100 py-3 px-8 block text-gray-500 no-underline'
+            linkDisabled: 'bg-gray-100 py-2 px-5 block text-gray-500 no-underline'
 
             // Costumize styling using CSS-in-JS. (optional)
             // wrapper: {
