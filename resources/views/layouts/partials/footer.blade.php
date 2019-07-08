@@ -1,5 +1,5 @@
 
-<section class="py-16 px-5 md:px-8 border-0 border-b border-t border-solid border-gray-300">
+<section class="bg-gray-200 py-16 px-5 md:px-8 border-0  border-solid border-gray-300">
     <div class="max-w-5xl mx-auto">
         <p class="mt-0 mb-4">Sign up below to receive updates, tips and more handy tutorials when git screws up. It’s good stuff & I don’t spam.</p>
 

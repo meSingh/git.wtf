@@ -4,7 +4,8 @@ module.exports = {
     theme: {
         extend: {
             boxShadow: {
-                theme: '0 1px 9px rgba(203, 208, 228, .19)'
+                theme: '0 1px 9px rgba(203, 208, 228, .19)',
+                custom: '0 1px 1px 0 rgba(0,0,0,.05)'
             },
             fontFamily: {
                 brand: "'Open Sans', sans-serif"
@@ -20,9 +21,12 @@ module.exports = {
                     100: '#fcfbfb',
                     // '200': '#F2F6FB'
                     // '200': '#f7f7f7',
-                    200: '#f9f7f7',
+                    // 200: '#f9f7f7',
+                    200: '#F9F9F9',
                     // '200': '#f2f4f6',
                     300: '#e0dede',
+                    // 300: '#f6f6f6',
+                    400: '#f3f3f3',
                     // '500': '#ECECEC'
                     500: '#979899',
                     600: '#6e6e70'

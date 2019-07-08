@@ -1,11 +1,11 @@
 
-    <header class="pt-1 pb-12 mb-8 bg-gray-200 border-0 border-solid border-b border-gray-300">
+    <header class="pt-6 pb-12 mb-8 bg-gray-200">
         <div class="max-w-5xl mx-auto px-4 md:px-0">
             <h2 class="text-3xl mb-1 leading-tight md:leading-snug font-semibold">{{ $post->title }}</h2>
 
             <p class="block m-0 text-sm text-gray-500">
                 Written
-                <time datetime="{{ $post->published }}" class="text-gray-600 font-semibold">
+                <time datetime="{{ $post->published }}" class="text-gray-600 font-semibold tracking-tight">
                     {{ $post->dateShort }}
                 </time>
 
