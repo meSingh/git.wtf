@@ -36,17 +36,17 @@
         </div>
     </section> -->
 
-    <section class="bg-gray-200 mb-16 py-10 px-2 md:px-6 border-0 border-t border-b border-solid border-gray-300">
+    <section class="bg-gray-200 mb-16 py-10 px-2 md:px-6">
         <div class="max-w-5xl mx-auto">
 
             <div class="flex flex-col md:flex-row text-xl px-3 md:px-0 leading-tight">
-                <div class="w-full md:w-1/2 border-0 md:border-r border-gray-300 border-solid">
+                <div class="w-full md:w-1/2 border-0 md:border-r border-gray-300 border-solid pr-4">
                     @if($post->previous)
                         <h3><a href="{{ route('post', $post->previous->slug) }}" class="text-gray-800 no-underline block">
                         <span class="block text-sm text-gray-500">&laquo; Previous Article</span> {{ $post->previous->title }}</a></h3>
                     @endif
                 </div>
-                <div class="w-full md:w-1/2 text-right">
+                <div class="w-full md:w-1/2 text-right pl-4">
                     @if($post->next)
                         <h3><a href="{{ route('post', $post->next->slug) }}" class="text-gray-800 no-underline block"><span class="block text-sm text-gray-500">Next Article &raquo;</span>{{ $post->next->title }} </a></h3>
                     @endif

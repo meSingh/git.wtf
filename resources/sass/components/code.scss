@@ -263,11 +263,11 @@ div.code-toolbar > .toolbar span {
 	// color: #bbb;
 	font-size: .8em;
 	// padding: 0 .5em;
-	background: #f5f2f0;
+	// background: #f5f2f0;
 	// background: rgba(224, 224, 224, 0.2);
 	box-shadow: 0 2px 0 0 rgba(0,0,0,0.2);
     // border-radius: .5em;
-    @apply .rounded-bl  .bg-indigo-600 .text-white .py-1 .px-6 .cursor-pointer .mr-1 .-mt-3;
+    @apply .rounded-bl  .bg-brand .text-white .py-1 .px-6 .cursor-pointer .mr-1 .-mt-3;
 }
 
 div.code-toolbar > .toolbar a:hover,
@@ -276,7 +276,7 @@ div.code-toolbar > .toolbar button:hover,
 div.code-toolbar > .toolbar button:focus,
 div.code-toolbar > .toolbar span:hover,
 div.code-toolbar > .toolbar span:focus {
-    @apply .bg-indigo-500;
+    @apply .bg-brand;
 	text-decoration: none;
 }
 
