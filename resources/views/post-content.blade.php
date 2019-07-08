@@ -5,7 +5,7 @@
 
             <p class="block m-0 text-sm text-gray-500">
                 Written
-                <time datetime="{{ $post->published }}" class="text-gray-600">
+                <time datetime="{{ $post->published }}" class="text-gray-600 font-semibold">
                     {{ $post->dateShort }}
                 </time>
 
