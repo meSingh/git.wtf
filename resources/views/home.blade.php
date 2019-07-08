@@ -18,10 +18,11 @@
     <section class="pt-1 pb-8 mb-16 bg-gray-200 border-0 border-b border-solid border-gray-300">
         <div class="max-w-5xl mx-auto px-4 md:px-0">
 
-            <h2 class="text-3xl leading-snug"><span class="text-brand">Git is fucking hard:</span> mistakes happen all the time, finding a solution is sometimes next to impossible.</h2>
-            <p> Git documentation has this needle in the haystack problem, where finding a solution is not just messy but tiresome too <em>unless you already know what you need.</em></p>
+            <!-- <h2 class="text-4xl text-brand leading-snug text-center">Git What The Fuck !?!</h2> -->
+            <h2 class="text-3xl leading-snug"><span class="text-brand">Git is fucking hard,</span> no matter how good you get, there always comes a time when you get stuck & can't figure out a solution!</h2>
+            <p>It's easy to get started, but remembering everything that it has to offer is just not practical. On top of that, git documentation is shit; you can't find anything there. If you think you can, you wouldn't be here looking for answers!</p>
 
-            <p class="mb-8">So here are several of those tricky situations that you might find yourself in with <i>simple ways to get out peacefully.</i></p>
+            <p class="mb-8">Let's be real, the best place to find any solution for our git problems is <strong>StackOverflow</strong>, and honestly, it does have most of the answers, but we sure can do better, and that is what <span class="text-brand font-bold">Git.WTF</span> is trying to do with a curated list of several of these <i class="underline">problems</i>, <i class="underline">frustrations</i>, and <i class="underline">tricks</i> that can give you a solution in seconds.</p>
             <!-- <div class="flex justify-center"> -->
                 <!-- <a href="{{ route('post', $first->slug) }}" class="bg-indigo-500 hover:bg-indigo-700 w-full md:w-1/3 text-white py-3 font-semibold rounded inline-block text-center hover:text-white no-underline border-none text-base cursor-pointer cta-button-home shadow-md">Get solutions to your GIT problems!</a> -->
             <!-- </div> -->
