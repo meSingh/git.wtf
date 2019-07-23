@@ -1,9 +1,8 @@
-const mix = require('laravel-mix');
-const tailwindcss = require('tailwindcss')
+const mix = require("laravel-mix")
+const tailwindcss = require("tailwindcss")
 
-
-require('laravel-mix-tailwind');
-require('laravel-mix-purgecss');
+require("laravel-mix-tailwind")
+require("laravel-mix-purgecss")
 
 /*
  |--------------------------------------------------------------------------
@@ -16,16 +15,16 @@ require('laravel-mix-purgecss');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+mix.js("resources/js/app.js", "public/js")
     .sass("resources/sass/app.scss", "public/css")
     .options({
         processCssUrls: false,
         postCss: [tailwindcss("./tailwind.config.js")]
-    });
+    })
 
 if (mix.inProduction()) {
-    mix.purgeCss().sourceMaps().version();
+    mix.sourceMaps().version()
+    // mix.purgeCss().sourceMaps().version();
 }
 
-
-mix.browserSync("https://git.wtf.test");
+mix.browserSync("https://git.wtf.test")
