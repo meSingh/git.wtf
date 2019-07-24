@@ -7,6 +7,7 @@
     @include('layouts.partials.fonts')
     @yield('meta')
 
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
 </head>
 <!-- <body class="font-brand text-base tracking-normal align-middle leading-relaxed text-gray-900 m-0 relative bg-gray-200 " style="background: #364f6b"> -->
 
@@ -54,6 +55,23 @@
 
 
     <script type="text/javascript" src="https://cdn.howuku.com/js/howu.js" key="N6V9xer17B7rVROvGQJ53g"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+    <script>
+        window.cookieconsent.initialise({
+            "palette": {
+                "popup": {
+                    "background": "#f8f8f8",
+                    "text": "#333333"
+                },
+                "button": {
+                    "background": "#e84545"
+                }
+            },
+            "showLink": false,
+            "theme": "edgeless",
+            "position": "bottom-left"
+        });
+    </script>
 </body>
 
 </html>
