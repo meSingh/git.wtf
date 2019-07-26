@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap');
+@import '~instantsearch.css/themes/algolia-min';
 
 /**
  * This injects Tailwind's base styles, which is a combination of
@@ -66,3 +67,11 @@
   * @import "utilities/background-patterns";
   * @import "utilities/skew-transforms";
   */
+
+
+::-webkit-input-placeholder,
+:-ms-input-placeholder,
+::placeholder,
+.ais-SearchBox-input::placeholder {
+  color: #979899;
+}

@@ -7,6 +7,7 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('tag/{slug}', 'HomeController@tag')->name('tag');
 Route::get('category/{slug}', 'HomeController@category')->name('category');
+Route::get('git-frustrations', 'HomeController@frustrations')->name('frustrations');
 
 Route::permanentRedirect(
     '/how-to-change-the-message-on-last-commit',

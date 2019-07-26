@@ -12,7 +12,10 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "dependencies": {
-        "puppeteer": "^1.17.0"
+        "algoliasearch": "^3.33.0",
+        "instantsearch.css": "^7.3.1",
+        "puppeteer": "^1.17.0",
+        "vue-instantsearch": "^2.2.2"
     },
     "devDependencies": {
         "@fullhuman/postcss-purgecss": "^1.2.0",

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Content\Posts;
+use App\Frustrations;
 use Illuminate\Http\Request;
 
 class HomeController
@@ -17,6 +18,14 @@ class HomeController
             'posts' => $posts,
             'first' => $posts->first(),
             'query' => $request->get('query') ?? null
+        ]);
+    }
+
+    public function frustrations(Frustrations $frustrations)
+    {
+        return view('frustrations', [
+            'frustrations' => $frustrations->get(),
+            'title' => "Git Frustrations"
         ]);
     }
 

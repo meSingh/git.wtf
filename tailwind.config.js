@@ -38,7 +38,8 @@ module.exports = {
         }
     },
     variants: {
-        margin: ['responsive', 'hover', 'focus']
+        margin: ['responsive', 'hover', 'focus'],
+        textColor: ['responsive', 'hover', 'focus', 'group-hover']
     },
     plugins: [
         require('tailwindcss-plugins/pagination')({

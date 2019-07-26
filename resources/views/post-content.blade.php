@@ -1,7 +1,7 @@
 
     <header class="pt-6 pb-12 mb-8 bg-gray-200">
         <div class="max-w-5xl mx-auto px-4 md:px-0">
-            <h2 class="text-3xl mb-1 leading-tight md:leading-snug font-semibold">{{ $post->title }}</h2>
+            <h2 class="text-4xl mb-1 leading-tight md:leading-snug font-semibold">{{ $post->title }}</h2>
 
             <p class="block m-0 text-sm text-gray-500">
                 Written
@@ -28,7 +28,7 @@
 
 
     <div class="max-w-5xl mx-auto px-4 md:px-0">
-        <div class="content py-6 mb-8 border-0 border-b border-gray-300 border-solid text-lg">
+        <div class="content pt-1 pb-6 mb-8 border-0 border-b border-gray-300 border-solid text-lg">
             {!! $post->contents !!}
 
             @if($post->source)

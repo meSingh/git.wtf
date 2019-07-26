@@ -3,8 +3,6 @@
 namespace App\Content;
 
 use Carbon\Carbon;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 class Posts extends Provider
@@ -74,11 +72,11 @@ class Posts extends Provider
         return tap($this->all()
             ->where('slug', $slug)
             ->first(), function ($post) use ($slug) {
-                $key = $this->findKey($slug);
+            $key = $this->findKey($slug);
 
-                $post->previous = $this->findPrevious($key);
-                $post->next = $this->findNext($key);
-            });
+            $post->previous = $this->findPrevious($key);
+            $post->next = $this->findNext($key);
+        });
     }
 
     public function findKey($slug)
@@ -142,6 +140,7 @@ class Posts extends Provider
                     'tags' => $document->tags ?? [],
                     'author' => config('me.authors')[$document->author ?? 'msingh'],
                     'slug' => $slug,
+                    'objectID' => $slug,
                     'source' => $document->source ?? '',
                     'url' => route('post', [$slug]),
                     'external_url' => $document->external_url ?? false,
