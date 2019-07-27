@@ -1,11 +1,10 @@
-# GIT.WTF!?!
+# Git.WTF !?!
 
-<img src="https://raw.githubusercontent.com/meSingh/git.wtf/master/public/images/ohshit.png" align="right" width="130px"/>
+Git is fucking hard, no matter how good you get, there always comes a time when you get stuck & can't figure out a solution!
 
+It's easy to get started, but remembering everything that it has to offer is just not practical. On top of that, git documentation is shit; you can't find anything there. If you think you can, you wouldn't be here looking for answers! 
 
-Git is hard: screwing up is easy, and figuring out how to fix your mistakes is fucking impossible.
-
-So here are some common bad situations and how you can get out of them _in plain english_*.
+Let's be real, the best place to find any solution for our git problems is StackOverflow, and honestly, it does have most of the answers, but we sure can do better, and that is what Git.WTF is trying to do with a curated list of several of these problems, frustrations, and tricks that can give you a solution in seconds.
 
 [Visit Website =>>](https://git.wtf)
 
