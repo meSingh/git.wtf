@@ -19,7 +19,7 @@ return [
     'website' => 'https://www.msingh.com',
     'summary' => 'Git is hard: screwing up is easy, and figuring out how to fix your mistakes is fucking impossible. So here are some common bad situations and how you can get out of them in plain english*.',
 
-    'email' => 'im@msingh.me',
+    'email' => 'hi@msingh.com',
 
     'social' => [
         'twitter' => 'gitwtf',

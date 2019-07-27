@@ -12,7 +12,7 @@
           placeholder="Search for git tips here"
           :show-loading-indicator="true"
           :class-names="{
-            'ais-SearchBox-input': 'transition text-base focus:outline-none rounded bg-gray-400 py-3 pl-10 pr-4 px-6 w-full appearance-none',
+            'ais-SearchBox-input': 'transition text-base focus:outline-none rounded bg-gray-400 py-3 pl-10 pr-4 px-6 border-0 w-full appearance-none',
             'ais-SearchBox-submitIcon': 'hidden',
             'ais-SearchBox-reset': 'mr-2'
           }"
