@@ -7,15 +7,15 @@ import './modules/copyToClipboard.js'
 // import './modules/showLanguage.js'
 
 
-import Turbolinks from 'turbolinks';
+// import Turbolinks from 'turbolinks';
 
-Turbolinks.start();
+// Turbolinks.start();
 
-document.addEventListener('turbolinks:load', () => {
+// document.addEventListener('turbolinks:load', () => {
 
-    Prism.highlightAll();
+Prism.highlightAll();
 
-});
+// });
 
 
 window.Vue = require('vue');
