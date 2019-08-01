@@ -1,5 +1,10 @@
 <template>
-  <ais-instant-search :search-client="searchClient" index-name="posts" :routing="routing">
+  <ais-instant-search
+    :search-client="searchClient"
+    :insights-client="window.aa"
+    index-name="posts"
+    :routing="routing"
+  >
     <ais-configure
       :hitsPerPage="5"
       :attributesToSnippet="['summary_short_formated']"
@@ -17,10 +22,7 @@
             'ais-SearchBox-reset': 'mr-2'
           }"
         />
-        <ais-hits
-          v-if="currentRefinement"
-          :class-names="{'ais-Hits': 'absolute z-20 pt-2 w-full'}"
-        >
+        <ais-hits v-if="currentRefinement" :class-names="{'ais-Hits': 'absolute z-20 pt-2 w-full'}">
           <ul
             slot-scope="{ items }"
             class="shadow-xl rounded list-none pl-0 my-0 bg-white"
@@ -31,7 +33,7 @@
               <strong>enter</strong> to select,
               <strong>↑↓</strong> to
               navigate,
-              <strong>esc</strong> to dismiss -->
+              <strong>esc</strong> to dismiss-->
             </li>
             <li
               v-for="(hit, index) in items"
@@ -39,7 +41,15 @@
               class="pt-6 px-5 hover:bg-gray-200"
               :tabindex="index+1"
             >
-              <a :href="hit.slug" class="no-underline block">
+              <a
+                :href="hit.slug"
+                class="no-underline block"
+                @click="clickedObjectIDs({
+                    eventName: 'Result Selected',
+                    index: 'posts',
+                    objectIDs: [hit.objectID]
+                })"
+              >
                 <ais-highlight
                   attribute="title"
                   :hit="hit"
@@ -90,6 +100,7 @@ router.write = routeState => {
 export default {
   data() {
     return {
+      window: window,
       routing: {
         router,
         // router: historyRouter(),
@@ -102,7 +113,12 @@ export default {
     };
   },
   methods: {
-
+    insights(method, payload) {
+      return insights(method, payload);
+    },
+    clickedObjectIDs(params) {
+      window.aa("clickedObjectIDs", params);
+    }
   }
 };
 </script>

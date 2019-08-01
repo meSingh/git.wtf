@@ -149,8 +149,8 @@ class Posts extends Provider
                     'category_formated' => ucwords(str_replace('-', ' ', $document->category ?? 'what-the-fuck')),
                     'contents' => markdown($document->body()),
                     'summary' => markdown($document->summary ?? $document->body()),
-                    'summary_short_formated' => markdown(mb_strimwidth($document->summary ?? $document->body(), 0, 145, '...')),
-                    'summary_short' => mb_strimwidth($document->summary ?? $document->body(), 0, 145, '...'),
+                    'summary_short_formated' => markdown(mb_strimwidth($document->summary ?? $document->body(), 0, 155, '...')),
+                    'summary_short' => mb_strimwidth($document->summary ?? $document->body(), 0, 155, '...'),
                     'preview_image' => $document->preview_image
                         ? url($document->preview_image)
                         : url('/images/social.jpg'),

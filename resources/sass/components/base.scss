@@ -48,4 +48,8 @@ a {
             @apply .text-brand;
         }
     }
+
+    .links > p > a {
+        @apply .text-red-600 .font-medium;
+    }
 }

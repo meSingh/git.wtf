@@ -45,13 +45,13 @@ return [
     // ],
 
     'seo' => [
-        'title' => 'GIT.WTF!?! - Figure out ways to fix GIT screw-ups',
-        'description' => 'Git is hard: screwing up is easy, and figuring out how to fix your mistakes is fucking impossible. So here are some common bad situations and how you can get out of them in plain english*.'
+        'title' => 'Git.WTF!?! - Figure out ways to fix GIT screw-ups',
+        'description' => 'Git.WTF is a curated list of solutions & examples for fixing your most annoying git problems & frustrations in seconds.'
     ],
 
     'rss' => [
-        'title' => 'GIT.WTF!?! - Figure out ways to fix GIT screw-ups',
-        'description' => 'Git is hard: screwing up is easy, and figuring out how to fix your mistakes is fucking impossible. So here are some common bad situations and how you can get out of them in plain english*.'
+        'title' => 'Git.WTF!?! - Figure out ways to fix GIT screw-ups',
+        'description' => 'Git.WTF is a curated list of solutions & examples for fixing your most annoying git problems & frustrations in seconds.'
     ],
 
     'extras' => [

@@ -25,7 +25,7 @@
         {{ $post->category_formated }}
     </a>
 </p> -->
-<p>{!! $post->summary_short_formated !!}</p>
+<p>{!! $post->summary !!}</p>
 
 <p class="block m-0 text-gray-500 font-normal">
     @if(isset($post->author['link']) && $post->author['link'] !== '' )
