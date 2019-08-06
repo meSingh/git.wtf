@@ -34,7 +34,7 @@
         "resolve-url-loader": "^3.1.0",
         "sass": "^1.20.1",
         "sass-loader": "^7.1.0",
-        "tailwindcss": "^1.0.2",
+        "tailwindcss": "^1.1.0",
         "tailwindcss-plugins": "^0.1.4",
         "turbolinks": "^5.2.0",
         "vue": "^2.6.10",
