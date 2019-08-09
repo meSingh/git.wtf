@@ -13,5 +13,4 @@ class PagesTest extends TestCase
     {
         $this->get('/')->assertStatus(200);
     }
-
 }
