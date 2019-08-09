@@ -24,8 +24,10 @@
     "require-dev": {
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "^1.8",
+        "graham-campbell/analyzer": "^2.2",
         "jasonmccreary/laravel-test-assertions": "^0.1.0",
         "laravel-frontend-presets/tailwindcss": "^1.0.0",
+        "mockery/mockery": "^1.2",
         "mpociot/laravel-test-factory-helper": "^1.1"
     },
     "autoload": {
