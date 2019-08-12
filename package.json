@@ -35,7 +35,7 @@
         "sass": "^1.20.1",
         "sass-loader": "^7.1.0",
         "tailwindcss": "^1.0.2",
-        "tailwindcss-plugins": "^0.1.4",
+        "tailwindcss-plugins": "^0.3.0",
         "turbolinks": "^5.2.0",
         "vue": "^2.6.10",
         "vue-template-compiler": "^2.6.10"
