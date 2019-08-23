@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "53e59395ecf729fc2da5becd7af75c46",
+    "content-hash": "36f1946f52be0b69fef00fec1d6539b6",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -1029,9 +1029,9 @@
             "authors": [
                 {
                     "name": "Colin O'Dell",
+                    "role": "Lead Developer",
                     "email": "colinodell@gmail.com",
-                    "homepage": "https://www.colinodell.com",
-                    "role": "Lead Developer"
+                    "homepage": "https://www.colinodell.com"
                 }
             ],
             "description": "Markdown parser for PHP based on the CommonMark spec",
@@ -2452,16 +2452,16 @@
         },
         {
             "name": "sentry/sentry",
-            "version": "2.1.1",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-php.git",
-                "reference": "8e27e6c5fcf6f01fc2e5235dd14cc0b2b347d793"
+                "reference": "646f6ada8b89a08063e31f54ed6d260bd6879239"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/8e27e6c5fcf6f01fc2e5235dd14cc0b2b347d793",
-                "reference": "8e27e6c5fcf6f01fc2e5235dd14cc0b2b347d793",
+                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/646f6ada8b89a08063e31f54ed6d260bd6879239",
+                "reference": "646f6ada8b89a08063e31f54ed6d260bd6879239",
                 "shasum": ""
             },
             "require": {
@@ -2490,12 +2490,12 @@
                 "phpstan/phpstan": "^0.10.3",
                 "phpstan/phpstan-phpunit": "^0.10",
                 "phpunit/phpunit": "^7.0",
-                "symfony/phpunit-bridge": "^4.1.6"
+                "symfony/phpunit-bridge": "^4.3"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "2.1.x-dev"
                 }
             },
             "autoload": {
@@ -2527,20 +2527,20 @@
                 "logging",
                 "sentry"
             ],
-            "time": "2019-06-13T11:27:23+00:00"
+            "time": "2019-08-22T07:37:30+00:00"
         },
         {
             "name": "sentry/sentry-laravel",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-laravel.git",
-                "reference": "1e5f644b62ee73424ad8316e37b9a2dcf7290de8"
+                "reference": "86b4549d8c388c5237bcfdd2eb99673d4c645ff9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-laravel/zipball/1e5f644b62ee73424ad8316e37b9a2dcf7290de8",
-                "reference": "1e5f644b62ee73424ad8316e37b9a2dcf7290de8",
+                "url": "https://api.github.com/repos/getsentry/sentry-laravel/zipball/86b4549d8c388c5237bcfdd2eb99673d4c645ff9",
+                "reference": "86b4549d8c388c5237bcfdd2eb99673d4c645ff9",
                 "shasum": ""
             },
             "require": {
@@ -2595,7 +2595,7 @@
                 "logging",
                 "sentry"
             ],
-            "time": "2019-07-04T10:36:53+00:00"
+            "time": "2019-08-23T07:11:58+00:00"
         },
         {
             "name": "spatie/browsershot",
@@ -2802,9 +2802,9 @@
             "authors": [
                 {
                     "name": "Freek Van der Herten",
+                    "role": "Developer",
                     "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
+                    "homepage": "https://spatie.be"
                 }
             ],
             "description": "Easily optimize images using PHP",
@@ -2864,15 +2864,15 @@
             "authors": [
                 {
                     "name": "Freek Van der Herten",
+                    "role": "Developer",
                     "email": "freek@spatie.be",
-                    "homepage": "https://github.com/freekmurze",
-                    "role": "Developer"
+                    "homepage": "https://github.com/freekmurze"
                 },
                 {
                     "name": "Sebastian De Deyne",
+                    "role": "Developer",
                     "email": "sebastian@spatie.be",
-                    "homepage": "https://github.com/sebastiandedeyne",
-                    "role": "Developer"
+                    "homepage": "https://github.com/sebastiandedeyne"
                 }
             ],
             "description": "A set of useful Laravel collection macros",
@@ -3000,9 +3000,9 @@
             "authors": [
                 {
                     "name": "Freek Van der Herten",
+                    "role": "Developer",
                     "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
+                    "homepage": "https://spatie.be"
                 }
             ],
             "description": "Speed up a Laravel application by caching the entire response",
@@ -3052,9 +3052,9 @@
             "authors": [
                 {
                     "name": "Sebastian De Deyne",
+                    "role": "Developer",
                     "email": "sebastian@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
+                    "homepage": "https://spatie.be"
                 }
             ],
             "description": "Add an `all` or `none` robots header to your requests via a middleware in Laravel",
@@ -3113,9 +3113,9 @@
             "authors": [
                 {
                     "name": "Freek Van der Herten",
+                    "role": "Developer",
                     "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
+                    "homepage": "https://spatie.be"
                 }
             ],
             "description": "Create and generate sitemaps with ease",
@@ -3160,9 +3160,9 @@
             "authors": [
                 {
                     "name": "Brent Roose",
+                    "role": "Developer",
                     "email": "brent@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
+                    "homepage": "https://spatie.be"
                 }
             ],
             "description": "Determine if a page may be crawled from robots.txt and robots meta tags",
@@ -3206,9 +3206,9 @@
             "authors": [
                 {
                     "name": "Alex Vanderbist",
+                    "role": "Developer",
                     "email": "alex@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
+                    "homepage": "https://spatie.be"
                 }
             ],
             "description": "Easily create, use and destroy temporary directories",
@@ -3254,9 +3254,9 @@
             "authors": [
                 {
                     "name": "Sebastian De Deyne",
+                    "role": "Developer",
                     "email": "sebastian@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
+                    "homepage": "https://spatie.be"
                 }
             ],
             "description": "A to the point yaml front matter parser",
@@ -4904,8 +4904,8 @@
             "authors": [
                 {
                     "name": "Tijs Verkoyen",
-                    "email": "css_to_inline_styles@verkoyen.eu",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "css_to_inline_styles@verkoyen.eu"
                 }
             ],
             "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
