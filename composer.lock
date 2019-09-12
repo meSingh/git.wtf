@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "53e59395ecf729fc2da5becd7af75c46",
+    "content-hash": "25feba552c15fedab4d7a009a978a50e",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -1029,9 +1029,9 @@
             "authors": [
                 {
                     "name": "Colin O'Dell",
+                    "role": "Lead Developer",
                     "email": "colinodell@gmail.com",
-                    "homepage": "https://www.colinodell.com",
-                    "role": "Lead Developer"
+                    "homepage": "https://www.colinodell.com"
                 }
             ],
             "description": "Markdown parser for PHP based on the CommonMark spec",
@@ -2802,9 +2802,9 @@
             "authors": [
                 {
                     "name": "Freek Van der Herten",
+                    "role": "Developer",
                     "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
+                    "homepage": "https://spatie.be"
                 }
             ],
             "description": "Easily optimize images using PHP",
@@ -2926,21 +2926,21 @@
             "authors": [
                 {
                     "name": "Jolita Grazyte",
-                    "role": "Developer",
                     "email": "jolita@spatie.be",
-                    "homepage": "https://spatie.be"
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
                 },
                 {
                     "name": "Freek Van der Herten",
-                    "role": "Developer",
                     "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be"
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
                 },
                 {
                     "name": "Sebastian De Deyne",
-                    "role": "Developer",
                     "email": "sebastian@spatie.be",
-                    "homepage": "https://spatie.be"
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
                 }
             ],
             "description": "Generates rss feed",
@@ -5077,8 +5077,8 @@
             "authors": [
                 {
                     "name": "Filipe Dobreira",
-                    "role": "Developer",
-                    "homepage": "https://github.com/filp"
+                    "homepage": "https://github.com/filp",
+                    "role": "Developer"
                 }
             ],
             "description": "php error handling for cool kids",
@@ -5145,20 +5145,20 @@
         },
         {
             "name": "laravel-frontend-presets/tailwindcss",
-            "version": "1.0.2",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel-frontend-presets/tailwindcss.git",
-                "reference": "7eeb4bf0c68ecc189f37622df540a9f1226d14ef"
+                "reference": "a0f437f65d3047b2c07839f966538600bfec14e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel-frontend-presets/tailwindcss/zipball/7eeb4bf0c68ecc189f37622df540a9f1226d14ef",
-                "reference": "7eeb4bf0c68ecc189f37622df540a9f1226d14ef",
+                "url": "https://api.github.com/repos/laravel-frontend-presets/tailwindcss/zipball/a0f437f65d3047b2c07839f966538600bfec14e7",
+                "reference": "a0f437f65d3047b2c07839f966538600bfec14e7",
                 "shasum": ""
             },
             "require": {
-                "laravel/framework": "^5.5"
+                "laravel/framework": "^5.5 || ^6.0"
             },
             "type": "library",
             "extra": {
@@ -5183,7 +5183,7 @@
                 "preset",
                 "tailwindcss"
             ],
-            "time": "2019-07-16T00:32:36+00:00"
+            "time": "2019-09-11T23:32:17+00:00"
         }
     ],
     "aliases": [],
