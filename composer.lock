@@ -1029,9 +1029,9 @@
             "authors": [
                 {
                     "name": "Colin O'Dell",
+                    "role": "Lead Developer",
                     "email": "colinodell@gmail.com",
-                    "homepage": "https://www.colinodell.com",
-                    "role": "Lead Developer"
+                    "homepage": "https://www.colinodell.com"
                 }
             ],
             "description": "Markdown parser for PHP based on the CommonMark spec",
@@ -2634,9 +2634,9 @@
             "authors": [
                 {
                     "name": "Freek Van der Herten",
-                    "role": "Developer",
                     "email": "freek@spatie.be",
-                    "homepage": "https://github.com/freekmurze"
+                    "homepage": "https://github.com/freekmurze",
+                    "role": "Developer"
                 }
             ],
             "description": "Convert a webpage to an image or pdf using headless Chrome",
@@ -2802,9 +2802,9 @@
             "authors": [
                 {
                     "name": "Freek Van der Herten",
+                    "role": "Developer",
                     "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
+                    "homepage": "https://spatie.be"
                 }
             ],
             "description": "Easily optimize images using PHP",
@@ -2885,24 +2885,24 @@
         },
         {
             "name": "spatie/laravel-feed",
-            "version": "2.2.2",
+            "version": "2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-feed.git",
-                "reference": "a273e4e316915ee0a0001adece7a3accf7222cfb"
+                "reference": "bf98c18e95a9d7ef4bd50518ef8f9193fe8dd5e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-feed/zipball/a273e4e316915ee0a0001adece7a3accf7222cfb",
-                "reference": "a273e4e316915ee0a0001adece7a3accf7222cfb",
+                "url": "https://api.github.com/repos/spatie/laravel-feed/zipball/bf98c18e95a9d7ef4bd50518ef8f9193fe8dd5e1",
+                "reference": "bf98c18e95a9d7ef4bd50518ef8f9193fe8dd5e1",
                 "shasum": ""
             },
             "require": {
-                "laravel/framework": "~5.8.0",
+                "laravel/framework": "~5.8.0|^6.0",
                 "php": "^7.2"
             },
             "require-dev": {
-                "orchestra/testbench": "~3.8.0",
+                "orchestra/testbench": "~3.8.0|^4.0",
                 "phpunit/phpunit": "^8.0",
                 "spatie/phpunit-snapshot-assertions": "^2.0"
             },
@@ -2926,21 +2926,21 @@
             "authors": [
                 {
                     "name": "Jolita Grazyte",
-                    "role": "Developer",
                     "email": "jolita@spatie.be",
-                    "homepage": "https://spatie.be"
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
                 },
                 {
                     "name": "Freek Van der Herten",
-                    "role": "Developer",
                     "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be"
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
                 },
                 {
                     "name": "Sebastian De Deyne",
-                    "role": "Developer",
                     "email": "sebastian@spatie.be",
-                    "homepage": "https://spatie.be"
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
                 }
             ],
             "description": "Generates rss feed",
@@ -2951,7 +2951,7 @@
                 "rss",
                 "spatie"
             ],
-            "time": "2019-07-24T19:17:42+00:00"
+            "time": "2019-09-16T09:33:42+00:00"
         },
         {
             "name": "spatie/laravel-responsecache",
@@ -5077,8 +5077,8 @@
             "authors": [
                 {
                     "name": "Filipe Dobreira",
-                    "role": "Developer",
-                    "homepage": "https://github.com/filp"
+                    "homepage": "https://github.com/filp",
+                    "role": "Developer"
                 }
             ],
             "description": "php error handling for cool kids",
