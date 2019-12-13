@@ -12,7 +12,7 @@ class AnalysisTest extends TestCase
     public function getPaths()
     {
         return [
-            __DIR__.'/../../app',
+            __DIR__ . '/../../app',
         ];
     }
 }

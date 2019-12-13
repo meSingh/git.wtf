@@ -4,7 +4,7 @@
             <h2 class="text-4xl mb-1 leading-tight md:leading-snug font-semibold">{{ $post->title }}</h2>
 
             <p class="block m-0 text-sm text-gray-500">
-                Written
+                Written on
                 <time datetime="{{ $post->published }}" class="text-gray-600 font-semibold tracking-tight">
                     {{ $post->dateShort }}
                 </time>

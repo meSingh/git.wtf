@@ -12,7 +12,7 @@ return [
     |
     */
 
-    'name' => 'GIT.WTF!?!',
+    'name'  => 'GIT.WTF!?!',
     'owner' => [
         'name' => 'Mandeep Singh'
     ],
@@ -23,7 +23,7 @@ return [
 
     'social' => [
         'twitter' => 'gitwtf',
-        'github' => 'meSingh/git.wtf'
+        'github'  => 'meSingh/git.wtf'
     ],
 
     'authors' => [
@@ -34,6 +34,10 @@ return [
         'bsahil' => [
             'name' => 'Sahil Bhatacharya',
             'link' => 'https://bsahil.com'
+        ],
+        'matija' => [
+            'name' => 'Matija Marohnić',
+            'link' => 'https://silvenon.com'
         ]
     ],
 
@@ -45,12 +49,12 @@ return [
     // ],
 
     'seo' => [
-        'title' => 'Git.WTF!?! - Figure out ways to fix GIT screw-ups',
+        'title'       => 'Git.WTF!?! - Figure out ways to fix GIT screw-ups',
         'description' => 'Git.WTF is a curated list of solutions & examples for fixing your most annoying git problems & frustrations in seconds.'
     ],
 
     'rss' => [
-        'title' => 'Git.WTF!?! - Figure out ways to fix GIT screw-ups',
+        'title'       => 'Git.WTF!?! - Figure out ways to fix GIT screw-ups',
         'description' => 'Git.WTF is a curated list of solutions & examples for fixing your most annoying git problems & frustrations in seconds.'
     ],
 
