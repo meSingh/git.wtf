@@ -22,7 +22,7 @@
         "spatie/yaml-front-matter": "^2.0.0"
     },
     "require-dev": {
-        "laravel-frontend-presets/tailwindcss": "^1.0.0",
+        "laravel-frontend-presets/tailwindcss": "^2.2.2",
         "fzaninotto/faker": "^1.8",
         "filp/whoops": "~2.0"
     },
