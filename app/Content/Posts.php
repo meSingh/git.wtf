@@ -30,6 +30,14 @@ class Posts extends Provider
         });
     }
 
+    public function notAPage()
+    {
+        return $this->all()
+            ->filter(function ($post) {
+                return $post->type != 'page';
+            });
+    }
+
     public function published()
     {
         return $this->all()
@@ -88,12 +96,12 @@ class Posts extends Provider
 
     public function findPrevious($currentId)
     {
-        return $this->all()[$currentId - 1] ?? null;
+        return $this->notAPage()[$currentId - 1] ?? null;
     }
 
     public function findNext($currentId)
     {
-        return $this->all()[$currentId + 1] ?? null;
+        return $this->notAPage()[$currentId + 1] ?? null;
     }
 
     public function feed()
@@ -155,6 +163,7 @@ class Posts extends Provider
                         ? url($document->preview_image)
                         : url('/images/social.jpg'),
                     'published' => $document->published ?? $published,
+                    'type' => $document->type,
                     'updated' => $updated,
                 ];
             })

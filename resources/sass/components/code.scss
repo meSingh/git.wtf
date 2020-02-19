@@ -3,7 +3,7 @@
 
 
 pre code {
-    @apply .text-gray-400 .leading-normal .font-mono .p-4 .block .rounded .border .border-solid .border-gray-400 .bg-gray-900 .shadow-theme .overflow-x-scroll;
+    @apply .text-gray-400 .leading-normal .font-mono .p-4 .block .rounded .border .border-solid .border-gray-400 .bg-gray-900 .shadow-theme .overflow-x-scroll .w-full;
 }
 
 // @media (max-width: 600px) {
@@ -20,14 +20,14 @@ pre code {
 
 p code {
     // color: #ec4e8b;
-    @apply .text-brand .py-1 .px-2 .border .border-solid .border-gray-300 .bg-gray-100 .-mt-1;
+    @apply .text-brand .py-1 .px-2 .border .border-solid .border-gray-400 .bg-gray-300 .-mt-1 .text-sm .rounded;
 }
 
 
 /** prismjs-themes | https://github.com/heyallan/prismjs-themes#readme */
 
 pre {
-    @apply .my-8;
+    @apply .my-8 .flex;
 }
 
 code[class*=language] {
@@ -40,11 +40,11 @@ code[class*=language] {
     background-color: #28323f
 }
 
-@media (min-width: 1024px) {
-    code[class*=language] {
-        @apply .px-16;
-    }
-}
+// @media (min-width: 1024px) {
+//     code[class*=language] {
+//         @apply .px-16;
+//     }
+// }
 
 code[class*=language-],
 {
@@ -126,7 +126,8 @@ code[class*=language-],
 
 .token.function {
     // color: #ec4e8b
-    @apply .text-brand;
+    // @apply .text-brand;
+    @apply .text-red-400;
 }
 
 .token.atrule {
@@ -207,15 +208,15 @@ pre .line-highlight {
 
 
 div.code-toolbar {
-    @apply .-mx-6;
-    position: relative;
+    @apply .relative;
+    // position: relative;
 }
 
-@media (min-width: 1024px) {
-    div.code-toolbar {
-        @apply .-mx-16;
-    }
-}
+// @media (min-width: 1024px) {
+//     div.code-toolbar {
+//         @apply .-mx-16;
+//     }
+// }
 
 div.code-toolbar > .toolbar {
 	position: absolute;

@@ -16,12 +16,26 @@
 
 @section('content')
 
-<article class="post bg-white mb-16 overflow-hidden leading-relaxed">
+@if($post->type != 'page')
+<article class="post bg-white pb-8 overflow-hidden leading-relaxed  bg-gray-100 ">
+@else
+<article class="post bg-white pb-8 overflow-hidden leading-relaxed  bg-white ">
+@endif
     @include('post-content', ['type' => 'single'])
 </article>
 
-<section class="bg-gray-200 mb-16 py-10 px-2 md:px-6">
-    <div class="max-w-5xl mx-auto">
+@if($post->type != 'page')
+
+
+<section class="bg-white  border-t pt-12">
+    <div class=" max-w-screen-lg px-3 md:px-12 mx-auto relative pb-12">
+    <div id="disqus_thread" style="overflow: hidden;position: relative;" class="px-4"></div>
+    </div>
+</section>
+
+
+<section class="bg-white pb-12 pt-10 px-2 md:px-6 hidden">
+    <div class="max-w-screen-lg px-12 mx-auto">
 
         <div class="flex flex-col md:flex-row text-xl px-3 md:px-0 leading-tight">
             <div class="w-full md:w-1/2 border-0 md:border-r border-gray-300 border-solid pr-4">
@@ -46,11 +60,7 @@
 
     </div>
 </section>
-
-<section class="max-w-5xl mx-auto relative pb-12">
-    <div id="disqus_thread" style="overflow: hidden;position: relative;" class="px-4"></div>
-</section>
-
+@endif
 
 @endsection
 

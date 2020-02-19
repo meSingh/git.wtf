@@ -12,29 +12,35 @@
 <meta name="twitter:title" content="{{ config('me.seo.title') }}" />
 <meta name="twitter:description" content="{{ config('me.seo.description') }}" />
 <meta name="twitter:image" content="{{ asset('/images/social.png') }}" />
+
 @endsection
 
 @section('content')
-<section class="py-12 max-w-6xl mx-auto">
-    <div class="rounded-lg bg-gray-200 px-4 md:px-12 py-4 mx-4 shadow">
+<section class="max-w-screen-lg mx-auto pt-0 md:pt-12 px-6 md:px-12 pb-12 md:pb-20 flex">
+    <div class="md:mr-10" style="">
+        <h2 class="text-3xl lg:text-4xl leading-tight mt-8 mb-3 text-indigo-400 font-semibold uppercase">
+            <span class="text-teal-400">Git</span> is <span class="text-red-400">f!!cking</span> <span class="text-pink-400">hard</span>
+        </h2>
 
-        <!-- <h2 class="text-4xl text-brand leading-snug text-center">Git What The Fuck !?!</h2> -->
-        <h2 class="text-3xl leading-snug"><span class="text-brand">Git is fucking hard</span>, no matter how good you get, there always comes a time when you get stuck & can't figure out a solution!</h2>
-        <p>It's easy to get started, but remembering everything that it has to offer is just not practical. On top of that, git documentation is shit; you can't find anything there. If you think you can, you wouldn't be here looking for answers!</p>
+        <h4 class="text-2xl leading-tight font-normal text-gray-600">Find solutions to all your git  problems along with tips & tricks to improve your git workflows!</h4>
 
-        <p class="mb-8">Let's be real, the best place to find any solution for our git problems is <strong>StackOverflow</strong>, and honestly, it does have most of the answers, but we sure can do better, and that is what <span class="text-brand font-bold">Git.WTF</span> is trying to do with a curated list of several of these <i class="underline">problems</i>, <i class="underline">frustrations</i>, and <i class="underline">tricks</i> that can give you a solution in seconds.</p>
-        <!-- <div class="flex justify-center"> -->
-        <!-- <a href="{{ route('post', $first->slug) }}" class="bg-indigo-500 hover:bg-indigo-700 w-full md:w-1/3 text-white py-3 font-semibold rounded inline-block text-center hover:text-white no-underline border-none text-base cursor-pointer cta-button-home shadow-md">Get solutions to your GIT problems!</a> -->
-        <!-- </div> -->
+        <form action="https://khurafatstudio.us13.list-manage.com/subscribe/post?u=00058058733c668eea4891e02&amp;id=d83f6d4784" method="post" class="mt-6 lg:mt-10 flex">
+            <input class="rounded-l-lg py-0 px-4 border-t mr-0 border-b border-l text-gray-800 border-gray-300 bg-gray-100 w-full outline-none focus:border-yellow-500 focus:bg-yellow-100 focus:placeholder-yellow-500" placeholder="Get latest tips & tricks right in your inbox" type="email" name="EMAIL"/>
+            <input type="hidden" name="LOCATION" value="GIT.WTF!?!">
+            <button class="px-4 rounded-r-lg bg-yellow-400  text-gray-800 font-bold py-3 uppercase border-yellow-500 border-t border-b border-r text-sm">Subscribe</button>
+        </form>
+
     </div>
+    <img src="/images/fuck.jpg" class="w-1/2 lg:w-2/5 hidden md:block">
 </section>
 
-<section class="max-w-5xl mx-auto pb-1">
+<section class="bg-gray-100 border-t">
+<div class="max-w-screen-lg mx-auto md:mt-8 px-2 md:px-12 py-8">
 
     @forelse($posts as $post)
-    <article class="mb-4 py-4 px-4 md:px-0 post leading-snug md:leading-relaxed">
+
         @include('post-list', ['type' => 'list'])
-    </article>
+
 
 
     {{--@if( $loop->index == 4)
@@ -42,7 +48,7 @@
                     <h3 class="mb-0">Want to Contribute?</h3>
 
                     <p class="mb-4">Send me an <a href="mailto:{{ config('me.email') }}?Subject={{ config('me.name') }}">Email</a>, ping me on <a href="https://twitter.com/{{ config('me.social.twitter') }}" target="_blank" rel="noopener" class="text-blue-500 hover:text-blue-300">Twitter</a> or submit a pull request on <a href="https://github.com/{{ config('me.social.github') }}/pulls" target="_blank" rel="noopener" class="text-orange-400 hover:text-orange-300">Github</a>.</p>
-
+</div>
 </section>
 @endif--}}
 @empty
@@ -52,8 +58,8 @@
 </section>
 @endforelse
 
-<div class="mb-12">
+
     {!! $posts->appends(['query' => $query])->links() !!}
-</div>
+
 </section>
 @endsection

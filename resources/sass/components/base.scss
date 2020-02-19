@@ -18,7 +18,7 @@
 
 
 a {
-    @apply .text-indigo-600 .easing;
+    @apply .text-indigo-600 .easing .font-bold;
 
     &:hover {
         // @apply .text-indigo-500;
@@ -27,7 +27,7 @@ a {
 }
 
 .footer {
-    @apply .max-w-2xl .mx-auto .mt-8 .py-8 .flex .flex-wrap .justify-between .items-center .text-gray-500;
+    @apply .max-w-2xl .mx-auto .mt-8 .py-8 .flex .flex-wrap .justify-between .items-center .text-gray-300;
 
     .copyright > a {
         @apply .no-underline .text-lg .text-gray-500;
@@ -37,11 +37,11 @@ a {
         // }
     }
 
-    .links a {
-        @apply .no-underline .mx-1 .text-gray-500;
+    .links > a {
+        @apply .no-underline .mx-1 .inline-block ;
 
         svg {
-            @apply .text-gray-500;
+            @apply .text-gray-300;
         }
 
         &:hover svg {
@@ -50,6 +50,6 @@ a {
     }
 
     .links > p > a {
-        @apply .text-red-600 .font-medium;
+        @apply  .font-semibold .underline .mx-0 text-orange-400;
     }
 }
