@@ -72,7 +72,7 @@
                 ></ais-snippet>-->
                 <div
                   v-html="hit.summary_short_formated"
-                  class="pb-4 mb-0 mt-0 border-0 border-b text-sm text-gray-600 border-solid border-gray-300"
+                  class="pb-4 mb-0 mt-0 border-0 border-b font-normal text-sm text-gray-600 border-solid border-gray-300"
                 ></div>
               </a>
             </li>
@@ -122,63 +122,49 @@ export default {
         process.env.MIX_ALGOLIA_APP_ID,
         process.env.MIX_ALGOLIA_SEARCH
       ),
-      eventRegistered: false,
       highlightedIndex: 0
     };
   },
-  ready: function() {
-
-    },
   created(){
-      console.log('event ready')
-      if(!this.eventRegistered) {
-        window.addEventListener('keyup', event  => {
-
-            switch (event.keyCode) {
-                case 191:
-                    this.isFocused = !this.isFocused;
-                    if (this.isFocused) {
-                        this.$refs.searchBox.$el.querySelector('input').focus();
-                    } else {
-                        this.$refs.searchBox.$el.querySelector('input').blur();
-                        this.$refs.searchBox.state.clear();
-                    }
-                    break;
-                case 27:
+    window.addEventListener('keyup', event  => {
+        switch (event.keyCode) {
+            case 191:
+                this.isFocused = !this.isFocused;
+                if (this.isFocused) {
+                    this.$refs.searchBox.$el.querySelector('input').focus();
+                } else {
                     this.$refs.searchBox.$el.querySelector('input').blur();
                     this.$refs.searchBox.state.clear();
-                    this.isFocused = !this.isFocused;
-                    break;
-                case 40:
-                    if ((this.highlightedIndex + 1) == this.$refs.hitsBox.items.length) {
-                        this.highlightedIndex = 0;
-                    } else {
-                        this.highlightedIndex++;
-                    }
-                    break;
-                case 38:
-                    if (this.highlightedIndex == 0) {
-                        this.highlightedIndex = this.$refs.hitsBox.items.length - 1;
-                    } else {
-                        this.highlightedIndex--;
-                    }
-                    break;
-                case 13:
-                    let selectedItem = this.$refs.hitsBox.items[this.highlightedIndex];
-                    window.location = selectedItem.slug
-                    break;
-                default:
-                    break;
-            }
-        });
-      }
-    // window.eventTarget.addEventListener("keydown", event => {
-    //     if (event.isComposing || event.keyCode === 191) {
-    //         this.isFocused = !this.isFocused;
-    //         return;
-    //     }
-    //     // do something
-    // });
+                }
+                break;
+            case 27:
+                this.$refs.searchBox.$el.querySelector('input').blur();
+                this.$refs.searchBox.state.clear();
+                this.isFocused = !this.isFocused;
+                break;
+            case 40:
+                if ((this.highlightedIndex + 1) == this.$refs.hitsBox.items.length) {
+                    this.highlightedIndex = 0;
+                } else {
+                    this.highlightedIndex++;
+                }
+                break;
+            case 38:
+                if (this.highlightedIndex == 0) {
+                    this.highlightedIndex = this.$refs.hitsBox.items.length - 1;
+                } else {
+                    this.highlightedIndex--;
+                }
+                break;
+            case 13:
+                let selectedItem = this.$refs.hitsBox.items[this.highlightedIndex];
+                window.location = '/' + selectedItem.slug
+                break;
+            default:
+                break;
+        }
+    });
+
   },
   methods: {
     insights(method, payload) {

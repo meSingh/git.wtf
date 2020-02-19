@@ -11,8 +11,8 @@ class HomeController
     public function index(Posts $posts, Request $request)
     {
         $posts = $request->has('query')
-            ? $posts->notAPage()->search($request->get('query'))->paginate(5)
-            : $posts->notAPage()->paginate(5);
+            ? $posts->all()->notAPage()->search($request->get('query'))->paginate(5)
+            : $posts->all()->notAPage()->paginate(5);
 
         return view('home', [
             'posts' => $posts,
@@ -31,7 +31,7 @@ class HomeController
 
     public function show($slug, Posts $posts)
     {
-        $post = $posts->find($slug);
+        $post = $posts->all()->find($slug);
 
         return view('post', [
             'post' => $post,
@@ -41,7 +41,7 @@ class HomeController
 
     public function tag($slug, Posts $posts, Request $request)
     {
-        $post = $posts->tag($slug)->paginate(5);
+        $post = $posts->all()->tag($slug)->paginate(5);
 
         return view('tag-index', [
             'posts' => $post,
@@ -52,7 +52,7 @@ class HomeController
 
     public function category($slug, Posts $posts, Request $request)
     {
-        $post = $posts->category($slug)->paginate(5);
+        $post = $posts->all()->category($slug)->paginate(5);
 
         return view('category-index', [
             'posts' => $post,

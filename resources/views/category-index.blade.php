@@ -15,28 +15,29 @@
 @endsection
 
 @section('content')
-    <section class="pt-1 pb-8 bg-gray-200 border-0 border-b border-solid border-gray-300">
+    <section class="pt-4 pb-8 border-b border-gray-300">
         <div class="max-w-5xl mx-auto px-3 md:px-1">
 
             <h2 class="text-3xl">{{ $title  }}</p>
         </div>
     </section>
 
-    <section class="max-w-5xl mx-auto px-3 md:px-0 pt-8">
+    <section class="px-3 md:px-0 pt-8 bg-gray-100">
+        <div class="max-w-5xl mx-auto ">
 
         @forelse($posts as $post)
-            <article class="mb-2 py-6 post">
+            <article class="py-6 post">
                 @include('post-list', ['type' => 'list'])
             </article>
 
 
             @if( $loop->index == 4)
-                <section class="bg-gray-200 border border-solid border-gray-300 my-6 max-w-5xl rounded py-3 px-4 md:px-6 -mx-4 md:mx-0">
+                <!-- <section class="bg-gray-200 border border-solid border-gray-300 my-6 max-w-5xl rounded py-3 px-4 md:px-6 -mx-4 md:mx-0">
                     <h3 class="mb-0">Want to Contribute?</h3>
 
                     <p class="mb-4">Send me an <a href="mailto:{{ config('me.email') }}?Subject={{ config('me.name') }}" class="text-brand">Email</a>, ping me on <a href="https://twitter.com/{{ config('me.social.twitter') }}" class="text-blue-600 hover:text-blue-800">Twitter</a> or submit a pull request on <a href="https://github.com/{{ config('me.social.github') }}/pulls" class="text-orange-600 hover:text-orange-800">Github</a>.</p>
 
-                </section>
+                </section> -->
             @endif
         @empty
             <section class="mb-8 p-8 text-center">
@@ -47,6 +48,7 @@
 
         <div class="pb-12">
             {!! $posts->appends(['query' => $query])->links() !!}
+        </div>
         </div>
     </section>
 @endsection
