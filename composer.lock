@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "53e59395ecf729fc2da5becd7af75c46",
+    "content-hash": "fe0e28a15ecc58ba4c75ec4d54fb87b8",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -2395,17 +2395,17 @@
             ],
             "authors": [
                 {
+                    "name": "Ben Ramsey",
+                    "email": "ben@benramsey.com",
+                    "homepage": "https://benramsey.com"
+                },
+                {
                     "name": "Marijn Huizendveld",
                     "email": "marijn.huizendveld@gmail.com"
                 },
                 {
                     "name": "Thibaud Fabre",
                     "email": "thibaud@aztech.io"
-                },
-                {
-                    "name": "Ben Ramsey",
-                    "email": "ben@benramsey.com",
-                    "homepage": "https://benramsey.com"
                 }
             ],
             "description": "Formerly rhumsaa/uuid. A PHP 5.4+ library for generating RFC 4122 version 1, 3, 4, and 5 universally unique identifiers (UUID).",
@@ -2634,9 +2634,9 @@
             "authors": [
                 {
                     "name": "Freek Van der Herten",
-                    "role": "Developer",
                     "email": "freek@spatie.be",
-                    "homepage": "https://github.com/freekmurze"
+                    "homepage": "https://github.com/freekmurze",
+                    "role": "Developer"
                 }
             ],
             "description": "Convert a webpage to an image or pdf using headless Chrome",
@@ -2752,9 +2752,9 @@
             "authors": [
                 {
                     "name": "Freek Van der Herten",
-                    "role": "Developer",
                     "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be"
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
                 }
             ],
             "description": "Manipulate images with an expressive API",
@@ -2926,21 +2926,21 @@
             "authors": [
                 {
                     "name": "Jolita Grazyte",
-                    "role": "Developer",
                     "email": "jolita@spatie.be",
-                    "homepage": "https://spatie.be"
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
                 },
                 {
                     "name": "Freek Van der Herten",
-                    "role": "Developer",
                     "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be"
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
                 },
                 {
                     "name": "Sebastian De Deyne",
-                    "role": "Developer",
                     "email": "sebastian@spatie.be",
-                    "homepage": "https://spatie.be"
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
                 }
             ],
             "description": "Generates rss feed",
@@ -5028,6 +5028,7 @@
                 "psr",
                 "psr-7"
             ],
+            "abandoned": "laminas/laminas-diactoros",
             "time": "2019-07-10T16:13:25+00:00"
         }
     ],
@@ -5077,8 +5078,8 @@
             "authors": [
                 {
                     "name": "Filipe Dobreira",
-                    "role": "Developer",
-                    "homepage": "https://github.com/filp"
+                    "homepage": "https://github.com/filp",
+                    "role": "Developer"
                 }
             ],
             "description": "php error handling for cool kids",
@@ -5145,20 +5146,20 @@
         },
         {
             "name": "laravel-frontend-presets/tailwindcss",
-            "version": "1.0.2",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel-frontend-presets/tailwindcss.git",
-                "reference": "7eeb4bf0c68ecc189f37622df540a9f1226d14ef"
+                "reference": "ea82c54ad94a222a8c0990c05fe700a8f37f9667"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel-frontend-presets/tailwindcss/zipball/7eeb4bf0c68ecc189f37622df540a9f1226d14ef",
-                "reference": "7eeb4bf0c68ecc189f37622df540a9f1226d14ef",
+                "url": "https://api.github.com/repos/laravel-frontend-presets/tailwindcss/zipball/ea82c54ad94a222a8c0990c05fe700a8f37f9667",
+                "reference": "ea82c54ad94a222a8c0990c05fe700a8f37f9667",
                 "shasum": ""
             },
             "require": {
-                "laravel/framework": "^5.5"
+                "laravel/framework": "^5.5 || ^6.0"
             },
             "type": "library",
             "extra": {
@@ -5183,7 +5184,7 @@
                 "preset",
                 "tailwindcss"
             ],
-            "time": "2019-07-16T00:32:36+00:00"
+            "time": "2020-02-24T10:30:57+00:00"
         }
     ],
     "aliases": [],
