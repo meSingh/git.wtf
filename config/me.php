@@ -29,15 +29,18 @@ return [
     'authors' => [
         'msingh' => [
             'name' => 'Mandeep Singh',
-            'link' => 'https://www.msingh.com'
+            'link' => 'https://www.msingh.com',
+            'avatar' => '//gravatar.com/avatar/09611408673cf517d7d357bf748fbd43?s=200'
         ],
         'bsahil' => [
             'name' => 'Sahil Bhatacharya',
-            'link' => 'https://bsahil.com'
+            'link' => 'https://bsahil.com',
+            'avatar' => '//avatars3.githubusercontent.com/u/7153650?s=200&v=4'
         ],
         'matija' => [
             'name' => 'Matija Marohnić',
-            'link' => 'https://silvenon.com'
+            'link' => 'https://silvenon.com',
+            'avatar' => '//gravatar.com/avatar/6d95827ad2de5f374947b02983d4c85b?s=200'
         ]
     ],
 
