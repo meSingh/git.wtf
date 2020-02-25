@@ -19,6 +19,12 @@ return [
             'title' => config('me.rss.title'),
 
             'description' => config('me.rss.description'),
+            'language' => 'en-US',
+
+            /*
+             * The view that will render the feed.
+             */
+            'view' => 'feed::feed',
         ],
     ],
 
