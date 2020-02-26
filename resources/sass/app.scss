@@ -75,3 +75,11 @@
 .ais-SearchBox-input::placeholder {
   color: #979899;
 }
+
+
+/* Medium (md) */
+@media (min-width: 768px) {
+    .pagination {
+        @apply .w-auto .mx-auto .overflow-auto;
+    }
+}

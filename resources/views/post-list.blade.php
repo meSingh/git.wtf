@@ -6,8 +6,9 @@
         </time>
         <div class="">
             @foreach($post->tags as $tag)
-                <a href="{{ route('tag', $tag) }}" class="px-2 py-1 bg-gray-200 text-gray-800 font-bold rounded hover:bg-gray-500">{{ $tag }}</a>
+                <a href="{{ route('tag', $tag) }}" class="px-2 py-1 bg-gray-200 text-gray-800 font-bold rounded hover:bg-gray-300">{{ $tag }}</a>
             @endforeach
+            <a href="{{ route('category', $post->category) }}" class="px-2 py-1 bg-gray-200 text-gray-800 font-bold rounded hover:bg-gray-300 lowercase">{{ $post->category_formated }}</a>
         </div>
     </div>
 

@@ -84,7 +84,7 @@ class Posts extends Provider
     {
 
         return $this->posts
-            ->paginate($perPage, $pageName, $page);
+            ->paginate($perPage, $pageName, $page)->onEachSide(3);
     }
 
     public function find($slug)
