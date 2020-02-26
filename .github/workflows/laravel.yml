@@ -20,12 +20,16 @@ jobs:
       run: |
         eval "$(ssh-agent -s)"
         echo "$DEPLOY_KEY" | ssh-add -
+        echo -e "$DEPLOY_KEY" >> ~/.ssh/id_rsa
+        chmod 400 ~/.ssh/id_rsa
     - name: setup ssh session 3
       run: mkdir ~/.ssh
     - name: setup ssh session 4
-      run: echo -e "HostName *\n\tStrictHostKeyChecking no" >> ~/.ssh/config
+      run: echo -e "HostName *\n\tStrictHostKeyChecking no\n\n" >> ~/.ssh/config
+    - name: create ssh host
+      run: echo -e "HostName prod-server\n\tHostName ${DEPLOY_HOST}\n\tUser ${DEPLOY_User}\n\tIdentityFile ~/.ssh/id_rsa\n\tIdentitiesOnly yes\n\n" >> ~/.ssh/config
     - name: login and test ssh access
-      run: ssh -o "User=${DEPLOY_USER}" -o "HostName=${DEPLOY_HOST}" 'cd ~/git.wtf && pwd'
+      run: ssh prod-server 'cd ~/git.wtf && pwd'
     - name: login and run deploy script
-      run: ssh ${DEPLOY_USER}@${DEPLOY_HOST} 'bash -s' < deploy.sh
+      run: ssh prod-server 'bash -s' < deploy.sh
 
