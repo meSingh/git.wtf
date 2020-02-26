@@ -82,10 +82,9 @@ class Posts extends Provider
 
     public function paginate($perPage = 15, $pageName = 'page', $page = null)
     {
-        return $this->cache('posts.paginate.' . request('page', 1), function () use ($perPage, $pageName, $page) {
-            return $this->posts
-                ->simplePaginate($perPage, $pageName, $page);
-        });
+
+        return $this->posts
+            ->paginate($perPage, $pageName, $page);
     }
 
     public function find($slug)

@@ -41,7 +41,7 @@ class HomeController
 
     public function tag($slug, Posts $posts, Request $request)
     {
-        $post = $posts->all()->tag($slug)->paginate(5);
+        $post = $posts->all()->notAPage()->tag($slug)->paginate(5);
 
         return view('tag-index', [
             'posts' => $post,
@@ -52,7 +52,7 @@ class HomeController
 
     public function category($slug, Posts $posts, Request $request)
     {
-        $post = $posts->all()->category($slug)->paginate(5);
+        $post = $posts->all()->notAPage()->category($slug)->paginate(5);
 
         return view('category-index', [
             'posts' => $post,
