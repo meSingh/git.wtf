@@ -1,0 +1,19 @@
+name: Deploy Git.WTF
+
+on: [push]
+
+jobs: 
+  deploy:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Deploy
+      env:
+        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+      run: |
+        eval "$(ssh-agent -s)"
+        ssh-add - <<< "${DEPLOY_KEY}"
+        mkdir ~/.ssh
+        echo -e "HostName example.com\n\tStrictHostKeyChecking no\n\t"User deploy >> ~/.ssh/config
+        ssh ${USER}@${HOST} 'bash -s' < deploy.sh
