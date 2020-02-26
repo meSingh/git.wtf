@@ -1,22 +1,29 @@
 name: Deploy Git.WTF
 
-on: [push]
+on: 
+  push:
+  pull_request:
+    branches: 
+      - master
 
 jobs:
   deploy:
-    if: github.ref == 'refs/heads/master'
+    name: deploy to production
     runs-on: ubuntu-18.04
+    env:
+      DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+      DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+      DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
     steps:
     - uses: actions/checkout@v2
-    - name: Deploy
-      env:
-        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
-        DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-        DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+    - name: setup ssh session
       run: |
         eval "$(ssh-agent -s)"
         ssh-add - <<< "${DEPLOY_KEY}"
         mkdir ~/.ssh
         echo -e "HostName *\n\tStrictHostKeyChecking no" >> ~/.ssh/config
-        ssh ${DEPLOY_USER}@${DEPLOY_HOST} 'cd ~/git.wtf && pwd'
+    - name: login and test ssh access
+      run: ssh ${DEPLOY_USER}@${DEPLOY_HOST} 'cd ~/git.wtf && pwd'
+    - name: login and run deploy script
+      run: ssh ${DEPLOY_USER}@${DEPLOY_HOST} 'bash -s' < deploy.sh
 
