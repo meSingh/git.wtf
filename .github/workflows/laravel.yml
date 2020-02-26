@@ -15,18 +15,14 @@ jobs:
       DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
       DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
     steps:
-    - uses: actions/checkout@v2
-    - name: setup ssh session 1
-      run: |
-        eval "$(ssh-agent -s)"
-        echo "$DEPLOY_KEY" | ssh-add -
-        mkdir ~/.ssh
-        echo -e "$DEPLOY_KEY" >> ~/.ssh/id_rsa
-        chmod 400 ~/.ssh/id_rsa
-        echo -e "HostName *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-        echo -e "Host prodserver\n\tHostName ${DEPLOY_HOST}\n\tUser ${DEPLOY_USER}\n\tIdentityFile ~/.ssh/id_rsa\n\tIdentitiesOnly yes\n\n" >> ~/.ssh/config
-    - name: login and test ssh access
-      run: ssh prodserver 'cd ~/git.wtf && pwd'
-    - name: login and run deploy script
-      run: ssh prodserver 'bash -s' < deploy.sh
+    - name: executing remote ssh commands
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.DEPLOY_HOST }}
+        username: ${{ secrets.DEPLOY_USER }}
+        key: ${{ secrets.DEPLOY_KEY }}
+        script: |
+          cd /home/msingh/git.wtf
+          pwd
+          git pull origin master
 
