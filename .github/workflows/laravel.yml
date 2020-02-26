@@ -11,11 +11,11 @@ jobs:
     - name: Deploy
       env:
         DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
-        HOST: ${{ secrets.HOST }}
-        USER: ${{ secrets.USER }}
+        DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+        DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
       run: |
         eval "$(ssh-agent -s)"
         ssh-add - <<< "${DEPLOY_KEY}"
         mkdir ~/.ssh
         echo -e "HostName example.com\n\tStrictHostKeyChecking no\n\t"User deploy >> ~/.ssh/config
-        ssh ${USER}@${HOST} 'bash -s' < deploy.sh
+        ssh ${DEPLOY_USER}@${DEPLOY_HOST} 'bash -s' < deploy.sh
