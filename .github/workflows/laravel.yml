@@ -2,7 +2,7 @@ name: Deploy Git.WTF
 
 on: [push]
 
-jobs: 
+jobs:
   deploy:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-18.04
@@ -11,6 +11,8 @@ jobs:
     - name: Deploy
       env:
         DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        HOST: ${{ secrets.HOST }}
+        USER: ${{ secrets.USER }}
       run: |
         eval "$(ssh-agent -s)"
         ssh-add - <<< "${DEPLOY_KEY}"
