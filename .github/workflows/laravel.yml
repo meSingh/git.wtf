@@ -17,9 +17,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: setup ssh session 1
-      run: eval "$(ssh-agent -s)"
-    - name: setup ssh session 2
-      run: ssh-add "${DEPLOY_KEY}"
+      run: |
+        eval "$(ssh-agent -s)"
+        ssh-add "${DEPLOY_KEY}"
     - name: setup ssh session 3
       run: mkdir ~/.ssh
     - name: setup ssh session 4
