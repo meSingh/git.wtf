@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "621feb3c8fcbd898368fab20213e4ce0",
+    "content-hash": "5c14058bc780c08ae7c951b2c9647a80",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -2839,27 +2839,27 @@
         },
         {
             "name": "spatie/laravel-collection-macros",
-            "version": "5.0.2",
+            "version": "6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-collection-macros.git",
-                "reference": "270eeb8387d4f1c341feec9ad795d5a00cbc7d30"
+                "reference": "ac3e7b7cb2e302e855e8c2abce75fe03d7e7b866"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-collection-macros/zipball/270eeb8387d4f1c341feec9ad795d5a00cbc7d30",
-                "reference": "270eeb8387d4f1c341feec9ad795d5a00cbc7d30",
+                "url": "https://api.github.com/repos/spatie/laravel-collection-macros/zipball/ac3e7b7cb2e302e855e8c2abce75fe03d7e7b866",
+                "reference": "ac3e7b7cb2e302e855e8c2abce75fe03d7e7b866",
                 "shasum": ""
             },
             "require": {
-                "laravel/framework": "~5.8.4",
+                "laravel/framework": "~5.8.4|^6.0",
                 "php": "^7.2"
             },
             "require-dev": {
                 "amphp/parallel": "^0.2.0",
                 "amphp/parallel-functions": "^0.1.2",
                 "mockery/mockery": "^1.0",
-                "orchestra/testbench": "~3.8.0",
+                "orchestra/testbench": "~3.8.0|^4.0",
                 "phpunit/phpunit": "^8.0",
                 "symfony/stopwatch": "^4.0"
             },
@@ -2903,7 +2903,7 @@
                 "laravel-collection-macros",
                 "spatie"
             ],
-            "time": "2019-03-19T18:07:58+00:00"
+            "time": "2019-09-04T09:36:45+00:00"
         },
         {
             "name": "spatie/laravel-feed",
