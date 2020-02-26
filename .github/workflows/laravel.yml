@@ -20,10 +20,9 @@ jobs:
       run: |
         eval "$(ssh-agent -s)"
         echo "$DEPLOY_KEY" | ssh-add -
+        mkdir ~/.ssh
         echo -e "$DEPLOY_KEY" >> ~/.ssh/id_rsa
         chmod 400 ~/.ssh/id_rsa
-    - name: setup ssh session 3
-      run: mkdir ~/.ssh
     - name: setup ssh session 4
       run: echo -e "HostName *\n\tStrictHostKeyChecking no\n\n" >> ~/.ssh/config
     - name: create ssh host
