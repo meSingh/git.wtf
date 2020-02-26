@@ -17,6 +17,6 @@ jobs:
         eval "$(ssh-agent -s)"
         ssh-add - <<< "${DEPLOY_KEY}"
         mkdir ~/.ssh
-        echo -e "HostName *\n\tStrictHostKeyChecking no\n\t"User deploy >> ~/.ssh/config
+        echo -e "HostName *\n\tStrictHostKeyChecking no" >> ~/.ssh/config
         ssh ${DEPLOY_USER}@${DEPLOY_HOST} 'cd ~/git.wtf && pwd'
-        ssh ${DEPLOY_USER}@${DEPLOY_HOST} 'bash -s' < deploy.sh
+
