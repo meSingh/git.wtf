@@ -30,7 +30,7 @@ jobs:
     - name: test ssh config
       run: cat ~/.ssh/config
     - name: login and test ssh access
-      run: ssh prodserver 'cd ~/git.wtf && pwd'
+      run: ssh -i ~/.ssh/id_rsa msingh@174.138.122.121 'cd ~/git.wtf && pwd'
     - name: login and run deploy script
       run: ssh prodserver 'bash -s' < deploy.sh
 
