@@ -25,7 +25,7 @@ jobs:
     - name: setup ssh session 4
       run: echo -e "HostName *\n\tStrictHostKeyChecking no" >> ~/.ssh/config
     - name: login and test ssh access
-      run: ssh ${DEPLOY_USER}@${DEPLOY_HOST} 'cd ~/git.wtf && pwd'
+      run: ssh -o "User=${DEPLOY_USER}" -o "HostName=${DEPLOY_HOST}" 'cd ~/git.wtf && pwd'
     - name: login and run deploy script
       run: ssh ${DEPLOY_USER}@${DEPLOY_HOST} 'bash -s' < deploy.sh
 
