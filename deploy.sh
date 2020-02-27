@@ -6,6 +6,9 @@
 cd /home/msingh/git.wtf
 pwd
 
+# eval "$(ssh-agent -s)"
+# echo "$(SSH_PASS)" | ssh-add ~/.ssh/id_rsa
+
 # Pull latest code from github
 git pull origin master
 

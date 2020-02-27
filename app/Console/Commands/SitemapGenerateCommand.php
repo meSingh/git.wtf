@@ -41,7 +41,7 @@ class SitemapGenerateCommand extends Command
 
         $tags = $categories = [];
 
-        foreach ($posts->all() as $post) {
+        foreach ($posts->all()->posts as $post) {
             $sitemap->add(Url::create($post->url)
                 ->setLastModificationDate($post->updated)
                 ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)
