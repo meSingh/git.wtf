@@ -1,21 +1,41 @@
 name: Deploy Git.WTF
 
-on: [push]
+on: 
+  push:
+  pull_request:
+    branches: 
+      - master
 
 jobs:
   deploy:
-    if: github.ref == 'refs/heads/master'
+    name: deploy to production
     runs-on: ubuntu-18.04
+    env:
+      DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+      DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+      DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
     steps:
-    - uses: actions/checkout@v2
-    - name: Deploy
-      env:
-        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
-        DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-        DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
-      run: |
-        eval "$(ssh-agent -s)"
-        ssh-add - <<< "${DEPLOY_KEY}"
-        mkdir ~/.ssh
-        echo -e "HostName example.com\n\tStrictHostKeyChecking no\n\t"User deploy >> ~/.ssh/config
-        ssh ${DEPLOY_USER}@${DEPLOY_HOST} 'bash -s' < deploy.sh
+    - name: executing remote ssh commands
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.DEPLOY_HOST }}
+        username: ${{ secrets.DEPLOY_USER }}
+        key: ${{ secrets.DEPLOY_KEY }}
+        script: |
+          cd ${{ secrets.DEPLOY_PATH }}
+          pwd
+          git pull deploy master
+          # Let's tie any loose end's if there are any..
+          composer install -q --no-ansi --no-interaction --no-suggest --no-progress --prefer-dist --optimize-autoloader --no-dev
+          # If everything worked out correctly then clear any previous caches and rebuild new ones
+          php artisan cache:clear
+          php artisan config:cache
+          php artisan route:cache
+          php artisan responsecache:clear
+          php artisan algolia:index
+          # Finally, compile any assets that might have been updated
+          yarn install
+          yarn run production
+          # We do need sitemap for SEO.. 
+          php artisan sitemap:generate
+          
