@@ -18,7 +18,7 @@ jobs:
       uses: voxmedia/github-action-slack-notify-build@v1
       with:
         channel: gitwtf
-        status: STARTING
+        status: STARTED
         color: warning
     - name: executing remote ssh commands
       uses: appleboy/ssh-action@master
