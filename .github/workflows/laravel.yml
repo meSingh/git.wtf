@@ -9,10 +9,6 @@ jobs:
   deploy:
     name: Deploy To Production
     runs-on: ubuntu-18.04
-    env:
-      DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
-      DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-      DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
     steps:
     - name: Notify slack that build has started
       if: success()
@@ -67,4 +63,3 @@ jobs:
         channel: gitwtf
         status: FAILED
         color: danger
-

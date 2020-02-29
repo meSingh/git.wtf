@@ -119,7 +119,7 @@ class Posts extends Provider
     public function feed()
     {
         return $this->cache('posts.feed', function () {
-            return $this->all()->posts
+            return $this->all()->notAPage()->posts
                 ->map(function ($post) {
                     return [
                         'id' => $post->url,
