@@ -25,13 +25,13 @@
         <h4 class="text-2xl leading-tight font-normal text-gray-600">Find solutions to all your git  problems along with tips & tricks to improve your git workflows!</h4>
 
         <form action="https://khurafatstudio.us13.list-manage.com/subscribe/post?u=00058058733c668eea4891e02&amp;id=d83f6d4784" method="post" class="mt-6 lg:mt-10 flex">
-            <input class="rounded-l-lg py-0 px-4 border-t mr-0 border-b border-l text-gray-800 border-gray-300 bg-gray-100 w-full outline-none focus:border-yellow-500 focus:bg-yellow-100 focus:placeholder-yellow-500" placeholder="Get latest tips & tricks right in your inbox" type="email" name="EMAIL"/>
+            <input class="rounded-l-lg py-0 px-4 border-t mr-0 border-b border-l text-gray-800 border-gray-300 bg-gray-100 w-full outline-none focus:border-yellow-500 focus:bg-yellow-100 focus:placeholder-yellow-500" placeholder="Subscribe to get latest tips & tricks" type="email" name="EMAIL"/>
             <input type="hidden" name="LOCATION" value="GIT.WTF!?!">
             <button class="px-4 rounded-r-lg bg-yellow-400  text-gray-800 font-bold py-3 uppercase border-yellow-500 border-t border-b border-r text-sm">Subscribe</button>
         </form>
 
     </div>
-    <img src="/images/fuck.jpg" class="w-1/2 lg:w-2/5 hidden md:block">
+    <img src="/images/fuck.jpg" class="w-1/2 hidden md:block">
 </section>
 
 <section class="bg-gray-100 border-t">
