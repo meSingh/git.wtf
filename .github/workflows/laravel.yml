@@ -1,19 +1,14 @@
 name: Deploy Git.WTF
 
-on: 
+on:
   push:
-  pull_request:
-    branches: 
+    branches:
       - master
 
 jobs:
   deploy:
-    name: deploy to production
+    name: Deploy To Production
     runs-on: ubuntu-18.04
-    env:
-      DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
-      DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-      DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
     steps:
     - name: executing remote ssh commands
       uses: appleboy/ssh-action@master
@@ -36,6 +31,5 @@ jobs:
           # Finally, compile any assets that might have been updated
           yarn install
           yarn run production
-          # We do need sitemap for SEO.. 
+          # We do need sitemap for SEO..
           php artisan sitemap:generate
-          
