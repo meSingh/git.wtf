@@ -29,7 +29,7 @@
                     <ul class="uppercase tracking-wide font-bold w-full block flex-none hidden md:flex md:w-auto items-center mt-0">
                         <li class="mr-5 lg:mr-8 mb-0"><a href="/about" class="text-gray-800 hover:text-gray-600">About</a></li>
                         <li class="mr-8 mb-0 hidden lg:block"><a href="https://github.com/meSingh/git.wtf" class="text-gray-800 hover:text-gray-600">Github</a></li>
-                        <li class="mb-0"><a href="https://airtable.com/shrrRtPS4oICgRVPM" class="text-gray-800 hover:text-gray-600">Submit Article</a></li>
+                        <li class="mb-0"><a href="https://airtable.com/shrrRtPS4oICgRVPM" class="text-red-400 border-b border-red-400 font-bold hover:text-red-600">Submit Article</a></li>
                     </ul>
                 </div>
             </div>
