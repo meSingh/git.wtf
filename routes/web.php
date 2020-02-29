@@ -1,6 +1,5 @@
 <?php
 
-
 Route::feeds();
 
 Route::get('/', 'HomeController@index')->name('home');
@@ -32,6 +31,11 @@ Route::permanentRedirect(
 Route::permanentRedirect(
     '/how-to-revert-last-x-commits',
     '/how-to-revert-last-x-commits-in-git'
+);
+
+Route::permanentRedirect(
+    '/how-to-run-a-diff-on-unstagged-changes',
+    '/how-to-run-a-diff-on-unstagged-changes-in-git'
 );
 
 Route::get('{slug}', 'HomeController@show')->name('post');

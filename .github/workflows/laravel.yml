@@ -1,20 +1,29 @@
 name: Deploy Git.WTF
 
-on: 
+on:
   push:
-  pull_request:
-    branches: 
+    branches:
       - master
 
 jobs:
   deploy:
-    name: deploy to production
+    name: Deploy To Production
     runs-on: ubuntu-18.04
     env:
       DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
       DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
       DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
     steps:
+    - name: Notify slack that build has started
+      if: success()
+      id: slack # IMPORTANT: reference this step ID value in future Slack steps
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      uses: voxmedia/github-action-slack-notify-build@v1
+      with:
+        channel: gitwtf
+        status: STARTED
+        color: warning
     - name: executing remote ssh commands
       uses: appleboy/ssh-action@master
       with:
@@ -36,6 +45,26 @@ jobs:
           # Finally, compile any assets that might have been updated
           yarn install
           yarn run production
-          # We do need sitemap for SEO.. 
+          # We do need sitemap for SEO..
           php artisan sitemap:generate
-          
+    - name: Notify slack that build is success
+      if: success()
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      uses: voxmedia/github-action-slack-notify-build@v1
+      with:
+        message_id: ${{ steps.slack.outputs.message_id }}
+        channel: gitwtf
+        status: SUCCESS
+        color: good
+    - name: Notify slack that build has failed
+      if: failure()
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      uses: voxmedia/github-action-slack-notify-build@v1
+      with:
+        message_id: ${{ steps.slack.outputs.message_id }}
+        channel: gitwtf
+        status: FAILED
+        color: danger
+
