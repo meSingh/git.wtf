@@ -10,6 +10,16 @@ jobs:
     name: Deploy To Production
     runs-on: ubuntu-18.04
     steps:
+    - name: Notify slack that build has started
+      if: success()
+      id: slack # IMPORTANT: reference this step ID value in future Slack steps
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      uses: voxmedia/github-action-slack-notify-build@v1
+      with:
+        channel: app-alerts
+        status: STARTING
+        color: warning
     - name: executing remote ssh commands
       uses: appleboy/ssh-action@master
       with:
@@ -33,3 +43,21 @@ jobs:
           yarn run production
           # We do need sitemap for SEO..
           php artisan sitemap:generate
+    - name: Notify slack that build is success
+      if: success()
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      uses: voxmedia/github-action-slack-notify-build@v1
+      with:
+        channel: app-alerts
+        status: SUCCESS
+        color: good
+    - name: Notify slack that build has failed
+      if: failure()
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      uses: voxmedia/github-action-slack-notify-build@v1
+      with:
+        channel: app-alerts
+        status: FAILED
+        color: danger
