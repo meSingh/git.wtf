@@ -20,7 +20,7 @@ jobs:
         channel: gitwtf
         status: STARTED
         color: warning
-    - name: executing remote ssh commands
+    - name: pull fresh code from github
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.DEPLOY_HOST }}
@@ -30,18 +30,54 @@ jobs:
           cd ${{ secrets.DEPLOY_PATH }}
           pwd
           git pull deploy master
+    - name: run composer to install any new packages added
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.DEPLOY_HOST }}
+        username: ${{ secrets.DEPLOY_USER }}
+        key: ${{ secrets.DEPLOY_KEY }}
+        script: |
+          cd ${{ secrets.DEPLOY_PATH }}
+          pwd
           # Let's tie any loose end's if there are any..
           composer install -q --no-ansi --no-interaction --no-suggest --no-progress --prefer-dist --optimize-autoloader --no-dev
+    - name: clear all caches and rebuild indexes
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.DEPLOY_HOST }}
+        username: ${{ secrets.DEPLOY_USER }}
+        key: ${{ secrets.DEPLOY_KEY }}
+        script: |
+          cd ${{ secrets.DEPLOY_PATH }}
+          pwd
           # If everything worked out correctly then clear any previous caches and rebuild new ones
           php artisan cache:clear
           php artisan config:cache
           php artisan route:cache
           php artisan responsecache:clear
-          php artisan algolia:index
+    - name: install any new yarn packages and rebuild frontend
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.DEPLOY_HOST }}
+        username: ${{ secrets.DEPLOY_USER }}
+        key: ${{ secrets.DEPLOY_KEY }}
+        script: |
+          cd ${{ secrets.DEPLOY_PATH }}
+          pwd
           # Finally, compile any assets that might have been updated
           yarn install
           yarn run production
-          # We do need sitemap for SEO..
+    - name: rebuild algolia index & sitemap
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.DEPLOY_HOST }}
+        username: ${{ secrets.DEPLOY_USER }}
+        key: ${{ secrets.DEPLOY_KEY }}
+        script: |
+          cd ${{ secrets.DEPLOY_PATH }}
+          pwd
+          # We do need to rebuild algolia index and sitemap for SEO..
+          php artisan algolia:index
           php artisan sitemap:generate
     - name: Notify slack that build is success
       if: success()
