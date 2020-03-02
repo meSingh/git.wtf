@@ -17,8 +17,8 @@
 
 @section('content')
 <section class="max-w-screen-lg mx-auto pt-0 md:pt-12 px-6 md:px-12 pb-12 md:pb-20 flex">
-    <div class="md:mr-10" style="">
-        <h2 class="text-3xl lg:text-4xl leading-tight mt-8 mb-3 text-indigo-400 font-semibold uppercase">
+    <div class="flex-1" style="">
+        <h2 class="text-3xl lg:text-4xl leading-tight mt-8 md:mt-4 mb-3 text-indigo-400 font-semibold uppercase">
             <span class="text-teal-400">Git</span> is <span class="text-red-400">f!!cking</span> <span class="text-pink-400">hard</span>
         </h2>
 
@@ -31,7 +31,9 @@
         </form>
 
     </div>
-    <img src="/images/fuck.jpg" class="w-1/2 hidden md:block">
+    <div class="w-5/12 hidden md:block pl-10">
+        <img src="/images/fuck.jpg" class="w-full">
+    </div>
 </section>
 
 <section class="bg-gray-100 border-t">
