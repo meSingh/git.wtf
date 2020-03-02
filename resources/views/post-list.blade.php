@@ -1,20 +1,20 @@
-<article class="px-10 py-6 bg-white rounded-lg shadow mb-8 post">
+<article class="px-6 md:px-10 py-6 bg-white rounded-lg shadow mb-8 post">
 
     <div class="flex justify-between items-center">
         <time datetime="{{ $post->published }}" class="font-light lowercase text-gray-600">
             {{ $post->dateShort }}
         </time>
-        <div class="">
+        <div class="hidden md:block">
             @foreach($post->tags as $tag)
-                <a href="{{ route('tag', $tag) }}" class="px-2 py-1 bg-gray-200 text-gray-800 font-bold rounded hover:bg-gray-300">{{ $tag }}</a>
+                <a href="{{ route('tag', $tag) }}" class="px-2 py-1 bg-gray-200 text-gray-800 font-bold text-base rounded hover:bg-gray-300">{{ $tag }}</a>
             @endforeach
-            <a href="{{ route('category', $post->category) }}" class="px-2 py-1 bg-gray-200 text-gray-800 font-bold rounded hover:bg-gray-300 lowercase">{{ $post->category_formated }}</a>
+            <a href="{{ route('category', $post->category) }}" class="px-2 py-1 bg-gray-200 text-gray-800 font-bold rounded text-base hover:bg-gray-300 lowercase">{{ $post->category_formated }}</a>
         </div>
     </div>
 
-    <div class="mt-3">
+    <div class="mt-4">
         <h2 class="">
-            <a href="{{ route('post', $post->slug) }}" class="text-2xl text-gray-700 font-bold hover:text-gray-600">
+            <a href="{{ route('post', $post->slug) }}" class="text-2xl text-gray-700 font-bold leading-snug md:leading-normal hover:text-gray-600">
                 {{ $post->title }}
             </a>
         </h2>

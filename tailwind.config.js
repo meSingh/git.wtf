@@ -48,6 +48,7 @@ module.exports = {
         margin: ['responsive', 'hover', 'focus'],
         textColor: ['responsive', 'hover', 'focus', 'group-hover'],
         width: ['responsive', 'hover', 'focus', 'focus-within'],
+        borderColor: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
     },
     plugins: [
         require('tailwindcss-plugins/pagination'),

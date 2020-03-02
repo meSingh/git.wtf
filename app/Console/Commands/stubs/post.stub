@@ -4,6 +4,13 @@ summary:
 category: fuck
 tags:
 - commit
-source: http://git.wtf/
+source: https://git.wtf/
 author: msingh
+other_uses:
+- Another use
+further_reading:
+-
+  title: another source
+  link: https://git.wtf/
+  source: false
 ---

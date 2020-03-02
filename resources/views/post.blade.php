@@ -17,9 +17,9 @@
 @section('content')
 
 @if($post->type != 'page')
-<article class="post bg-white pb-8 overflow-hidden leading-relaxed  bg-gray-100 ">
+<article class="post bg-white pb-10 overflow-hidden leading-relaxed  bg-gray-100 ">
 @else
-<article class="post bg-white pb-8 overflow-hidden leading-relaxed  bg-white ">
+<article class="post bg-white pb-10 overflow-hidden leading-relaxed  bg-white ">
 @endif
     @include('post-content', ['type' => 'single'])
 </article>
@@ -27,7 +27,7 @@
 @if($post->type != 'page')
 
 
-<section class="bg-white  border-t pt-12">
+<section class="bg-white border-t pt-12">
     <div class=" max-w-screen-lg px-3 md:px-12 mx-auto relative pb-12">
     <div id="disqus_thread" style="overflow: hidden;position: relative;" class="px-4"></div>
     </div>
