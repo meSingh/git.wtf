@@ -3043,24 +3043,24 @@
         },
         {
             "name": "spatie/laravel-robots-middleware",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-robots-middleware.git",
-                "reference": "ceb30bc732e6b7fbc73719a72ae19d6fa398d621"
+                "reference": "e450e2f3535313480aab4c2706016eaef58fb616"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-robots-middleware/zipball/ceb30bc732e6b7fbc73719a72ae19d6fa398d621",
-                "reference": "ceb30bc732e6b7fbc73719a72ae19d6fa398d621",
+                "url": "https://api.github.com/repos/spatie/laravel-robots-middleware/zipball/e450e2f3535313480aab4c2706016eaef58fb616",
+                "reference": "e450e2f3535313480aab4c2706016eaef58fb616",
                 "shasum": ""
             },
             "require": {
-                "illuminate/http": "^5.8|^6.0",
+                "illuminate/http": "^5.8|^6.0|^7.0",
                 "php": "^7.2"
             },
             "require-dev": {
-                "orchestra/testbench": "^3.8|^4.0",
+                "orchestra/testbench": "^3.8|^4.0|^5.0",
                 "phpunit/phpunit": "^8.0"
             },
             "type": "library",
@@ -3089,7 +3089,7 @@
                 "seo",
                 "spatie"
             ],
-            "time": "2019-09-04T16:36:08+00:00"
+            "time": "2020-03-03T08:39:21+00:00"
         },
         {
             "name": "spatie/laravel-sitemap",
