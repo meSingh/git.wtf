@@ -1,5 +1,5 @@
 
-<section class="bg-gray-100 py-16 px-4 md:px-8 border-t border-gray-300">
+<section class="newsletter bg-gray-100 py-16 px-4 md:px-8 border-t border-gray-300">
     <div class="max-w-screen-lg px-2 md:px-12  mx-auto">
         <p class="mt-0 mb-4 text-xl text-gray-900">Sign up below to receive updates, tips and more handy tutorials. It’s good stuff & I don’t spam.</p>
 

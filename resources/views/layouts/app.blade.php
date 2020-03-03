@@ -9,7 +9,7 @@
 </head>
 <!-- <body class="font-brand text-base tracking-normal align-middle leading-relaxed text-gray-900 m-0 relative bg-gray-200 " style="background: #364f6b"> -->
 
-<body class="font-sans text-lg leading-normal text-gray-800 m-0 relative bg-white">
+<body class="font-sans text-lg leading-normal text-gray-800 m-0 relative bg-white {{ Route::currentRouteName() }}">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ config('services.analytics.gtm_id') }}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
