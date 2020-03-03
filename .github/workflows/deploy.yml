@@ -10,7 +10,7 @@ jobs:
     name: Deploy To Production
     runs-on: ubuntu-18.04
     steps:
-    - name: Notify slack that build has started
+    - name: Notify slack that build has STARTED!
       if: success()
       id: slack # IMPORTANT: reference this step ID value in future Slack steps
       env:
@@ -20,7 +20,7 @@ jobs:
         channel: gitwtf
         status: STARTED
         color: warning
-    - name: pull fresh code from github
+    - name: Pull fresh code from Github
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.DEPLOY_HOST }}
@@ -30,7 +30,7 @@ jobs:
           cd ${{ secrets.DEPLOY_PATH }}
           pwd
           git pull deploy master
-    - name: run composer to install any new packages added
+    - name: Run Composer to install any new/updated Packages
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.DEPLOY_HOST }}
@@ -41,7 +41,7 @@ jobs:
           pwd
           # Let's tie any loose end's if there are any..
           composer install -q --no-ansi --no-interaction --no-suggest --no-progress --prefer-dist --optimize-autoloader --no-dev
-    - name: clear all caches and rebuild indexes
+    - name: Clear & rebuild caches
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.DEPLOY_HOST }}
@@ -55,7 +55,7 @@ jobs:
           php artisan config:cache
           php artisan route:cache
           php artisan responsecache:clear
-    - name: install any new yarn packages and rebuild frontend
+    - name: Install Yarn packages & rebuild frontend assets
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.DEPLOY_HOST }}
@@ -67,7 +67,7 @@ jobs:
           # Finally, compile any assets that might have been updated
           yarn install
           yarn run production
-    - name: rebuild algolia index & sitemap
+    - name: Rebuild Algolia Index & Sitemap
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.DEPLOY_HOST }}
@@ -79,7 +79,13 @@ jobs:
           # We do need to rebuild algolia index and sitemap for SEO..
           php artisan algolia:index
           php artisan sitemap:generate
-    - name: Notify slack that build is success
+    - name: Purge All CloudFlare Cache
+      uses: nathanvaughn/actions-cloudflare-purge@master
+      if: success()
+      env:
+        CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
+        CLOUDFLARE_AUTH_KEY: ${{ secrets.CLOUDFLARE_AUTH_KEY }}
+    - name: Notify slack that build is SUCCESS!
       if: success()
       env:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
@@ -89,7 +95,7 @@ jobs:
         channel: gitwtf
         status: SUCCESS
         color: good
-    - name: Notify slack that build has failed
+    - name: Notify slack that build has FAILED!
       if: failure()
       env:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
