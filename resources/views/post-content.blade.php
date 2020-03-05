@@ -45,7 +45,7 @@
                         <ul>
                             @foreach($post->other_uses as $otherUse)
                                 <li class="flex items-center mb-1">
-                                    <svg class="h-12 md:h-6 w-12 md:w-6 mr-1 md:mr-0" viewBox="0 0 24 24" fill="none">
+                                    <svg class="w-1/12 sm:w-6 mr-1 md:mr-0" viewBox="0 0 24 24" fill="none">
                                         <path
                                             class="text-teal-400"
                                             fill="currentColor"
@@ -60,7 +60,7 @@
                                             stroke-linejoin="round"
                                         />
                                     </svg>
-                                    <span class="ml-2">{{ $otherUse }}</span>
+                                    <span class="ml-2 flex-1">{{ $otherUse }}</span>
                                 </li>
                             @endforeach
                         </ul>
