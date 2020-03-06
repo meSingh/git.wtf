@@ -1,4 +1,4 @@
-<article class="px-6 md:px-10 py-6 bg-white rounded-lg shadow mb-8 post">
+<article class="px-5 md:px-10 py-6 bg-white rounded-lg shadow mb-8 post">
 
     <div class="flex justify-between items-center">
         <time datetime="{{ $post->published }}" class="font-light lowercase text-gray-600">
