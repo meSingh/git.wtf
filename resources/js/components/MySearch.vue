@@ -37,7 +37,7 @@
             class="shadow-xl rounded list-none pl-0 my-0 bg-white"
             v-if="items.length > 0"
           >
-            <li class="bg-gray-300 rounded rounded-b-none py-3 px-4 text-sm" >
+            <li class="bg-gray-200 rounded rounded-b-none py-3 px-4 text-sm" >
               Press
               <strong>enter</strong> to select,
               <strong>↑↓</strong> to
@@ -47,8 +47,8 @@
             <li
               v-for="(hit, index) in items"
               :key="hit.objectID"
-              class="pt-6 px-5 hover:bg-gray-200"
-              :class="{ 'bg-gray-200' : index == highlightedIndex }"
+              class="pt-6 px-5 hover:bg-gray-100"
+              :class="{ 'bg-gray-100' : index == highlightedIndex }"
               :tabindex="index+1"
             >
               <a
@@ -75,6 +75,9 @@
                   class="pb-4 mb-0 mt-0 border-0 border-b font-normal text-sm text-gray-600 border-solid border-gray-300"
                 ></div>
               </a>
+            </li>
+            <li class="flex justify-end rounded rounded-t-none py-2 px-4 text-sm" >
+              <img src="/images/algolia.png" class="h-4"/>
             </li>
           </ul>
           <div v-else class="shadow-lg rounded list-none pl-0 mt-0">

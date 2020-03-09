@@ -1,5 +1,5 @@
 
-<section class="bg-gray-300 py-16 px-4 md:px-8 border-0  border-solid border-gray-300">
+<section class="newsletter bg-gray-100 py-16 px-4 md:px-8 border-t border-gray-300">
     <div class="max-w-screen-lg px-2 md:px-12  mx-auto">
         <p class="mt-0 mb-4 text-xl text-gray-900">Sign up below to receive updates, tips and more handy tutorials. It’s good stuff & I don’t spam.</p>
 
@@ -13,7 +13,7 @@
 
 <footer class="bg-gray-700">
 <div class="flex flex-row  max-w-screen-lg  mx-auto mt-0 pt-10 footer px-6 md:px-12">
-    <div class="copyright">
+    <div class="copyright text-gray-400">
         Fuck git!<br>
         Oh, it's solved.<br>
         I love git! Git is awesome.<br>
@@ -21,10 +21,10 @@
     </div>
     <div class="links mt-8 md:mt-0">
         <div class="links mt-0 md:text-right" style="">
-            <p class="inline-block">
-                You can blame <a href="https://www.msingh.com" data-turbolinks="false" target="_blank" class="text-teal-400 font-bold">Mandeep Singh</a> & <a href="/contributors" class="text-teal-400 font-bold">Contributors</a> for this
+            <p class="inline-block text-gray-400">
+                You can blame <a href="https://www.msingh.com" data-turbolinks="false" target="_blank" class="text-teal-400 hover:text-red-500 font-bold">Mandeep Singh</a> & <a href="/contributors" class="text-teal-400 hover:text-teal-500 font-bold">Contributors</a> for this
             </p>
-            <p class="text-base">The website content is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" >CC BY NC SA 4.0</a>.
+            <p class="text-base text-gray-500">The website content is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" class="text-gray-400 hover:text-blue-500">CC BY NC SA 4.0</a>.
       </p>
 
                 <!-- <span class="text-red-500"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" class="svg-inline--fa fa-heart fa-w-16 fill-current text-red-600 -mb-1 inline-block relative" width="20px" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z" xmlns="http://www.w3.org/2000/svg"></path></svg></span> -->

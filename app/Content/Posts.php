@@ -176,6 +176,8 @@ class Posts extends Provider
                         : url('/images/social.jpg'),
                     'published' => $document->published ?? $published,
                     'type' => $document->type,
+                    'other_uses' => $document->other_uses,
+                    'further_reading' => $document->further_reading,
                     'updated' => $updated,
                 ];
             })

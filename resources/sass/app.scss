@@ -77,6 +77,11 @@
 }
 
 
+.home .newsletter {
+    @apply .bg-gray-200;
+}
+
+
 /* Medium (md) */
 @media (min-width: 768px) {
     .pagination {
