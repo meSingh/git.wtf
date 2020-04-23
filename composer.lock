@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c14058bc780c08ae7c951b2c9647a80",
+    "content-hash": "a6c61709425f8486d000e79afe689c8b",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -2907,26 +2907,25 @@
         },
         {
             "name": "spatie/laravel-feed",
-            "version": "2.4.3",
+            "version": "2.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-feed.git",
-                "reference": "70bbfa3a985133bbf047eca5d786fa99b4ed7cd0"
+                "reference": "58596045035f9f2ec2cd64a16c23352807ee4c09"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-feed/zipball/70bbfa3a985133bbf047eca5d786fa99b4ed7cd0",
-                "reference": "70bbfa3a985133bbf047eca5d786fa99b4ed7cd0",
+                "url": "https://api.github.com/repos/spatie/laravel-feed/zipball/58596045035f9f2ec2cd64a16c23352807ee4c09",
+                "reference": "58596045035f9f2ec2cd64a16c23352807ee4c09",
                 "shasum": ""
             },
             "require": {
-                "illuminate/contracts": "~5.8.0|^6.0",
-                "illuminate/http": "~5.8.0|^6.0",
-                "illuminate/support": "~5.8.0|^6.0",
+                "illuminate/contracts": "~5.8.0|^6.0|^7.0",
+                "illuminate/http": "~5.8.0|^6.0|^7.0",
+                "illuminate/support": "~5.8.0|^6.0|^7.0",
                 "php": "^7.2"
             },
             "require-dev": {
-                "orchestra/testbench": "~3.8.0|^4.0",
                 "phpunit/phpunit": "^8.0",
                 "spatie/phpunit-snapshot-assertions": "^2.0"
             },
@@ -2975,7 +2974,7 @@
                 "rss",
                 "spatie"
             ],
-            "time": "2019-10-07T09:43:42+00:00"
+            "time": "2020-04-23T07:40:56+00:00"
         },
         {
             "name": "spatie/laravel-responsecache",
