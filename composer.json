@@ -13,7 +13,7 @@
         "fideloper/proxy": "~4.0",
         "laravel/framework": "5.8.*",
         "league/commonmark": "^0.18.3",
-        "sentry/sentry-laravel": "1.1.0",
+        "sentry/sentry-laravel": "1.9.0",
         "spatie/laravel-collection-macros": "^6.0",
         "spatie/laravel-feed": "2.4.*",
         "spatie/laravel-responsecache": "^4.0",
