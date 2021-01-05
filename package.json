@@ -19,7 +19,7 @@
     },
     "devDependencies": {
         "@fullhuman/postcss-purgecss": "^2.1.0",
-        "axios": "^0.19.0",
+        "axios": "^0.21.1",
         "babel-preset-env": "^1.7.0",
         "browser-sync": "^2.26.5",
         "browser-sync-webpack-plugin": "2.0.1",
