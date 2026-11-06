@@ -1,5 +1,8 @@
 {
     // Static site on Cloudflare Workers (assets only, no Worker code).
+    // Deployed by Workers Builds from the connected GitHub repository. Dashboard settings:
+    //   build command: npm run build      deploy command: npx wrangler deploy      root directory: /
+    // Non-production branches get a preview URL (versions upload); master deploys for real.
     // The custom domain (git.wtf) is added here only when the switch from Ghost is approved:
     //   "routes": [{ "pattern": "git.wtf", "custom_domain": true }]
     "name": "gitwtf",

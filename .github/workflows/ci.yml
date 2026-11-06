@@ -1,3 +1,6 @@
+# Build and the old-URL check. Deploys are not done here: Cloudflare Workers Builds watches the
+# repository and runs `npm run build` then `npx wrangler deploy` on every push to master, and
+# `wrangler versions upload` (a preview URL) for other branches.
 name: CI
 
 on:
@@ -29,20 +32,3 @@ jobs:
           name: dist
           path: dist
 
-  deploy:
-    name: Deploy to Cloudflare
-    needs: build
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-      - run: npm ci
-      - run: npm run build
-      - run: npx wrangler deploy
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
