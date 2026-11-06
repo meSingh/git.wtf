@@ -41,7 +41,7 @@ h1, h2, h3 { margin: 0; font-family: var(--display); font-weight: 800; line-heig
 .badge { justify-self: center; display: flex; align-items: center; gap: 0.55rem; font-family: var(--mono); font-size: 0.75rem; color: var(--grey); letter-spacing: 0.02em; opacity: 0; transform: translateY(-4px); transition: opacity 0.25s ease, transform 0.25s ease; pointer-events: none; }
 .badge .flaps { --flap-size: 1.25rem; }
 body.docked .badge, .badge.on { opacity: 1; transform: none; pointer-events: auto; }
-@media (max-width: 640px) { .bar { grid-template-columns: auto 1fr auto; } .badge { justify-self: start; margin-left: 0.75rem; } .badge span.badge-label { display: none; } }
+@media (max-width: 640px) { .bar { grid-template-columns: auto 1fr auto; padding-inline: 0.9rem; } .bar .brand .logo { height: 1.2rem !important; } .bar nav { gap: 0.9rem; } .bar nav a[href$='rss.xml'] { display: none; } .badge { justify-self: start; margin-left: 0.6rem; } .badge span.badge-label { display: none; } }
 
 /* ---------- the mark ---------- */
 .brand { display: inline-flex; align-items: center; color: var(--paper); text-decoration: none; }
