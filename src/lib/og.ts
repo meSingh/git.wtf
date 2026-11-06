@@ -2,6 +2,7 @@ import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
+import { BANG_PATH, BANG_TRANSFORM, LOGO_VIEWBOX, SCRIPT_PATH, SCRIPT_TRANSFORM } from './logo-paths';
 
 const YELLOW = '#FFD400';
 const BLACK = '#0A0A0A';
@@ -25,6 +26,9 @@ async function loadFonts(): Promise<FontSet> {
 
 const h = (type: string, style: Record<string, unknown>, children?: unknown) => ({ type, props: { style, children } });
 
+const LOGO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${LOGO_VIEWBOX}"><g fill="${PAPER}"><path d="${SCRIPT_PATH}" transform="${SCRIPT_TRANSFORM}"/><path d="${BANG_PATH}" transform="${BANG_TRANSFORM}"/></g></svg>`;
+const LOGO_DATA_URI = `data:image/svg+xml;base64,${Buffer.from(LOGO_SVG).toString('base64')}`;
+
 function flap(d: string, dim: boolean) {
     const digit = (top: boolean) =>
         h('div', { position: 'absolute', left: 0, right: 0, top: top ? 0 : -100, height: 200, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 168, color: dim ? 'rgba(255,212,0,0.3)' : YELLOW, fontFamily: 'Big Shoulders Display' }, d);
@@ -43,18 +47,25 @@ function stripes() {
 
 /** 1200x630 share card: the sign at its number, the incident title, the status. */
 export async function shareImage(opts: { title: string; status: string; days?: number; date?: string }): Promise<Uint8Array> {
+    const svg = await shareSvg(opts);
+    return new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render().asPng();
+}
+
+/** The share card as SVG (what the PNG is rendered from). */
+export async function shareSvg(opts: { title: string; status: string; days?: number; date?: string }): Promise<string> {
     const f = await loadFonts();
     const n = Math.max(0, opts.days ?? 0);
     const digits = String(n).padStart(2, '0').split('');
     const firstNonZero = digits.findIndex((d) => d !== '0');
     const title = opts.title.length > 64 ? opts.title.slice(0, 61).trimEnd() + '...' : opts.title;
     const status = opts.status.replace(/`/g, '');
-    const tree = h('div', { width: 1200, height: 630, display: 'flex', flexDirection: 'column', background: BLACK, color: PAPER, padding: '40px 56px 44px', position: 'relative' }, [
+    // satori sizes the content box, so width and height leave room for the padding: 1200 x 630 overall.
+    const tree = h('div', { width: 1088, height: 544, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', background: BLACK, color: PAPER, padding: '40px 56px 46px', position: 'relative', overflow: 'hidden' }, [
         h('div', { display: 'flex', alignItems: 'center', justifyContent: 'space-between' }, [
             h('div', { fontFamily: 'Big Shoulders Display', fontSize: 44, letterSpacing: 1, color: PAPER }, 'DAYS SINCE THE LAST GIT FUCK-UP'),
             h('div', { fontFamily: 'JetBrains Mono', fontSize: 22, color: GREY }, opts.date ?? ''),
         ]),
-        h('div', { display: 'flex', alignItems: 'center', gap: 44, marginTop: 16, flexGrow: 1, flexShrink: 1, minHeight: 0 }, [
+        h('div', { display: 'flex', alignItems: 'center', gap: 44, height: 340 }, [
             h('div', { display: 'flex', gap: 10, padding: 12, background: '#0e0e0e', border: `2px solid rgba(242,240,234,0.12)` }, digits.map((d, i) => flap(d, firstNonZero === -1 ? i < digits.length - 1 : i < firstNonZero))),
             h('div', { display: 'flex', flexDirection: 'column', flexGrow: 1, minWidth: 0 }, [
                 h('div', { fontFamily: 'Big Shoulders Display', fontSize: 72, lineHeight: 0.95, textTransform: 'uppercase', color: PAPER }, title),
@@ -63,13 +74,13 @@ export async function shareImage(opts: { title: string; status: string; days?: n
                 ]),
             ]),
         ]),
-        h('div', { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', fontFamily: 'JetBrains Mono', fontSize: 24, color: GREY, flexShrink: 0 }, [
-            h('div', { display: 'flex', alignItems: 'center', gap: 10 }, [h('div', { fontFamily: 'Big Shoulders Display', fontSize: 34, color: PAPER }, 'git'), h('div', { width: 14, height: 14, background: YELLOW }), h('div', { fontFamily: 'Big Shoulders Display', fontSize: 34, color: PAPER }, 'wtf')]),
+        h('div', { display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: 'JetBrains Mono', fontSize: 24, color: GREY, height: 44 }, [
+            { type: 'img', props: { src: LOGO_DATA_URI, width: 203, height: 39, style: { display: 'flex' } } },
             h('div', {}, 'one real Git fuck-up a day'),
         ]),
         stripes(),
     ]);
-    const svg = await satori(tree as any, {
+    return satori(tree as any, {
         width: 1200,
         height: 630,
         fonts: [
@@ -77,5 +88,4 @@ export async function shareImage(opts: { title: string; status: string; days?: n
             { name: 'JetBrains Mono', data: f.mono, weight: 600, style: 'normal' },
         ],
     });
-    return new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render().asPng();
 }

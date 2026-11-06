@@ -1,6 +1,0 @@
----
-import { href } from '../lib/site';
-interface Props { small?: boolean }
-const { small = false } = Astro.props;
----
-<a class={`wordmark${small ? ' small' : ''}`} href={href('/')} aria-label="git.wtf, home">git<span class="dot" aria-hidden="true"></span>wtf</a>

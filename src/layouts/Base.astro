@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { getCollection } from 'astro:content';
-import Wordmark from '../components/Wordmark.astro';
+import Logo from '../components/Logo.astro';
 import Flaps from '../components/Flaps.astro';
 import Footer from '../components/Footer.astro';
 import { SITE, daysSince, happened, href, sortIncidents } from '../lib/site';
@@ -64,7 +64,7 @@ const fontCss = fonts.map(([file, family, weight]) => `@font-face{font-family:'$
 </head>
 <body>
     <header class="bar">
-        <Wordmark />
+        <a class="brand" href={href('/')} aria-label="Git.WTF, home"><Logo height="1.55rem" /></a>
         <a class={`badge${badge ? ' on' : ''}`} id="badge" href={href('/')} aria-label={`${days ?? 'unknown'} days since the last Git fuck-up`}>
             <Flaps value={days} min={2} class="badge-flaps" since={latest ? happened(latest) : null} label="" />
             <span class="badge-label">days since the last Git fuck-up</span>
