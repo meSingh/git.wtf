@@ -54,6 +54,8 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
 .incident .body p { margin: 0 0 1rem; }
 .incident .status { font-family: var(--mono); color: var(--yellow); font-size: 1.05rem; margin: 1.25rem 0 0.75rem; }
 .incident .source { color: var(--muted); font-size: 0.9rem; }
+.incident .video { margin: 1.5rem 0 0; }
+.incident .video video { width: 100%; max-width: 22rem; aspect-ratio: 9 / 16; background: #000; border: 1px solid var(--line); display: block; }
 .incident .share { margin-top: 1rem; }
 .incident .share img { width: 100%; height: auto; border: 1px solid var(--line); }
 

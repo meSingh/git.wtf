@@ -39,6 +39,10 @@ const incidents = defineCollection({
         source_url: z.string().url(),
         source_date: isoDate,
         status: z.string().min(1),
+        // Set by scripts/render-video.mjs once the video is uploaded (phase 2). Absent until then.
+        video: z.string().url().optional(),
+        poster: z.string().url().optional(),
+        fixture: z.boolean().optional(),
     }),
 });
 

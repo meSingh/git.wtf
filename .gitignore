@@ -8,3 +8,6 @@ drafts/*
 .env.*
 .DS_Store
 tests/fixtures/archive/
+# local video renders (scripts/render-video.mjs --local) and phase-2 render scratch
+public/incident/
+.render/
