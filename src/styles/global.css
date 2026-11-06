@@ -111,15 +111,17 @@ body.docked .badge, .badge.on { opacity: 1; transform: none; pointer-events: aut
 .beat-head .count { font-family: var(--mono); font-size: 0.82rem; color: var(--grey); white-space: nowrap; }
 
 /* beat 2: the terminal card */
-.beat-today { height: 100svh; display: grid; align-items: center; padding: calc(var(--bar) + 0.5rem) 0 1rem; }
-.beat-today .term { max-height: calc(100svh - var(--bar) - 1.5rem); overflow: hidden; }
+.beat-today { height: 100svh; display: grid; align-items: safe center; padding: calc(var(--bar) + 0.5rem) 0 1rem; }
+.typed .ch.hid { visibility: hidden; }
+@media (max-width: 767px) { .typed .ch.hid { display: none; } .beat-today { align-items: start; } .beat-today .term { max-height: none; overflow: visible; } .term-body { font-size: 0.92rem; line-height: 1.5; } .stamp-row { min-height: 0; } }
+@media (min-width: 768px) { .beat-today .term { max-height: calc(100svh - var(--bar) - 1.5rem); overflow: hidden; } }
 .term { width: min(var(--read), 100% - 2rem); max-width: 100%; margin-inline: auto; min-width: 0; background: rgba(242, 240, 234, 0.035); border: 1px solid var(--line); box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6); }
 .term-bar { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 1rem; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 0.75rem; color: var(--grey); overflow: hidden; }
 .term-bar .lights { display: inline-flex; gap: 0.35rem; }
 .term-bar .lights i { width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--line-2); }
 .term-bar .lights i:first-child { background: var(--yellow); }
 .term-bar .path { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.term-body { padding: clamp(1rem, 3vw, 2.2rem) clamp(0.9rem, 3vw, 2.2rem); font-family: var(--mono); font-size: clamp(0.98rem, 1.65vw, 1.6rem); line-height: 1.55; overflow-wrap: anywhere; }
+.term-body { padding: clamp(1rem, 3vw, 2.2rem) clamp(0.9rem, 3vw, 2.2rem); font-family: var(--mono); font-size: clamp(0.95rem, 1.65vw, 1.6rem); line-height: 1.55; overflow-wrap: anywhere; }
 .term-title { font-family: var(--display); font-weight: 800; font-size: clamp(2.2rem, 5vw, 3.6rem); text-transform: uppercase; line-height: 0.95; margin: 0 0 1rem; }
 .term-title a { color: var(--paper); }
 .term-title a:hover { color: var(--yellow); text-decoration: none; }
@@ -141,37 +143,40 @@ body.docked .badge, .badge.on { opacity: 1; transform: none; pointer-events: aut
 
 /* beat 3: the record */
 .beat-record { padding-top: 0; }
-.track-wrap { position: relative; height: 100svh; display: flex; align-items: center; overflow: hidden; }
-.track-head { position: absolute; left: 50%; transform: translateX(-50%); top: calc(var(--bar) + 1.5rem); margin: 0; z-index: 2; }
-.tick { position: absolute; top: calc(50% - 2.1rem); font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey); transform: translateX(-50%); }
-.tick::after { content: ''; position: absolute; left: 50%; top: 1.3rem; width: 1px; height: 0.9rem; background: var(--line-2); }
-.track { position: relative; height: min(36rem, 62svh); margin-top: 6rem; flex: none; }
-.track-line { position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--line-2); }
-.track-head .count { max-width: 28rem; text-align: right; white-space: normal; }
-.track-line::before { content: ''; position: absolute; left: 0; right: 0; top: -2px; height: 5px; background: repeating-linear-gradient(to right, var(--line-2) 0 1px, transparent 1px 2.4rem); opacity: 0.6; }
-.tcard { position: absolute; top: 50%; width: 21.25rem; min-height: 13rem; transform: translateY(-50%); background: var(--black); border: 1px solid var(--line-2); padding: 1.2rem 1.3rem 1.3rem; transition: transform 0.25s ease, border-color 0.25s ease; color: var(--paper); }
+.track-wrap { position: relative; height: 100svh; overflow: hidden; }
+.track-head { position: absolute; left: 0; right: 0; top: 0; z-index: 3; padding-top: calc(var(--bar) + 1.25rem); background: linear-gradient(to bottom, var(--black) 78%, transparent); }
+.track-head .beat-head { margin-bottom: 0; padding-bottom: 1.5rem; }
+.track-head .count { max-width: 30rem; text-align: right; white-space: normal; }
+.track { position: absolute; left: 0; top: calc(var(--bar) + 8.5rem); bottom: 0; flex: none; }
+.year { position: absolute; left: 1rem; bottom: 2.4rem; font-family: var(--display); font-weight: 900; font-size: min(44rem, 68svh); line-height: 0.78; letter-spacing: -0.03em; color: rgba(242, 240, 234, 0.05); user-select: none; }
+.ruler { position: absolute; left: 0; right: 0; bottom: 5.5rem; height: 1px; background: var(--line-2); }
+.ruler .tick { position: absolute; left: 0; top: 0; width: 1px; height: 0.45rem; background: var(--line); }
+.ruler .tick.week { height: 0.9rem; background: var(--line-2); }
+.ruler .tick.month { height: 1.5rem; background: var(--yellow); }
+.ruler .tick b { position: absolute; left: 0.5rem; top: 0.55rem; font-family: var(--mono); font-weight: 500; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--paper); white-space: nowrap; }
+.stem { position: absolute; bottom: 5.5rem; width: 1px; height: 2.6rem; background: var(--line-2); transform: translateX(-50%); }
+.stem::after { content: ''; position: absolute; left: 50%; bottom: -3px; width: 7px; height: 7px; margin-left: -3.5px; border-radius: 50%; background: var(--yellow); }
+.tcard { position: absolute; bottom: 8.1rem; width: 25rem; min-height: 21rem; display: flex; flex-direction: column; background: var(--black); border: 1px solid var(--line-2); padding: 1.2rem 1.35rem 1.25rem; transition: transform 0.25s ease, border-color 0.25s ease; color: var(--paper); }
 .tcard::before { content: ''; position: absolute; left: -1px; right: -1px; top: -1px; height: 3px; background: var(--yellow); transform: scaleX(0); transform-origin: 0 0; transition: transform 0.25s ease; }
-.tcard:hover, .tcard:focus-visible { transform: translateY(calc(-50% - 8px)); border-color: var(--yellow); text-decoration: none; }
+.tcard:hover, .tcard:focus-visible { transform: translateY(-8px); border-color: var(--yellow); text-decoration: none; }
 .tcard:hover::before, .tcard:focus-visible::before { transform: scaleX(1); }
-.tcard .d { font-family: var(--mono); font-size: 0.75rem; color: var(--grey); display: flex; justify-content: space-between; gap: 0.5rem; }
-.tcard .t { display: block; font-family: var(--display); font-weight: 800; font-size: 2.25rem; text-transform: uppercase; line-height: 0.95; margin: 0.45rem 0 0; }
-.tcard .s { display: block; font-family: var(--mono); font-size: 0.85rem; color: var(--yellow); margin-top: 0.7rem; max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.3s ease, opacity 0.3s ease; }
-.tcard:hover .s, .tcard:focus-visible .s { max-height: 6rem; opacity: 1; }
-.gap { position: absolute; top: calc(50% + 0.7rem); transform: translateX(-50%); font-family: var(--mono); font-size: 0.8rem; color: var(--yellow); white-space: nowrap; }
+.tcard .d { font-family: var(--mono); font-size: 0.78rem; color: var(--grey); display: flex; justify-content: space-between; gap: 0.5rem; }
+.tcard .t { display: block; font-family: var(--display); font-weight: 800; font-size: 2.3rem; text-transform: uppercase; line-height: 0.95; margin: 0.6rem 0 0.7rem; }
+.tcard .x { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; font-family: var(--mono); font-size: 0.86rem; line-height: 1.5; color: var(--grey); }
+.tcard .s { display: block; margin-top: auto; padding-top: 0.9rem; font-family: var(--mono); font-size: 0.86rem; color: var(--yellow); }
+.gap { position: absolute; bottom: 6.6rem; transform: translateX(-50%); font-family: var(--mono); font-size: 0.8rem; color: var(--yellow); white-space: nowrap; }
 .gap.quiet { font-weight: 700; }
-.gap.quiet::before { content: ''; position: absolute; left: 50%; bottom: calc(100% + 0.35rem); width: 1px; height: 0.6rem; background: var(--yellow); }
-.track-end { position: absolute; top: 50%; transform: translateY(-50%); font-family: var(--mono); font-size: 0.78rem; color: var(--grey); white-space: nowrap; }
+.gap.quiet::before { content: none; }
+.track-end { position: absolute; bottom: 8.1rem; font-family: var(--mono); font-size: 0.82rem; color: var(--grey); white-space: nowrap; }
 .track-end a { color: var(--paper); }
 .record-stack { display: none; }
 @media (max-width: 767px) {
     .track-wrap { display: none; }
-    .record-stack { display: block; padding-bottom: 2rem; }
-    .record-stack .tcard { display: block; position: relative; top: auto; transform: none; width: 100%; }
+    .record-stack { display: block; padding: 1rem 0 2rem; }
+    .record-stack .tcard { display: flex; position: relative; bottom: auto; width: 100%; min-height: 0; }
     .record-stack .tcard:hover, .record-stack .tcard:focus-visible { transform: none; }
-    .record-stack .tcard .s { max-height: none; opacity: 1; }
-    .record-stack .vgap { display: flex; align-items: center; gap: 0.8rem; padding-left: 1.1rem; font-family: var(--mono); font-size: 0.75rem; color: var(--grey); }
+    .record-stack .vgap { display: flex; align-items: center; gap: 0.8rem; padding-left: 1.1rem; font-family: var(--mono); font-size: 0.75rem; color: var(--yellow); }
     .record-stack .vgap::before { content: ''; width: 1px; height: var(--h, 2rem); background: repeating-linear-gradient(to bottom, var(--line-2) 0 4px, transparent 4px 8px); }
-    .record-stack .vgap.quiet { color: var(--yellow); }
 }
 
 /* beat 4: the tally */

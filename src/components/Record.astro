@@ -1,72 +1,74 @@
 ---
-// Beat 3: the record. A horizontal track where the distance between incidents is their real gap in days.
-import { daysBetween, formatDay, happened, href, incidentPath, inlineCode, sortIncidents, type Incident } from '../lib/site';
+// Beat 3: the record. A horizontal track where the distance between incidents is their real gap in days,
+// a ruler of day ticks and month labels underneath, the year behind. Phones get the same cards stacked.
+import { daysBetween, formatDay, happened, href, incidentPath, inlineCode, sentences, sortIncidents, type Incident } from '../lib/site';
 
 interface Props { incidents: Incident[] }
 const { incidents } = Astro.props;
 const asc = sortIncidents(incidents).reverse(); // oldest first, left to right
-const CARD = 340, MIN = 48, PPD = 46, QUIET = 21, PAD = 56;
-type Placed = { i: Incident; x: number; gap: number };
+const CARD = 400, MIN = 56, PPD = 50, QUIET = 21, PAD = 72;
+type Placed = { i: Incident; x: number; gap: number; first: string };
 const placed: Placed[] = [];
 let x = PAD;
 asc.forEach((i, n) => {
     const gap = n === 0 ? 0 : daysBetween(happened(asc[n - 1]), happened(i));
     if (n > 0) x += Math.max(CARD + MIN, gap * PPD);
-    placed.push({ i, x, gap });
+    const first = sentences(i.body ?? '')[0] ?? '';
+    placed.push({ i, x, gap, first: first.length > 150 ? first.slice(0, 147).trimEnd() + '...' : first });
 });
-const width = (placed.at(-1)?.x ?? 0) + CARD + PAD + 260;
-// Month ticks on the ruler: a tick where each month starts, placed by its real day distance.
+const width = (placed.at(-1)?.x ?? 0) + CARD + PAD + 300;
 const first = happened(asc[0]);
+const last = happened(asc.at(-1)!);
+/** x of a date on the ruler: between two incidents the track is linear in days. */
 const dayX = (iso: string) => {
-    // x of a date: between two incidents the track is linear in days, so interpolate.
     for (let n = 1; n < placed.length; n++) {
         const a = happened(asc[n - 1]), b = happened(asc[n]);
         if (iso >= a && iso <= b) {
             const span = daysBetween(a, b) || 1;
-            return placed[n - 1].x + (placed[n].x - placed[n - 1].x) * (daysBetween(a, iso) / span);
+            return placed[n - 1].x + CARD / 2 + (placed[n].x - placed[n - 1].x) * (daysBetween(a, iso) / span);
         }
     }
-    return iso < first ? PAD : (placed.at(-1)?.x ?? 0) + CARD + 40;
+    return iso < first ? PAD + CARD / 2 : (placed.at(-1)?.x ?? 0) + CARD / 2 + 48 * daysBetween(last, iso);
 };
-const months: { label: string; x: number }[] = [];
-{
-    const [y0, m0] = first.split('-').map(Number);
-    const last = happened(asc.at(-1)!);
-    let y = y0, m = m0 + 1;
-    for (let k = 0; k < 24; k++) {
-        if (m > 12) { m = 1; y++; }
-        const iso = `${y}-${String(m).padStart(2, '0')}-01`;
-        if (iso > last) break;
-        months.push({ label: new Intl.DateTimeFormat('en-GB', { month: 'short', timeZone: 'UTC' }).format(Date.UTC(y, m - 1, 1)), x: dayX(iso) });
-        m++;
-    }
+const addDays = (iso: string, d: number) => new Date(Date.UTC(+iso.slice(0, 4), +iso.slice(5, 7) - 1, +iso.slice(8, 10) + d)).toISOString().slice(0, 10);
+const ticks: { iso: string; x: number; month: string | null; day: number }[] = [];
+for (let d = -3; d <= daysBetween(first, last) + 4; d++) {
+    const iso = addDays(first, d);
+    const day = +iso.slice(8, 10);
+    ticks.push({ iso, x: dayX(iso), day, month: day === 1 ? new Intl.DateTimeFormat('en-GB', { month: 'long', timeZone: 'UTC' }).format(Date.UTC(+iso.slice(0, 4), +iso.slice(5, 7) - 1, 1)) : null });
 }
+const year = first.slice(0, 4);
+const gapLabel = (g: number) => (g >= QUIET ? `${g} quiet days` : g === 0 ? 'same day' : g === 1 ? '1 day' : `${g} days`);
 ---
 <div class="track-wrap" id="track-wrap">
-    <div class="col beat-head track-head">
-        <h2 id="record-h">The record</h2>
-        <span class="count">{incidents.length} incidents, spaced by the real days between them. Keep scrolling.</span>
+    <div class="track-head">
+        <div class="col beat-head">
+            <h2 id="record-h">The record</h2>
+            <span class="count">{incidents.length} incidents, spaced by the real days between them. Keep scrolling.</span>
+        </div>
     </div>
     <div class="track" id="track" style={`width:${width}px`}>
-        <span class="track-line" aria-hidden="true"></span>
-        {months.map((mo) => (
-            <span class="tick" style={`left:${mo.x}px`} aria-hidden="true">{mo.label}</span>
-        ))}
+        <span class="year" aria-hidden="true">{year}</span>
+        <div class="ruler" aria-hidden="true">
+            {ticks.map((t) => (
+                <span class={`tick${t.month ? ' month' : ''}${t.day % 7 === 1 ? ' week' : ''}`} style={`left:${t.x}px`}>{t.month && <b>{t.month}</b>}</span>
+            ))}
+        </div>
         {placed.map((p, n) => (
             <>
                 {n > 0 && (
-                    <span class={`gap${p.gap >= QUIET ? ' quiet' : ''}`} style={`left:${(placed[n - 1].x + CARD + p.x) / 2}px`} aria-hidden="true">
-                        {p.gap >= QUIET ? `${p.gap} quiet days` : p.gap === 0 ? 'same day' : p.gap === 1 ? '1 day' : `${p.gap} days`}
-                    </span>
+                    <span class={`gap${p.gap >= QUIET ? ' quiet' : ''}`} style={`left:${(placed[n - 1].x + CARD + p.x) / 2}px`} aria-hidden="true">{gapLabel(p.gap)}</span>
                 )}
+                <span class="stem" style={`left:${p.x + CARD / 2}px`} aria-hidden="true"></span>
                 <a class="tcard" href={href(incidentPath(p.i))} style={`left:${p.x}px`}>
                     <span class="d"><time datetime={happened(p.i)}>{formatDay(happened(p.i))}</time><span>{p.i.data.category}</span></span>
                     <span class="t">{p.i.data.title}</span>
+                    <span class="x">{p.first}</span>
                     <span class="s" set:html={`Status: ${inlineCode(p.i.data.status)}`} />
                 </a>
             </>
         ))}
-        <span class="track-end" style={`left:${(placed.at(-1)?.x ?? 0) + CARD + 40}px`}>today <a href={href('/incidents/')}>every incident</a></span>
+        <span class="track-end" style={`left:${(placed.at(-1)?.x ?? 0) + CARD + 56}px`}>today <a href={href('/incidents/')}>every incident</a></span>
     </div>
 </div>
 <div class="record-stack col" aria-label="Earlier incidents">
@@ -75,12 +77,11 @@ const months: { label: string; x: number }[] = [];
             <a class="tcard" href={href(incidentPath(p.i))}>
                 <span class="d"><time datetime={happened(p.i)}>{formatDay(happened(p.i))}</time><span>{p.i.data.category}</span></span>
                 <span class="t">{p.i.data.title}</span>
+                <span class="x">{p.first}</span>
                 <span class="s" set:html={`Status: ${inlineCode(p.i.data.status)}`} />
             </a>
             {n < arr.length - 1 && (
-                <span class={`vgap${p.gap >= QUIET ? ' quiet' : ''}`} style={`--h:${Math.min(160, Math.max(20, p.gap * 4))}px`} aria-hidden="true">
-                    {p.gap >= QUIET ? `${p.gap} quiet days` : p.gap === 0 ? 'same day' : p.gap === 1 ? '1 day' : `${p.gap} days`}
-                </span>
+                <span class={`vgap${p.gap >= QUIET ? ' quiet' : ''}`} style={`--h:${Math.min(160, Math.max(20, p.gap * 4))}px`} aria-hidden="true">{gapLabel(p.gap)}</span>
             )}
         </>
     ))}

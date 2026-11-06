@@ -74,24 +74,30 @@ export function home() {
             const sents = Array.from(term.querySelectorAll<HTMLElement>('.typed .sent'));
             const stamp = q('.stamp', term)!;
             const meta = q('.term-meta', term)!;
-            gsap.set(chars, { visibility: 'hidden' });
+            const fullHeight = term.offsetHeight; // measured before anything is hidden
+            chars.forEach((c) => c.classList.add('hid'));
             gsap.set(stamp, { autoAlpha: 0, scale: 2.2, rotate: -14 });
             gsap.set(meta, { autoAlpha: 0, y: 8 });
+            // On phones the card grows with the text, so the stamp and meta take no room until they appear.
+            const stampRow = stamp.parentElement as HTMLElement;
+            if (!desktop) gsap.set([stampRow, meta], { display: 'none' });
             let shown = 0;
             const proxy = { n: 0 };
+            const pre = { n: 0 }; // the first words, typed while the card arrives; never fights the main timeline
             const reveal = () => {
-                const n = Math.max(0, Math.min(chars.length, Math.round(proxy.n)));
+                const n = Math.max(0, Math.min(chars.length, Math.round(Math.max(proxy.n, pre.n))));
                 if (n === shown) return;
-                if (n > shown) for (let i = shown; i < n; i++) chars[i].style.visibility = 'visible';
-                else for (let i = n; i < shown; i++) chars[i].style.visibility = 'hidden';
+                if (n > shown) for (let i = shown; i < n; i++) chars[i].classList.remove('hid');
+                else for (let i = n; i < shown; i++) chars[i].classList.add('hid');
                 chars[shown - 1]?.classList.remove('at');
                 chars[n - 1]?.classList.add('at');
                 shown = n;
             };
+            const lead = Math.min(28, chars.length);
+            gsap.to(pre, { n: lead, ease: 'none', onUpdate: reveal, scrollTrigger: { trigger: today, start: 'top 85%', end: 'top top', scrub: 0.3 } });
             const tl = gsap.timeline({
                 scrollTrigger: { trigger: today, start: 'top top', end: () => `+=${sents.length * 65 + 70}%`, pin: true, scrub: 0.35, invalidateOnRefresh: true },
             });
-            tl.to({}, { duration: 0.1 });
             let cum = 0;
             sents.forEach((s) => {
                 const len = s.querySelectorAll('.ch').length;
@@ -99,6 +105,12 @@ export function home() {
                 tl.to(proxy, { n: cum, duration: len * 0.012, ease: 'none', onUpdate: reveal });
                 tl.to({}, { duration: 0.16 });
             });
+            // On phones the full card is taller than the view: lift it as the last sentence lands so the stamp and meta arrive.
+            if (!desktop) {
+                const lift = Math.max(0, fullHeight + 24 - (window.innerHeight - 68));
+                if (lift) tl.to(term, { y: -lift, duration: 0.3, ease: 'power1.inOut' }, '-=0.2');
+                tl.set(stampRow, { display: 'flex' }).set(meta, { display: 'flex' });
+            }
             tl.to(stamp, { autoAlpha: 1, scale: 1, rotate: -2, duration: 0.22, ease: 'power4.in' });
             tl.fromTo(term, { x: 0 }, { x: -4, duration: 0.03, yoyo: true, repeat: 3, ease: 'none' }, '<0.18');
             tl.to(stamp, { rotate: -2.6, scale: 1.01, duration: 0.08, ease: 'power2.out' });
@@ -120,10 +132,12 @@ export function home() {
         }
 
         // Beat 4: the tally counts up once as it enters.
-        document.querySelectorAll<HTMLElement>('.tally .n').forEach((el) => {
+        // Beat 4: the tally. Values under ten flip in at their value (a count from 0 to 2 reads as zeros); larger ones count up.
+        document.querySelectorAll<HTMLElement>('.tally .n').forEach((el, i) => {
             const n = Number(el.dataset.n ?? 0);
             if (!n) return;
-            gsap.from(el, { textContent: 0, snap: { textContent: 1 }, duration: 1.1, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
+            if (n < 10) gsap.from(el, { autoAlpha: 0, rotateX: -70, y: 10, transformOrigin: '50% 100%', duration: 0.5, delay: i * 0.06, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 92%', once: true } });
+            else gsap.from(el, { textContent: 0, snap: { textContent: 1 }, duration: 1.1, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
         });
     });
 
