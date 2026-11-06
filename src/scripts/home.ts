@@ -7,6 +7,9 @@ import { currentValue, reducedMotion, renderValue, rollTo } from './flaps';
 gsap.registerPlugin(ScrollTrigger);
 
 const q = <T extends HTMLElement = HTMLElement>(s: string, root: ParentNode = document) => root.querySelector<T>(s);
+// The roll and the caption intro run once per page load. gsap.matchMedia re-runs the setup when the
+// viewport crosses the desktop breakpoint; the counters and the docking must rebuild then, the intro must not.
+let introDone = false;
 
 export function home() {
     const hero = q('#hero');
@@ -33,13 +36,16 @@ export function home() {
         const subs = Array.from(document.querySelectorAll<HTMLElement>('.hero-sub'));
 
         // Beat 1: the board rolls once on load and settles on the real number.
-        const roll = rollTo(heroFlaps, value, 1.2).pause();
-        gsap.set([caption, next], { autoAlpha: 0, y: 8 });
-        const intro = gsap.timeline({ delay: 0.15 })
-            .add(roll.play())
-            .to(caption, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.3')
-            .to(next, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.3');
-        (window as any).__gwIntro = intro;
+        if (!introDone) {
+            introDone = true;
+            const roll = rollTo(heroFlaps, value, 1.2).pause();
+            gsap.set([caption, next], { autoAlpha: 0, y: 8 });
+            const intro = gsap.timeline({ delay: 0.15 })
+                .add(roll.play())
+                .to(caption, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.3')
+                .to(next, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.3');
+            (window as any).__gwIntro = intro;
+        }
 
         // Beat 1 to 2: the sign docks into the top bar as the live badge. Scrubbed, so scrolling back undocks it.
         const dock = () => {
