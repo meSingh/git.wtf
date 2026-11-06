@@ -19,6 +19,10 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Smoke build from the fixtures (templates, share images, converter)
+        run: npm run build:fixture
+      - name: No fixture content in the real folders
+        run: '! grep -rl "^fixture: true" incidents archive'
       - run: npm run build
       - name: Serve the build like Cloudflare does
         run: |

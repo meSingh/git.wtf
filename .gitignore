@@ -7,3 +7,4 @@ drafts/*
 .env
 .env.*
 .DS_Store
+tests/fixtures/archive/

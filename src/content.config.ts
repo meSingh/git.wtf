@@ -24,8 +24,14 @@ const toDay = (v: unknown) => (v instanceof Date ? v.toISOString().slice(0, 10) 
 const toIso = (v: unknown) => (v instanceof Date ? v.toISOString() : v);
 const isoDate = z.preprocess(toDay, z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'YYYY-MM-DD'));
 
+// GITWTF_FIXTURE=1 builds from tests/fixtures/ instead of the real folders (npm run build:fixture),
+// so fixture output never lands in incidents/ or archive/.
+const FIXTURE = process.env.GITWTF_FIXTURE === '1';
+const INCIDENTS_DIR = FIXTURE ? './tests/fixtures/incidents' : './incidents';
+const ARCHIVE_DIR = FIXTURE ? 'tests/fixtures/archive/' : 'archive/';
+
 const incidents = defineCollection({
-    loader: glob({ pattern: '*.md', base: './incidents' }),
+    loader: glob({ pattern: '*.md', base: INCIDENTS_DIR }),
     schema: z.object({
         date: isoDate,
         title: z.string().min(3),
@@ -39,16 +45,26 @@ const incidents = defineCollection({
 // The Ghost archive: one file per post or page, front matter plus the post's html as the body.
 // Written by scripts/ghost-to-archive.mjs, never by hand. The body stays html (no markdown pass).
 const archive = defineCollection({
-    loader: async () => {
-        const dir = new URL('../archive/', import.meta.url);
-        const files = (await readdir(dir)).filter((f) => f.endsWith('.md')).sort();
-        return Promise.all(
-            files.map(async (file) => {
+    loader: {
+        name: 'ghost-archive',
+        load: async ({ store, config, parseData, logger }) => {
+            const dir = new URL(ARCHIVE_DIR, config.root);
+            let files: string[] = [];
+            try {
+                files = (await readdir(dir)).filter((f) => f.endsWith('.md')).sort();
+            } catch {
+                logger.warn(`${ARCHIVE_DIR} is missing; the archive is empty`);
+            }
+            store.clear();
+            for (const file of files) {
                 const raw = await readFile(new URL(file, dir), 'utf8');
                 const { data, content } = matter(raw);
-                return { id: file.replace(/\.md$/, ''), ...data, html: content.trim() };
-            }),
-        );
+                const id = file.replace(/\.md$/, '');
+                const parsed = await parseData({ id, data: { ...data, html: content.trim() } });
+                store.set({ id, data: parsed });
+            }
+            logger.info(`${files.length} archive entries from ${ARCHIVE_DIR}`);
+        },
     },
     schema: z.object({
         title: z.string(),

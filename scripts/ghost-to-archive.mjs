@@ -23,6 +23,12 @@ const input = args.find((a) => !a.startsWith('--'));
 const opt = (name, dflt) => (args.includes(name) ? args[args.indexOf(name) + 1] : dflt);
 const imagesDir = opt('--images', null);
 const outDir = path.resolve(root, opt('--out', 'archive'));
+const noUrlList = args.includes('--no-url-list');
+const isFixture = path.resolve(input ?? '').includes(`${path.sep}tests${path.sep}fixtures${path.sep}`);
+if (isFixture && outDir === path.resolve(root, 'archive')) {
+    console.error('Fixture input must not be written into archive/. Use --out tests/fixtures/archive (npm run build:fixture does).');
+    process.exit(2);
+}
 if (!input) {
     console.error('usage: ghost-to-archive.mjs <ghost-export.json> [--images <dir>] [--out archive]');
     process.exit(2);
@@ -126,6 +132,7 @@ for (const p of posts) {
         canonical_url: p.canonical_url ? relative(p.canonical_url) : null,
         authors,
         ghost_id: p.id,
+        fixture: isFixture ? true : undefined,
         visibility: p.visibility && p.visibility !== 'public' ? p.visibility : undefined,
     };
     for (const k of Object.keys(fm)) if (fm[k] === undefined) delete fm[k];
@@ -163,10 +170,13 @@ if (imagesDir) {
 }
 
 // URL list.
+if (!noUrlList) {
 const listFile = path.join(root, 'tests/old-urls.txt');
 const existing = (await readFile(listFile, 'utf8').catch(() => '')).split('\n').map((l) => l.trim()).filter(Boolean);
 const merged = [...new Set([...existing, ...urls])].sort();
 await writeFile(listFile, merged.join('\n') + '\n');
+console.log(`tests/old-urls.txt: ${merged.length} paths`);
+}
 
 console.log(`Ghost export ${meta.version ?? '?'} from ${meta.exported_on ? new Date(meta.exported_on).toISOString() : '?'}`);
 console.log(`written: ${report.written.length} (${report.written.filter((s) => true).length} files in ${path.relative(root, outDir)}/)`);
@@ -178,4 +188,3 @@ if (report.externalImages.size) {
     console.log('external image hosts (Content may want a look):');
     for (const [host, slugs] of report.externalImages) console.log(`  ${host}: ${[...slugs].join(', ')}`);
 }
-console.log(`tests/old-urls.txt: ${merged.length} paths`);

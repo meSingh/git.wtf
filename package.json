@@ -6,6 +6,7 @@
     "scripts": {
         "dev": "astro dev",
         "build": "astro build",
+        "build:fixture": "node scripts/ghost-to-archive.mjs tests/fixtures/ghost-export.json --out tests/fixtures/archive --no-url-list && GITWTF_FIXTURE=1 astro build",
         "preview": "wrangler dev --port 8787",
         "check": "astro check",
         "convert": "node scripts/ghost-to-archive.mjs",
