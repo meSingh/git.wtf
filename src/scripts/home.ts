@@ -161,7 +161,8 @@ export async function home() {
             });
             arrive.to(pre, { n: Math.min(28, chars.length), duration: 0.5, ease: 'none', onUpdate: reveal }, Math.max(0.25, tws.length * 0.12 - 0.1));
 
-            const tl = gsap.timeline({ scrollTrigger: { trigger: todaySec, start: 'top top', end: () => `+=${sents.length * 65 + 70}%`, pin: true, scrub: 0.35, invalidateOnRefresh: true } });
+            // about 4 px of scroll per character, plus a short hold for the stamp: a four-sentence piece pins for ~2,400 px
+            const tl = gsap.timeline({ scrollTrigger: { trigger: todaySec, start: 'top top', end: () => `+=${Math.round(chars.length * 4 + window.innerHeight * 0.3)}`, pin: true, scrub: 0.35, invalidateOnRefresh: true } });
             let cum = 0;
             sents.forEach((s) => {
                 const len = s.querySelectorAll('.ch').length;
@@ -205,7 +206,8 @@ export async function home() {
             const sideways = gsap.to(track, {
                 x: () => -distance(),
                 ease: 'none',
-                scrollTrigger: { trigger: wrap, start: 'top top', end: () => `+=${distance()}`, pin: true, scrub: 0.6, invalidateOnRefresh: true },
+                // about 350 px of scroll per card, whatever the track's length in days
+                scrollTrigger: { trigger: wrap, start: 'top top', end: () => `+=${qa('#track .tcard').length * 350}`, pin: true, scrub: 0.6, invalidateOnRefresh: true },
             });
             qa('#track .gap .odo').forEach((g) => ScrollTrigger.create({ trigger: g, containerAnimation: sideways, start: 'left 88%', once: true, onEnter: () => rollOnce(g, 0.9) }));
         } else {
