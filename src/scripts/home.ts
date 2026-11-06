@@ -10,10 +10,7 @@
 // 4 The tally's wheels roll to their counts on entry. Section headings lock in word by word, once.
 // Between sections a band of hazard stripes wipes across, scrubbed to scroll.
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { place, roll, syncOdos, target } from './odometer';
-
-gsap.registerPlugin(ScrollTrigger);
+import { roll, syncOdos, target } from './odometer';
 
 const q = <T extends HTMLElement = HTMLElement>(s: string, root: ParentNode = document) => root.querySelector<T>(s);
 const qa = <T extends HTMLElement = HTMLElement>(s: string, root: ParentNode = document) => Array.from(root.querySelectorAll<T>(s));
@@ -44,7 +41,32 @@ function rollOnce(el: HTMLElement, duration = 1.0) {
     roll(el, target(el), Number(el.dataset.from ?? target(el)), duration, 'power3.out');
 }
 
-export function home() {
+/** 1 The opening, once per page load. Needs only GSAP core, so it starts before the scroll machinery has loaded. */
+function opening(odo: HTMLElement, odoWrap: HTMLElement) {
+    const words = qa('.hh-words .w');
+    const today = q('.hh-today');
+    const wipe = q('.hh-wipe')!;
+    const blur = document.querySelector('#vblur feGaussianBlur')!;
+    const to = target(odo);
+    const from = Number(odo.dataset.from ?? to + 20);
+    const intro = gsap.timeline();
+    odo.style.filter = 'url(#vblur)';
+    intro.add(roll(odo, to, from, 2.1, 'power3.out', (speed) => blur.setAttribute('stdDeviation', `0 ${Math.min(28, speed * 0.55).toFixed(1)}`)), 0.15);
+    intro.call(() => { odo.style.filter = ''; }, [], 2.3);
+    intro.to(odoWrap, { keyframes: [{ x: -2, y: 1 }, { x: 2, y: -1 }, { x: -1, y: 0 }, { x: 0, y: 0 }], duration: 0.14, ease: 'none' }, 2.25);
+    words.forEach((w, i) => {
+        const at = 1.25 + i * 0.24;
+        const left = i % 2 === 0;
+        intro.fromTo(wipe, { x: 0, xPercent: left ? -120 : 520 }, { x: 0, xPercent: left ? 520 : -120, duration: 0.26, ease: 'none' }, at - 0.06);
+        intro.fromTo(w, { autoAlpha: 0, x: left ? '-60vw' : '60vw' }, { autoAlpha: 1, x: 0, duration: 0.2, ease: 'power4.out' }, at);
+        intro.to(w, { keyframes: [{ x: left ? 6 : -6 }, { x: 0 }], duration: 0.08, ease: 'none' }, at + 0.2);
+    });
+    // revealed by a wipe, not a fade, so the line is never on screen at low contrast
+    if (today) intro.fromTo(today, { autoAlpha: 1, clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 0.4, ease: 'power2.out' }, 1.25 + 5 * 0.24 + 0.15);
+    if (location.search.includes('debug')) { intro.pause(0); (window as any).__hero = { tl: intro, gsap }; }
+}
+
+export async function home() {
     syncOdos();
     const hero = q('#hero');
     const odoWrap = q('#hero-odo');
@@ -57,36 +79,16 @@ export function home() {
         return;
     }
     (window as any).__heroRan = true;
+    if (!introDone) { introDone = true; opening(odo, odoWrap); }
 
+    // The scroll choreography loads after the opening has started: nobody scrolls in the first moment, and the
+    // largest paint does not have to share the line with it.
+    const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+    gsap.registerPlugin(ScrollTrigger);
     const mm = gsap.matchMedia();
     // GSAP only runs the setup when a condition matches, so one condition is always true
     mm.add({ any: '(min-width: 0px)', desktop: '(min-width: 768px)' }, (ctx) => {
         const { desktop } = ctx.conditions as { desktop: boolean };
-        const words = qa('.hh-words .w');
-        const today = q('.hh-today');
-        const wipe = q('.hh-wipe')!;
-        const blur = document.querySelector('#vblur feGaussianBlur')!;
-
-        // 1 The opening (once per page load, whatever the breakpoint does)
-        if (!introDone) {
-            introDone = true;
-            const to = target(odo);
-            const from = Number(odo.dataset.from ?? to + 20);
-            const intro = gsap.timeline();
-            odo.style.filter = 'url(#vblur)';
-            intro.add(roll(odo, to, from, 2.1, 'power3.out', (speed) => blur.setAttribute('stdDeviation', `0 ${Math.min(28, speed * 0.55).toFixed(1)}`)), 0.15);
-            intro.call(() => { odo.style.filter = ''; }, [], 2.3);
-            intro.to(odoWrap, { keyframes: [{ x: -2, y: 1 }, { x: 2, y: -1 }, { x: -1, y: 0 }, { x: 0, y: 0 }], duration: 0.14, ease: 'none' }, 2.25);
-            words.forEach((w, i) => {
-                const at = 1.25 + i * 0.24;
-                const left = i % 2 === 0;
-                intro.fromTo(wipe, { x: 0, xPercent: left ? -120 : 520 }, { x: 0, xPercent: left ? 520 : -120, duration: 0.26, ease: 'none' }, at - 0.06);
-                intro.fromTo(w, { autoAlpha: 0, x: left ? '-60vw' : '60vw' }, { autoAlpha: 1, x: 0, duration: 0.2, ease: 'power4.out' }, at);
-                intro.to(w, { keyframes: [{ x: left ? 6 : -6 }, { x: 0 }], duration: 0.08, ease: 'none' }, at + 0.2);
-            });
-            if (today) intro.fromTo(today, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.45, ease: 'power2.out' }, 1.25 + 5 * 0.24 + 0.15);
-            if (location.search.includes('debug')) { intro.pause(0); (window as any).__hero = { tl: intro, gsap }; }
-        }
 
         // 1 to 2 The wheels dock into the bar as the badge. The hero pins without a spacer, so the card slides up over it.
         const badgeOdo = q('.odo', badge)!;

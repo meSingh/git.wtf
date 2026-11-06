@@ -62,6 +62,7 @@ const words = ['DAYS', 'SINCE', 'THE', 'LAST', 'GIT', 'FUCK-UP'];
     <div class="wipes" aria-hidden="true"><i data-wipe="record"></i><i data-wipe="by-category"></i><i data-wipe="archive"></i></div>
 
     <script>
-        import '../scripts/home';
+        // The motion loads after the first frame is painted, so the opening's still is never kept waiting for it.
+        requestAnimationFrame(() => requestAnimationFrame(() => import('../scripts/home')));
     </script>
 </Base>

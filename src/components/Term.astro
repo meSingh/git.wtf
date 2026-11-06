@@ -25,7 +25,8 @@ const { Content } = await render(incident);
     </div>
     <div class="term-body">
         {(() => {
-            const words = lockTitle ? d.title.split(/\s+/).map((w, i, a) => <><span class="tw">{w}</span>{i < a.length - 1 && ' '}</>) : d.title;
+            // the word spans are motion only; the full title stays in the link for assistive tech whatever the animation state
+            const words = lockTitle ? <><span class="visually-hidden">{d.title}</span><span aria-hidden="true">{d.title.split(/\s+/).map((w, i, a) => <><span class="tw">{w}</span>{i < a.length - 1 && ' '}</>)}</span></> : d.title;
             return <h2 class="term-title">{linkTitle ? <a href={href(path)}>{words}</a> : words}</h2>;
         })()}
         {typed ? (

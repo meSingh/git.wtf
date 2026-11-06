@@ -26,9 +26,16 @@ const img = new URL(image.startsWith('/') ? base + image : image, SITE.url).toSt
 const incidents = sortIncidents(await getCollection('incidents'));
 const latest = incidents[0] ?? null;
 const days = daysSince(incidents);
+// The display face as three static weights (14 kB each) rather than the 35 kB variable file: the opening only
+// needs 900, which is preloaded; 800 and 700 load when a page uses them.
 const fonts = [
-    ['big-shoulders-display-latin-wght-normal.woff2', 'Big Shoulders Display', '100 900'],
-    ['jetbrains-mono-latin-wght-normal.woff2', 'JetBrains Mono', '100 800'],
+    ['big-shoulders-display-latin-900-normal.woff2', 'Big Shoulders Display', '900'],
+    ['big-shoulders-display-latin-800-normal.woff2', 'Big Shoulders Display', '800'],
+    ['big-shoulders-display-latin-700-normal.woff2', 'Big Shoulders Display', '700'],
+    // JetBrains Mono likewise: 400 is nearly all of it; 500 and 700 only appear below the fold
+    ['jetbrains-mono-latin-400-normal.woff2', 'JetBrains Mono', '400'],
+    ['jetbrains-mono-latin-500-normal.woff2', 'JetBrains Mono', '500'],
+    ['jetbrains-mono-latin-700-normal.woff2', 'JetBrains Mono', '700'],
     ['geist-latin-wght-normal.woff2', 'Geist', '100 900'],
 ];
 const fontCss = fonts.map(([file, family, weight]) => `@font-face{font-family:'${family}';font-style:normal;font-weight:${weight};font-display:swap;src:url(${base}/fonts/${file}) format('woff2')}`).join('');

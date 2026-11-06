@@ -57,9 +57,8 @@ body.docked .badge, .badge.on { opacity: 1; transform: none; pointer-events: aut
    starts at --d0. odometer.ts then sets the transform directly. */
 .odo { display: inline-flex; gap: 0.04em; font-family: var(--display); font-weight: 900; line-height: 0.92; color: var(--yellow); vertical-align: -0.1em; }
 .odo-col { position: relative; display: block; width: 0.55em; height: 0.92em; overflow: hidden; text-align: center; }
-.odo-strip { display: flex; flex-direction: column; transform: translateY(calc(var(--df) * -100% / 11)); }
+.odo-strip { display: block; white-space: pre; line-height: 0.92em; transform: translateY(calc(var(--df) * -100% / 11)); }
 html.js-anim .odo[data-from] .odo-strip { transform: translateY(calc(var(--d0) * -100% / 11)); }
-.odo-strip > span { display: block; height: 0.92em; }
 .odo-col.dim { color: rgba(255, 212, 0, 0.3); }
 .odo.wheel .odo-col { background: linear-gradient(to bottom, #050505, #121212 18%, #171717 50%, #121212 82%, #050505); }
 .odo.wheel .odo-col::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), transparent 17%, transparent 83%, rgba(0, 0, 0, 0.85)); }
