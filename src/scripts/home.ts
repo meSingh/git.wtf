@@ -54,7 +54,7 @@ export function home() {
             scrollTrigger: {
                 trigger: hero,
                 start: 'top top',
-                end: '+=70%',
+                end: () => (desktop ? '+=70%' : '+=55%'),
                 pin: true,
                 pinSpacing: false,
                 scrub: 0.5,

@@ -23,7 +23,7 @@
 * { box-sizing: border-box; }
 html { background: var(--black); color: var(--paper); font-family: var(--body); font-size: 17px; line-height: 1.5; -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-html, body { overflow-x: clip; }
+body { overflow-x: clip; }
 body { margin: 0; min-height: 100vh; }
 a { color: var(--yellow); text-decoration: none; }
 a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
@@ -34,7 +34,7 @@ h1, h2, h3 { margin: 0; font-family: var(--display); font-weight: 800; line-heig
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* ---------- top bar ---------- */
-.bar { position: fixed; inset: 0 0 auto 0; height: var(--bar); z-index: 50; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding-inline: clamp(1rem, 2.5vw, 2rem); background: linear-gradient(to bottom, rgba(10, 10, 10, 0.92), rgba(10, 10, 10, 0.7)); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.bar { position: fixed; inset: 0 0 auto 0; height: var(--bar); z-index: 50; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding-inline: clamp(1rem, 2.5vw, 2rem); background: linear-gradient(to bottom, rgba(10, 10, 10, 0.96), rgba(10, 10, 10, 0.78)); }
 .bar nav { justify-self: end; display: flex; gap: clamp(0.9rem, 2vw, 1.6rem); font-family: var(--mono); font-size: 0.82rem; }
 .bar nav a { color: var(--paper); opacity: 0.8; }
 .bar nav a:hover { opacity: 1; color: var(--yellow); text-decoration: none; }
@@ -60,7 +60,7 @@ body.docked .badge, .badge.on { opacity: 1; transform: none; pointer-events: aut
 .flap-bottom, .flap-leaf-bottom { background: linear-gradient(to bottom, #131313, #0f0f0f); }
 .flap-digit { position: absolute; left: 0; right: 0; top: 0; height: 1.08em; line-height: 1.08em; text-align: center; font-size: 1em; }
 .flap-bottom .flap-digit, .flap-leaf-bottom .flap-digit { top: -0.54em; }
-.flap-leaf { backface-visibility: hidden; -webkit-backface-visibility: hidden; will-change: transform; }
+.flap-leaf { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
 .flap-leaf-top { transform-origin: 50% 100%; }
 .flap-leaf-bottom { transform-origin: 50% 0%; transform: rotateX(90deg); }
 .flap::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 0.02em; margin-top: -0.01em; background: var(--black); z-index: 3; }
@@ -68,11 +68,11 @@ body.docked .badge, .badge.on { opacity: 1; transform: none; pointer-events: aut
 .flaps.badge-flaps .flap { perspective: 3em; }
 
 /* ---------- the sign ---------- */
-.sign { --flap-size: clamp(5rem, 17vw, 13rem); position: relative; display: inline-block; max-width: 100%; transform-origin: 0 0; will-change: transform; }
+.sign { --flap-size: clamp(5rem, 17vw, 13rem); position: relative; display: inline-block; max-width: 100%; transform-origin: 0 0; }
 .sign-frame { position: relative; padding: 0.95rem; background: repeating-linear-gradient(-45deg, var(--yellow) 0 1.1rem, var(--black) 1.1rem 2.2rem); box-shadow: 0 0 0 2px var(--black), 0 0 0 4px rgba(255, 212, 0, 0.35), 0 30px 80px rgba(0, 0, 0, 0.65); }
 .sign-face { position: relative; background: var(--black); padding: clamp(1.2rem, 3vw, 2rem) clamp(1.4rem, 4vw, 3rem) clamp(1.3rem, 3vw, 2.2rem); text-align: center; overflow: hidden; }
 .sign-face::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 90% at 50% 0%, rgba(242, 240, 234, 0.07), transparent 55%), radial-gradient(90% 70% at 50% 110%, rgba(0, 0, 0, 0.6), transparent 60%); }
-.sign-face::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.18; mix-blend-mode: screen; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.94 0 0 0 0 0.9 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.sign-face::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.14; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.94 0 0 0 0 0.9 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"); }
 .sign-edge { position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 1px 0 rgba(242, 240, 234, 0.28), inset 0 -1px 0 rgba(0, 0, 0, 0.8), inset 1px 0 0 rgba(242, 240, 234, 0.08); }
 .sign-title { position: relative; font-family: var(--display); font-weight: 900; font-size: clamp(1.5rem, 3.6vw, 2.7rem); letter-spacing: 0.02em; color: var(--paper); line-height: 0.95; max-width: min(14em, 100%); margin: 0 auto 0.6em; }
 .sign-title em { font-style: normal; color: var(--yellow); }
@@ -98,7 +98,7 @@ body.docked .badge, .badge.on { opacity: 1; transform: none; pointer-events: aut
 /* the drift: real git output, very low contrast, moving like scrollback */
 .drift { position: absolute; inset: -10% 0; z-index: 0; pointer-events: none; overflow: hidden; -webkit-mask-image: radial-gradient(70% 70% at 50% 50%, #000 30%, transparent 100%); mask-image: radial-gradient(70% 70% at 50% 50%, #000 30%, transparent 100%); }
 .drift { opacity: 0; animation: driftin 1.2s ease-out 0.6s forwards; }
-.drift pre { margin: 0; font-family: var(--mono); font-size: clamp(0.75rem, 0.9vw, 0.8rem); line-height: 1.75; color: rgba(242, 240, 234, 0.09); white-space: pre; columns: 2; column-gap: 6vw; padding-inline: 3vw; animation: drift 90s linear infinite; will-change: transform; }
+.drift pre { margin: 0; font-family: var(--mono); font-size: clamp(0.75rem, 0.9vw, 0.8rem); line-height: 1.75; color: rgba(242, 240, 234, 0.09); white-space: pre; columns: 2; column-gap: 6vw; padding-inline: 3vw; animation: drift 90s linear infinite; }
 @keyframes drift { from { transform: translateY(0); } to { transform: translateY(-50%); } }
 @keyframes driftin { to { opacity: 1; } }
 
@@ -278,5 +278,4 @@ html.reduce .marquee { -webkit-mask-image: none; mask-image: none; }
     .marquee { display: block; } .marquee .row { width: auto; flex-wrap: wrap; }
     .marquee { -webkit-mask-image: none; mask-image: none; }
     .tcard, .tcard::before, .tcard .s, .tally a, .badge { transition: none; }
-    .sign { will-change: auto; }
 }
