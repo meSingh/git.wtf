@@ -2,7 +2,8 @@
 // Checks that every old git.wtf URL still resolves on a deployed or local copy of the site.
 // Usage: node scripts/check-urls.mjs <base-url> [tests/old-urls.txt]
 // Each line in the list is a path; an optional second column is the path it must end on.
-// A path passes when it answers 200, or redirects (up to 5 hops) to a page that answers 200.
+// A path passes when it answers 200, or redirects (up to 5 hops, http redirects or meta-refresh pages
+// as GitHub Pages needs) to a page that answers 200 and is not itself a redirect page.
 
 import { readFile } from 'node:fs/promises';
 
@@ -19,6 +20,15 @@ async function follow(path) {
         if (res.status >= 300 && res.status < 400 && res.headers.get('location')) {
             url = new URL(res.headers.get('location'), url).toString();
             continue;
+        }
+        if (res.status === 200 && (res.headers.get('content-type') ?? '').includes('text/html')) {
+            const html = await res.text();
+            const m = html.match(/<meta[^>]+http-equiv=["']refresh["'][^>]+content=["']\s*\d+\s*;\s*url=([^"']+)["']/i);
+            if (m) {
+                hops[hops.length - 1] += ' (meta refresh)';
+                url = new URL(m[1].trim(), url).toString();
+                continue;
+            }
         }
         return { status: res.status, final: new URL(url).pathname, hops };
     }

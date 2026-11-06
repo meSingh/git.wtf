@@ -1,0 +1,16 @@
+---
+// The old feed address. GitHub Pages has no redirects, so this page refreshes to the real feed.
+const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+const to = `${base}/rss.xml`;
+---
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Redirecting to the feed</title>
+    <meta http-equiv="refresh" content={`0;url=${to}`} />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="https://git.wtf/rss.xml" />
+</head>
+<body><a href={to}>The feed moved to {to}.</a></body>
+</html>

@@ -1,6 +1,4 @@
-# Build and the old-URL check. Deploys are not done here: Cloudflare Workers Builds watches the
-# repository and runs `npm run build` then `npx wrangler deploy` on every push to master, and
-# `wrangler versions upload` (a preview URL) for other branches.
+# Build and the old-URL check on every pull request and push. The dist is uploaded for review.
 name: CI
 
 on:
@@ -24,15 +22,12 @@ jobs:
       - name: No fixture content in the real folders
         run: '! grep -rl "^fixture: true" incidents archive'
       - run: npm run build
-      - name: Serve the build like Cloudflare does
+      - name: Serve the build like GitHub Pages does
         run: |
-          npx wrangler dev --port 8787 > wrangler.log 2>&1 &
-          for i in $(seq 1 30); do curl -sf -o /dev/null http://127.0.0.1:8787/ && break; sleep 1; done
+          node scripts/serve-dist.mjs dist 8787 > serve.log 2>&1 &
+          for i in $(seq 1 20); do curl -sf -o /dev/null http://127.0.0.1:8787/ && break; sleep 1; done
       - run: node scripts/check-urls.mjs http://127.0.0.1:8787
-      - if: failure()
-        run: cat wrangler.log
       - uses: actions/upload-artifact@v4
         with:
           name: dist
           path: dist
-
