@@ -1,7 +1,13 @@
 ---
-// The mark. A placeholder until the new wordmark (from the 2023 GIT.WTF!?! mark) is picked: the final one replaces
-// this file and nothing else changes. `height` is the cap height of the lettering.
-interface Props { height?: string; class?: string; title?: string }
-const { height = '1.6rem', class: cls = '', title = 'GIT.WTF!?!' } = Astro.props;
+// The git.wtf wordmark (concept A, the hazard bar): GIT.WTF!?! in Big Shoulders Display 900, outlined, with a short
+// hazard-stripe bar above the G. Paths come from scripts/make-logo.mjs. `height` is the whole mark's height;
+// `mono` draws it in one colour (currentColor), for yellow backgrounds.
+import { LOGO } from '../lib/logo-data';
+interface Props { height?: string; class?: string; title?: string; mono?: boolean }
+const { height = '1.75rem', class: cls = '', title = 'git.wtf', mono = false } = Astro.props;
 ---
-<span class={`logo ${cls}`.trim()} style={`--logo-h:${height}`} role="img" aria-label={title}><span aria-hidden="true">GIT.WTF<b>!?!</b></span></span>
+<svg class={`logo${mono ? ' mono' : ''} ${cls}`.trim()} style={`height:${height}`} viewBox={LOGO.viewBox} role={title ? 'img' : undefined} aria-label={title || undefined} aria-hidden={title ? undefined : 'true'} xmlns="http://www.w3.org/2000/svg">
+    <path class="logo-bar" d={LOGO.bar} />
+    <path class="logo-word" d={LOGO.word} />
+    <path class="logo-trio" d={LOGO.trio} />
+</svg>

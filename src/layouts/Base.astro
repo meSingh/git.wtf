@@ -53,6 +53,7 @@ const fontCss = fonts.map(([file, family, weight]) => `@font-face{font-family:'$
     <style set:html={fontCss} />
     <link rel="icon" href={`${base}/favicon.svg`} type="image/svg+xml" />
     <link rel="icon" href={`${base}/favicon-32.png`} sizes="32x32" type="image/png" />
+    <link rel="icon" href={`${base}/favicon-16.png`} sizes="16x16" type="image/png" />
     <link rel="apple-touch-icon" href={`${base}/apple-touch-icon.png`} />
     <link rel="manifest" href={`${base}/site.webmanifest`} />
     <link rel="alternate" type="application/rss+xml" title={SITE.name} href={`${base}/rss.xml`} />
@@ -85,7 +86,7 @@ const fontCss = fonts.map(([file, family, weight]) => `@font-face{font-family:'$
 </head>
 <body>
     <header class="bar">
-        <a class="brand" href={href('/')} aria-label="Git.WTF, home"><Logo height="1.55rem" /></a>
+        <a class="brand" href={href('/')} aria-label="git.wtf, home"><Logo height="1.75rem" title="" /></a>
         <a class={`badge${badge ? ' on' : ''}`} id="badge" href={href('/')} aria-label={`${days ?? 'unknown'} days since the last Git fuck-up`}>
             <Odo value={days ?? 0} min={2} class="badge-odo wheel" since={latest ? happened(latest) : null} label={`${days ?? 0}`} />
             <span class="badge-label">days since the last Git fuck-up</span>

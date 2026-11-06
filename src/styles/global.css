@@ -41,15 +41,17 @@ h1, h2, h3 { margin: 0; font-family: var(--display); font-weight: 800; line-heig
 .badge { justify-self: center; display: flex; align-items: center; gap: 0.55rem; font-family: var(--mono); font-size: 0.75rem; color: var(--grey); letter-spacing: 0.02em; opacity: 0; transform: translateY(-4px); transition: opacity 0.25s ease, transform 0.25s ease; pointer-events: none; }
 .badge .odo { font-size: 1.45rem; }
 body.docked .badge, .badge.on { opacity: 1; transform: none; pointer-events: auto; }
-@media (max-width: 640px) { .bar { grid-template-columns: auto 1fr auto; padding-inline: 0.9rem; } .bar .brand .logo { --logo-h: 1.05rem !important; } .bar nav { gap: 0.9rem; } .bar nav a[href$='rss.xml'] { display: none; } .badge { justify-self: start; margin-left: 0.6rem; } .badge span.badge-label { display: none; } }
+@media (max-width: 640px) { .bar { grid-template-columns: auto 1fr auto; padding-inline: 0.9rem; } .bar .brand .logo { height: 1.4rem !important; } .bar nav { gap: 0.9rem; } .bar nav a[href$='rss.xml'] { display: none; } .badge { justify-self: start; margin-left: 0.6rem; } .badge span.badge-label { display: none; } }
 
 /* ---------- the mark ---------- */
-.brand { display: inline-flex; align-items: center; color: var(--paper); text-decoration: none; }
+.brand { display: inline-flex; align-items: center; justify-self: start; color: var(--paper); text-decoration: none; }
 .brand:hover { color: var(--paper); text-decoration: none; }
 .brand .logo { display: block; }
-/* placeholder mark: GIT.WTF in Big Shoulders 900 with a yellow !?!; the cap height is --logo-h */
-.logo { font-family: var(--display); font-weight: 900; font-size: calc(var(--logo-h, 1.6rem) / 0.82); line-height: 0.82; letter-spacing: 0.01em; color: var(--paper); white-space: nowrap; }
-.logo b { font-weight: 900; color: var(--yellow); margin-left: 0.04em; }
+/* the mark: outlined paths; the word in off-white, the trio and the stripes in yellow; .mono for yellow grounds */
+.logo { display: block; width: auto; overflow: visible; }
+.logo .logo-word { fill: var(--paper); }
+.logo .logo-trio, .logo .logo-bar { fill: var(--yellow); }
+.logo.mono .logo-word, .logo.mono .logo-trio, .logo.mono .logo-bar { fill: currentColor; }
 .foot .credit { font-size: 0.8rem; }
 
 /* ---------- odometer ---------- */
