@@ -1,0 +1,29 @@
+---
+import Lab from '../../layouts/Lab.astro';
+import Logo from '../../components/Logo.astro';
+import { heroData } from '../../lib/hero';
+import { href } from '../../lib/site';
+const d = await heroData();
+const digits = String(d.days).padStart(2, '0').split('').map(Number);
+const words = ['DAYS', 'SINCE', 'THE', 'LAST', 'GIT', 'FUCK-UP'];
+---
+<Lab title="C. The odometer" current="c">
+    <main class="hc" id="hero">
+        <svg class="hc-defs" width="0" height="0" aria-hidden="true"><filter id="vblur" x="0" y="-20%" width="100%" height="140%"><feGaussianBlur stdDeviation="0 0" /></filter></svg>
+        <a class="brand hc-logo hc-late" href={href('/')} aria-label="Git.WTF, home"><Logo height="clamp(1.5rem, 3.6vh, 2.4rem)" /></a>
+        <div class="hc-odo" data-to={d.days} data-since={d.since ?? undefined} data-first={d.firstSince ?? undefined} role="img" aria-label={`${d.days} days since the last Git fuck-up`}>
+            {digits.map((n, i) => (
+                <span class={`col${i === 0 && n === 0 ? ' dim' : ''}`}><span class="strip" style={`transform:translateY(${-n * 10}%)`}>{[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((k) => <span>{k}</span>)}</span></span>
+            ))}
+        </div>
+        <h1 class="hc-words">
+            <span class="visually-hidden">Days since the last Git fuck-up</span>
+            {words.map((w) => <span class="w" aria-hidden="true">{w}</span>)}
+        </h1>
+        <a class="hero-today hc-today hc-late" href={href(d.path)}>Today's: <em>{d.title}</em><span aria-hidden="true"> &darr;</span></a>
+        <div class="hc-wipe" aria-hidden="true"></div>
+    </main>
+    <script>
+        import '../../scripts/hero-c';
+    </script>
+</Lab>

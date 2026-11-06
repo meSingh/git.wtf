@@ -77,7 +77,7 @@ function applyDim(flaps: HTMLElement) {
 }
 
 /** Rolls every cell through a full turn and settles on `value`. About 1.2 s; the last flap overshoots a little. */
-export function rollTo(flaps: HTMLElement, value: number, duration = 1.2): gsap.core.Timeline {
+export function rollTo(flaps: HTMLElement, value: number, duration = 1.2, stagger = 0.07): gsap.core.Timeline {
     const cells = Array.from(flaps.querySelectorAll<Flap>('.flap'));
     const target = digitsOf(value, cells.length);
     const master = gsap.timeline();
@@ -93,7 +93,7 @@ export function rollTo(flaps: HTMLElement, value: number, duration = 1.2): gsap.
             const digit = s === steps ? end : String((cur + s) % 10);
             tl.add(flip(flap, digit, unit * weights[s - 1], s === steps));
         }
-        master.add(tl, i * 0.07);
+        master.add(tl, i * stagger);
     });
     master.call(() => applyDim(flaps));
     return master;

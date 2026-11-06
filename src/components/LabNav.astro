@@ -1,0 +1,18 @@
+---
+import { href } from '../lib/site';
+interface Props { current?: 'a' | 'b' | 'c' }
+const { current } = Astro.props;
+const items = [['a', 'Lights on'], ['b', 'The crash'], ['c', 'The odometer']] as const;
+---
+<nav class="lab-nav" aria-label="Hero lab">
+    <a href={href('/hero/')}>Lab</a>
+    {items.map(([k, label]) => (
+        <a href={href(`/hero/${k}/`)} aria-current={current === k ? 'page' : undefined} title={label}>{k.toUpperCase()}</a>
+    ))}
+    <button type="button" data-replay title="Replay (R)">Replay</button>
+</nav>
+<script>
+    const replay = () => location.reload();
+    document.querySelector('[data-replay]')?.addEventListener('click', replay);
+    addEventListener('keydown', (e) => { if ((e.key === 'r' || e.key === 'R') && !e.metaKey && !e.ctrlKey) replay(); });
+</script>
