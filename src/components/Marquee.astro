@@ -8,11 +8,22 @@ const rows = [posts.filter((_, i) => i % 2 === 0), posts.filter((_, i) => i % 2 
 {rows.map((row, r) => (
     <div class={`marquee${r === 1 ? ' rev' : ''}`} style={`--dur:${Math.max(60, row.length * (r === 0 ? 3.6 : 5.4))}s`}>
         <div class="row">
-            {[0, 1].map((copy) => row.map((p) => (
-                <a href={href(`/${p.id}/`)} tabindex={copy === 1 ? -1 : undefined} aria-hidden={copy === 1 ? 'true' : undefined}>
+            {row.map((p) => (
+                <a href={href(`/${p.id}/`)}>
                     {p.data.title} <span class="y">{p.data.published_at.slice(0, 4)}</span>
                 </a>
-            )))}
+            ))}
         </div>
     </div>
 ))}
+<script>
+    // The seamless loop needs a second copy of each row; it is cloned here rather than shipped twice.
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && !location.search.includes('reduce')) {
+        document.querySelectorAll<HTMLElement>('.marquee .row').forEach((row) => {
+            const copy = row.cloneNode(true) as HTMLElement;
+            copy.setAttribute('aria-hidden', 'true');
+            copy.querySelectorAll('a').forEach((a) => a.setAttribute('tabindex', '-1'));
+            row.after(copy);
+        });
+    }
+</script>

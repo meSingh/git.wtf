@@ -29,7 +29,7 @@ const { Content } = await render(incident);
                 <div class="typed" aria-hidden="true">
                     {sents.map((s, si) => (
                         <>
-                            <span class="sent" data-i={si}>{[...s].map((ch) => <span class="ch">{ch}</span>)}</span>
+                            <span class="sent" data-i={si}>{s}</span>
                             {si < sents.length - 1 && ' '}
                         </>
                     ))}

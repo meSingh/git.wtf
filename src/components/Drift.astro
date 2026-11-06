@@ -55,5 +55,10 @@ const lines = [
 const text = lines.join('\n');
 ---
 <div class="drift" aria-hidden="true">
-    <pre>{text + '\n' + text}</pre>
+    <pre>{text}</pre>
 </div>
+<script>
+    // The loop needs the text twice; the second copy is made here, not shipped.
+    const pre = document.querySelector<HTMLElement>('.drift pre');
+    if (pre) pre.textContent = pre.textContent + '\n' + pre.textContent;
+</script>

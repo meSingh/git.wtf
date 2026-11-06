@@ -70,8 +70,21 @@ export function home() {
         const today = q('#today');
         const term = today && q('.term', today);
         if (today && term) {
-            const chars = Array.from(term.querySelectorAll<HTMLElement>('.typed .ch'));
+            // The card ships plain sentences; they are split into characters here, only when the typing will run.
             const sents = Array.from(term.querySelectorAll<HTMLElement>('.typed .sent'));
+            sents.forEach((el) => {
+                const text = el.textContent ?? '';
+                el.textContent = '';
+                const frag = document.createDocumentFragment();
+                for (const ch of text) {
+                    const span = document.createElement('span');
+                    span.className = 'ch';
+                    span.textContent = ch;
+                    frag.appendChild(span);
+                }
+                el.appendChild(frag);
+            });
+            const chars = Array.from(term.querySelectorAll<HTMLElement>('.typed .ch'));
             const stamp = q('.stamp', term)!;
             const meta = q('.term-meta', term)!;
             const fullHeight = term.offsetHeight; // measured before anything is hidden
@@ -136,7 +149,7 @@ export function home() {
         document.querySelectorAll<HTMLElement>('.tally .n').forEach((el, i) => {
             const n = Number(el.dataset.n ?? 0);
             if (!n) return;
-            if (n < 10) gsap.from(el, { autoAlpha: 0, rotateX: -70, y: 10, transformOrigin: '50% 100%', duration: 0.5, delay: i * 0.06, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 92%', once: true } });
+            if (n < 10) gsap.from(el, { autoAlpha: 0, rotateX: -60, transformOrigin: '50% 100%', duration: 0.3, delay: i * 0.03, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 96%', once: true } });
             else gsap.from(el, { textContent: 0, snap: { textContent: 1 }, duration: 1.1, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
         });
     });

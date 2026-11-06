@@ -150,6 +150,7 @@ body.docked .badge, .badge.on { opacity: 1; transform: none; pointer-events: aut
 .track { position: absolute; left: 0; top: calc(var(--bar) + 8.5rem); bottom: 0; flex: none; }
 .year { position: absolute; left: 1rem; bottom: 2.4rem; font-family: var(--display); font-weight: 900; font-size: min(44rem, 68svh); line-height: 0.78; letter-spacing: -0.03em; color: rgba(242, 240, 234, 0.05); user-select: none; }
 .ruler { position: absolute; left: 0; right: 0; bottom: 5.5rem; height: 1px; background: var(--line-2); }
+.ruler::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 0.45rem; background: repeating-linear-gradient(to right, var(--line) 0 1px, transparent 1px 50px); opacity: 0.9; }
 .ruler .tick { position: absolute; left: 0; top: 0; width: 1px; height: 0.45rem; background: var(--line); }
 .ruler .tick.week { height: 0.9rem; background: var(--line-2); }
 .ruler .tick.month { height: 1.5rem; background: var(--yellow); }
@@ -196,14 +197,15 @@ body.docked .badge, .badge.on { opacity: 1; transform: none; pointer-events: aut
 .beat-archive .lede a { color: var(--yellow); text-decoration: underline; text-decoration-color: rgba(255, 212, 0, 0.45); text-underline-offset: 0.18em; }
 .marquee { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent); }
 .marquee + .marquee { border-top: 0; }
-.marquee .row { display: flex; width: max-content; animation: marquee var(--dur, 120s) linear infinite; }
+.marquee { display: flex; }
+.marquee .row { display: flex; flex: none; width: max-content; animation: marquee var(--dur, 120s) linear infinite; }
 .marquee.rev .row { animation-direction: reverse; }
 .marquee:hover .row, .marquee:focus-within .row { animation-play-state: paused; }
 .marquee .row a { display: inline-flex; align-items: baseline; gap: 0.6rem; padding: 0.95rem 1.8rem 0.95rem 0; font-family: var(--body); font-weight: 500; font-size: clamp(1rem, 1.35vw, 1.2rem); color: var(--paper); white-space: nowrap; line-height: 1; }
 .marquee .row a:hover { color: var(--yellow); text-decoration: none; }
 .marquee .row a::before { content: ''; width: 0.3em; height: 0.3em; background: var(--line-2); margin-right: 1rem; align-self: center; }
 .marquee .row a .y { font-family: var(--mono); font-size: 0.78em; color: var(--yellow); font-weight: 400; }
-@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes marquee { to { transform: translateX(-100%); } }
 
 /* ---------- footer ---------- */
 .foot { width: min(var(--col), 100% - 2.5rem); margin: 3rem auto 2.5rem; display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; align-items: end; font-size: 0.92rem; color: var(--grey); }
@@ -269,11 +271,11 @@ body.docked .badge, .badge.on { opacity: 1; transform: none; pointer-events: aut
 
 /* ---------- reduced motion (the media query, and html.reduce for the ?reduce debug switch) ---------- */
 html.reduce .drift pre, html.reduce .marquee .row, html.reduce .hero-next .arrow, html.reduce .typed .ch.at::after { animation: none !important; }
-html.reduce .marquee .row { width: auto; flex-wrap: wrap; }
+html.reduce .marquee { display: block; } html.reduce .marquee .row { width: auto; flex-wrap: wrap; }
 html.reduce .marquee { -webkit-mask-image: none; mask-image: none; }
 @media (prefers-reduced-motion: reduce) {
     .drift pre, .marquee .row, .hero-next .arrow, .typed .ch.at::after { animation: none !important; }
-    .marquee .row { width: auto; flex-wrap: wrap; }
+    .marquee { display: block; } .marquee .row { width: auto; flex-wrap: wrap; }
     .marquee { -webkit-mask-image: none; mask-image: none; }
     .tcard, .tcard::before, .tcard .s, .tally a, .badge { transition: none; }
     .sign { will-change: auto; }

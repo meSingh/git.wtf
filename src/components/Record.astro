@@ -50,8 +50,8 @@ const gapLabel = (g: number) => (g >= QUIET ? `${g} quiet days` : g === 0 ? 'sam
     <div class="track" id="track" style={`width:${width}px`}>
         <span class="year" aria-hidden="true">{year}</span>
         <div class="ruler" aria-hidden="true">
-            {ticks.map((t) => (
-                <span class={`tick${t.month ? ' month' : ''}${t.day % 7 === 1 ? ' week' : ''}`} style={`left:${t.x}px`}>{t.month && <b>{t.month}</b>}</span>
+            {ticks.filter((t) => t.month || t.day % 7 === 1).map((t) => (
+                <span class={`tick${t.month ? ' month' : ' week'}`} style={`left:${t.x}px`}>{t.month && <b>{t.month}</b>}</span>
             ))}
         </div>
         {placed.map((p, n) => (
