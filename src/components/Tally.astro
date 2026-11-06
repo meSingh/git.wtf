@@ -3,12 +3,15 @@ import { CATEGORIES } from '../content.config';
 import { categoryLabel, href, type Incident } from '../lib/site';
 interface Props { incidents: Incident[] }
 const { incidents } = Astro.props;
-const counts = Object.fromEntries(CATEGORIES.map((c) => [c, incidents.filter((i) => i.data.category === c).length]));
+// Only the categories that have happened, most first. The empty ones appear when they happen.
+const rows = CATEGORIES.map((c) => ({ c, n: incidents.filter((i) => i.data.category === c).length }))
+    .filter((r) => r.n > 0)
+    .sort((a, b) => b.n - a.n || categoryLabel(a.c).localeCompare(categoryLabel(b.c)));
 ---
 <div class="tally">
-    {CATEGORIES.map((c) => (
+    {rows.map(({ c, n }) => (
         <a href={href(`/incidents/${c}/`)}>
-            <span class={`n${counts[c] === 0 ? ' zero' : ''}`} data-n={counts[c]}>{counts[c]}</span>
+            <span class="n" data-n={n}>{n}</span>
             <span class="l">{categoryLabel(c)}</span>
         </a>
     ))}

@@ -32,7 +32,7 @@ const image = latest ? `${incidentPath(latest)}share.png` : '/share.png';
     </section>
 
     {latest ? (
-        <section class="beat beat-today" id="today" aria-labelledby="today-h">
+        <section class="beat beat-today over" id="today" aria-labelledby="today-h">
             <h2 class="visually-hidden" id="today-h">Today's incident</h2>
             <Term incident={latest} typed linkTitle />
         </section>

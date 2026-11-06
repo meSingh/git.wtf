@@ -54,8 +54,9 @@ export function home() {
             scrollTrigger: {
                 trigger: hero,
                 start: 'top top',
-                end: '+=75%',
+                end: '+=70%',
                 pin: true,
+                pinSpacing: false,
                 scrub: 0.5,
                 invalidateOnRefresh: true,
                 onUpdate: (self) => document.body.classList.toggle('docked', self.progress > 0.96),
@@ -88,22 +89,22 @@ export function home() {
                 shown = n;
             };
             const tl = gsap.timeline({
-                scrollTrigger: { trigger: today, start: 'top top', end: () => `+=${sents.length * 70 + 110}%`, pin: true, scrub: 0.35, invalidateOnRefresh: true },
+                scrollTrigger: { trigger: today, start: 'top top', end: () => `+=${sents.length * 65 + 70}%`, pin: true, scrub: 0.35, invalidateOnRefresh: true },
             });
-            tl.to({}, { duration: 0.2 });
+            tl.to({}, { duration: 0.1 });
             let cum = 0;
             sents.forEach((s) => {
                 const len = s.querySelectorAll('.ch').length;
                 cum += len;
                 tl.to(proxy, { n: cum, duration: len * 0.012, ease: 'none', onUpdate: reveal });
-                tl.to({}, { duration: 0.22 });
+                tl.to({}, { duration: 0.16 });
             });
             tl.to(stamp, { autoAlpha: 1, scale: 1, rotate: -2, duration: 0.22, ease: 'power4.in' });
             tl.fromTo(term, { x: 0 }, { x: -4, duration: 0.03, yoyo: true, repeat: 3, ease: 'none' }, '<0.18');
             tl.to(stamp, { rotate: -2.6, scale: 1.01, duration: 0.08, ease: 'power2.out' });
             tl.to(stamp, { rotate: -2, scale: 1, duration: 0.1, ease: 'power2.inOut' });
             tl.to(meta, { autoAlpha: 1, y: 0, duration: 0.2, ease: 'power2.out' }, '<');
-            tl.to({}, { duration: 0.3 });
+            tl.to({}, { duration: 0.12 });
         }
 
         // Beat 3: the record scrolls sideways with the page on desktop; mobile stacks it.

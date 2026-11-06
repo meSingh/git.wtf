@@ -5,7 +5,7 @@ import { daysBetween, formatDay, happened, href, incidentPath, inlineCode, sortI
 interface Props { incidents: Incident[] }
 const { incidents } = Astro.props;
 const asc = sortIncidents(incidents).reverse(); // oldest first, left to right
-const CARD = 280, MIN = 36, PPD = 34, QUIET = 21, PAD = 48;
+const CARD = 340, MIN = 48, PPD = 46, QUIET = 21, PAD = 56;
 type Placed = { i: Incident; x: number; gap: number };
 const placed: Placed[] = [];
 let x = PAD;
@@ -45,7 +45,7 @@ const months: { label: string; x: number }[] = [];
 <div class="track-wrap" id="track-wrap">
     <div class="col beat-head track-head">
         <h2 id="record-h">The record</h2>
-        <span class="count">{incidents.length} incidents, spaced by the real days between them. Scroll on.</span>
+        <span class="count">{incidents.length} incidents, spaced by the real days between them. Keep scrolling.</span>
     </div>
     <div class="track" id="track" style={`width:${width}px`}>
         <span class="track-line" aria-hidden="true"></span>
