@@ -1,40 +1,38 @@
-# Git.WTF !?!
+# git.wtf
 
-Git is fucking hard, no matter how good you get, there always comes a time when you get stuck & can't figure out a solution!
+One real Git fuck-up a day, retold deadpan, under a sign that counts the days since the last one.
 
-It's easy to get started, but remembering everything that it has to offer is just not practical. On top of that, git documentation is shit; you can't find anything there. If you think you can, you wouldn't be here looking for answers! 
+From 2016 to 2025 this domain was a blog about fixing Git. Those posts are still here, unchanged, at their old URLs, listed at [/archive/](https://git.wtf/archive/).
 
-Let's be real, the best place to find any solution for our git problems is StackOverflow, and honestly, it does have most of the answers, but we sure can do better, and that is what Git.WTF is trying to do with a curated list of several of these problems, frustrations, and tricks that can give you a solution in seconds.
+## How it works
 
-[Visit Website =>>](https://git.wtf)
+- `incidents/YYYY-MM-DD-slug.md`: one file per incident. Front matter: `date`, `title`, `category`, `source_url`, `source_date`, `status`. The body is the retelling, three or four sentences. The counter on the homepage is computed in the browser from the latest incident's date, so it climbs without a deploy.
+- `archive/<slug>.md`: the old posts, written by `scripts/ghost-to-archive.mjs` from a Ghost export. The body is the post's html.
+- `public/_redirects`: every old tag, category, author, AMP and feed URL. `tests/old-urls.txt` lists the old URLs and `scripts/check-urls.mjs` fails CI if one stops resolving.
+- Built with Astro, served from Cloudflare Workers as static files, deployed by GitHub Actions on every push to `master`.
 
+## Working on it
 
-## Installation
-
-To install switch to the project directory and load the Composer dependencies.
-
-``` bash
-composer install
+```bash
+npm install
+npm run dev            # http://localhost:4321
+npm run build          # dist/
+npm run preview        # dist/ served the way Cloudflare serves it, with the redirects
+npm run check-urls     # against the preview
 ```
 
-Next you need to install dependencies using yarn/npm.
+Publish a reviewed draft:
 
-``` bash
-yarn install
+```bash
+node scripts/publish-incident.mjs drafts/2026-11-07-slug.md
 ```
 
-And finally we need to run Laravel Mix in order to compile the assets.
+It validates the file, moves it into `incidents/`, builds, commits the file and pushes.
 
-``` bash
-yarn run dev
+Convert a Ghost export:
+
+```bash
+node scripts/ghost-to-archive.mjs ~/path/to/ghost-export.json --images ~/path/to/ghost/content/images
 ```
 
-Now you should be able to visit the site and to see my blog. Of course you need to have a local environment setup already.
-
-## Good to know
-
-The blog articles get cached with the first request. So in order to see a change, you need to delete the cache:
-
-``` bash
-php artisan cache:clear
-```
+The Laravel version that ran here from 2016 to 2021 is tagged `laravel-2021`.

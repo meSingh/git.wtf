@@ -1,0 +1,60 @@
+---
+import '../styles/global.css';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../lib/site';
+
+interface Props {
+    title: string;
+    description?: string;
+    image?: string;
+    canonical?: string;
+    type?: 'website' | 'article';
+    noindex?: boolean;
+    jsonld?: Record<string, unknown>;
+}
+const { title, description = SITE.description, image = '/share.png', canonical, type = 'website', noindex = false, jsonld } = Astro.props;
+const url = canonical ?? new URL(Astro.url.pathname, SITE.url).toString();
+const img = new URL(image, SITE.url).toString();
+---
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={url} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="icon" href="/favicons/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title={SITE.name} href="/rss.xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+    <meta property="og:image" content={img} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={SITE.twitter} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={img} />
+    <meta name="theme-color" content="#111111" />
+    {jsonld && <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />}
+</head>
+<body>
+    <header class="top">
+        <a class="brand" href="/">git<span>.</span>wtf</a>
+        <nav>
+            <a href="/archive/">Archive</a>
+            <a href="/rss.xml">RSS</a>
+        </nav>
+    </header>
+    <main>
+        <slot />
+    </main>
+    <Footer />
+</body>
+</html>

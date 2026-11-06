@@ -1,0 +1,29 @@
+---
+import { render } from 'astro:content';
+import { formatDate, incidentPath, inlineCode, sourceHost, type Incident } from '../lib/site';
+
+interface Props {
+    incident: Incident;
+    /** Link the title to the incident page (homepage) or not (the page itself). */
+    linked?: boolean;
+    /** Show the share image under the text (the incident page). */
+    showShare?: boolean;
+}
+const { incident, linked = false, showShare = false } = Astro.props;
+const { Content } = await render(incident);
+const d = incident.data;
+const path = incidentPath(incident);
+---
+<article class="incident">
+    {linked ? <h2><a href={path}>{d.title}</a></h2> : <h1>{d.title}</h1>}
+    <p class="meta">
+        <time datetime={d.date}>{formatDate(d.date)}</time>
+        <span class="cat">{d.category}</span>
+    </p>
+    <div class="body"><Content /></div>
+    <p class="status" set:html={`Status: ${inlineCode(d.status)}`} />
+    <p class="source">Source: <a href={d.source_url} rel="noopener nofollow">{sourceHost(d.source_url)}</a>, {formatDate(d.source_date)}.</p>
+    {showShare && (
+        <p class="share"><img src={`${path}share.png`} alt={`Share image: ${d.title}`} width="1200" height="630" loading="lazy" /></p>
+    )}
+</article>

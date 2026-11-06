@@ -1,0 +1,12 @@
+{
+    // Static site on Cloudflare Workers (assets only, no Worker code).
+    // The custom domain (git.wtf) is added here only when the switch from Ghost is approved:
+    //   "routes": [{ "pattern": "git.wtf", "custom_domain": true }]
+    "name": "gitwtf",
+    "compatibility_date": "2026-11-06",
+    "assets": {
+        "directory": "./dist",
+        "html_handling": "auto-trailing-slash",
+        "not_found_handling": "404-page"
+    }
+}

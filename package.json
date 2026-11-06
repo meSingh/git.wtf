@@ -1,43 +1,31 @@
 {
     "name": "git.wtf",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "private": true,
+    "type": "module",
     "scripts": {
-        "dev": "npm run development",
-        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "watch": "npm run development -- --watch",
-        "watch-poll": "npm run watch -- --watch-poll",
-        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "prod": "npm run production",
-        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+        "dev": "astro dev",
+        "build": "astro build",
+        "preview": "wrangler dev --port 8787",
+        "check": "astro check",
+        "convert": "node scripts/ghost-to-archive.mjs",
+        "check-urls": "node scripts/check-urls.mjs",
+        "publish-incident": "node scripts/publish-incident.mjs",
+        "list-sources": "node scripts/list-sources.mjs"
     },
     "dependencies": {
-        "algoliasearch": "^3.33.0",
-        "instantsearch.css": "^7.3.1",
-        "puppeteer": "^1.17.0",
-        "vue-instantsearch": "^2.3.0"
+        "@astrojs/rss": "^4.0.0",
+        "@astrojs/sitemap": "^3.6.0",
+        "@resvg/resvg-js": "^2.6.2",
+        "astro": "^7.4.7",
+        "gray-matter": "^4.0.3",
+        "satori": "^0.63.2"
     },
     "devDependencies": {
-        "@fullhuman/postcss-purgecss": "^2.1.0",
-        "axios": "^0.19.0",
-        "babel-preset-env": "^1.7.0",
-        "browser-sync": "^2.26.5",
-        "browser-sync-webpack-plugin": "2.0.1",
-        "cross-env": "^7.0.0",
-        "jquery": "^3.4.1",
-        "laravel-mix": "^4.0.15",
-        "laravel-mix-purgecss": "^4.1.0",
-        "laravel-mix-tailwind": "^0.1.0",
-        "lodash": "^4.17.13",
-        "popper.js": "^1.15.0",
-        "prismjs": "^1.16.0",
-        "resolve-url-loader": "^3.1.0",
-        "sass": "^1.26.1",
-        "sass-loader": "^7.1.0",
-        "tailwindcss": "^1.2.0",
-        "tailwindcss-plugins": "^0.3.0",
-        "turbolinks": "^5.2.0",
-        "vue": "^2.6.10",
-        "vue-template-compiler": "^2.6.10"
+        "cheerio": "^1.2.0",
+        "wrangler": "^4.158.0"
+    },
+    "engines": {
+        "node": ">=22"
     }
 }

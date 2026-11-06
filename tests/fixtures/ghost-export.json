@@ -1,0 +1,124 @@
+{
+    "db": [
+        {
+            "meta": { "exported_on": 1762400000000, "version": "5.94.0" },
+            "data": {
+                "posts": [
+                    {
+                        "id": "p1",
+                        "uuid": "00000000-0000-0000-0000-000000000001",
+                        "title": "How to change the message on the last commit in git?",
+                        "slug": "how-to-change-the-message-on-last-commit-in-git",
+                        "html": "<pre><code class=\"language-bash\">git commit --amend\n# follow prompts to change the commit message</code></pre><p>Stupid commit message formatting requirements.</p><p class=\"git-article-source\">Originally Posted On: <a href=\"http://ohshitgit.com/\">OhShitGit</a></p><div class=\"kg-card kg-signup-card\"><h2>Subscribe</h2><form data-members-form=\"signup\"><input type=\"email\"></form></div>",
+                        "lexical": null,
+                        "mobiledoc": null,
+                        "feature_image": null,
+                        "featured": true,
+                        "type": "post",
+                        "status": "published",
+                        "visibility": "public",
+                        "created_at": "2023-05-30 10:00:00",
+                        "updated_at": "2024-02-01 09:00:00",
+                        "published_at": "2016-09-29 00:00:00",
+                        "custom_excerpt": "Making amends is easy when you know the right command.",
+                        "canonical_url": null
+                    },
+                    {
+                        "id": "p2",
+                        "uuid": "00000000-0000-0000-0000-000000000002",
+                        "title": "Removing .env file from Git history",
+                        "slug": "removing-env-file-from-git-history",
+                        "html": "<p>You committed <code>.env</code>. Everyone has. Here is how to make it go away.</p><h2 id=\"the-fix\">The fix</h2><figure class=\"kg-card kg-image-card\"><img src=\"__GHOST_URL__/content/images/2023/06/env-leak.png\" class=\"kg-image\" alt=\"terminal\" loading=\"lazy\" width=\"1200\" height=\"600\" srcset=\"__GHOST_URL__/content/images/size/w600/2023/06/env-leak.png 600w, __GHOST_URL__/content/images/2023/06/env-leak.png 1200w\"></figure><pre><code class=\"language-bash\">git filter-repo --path .env --invert-paths</code></pre><p>Then rotate the keys. The history was public; so were they. See also <a href=\"__GHOST_URL__/how-to-change-the-message-on-last-commit-in-git/amp/\">amending</a> and the <a href=\"__GHOST_URL__/tag/git-filter-repo/\">filter-repo tag</a>.</p><img src=\"https://learn-seo.com/content/images/2024/07/SEO--1-.png\" alt=\"\"><p><a href=\"#/portal/signup\">Subscribe</a> for more.</p><script src=\"https://cdn.example.com/track.js\"></script>",
+                        "feature_image": "__GHOST_URL__/content/images/2023/06/social-1.png",
+                        "featured": false,
+                        "type": "post",
+                        "status": "published",
+                        "visibility": "public",
+                        "created_at": "2023-06-10 10:00:00",
+                        "updated_at": "2023-06-10 10:00:00",
+                        "published_at": "2023-06-10 10:00:00",
+                        "custom_excerpt": null,
+                        "canonical_url": null
+                    },
+                    {
+                        "id": "p3",
+                        "uuid": "00000000-0000-0000-0000-000000000003",
+                        "title": "Fuck this noise, I give up",
+                        "slug": "fuck-this-noise-i-give-up",
+                        "html": "<pre><code class=\"language-bash\">cd ..\nrm -rf fucking-git-repo-dir\ngit clone https://some.github.url/fucking-git-repo-dir.git\ncd fucking-git-repo-dir</code></pre><p>Thanks to Eric V. for this one.</p>",
+                        "feature_image": null,
+                        "featured": false,
+                        "type": "post",
+                        "status": "published",
+                        "visibility": "public",
+                        "created_at": "2023-05-30 10:00:00",
+                        "updated_at": "2023-05-30 10:00:00",
+                        "published_at": "2016-09-28 00:00:00",
+                        "custom_excerpt": null,
+                        "canonical_url": null
+                    },
+                    {
+                        "id": "p4",
+                        "uuid": "00000000-0000-0000-0000-000000000004",
+                        "title": "About",
+                        "slug": "about",
+                        "html": "<p>Git is hard: screwing up is easy, and figuring out how to fix your mistakes is fucking impossible. So here are some common bad situations and how you can get out of them in plain English.</p>",
+                        "feature_image": null,
+                        "featured": false,
+                        "type": "page",
+                        "status": "published",
+                        "visibility": "public",
+                        "created_at": "2023-05-30 10:00:00",
+                        "updated_at": "2023-05-30 10:00:00",
+                        "published_at": "2023-05-30 10:00:00",
+                        "custom_excerpt": null,
+                        "canonical_url": null
+                    },
+                    {
+                        "id": "p5",
+                        "uuid": "00000000-0000-0000-0000-000000000005",
+                        "title": "Unfinished draft",
+                        "slug": "unfinished-draft",
+                        "html": "<p>Never published.</p>",
+                        "feature_image": null,
+                        "featured": false,
+                        "type": "post",
+                        "status": "draft",
+                        "visibility": "public",
+                        "created_at": "2025-05-01 10:00:00",
+                        "updated_at": "2025-05-01 10:00:00",
+                        "published_at": null,
+                        "custom_excerpt": null,
+                        "canonical_url": null
+                    }
+                ],
+                "posts_meta": [
+                    { "id": "m1", "post_id": "p1", "meta_title": "Change the last commit message in Git", "meta_description": "git commit --amend, and what to do when it is already pushed." }
+                ],
+                "tags": [
+                    { "id": "t1", "name": "mistakes-correction", "slug": "mistakes-correction", "visibility": "public" },
+                    { "id": "t2", "name": "git-commit", "slug": "git-commit", "visibility": "public" },
+                    { "id": "t3", "name": "git-amend", "slug": "git-amend", "visibility": "public" },
+                    { "id": "t4", "name": "git-filter-repo", "slug": "git-filter-repo", "visibility": "public" },
+                    { "id": "t5", "name": "fuck", "slug": "fuck", "visibility": "public" }
+                ],
+                "posts_tags": [
+                    { "id": "pt1", "post_id": "p1", "tag_id": "t1", "sort_order": 0 },
+                    { "id": "pt2", "post_id": "p1", "tag_id": "t2", "sort_order": 1 },
+                    { "id": "pt3", "post_id": "p1", "tag_id": "t3", "sort_order": 2 },
+                    { "id": "pt4", "post_id": "p2", "tag_id": "t4", "sort_order": 0 },
+                    { "id": "pt5", "post_id": "p3", "tag_id": "t5", "sort_order": 0 }
+                ],
+                "users": [
+                    { "id": "u1", "name": "Mandeep Singh", "slug": "mandeep", "email": "hi@msingh.com", "roles": ["Owner"] }
+                ],
+                "posts_authors": [
+                    { "id": "pa1", "post_id": "p1", "author_id": "u1", "sort_order": 0 },
+                    { "id": "pa2", "post_id": "p2", "author_id": "u1", "sort_order": 0 },
+                    { "id": "pa3", "post_id": "p3", "author_id": "u1", "sort_order": 0 },
+                    { "id": "pa4", "post_id": "p4", "author_id": "u1", "sort_order": 0 }
+                ]
+            }
+        }
+    ]
+}

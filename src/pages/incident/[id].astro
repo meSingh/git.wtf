@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Sign from '../../components/Sign.astro';
+import Incident from '../../components/Incident.astro';
+import { SITE, incidentPath, sortIncidents, type Incident as IncidentEntry } from '../../lib/site';
+
+export async function getStaticPaths() {
+    const all = sortIncidents(await getCollection('incidents'));
+    return all.map((incident, i) => ({
+        params: { id: incident.id },
+        props: { incident, newer: all[i - 1] ?? null, older: all[i + 1] ?? null },
+    }));
+}
+interface Props { incident: IncidentEntry; newer: IncidentEntry | null; older: IncidentEntry | null }
+const { incident, newer, older } = Astro.props;
+const d = incident.data;
+const path = incidentPath(incident);
+const jsonld = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: d.title,
+    datePublished: d.date,
+    url: new URL(path, SITE.url).toString(),
+    image: new URL(`${path}share.png`, SITE.url).toString(),
+    author: { '@type': 'Person', name: SITE.owner.name, url: SITE.owner.url },
+    publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+    citation: d.source_url,
+};
+---
+<Base title={`${d.title} | git.wtf`} description={`Status: ${d.status}`} image={`${path}share.png`} type="article" jsonld={jsonld}>
+    <Sign since={d.date} />
+    <Incident incident={incident} showShare />
+    <nav class="post nav">
+        <span>{older && <a href={incidentPath(older)}>&larr; {older.data.title}</a>}</span>
+        <span>{newer && <a href={incidentPath(newer)}>{newer.data.title} &rarr;</a>}</span>
+    </nav>
+</Base>

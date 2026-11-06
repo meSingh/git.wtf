@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Sign from '../components/Sign.astro';
+import Incident from '../components/Incident.astro';
+import { SITE, formatDate, incidentPath, inlineCode, sortIncidents } from '../lib/site';
+
+const incidents = sortIncidents(await getCollection('incidents'));
+const latest = incidents[0] ?? null;
+const older = incidents.slice(1);
+const image = latest ? `${incidentPath(latest)}share.png` : '/share.png';
+---
+<Base title={`${SITE.title} | git.wtf`} image={image}>
+    <Sign since={latest?.data.date ?? null} />
+
+    {latest ? (
+        <Incident incident={latest} linked />
+    ) : (
+        <p class="note">No incident on record yet. The first one lands when the daily search finds one that passes the rules.</p>
+    )}
+
+    {older.length > 0 && (
+        <section>
+            <h2>Earlier fuck-ups</h2>
+            <ul class="list">
+                {older.map((i) => (
+                    <li>
+                        <span class="date">{formatDate(i.data.date)}</span>
+                        <span>
+                            <a href={incidentPath(i)}>{i.data.title}</a>
+                            <span class="status" set:html={`Status: ${inlineCode(i.data.status)}`} />
+                        </span>
+                    </li>
+                ))}
+            </ul>
+        </section>
+    )}
+</Base>
