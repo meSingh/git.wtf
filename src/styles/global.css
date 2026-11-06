@@ -47,11 +47,8 @@ body.docked .badge, .badge.on { opacity: 1; transform: none; pointer-events: aut
 .brand { display: inline-flex; align-items: center; justify-self: start; color: var(--paper); text-decoration: none; }
 .brand:hover { color: var(--paper); text-decoration: none; }
 .brand .logo { display: block; }
-/* the mark: outlined paths; the word in off-white, the trio and the stripes in yellow; .mono for yellow grounds */
-.logo { display: block; width: auto; overflow: visible; }
-.logo .logo-word { fill: var(--paper); }
-.logo .logo-trio, .logo .logo-bar { fill: var(--yellow); }
-.logo.mono .logo-word, .logo.mono .logo-trio, .logo.mono .logo-bar { fill: currentColor; }
+/* the mark: an image of outlined paths (public/logo.svg); width follows the height */
+.logo { display: block; width: auto; }
 .foot .credit { font-size: 0.8rem; }
 
 /* ---------- odometer ---------- */

@@ -1,13 +1,13 @@
 ---
 // The git.wtf wordmark (concept A, the hazard bar): GIT.WTF!?! in Big Shoulders Display 900, outlined, with a short
-// hazard-stripe bar above the G. Paths come from scripts/make-logo.mjs. `height` is the whole mark's height;
-// `mono` draws it in one colour (currentColor), for yellow backgrounds.
+// hazard-stripe bar above the G. The files come from scripts/make-logo.mjs: public/logo.svg (full colour) and
+// public/logo-black.svg (one colour, for yellow grounds). Served as an image, not inlined, so the outlines stay out
+// of the HTML and off the first paint. `height` is the whole mark's height.
 import { LOGO } from '../lib/logo-data';
+import { href } from '../lib/site';
 interface Props { height?: string; class?: string; title?: string; mono?: boolean }
 const { height = '1.75rem', class: cls = '', title = 'git.wtf', mono = false } = Astro.props;
+const h = 30;
+const w = Math.round((h * LOGO.width) / LOGO.height);
 ---
-<svg class={`logo${mono ? ' mono' : ''} ${cls}`.trim()} style={`height:${height}`} viewBox={LOGO.viewBox} role={title ? 'img' : undefined} aria-label={title || undefined} aria-hidden={title ? undefined : 'true'} xmlns="http://www.w3.org/2000/svg">
-    <path class="logo-bar" d={LOGO.bar} />
-    <path class="logo-word" d={LOGO.word} />
-    <path class="logo-trio" d={LOGO.trio} />
-</svg>
+<img class={`logo ${cls}`.trim()} src={href(mono ? '/logo-black.svg' : '/logo.svg')} alt={title} width={w} height={h} style={`height:${height}`} decoding="async" />
