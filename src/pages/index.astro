@@ -1,43 +1,42 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import Sign from '../components/Sign.astro';
-import Drift from '../components/Drift.astro';
+import Odo from '../components/Odo.astro';
 import Term from '../components/Term.astro';
 import Record from '../components/Record.astro';
 import Tally from '../components/Tally.astro';
 import Marquee from '../components/Marquee.astro';
-import { SITE, daysSince, formatDate, happened, href, incidentPath, sortIncidents } from '../lib/site';
+import { heroData } from '../lib/hero';
+import { SITE, href, incidentPath, sortIncidents } from '../lib/site';
 
 const incidents = sortIncidents(await getCollection('incidents'));
 const latest = incidents[0] ?? null;
-const days = daysSince(incidents);
+const d = await heroData();
 const archive = (await getCollection('archive')).filter((p) => p.data.type === 'post').sort((a, b) => (a.data.published_at < b.data.published_at ? 1 : -1));
 const image = latest ? `${incidentPath(latest)}share.png` : '/share.png';
+const words = ['DAYS', 'SINCE', 'THE', 'LAST', 'GIT', 'FUCK-UP'];
 ---
-<Base title={`${SITE.title} | git.wtf`} image={image} badge={false}>
-    <section class="hero" id="hero">
-        <Drift />
-        <div class="hero-inner">
-            <Sign days={days} since={latest ? happened(latest) : null} />
-            <div class="hero-sub">
-                <p class="hero-caption">
-                    {latest ? <>since the last Git fuck-up on <b>{formatDate(happened(latest))}</b></> : <>no Git fuck-up on record yet</>}
-                </p>
-            </div>
+<Base title={`${SITE.title} | git.wtf`} image={image} badge={false} motionFlag>
+    <section class="hh" id="hero">
+        <svg class="hh-defs" width="0" height="0" aria-hidden="true"><filter id="vblur" x="0" y="-20%" width="100%" height="140%"><feGaussianBlur stdDeviation="0 0" /></filter></svg>
+        <div class="hh-odo-wrap" id="hero-odo">
+            <Odo value={d.days} from={Math.max(d.total, d.days + 20)} min={2} since={d.since} class="hh-odo wheel" label={`${d.days} days since the last Git fuck-up`} />
         </div>
-        {latest && (
-            <div class="hero-sub hero-foot"><a class="hero-next" href="#today">Today's: <em>{latest.data.title}</em><span class="arrow" aria-hidden="true">&darr;</span></a></div>
-        )}
+        <h1 class="hh-words">
+            <span class="visually-hidden">Days since the last Git fuck-up</span>
+            {words.map((w) => <span class="w" aria-hidden="true">{w}</span>)}
+        </h1>
+        {latest && <div class="hh-foot"><a class="hero-today hh-today" href="#today">Today's: <em>{latest.data.title}</em><span aria-hidden="true"> &darr;</span></a></div>}
+        <div class="hh-wipe" aria-hidden="true"></div>
     </section>
 
     {latest ? (
         <section class="beat beat-today over" id="today" aria-labelledby="today-h">
             <h2 class="visually-hidden" id="today-h">Today's incident</h2>
-            <Term incident={latest} typed linkTitle />
+            <Term incident={latest} typed linkTitle lockTitle />
         </section>
     ) : (
-        <section class="beat col" id="today"><p class="note">No incident on record yet. The first one lands when the daily search finds one that passes the rules.</p></section>
+        <section class="beat col over" id="today"><p class="note">No incident on record yet. The first one lands when the daily search finds one that passes the rules.</p></section>
     )}
 
     {incidents.length > 1 && (
@@ -48,17 +47,19 @@ const image = latest ? `${incidentPath(latest)}share.png` : '/share.png';
 
     <section class="beat beat-tally col" id="by-category" aria-labelledby="tally-h">
         <div class="beat-head">
-            <h2 id="tally-h">By category</h2>
+            <h2 id="tally-h" data-lock>By category</h2>
             <span class="count">how they go wrong</span>
         </div>
         <Tally incidents={incidents} />
     </section>
 
     <section class="beat beat-archive" id="archive" aria-labelledby="archive-h">
-        <h2 class="visually-hidden" id="archive-h">The archive</h2>
+        <div class="col beat-head"><h2 id="archive-h" data-lock>The old blog</h2><span class="count">{archive.length} posts, 2016 to 2025</span></div>
         <p class="lede">git.wtf used to be a blog about fixing Git. <a href={href('/archive/')}>The archive lives here</a>, {archive.length} posts at their old addresses.</p>
         <Marquee posts={archive} />
     </section>
+
+    <div class="wipes" aria-hidden="true"><i data-wipe="record"></i><i data-wipe="by-category"></i><i data-wipe="archive"></i></div>
 
     <script>
         import '../scripts/home';

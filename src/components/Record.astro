@@ -1,6 +1,7 @@
 ---
 // Beat 3: the record. A horizontal track where the distance between incidents is their real gap in days,
 // a ruler of day ticks and month labels underneath, the year behind. Phones get the same cards stacked.
+import Odo from './Odo.astro';
 import { daysBetween, formatDay, happened, href, incidentPath, inlineCode, sentences, sortIncidents, type Incident } from '../lib/site';
 
 interface Props { incidents: Incident[] }
@@ -38,12 +39,14 @@ for (let d = -3; d <= daysBetween(first, last) + 4; d++) {
     ticks.push({ iso, x: dayX(iso), day, month: day === 1 ? new Intl.DateTimeFormat('en-GB', { month: 'long', timeZone: 'UTC' }).format(Date.UTC(+iso.slice(0, 4), +iso.slice(5, 7) - 1, 1)) : null });
 }
 const year = first.slice(0, 4);
-const gapLabel = (g: number) => (g >= QUIET ? `${g} quiet days` : g === 0 ? 'same day' : g === 1 ? '1 day' : `${g} days`);
+const gapWords = (g: number) => (g >= QUIET ? 'quiet days' : g === 1 ? 'day' : 'days');
+// the gap's wheels start a little higher and roll down to it on entry; single digits start at 9 so the width never changes
+const gapFrom = (g: number) => (g < 10 ? 9 : Math.min(99, g + 30));
 ---
 <div class="track-wrap" id="track-wrap">
     <div class="track-head">
         <div class="col beat-head">
-            <h2 id="record-h">The record</h2>
+            <h2 id="record-h" data-lock>The record</h2>
             <span class="count">{incidents.length} incidents, spaced by the real days between them. Keep scrolling.</span>
         </div>
     </div>
@@ -57,7 +60,9 @@ const gapLabel = (g: number) => (g >= QUIET ? `${g} quiet days` : g === 0 ? 'sam
         {placed.map((p, n) => (
             <>
                 {n > 0 && (
-                    <span class={`gap${p.gap >= QUIET ? ' quiet' : ''}`} style={`left:${(placed[n - 1].x + CARD + p.x) / 2}px`} aria-hidden="true">{gapLabel(p.gap)}</span>
+                    <span class={`gap${p.gap >= QUIET ? ' quiet' : ''}`} style={`left:${(placed[n - 1].x + CARD + p.x) / 2}px`}>
+                        {p.gap === 0 ? 'same day' : <><Odo value={p.gap} from={gapFrom(p.gap)} dimLead={false} class="gap-odo" label={`${p.gap}`} /> {gapWords(p.gap)}</>}
+                    </span>
                 )}
                 <span class="stem" style={`left:${p.x + CARD / 2}px`} aria-hidden="true"></span>
                 <a class="tcard" href={href(incidentPath(p.i))} style={`left:${p.x}px`}>
@@ -81,7 +86,9 @@ const gapLabel = (g: number) => (g >= QUIET ? `${g} quiet days` : g === 0 ? 'sam
                 <span class="s" set:html={`Status: ${inlineCode(p.i.data.status)}`} />
             </a>
             {n < arr.length - 1 && (
-                <span class={`vgap${p.gap >= QUIET ? ' quiet' : ''}`} style={`--h:${Math.min(160, Math.max(20, p.gap * 4))}px`} aria-hidden="true">{gapLabel(p.gap)}</span>
+                <span class={`vgap${p.gap >= QUIET ? ' quiet' : ''}`} style={`--h:${Math.min(160, Math.max(20, p.gap * 4))}px`}>
+                    {p.gap === 0 ? 'same day' : <><Odo value={p.gap} from={gapFrom(p.gap)} dimLead={false} class="gap-odo" label={`${p.gap}`} /> {gapWords(p.gap)}</>}
+                </span>
             )}
         </>
     ))}

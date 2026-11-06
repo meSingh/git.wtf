@@ -2,7 +2,6 @@ import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { BANG_PATH, BANG_TRANSFORM, LOGO_VIEWBOX, SCRIPT_PATH, SCRIPT_TRANSFORM } from './logo-paths';
 
 const YELLOW = '#FFD400';
 const BLACK = '#0A0A0A';
@@ -26,8 +25,6 @@ async function loadFonts(): Promise<FontSet> {
 
 const h = (type: string, style: Record<string, unknown>, children?: unknown) => ({ type, props: { style, children } });
 
-const LOGO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${LOGO_VIEWBOX}"><g fill="${PAPER}"><path d="${SCRIPT_PATH}" transform="${SCRIPT_TRANSFORM}"/><path d="${BANG_PATH}" transform="${BANG_TRANSFORM}"/></g></svg>`;
-const LOGO_DATA_URI = `data:image/svg+xml;base64,${Buffer.from(LOGO_SVG).toString('base64')}`;
 
 function flap(d: string, dim: boolean) {
     const digit = (top: boolean) =>
@@ -75,7 +72,7 @@ export async function shareSvg(opts: { title: string; status: string; days?: num
             ]),
         ]),
         h('div', { display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: 'JetBrains Mono', fontSize: 24, color: GREY, height: 44 }, [
-            { type: 'img', props: { src: LOGO_DATA_URI, width: 203, height: 39, style: { display: 'flex' } } },
+            h('div', { display: 'flex', fontFamily: 'Big Shoulders Display', fontSize: 40, color: PAPER, letterSpacing: 0.5 }, [h('div', {}, 'GIT.WTF'), h('div', { color: YELLOW }, '!?!')]),
             h('div', {}, 'one real Git fuck-up a day'),
         ]),
         stripes(),

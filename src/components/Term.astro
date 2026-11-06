@@ -8,9 +8,11 @@ interface Props {
     incident: Incident;
     typed?: boolean;
     linkTitle?: boolean;
+    /** Split the title into words for the word-by-word lock-in on the homepage. */
+    lockTitle?: boolean;
     id?: string;
 }
-const { incident, typed = false, linkTitle = false, id } = Astro.props;
+const { incident, typed = false, linkTitle = false, lockTitle = false, id } = Astro.props;
 const d = incident.data;
 const path = incidentPath(incident);
 const sents = sentences(incident.body ?? '');
@@ -22,7 +24,10 @@ const { Content } = await render(incident);
         <span class="path">incidents/{incident.id}.md</span>
     </div>
     <div class="term-body">
-        <h2 class="term-title">{linkTitle ? <a href={href(path)}>{d.title}</a> : d.title}</h2>
+        {(() => {
+            const words = lockTitle ? d.title.split(/\s+/).map((w, i, a) => <><span class="tw">{w}</span>{i < a.length - 1 && ' '}</>) : d.title;
+            return <h2 class="term-title">{linkTitle ? <a href={href(path)}>{words}</a> : words}</h2>;
+        })()}
         {typed ? (
             <>
                 <p class="visually-hidden">{sents.join(' ')}</p>

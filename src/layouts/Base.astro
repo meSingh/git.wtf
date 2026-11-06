@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import { getCollection } from 'astro:content';
 import Logo from '../components/Logo.astro';
-import Flaps from '../components/Flaps.astro';
+import Odo from '../components/Odo.astro';
 import Footer from '../components/Footer.astro';
 import { SITE, daysSince, happened, href, sortIncidents } from '../lib/site';
 
@@ -16,8 +16,10 @@ interface Props {
     jsonld?: Record<string, unknown>;
     /** Show the live counter badge in the top bar from the start (every page but the homepage). */
     badge?: boolean;
+    /** The homepage's opening runs from its first frame: set the motion flag before paint, with a fallback to the still. */
+    motionFlag?: boolean;
 }
-const { title, description = SITE.description, image = '/share.png', canonical, type = 'website', noindex = false, jsonld, badge = true } = Astro.props;
+const { title, description = SITE.description, image = '/share.png', canonical, type = 'website', noindex = false, jsonld, badge = true, motionFlag = false } = Astro.props;
 const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
 const url = canonical ?? new URL(Astro.url.pathname, SITE.url).toString();
 const img = new URL(image.startsWith('/') ? base + image : image, SITE.url).toString();
@@ -61,12 +63,24 @@ const fontCss = fonts.map(([file, family, weight]) => `@font-face{font-family:'$
     <meta name="twitter:image" content={img} />
     <meta name="theme-color" content="#0a0a0a" />
     {jsonld && <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />}
+    {motionFlag && (
+        <script is:inline>
+            // Before first paint: decide whether the opening runs. With reduced motion (or ?reduce) the page is the
+            // finished still; if the motion script has not started within 2.5 s, fall back to the still.
+            (function () {
+                var d = document.documentElement;
+                if (matchMedia('(prefers-reduced-motion: reduce)').matches || location.search.indexOf('reduce') > -1) return;
+                d.classList.add('js-anim');
+                setTimeout(function () { if (!window.__heroRan) d.classList.remove('js-anim'); }, 2500);
+            })();
+        </script>
+    )}
 </head>
 <body>
     <header class="bar">
         <a class="brand" href={href('/')} aria-label="Git.WTF, home"><Logo height="1.55rem" /></a>
         <a class={`badge${badge ? ' on' : ''}`} id="badge" href={href('/')} aria-label={`${days ?? 'unknown'} days since the last Git fuck-up`}>
-            <Flaps value={days} min={2} class="badge-flaps" since={latest ? happened(latest) : null} label="" />
+            <Odo value={days ?? 0} min={2} class="badge-odo wheel" since={latest ? happened(latest) : null} label={`${days ?? 0}`} />
             <span class="badge-label">days since the last Git fuck-up</span>
         </a>
         <nav aria-label="Site">
@@ -78,8 +92,8 @@ const fontCss = fonts.map(([file, family, weight]) => `@font-face{font-family:'$
     <slot />
     <Footer />
     <script>
-        import { syncCounters } from '../scripts/flaps';
-        syncCounters();
+        import { syncOdos } from '../scripts/odometer';
+        syncOdos();
     </script>
 </body>
 </html>

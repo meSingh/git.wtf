@@ -1,0 +1,31 @@
+---
+// A number as odometer wheels. The page renders the final value; with motion on (html.js-anim) a wheel with `from`
+// starts at that value instead and src/scripts/odometer.ts rolls it down to `value`. `since` makes the value live:
+// days since that date in IST, recomputed in the browser.
+interface Props {
+    value: number;
+    from?: number;
+    min?: number;
+    since?: string | null;
+    class?: string;
+    label?: string;
+    /** Dim leading zeros (the counter style); off for plain numbers like the record's gaps. */
+    dimLead?: boolean;
+}
+const { value, from, min = 1, since = null, class: cls = '', label, dimLead = true } = Astro.props;
+const v = Math.max(0, Math.floor(value));
+const f = from === undefined ? undefined : Math.max(0, Math.floor(from));
+const n = Math.max(min, String(v).length, f === undefined ? 0 : String(f).length);
+const cols = String(v).padStart(n, '0').split('').map(Number);
+const starts = f === undefined ? cols : String(f).padStart(n, '0').split('').map(Number);
+const lead = cols.findIndex((d) => d !== 0);
+const dim = (i: number) => dimLead && i < n - 1 && (lead === -1 || i < lead);
+const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+---
+<span class={`odo ${cls}`.trim()} data-value={v} data-from={f} data-since={since ?? undefined} data-dim={dimLead ? '1' : undefined} role="img" aria-label={label ?? String(v)}>
+    {cols.map((d, i) => (
+        <span class={`odo-col${dim(i) ? ' dim' : ''}`} style={`--df:${d};--d0:${starts[i]}`} aria-hidden="true">
+            <span class="odo-strip">{digits.map((k) => <span>{k}</span>)}</span>
+        </span>
+    ))}
+</span>

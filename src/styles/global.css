@@ -39,15 +39,30 @@ h1, h2, h3 { margin: 0; font-family: var(--display); font-weight: 800; line-heig
 .bar nav a { color: var(--paper); opacity: 0.8; }
 .bar nav a:hover { opacity: 1; color: var(--yellow); text-decoration: none; }
 .badge { justify-self: center; display: flex; align-items: center; gap: 0.55rem; font-family: var(--mono); font-size: 0.75rem; color: var(--grey); letter-spacing: 0.02em; opacity: 0; transform: translateY(-4px); transition: opacity 0.25s ease, transform 0.25s ease; pointer-events: none; }
-.badge .flaps { --flap-size: 1.25rem; }
+.badge .odo { font-size: 1.45rem; }
 body.docked .badge, .badge.on { opacity: 1; transform: none; pointer-events: auto; }
-@media (max-width: 640px) { .bar { grid-template-columns: auto 1fr auto; padding-inline: 0.9rem; } .bar .brand .logo { height: 1.2rem !important; } .bar nav { gap: 0.9rem; } .bar nav a[href$='rss.xml'] { display: none; } .badge { justify-self: start; margin-left: 0.6rem; } .badge span.badge-label { display: none; } }
+@media (max-width: 640px) { .bar { grid-template-columns: auto 1fr auto; padding-inline: 0.9rem; } .bar .brand .logo { --logo-h: 1.05rem !important; } .bar nav { gap: 0.9rem; } .bar nav a[href$='rss.xml'] { display: none; } .badge { justify-self: start; margin-left: 0.6rem; } .badge span.badge-label { display: none; } }
 
 /* ---------- the mark ---------- */
 .brand { display: inline-flex; align-items: center; color: var(--paper); text-decoration: none; }
 .brand:hover { color: var(--paper); text-decoration: none; }
-.brand .logo { display: block; width: auto; }
+.brand .logo { display: block; }
+/* placeholder mark: GIT.WTF in Big Shoulders 900 with a yellow !?!; the cap height is --logo-h */
+.logo { font-family: var(--display); font-weight: 900; font-size: calc(var(--logo-h, 1.6rem) / 0.82); line-height: 0.82; letter-spacing: 0.01em; color: var(--paper); white-space: nowrap; }
+.logo b { font-weight: 900; color: var(--yellow); margin-left: 0.04em; }
 .foot .credit { font-size: 0.8rem; }
+
+/* ---------- odometer ---------- */
+/* Wheels of 0 to 9 plus a wrap 0. The page renders --df (the final digit); with motion on, a wheel that will roll
+   starts at --d0. odometer.ts then sets the transform directly. */
+.odo { display: inline-flex; gap: 0.04em; font-family: var(--display); font-weight: 900; line-height: 0.92; color: var(--yellow); vertical-align: -0.1em; }
+.odo-col { position: relative; display: block; width: 0.55em; height: 0.92em; overflow: hidden; text-align: center; }
+.odo-strip { display: flex; flex-direction: column; transform: translateY(calc(var(--df) * -100% / 11)); }
+html.js-anim .odo[data-from] .odo-strip { transform: translateY(calc(var(--d0) * -100% / 11)); }
+.odo-strip > span { display: block; height: 0.92em; }
+.odo-col.dim { color: rgba(255, 212, 0, 0.3); }
+.odo.wheel .odo-col { background: linear-gradient(to bottom, #050505, #121212 18%, #171717 50%, #121212 82%, #050505); }
+.odo.wheel .odo-col::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), transparent 17%, transparent 83%, rgba(0, 0, 0, 0.85)); }
 
 /* ---------- split-flap ---------- */
 .flaps { display: inline-flex; gap: 0.08em; font-size: var(--flap-size, 6rem); line-height: 1; }
@@ -66,40 +81,38 @@ body.docked .badge, .badge.on { opacity: 1; transform: none; pointer-events: aut
 .flap.dim { color: rgba(255, 212, 0, 0.3); }
 .flaps.badge-flaps .flap { perspective: 3em; }
 
-/* ---------- the sign ---------- */
-.sign { --flap-size: clamp(5rem, 17vw, 13rem); position: relative; display: inline-block; max-width: 100%; transform-origin: 0 0; }
-.sign-frame { position: relative; padding: 0.95rem; background: repeating-linear-gradient(-45deg, var(--yellow) 0 1.1rem, var(--black) 1.1rem 2.2rem); box-shadow: 0 0 0 2px var(--black), 0 0 0 4px rgba(255, 212, 0, 0.35), 0 30px 80px rgba(0, 0, 0, 0.65); }
-.sign-face { position: relative; background: var(--black); padding: clamp(1.2rem, 3vw, 2rem) clamp(1.4rem, 4vw, 3rem) clamp(1.3rem, 3vw, 2.2rem); text-align: center; overflow: hidden; }
-.sign-face::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 90% at 50% 0%, rgba(242, 240, 234, 0.07), transparent 55%), radial-gradient(90% 70% at 50% 110%, rgba(0, 0, 0, 0.6), transparent 60%); }
-.sign-face::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.14; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.94 0 0 0 0 0.9 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"); }
-.sign-edge { position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 1px 0 rgba(242, 240, 234, 0.28), inset 0 -1px 0 rgba(0, 0, 0, 0.8), inset 1px 0 0 rgba(242, 240, 234, 0.08); }
-.sign-title { position: relative; font-family: var(--display); font-weight: 900; font-size: clamp(1.5rem, 3.6vw, 2.7rem); letter-spacing: 0.02em; color: var(--paper); line-height: 0.95; max-width: min(14em, 100%); margin: 0 auto 0.6em; }
-.sign-title em { font-style: normal; color: var(--yellow); }
-.sign-board { position: relative; display: inline-flex; align-items: flex-end; gap: 0.6rem; padding: 0.45rem; background: #0e0e0e; box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.9), 0 1px 0 rgba(242, 240, 234, 0.08); }
-.sign-unit { font-family: var(--mono); font-size: clamp(0.7rem, 1.4vw, 0.95rem); color: var(--grey); writing-mode: vertical-rl; transform: rotate(180deg); letter-spacing: 0.12em; text-transform: uppercase; padding-bottom: 0.2rem; }
-.sign-rivet { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #2a2a2a, #050505); box-shadow: 0 0 0 1px rgba(242, 240, 234, 0.1); }
-.sign-rivet.tl { top: 6px; left: 6px; } .sign-rivet.tr { top: 6px; right: 6px; } .sign-rivet.bl { bottom: 6px; left: 6px; } .sign-rivet.br { bottom: 6px; right: 6px; }
+/* ---------- the opening: the trip meter ---------- */
+.hh { position: relative; z-index: 0; height: 100svh; overflow: hidden; display: grid; grid-template-columns: auto 1fr; grid-template-rows: 1fr auto; column-gap: clamp(1.5rem, 4vw, 4rem); padding: calc(var(--bar) + 1rem) clamp(1rem, 4vw, 3.5rem) clamp(1rem, 4vh, 2.4rem); background: var(--black); }
+.hh-defs { position: absolute; }
+.hh-odo-wrap { grid-column: 1; grid-row: 1 / 3; align-self: center; transform-origin: 0 0; }
+.hh-odo { font-size: min(calc(100svh - var(--bar) - 3rem), 56vw); }
+.hh-words { grid-column: 2; grid-row: 1; align-self: center; margin: 0; display: flex; flex-wrap: wrap; align-content: center; gap: 0 0.22em; font-family: var(--display); font-weight: 900; font-size: clamp(2.6rem, min(12vh, 7.4vw), 8.5rem); line-height: 0.9; color: var(--paper); z-index: 2; }
+.hh-words .w { display: inline-block; }
+.hh-words .w:last-of-type { color: var(--yellow); }
+.hh-foot { grid-column: 2; grid-row: 2; justify-self: end; align-self: end; z-index: 3; }
+.hero-today { font-family: var(--mono); font-size: clamp(0.8rem, 1.5vh + 0.3vw, 1.15rem); color: var(--paper); text-align: right; text-wrap: balance; }
+.hero-today em { font-style: normal; color: var(--yellow); }
+.hero-today:hover { text-decoration: none; color: var(--yellow); }
+.hh-wipe { position: absolute; top: 0; bottom: 0; left: 0; width: 22vw; z-index: 5; visibility: hidden; background: repeating-linear-gradient(-45deg, var(--yellow) 0 2.4vmin, var(--black) 2.4vmin 4.8vmin); }
+html.js-anim .hh-wipe { visibility: visible; transform: translateX(-120%); }
+html.js-anim .hh-words .w, html.js-anim .hh-today { opacity: 0; visibility: hidden; }
+.hh-today { display: inline-block; }
+@media (max-width: 767px) {
+    .hh { grid-template-columns: 1fr; grid-template-rows: 1fr auto auto; row-gap: 1.2rem; padding: calc(var(--bar) + 0.5rem) 1rem 1.6rem; }
+    .hh-odo-wrap { grid-column: 1; grid-row: 1; justify-self: center; }
+    .hh-odo { font-size: min(52svh, calc((100vw - 2rem) / 1.14)); }
+    .hh-words { grid-column: 1; grid-row: 2; font-size: clamp(2.2rem, 12.5vw, 4rem); }
+    .hh-foot { grid-column: 1; grid-row: 3; justify-self: start; }
+    .hh-today { text-align: left; }
+    .hh-wipe { width: 40vw; }
+}
 
-/* ---------- hero ---------- */
-.hero { position: relative; min-height: 100svh; display: grid; place-items: center; padding: calc(var(--bar) + 1rem) 1rem 2rem; overflow: hidden; isolation: isolate; }
-@media (max-width: 640px) { .hero { padding: calc(var(--bar) + 0.5rem) 0.75rem 4.5rem; } .hero-inner { transform: translateY(-2vh); } .sign-frame { padding: 0.7rem; } .sign-face { padding-inline: 0.9rem; } .sign-title { font-size: clamp(1.5rem, 7.2vw, 2rem); } }
-.hero-inner { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 1.6rem; text-align: center; }
-.hero-caption { margin: 0; font-family: var(--mono); font-size: clamp(0.85rem, 1.5vw, 1.05rem); color: var(--grey); }
-.hero-caption b { color: var(--paper); font-weight: 500; }
-.note a { text-decoration: underline; }
-.hero-foot { position: absolute; left: 0; right: 0; bottom: clamp(1rem, 4vh, 2.5rem); z-index: 2; display: flex; justify-content: center; }
-.hero-next { font-family: var(--mono); font-size: 0.85rem; color: var(--paper); white-space: nowrap; max-width: calc(100vw - 2rem); overflow: hidden; text-overflow: ellipsis; }
-.hero-next:hover { text-decoration: none; color: var(--yellow); }
-.hero-next em { font-style: normal; color: var(--yellow); }
-.hero-next .arrow { display: inline-block; margin-left: 0.4em; animation: nudge 1.8s ease-in-out infinite; }
-@keyframes nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+/* the lock-in: words of headings and today's title */
+.lw, .term-title .tw { display: inline-block; }
 
-/* the drift: real git output, very low contrast, moving like scrollback */
-.drift { position: absolute; inset: -10% 0; z-index: 0; pointer-events: none; overflow: hidden; -webkit-mask-image: radial-gradient(70% 70% at 50% 50%, #000 30%, transparent 100%); mask-image: radial-gradient(70% 70% at 50% 50%, #000 30%, transparent 100%); }
-.drift { opacity: 0; animation: driftin 1.2s ease-out 0.6s forwards; }
-.drift pre { margin: 0; font-family: var(--mono); font-size: clamp(0.75rem, 0.9vw, 0.8rem); line-height: 1.75; color: rgba(242, 240, 234, 0.09); white-space: pre; columns: 2; column-gap: 6vw; padding-inline: 3vw; animation: drift 90s linear infinite; }
-@keyframes drift { from { transform: translateY(0); } to { transform: translateY(-50%); } }
-@keyframes driftin { to { opacity: 1; } }
+/* the wipes between sections: one band each, moved by the scroll */
+.wipes i { position: fixed; top: 0; bottom: 0; left: 0; width: 26vw; z-index: 40; pointer-events: none; visibility: hidden; background: repeating-linear-gradient(-45deg, var(--yellow) 0 2.4vmin, var(--black) 2.4vmin 4.8vmin); }
+@media (max-width: 767px) { .wipes i { width: 45vw; } }
 
 /* ---------- beats ---------- */
 .beat { position: relative; }
@@ -164,7 +177,9 @@ body.docked .badge, .badge.on { opacity: 1; transform: none; pointer-events: aut
 .tcard .t { display: block; font-family: var(--display); font-weight: 800; font-size: 2.3rem; text-transform: uppercase; line-height: 0.95; margin: 0.6rem 0 0.7rem; }
 .tcard .x { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; font-family: var(--mono); font-size: 0.86rem; line-height: 1.5; color: var(--grey); }
 .tcard .s { display: block; margin-top: auto; padding-top: 0.9rem; font-family: var(--mono); font-size: 0.86rem; color: var(--yellow); }
-.gap { position: absolute; bottom: 6.6rem; transform: translateX(-50%); font-family: var(--mono); font-size: 0.8rem; color: var(--yellow); white-space: nowrap; }
+.gap { position: absolute; bottom: 6.6rem; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 0.4em; font-family: var(--mono); font-size: 0.8rem; color: var(--yellow); white-space: nowrap; }
+.gap-odo { font-size: 1.7rem; }
+.vgap .gap-odo { font-size: 1.35rem; }
 .gap.quiet { font-weight: 700; }
 .gap.quiet::before { content: none; }
 .track-end { position: absolute; bottom: 8.1rem; font-family: var(--mono); font-size: 0.82rem; color: var(--grey); white-space: nowrap; }
@@ -185,8 +200,7 @@ body.docked .badge, .badge.on { opacity: 1; transform: none; pointer-events: aut
 @media (max-width: 560px) { .tally { grid-template-columns: repeat(2, 1fr); } }
 .tally a { display: flex; flex-direction: column; justify-content: space-between; gap: 1.2rem; min-height: 9.5rem; padding: 1rem 1.1rem; background: var(--black); color: var(--paper); box-shadow: 0 0 0 1px var(--line); transition: background 0.2s ease; }
 .tally a:hover { background: var(--tile); text-decoration: none; }
-.tally .n { font-family: var(--display); font-weight: 900; font-size: clamp(3rem, 6vw, 4.6rem); line-height: 0.9; color: var(--yellow); font-variant-numeric: tabular-nums; }
-.tally .n.zero { color: var(--line-2); }
+.tally .n { font-size: clamp(3rem, 6vw, 4.6rem); align-self: flex-start; }
 .tally .l { font-family: var(--mono); font-size: 0.82rem; color: var(--paper); }
 .tally a:hover .l { color: var(--yellow); }
 
@@ -269,11 +283,11 @@ body.docked .badge, .badge.on { opacity: 1; transform: none; pointer-events: aut
 @media (max-width: 640px) { .ilist li a { grid-template-columns: 1fr; gap: 0.25rem; } .ilist .s { grid-column: auto; } }
 
 /* ---------- reduced motion (the media query, and html.reduce for the ?reduce debug switch) ---------- */
-html.reduce .drift pre, html.reduce .marquee .row, html.reduce .hero-next .arrow, html.reduce .typed .ch.at::after { animation: none !important; }
+html.reduce .marquee .row, html.reduce .typed .ch.at::after { animation: none !important; }
 html.reduce .marquee { display: block; } html.reduce .marquee .row { width: auto; flex-wrap: wrap; }
 html.reduce .marquee { -webkit-mask-image: none; mask-image: none; }
 @media (prefers-reduced-motion: reduce) {
-    .drift pre, .marquee .row, .hero-next .arrow, .typed .ch.at::after { animation: none !important; }
+    .marquee .row, .typed .ch.at::after { animation: none !important; }
     .marquee { display: block; } .marquee .row { width: auto; flex-wrap: wrap; }
     .marquee { -webkit-mask-image: none; mask-image: none; }
     .tcard, .tcard::before, .tcard .s, .tally a, .badge { transition: none; }
