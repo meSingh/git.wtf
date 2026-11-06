@@ -1,7 +1,10 @@
 ---
 import '../styles/global.css';
+import { getCollection } from 'astro:content';
+import Wordmark from '../components/Wordmark.astro';
+import Flaps from '../components/Flaps.astro';
 import Footer from '../components/Footer.astro';
-import { SITE } from '../lib/site';
+import { SITE, daysSince, happened, href, sortIncidents } from '../lib/site';
 
 interface Props {
     title: string;
@@ -11,10 +14,22 @@ interface Props {
     type?: 'website' | 'article';
     noindex?: boolean;
     jsonld?: Record<string, unknown>;
+    /** Show the live counter badge in the top bar from the start (every page but the homepage). */
+    badge?: boolean;
 }
-const { title, description = SITE.description, image = '/share.png', canonical, type = 'website', noindex = false, jsonld } = Astro.props;
+const { title, description = SITE.description, image = '/share.png', canonical, type = 'website', noindex = false, jsonld, badge = true } = Astro.props;
+const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
 const url = canonical ?? new URL(Astro.url.pathname, SITE.url).toString();
-const img = new URL(image, SITE.url).toString();
+const img = new URL(image.startsWith('/') ? base + image : image, SITE.url).toString();
+const incidents = sortIncidents(await getCollection('incidents'));
+const latest = incidents[0] ?? null;
+const days = daysSince(incidents);
+const fonts = [
+    ['big-shoulders-display-latin-wght-normal.woff2', 'Big Shoulders Display', '100 900'],
+    ['jetbrains-mono-latin-wght-normal.woff2', 'JetBrains Mono', '100 800'],
+    ['geist-latin-wght-normal.woff2', 'Geist', '100 900'],
+];
+const fontCss = fonts.map(([file, family, weight]) => `@font-face{font-family:'${family}';font-style:normal;font-weight:${weight};font-display:swap;src:url(${base}/fonts/${file}) format('woff2')}`).join('');
 ---
 <!doctype html>
 <html lang="en">
@@ -25,11 +40,14 @@ const img = new URL(image, SITE.url).toString();
     <meta name="description" content={description} />
     <link rel="canonical" href={url} />
     {noindex && <meta name="robots" content="noindex" />}
-    <link rel="icon" href="/favicons/favicon.ico" sizes="any" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
-    <link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png" />
-    <link rel="alternate" type="application/rss+xml" title={SITE.name} href="/rss.xml" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href={`${base}/fonts/${fonts[0][0]}`} />
+    <style set:html={fontCss} />
+    <link rel="icon" href={`${base}/favicon.svg`} type="image/svg+xml" />
+    <link rel="icon" href={`${base}/favicon-32.png`} sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href={`${base}/apple-touch-icon.png`} />
+    <link rel="manifest" href={`${base}/site.webmanifest`} />
+    <link rel="alternate" type="application/rss+xml" title={SITE.name} href={`${base}/rss.xml`} />
+    <link rel="sitemap" href={`${base}/sitemap-index.xml`} />
     <meta property="og:site_name" content={SITE.name} />
     <meta property="og:type" content={type} />
     <meta property="og:title" content={title} />
@@ -41,20 +59,27 @@ const img = new URL(image, SITE.url).toString();
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={img} />
-    <meta name="theme-color" content="#111111" />
+    <meta name="theme-color" content="#0a0a0a" />
     {jsonld && <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />}
 </head>
 <body>
-    <header class="top">
-        <a class="brand" href="/">git<span>.</span>wtf</a>
-        <nav>
-            <a href="/archive/">Archive</a>
-            <a href="/rss.xml">RSS</a>
+    <header class="bar">
+        <Wordmark />
+        <a class={`badge${badge ? ' on' : ''}`} id="badge" href={href('/')} aria-label={`${days ?? 'unknown'} days since the last Git fuck-up`}>
+            <Flaps value={days} min={2} class="badge-flaps" since={latest ? happened(latest) : null} label="" />
+            <span class="badge-label">days since the last Git fuck-up</span>
+        </a>
+        <nav aria-label="Site">
+            <a href={href('/incidents/')}>Incidents</a>
+            <a href={href('/archive/')}>Archive</a>
+            <a href={href('/rss.xml')}>RSS</a>
         </nav>
     </header>
-    <main>
-        <slot />
-    </main>
+    <slot />
     <Footer />
+    <script>
+        import { syncCounters } from '../scripts/flaps';
+        syncCounters();
+    </script>
 </body>
 </html>

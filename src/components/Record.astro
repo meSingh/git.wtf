@@ -1,0 +1,87 @@
+---
+// Beat 3: the record. A horizontal track where the distance between incidents is their real gap in days.
+import { daysBetween, formatDay, happened, href, incidentPath, inlineCode, sortIncidents, type Incident } from '../lib/site';
+
+interface Props { incidents: Incident[] }
+const { incidents } = Astro.props;
+const asc = sortIncidents(incidents).reverse(); // oldest first, left to right
+const CARD = 280, MIN = 36, PPD = 34, QUIET = 21, PAD = 48;
+type Placed = { i: Incident; x: number; gap: number };
+const placed: Placed[] = [];
+let x = PAD;
+asc.forEach((i, n) => {
+    const gap = n === 0 ? 0 : daysBetween(happened(asc[n - 1]), happened(i));
+    if (n > 0) x += Math.max(CARD + MIN, gap * PPD);
+    placed.push({ i, x, gap });
+});
+const width = (placed.at(-1)?.x ?? 0) + CARD + PAD + 260;
+// Month ticks on the ruler: a tick where each month starts, placed by its real day distance.
+const first = happened(asc[0]);
+const dayX = (iso: string) => {
+    // x of a date: between two incidents the track is linear in days, so interpolate.
+    for (let n = 1; n < placed.length; n++) {
+        const a = happened(asc[n - 1]), b = happened(asc[n]);
+        if (iso >= a && iso <= b) {
+            const span = daysBetween(a, b) || 1;
+            return placed[n - 1].x + (placed[n].x - placed[n - 1].x) * (daysBetween(a, iso) / span);
+        }
+    }
+    return iso < first ? PAD : (placed.at(-1)?.x ?? 0) + CARD + 40;
+};
+const months: { label: string; x: number }[] = [];
+{
+    const [y0, m0] = first.split('-').map(Number);
+    const last = happened(asc.at(-1)!);
+    let y = y0, m = m0 + 1;
+    for (let k = 0; k < 24; k++) {
+        if (m > 12) { m = 1; y++; }
+        const iso = `${y}-${String(m).padStart(2, '0')}-01`;
+        if (iso > last) break;
+        months.push({ label: new Intl.DateTimeFormat('en-GB', { month: 'short', timeZone: 'UTC' }).format(Date.UTC(y, m - 1, 1)), x: dayX(iso) });
+        m++;
+    }
+}
+---
+<div class="track-wrap" id="track-wrap">
+    <div class="col beat-head track-head">
+        <h2 id="record-h">The record</h2>
+        <span class="count">{incidents.length} incidents, spaced by the real days between them. Scroll on.</span>
+    </div>
+    <div class="track" id="track" style={`width:${width}px`}>
+        <span class="track-line" aria-hidden="true"></span>
+        {months.map((mo) => (
+            <span class="tick" style={`left:${mo.x}px`} aria-hidden="true">{mo.label}</span>
+        ))}
+        {placed.map((p, n) => (
+            <>
+                {n > 0 && (
+                    <span class={`gap${p.gap >= QUIET ? ' quiet' : ''}`} style={`left:${(placed[n - 1].x + CARD + p.x) / 2}px`} aria-hidden="true">
+                        {p.gap >= QUIET ? `${p.gap} quiet days` : p.gap === 0 ? 'same day' : p.gap === 1 ? '1 day' : `${p.gap} days`}
+                    </span>
+                )}
+                <a class="tcard" href={href(incidentPath(p.i))} style={`left:${p.x}px`}>
+                    <span class="d"><time datetime={happened(p.i)}>{formatDay(happened(p.i))}</time><span>{p.i.data.category}</span></span>
+                    <span class="t">{p.i.data.title}</span>
+                    <span class="s" set:html={`Status: ${inlineCode(p.i.data.status)}`} />
+                </a>
+            </>
+        ))}
+        <span class="track-end" style={`left:${(placed.at(-1)?.x ?? 0) + CARD + 40}px`}>today <a href={href('/incidents/')}>every incident</a></span>
+    </div>
+</div>
+<div class="record-stack col" aria-label="Earlier incidents">
+    {[...placed].reverse().map((p, n, arr) => (
+        <>
+            <a class="tcard" href={href(incidentPath(p.i))}>
+                <span class="d"><time datetime={happened(p.i)}>{formatDay(happened(p.i))}</time><span>{p.i.data.category}</span></span>
+                <span class="t">{p.i.data.title}</span>
+                <span class="s" set:html={`Status: ${inlineCode(p.i.data.status)}`} />
+            </a>
+            {n < arr.length - 1 && (
+                <span class={`vgap${p.gap >= QUIET ? ' quiet' : ''}`} style={`--h:${Math.min(160, Math.max(20, p.gap * 4))}px`} aria-hidden="true">
+                    {p.gap >= QUIET ? `${p.gap} quiet days` : p.gap === 0 ? 'same day' : p.gap === 1 ? '1 day' : `${p.gap} days`}
+                </span>
+            )}
+        </>
+    ))}
+</div>

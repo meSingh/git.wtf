@@ -1,29 +1,18 @@
 ---
-import { daysBetween, todayIST } from '../lib/site';
-
-interface Props {
-    /** Date (YYYY-MM-DD, IST) of the latest incident, or null when there is none yet. */
-    since: string | null;
-}
-const { since } = Astro.props;
-const days = since ? Math.max(0, daysBetween(since, todayIST())) : null;
+import Flaps from './Flaps.astro';
+interface Props { days: number | null; since: string | null }
+const { days, since } = Astro.props;
 ---
-<div class="sign" role="img" aria-label={`Days since the last Git fuck-up: ${days ?? 'unknown'}`}>
-    <div class="label">Days since the last Git fuck-up</div>
-    <div class="days" data-since={since ?? ''}>{days ?? '??'}</div>
-    <div class="unit">{days === 1 ? 'day' : 'days'}</div>
+<div class="sign" id="sign">
+    <div class="sign-frame">
+        <div class="sign-face">
+            <span class="sign-edge" aria-hidden="true"></span>
+            <i class="sign-rivet tl" aria-hidden="true"></i><i class="sign-rivet tr" aria-hidden="true"></i><i class="sign-rivet bl" aria-hidden="true"></i><i class="sign-rivet br" aria-hidden="true"></i>
+            <h1 class="sign-title">Days since the last Git fuck-up</h1>
+            <div class="sign-board">
+                <Flaps value={days} min={2} since={since} class="hero-flaps" label={`${days ?? 'unknown'} days since the last Git fuck-up`} />
+                <span class="sign-unit" aria-hidden="true">days</span>
+            </div>
+        </div>
+    </div>
 </div>
-<script>
-    // The counter climbs on its own: whole days in IST since the latest incident, no deploy needed.
-    const el = document.querySelector<HTMLElement>('.sign .days');
-    const since = el?.dataset.since;
-    if (el && since) {
-        const [y, m, d] = since.split('-').map(Number);
-        const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
-        const [ty, tm, td] = today.split('-').map(Number);
-        const days = Math.max(0, Math.round((Date.UTC(ty, tm - 1, td) - Date.UTC(y, m - 1, d)) / 86_400_000));
-        el.textContent = String(days);
-        const unit = el.nextElementSibling;
-        if (unit) unit.textContent = days === 1 ? 'day' : 'days';
-    }
-</script>

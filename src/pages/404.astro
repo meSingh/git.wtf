@@ -1,7 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
+import { href } from '../lib/site';
 ---
 <Base title="404 | git.wtf" noindex>
-    <h1>404</h1>
-    <p>Not here. If this was a post from the old blog, it should be in <a href="/archive/">the archive</a>. If it is not, that is a Git fuck-up of ours.</p>
+    <main class="page">
+        <div class="page-head"><h1>404</h1></div>
+        <div class="prose"><p>Not here. If this was a post from the old blog, it should be in <a href={href('/archive/')}>the archive</a>. If it is not, that is a Git fuck-up of ours.</p></div>
+    </main>
 </Base>

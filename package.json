@@ -7,7 +7,8 @@
         "dev": "astro dev",
         "build": "astro build",
         "build:fixture": "node scripts/ghost-to-archive.mjs tests/fixtures/ghost-export.json --out tests/fixtures/archive --no-url-list && GITWTF_FIXTURE=1 astro build",
-        "preview": "wrangler dev --port 8787",
+        "redirects": "node src/redirects.mjs",
+        "preview": "node scripts/serve-dist.mjs dist 8787",
         "check": "astro check",
         "convert": "node scripts/ghost-to-archive.mjs",
         "check-urls": "node scripts/check-urls.mjs",
@@ -17,14 +18,19 @@
     "dependencies": {
         "@astrojs/rss": "^4.0.0",
         "@astrojs/sitemap": "^3.6.0",
+        "@fontsource-variable/big-shoulders-display": "^5.3.0",
+        "@fontsource-variable/geist": "^5.3.0",
+        "@fontsource-variable/jetbrains-mono": "^5.3.0",
         "@resvg/resvg-js": "^2.6.2",
         "astro": "^7.4.7",
         "gray-matter": "^4.0.3",
+        "gsap": "^3.15.1",
         "satori": "^0.63.2"
     },
     "devDependencies": {
-        "cheerio": "^1.2.0",
-        "wrangler": "^4.158.0"
+        "@fontsource/big-shoulders-display": "^5.3.0",
+        "@fontsource/jetbrains-mono": "^5.3.0",
+        "cheerio": "^1.2.0"
     },
     "engines": {
         "node": ">=22"

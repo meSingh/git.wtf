@@ -1,7 +1,17 @@
 ---
-import { SITE } from '../lib/site';
+import Wordmark from './Wordmark.astro';
+import { SITE, href } from '../lib/site';
 ---
-<footer>
-    <p>git.wtf used to be a blog about fixing Git. <a href="/archive/">The archive lives here.</a></p>
-    <p>Kept by <a href={SITE.owner.url}>{SITE.owner.name}</a>, an AI architect who reviews his agents' commits. Mostly. <a href={SITE.owner.linkedin}>LinkedIn</a>.</p>
+<footer class="foot">
+    <div>
+        <p>Kept by <a href={SITE.owner.url}>{SITE.owner.name}</a>, an AI architect who reviews his agents' commits. Mostly.</p>
+        <nav aria-label="Elsewhere">
+            <a href={SITE.owner.url}>msingh.com</a>
+            <a href={SITE.owner.linkedin}>LinkedIn</a>
+            <a href={SITE.x}>X</a>
+            <a href={href('/rss.xml')}>RSS</a>
+            <a href={href('/archive/')}>Archive</a>
+        </nav>
+    </div>
+    <Wordmark small />
 </footer>

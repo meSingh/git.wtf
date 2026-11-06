@@ -1,28 +1,29 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import { formatDate } from '../../lib/site';
+import { formatDate, href } from '../../lib/site';
 
-const posts = (await getCollection('archive'))
-    .filter((p) => p.data.type === 'post')
-    .sort((a, b) => (a.data.published_at < b.data.published_at ? 1 : -1));
+const posts = (await getCollection('archive')).filter((p) => p.data.type === 'post').sort((a, b) => (a.data.published_at < b.data.published_at ? 1 : -1));
 const years = [...new Set(posts.map((p) => p.data.published_at.slice(0, 4)))];
 ---
-<Base title="Archive | git.wtf" description="Every post from the years git.wtf was a blog about fixing Git, at the same URLs.">
-    <h1>The archive</h1>
-    <p class="note">From 2016 to 2025 git.wtf was a blog about fixing Git. These are those posts, unchanged, at their old addresses. The commands still work. The jokes are older.</p>
-    {posts.length === 0 && <p>The archive is being converted. The posts come back at their old URLs.</p>}
-    {years.map((year) => (
-        <section>
-            <h2>{year}</h2>
-            <ul class="list">
-                {posts.filter((p) => p.data.published_at.startsWith(year)).map((p) => (
-                    <li>
-                        <span class="date">{formatDate(p.data.published_at.slice(0, 10))}</span>
-                        <span><a href={`/${p.id}/`}>{p.data.title}</a></span>
-                    </li>
-                ))}
-            </ul>
-        </section>
-    ))}
+<Base title="The archive | git.wtf" description="Every post from the years git.wtf was a blog about fixing Git, at the same URLs.">
+    <main class="page">
+        <div class="page-head">
+            <h1>The archive</h1>
+            <p class="meta"><span>{posts.length} posts, 2016 to 2025</span></p>
+        </div>
+        <div class="prose"><p>From 2016 to 2025 git.wtf was a blog about fixing Git. These are those posts, unchanged, at their old addresses. The commands still work. The jokes are older.</p></div>
+        <div class="index">
+            {years.map((year) => (
+                <section>
+                    <h2>{year}</h2>
+                    <ol>
+                        {posts.filter((p) => p.data.published_at.startsWith(year)).map((p) => (
+                            <li><a href={href(`/${p.id}/`)}><span class="d">{formatDate(p.data.published_at.slice(0, 10))}</span><span>{p.data.title}</span></a></li>
+                        ))}
+                    </ol>
+                </section>
+            ))}
+        </div>
+    </main>
 </Base>

@@ -3,46 +3,79 @@ import { Resvg } from '@resvg/resvg-js';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
-const YELLOW = '#F5C400';
-const BLACK = '#111111';
+const YELLOW = '#FFD400';
+const BLACK = '#0A0A0A';
+const PAPER = '#F2F0EA';
+const GREY = '#8A877F';
 
-let fontData: ArrayBuffer | null = null;
-async function font(): Promise<ArrayBuffer> {
-    if (!fontData) {
-        // Read from the project root: at build time this module runs from dist/, so import.meta.url is no use.
-        const buf = await readFile(path.join(process.cwd(), 'public/fonts/Anton-Regular.ttf'));
-        fontData = buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength) as ArrayBuffer;
-    }
-    return fontData;
+type FontSet = { display: ArrayBuffer; mono: ArrayBuffer };
+let fonts: FontSet | null = null;
+async function loadFonts(): Promise<FontSet> {
+    if (fonts) return fonts;
+    const read = async (p: string) => {
+        const buf = await readFile(path.join(process.cwd(), 'node_modules', p));
+        return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength) as ArrayBuffer;
+    };
+    fonts = {
+        display: await read('@fontsource/big-shoulders-display/files/big-shoulders-display-latin-900-normal.woff'),
+        mono: await read('@fontsource/jetbrains-mono/files/jetbrains-mono-latin-600-normal.woff'),
+    };
+    return fonts;
 }
 
 const h = (type: string, style: Record<string, unknown>, children?: unknown) => ({ type, props: { style, children } });
 
-/** 1200x630 share card: the yellow sign at 0, the incident title, the status line. */
+function flap(d: string, dim: boolean) {
+    const digit = (top: boolean) =>
+        h('div', { position: 'absolute', left: 0, right: 0, top: top ? 0 : -100, height: 200, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 168, color: dim ? 'rgba(255,212,0,0.3)' : YELLOW, fontFamily: 'Big Shoulders Display' }, d);
+    return h('div', { position: 'relative', width: 140, height: 200, display: 'flex' }, [
+        h('div', { position: 'absolute', left: 0, right: 0, top: 0, height: 100, overflow: 'hidden', background: '#1b1b1b', borderRadius: '8px 8px 0 0', display: 'flex' }, [digit(true)]),
+        h('div', { position: 'absolute', left: 0, right: 0, top: 100, height: 100, overflow: 'hidden', background: '#121212', borderRadius: '0 0 8px 8px', display: 'flex' }, [digit(false)]),
+        h('div', { position: 'absolute', left: 0, right: 0, top: 98, height: 4, background: BLACK }),
+    ]);
+}
+
+function stripes() {
+    const cells = [];
+    for (let i = 0; i < 60; i++) cells.push(h('div', { width: 40, height: 60, background: i % 2 ? BLACK : YELLOW, transform: 'skewX(-45deg)' }));
+    return h('div', { position: 'absolute', left: -40, right: -40, bottom: 0, height: 18, display: 'flex', overflow: 'hidden' }, cells);
+}
+
+/** 1200x630 share card: the sign at its number, the incident title, the status. */
 export async function shareImage(opts: { title: string; status: string; days?: number; date?: string }): Promise<Uint8Array> {
-    const days = String(opts.days ?? 0);
-    const tree = h(
-        'div',
-        { width: 1200, height: 630, display: 'flex', flexDirection: 'column', background: BLACK, color: '#f2f2f2', fontFamily: 'Anton', padding: 48 },
-        [
-            h('div', { display: 'flex', flexDirection: 'column', alignItems: 'center', background: YELLOW, color: BLACK, border: `14px solid ${BLACK}`, outline: `6px solid ${YELLOW}`, padding: '18px 36px', borderRadius: 6 }, [
-                h('div', { fontSize: 40, letterSpacing: 2, textTransform: 'uppercase' }, 'Days since the last Git fuck-up'),
-                h('div', { fontSize: 170, lineHeight: 1, marginTop: 6 }, days),
+    const f = await loadFonts();
+    const n = Math.max(0, opts.days ?? 0);
+    const digits = String(n).padStart(2, '0').split('');
+    const firstNonZero = digits.findIndex((d) => d !== '0');
+    const title = opts.title.length > 64 ? opts.title.slice(0, 61).trimEnd() + '...' : opts.title;
+    const status = opts.status.replace(/`/g, '');
+    const tree = h('div', { width: 1200, height: 630, display: 'flex', flexDirection: 'column', background: BLACK, color: PAPER, padding: '40px 56px 44px', position: 'relative' }, [
+        h('div', { display: 'flex', alignItems: 'center', justifyContent: 'space-between' }, [
+            h('div', { fontFamily: 'Big Shoulders Display', fontSize: 44, letterSpacing: 1, color: PAPER }, 'DAYS SINCE THE LAST GIT FUCK-UP'),
+            h('div', { fontFamily: 'JetBrains Mono', fontSize: 22, color: GREY }, opts.date ?? ''),
+        ]),
+        h('div', { display: 'flex', alignItems: 'center', gap: 44, marginTop: 16, flexGrow: 1, flexShrink: 1, minHeight: 0 }, [
+            h('div', { display: 'flex', gap: 10, padding: 12, background: '#0e0e0e', border: `2px solid rgba(242,240,234,0.12)` }, digits.map((d, i) => flap(d, firstNonZero === -1 ? i < digits.length - 1 : i < firstNonZero))),
+            h('div', { display: 'flex', flexDirection: 'column', flexGrow: 1, minWidth: 0 }, [
+                h('div', { fontFamily: 'Big Shoulders Display', fontSize: 72, lineHeight: 0.95, textTransform: 'uppercase', color: PAPER }, title),
+                h('div', { display: 'flex', marginTop: 24 }, [
+                    h('div', { fontFamily: 'Big Shoulders Display', fontSize: 34, lineHeight: 1, color: YELLOW, border: `5px solid ${YELLOW}`, padding: '10px 16px', transform: 'rotate(-2deg)', textTransform: 'uppercase', letterSpacing: 1, maxWidth: 820 }, `Status: ${status}`),
+                ]),
             ]),
-            h('div', { display: 'flex', flexDirection: 'column', marginTop: 40, flexGrow: 1, justifyContent: 'center' }, [
-                h('div', { fontSize: 56, lineHeight: 1.1, textTransform: 'uppercase' }, opts.title),
-                h('div', { fontSize: 32, marginTop: 20, color: YELLOW }, `Status: ${opts.status}`),
-            ]),
-            h('div', { display: 'flex', justifyContent: 'space-between', fontSize: 28, color: '#9a9a9a' }, [
-                h('div', {}, 'git.wtf'),
-                h('div', {}, opts.date ?? ''),
-            ]),
-        ],
-    );
+        ]),
+        h('div', { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', fontFamily: 'JetBrains Mono', fontSize: 24, color: GREY, flexShrink: 0 }, [
+            h('div', { display: 'flex', alignItems: 'center', gap: 10 }, [h('div', { fontFamily: 'Big Shoulders Display', fontSize: 34, color: PAPER }, 'git'), h('div', { width: 14, height: 14, background: YELLOW }), h('div', { fontFamily: 'Big Shoulders Display', fontSize: 34, color: PAPER }, 'wtf')]),
+            h('div', {}, 'one real Git fuck-up a day'),
+        ]),
+        stripes(),
+    ]);
     const svg = await satori(tree as any, {
         width: 1200,
         height: 630,
-        fonts: [{ name: 'Anton', data: await font(), weight: 400, style: 'normal' }],
+        fonts: [
+            { name: 'Big Shoulders Display', data: f.display, weight: 900, style: 'normal' },
+            { name: 'JetBrains Mono', data: f.mono, weight: 600, style: 'normal' },
+        ],
     });
     return new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render().asPng();
 }

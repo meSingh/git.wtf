@@ -2,37 +2,65 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Sign from '../components/Sign.astro';
-import Incident from '../components/Incident.astro';
-import { SITE, formatDate, incidentPath, inlineCode, sortIncidents } from '../lib/site';
+import Drift from '../components/Drift.astro';
+import Term from '../components/Term.astro';
+import Record from '../components/Record.astro';
+import Tally from '../components/Tally.astro';
+import Marquee from '../components/Marquee.astro';
+import { SITE, daysSince, formatDate, happened, href, incidentPath, sortIncidents } from '../lib/site';
 
 const incidents = sortIncidents(await getCollection('incidents'));
 const latest = incidents[0] ?? null;
-const older = incidents.slice(1);
+const days = daysSince(incidents);
+const archive = (await getCollection('archive')).filter((p) => p.data.type === 'post').sort((a, b) => (a.data.published_at < b.data.published_at ? 1 : -1));
 const image = latest ? `${incidentPath(latest)}share.png` : '/share.png';
 ---
-<Base title={`${SITE.title} | git.wtf`} image={image}>
-    <Sign since={latest?.data.date ?? null} />
+<Base title={`${SITE.title} | git.wtf`} image={image} badge={false}>
+    <section class="hero" id="hero">
+        <Drift />
+        <div class="hero-inner">
+            <Sign days={days} since={latest ? happened(latest) : null} />
+            <div class="hero-sub">
+                <p class="hero-caption">
+                    {latest ? <>since the last Git fuck-up on <b>{formatDate(happened(latest))}</b></> : <>no Git fuck-up on record yet</>}
+                </p>
+            </div>
+        </div>
+        {latest && (
+            <div class="hero-sub hero-foot"><a class="hero-next" href="#today">Today's: <em>{latest.data.title}</em><span class="arrow" aria-hidden="true">&darr;</span></a></div>
+        )}
+    </section>
 
     {latest ? (
-        <Incident incident={latest} linked />
+        <section class="beat beat-today" id="today" aria-labelledby="today-h">
+            <h2 class="visually-hidden" id="today-h">Today's incident</h2>
+            <Term incident={latest} typed linkTitle />
+        </section>
     ) : (
-        <p class="note">No incident on record yet. The first one lands when the daily search finds one that passes the rules.</p>
+        <section class="beat col" id="today"><p class="note">No incident on record yet. The first one lands when the daily search finds one that passes the rules.</p></section>
     )}
 
-    {older.length > 0 && (
-        <section>
-            <h2>Earlier fuck-ups</h2>
-            <ul class="list">
-                {older.map((i) => (
-                    <li>
-                        <span class="date">{formatDate(i.data.date)}</span>
-                        <span>
-                            <a href={incidentPath(i)}>{i.data.title}</a>
-                            <span class="status" set:html={`Status: ${inlineCode(i.data.status)}`} />
-                        </span>
-                    </li>
-                ))}
-            </ul>
+    {incidents.length > 1 && (
+        <section class="beat beat-record" id="record" aria-labelledby="record-h">
+            <Record incidents={incidents} />
         </section>
     )}
+
+    <section class="beat beat-tally col" id="by-category" aria-labelledby="tally-h">
+        <div class="beat-head">
+            <h2 id="tally-h">By category</h2>
+            <span class="count">how they go wrong</span>
+        </div>
+        <Tally incidents={incidents} />
+    </section>
+
+    <section class="beat beat-archive" id="archive" aria-labelledby="archive-h">
+        <h2 class="visually-hidden" id="archive-h">The archive</h2>
+        <p class="lede">git.wtf used to be a blog about fixing Git. <a href={href('/archive/')}>The archive lives here</a>, {archive.length} posts at their old addresses.</p>
+        <Marquee posts={archive} />
+    </section>
+
+    <script>
+        import '../scripts/home';
+    </script>
 </Base>

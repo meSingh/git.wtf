@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { categoryLabel, formatDate, happened, href, incidentPath, inlineCode, sortIncidents } from '../../lib/site';
+const incidents = sortIncidents(await getCollection('incidents'));
+---
+<Base title="Every incident | git.wtf" description="Every Git fuck-up on the record, newest first.">
+    <main class="page">
+        <div class="page-head"><h1>Every incident</h1><p class="meta"><span>{incidents.length} on the record</span></p></div>
+        <div class="ilist">
+            <ol>
+                {incidents.map((i) => (
+                    <li><a href={href(incidentPath(i))}>
+                        <span class="d">{formatDate(happened(i))}</span>
+                        <span class="t">{i.data.title}</span>
+                        <span class="c">{categoryLabel(i.data.category)}</span>
+                        <span class="s" set:html={`Status: ${inlineCode(i.data.status)}`} />
+                    </a></li>
+                ))}
+            </ol>
+        </div>
+    </main>
+</Base>

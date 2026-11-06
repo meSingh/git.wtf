@@ -1,0 +1,24 @@
+---
+import { flapDigits } from '../lib/site';
+interface Props {
+    value: number | null;
+    min?: number;
+    class?: string;
+    label?: string;
+    /** YYYY-MM-DD the counter counts from; the browser recomputes the value from it. */
+    since?: string | null;
+}
+const { value, min = 2, class: cls = '', label, since = null } = Astro.props;
+const digits = flapDigits(value, min);
+const dimUntil = digits.findIndex((d) => d !== '0');
+---
+<span class={`flaps ${cls}`.trim()} data-value={value ?? ''} data-since={since ?? undefined} data-min={min} role="img" aria-label={label ?? String(value ?? 'unknown')}>
+    {digits.map((d, i) => (
+        <span class={`flap${(dimUntil === -1 ? i < digits.length - 1 : i < dimUntil) ? ' dim' : ''}`} data-digit={d} aria-hidden="true">
+            <span class="flap-half flap-top"><span class="flap-digit">{d}</span></span>
+            <span class="flap-half flap-bottom"><span class="flap-digit">{d}</span></span>
+            <span class="flap-leaf flap-leaf-top"><span class="flap-digit">{d}</span></span>
+            <span class="flap-leaf flap-leaf-bottom"><span class="flap-digit">{d}</span></span>
+        </span>
+    ))}
+</span>

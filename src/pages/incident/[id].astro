@@ -1,38 +1,57 @@
 ---
 import { getCollection } from 'astro:content';
+import { existsSync } from 'node:fs';
+import path from 'node:path';
 import Base from '../../layouts/Base.astro';
-import Sign from '../../components/Sign.astro';
-import Incident from '../../components/Incident.astro';
-import { SITE, incidentPath, sortIncidents, type Incident as IncidentEntry } from '../../lib/site';
+import Term from '../../components/Term.astro';
+import { SITE, formatDay, happened, href, incidentPath, sortIncidents, type Incident } from '../../lib/site';
 
 export async function getStaticPaths() {
     const all = sortIncidents(await getCollection('incidents'));
-    return all.map((incident, i) => ({
-        params: { id: incident.id },
-        props: { incident, newer: all[i - 1] ?? null, older: all[i + 1] ?? null },
-    }));
+    return all.map((incident, i) => ({ params: { id: incident.id }, props: { incident, newer: all[i - 1] ?? null, older: all[i + 1] ?? null } }));
 }
-interface Props { incident: IncidentEntry; newer: IncidentEntry | null; older: IncidentEntry | null }
+interface Props { incident: Incident; newer: Incident | null; older: Incident | null }
 const { incident, newer, older } = Astro.props;
 const d = incident.data;
-const path = incidentPath(incident);
+const p = incidentPath(incident);
+const localVideo = existsSync(path.join(process.cwd(), 'public/incident', incident.id, 'video.mp4'));
+const video = d.video ?? (localVideo ? href(`${p}video.mp4`) : null);
+const poster = d.poster ?? (localVideo && existsSync(path.join(process.cwd(), 'public/incident', incident.id, 'poster.jpg')) ? href(`${p}poster.jpg`) : href(`${p}share.png`));
 const jsonld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: d.title,
     datePublished: d.date,
-    url: new URL(path, SITE.url).toString(),
-    image: new URL(`${path}share.png`, SITE.url).toString(),
+    url: new URL(p, SITE.url).toString(),
+    image: new URL(`${p}share.png`, SITE.url).toString(),
     author: { '@type': 'Person', name: SITE.owner.name, url: SITE.owner.url },
     publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
     citation: d.source_url,
 };
 ---
-<Base title={`${d.title} | git.wtf`} description={`Status: ${d.status}`} image={`${path}share.png`} type="article" jsonld={jsonld}>
-    <Sign since={d.date} />
-    <Incident incident={incident} showShare />
-    <nav class="post nav">
-        <span>{older && <a href={incidentPath(older)}>&larr; {older.data.title}</a>}</span>
-        <span>{newer && <a href={incidentPath(newer)}>{newer.data.title} &rarr;</a>}</span>
-    </nav>
+<Base title={`${d.title} | git.wtf`} description={`Status: ${d.status}`} image={`${p}share.png`} type="article" jsonld={jsonld}>
+    <main class="page">
+        <div class="page-head">
+            <p class="meta"><a href={href('/incidents/')}>Incidents</a> <span>{formatDay(happened(incident))}</span></p>
+        </div>
+        <Term incident={incident} id="incident" />
+        <div class="prose">
+            {video && (
+                <p class="video"><video src={video} poster={poster} controls muted playsinline preload="none" width="1080" height="1920">Your browser does not play this video. <a href={video}>Download it.</a></video></p>
+            )}
+            <p class="share" style="margin-top:2rem"><img src={href(`${p}share.png`)} alt={`Share image: ${d.title}`} width="1200" height="630" loading="lazy" /></p>
+        </div>
+        <nav class="pager" aria-label="Other incidents">
+            <span>{older && <a href={href(incidentPath(older))}>&larr; {older.data.title}</a>}</span>
+            <span class="next">{newer && <a href={href(incidentPath(newer))}>{newer.data.title} &rarr;</a>}</span>
+        </nav>
+    </main>
+    <script>
+        import gsap from 'gsap';
+        import { reducedMotion } from '../../scripts/flaps';
+        const stamp = document.querySelector('#incident .stamp');
+        if (stamp && !reducedMotion()) {
+            gsap.fromTo(stamp, { autoAlpha: 0, scale: 2, rotate: -12 }, { autoAlpha: 1, scale: 1, rotate: -2, duration: 0.35, ease: 'power4.in', delay: 0.35 });
+        }
+    </script>
 </Base>

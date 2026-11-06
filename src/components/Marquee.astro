@@ -1,0 +1,18 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { href } from '../lib/site';
+interface Props { posts: CollectionEntry<'archive'>[] }
+const { posts } = Astro.props;
+const rows = [posts.filter((_, i) => i % 2 === 0), posts.filter((_, i) => i % 2 === 1)];
+---
+{rows.map((row, r) => (
+    <div class={`marquee${r === 1 ? ' rev' : ''}`} style={`--dur:${Math.max(60, row.length * 4.2)}s`}>
+        <div class="row">
+            {[0, 1].map((copy) => row.map((p) => (
+                <a href={href(`/${p.id}/`)} tabindex={copy === 1 ? -1 : undefined} aria-hidden={copy === 1 ? 'true' : undefined}>
+                    {p.data.title} <span class="y">{p.data.published_at.slice(0, 4)}</span>
+                </a>
+            )))}
+        </div>
+    </div>
+))}

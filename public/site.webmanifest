@@ -1,0 +1,8 @@
+{
+    "name": "git.wtf",
+    "short_name": "git.wtf",
+    "icons": [{ "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }],
+    "theme_color": "#0a0a0a",
+    "background_color": "#0a0a0a",
+    "display": "browser"
+}

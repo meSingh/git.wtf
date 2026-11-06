@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+import { CATEGORIES } from '../../content.config';
+import Base from '../../layouts/Base.astro';
+import { categoryLabel, formatDate, happened, href, incidentPath, inlineCode, sortIncidents } from '../../lib/site';
+
+export async function getStaticPaths() {
+    const all = sortIncidents(await getCollection('incidents'));
+    return CATEGORIES.map((category) => ({ params: { category }, props: { category, incidents: all.filter((i) => i.data.category === category) } }));
+}
+const { category, incidents } = Astro.props;
+---
+<Base title={`${categoryLabel(category)} | git.wtf`} description={`Git fuck-ups filed under ${categoryLabel(category)}.`}>
+    <main class="page">
+        <div class="page-head">
+            <h1>{categoryLabel(category)}</h1>
+            <p class="meta"><a href={href('/incidents/')}>Every incident</a> <span>{incidents.length === 1 ? '1 incident' : `${incidents.length} incidents`}</span></p>
+        </div>
+        <div class="ilist">
+            {incidents.length === 0 ? (
+                <p class="note">Nothing filed here yet. Give it time.</p>
+            ) : (
+                <ol>
+                    {incidents.map((i) => (
+                        <li><a href={href(incidentPath(i))}>
+                            <span class="d">{formatDate(happened(i))}</span>
+                            <span class="t">{i.data.title}</span>
+                            <span class="c"></span>
+                            <span class="s" set:html={`Status: ${inlineCode(i.data.status)}`} />
+                        </a></li>
+                    ))}
+                </ol>
+            )}
+        </div>
+    </main>
+</Base>
