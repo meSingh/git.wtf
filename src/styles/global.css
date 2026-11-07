@@ -139,9 +139,10 @@ html.js-anim .hh-hint { opacity: 0; visibility: hidden; }
 .ep .cut-count { display: none; }
 .ep .cut-sound { top: calc(var(--bar) + 0.8rem); }
 .ep-bar { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.7rem clamp(1rem, 2.5vw, 2rem); background: linear-gradient(to top, rgba(10, 10, 10, 0.92), rgba(10, 10, 10, 0.6)); font-family: var(--mono); font-size: 0.85rem; }
-.ep-today { margin: 0; min-width: 0; color: var(--paper); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ep-today { margin: 0; min-width: 0; display: flex; gap: 0.4em; align-items: baseline; color: var(--paper); white-space: nowrap; }
 .ep-k { color: var(--yellow); }
-.ep-today a { display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: bottom; color: var(--paper); }
+.ep-k { flex: none; }
+.ep-today a { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--paper); }
 .ep-today a:hover { color: var(--yellow); }
 .ep-ctls { margin: 0; display: flex; align-items: center; color: var(--grey); white-space: nowrap; }
 .ep-ctls { gap: 0.7rem; }
