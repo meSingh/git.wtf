@@ -250,3 +250,5 @@
     .cutscene .a-agent .face-h .grin { stroke-width: 12; }
     .cutscene .footprints ellipse { fill: #4a5568; opacity: 0.75; }
     .cutscene .bg-flat .footprints ellipse { fill: #5f6a7a; }
+    /* the counter's words: second in size, under the number */
+    .cutscene .counter-label { fill: #ffd400; stroke: #0a0a0a; stroke-width: 8; paint-order: stroke; font-family: var(--display); font-weight: 900; font-size: 64px; text-anchor: middle; letter-spacing: 2px; }

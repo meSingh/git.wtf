@@ -222,7 +222,12 @@ const longest = (rows: string[]) => Math.max(...rows.map((r) => r.length));
                             </g>
                         </g>
                     )}
-                    {s.props?.counter && <text class="counter" x={P.counter!.x} y={P.counter!.y} data-from={P.counter!.from ?? 0} data-to={P.counter!.to ?? ''} data-value={P.counter!.value ?? ''}>{P.counter!.value ?? P.counter!.from ?? 0}</text>}
+                    {s.props?.counter && (
+                        <g class="count">
+                            <text class="counter" x={P.counter!.x} y={P.counter!.y} data-from={P.counter!.from ?? 0} data-to={P.counter!.to ?? ''} data-value={P.counter!.value ?? ''}>{P.counter!.value ?? P.counter!.from ?? 0}</text>
+                            {P.counter!.label && <text class="counter-label" x={P.counter!.x} y={P.counter!.y + 70}>{P.counter!.label}{P.counter!.after && <tspan class="counter-after" style="visibility:hidden"> {P.counter!.after}</tspan>}</text>}
+                        </g>
+                    )}
                     {P.note && (
                         <g class="note" transform={`translate(${P.note.x} ${P.note.y}) scale(${P.note.scale ?? 1})`}><g class="n-in" style="visibility:hidden">
                             <rect x="-130" y="-110" width="260" height="220" />

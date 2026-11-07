@@ -329,6 +329,9 @@ Object.assign(FX, {
     tick({ tl, g }: Ctx, t: number) {
         const c = q(g, '.counter');
         if (!c || c.dataset.value) return;
+        // the word that lands when the count stops
+        const after = q(g, '.counter-after');
+        if (after) tl.fromTo(after, { visibility: 'visible', scale: 2.2, autoAlpha: 0, transformOrigin: '50% 50%' }, { scale: 1, autoAlpha: 1, duration: 0.22, ease: 'power4.in', immediateRender: false }, t + 2.4);
         // tweened on the element itself (not in onUpdate), so a seek with events off still shows the number
         tl.fromTo(c, { textContent: Number(c.dataset.from || 0) }, { textContent: Number(c.dataset.to || 0), duration: 2.4, ease: 'power1.in', modifiers: { textContent: (v: number) => Math.round(v).toLocaleString('en-GB') }, immediateRender: false }, t);
     },

@@ -45,9 +45,10 @@
     },
     "counter": {
      "x": 990,
-     "y": 540,
+     "y": 500,
      "from": 0,
-     "to": 2309
+     "to": 2309,
+     "label": "PAGES"
     },
     "pages": {
      "x": 850,
@@ -156,9 +157,10 @@
      },
      "counter": {
       "x": 300,
-      "y": 780,
+      "y": 740,
       "from": 0,
-      "to": 2309
+      "to": 2309,
+      "label": "PAGES"
      },
      "pages": {
       "x": 440,
@@ -1241,20 +1243,21 @@
     },
     "desk": {
      "x": 900,
-     "y": 840,
+     "y": 740,
      "open": true
     },
     "folder": {
      "x": 900,
-     "y": 740,
+     "y": 640,
      "scale": 0.4,
      "label": "UNSAVED WORK",
      "empty": true
     },
     "counter": {
      "x": 900,
-     "y": 640,
-     "value": 0
+     "y": 480,
+     "value": 0,
+     "label": "PAGES"
     },
     "footprints": {
      "from": [
@@ -1263,7 +1266,7 @@
      ],
      "to": [
       880,
-      962
+      866
      ]
     }
    },
@@ -1280,7 +1283,7 @@
      "who": "agent",
      "pose": "hide",
      "x": 830,
-     "y": 976,
+     "y": 876,
      "scale": 0.2,
      "n": 1,
      "wet": true
@@ -1289,7 +1292,7 @@
      "who": "agent",
      "pose": "hide",
      "x": 900,
-     "y": 976,
+     "y": 876,
      "scale": 0.2,
      "n": 7,
      "wet": true
@@ -1298,7 +1301,7 @@
      "who": "agent",
      "pose": "hide",
      "x": 970,
-     "y": 976,
+     "y": 876,
      "scale": 0.2,
      "n": 12,
      "wet": true
@@ -1339,8 +1342,9 @@
      },
      "counter": {
       "x": 520,
-      "y": 880,
-      "value": 0
+      "y": 860,
+      "value": 0,
+      "label": "PAGES"
      },
      "footprints": {
       "from": [
@@ -1864,9 +1868,11 @@
     },
     "counter": {
      "x": 1150,
-     "y": 330,
+     "y": 300,
      "from": 0,
-     "to": 2309
+     "to": 2309,
+     "label": "PAGES",
+     "after": "BACK"
     },
     "gate": {
      "x": 800,
@@ -1926,9 +1932,11 @@
      },
      "counter": {
       "x": 450,
-      "y": 620,
+      "y": 680,
       "from": 0,
-      "to": 2309
+      "to": 2309,
+      "label": "PAGES",
+      "after": "BACK"
      },
      "gate": {
       "x": 450,

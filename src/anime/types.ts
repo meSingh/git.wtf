@@ -32,7 +32,8 @@ type At = { x: number; y: number; scale?: number };
 export interface Props {
     folder?: At & { label?: string; empty?: boolean };
     files?: boolean;
-    counter?: { x: number; y: number; to?: number; from?: number; value?: number };
+    /** The counter: a large number, with words under it (label), and a word that lands when the count stops (after). */
+    counter?: { x: number; y: number; to?: number; from?: number; value?: number; label?: string; after?: string };
     /** The desk: a top, legs and a front. `laptop` is an open laptop on it, x relative to the desk's middle. */
     desk?: At & { laptop?: { x: number }; /** no front panel: the space under it shows */ open?: boolean };
     chair?: At;
