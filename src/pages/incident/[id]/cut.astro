@@ -5,10 +5,10 @@ import { getCollection } from 'astro:content';
 import Base from '../../../layouts/Base.astro';
 import CutPlayer from '../../../components/anime/CutPlayer.astro';
 import { shotList } from '../../../lib/cuts';
-import { href, incidentPath, sourceHost, type Incident } from '../../../lib/site';
+import { href, incidentPath, published, sourceHost, type Incident } from '../../../lib/site';
 
 export async function getStaticPaths() {
-    const all = await getCollection('incidents');
+    const all = published(await getCollection('incidents'));
     return all.filter((i) => shotList(i.id)).map((incident) => ({ params: { id: incident.id }, props: { incident } }));
 }
 interface Props { incident: Incident }

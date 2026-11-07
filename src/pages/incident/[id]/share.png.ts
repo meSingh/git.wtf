@@ -1,13 +1,13 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 import { shareImage } from '../../../lib/og';
-import { formatDate } from '../../../lib/site';
+import { formatDate, published } from '../../../lib/site';
 import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 export async function getStaticPaths() {
-    const all = await getCollection('incidents');
+    const all = published(await getCollection('incidents'));
     return all.map((incident) => ({ params: { id: incident.id }, props: { incident } }));
 }
 

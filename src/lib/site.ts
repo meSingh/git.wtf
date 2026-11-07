@@ -1,4 +1,13 @@
 import type { CollectionEntry } from 'astro:content';
+import { hiddenIncidentIds } from './visibility.mjs';
+
+// Launch rule (Mandeep, 7 Nov): one incident is published, the rest stay hidden (`published: false`, `draft: true`
+// or `hidden: true` in the front matter, or the GITWTF_ONLY_INCIDENTS / GITWTF_HIDE_INCIDENTS preview). Read once.
+const HIDDEN = hiddenIncidentIds();
+/** The incidents the site shows: the published ones. */
+export function published(list: Incident[]): Incident[] {
+    return list.filter((i) => !HIDDEN.has(i.id));
+}
 
 export const SITE = {
     name: 'git.wtf',
@@ -41,9 +50,9 @@ export function happened(i: Incident): string {
     return i.data.source_date;
 }
 
-/** Newest first by the day it happened, then by publish date. */
+/** The published incidents, newest first by the day it happened, then by publish date. */
 export function sortIncidents(list: Incident[]): Incident[] {
-    return [...list].sort((x, y) => {
+    return published(list).sort((x, y) => {
         const a = happened(x), b = happened(y);
         if (a !== b) return a < b ? 1 : -1;
         if (x.data.date !== y.data.date) return x.data.date < y.data.date ? 1 : -1;

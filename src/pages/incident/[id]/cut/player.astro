@@ -6,11 +6,11 @@ export const partial = true;
 import { getCollection } from 'astro:content';
 import Cutscene from '../../../../components/anime/Cutscene.astro';
 import { shotList } from '../../../../lib/cuts';
-import type { Incident } from '../../../../lib/site';
+import { published, type Incident } from '../../../../lib/site';
 import css from '../../../../styles/cut.css?raw';
 
 export async function getStaticPaths() {
-    const all = await getCollection('incidents');
+    const all = published(await getCollection('incidents'));
     return all.filter((i) => shotList(i.id)).map((incident) => ({ params: { id: incident.id }, props: { incident } }));
 }
 interface Props { incident: Incident }
