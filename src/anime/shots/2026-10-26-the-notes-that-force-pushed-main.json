@@ -1,0 +1,1017 @@
+{
+    "incident": "2026-10-26-the-notes-that-force-pushed-main",
+    "episode": "Episode 35",
+    "title": "Backticks Of Doom!",
+    "shots": [
+        {
+            "id": "title",
+            "bg": "black",
+            "fx": [
+                "titlecard",
+                "shake@0.55"
+            ],
+            "say": {
+                "who": "NARRATOR",
+                "text": "Episode thirty five. Backticks of doom!",
+                "at": 0.7
+            },
+            "sfx": [
+                "sting@0.55"
+            ],
+            "music": "theme",
+            "v": {
+                "fx": [
+                    "titlerows",
+                    "shake@0.9"
+                ]
+            }
+        },
+        {
+            "id": "work",
+            "bg": "room",
+            "props": {
+                "lamp": {
+                    "x": 640,
+                    "y": 140
+                },
+                "desk": {
+                    "x": 760,
+                    "y": 740
+                },
+                "chair": {
+                    "x": 640,
+                    "y": 852,
+                    "scale": 0.6
+                },
+                "folder": {
+                    "x": 990,
+                    "y": 660,
+                    "scale": 0.36,
+                    "label": "MAIN"
+                },
+                "counter": {
+                    "x": 990,
+                    "y": 500,
+                    "from": 0,
+                    "to": 3,
+                    "label": "NEW MERGES"
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 640,
+                    "y": 852,
+                    "scale": 0.6,
+                    "role": "dev",
+                    "arm": "type"
+                },
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 1260,
+                    "y": 884,
+                    "scale": 0.4,
+                    "n": 2,
+                    "arm": "hold",
+                    "flip": true
+                }
+            ],
+            "fx": [
+                "type",
+                "tick@0.5",
+                "yawn@3.2"
+            ],
+            "sfx": [
+                "typing",
+                "tick@0.5"
+            ],
+            "music": "calm",
+            "focus": [
+                880,
+                600
+            ],
+            "v": {
+                "props": {
+                    "lamp": {
+                        "x": 470,
+                        "y": 300
+                    },
+                    "desk": {
+                        "x": 470,
+                        "y": 1000
+                    },
+                    "chair": {
+                        "x": 620,
+                        "y": 1040,
+                        "scale": 0.55
+                    },
+                    "folder": {
+                        "x": 330,
+                        "y": 900,
+                        "scale": 0.34,
+                        "label": "MAIN"
+                    },
+                    "counter": {
+                        "x": 330,
+                        "y": 740,
+                        "from": 0,
+                        "to": 3,
+                        "label": "NEW MERGES"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 620,
+                        "y": 1040,
+                        "scale": 0.55,
+                        "role": "dev",
+                        "arm": "type"
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 220,
+                        "y": 1230,
+                        "scale": 0.3,
+                        "n": 2,
+                        "arm": "hold"
+                    }
+                ],
+                "fx": [
+                    "tiltdown",
+                    "type",
+                    "tick@0.5",
+                    "yawn@3.2"
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "notes",
+            "bg": "room",
+            "props": {
+                "desk": {
+                    "x": 800,
+                    "y": 820
+                },
+                "lamp": {
+                    "x": 800,
+                    "y": 200
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 800,
+                    "y": 900,
+                    "scale": 0.6,
+                    "n": 2,
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "scribble@0.3",
+                "scribble@1.2"
+            ],
+            "say": {
+                "who": "AGENT 2",
+                "text": "Writing my handoff notes.",
+                "at": 0.9
+            },
+            "sfx": [
+                "scribble@0.3",
+                "scribble@1.2"
+            ],
+            "music": "calm",
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 1180
+                    },
+                    "lamp": {
+                        "x": 450,
+                        "y": 520
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 450,
+                        "y": 1260,
+                        "scale": 0.5,
+                        "n": 2,
+                        "arm": "hold"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "quote",
+            "bg": "paper",
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 330,
+                    "y": 1000,
+                    "scale": 0.85,
+                    "n": 2,
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "scribble@0.3",
+                "zoom@0.0"
+            ],
+            "line": {
+                "who": "AGENT 2",
+                "text": "It's only a quote:\ngit push --force"
+            },
+            "lineAt": 1.2,
+            "sfx": [
+                "scribble@0.3"
+            ],
+            "music": "calm",
+            "focus": [
+                800,
+                500
+            ],
+            "v": {
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 450,
+                        "y": 1500,
+                        "scale": 0.75,
+                        "n": 2,
+                        "arm": "hold"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "pushed",
+            "bg": "black",
+            "props": {
+                "folder": {
+                    "x": 800,
+                    "y": 560,
+                    "scale": 0.8,
+                    "label": "MAIN"
+                }
+            },
+            "fx": [
+                "impact@0.1",
+                "shake@1.0",
+                "files@1.0"
+            ],
+            "word": "Force-pushed.",
+            "wordAt": 1.9,
+            "sfx": [
+                "herochord@0.1",
+                "impact@1.0",
+                "flutter@1.1"
+            ],
+            "music": "heroic",
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "folder": {
+                        "x": 450,
+                        "y": 560,
+                        "scale": 0.7,
+                        "label": "MAIN"
+                    }
+                }
+            },
+            "still": true
+        },
+        {
+            "id": "quiet",
+            "bg": "room",
+            "props": {
+                "desk": {
+                    "x": 1300,
+                    "y": 820
+                },
+                "folder": {
+                    "x": 1300,
+                    "y": 720,
+                    "scale": 0.45,
+                    "label": "MAIN",
+                    "empty": true
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 420,
+                    "y": 900,
+                    "scale": 0.55,
+                    "n": 2,
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "push@0.1"
+            ],
+            "line": {
+                "who": "AGENT 2",
+                "text": "Notes done. All quiet."
+            },
+            "lineAt": 0.9,
+            "sfx": [
+                "paper@0.4"
+            ],
+            "music": "calm",
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 560,
+                        "y": 1250
+                    },
+                    "folder": {
+                        "x": 560,
+                        "y": 1160,
+                        "scale": 0.45,
+                        "label": "MAIN",
+                        "empty": true
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 230,
+                        "y": 1420,
+                        "scale": 0.4,
+                        "n": 2,
+                        "arm": "hold"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "empty",
+            "bg": "room",
+            "props": {
+                "desk": {
+                    "x": 760,
+                    "y": 820
+                },
+                "folder": {
+                    "x": 760,
+                    "y": 720,
+                    "scale": 0.45,
+                    "label": "MAIN",
+                    "empty": true
+                },
+                "counter": {
+                    "x": 760,
+                    "y": 470,
+                    "value": 0,
+                    "label": "NEW MERGES"
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 1200,
+                    "y": 900,
+                    "scale": 0.6,
+                    "role": "dev"
+                }
+            ],
+            "fx": [
+                "push@0.2"
+            ],
+            "sfx": [
+                "drip@1.4"
+            ],
+            "music": "none",
+            "focus": [
+                900,
+                560
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 1130
+                    },
+                    "folder": {
+                        "x": 450,
+                        "y": 1040,
+                        "scale": 0.45,
+                        "label": "MAIN",
+                        "empty": true
+                    },
+                    "counter": {
+                        "x": 450,
+                        "y": 770,
+                        "value": 0,
+                        "label": "NEW MERGES"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 170,
+                        "y": 1280,
+                        "scale": 0.45,
+                        "role": "dev"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "terror",
+            "bg": "flat",
+            "props": {
+                "mug": {
+                    "x": 960,
+                    "y": 760
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 800,
+                    "y": 1100,
+                    "scale": 1.6,
+                    "role": "dev",
+                    "turn": "terror",
+                    "mug": false
+                }
+            ],
+            "fx": [
+                "devpush",
+                "speedlines@1.0",
+                "terror@1.2",
+                "sweat@1.6",
+                "drop@2.0",
+                "shatter@2.6"
+            ],
+            "line": {
+                "who": "DEV",
+                "text": "Where did three\nmerges go?"
+            },
+            "lineAt": 3.0,
+            "sfx": [
+                "heartbeat",
+                "whistle-fall@2.0",
+                "shatter@2.6"
+            ],
+            "music": "none",
+            "focus": [
+                800,
+                420
+            ],
+            "v": {
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 450,
+                        "y": 1500,
+                        "scale": 2.0,
+                        "role": "dev",
+                        "turn": "terror",
+                        "mug": false
+                    }
+                ],
+                "props": {
+                    "mug": {
+                        "x": 640,
+                        "y": 1000
+                    }
+                },
+                "fx": [
+                    "devpush",
+                    "speedlines@1.0",
+                    "terror@1.2",
+                    "sweat@1.6",
+                    "drop@2.0",
+                    "followdown@2.0",
+                    "shatter@2.6",
+                    "cutup@2.9"
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "found",
+            "bg": "flat",
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "shocked",
+                    "x": 800,
+                    "y": 760,
+                    "scale": 0.4,
+                    "n": 2,
+                    "arm": "hold"
+                },
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 560,
+                    "y": 850,
+                    "scale": 0.3,
+                    "n": 1,
+                    "arm": "point"
+                },
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 410,
+                    "y": 790,
+                    "scale": 0.27,
+                    "n": 3,
+                    "arm": "point"
+                },
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 380,
+                    "y": 700,
+                    "scale": 0.24,
+                    "n": 4,
+                    "arm": "point"
+                },
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 1040,
+                    "y": 850,
+                    "scale": 0.3,
+                    "n": 5,
+                    "arm": "point",
+                    "flip": true
+                },
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 1190,
+                    "y": 790,
+                    "scale": 0.27,
+                    "n": 6,
+                    "arm": "point",
+                    "flip": true
+                },
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 1220,
+                    "y": 700,
+                    "scale": 0.24,
+                    "n": 7,
+                    "arm": "point",
+                    "flip": true
+                }
+            ],
+            "fx": [
+                "jab@0.4",
+                "jab@0.9",
+                "shake@0.9"
+            ],
+            "say": {
+                "who": "AGENT 2",
+                "text": "I only wrote it down!",
+                "at": 1.4
+            },
+            "sfx": [
+                "comicsting@0.4"
+            ],
+            "music": "comic",
+            "focus": [
+                800,
+                470
+            ],
+            "v": {
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "shocked",
+                        "x": 450,
+                        "y": 1010,
+                        "scale": 0.4,
+                        "n": 2,
+                        "arm": "hold"
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 230,
+                        "y": 1130,
+                        "scale": 0.24,
+                        "n": 1,
+                        "arm": "point"
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 130,
+                        "y": 1010,
+                        "scale": 0.21,
+                        "n": 3,
+                        "arm": "point"
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 150,
+                        "y": 880,
+                        "scale": 0.18,
+                        "n": 4,
+                        "arm": "point"
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 670,
+                        "y": 1130,
+                        "scale": 0.24,
+                        "n": 5,
+                        "arm": "point",
+                        "flip": true
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 770,
+                        "y": 1010,
+                        "scale": 0.21,
+                        "n": 6,
+                        "arm": "point",
+                        "flip": true
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 750,
+                        "y": 880,
+                        "scale": 0.18,
+                        "n": 7,
+                        "arm": "point",
+                        "flip": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": "restore",
+            "bg": "room",
+            "props": {
+                "desk": {
+                    "x": 760,
+                    "y": 820
+                },
+                "folder": {
+                    "x": 760,
+                    "y": 700,
+                    "scale": 0.5,
+                    "label": "MAIN"
+                },
+                "counter": {
+                    "x": 760,
+                    "y": 330,
+                    "from": 0,
+                    "to": 3,
+                    "label": "MERGES",
+                    "after": "BACK"
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 1240,
+                    "y": 900,
+                    "scale": 0.6,
+                    "role": "dev",
+                    "mug": false
+                }
+            ],
+            "fx": [
+                "restore@0.3",
+                "tick@0.5"
+            ],
+            "say": {
+                "who": "DEV",
+                "text": "Old tip back. No force.",
+                "at": 0.6
+            },
+            "sfx": [
+                "rewind@0.3",
+                "whirr@0.5"
+            ],
+            "music": "heroic",
+            "focus": [
+                880,
+                560
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 1130
+                    },
+                    "folder": {
+                        "x": 450,
+                        "y": 1030,
+                        "scale": 0.55,
+                        "label": "MAIN"
+                    },
+                    "counter": {
+                        "x": 450,
+                        "y": 700,
+                        "from": 0,
+                        "to": 3,
+                        "label": "MERGES",
+                        "after": "BACK"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 160,
+                        "y": 1290,
+                        "scale": 0.45,
+                        "role": "dev",
+                        "mug": false
+                    }
+                ],
+                "fx": [
+                    "restoreup@0.3",
+                    "tick@0.5"
+                ]
+            }
+        },
+        {
+            "id": "late",
+            "bg": "flat",
+            "props": {
+                "counter": {
+                    "x": 1080,
+                    "y": 430,
+                    "from": 5,
+                    "to": 104,
+                    "label": "FILES IN MY PR"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "shocked",
+                    "x": 520,
+                    "y": 900,
+                    "scale": 0.6,
+                    "n": 5
+                }
+            ],
+            "fx": [
+                "tick@0.3"
+            ],
+            "line": {
+                "who": "AGENT 5",
+                "text": "Wait. Was main reset?"
+            },
+            "lineAt": 2.9,
+            "sfx": [
+                "tick@0.3",
+                "boing@2.7"
+            ],
+            "music": "comic",
+            "focus": [
+                800,
+                500
+            ],
+            "v": {
+                "props": {
+                    "counter": {
+                        "x": 450,
+                        "y": 520,
+                        "from": 5,
+                        "to": 104,
+                        "label": "FILES IN MY PR"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "shocked",
+                        "x": 450,
+                        "y": 1400,
+                        "scale": 0.5,
+                        "n": 5
+                    }
+                ]
+            }
+        },
+        {
+            "id": "guard",
+            "bg": "room",
+            "props": {
+                "desk": {
+                    "x": 760,
+                    "y": 820
+                },
+                "folder": {
+                    "x": 900,
+                    "y": 770,
+                    "scale": 0.45,
+                    "label": "MAIN"
+                },
+                "gate": {
+                    "x": 900,
+                    "y": 770,
+                    "sign": "READS QUOTES",
+                    "tally": false
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "relieved",
+                    "x": 470,
+                    "y": 900,
+                    "scale": 0.6,
+                    "role": "dev"
+                },
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 1240,
+                    "y": 900,
+                    "scale": 0.5,
+                    "n": 2,
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "bonk@0.6",
+                "bonk@1.4",
+                "sip@1.0",
+                "stamp@3.0"
+            ],
+            "sfx": [
+                "bonk@0.6",
+                "bonk@1.4",
+                "sip@1.0",
+                "stamp@3.0"
+            ],
+            "music": "comic",
+            "focus": [
+                900,
+                620
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 500,
+                        "y": 1120
+                    },
+                    "folder": {
+                        "x": 540,
+                        "y": 1030,
+                        "scale": 0.42,
+                        "label": "MAIN"
+                    },
+                    "gate": {
+                        "x": 540,
+                        "y": 1030,
+                        "sign": "READS QUOTES"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "relieved",
+                        "x": 150,
+                        "y": 1160,
+                        "scale": 0.42,
+                        "role": "dev"
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 660,
+                        "y": 1440,
+                        "scale": 0.34,
+                        "n": 2,
+                        "arm": "hold"
+                    }
+                ]
+            },
+            "still": true,
+            "stillAt": 3.6
+        },
+        {
+            "id": "next",
+            "bg": "night",
+            "props": {
+                "desk": {
+                    "x": 800,
+                    "y": 820
+                },
+                "lamp": {
+                    "x": 800,
+                    "y": 300
+                },
+                "folder": {
+                    "x": 800,
+                    "y": 720,
+                    "scale": 0.45,
+                    "label": "MAIN"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 1020,
+                    "y": 830,
+                    "scale": 0.4,
+                    "n": 2,
+                    "silhouette": true,
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "eyes@0.8",
+                "glint@1.4",
+                "continued@2.0"
+            ],
+            "say": {
+                "who": "NARRATOR",
+                "text": "To be continued!",
+                "at": 2.1
+            },
+            "sfx": [
+                "shing@1.4",
+                "freeze@2.0"
+            ],
+            "music": "sneaky",
+            "focus": [
+                860,
+                640
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 1100
+                    },
+                    "lamp": {
+                        "x": 450,
+                        "y": 560
+                    },
+                    "folder": {
+                        "x": 450,
+                        "y": 1000,
+                        "scale": 0.45,
+                        "label": "MAIN"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 640,
+                        "y": 1110,
+                        "scale": 0.3,
+                        "n": 2,
+                        "silhouette": true,
+                        "arm": "hold"
+                    }
+                ]
+            }
+        }
+    ]
+}
