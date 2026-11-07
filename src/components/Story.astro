@@ -2,11 +2,9 @@
 // The story: why git.wtf counts fuck-ups now. On the homepage it has its heading and ends with the way into the
 // old blog; at the top of the archive, which is the old blog, it sits under the page's title and ends on the
 // archive's own line instead.
-import { getCollection } from 'astro:content';
 import { href } from '../lib/site';
 interface Props { toArchive?: boolean; head?: boolean }
 const { toArchive = true, head = true } = Astro.props;
-const posts = (await getCollection('archive')).filter((p) => p.data.type === 'post').length;
 ---
 <div class="col">
     {head && <div class="beat-head"><h2 id="story-h" data-lock>The story</h2></div>}
@@ -16,5 +14,5 @@ const posts = (await getCollection('archive')).filter((p) => p.data.type === 'po
         <p>AI now runs Git commands by itself, and <mark>a good many of the fuck-ups are now its own</mark>. We keep track of those with delight.</p>
         {toArchive ? <p>By the way, the old blog posts are still here, unchanged, in the archive.</p> : <p>These are those posts, unchanged and at their old addresses. The commands still work. The jokes are older.</p>}
     </div>
-    {toArchive && <p class="story-go"><a class="story-btn" href={href('/archive/')}>Read the old blog: {posts} posts</a></p>}
+    {toArchive && <p class="story-go"><a class="story-btn" href={href('/archive/')}>Read the old blog</a></p>}
 </div>
