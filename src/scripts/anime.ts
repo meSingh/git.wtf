@@ -323,7 +323,11 @@ export function mountCutscene(wrap: HTMLElement) {
         if (hint) hint.hidden = last;
         if (after) after.classList.toggle('on', last);
     };
-    const next = () => show(i + 1);
+    // an input while a shot is still playing finishes that shot, line and all; the next input moves on
+    const next = () => {
+        if (tl && tl.progress() < 1) { tl.progress(1); return; }
+        show(i + 1);
+    };
     const prev = () => show(i - 1);
 
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || location.search.includes('reduce');
