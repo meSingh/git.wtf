@@ -15,8 +15,12 @@
 .foot-mark .logo { display: block; }
 .foot-follow { margin: 0; font-family: var(--display); font-weight: 900; font-size: clamp(1.4rem, 3.4vw, 2.4rem); text-transform: uppercase; }
 .foot-social { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; }
-.foot-btn { display: inline-block; border: 2px solid var(--black); border-radius: 2px; padding: 0.65em 1.1em; font-family: var(--mono); font-size: 0.9rem; color: var(--black); transition: background 0.2s ease, color 0.2s ease; }
-.foot-btn:hover { background: var(--black); color: var(--yellow); text-decoration: none; }
+.foot-btn { display: inline-flex; align-items: center; gap: 0.55em; border: 2px solid var(--black); border-radius: 3px; padding: 0.65em 1.15em; background: var(--paper); box-shadow: 3px 3px 0 var(--black); font-family: var(--mono); font-size: 0.9rem; font-weight: 600; color: var(--black); transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease, color 0.2s ease; }
+.foot-btn svg { width: 1.15em; height: 1.15em; flex: none; }
+.foot-btn:hover, .foot-btn:focus-visible { background: var(--black); color: var(--yellow); text-decoration: none; transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--black); }
+.foot-btn .ko { fill: var(--paper); }
+.foot-btn:hover .ko, .foot-btn:focus-visible .ko { fill: var(--black); }
+@media (prefers-reduced-motion: reduce) { .foot-btn { transition: none; } }
 .foot-row { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.6rem 1.6rem; margin: 0.4rem 0 0; }
 .foot-nav { display: flex; gap: 1.2rem; font-family: var(--mono); font-size: 0.85rem; }
 .foot-nav a { color: var(--black); text-decoration: underline; }
