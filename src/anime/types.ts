@@ -33,7 +33,9 @@ export interface Props {
     folder?: At & { label?: string; empty?: boolean };
     files?: boolean;
     counter?: { x: number; y: number; to?: number; from?: number; value?: number };
-    desk?: At;
+    /** The desk: a top, legs and a front. `laptop` is an open laptop on it, x relative to the desk's middle. */
+    desk?: At & { laptop?: { x: number } };
+    chair?: At;
     copier?: At;
     paper?: At & { ring?: boolean };
     stack?: At & { to?: [number, number]; grow?: [number, number]; ring?: boolean };
@@ -85,7 +87,8 @@ export interface Shot {
      *  sound plan and timings stay the shared ones. Safe areas: no words above y 190 or below y 1200, nothing to
      *  read right of x 780 below y 700; words 400 to 900, lines 1000 to 1180. */
     v?: { cast?: CastIn[]; props?: Props; fx?: string[]; bg?: Shot['bg'] };
-    /** Draw this shot as a still on the incident page. */
+    /** Draw this shot as a still on the incident page, at stillAt seconds in (else just before it ends). */
     still?: boolean;
+    stillAt?: number;
 }
 export interface ShotList { incident: string; episode: string; title: string; shots: Shot[] }

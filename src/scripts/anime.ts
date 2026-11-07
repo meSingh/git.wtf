@@ -300,7 +300,10 @@ Object.assign(FX, {
         const mug = q(pile, '.pmug');
         tl.set(sheet, { visibility: 'visible' }, t - 0.2);
         tl.fromTo(sheet, { y: -30 }, { y: 0, duration: 0.14, ease: 'power2.in', immediateRender: false }, t - 0.2);
-        if (mug) tl.to(mug, { keyframes: [{ y: 150 - 46 - k * 18 - 30, duration: 0.12, ease: 'power2.in' }, { y: 0, duration: 0.2, ease: 'power2.out', delay: 0.1 }] }, t - 0.1);
+        // the mug rests on the top sheet: up, then down onto the new one
+        const rest = (n: number) => 74 - 18 * Math.min(n, sheets.length - 1);
+        if (mug && k === 1) tl.set(mug, { y: rest(0) }, 0);
+        if (mug) tl.to(mug, { keyframes: [{ y: rest(k) - 60, duration: 0.12, ease: 'power2.out' }, { y: rest(k), duration: 0.16, ease: 'power2.in', delay: 0.08 }] }, t - 0.1);
         tl.fromTo(q(sheet, '.ring'), { opacity: 0 }, { opacity: 0.85, duration: 0.1, immediateRender: false }, t + 0.05);
     },
     tick({ tl, g }: Ctx, t: number) {

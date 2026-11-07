@@ -204,3 +204,7 @@
     /* the tall frame's lines: large, read on a phone in the feed */
     .cutscene[data-frame='9:16'] .line text { font-size: 68px; stroke-width: 14px; }
     .cutscene[data-frame='9:16'] .line .who { font-size: 34px; }
+    .cutscene .desk .front { fill: #2a2926; stroke: #0a0a0a; stroke-width: 6; }
+    .cutscene .chair .back, .cutscene .chair .post { fill: #5d5a53; stroke: #0a0a0a; stroke-width: 6; }
+    .cutscene .laptop .lid, .cutscene .laptop .base { fill: #5d5a53; stroke: #0a0a0a; stroke-width: 5; }
+    .cutscene .laptop .screen { fill: #0a0a0a; }

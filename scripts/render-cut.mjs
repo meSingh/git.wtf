@@ -33,7 +33,8 @@ const shoot = async (w, h, ks, save) => {
     const plan = await page.evaluate(() => window.__cut.plan);
     for (const k of ks) {
         // the shot settled: just before it hands over to the next
-        await page.evaluate((t) => { window.__cut.frameAt(t); }, plan[k].start + plan[k].length - 0.25);
+        const at = list.shots[k].stillAt;
+        await page.evaluate((t) => { window.__cut.frameAt(t); }, plan[k].start + (typeof at === 'number' ? Math.min(at, plan[k].length - 0.05) : plan[k].length - 0.25));
         await page.waitForTimeout(60);
         const png = await page.locator('svg.cutscene').screenshot({ animations: 'disabled', timeout: 15000 });
         await save(k, png);

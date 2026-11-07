@@ -32,11 +32,14 @@
    "props": {
     "desk": {
      "x": 760,
-     "y": 820
+     "y": 820,
+     "laptop": {
+      "x": -120
+     }
     },
     "folder": {
      "x": 990,
-     "y": 770,
+     "y": 740,
      "scale": 0.36,
      "label": "UNSAVED WORK"
     },
@@ -48,18 +51,23 @@
     },
     "pages": {
      "x": 850,
-     "y": 786,
+     "y": 790,
      "scale": 0.8,
      "ring": true,
      "grow": true
     },
     "copier": {
      "x": 1330,
-     "y": 880
+     "y": 964
     },
     "lamp": {
      "x": 640,
      "y": 160
+    },
+    "chair": {
+     "x": 640,
+     "y": 932,
+     "scale": 0.6
     }
    },
    "cast": [
@@ -78,7 +86,7 @@
      "pose": "neutral",
      "arm": "hold",
      "x": 1200,
-     "y": 880,
+     "y": 964,
      "scale": 0.4,
      "role": "extra"
     }
@@ -111,7 +119,7 @@
       "who": "dev",
       "pose": "neutral",
       "arm": "type",
-      "x": 330,
+      "x": 340,
       "y": 1072,
       "scale": 0.6,
       "role": "dev"
@@ -121,9 +129,9 @@
       "extra": true,
       "pose": "neutral",
       "arm": "hold",
-      "x": 290,
-      "y": 1190,
-      "scale": 0.32,
+      "x": 200,
+      "y": 1104,
+      "scale": 0.3,
       "role": "extra"
      }
     ],
@@ -133,12 +141,16 @@
       "y": 260
      },
      "desk": {
-      "x": 450,
-      "y": 960
+      "x": 470,
+      "y": 960,
+      "scale": 0.7,
+      "laptop": {
+       "x": -170
+      }
      },
      "folder": {
       "x": 600,
-      "y": 900,
+      "y": 880,
       "scale": 0.3,
       "label": "UNSAVED WORK"
      },
@@ -150,14 +162,20 @@
      },
      "pages": {
       "x": 470,
-      "y": 926,
+      "y": 930,
       "scale": 0.6,
       "ring": true,
       "grow": true
      },
      "copier": {
-      "x": 150,
-      "y": 1190
+      "x": 92,
+      "y": 1104,
+      "scale": 0.8
+     },
+     "chair": {
+      "x": 340,
+      "y": 1072,
+      "scale": 0.6
      }
     },
     "fx": [
@@ -690,7 +708,9 @@
      "squeeze@0.9",
      "shake@1.6"
     ]
-   }
+   },
+   "still": true,
+   "stillAt": 1.0
   },
   {
    "id": "inside",
