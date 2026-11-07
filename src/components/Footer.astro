@@ -39,7 +39,7 @@ const credits: [string, string][] = [
             <a class="foot-mark" href={href('/')} aria-label="git.wtf, home"><Logo height="clamp(2.6rem, 7vw, 4.8rem)" title="" /></a>
             <p class="foot-follow">Follow the count</p>
             <nav class="foot-social" aria-label="git.wtf elsewhere">
-                {SITE.social.map((s) => <a class="foot-btn" href={s.url} rel="noopener" aria-label={`git.wtf on ${s.name}`}><svg viewBox="0 0 24 24" aria-hidden="true" set:html={ICONS[s.name] ?? ''} />{s.name}</a>)}
+                {SITE.social.map((s) => <a class="foot-btn" href={s.url} target="_blank" rel="noopener noreferrer" aria-label={`git.wtf on ${s.name}`}><svg viewBox="0 0 24 24" aria-hidden="true" set:html={ICONS[s.name] ?? ''} />{s.name}</a>)}
             </nav>
             <p class="foot-row">
                 <nav class="foot-nav" aria-label="Site"><a href={href('/incidents/')}>Incidents</a><a href={href('/archive/')}>Archive</a><a href={href('/rss.xml')}>RSS</a></nav>
@@ -50,5 +50,5 @@ const credits: [string, string][] = [
             </p>
         </div>
     </div>
-    <div class="foot-strip"><p class="col credit"><a class="credit-name" href={SITE.owner.url}>{c.name}</a>, {c.before}<em>{c.strong}</em>{c.after}<em>{c.last}</em></p></div>
+    <div class="foot-strip"><p class="col credit"><a class="credit-name" href={SITE.owner.url} target="_blank" rel="noopener noreferrer">{c.name}</a>, {c.before}<em>{c.strong}</em>{c.after}<em>{c.last}</em></p></div>
 </footer>
