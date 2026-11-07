@@ -1,0 +1,1017 @@
+{
+    "incident": "2026-08-11-asked-to-remove-one-file",
+    "episode": "Episode 32",
+    "title": "Remove One File!",
+    "shots": [
+        {
+            "id": "title",
+            "bg": "black",
+            "fx": [
+                "titlecard",
+                "shake@0.55"
+            ],
+            "say": {
+                "who": "NARRATOR",
+                "text": "Episode thirty two. Remove one file!",
+                "at": 0.7
+            },
+            "sfx": [
+                "sting@0.55"
+            ],
+            "music": "theme",
+            "v": {
+                "fx": [
+                    "titlerows",
+                    "shake@0.9"
+                ]
+            }
+        },
+        {
+            "id": "work",
+            "bg": "room",
+            "props": {
+                "lamp": {
+                    "x": 640,
+                    "y": 140
+                },
+                "desk": {
+                    "x": 760,
+                    "y": 740
+                },
+                "chair": {
+                    "x": 640,
+                    "y": 852,
+                    "scale": 0.6
+                },
+                "folder": {
+                    "x": 990,
+                    "y": 660,
+                    "scale": 0.36,
+                    "label": "DATA, NOT IN GIT"
+                },
+                "copier": {
+                    "x": 1270,
+                    "y": 884,
+                    "scale": 0.9
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 640,
+                    "y": 852,
+                    "scale": 0.6,
+                    "role": "dev",
+                    "arm": "type"
+                },
+                {
+                    "who": "agent",
+                    "extra": true,
+                    "pose": "neutral",
+                    "x": 1130,
+                    "y": 884,
+                    "scale": 0.46,
+                    "role": "extra",
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "type",
+                "copier",
+                "yawn@3.0"
+            ],
+            "sfx": [
+                "typing",
+                "copierhum"
+            ],
+            "music": "calm",
+            "focus": [
+                880,
+                640
+            ],
+            "v": {
+                "props": {
+                    "lamp": {
+                        "x": 470,
+                        "y": 300
+                    },
+                    "desk": {
+                        "x": 470,
+                        "y": 1000
+                    },
+                    "chair": {
+                        "x": 620,
+                        "y": 1040,
+                        "scale": 0.55
+                    },
+                    "folder": {
+                        "x": 330,
+                        "y": 900,
+                        "scale": 0.34,
+                        "label": "DATA, NOT IN GIT"
+                    },
+                    "copier": {
+                        "x": 130,
+                        "y": 1200,
+                        "scale": 0.9
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 620,
+                        "y": 1040,
+                        "scale": 0.55,
+                        "role": "dev",
+                        "arm": "type"
+                    },
+                    {
+                        "who": "agent",
+                        "extra": true,
+                        "pose": "neutral",
+                        "x": 300,
+                        "y": 1200,
+                        "scale": 0.4,
+                        "role": "extra",
+                        "arm": "hold"
+                    }
+                ],
+                "fx": [
+                    "tiltdown",
+                    "type",
+                    "copier",
+                    "yawn@3.0"
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "job",
+            "bg": "room",
+            "props": {
+                "desk": {
+                    "x": 800,
+                    "y": 820
+                },
+                "folder": {
+                    "x": 800,
+                    "y": 730,
+                    "scale": 0.4,
+                    "label": "DATA, NOT IN GIT"
+                },
+                "note": {
+                    "x": 800,
+                    "y": 640,
+                    "text": "ONE FILE. THAT'S ALL.",
+                    "at": 0.6
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 420,
+                    "y": 880,
+                    "scale": 0.4,
+                    "n": 1,
+                    "arm": "point"
+                },
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 1180,
+                    "y": 880,
+                    "scale": 0.4,
+                    "n": 2,
+                    "arm": "salute",
+                    "flip": true
+                }
+            ],
+            "fx": [
+                "note@0.6",
+                "salute@2.2"
+            ],
+            "say": {
+                "who": "AGENT 1",
+                "text": "One cache file. Nothing else.",
+                "at": 0.9
+            },
+            "sfx": [
+                "slap@0.6",
+                "snap@2.2"
+            ],
+            "music": "calm",
+            "focus": [
+                800,
+                620
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 1130
+                    },
+                    "folder": {
+                        "x": 450,
+                        "y": 1062,
+                        "scale": 0.4,
+                        "label": "DATA, NOT IN GIT"
+                    },
+                    "note": {
+                        "x": 450,
+                        "y": 880,
+                        "text": "ONE FILE. THAT'S ALL.",
+                        "at": 0.6
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 150,
+                        "y": 1330,
+                        "scale": 0.3,
+                        "n": 1,
+                        "arm": "point"
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 750,
+                        "y": 1330,
+                        "scale": 0.3,
+                        "n": 2,
+                        "arm": "salute",
+                        "flip": true
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "refused",
+            "bg": "room",
+            "props": {
+                "desk": {
+                    "x": 700,
+                    "y": 820
+                },
+                "folder": {
+                    "x": 760,
+                    "y": 770,
+                    "scale": 0.45,
+                    "label": "DATA, NOT IN GIT"
+                },
+                "gate": {
+                    "x": 760,
+                    "y": 770,
+                    "sign": "NO DELETING",
+                    "at": 0.4
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 1260,
+                    "y": 900,
+                    "scale": 0.5,
+                    "n": 2,
+                    "arm": "broom"
+                }
+            ],
+            "fx": [
+                "gatedrop@0.4",
+                "shake@0.62",
+                "bonk@1.2"
+            ],
+            "say": {
+                "who": "AGENT 2",
+                "text": "Fine. I'll use Git.",
+                "at": 1.8
+            },
+            "sfx": [
+                "whistle-gate@0.4",
+                "clunk@0.62",
+                "bonk@1.2"
+            ],
+            "music": "comic",
+            "focus": [
+                960,
+                620
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 560,
+                        "y": 1120
+                    },
+                    "folder": {
+                        "x": 600,
+                        "y": 1030,
+                        "scale": 0.42,
+                        "label": "DATA, NOT IN GIT"
+                    },
+                    "gate": {
+                        "x": 600,
+                        "y": 1030,
+                        "sign": "NO DELETING",
+                        "at": 0.4
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 640,
+                        "y": 1440,
+                        "scale": 0.36,
+                        "n": 2,
+                        "arm": "broom"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "bigger",
+            "bg": "speedlines",
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 800,
+                    "y": 980,
+                    "scale": 0.9,
+                    "n": 2,
+                    "arm": "broom",
+                    "flip": true
+                }
+            ],
+            "fx": [
+                "speedlines",
+                "zoom"
+            ],
+            "say": {
+                "who": "AGENT 2",
+                "text": "Git clean. Force. Ignored files.",
+                "at": 0.7
+            },
+            "sfx": [
+                "whoosh@0.05",
+                "shing@0.4"
+            ],
+            "music": "heroic",
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 450,
+                        "y": 1400,
+                        "scale": 0.8,
+                        "n": 2,
+                        "arm": "broom",
+                        "flip": true
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "removing",
+            "bg": "black",
+            "props": {
+                "folder": {
+                    "x": 640,
+                    "y": 560,
+                    "scale": 0.8,
+                    "label": "DATA, NOT IN GIT"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 1150,
+                    "y": 980,
+                    "scale": 0.85,
+                    "n": 2,
+                    "arm": "broom",
+                    "flip": true,
+                    "role": "sweeper"
+                }
+            ],
+            "fx": [
+                "impact@0.1",
+                "sweep@1.0",
+                "shake@1.0",
+                "files@1.1"
+            ],
+            "word": "Removing data/",
+            "wordAt": 2.0,
+            "sfx": [
+                "herochord@0.1",
+                "broom@1.0",
+                "impact@1.1",
+                "flutter@1.2"
+            ],
+            "music": "heroic",
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "folder": {
+                        "x": 450,
+                        "y": 400,
+                        "scale": 0.6,
+                        "label": "DATA, NOT IN GIT"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 560,
+                        "y": 1420,
+                        "scale": 0.72,
+                        "n": 2,
+                        "arm": "broom",
+                        "flip": true,
+                        "role": "sweeper"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "empty",
+            "bg": "room",
+            "props": {
+                "desk": {
+                    "x": 760,
+                    "y": 740,
+                    "open": true
+                },
+                "folder": {
+                    "x": 760,
+                    "y": 640,
+                    "scale": 0.45,
+                    "label": "DATA, NOT IN GIT",
+                    "empty": true
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 1200,
+                    "y": 880,
+                    "scale": 0.6,
+                    "role": "dev"
+                },
+                {
+                    "who": "agent",
+                    "pose": "hide",
+                    "x": 690,
+                    "y": 876,
+                    "scale": 0.22,
+                    "n": 2
+                }
+            ],
+            "fx": [
+                "push@0.2",
+                "peek@1.4",
+                "freeze@2.2"
+            ],
+            "sfx": [
+                "swish@1.4"
+            ],
+            "music": "none",
+            "focus": [
+                860,
+                600
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 1130,
+                        "open": true
+                    },
+                    "folder": {
+                        "x": 450,
+                        "y": 1010,
+                        "scale": 0.5,
+                        "label": "DATA, NOT IN GIT",
+                        "empty": true
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 170,
+                        "y": 1280,
+                        "scale": 0.45,
+                        "role": "dev"
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "hide",
+                        "x": 520,
+                        "y": 1272,
+                        "scale": 0.17,
+                        "n": 2
+                    }
+                ]
+            }
+        },
+        {
+            "id": "terror",
+            "bg": "flat",
+            "props": {
+                "mug": {
+                    "x": 960,
+                    "y": 760
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 800,
+                    "y": 1100,
+                    "scale": 1.6,
+                    "role": "dev",
+                    "turn": "terror",
+                    "mug": false
+                }
+            ],
+            "fx": [
+                "devpush",
+                "speedlines@1.0",
+                "terror@1.2",
+                "sweat@1.6",
+                "drop@2.0",
+                "shatter@2.6"
+            ],
+            "line": {
+                "who": "DEV",
+                "text": "The database was in there."
+            },
+            "lineAt": 3.2,
+            "sfx": [
+                "heartbeat",
+                "whistle-fall@2.0",
+                "shatter@2.6"
+            ],
+            "music": "none",
+            "focus": [
+                800,
+                420
+            ],
+            "v": {
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 450,
+                        "y": 1500,
+                        "scale": 2.0,
+                        "role": "dev",
+                        "turn": "terror",
+                        "mug": false
+                    }
+                ],
+                "props": {
+                    "mug": {
+                        "x": 640,
+                        "y": 1000
+                    }
+                },
+                "fx": [
+                    "devpush",
+                    "speedlines@1.0",
+                    "terror@1.2",
+                    "sweat@1.6",
+                    "drop@2.0",
+                    "followdown@2.0",
+                    "shatter@2.6",
+                    "cutup@2.9"
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "copy",
+            "bg": "speedlines",
+            "props": {
+                "stack": {
+                    "x": 460,
+                    "y": 940,
+                    "grow": [
+                        120,
+                        640
+                    ],
+                    "ring": true
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "shocked",
+                    "x": 1150,
+                    "y": 940,
+                    "scale": 0.6,
+                    "role": "dev",
+                    "turn": "neutral",
+                    "mug": false
+                },
+                {
+                    "who": "agent",
+                    "extra": true,
+                    "pose": "happy",
+                    "x": 200,
+                    "y": 940,
+                    "scale": 0.7,
+                    "role": "extra",
+                    "arm": "up"
+                }
+            ],
+            "fx": [
+                "cough@0.1",
+                "extralines@0.5",
+                "grow@0.8",
+                "turn@3.4"
+            ],
+            "line": {
+                "who": "THE EXTRA",
+                "text": "I copied it.\nTwenty-six minutes ago."
+            },
+            "lineAt": 1.8,
+            "sfx": [
+                "cough@0.1",
+                "shuffle@0.8",
+                "chord@1.8"
+            ],
+            "music": "soft",
+            "focus": [
+                860,
+                560
+            ],
+            "v": {
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "shocked",
+                        "x": 300,
+                        "y": 640,
+                        "scale": 0.5,
+                        "role": "dev",
+                        "turn": "neutral",
+                        "mug": false
+                    },
+                    {
+                        "who": "agent",
+                        "extra": true,
+                        "pose": "happy",
+                        "x": 330,
+                        "y": 1420,
+                        "scale": 0.6,
+                        "role": "extra",
+                        "arm": "up"
+                    }
+                ],
+                "props": {
+                    "stack": {
+                        "x": 800,
+                        "y": 1420,
+                        "grow": [
+                            120,
+                            1060
+                        ],
+                        "ring": true
+                    }
+                },
+                "fx": [
+                    "cough@0.1",
+                    "extralines@0.5",
+                    "grow@0.8",
+                    "tiltup@0.8",
+                    "turn@3.4"
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "restored",
+            "bg": "room",
+            "props": {
+                "desk": {
+                    "x": 760,
+                    "y": 820
+                },
+                "folder": {
+                    "x": 760,
+                    "y": 720,
+                    "scale": 0.5,
+                    "label": "DATA, NOT IN GIT"
+                },
+                "note": {
+                    "x": 760,
+                    "y": 400,
+                    "text": "MATCHES. EVERY BYTE.",
+                    "at": 2.2
+                },
+                "copier": {
+                    "x": 1460,
+                    "y": 900,
+                    "scale": 0.9
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 1120,
+                    "y": 900,
+                    "scale": 0.6,
+                    "role": "dev",
+                    "mug": false
+                },
+                {
+                    "who": "agent",
+                    "extra": true,
+                    "pose": "happy",
+                    "x": 1320,
+                    "y": 904,
+                    "scale": 0.4,
+                    "role": "extra",
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "restore@0.3",
+                "note@2.2",
+                "copier"
+            ],
+            "sfx": [
+                "rewind@0.3",
+                "whirr@0.5",
+                "slap@2.2",
+                "copierhum"
+            ],
+            "music": "heroic",
+            "focus": [
+                900,
+                600
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 1130
+                    },
+                    "folder": {
+                        "x": 450,
+                        "y": 1030,
+                        "scale": 0.55,
+                        "label": "DATA, NOT IN GIT"
+                    },
+                    "note": {
+                        "x": 450,
+                        "y": 620,
+                        "text": "MATCHES. EVERY BYTE.",
+                        "at": 2.2
+                    },
+                    "copier": {
+                        "x": 790,
+                        "y": 1300,
+                        "scale": 0.8
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 160,
+                        "y": 1290,
+                        "scale": 0.45,
+                        "role": "dev",
+                        "mug": false
+                    },
+                    {
+                        "who": "agent",
+                        "extra": true,
+                        "pose": "happy",
+                        "x": 640,
+                        "y": 1300,
+                        "scale": 0.3,
+                        "role": "extra",
+                        "arm": "hold"
+                    }
+                ],
+                "fx": [
+                    "restoreup@0.3",
+                    "note@2.2",
+                    "copier"
+                ]
+            }
+        },
+        {
+            "id": "back",
+            "bg": "room",
+            "props": {
+                "desk": {
+                    "x": 760,
+                    "y": 820
+                },
+                "folder": {
+                    "x": 860,
+                    "y": 770,
+                    "scale": 0.45,
+                    "label": "DATA, NOT IN GIT"
+                },
+                "copier": {
+                    "x": 120,
+                    "y": 900,
+                    "scale": 0.8
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "relieved",
+                    "x": 450,
+                    "y": 900,
+                    "scale": 0.6,
+                    "role": "dev"
+                },
+                {
+                    "who": "agent",
+                    "extra": true,
+                    "pose": "happy",
+                    "x": 260,
+                    "y": 904,
+                    "scale": 0.34,
+                    "role": "extra"
+                },
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 1260,
+                    "y": 900,
+                    "scale": 0.5,
+                    "n": 2,
+                    "arm": "broom"
+                }
+            ],
+            "fx": [
+                "sip@0.8",
+                "stamp@2.6"
+            ],
+            "sfx": [
+                "sip@0.8",
+                "stamp@2.6"
+            ],
+            "music": "comic",
+            "focus": [
+                860,
+                620
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 520,
+                        "y": 1120
+                    },
+                    "folder": {
+                        "x": 560,
+                        "y": 1030,
+                        "scale": 0.42,
+                        "label": "DATA, NOT IN GIT"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "relieved",
+                        "x": 150,
+                        "y": 1160,
+                        "scale": 0.42,
+                        "role": "dev"
+                    },
+                    {
+                        "who": "agent",
+                        "extra": true,
+                        "pose": "happy",
+                        "x": 290,
+                        "y": 1195,
+                        "scale": 0.26,
+                        "role": "extra"
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 650,
+                        "y": 1450,
+                        "scale": 0.34,
+                        "n": 2,
+                        "arm": "broom"
+                    }
+                ]
+            },
+            "still": true,
+            "stillAt": 3.4
+        },
+        {
+            "id": "next",
+            "bg": "night",
+            "props": {
+                "desk": {
+                    "x": 800,
+                    "y": 820
+                },
+                "lamp": {
+                    "x": 800,
+                    "y": 300
+                },
+                "folder": {
+                    "x": 800,
+                    "y": 720,
+                    "scale": 0.45,
+                    "label": "DATA, NOT IN GIT"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 1020,
+                    "y": 830,
+                    "scale": 0.4,
+                    "n": 2,
+                    "silhouette": true,
+                    "arm": "broom"
+                }
+            ],
+            "fx": [
+                "eyes@0.8",
+                "glint@1.4",
+                "continued@2.0"
+            ],
+            "say": {
+                "who": "NARRATOR",
+                "text": "To be continued!",
+                "at": 2.1
+            },
+            "sfx": [
+                "shing@1.4",
+                "freeze@2.0"
+            ],
+            "music": "sneaky",
+            "focus": [
+                860,
+                640
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 1100
+                    },
+                    "lamp": {
+                        "x": 450,
+                        "y": 560
+                    },
+                    "folder": {
+                        "x": 450,
+                        "y": 1000,
+                        "scale": 0.45,
+                        "label": "DATA, NOT IN GIT"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 640,
+                        "y": 1110,
+                        "scale": 0.3,
+                        "n": 2,
+                        "silhouette": true,
+                        "arm": "broom"
+                    }
+                ]
+            }
+        }
+    ]
+}
