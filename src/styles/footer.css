@@ -36,3 +36,6 @@
     .foot .ck, .foot .cv { text-align: center; }
     .foot-credits { padding-bottom: 10rem; }
 }
+
+.credit-name { color: inherit; text-decoration: underline; text-decoration-color: rgba(242, 240, 234, 0.35); text-underline-offset: 0.2em; }
+.credit-name:hover { color: var(--yellow); text-decoration-color: var(--yellow); }
