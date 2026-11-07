@@ -1,9 +1,0 @@
----
-// One line of Big Shoulders Display 900 fitted exactly to the width of its box, as vector text.
-// `width` is the line's natural width at 100 px (measured once); cap height is 0.82 em.
-interface Props { text: string; width: number; class?: string }
-const { text, width, class: cls = '' } = Astro.props;
----
-<svg class={`fit ${cls}`.trim()} viewBox={`0 -82 ${width} 83`} preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-    <text x="0" y="0" textLength={width} lengthAdjust="spacingAndGlyphs" font-family="Big Shoulders Display" font-weight="900" font-size="100" fill="currentColor">{text}</text>
-</svg>

@@ -68,7 +68,7 @@ const jsonld = {
                     </picture>
                     <p class="cut-wait" data-cut-wait>Loading the cut</p>
                 </div>
-                <p class="cut-under col"><span data-cut-count aria-live="off"></span><a href={href(incidentPath(latest!))}>Read what happened <span aria-hidden="true">&rarr;</span></a><a href={href(`${incidentPath(latest!)}cut/`)}>Open the cut full screen</a></p>
+                <p class="cut-under col"><span data-cut-count aria-live="off"></span><button type="button" class="cut-ctl" data-cut-replay>Replay</button><button type="button" class="cut-ctl" data-cut-skip>Skip to the end</button><a href={href(incidentPath(latest!))}>Read what happened <span aria-hidden="true">&rarr;</span></a><a href={href(`${incidentPath(latest!)}cut/`)}>Open the cut full screen</a></p>
             </div>
         </section>
     ) : latest ? (

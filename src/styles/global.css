@@ -140,6 +140,8 @@ html.js-anim .hh-hint { opacity: 0; visibility: hidden; }
 .cut-under { display: flex; flex-wrap: wrap; gap: 0.4rem 1.6rem; align-items: center; margin: 0; padding: 0.7rem 0 0.9rem; font-family: var(--mono); font-size: 0.85rem; color: var(--grey); }
 .cut-under a { color: var(--paper); text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 0.25em; }
 .cut-under a:hover { color: var(--yellow); }
+.cut-ctl { appearance: none; background: none; border: 1px solid var(--line-2); border-radius: 2px; color: var(--paper); font: 400 0.8rem/1 var(--mono); padding: 0.5em 0.8em; cursor: pointer; }
+.cut-ctl:hover { border-color: var(--yellow); color: var(--yellow); }
 @media (max-aspect-ratio: 4/5) {
     .cut-box { width: min(100%, calc((100svh - var(--bar) - 7.5rem) * 9 / 16)); }
 }

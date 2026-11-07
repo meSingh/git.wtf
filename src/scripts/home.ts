@@ -124,6 +124,11 @@ function scrubByScroll(h: import('./anime').CutHandle, ST: typeof import('gsap/S
         const k = h.frameAt(p * h.total);
         if (count) count.textContent = `${k + 1} / ${h.n}`;
     };
+    // replay and skip: the scroll is the clock, so they move the page to the cut's start or its end
+    const top = () => sec.getBoundingClientRect().top + scrollY;
+    const go = (y: number) => scrollTo({ top: y, behavior: html.classList.contains('js-anim') ? 'smooth' : 'auto' });
+    q('[data-cut-replay]')?.addEventListener('click', () => go(top()));
+    q('[data-cut-skip]')?.addEventListener('click', () => go(top() + sec.offsetHeight - innerHeight));
     if (ST) {
         ST.create({ trigger: sec, start: 'top top', end: 'bottom bottom', scrub: 0.35, onUpdate: (self) => paint(self.progress) });
         return;
