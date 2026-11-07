@@ -1,0 +1,51 @@
+---
+// DEV, anime style: hood up, hoodie strings, the mug, a pointed chin. Bust, origin at the bottom middle.
+// Poses: neutral (half-lidded, deadpan), shocked (huge eyes, open mouth), dramatic (shadow over the eyes, a glint),
+// defeated (eyes shut, a single tear).
+import type { Pose } from '../../anime/types';
+interface Props { pose?: Pose; arm?: 'point' | 'palm' | 'up' | 'hold' }
+const { pose = 'neutral', arm } = Astro.props;
+const sides = [-1, 1].map((k) => 55 * k);
+---
+<g class={`a-dev pose-${pose}`}>
+    <path class="hood" d="M-178 -300 C-200 -480 -105 -572 0 -572 C105 -572 200 -480 178 -300 C150 -240 -150 -240 -178 -300Z" />
+    <path class="torso" d="M-300 0 C-290 -160 -230 -240 -118 -268 L118 -268 C230 -240 290 -160 300 0Z" />
+    <path class="string" d="M-42 -262 L-52 -150 M42 -262 L52 -150" />
+    <circle class="knot" cx="-52" cy="-146" r="7" /><circle class="knot" cx="52" cy="-146" r="7" />
+    <path class="face" d="M-122 -425 C-122 -505 -62 -532 0 -532 C62 -532 122 -505 122 -425 C122 -352 72 -292 0 -280 C-72 -292 -122 -352 -122 -425Z" />
+    <path class="bangs" d="M-124 -436 L-98 -512 L-66 -458 L-34 -524 L-2 -462 L34 -528 L62 -460 L96 -508 L122 -436 C104 -520 -104 -520 -124 -436Z" />
+    {pose === 'shocked' && <path class="brow" d="M-92 -462 L-24 -472 M24 -472 L92 -462" />}
+    {pose === 'dramatic' && <path class="brow" d="M-92 -448 L-22 -432 M22 -432 L92 -448" />}
+    {sides.map((x) => pose === 'shocked' ? (
+        <g class="eye"><ellipse cx={x} cy={-405} rx="34" ry="42" class="white" /><circle cx={x - Math.sign(x) * 2} cy={-400} r="7" class="pupil" /></g>
+    ) : pose === 'defeated' ? (
+        <path class="shut" d={`M${x - 30} -398 q30 18 60 0`} />
+    ) : (
+        <g class="eye">
+            <path class="white" d={`M${x - 34} -402 Q${x} -432 ${x + 34} -402 Q${x} -380 ${x - 34} -402Z`} />
+            <circle cx={x + Math.sign(x) * 2} cy={-400} r="12" class="pupil" />
+            <circle cx={x + Math.sign(x) * 6} cy={-405} r="3.4" class="spark" />
+            {pose === 'neutral' && <path class="lid" d={`M${x - 40} -408 L${x + 40} -408`} />}
+        </g>
+    ))}
+    {pose === 'dramatic' && <rect class="shade" x="-126" y="-446" width="252" height="64" />}
+    {pose === 'dramatic' && <g class="glints"><circle cx="-55" cy="-412" r="7" /><circle cx="55" cy="-412" r="7" /></g>}
+    {pose === 'shocked' ? <ellipse class="mouth-open" cx="0" cy="-330" rx="20" ry="26" /> : pose === 'defeated' ? <path class="mouth" d="M-18 -330 q9 -8 18 0 q9 8 18 0" /> : pose === 'dramatic' ? <path class="mouth" d="M-24 -330 L24 -334" /> : <path class="mouth" d="M-14 -332 L14 -332" />}
+    <g class="sweat" style="visibility:hidden"><path d="M138 -500 C118 -470 120 -440 140 -436 C160 -440 162 -470 138 -500Z" /></g>
+    <path class="tear" d="M70 -390 C64 -370 66 -350 74 -346 C82 -350 82 -370 70 -390Z" style="visibility:hidden" />
+    {arm === 'palm' && (
+        <g class="palm-up">
+            <path class="sleeve" d="M200 -150 L262 -170 L330 -470 L276 -486Z" />
+            <path class="hand" d="M270 -480 L340 -470 L360 -600 L336 -606 L330 -540 L318 -620 L294 -622 L296 -540 L280 -610 L258 -604Z" />
+        </g>
+    )}
+    {pose !== 'defeated' && arm !== 'palm' && (
+        <g class="mug">
+            <path class="cup" d="M140 -190 L214 -190 L208 -96 L146 -96Z" />
+            <path class="band" d="M142 -164 L212 -164 L211 -146 L143 -146Z" />
+            <path class="handle" d="M212 -172 C246 -170 246 -122 210 -120" />
+            <path class="hand" d="M120 -150 C130 -180 160 -176 160 -150 C160 -120 126 -112 120 -150Z" />
+            <path class="steam" d="M160 -206 c-14 -20 14 -30 0 -54 M190 -206 c-14 -20 14 -30 0 -54" />
+        </g>
+    )}
+</g>

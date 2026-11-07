@@ -1,0 +1,115 @@
+---
+// The anime cutscene: every shot of a shot list drawn in its own group, one shown at a time by
+// src/scripts/anime.ts. The frame is 1600 x 900; a phone keeps each shot's focus in view.
+import type { ShotList } from '../../anime/types';
+import Dev from './Dev.astro';
+import Agent from './Agent.astro';
+interface Props { list: ShotList; status: string }
+const { list, status } = Astro.props;
+const st = status.replace(/`/g, '');
+const cut = st.length > 24 ? st.indexOf(',') : -1;
+const stamp = cut > 0 ? [st.slice(0, cut + 1), st.slice(cut + 1).trim()] : [st];
+// concentration lines: thin wedges from the middle out
+const wedges = Array.from({ length: 72 }, (_, i) => {
+    const a = (i / 72) * Math.PI * 2 + (i % 3) * 0.01;
+    const w = 0.012 + (i % 5) * 0.004;
+    const r0 = 260 + (i % 4) * 60, r1 = 1800;
+    const p = (r: number, d: number) => `${(800 + Math.cos(a + d) * r).toFixed(0)} ${(450 + Math.sin(a + d) * r).toFixed(0)}`;
+    return `M${p(r0, 0)} L${p(r1, -w)} L${p(r1, w)}Z`;
+});
+const files = Array.from({ length: 40 }, (_, i) => i);
+const rainLines = Array.from({ length: 90 }, (_, i) => { const x = (i * 211) % 2400 - 400, y = (i * 137) % 1300 - 300; return `M${x} ${y} l-14 70`; });
+// twelve slanted slivers across the frame, a pointing agent in each
+const slivers = Array.from({ length: 12 }, (_, k) => {
+    const w = 1600 / 12, x0 = k * w - 90, x1 = (k + 1) * w - 90;
+    return { cx: (x0 + x1) / 2 + 90, clip: `M${x0} -400 L${x1} -400 L${x1 + 180} 1300 L${x0 + 180} 1300Z`, edge: `M${x1} -400 L${x1 + 180} 1300` };
+});
+// three diagonal panels, top to bottom
+const panelPaths = ['M-400 -200 L2000 -200 L2000 170 L-400 330Z', 'M-400 350 L2000 190 L2000 520 L-400 680Z', 'M-400 700 L2000 540 L2000 1100 L-400 1100Z'];
+---
+<svg class="cutscene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label={`${list.episode}: ${list.title}. An anime cutscene. Status: ${st}`} data-list={JSON.stringify(list)}>
+    <defs>
+        <pattern id="a-hazard" width="24" height="24" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="12" height="24" fill="#ffd400" /><rect x="12" width="12" height="24" fill="#0a0a0a" /></pattern>
+        <filter id="a-glow" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation="9" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+        {panelPaths.map((d, i) => <clipPath id={`a-panel-${i}`}><path d={d} /></clipPath>)}
+        {slivers.map((sv, k) => <clipPath id={`a-sliver-${k}`}><path d={sv.clip} /></clipPath>)}
+    </defs>
+    <rect class="ground" x="-2000" y="-2000" width="5600" height="5000" />
+    {list.shots.map((s, si) => (
+        <g class={`shot bg-${s.bg ?? 'black'}`} data-shot={s.id} data-i={si} data-focus={(s.focus ?? [800, 450]).join(' ')} style="visibility:hidden">
+            <rect class="bg" x="-2000" y="-2000" width="5600" height="5000" />
+            {s.bg === 'speedlines' && <g class="lines">{wedges.map((d) => <path d={d} />)}</g>}
+            {s.bg === 'dusk' && <g class="dusk"><rect class="sky" x="-2000" y="-2000" width="5600" height="2440" /><rect class="glow" x="-2000" y="440" width="5600" height="170" /><rect class="sun" x="-2000" y="560" width="5600" height="50" /><rect class="land" x="-2000" y="600" width="5600" height="3000" /></g>}
+            {s.props?.rain && <g class="rain">{rainLines.map((d) => <path d={d} />)}</g>}
+            <g class="cam">
+                {s.bg === 'split' && (s.panels ?? []).map((c, i) => (
+                    <g class="panel" clip-path={`url(#a-panel-${i})`}>
+                        <rect class="pbg" x="-400" y="-200" width="2400" height="1300" />
+                        <g transform={`translate(${[560, 1040, 640][i]} ${[120, 440, 770][i] + 404}) scale(${i === 1 ? -1 : 1} 1)`}><Agent pose={c.pose} n={c.n} head /></g>
+                    </g>
+                ))}
+                {s.bg === 'split' && <path class="gutters" d="M-400 340 L2000 180 M-400 690 L2000 530" />}
+                {s.bg === 'split12' && (
+                    <g class="slivers">
+                        {slivers.map((sv, k) => (
+                            <g class="sliver" clip-path={`url(#a-sliver-${k})`}>
+                                <rect class={`sbg sbg-${k % 3}`} x="-1200" y="-1200" width="4000" height="3300" />
+                                <g transform={`translate(${sv.cx - 30} ${560 + (k % 3) * 60}) scale(0.5)`}><Agent pose="dramatic" n={k + 1} arm="point" /></g>
+                            </g>
+                        ))}
+                        <g class="sgutters">{slivers.map((sv) => <path d={sv.edge} />)}</g>
+                    </g>
+                )}
+                {s.fx?.includes('door') && <g class="doorframe"><rect class="dark" x="560" y="140" width="480" height="780" /><path class="jamb" d="M540 940 L540 120 L1060 120 L1060 940" /></g>}
+                {s.props?.desk && <g class="desk" transform={`translate(${s.props.desk.x} ${s.props.desk.y})`}><rect x="-200" y="-30" width="400" height="34" rx="4" /><rect x="-180" y="4" width="18" height="140" /><rect x="162" y="4" width="18" height="140" /></g>}
+                {s.props?.copier && <g class="copier" transform={`translate(${s.props.copier.x} ${s.props.copier.y})`}><rect class="box" x="-70" y="-150" width="140" height="150" rx="8" /><rect class="lid" x="-78" y="-168" width="156" height="22" rx="4" /><rect class="beam" x="-60" y="-140" width="120" height="10" /></g>}
+                {s.props?.branch && <g class="branch" transform={`translate(${s.props.branch.x} ${s.props.branch.y})`} filter="url(#a-glow)"><path class="half a" d="M-20 300 L-6 0 L14 0 L4 300Z" /><path class="half b" d="M-6 0 L-10 -290 L10 -290 L14 0Z" /><path class="twig" d="M2 -150 L60 -210 M0 -60 L-50 -120" /></g>}
+                {s.props?.folder && (
+                    <g class="folder" transform={`translate(${s.props.folder.x} ${s.props.folder.y}) scale(${s.props.folder.scale ?? 1})`}>
+                        <path class="tab" d="M-180 -150 L-60 -150 L-30 -118 L180 -118 L180 -96 L-180 -96Z" />
+                        <rect class="body" x="-190" y="-110" width="380" height="250" rx="16" />
+                        <text x="0" y="40">my folder</text>
+                    </g>
+                )}
+                {s.props?.files && (
+                    <g class="files" data-from={s.props.folder ? `${s.props.folder.x} ${s.props.folder.y - 60}` : '800 450'}>
+                        {files.map(() => <g class="file" style="visibility:hidden"><rect x="-26" y="-34" width="52" height="68" rx="4" /><path d="M-14 -16 h28 M-14 -4 h28 M-14 8 h18" /></g>)}
+                    </g>
+                )}
+                {s.props?.paper && <g class="paper1" transform={`translate(${s.props.paper.x} ${s.props.paper.y})`}><g class="p-in"><rect x="-30" y="-38" width="60" height="76" rx="4" /><path d="M-16 -18 h32 M-16 -4 h32 M-16 10 h22" /></g></g>}
+                {s.props?.stack && <g class="stack" transform={`translate(${s.props.stack.x} ${s.props.stack.y})`} data-to={s.props.stack.to?.join(' ')}><g class="s-in">{[0, 1, 2, 3, 4, 5, 6, 7].map((k) => <rect x={-90 + (k % 2) * 6} y={-24 - k * 22} width="180" height="22" rx="3" />)}</g></g>}
+                {(s.cast ?? []).map((c) => (
+                    <g transform={`translate(${c.x} ${c.y}) scale(${(c.flip ? -1 : 1) * (c.scale ?? 1)} ${c.scale ?? 1})`}>
+                        <g class="fig" data-who={c.who} data-role={c.role}>{c.who === 'dev' ? <Dev pose={c.pose} arm={c.arm} /> : <Agent pose={c.pose} n={c.n} extra={c.extra} silhouette={c.silhouette} arm={c.arm} turn={c.turn} />}</g>
+                    </g>
+                ))}
+                {s.props?.counter && <text class="counter" x={s.props.counter.x} y={s.props.counter.y} data-to={s.props.counter.to}>0</text>}
+            </g>
+            {s.word && <g class="word" data-len={s.word.length} data-at={s.wordAt}><g class="wordfit"><text x="800" y="200" transform="rotate(-7 800 200)">{s.word}</text></g></g>}
+            {s.line && <g class="line" data-at={s.lineAt} data-len={s.line.who.length + s.line.text.length + 2}><text x="800" y="830"><tspan class="who">{s.line.who}</tspan><tspan dx="18">{s.line.text}</tspan></text></g>}
+            {s.fx?.includes('titlecard') && (
+                <g class="titlecard">
+                    <g class="lines tl">{wedges.map((d) => <path d={d} />)}</g>
+                    <rect class="band" x="-2000" y="330" width="5600" height="250" />
+                    <text class="ep" x="800" y="300">{list.episode}</text>
+                    <g class="ttlfit"><text class="ttl" x="800" y="490">{list.title}</text></g>
+                </g>
+            )}
+            {s.fx?.includes('endcard') && (
+                <g class="endcard">
+                    <g class="tbc" transform="translate(120 840)"><g class="tbc-in">
+                        <path d="M0 -40 L420 -40 L420 -62 L486 0 L420 62 L420 40 L0 40Z" />
+                        <text x="200" y="14">To be continued</text>
+                    </g></g>
+                    <g class="stampspot" transform="translate(800 650) rotate(-5)"><g class="stampfit"><g class="stampmark">
+                        <rect class="plate" x="-480" y="-110" width="960" height={stamp.length > 1 ? 220 : 140} rx="6" />
+                        <rect class="inner" x="-462" y="-94" width="924" height={stamp.length > 1 ? 188 : 108} rx="4" />
+                        <text class="slbl" x="-436" y="-54">STATUS</text>
+                        {stamp.map((t, i) => <text class="stext" x="0" y={stamp.length > 1 ? 16 + i * 78 : 22}>{t}</text>)}
+                    </g></g></g>
+                </g>
+            )}
+        </g>
+    ))}
+    <rect class="flash" x="-2000" y="-2000" width="5600" height="5000" style="visibility:hidden" />
+</svg>
