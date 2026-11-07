@@ -91,6 +91,21 @@ const fontCss = fonts.map(([file, family, weight]) => `@font-face{font-family:'$
             })();
         </script>
     )}
+    {SITE.gtm && import.meta.env.PROD && !base && (
+        <script is:inline define:vars={{ gtm: SITE.gtm }}>
+            // Google Tag Manager (Analytics), started after the load and a moment's idle so the first paint never waits for it
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+            addEventListener('load', function () {
+                setTimeout(function () {
+                    var s = document.createElement('script');
+                    s.async = true;
+                    s.src = 'https://www.googletagmanager.com/gtm.js?id=' + gtm;
+                    document.head.appendChild(s);
+                }, 1500);
+            });
+        </script>
+    )}
 </head>
 <body>
     <a class="skip" href="#main">Skip to content</a>

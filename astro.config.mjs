@@ -16,7 +16,8 @@ if (unmapped.length) console.warn(`[redirects] ${unmapped.length} old paths have
 export default defineConfig({
     site: 'https://git.wtf',
     base,
-    trailingSlash: 'always',
+    // both /archive and /archive/ work: GitHub Pages redirects the first to the second, and the dev server serves both
+    trailingSlash: 'ignore',
     build: { format: 'directory', inlineStylesheets: 'always' },
     redirects,
     integrations: [

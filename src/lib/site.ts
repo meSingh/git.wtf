@@ -30,6 +30,9 @@ export const SITE = {
         { name: 'X', url: 'https://x.com/gitwtf' },
         { name: 'LinkedIn', url: 'https://www.linkedin.com/company/gitwtf', placeholder: true },
     ] as { name: string; url: string; placeholder?: boolean }[],
+    // Google Analytics, through the Tag Manager container the Ghost site used (the same property, so the history
+    // carries on). Loaded only on the real site, after the page has finished loading.
+    gtm: 'GTM-PPTBFGT',
     // the score's line, as it was
     tagline: "AI killed our blog. We're keeping score.",
     description: "A running count of the days since the last Git or AI fuck-up, each new one retold as an anime episode. Plus the old git.wtf blog on fixing Git, kept as it was.",

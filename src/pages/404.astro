@@ -1,11 +1,33 @@
 ---
+// Not found: the site's joke turned on itself, with the ways back. Kept out of search.
 import Base from '../layouts/Base.astro';
 import '../styles/pages.css';
 import { href } from '../lib/site';
 ---
-<Base title="404 | git.wtf" noindex>
-    <main class="page">
-        <div class="page-head"><h1>404</h1></div>
-        <div class="prose"><p>Not here. If this was a post from the old blog, it should be in <a href={href('/archive/')}>the archive</a>. If it is not, that is a Git fuck-up of ours.</p></div>
+<Base title="404: tidied | git.wtf" description="This page is not here. The archive, the fuck-ups and the homepage are." noindex>
+    <main class="page nf">
+        <div class="col nf-in">
+            <p class="nf-code" aria-hidden="true">404</p>
+            <h1 class="nf-h">This page was tidied.</h1>
+            <p class="nf-stamp">Status: not found. No rescue branch.</p>
+            <p class="nf-text">Probably by an agent. If you came for a post from the old blog, it is in the archive at the same address, so check the link for a typo. If it is not there, that is a Git fuck-up of ours.</p>
+            <p class="nf-go">
+                <a class="nf-main" href={href('/archive/')}>The archive</a>
+                <a href={href('/incidents/')}>The fuck-ups</a>
+                <a href={href('/')}>Home</a>
+            </p>
+        </div>
     </main>
 </Base>
+<style>
+    .nf { min-height: 70svh; display: grid; align-items: center; }
+    .nf-code { margin: 0; font-family: var(--display); font-weight: 900; font-size: clamp(7rem, 26vw, 18rem); line-height: 0.85; color: var(--yellow); }
+    .nf-h { margin: 0.6rem 0 0; font-size: clamp(2.2rem, 6vw, 4.6rem); line-height: 0.95; }
+    .nf-stamp { display: inline-block; margin: 1.4rem 0 0; padding: 0.5em 0.8em; border: 3px solid var(--yellow); color: var(--yellow); font-family: var(--display); font-weight: 900; font-size: clamp(1.1rem, 2.4vw, 1.6rem); text-transform: uppercase; transform: rotate(-2deg); }
+    .nf-text { max-width: 36rem; margin: 1.6rem 0 0; font-size: 1.1rem; line-height: 1.6; color: var(--paper); }
+    .nf-go { display: flex; flex-wrap: wrap; gap: 0.8rem 1.4rem; align-items: center; margin: 2rem 0 0; font-family: var(--mono); }
+    .nf-go a { color: var(--paper); text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 0.25em; }
+    .nf-go a:hover { color: var(--yellow); }
+    .nf-go .nf-main { padding: 0.9em 1.3em; background: var(--yellow); color: var(--black); text-decoration: none; border-radius: 2px; }
+    .nf-go .nf-main:hover { color: var(--black); box-shadow: 0 0 0 3px var(--black), 0 0 0 5px var(--yellow); }
+</style>
