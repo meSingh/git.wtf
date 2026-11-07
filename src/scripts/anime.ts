@@ -747,7 +747,7 @@ function build(g: El, svg: SVGSVGElement, shot: Shot, flash: boolean): Ctx {
 }
 
 /** What a scrolled cut hands the page: its length, a seek, and its sound. */
-export interface CutHandle { total: number; n: number; plan: { id: string; start: number; length: number }[]; frameAt: (t: number) => number; audio: CutAudio | null }
+export interface CutHandle { total: number; n: number; plan: { id: string; start: number; length: number }[]; frameAt: (t: number) => number; play: (k: number) => void; busy: () => boolean; at: () => number; audio: CutAudio | null }
 
 export function mountCutscene(wrap: HTMLElement, opts: { mode?: 'scroll'; soundDefault?: boolean } = {}): CutHandle | undefined {
     // the frame: ?frame=9:16 or 16:9, else the screen's shape (phones and anything tall get the staged vertical one)
@@ -970,7 +970,7 @@ export function mountCutscene(wrap: HTMLElement, opts: { mode?: 'scroll'; soundD
         };
         show(0);
         seek(0);
-        return { total, n: shots.length, plan, frameAt: seek, audio };
+        return { total, n: shots.length, plan, frameAt: seek, play: (k) => { if (k !== i) { show(k); last = starts[k] ?? 0; } else { tl?.restart(); } }, busy: () => !!tl && tl.progress() < 1 && !tl.paused(), at: () => i, audio };
     }
 
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || location.search.includes('reduce');

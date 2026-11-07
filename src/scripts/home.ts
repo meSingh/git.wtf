@@ -6,9 +6,11 @@
 //   the bar as the odometer badge (scrubbed, so scrolling back undocks).
 // 2 About two seconds in, the page scrolls slowly to the cut with a hint; any input stops it. With reduced motion
 //   there is no auto-scroll, only the hint.
-// 3 The cut plays the whole story as the reader scrolls: the player fragment and the engine load after the first
-//   paint, then a pinned stage scrubs the cut's clock. Sound is off until the reader turns it on.
-// 4 The record's gaps and the score's wheels roll to their counts on entry. Headings lock in word by word, once.
+// 3 The episode plays full screen at the page's pace: the player fragment and the engine load after the first
+//   paint; the stage sticks in a tall section, and each gesture (wheel, swipe, key) plays the next shot at its own
+//   timing, input held while a shot plays, never more than one shot a gesture. Sound is off until turned on.
+// 4 The record scrolls sideways, newest first; the score and the streak roll to their counts on entry, the tool
+//   bars grow. Headings lock in word by word, once.
 // Between sections a band of hazard stripes wipes across, scrubbed to scroll.
 import gsap from 'gsap';
 import { syncOdos, target } from './odometer';
@@ -110,36 +112,114 @@ function opening(odo: HTMLElement, odoWrap: HTMLElement) {
     const after = 1.25 + words.length * 0.24 + 0.15;
     if (today) intro.fromTo(today, { autoAlpha: 1, clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 0.4, ease: 'power2.out' }, after);
     const hint = q('.hh-hint');
-    if (hint) intro.fromTo(hint, { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: 0.35, ease: 'power2.out' }, after + 0.3);
+    if (hint) {
+        // shown outright, not faded: a half-faded hint is unreadable, and an audit would catch it so
+        intro.set(hint, { autoAlpha: 1 }, after + 0.3);
+        // once the page has moved, the hint is gone outright (no half-faded state over the episode)
+        addEventListener('scroll', () => gsap.set(hint, { autoAlpha: scrollY > 24 ? 0 : 1 }), { passive: true });
+    }
     if (location.search.includes('debug')) { intro.pause(0); (window as any).__hero = { tl: intro, gsap }; }
 }
 
-/** The cut's clock on the scroll: progress through #cut is time through the cut. Without ScrollTrigger (reduced
- *  motion), a plain scroll listener does the same. */
-function scrubByScroll(h: import('./anime').CutHandle, ST: typeof import('gsap/ScrollTrigger').ScrollTrigger | null) {
+/** Reduced motion: the cut's frames follow the scroll, nothing plays by itself. */
+function scrubByScroll(h: import('./anime').CutHandle) {
     const sec = q('#cut');
     const count = q('[data-cut-count]');
     if (!sec) return;
-    const paint = (p: number) => {
-        const k = h.frameAt(p * h.total);
-        if (count) count.textContent = `${k + 1} / ${h.n}`;
-    };
-    // replay and skip: the scroll is the clock, so they move the page to the cut's start or its end
-    const top = () => sec.getBoundingClientRect().top + scrollY;
-    const go = (y: number) => scrollTo({ top: y, behavior: html.classList.contains('js-anim') ? 'smooth' : 'auto' });
-    q('[data-cut-replay]')?.addEventListener('click', () => go(top()));
-    q('[data-cut-skip]')?.addEventListener('click', () => go(top() + sec.offsetHeight - innerHeight));
-    if (ST) {
-        ST.create({ trigger: sec, start: 'top top', end: 'bottom bottom', scrub: 0.35, onUpdate: (self) => paint(self.progress) });
-        return;
-    }
     const onScroll = () => {
         const r = sec.getBoundingClientRect();
         const span = r.height - innerHeight;
-        paint(Math.max(0, Math.min(1, -r.top / Math.max(1, span))));
+        const k = h.frameAt(Math.max(0, Math.min(1, -r.top / Math.max(1, span))) * h.total);
+        if (count) count.textContent = `${k + 1} / ${h.n}`;
     };
     addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+}
+
+/** 3 The episode at the page's pace. The section is as tall as one step a shot; the stage sticks. Inside it, a
+ *  gesture plays the next shot at its authored timing and moves the page one step; while a shot plays, input is
+ *  held; a wheel's inertia or a long swipe counts once. At the last shot's end the page scrolls on as usual. */
+function stepCut(h: import('./anime').CutHandle, ST: typeof import('gsap/ScrollTrigger').ScrollTrigger) {
+    const sec = q('#cut');
+    const count = q('[data-cut-count]');
+    if (!sec) return;
+    const n = h.n;
+    const step = parseFloat(getComputedStyle(sec).getPropertyValue('--cut-step')) || 360;
+    let k = -1;
+    let holdUntil = 0;
+    let lastWheel = 0;
+    const top = () => sec.getBoundingClientRect().top + scrollY;
+    const inside = () => { const t = top(); return scrollY >= t - 1 && scrollY <= t + n * step + 1; };
+    const held = () => h.busy() || performance.now() < holdUntil;
+    const paint = () => { if (count) count.textContent = `${k + 1} / ${n}`; };
+    const go = (to: number) => {
+        to = Math.max(0, Math.min(n - 1, to));
+        k = to;
+        scrollTo({ top: Math.round(top() + k * step), behavior: 'auto' });
+        h.play(k);
+        holdUntil = performance.now() + 450;
+        paint();
+    };
+    // a scroll the page did not make (the scrollbar, the auto-scroll arriving, a jump back): show that step's shot
+    ST.create({
+        trigger: sec, start: 'top top', end: 'bottom bottom',
+        onUpdate: (self) => { const to = Math.min(n - 1, Math.round(self.progress * n)); if (to !== k) { k = to; h.play(k); paint(); } },
+        onEnter: () => { if (k < 0) go(0); },
+    });
+    // arriving at the top by any route (the auto-scroll lands exactly there): the first shot plays
+    const sync = () => { if (k < 0 && scrollY >= top() - 1 && scrollY <= top() + step) go(0); };
+    addEventListener('scroll', sync, { passive: true });
+    sync();
+    const forward = (dir: number) => {
+        if (held()) return true; // held: eaten
+        go(k + dir);
+        return true;
+    };
+    // the wheel: one gesture is one step; a stream of inertia events is one gesture
+    addEventListener('wheel', (e) => {
+        if (!inside()) return;
+        const dir = e.deltaY > 0 ? 1 : e.deltaY < 0 ? -1 : 0;
+        if (!dir) return;
+        if (dir > 0 && k >= n - 1 && !h.busy()) return; // the end: the page goes on
+        if (dir < 0 && k <= 0 && scrollY <= top() + 1) return; // the start: back to the hero
+        e.preventDefault();
+        const now = performance.now();
+        const fresh = now - lastWheel > 220;
+        lastWheel = now;
+        if (!fresh) return;
+        forward(dir);
+    }, { passive: false });
+    // a swipe: the touch moves nothing itself; on lift, its direction is one step
+    let y0: number | null = null;
+    addEventListener('touchstart', (e) => { y0 = inside() ? e.touches[0].clientY : null; }, { passive: true });
+    addEventListener('touchmove', (e) => {
+        if (y0 === null || !inside()) return;
+        const dy = y0 - e.touches[0].clientY;
+        if (dy > 0 && k >= n - 1 && !h.busy()) return;
+        if (dy < 0 && k <= 0) return;
+        e.preventDefault();
+    }, { passive: false });
+    addEventListener('touchend', (e) => {
+        if (y0 === null) return;
+        const dy = y0 - e.changedTouches[0].clientY;
+        y0 = null;
+        if (Math.abs(dy) < 24 || !inside()) return;
+        if (dy > 0 && k >= n - 1 && !h.busy()) return;
+        if (dy < 0 && k <= 0) return;
+        forward(dy > 0 ? 1 : -1);
+    }, { passive: true });
+    addEventListener('keydown', (e) => {
+        if (!inside() || (e.target instanceof HTMLElement && e.target.closest('input, textarea, button, a'))) return;
+        const dir = [' ', 'ArrowDown', 'PageDown', 'Enter'].includes(e.key) ? 1 : ['ArrowUp', 'PageUp'].includes(e.key) ? -1 : 0;
+        if (!dir) return;
+        if (dir > 0 && k >= n - 1 && !h.busy()) return;
+        if (dir < 0 && k <= 0) return;
+        e.preventDefault();
+        forward(dir);
+    });
+    q('[data-cut-replay]')?.addEventListener('click', () => { k = -1; go(0); });
+    q('[data-cut-skip]')?.addEventListener('click', () => go(n - 1));
+    q('[data-cut-down]')?.addEventListener('click', (e) => { e.preventDefault(); if (k >= n - 1 && !h.busy()) scrollTo({ top: top() + n * step + 1, behavior: 'smooth' }); else forward(1); });
 }
 
 export async function home() {
@@ -153,7 +233,7 @@ export async function home() {
     if (!html.classList.contains('js-anim')) {
         // reduced motion: the finished page, the hint, the cut scrubbed by hand, no auto-scroll
         document.body.classList.add('docked');
-        setTimeout(() => mountCut()?.then((h) => h && scrubByScroll(h, null)), 300);
+        setTimeout(() => mountCut()?.then((h) => h && scrubByScroll(h)), 300);
         return;
     }
     (window as any).__heroRan = true;
@@ -202,7 +282,7 @@ export async function home() {
             .to(odoWrap, { autoAlpha: 0, duration: 0.03, ease: 'none' }, 0.97);
 
         // 3 The cut: the stage is sticky in a tall section; the scroll through that section is the cut's clock
-        mountCut()?.then((h) => h && scrubByScroll(h, ScrollTrigger));
+        mountCut()?.then((h) => h && stepCut(h, ScrollTrigger));
 
         // Section headings lock in word by word, once.
         qa('[data-lock]').forEach((h) => {
@@ -219,11 +299,28 @@ export async function home() {
             });
         });
 
-        // 4 The record's gaps roll as they come into view
-        qa('.record .gap-odo').forEach((g) => ScrollTrigger.create({ trigger: g, start: 'top 90%', once: true, onEnter: () => rollOnce(g, 0.9) }));
+        // 4 The record: sideways on desktop, each gap rolling as it comes into view; stacked on phones.
+        const wrap = q('#track-wrap');
+        const track = q('#track');
+        if (desktop && wrap && track) {
+            const distance = () => Math.max(0, track.offsetWidth - window.innerWidth);
+            const sideways = gsap.to(track, {
+                x: () => -distance(),
+                ease: 'none',
+                scrollTrigger: { trigger: wrap, start: 'top top', end: () => `+=${Math.max(1, qa('#track .tcard').length) * 350}`, pin: true, scrub: 0.6, invalidateOnRefresh: true },
+            });
+            qa('#track .gap .odo').forEach((g) => ScrollTrigger.create({ trigger: g, containerAnimation: sideways, start: 'left 88%', once: true, onEnter: () => rollOnce(g, 0.9) }));
+        } else {
+            qa('.record-stack .odo').forEach((g) => ScrollTrigger.create({ trigger: g, start: 'top 90%', once: true, onEnter: () => rollOnce(g, 0.9) }));
+        }
 
         // 4 and 5 The score and the streak roll to their counts; the tool bars grow from nothing.
-        qa('.score .odo').forEach((n, i) => ScrollTrigger.create({ trigger: n, start: 'top 90%', once: true, onEnter: () => gsap.delayedCall((i % 3) * 0.12, () => rollOnce(n, 1.1)) }));
+        qa('.score .odo, .streak .odo').forEach((n, i) => ScrollTrigger.create({ trigger: n, start: 'top 90%', once: true, onEnter: () => gsap.delayedCall((i % 3) * 0.12, () => rollOnce(n, 1.1)) }));
+        const fills = qa('.score .tools .fill');
+        if (fills.length) {
+            gsap.set(fills, { scaleX: 0 });
+            ScrollTrigger.create({ trigger: '.score .tools', start: 'top 88%', once: true, onEnter: () => gsap.to(fills, { scaleX: 1, duration: 0.7, ease: 'power3.out', stagger: 0.07 }) });
+        }
 
         // Wipes between sections: as a section arrives, a band of stripes crosses the screen once, in half a second,
         // and is gone. Never scrubbed, so it can never rest over the content at any scroll position.

@@ -22,14 +22,14 @@ export const SITE = {
     lineWords: ['DAYS', 'SINCE', 'THE', 'LAST', 'GIT/AI', 'FUCK-UP'],
     // The credit line, his exact words; the emphasised parts are marked by the footer.
     credit: { name: 'Mandeep Singh', before: 'an ', strong: 'AI Architect', after: " who reviews his agents' commits. ", last: 'Mostly.' },
-    // The project's own accounts, from this one list: only the ones with a URL are shown. X exists; the rest land when he gives the handles.
+    // The project's own accounts, from this one list. X is real; the other three are PLACEHOLDER URLs until he gives
+    // the handles (Mandeep, v6: show all four).
     social: [
-        { name: 'YouTube', url: '' },
-        { name: 'Instagram', url: '' },
+        { name: 'Instagram', url: 'https://www.instagram.com/gitwtf/' },
+        { name: 'YouTube Shorts', url: 'https://www.youtube.com/@gitwtf/shorts' },
         { name: 'X', url: 'https://x.com/gitwtf' },
-        { name: 'LinkedIn', url: '' },
-    ] as { name: 'YouTube' | 'Instagram' | 'X' | 'LinkedIn'; url: string }[],
-    // the tagline, approved by Mandeep on 7 Nov 2026 (notes/content/STORY.md)
+        { name: 'LinkedIn', url: 'https://www.linkedin.com/company/gitwtf/' },
+    ] as { name: string; url: string }[],
     description: "AI killed our blog. We're keeping score.",
     repo: 'meSingh/git.wtf',
     // where a mailed confession goes; empty until Mandeep names an address, and the mail link stays hidden till then

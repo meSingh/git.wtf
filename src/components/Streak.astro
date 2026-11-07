@@ -1,0 +1,35 @@
+---
+// The streak board: the current run, the longest quiet stretch, the average gap. Factory-floor plain.
+import Odo from './Odo.astro';
+import { daysBetween, formatDay, happened, sortIncidents, todayIST, type Incident } from '../lib/site';
+interface Props { incidents: Incident[] }
+const { incidents } = Astro.props;
+const days = [...new Set(sortIncidents(incidents).map(happened))].sort();
+const today = todayIST();
+const current = days.length ? Math.max(0, daysBetween(days[days.length - 1], today)) : 0;
+let best = { n: 0, from: '', to: '' };
+for (let i = 1; i < days.length; i++) {
+    const n = daysBetween(days[i - 1], days[i]);
+    if (n > best.n) best = { n, from: days[i - 1], to: days[i] };
+}
+const currentIsBest = current > best.n;
+const avg = days.length > 1 ? daysBetween(days[0], days[days.length - 1]) / (days.length - 1) : 0;
+const year = (iso: string) => iso.slice(0, 4);
+---
+<div class="streak col">
+    <div class="beat-head"><h2 id="streak-h" data-lock>The streak</h2><span class="count">since {days[0] ? formatDay(days[0]) + ' ' + year(days[0]) : 'the start'}</span></div>
+    <div class="boards">
+        <div class="board">
+            <Odo value={current} from={0} min={2} since={days[days.length - 1] ?? null} class="streak-odo wheel" label={`${current} days since the last one`} />
+            <p>days since the last one</p>
+        </div>
+        <div class="board">
+            <Odo value={currentIsBest ? current : best.n} from={0} min={2} class="streak-odo wheel" label={`record: ${currentIsBest ? current : best.n} days`} />
+            <p>{currentIsBest ? 'record: this one, still going' : `record: ${best.n} days, ${formatDay(best.from)} to ${formatDay(best.to)}`}</p>
+        </div>
+        <div class="board">
+            <Odo value={Math.round(avg)} from={0} min={2} class="streak-odo wheel" label={`${avg.toFixed(1)} days between fuck-ups on average`} />
+            <p>days between fuck-ups, on average ({avg.toFixed(1)})</p>
+        </div>
+    </div>
+</div>
