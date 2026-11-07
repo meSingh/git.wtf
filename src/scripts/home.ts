@@ -325,12 +325,16 @@ export async function home() {
         const track = q('#track');
         if (desktop && wrap && track) {
             const distance = () => Math.max(0, track.offsetWidth - window.innerWidth);
-            const sideways = gsap.to(track, {
-                x: () => -distance(),
+            // the track is anchored to the right edge (the newest card in view); the scroll slides it rightward, so
+            // the older cards come in from the left, back in time
+            const sideways = gsap.fromTo(track, { x: 0 }, {
+                x: () => distance(),
                 ease: 'none',
                 scrollTrigger: { trigger: wrap, start: 'top top', end: () => `+=${Math.max(1, qa('#track .tcard').length) * 350}`, pin: true, scrub: 0.6, invalidateOnRefresh: true },
             });
-            qa('#track .gap .odo').forEach((g) => ScrollTrigger.create({ trigger: g, containerAnimation: sideways, start: 'left 88%', once: true, onEnter: () => rollOnce(g, 0.9) }));
+            void sideways;
+            // the gaps roll as the record pins, the nearest first
+            ScrollTrigger.create({ trigger: wrap, start: 'top 60%', once: true, onEnter: () => qa('#track .gap .odo').forEach((g, i) => gsap.delayedCall(i * 0.15, () => rollOnce(g, 0.9))) });
         } else {
             qa('.record-stack .odo').forEach((g) => ScrollTrigger.create({ trigger: g, start: 'top 90%', once: true, onEnter: () => rollOnce(g, 0.9) }));
         }

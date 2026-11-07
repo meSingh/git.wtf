@@ -174,12 +174,14 @@ html.js-anim .hh-hint { opacity: 0; visibility: hidden; }
 @media (max-width: 760px) { .detail { grid-template-columns: 1fr; } }
 
 .beat-record { padding-top: 5rem; }
-.track-wrap { position: relative; height: 100svh; overflow: hidden; }
+/* the track's stage is capped, so the room under the heading does not grow with a tall screen */
+.track-wrap { position: relative; height: min(100svh, 50rem); overflow: hidden; }
 .track-head { position: absolute; left: 0; right: 0; top: 0; z-index: 3; padding-top: calc(var(--bar) + 1.25rem); background: linear-gradient(to bottom, var(--black) 78%, transparent); }
 .track-head .beat-head { margin-bottom: 0; padding-bottom: 1.5rem; }
 .track-head .count { max-width: 30rem; text-align: right; white-space: normal; }
-.track { position: absolute; left: 0; top: calc(var(--bar) + 8.5rem); bottom: 0; flex: none; }
-.year { position: absolute; left: 1rem; bottom: 2.4rem; font-family: var(--display); font-weight: 900; font-size: min(44rem, 68svh); line-height: 0.78; letter-spacing: -0.03em; color: rgba(242, 240, 234, 0.05); user-select: none; }
+/* anchored to the right edge: the newest card is in view before any script runs; the scroll slides it rightward */
+.track { position: absolute; right: 0; top: calc(var(--bar) + 7rem); bottom: 0; flex: none; }
+.year { position: absolute; right: 1rem; bottom: 2.4rem; font-family: var(--display); font-weight: 900; font-size: min(44rem, 68svh); line-height: 0.78; letter-spacing: -0.03em; color: rgba(242, 240, 234, 0.05); user-select: none; }
 .ruler { position: absolute; left: 0; right: 0; bottom: 5.5rem; height: 1px; background: var(--line-2); }
 .ruler::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 0.45rem; background: repeating-linear-gradient(to right, var(--line) 0 1px, transparent 1px 50px); opacity: 0.9; }
 .ruler .tick { position: absolute; left: 0; top: 0; width: 1px; height: 0.45rem; background: var(--line); }

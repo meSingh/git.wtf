@@ -1,7 +1,7 @@
 ---
-// Beat 3: the record. A horizontal track, newest first and going back in time, where the distance between
-// incidents is their real gap in days, a ruler of day ticks and month labels underneath, the year behind. Phones
-// get the same cards stacked.
+// Beat 3: the record. A horizontal track that runs back in time from right to left: the newest card starts on the
+// right, and the scroll reveals older incidents from the left, the distance between them their real gap in days,
+// a ruler of day ticks and month labels underneath, the year behind. Phones get the same cards stacked, newest first.
 import Odo from './Odo.astro';
 import { getCollection } from 'astro:content';
 import { daysBetween, formatDay, happened, href, incidentPath, inlineCode, sentences, sortIncidents, type Incident } from '../lib/site';
@@ -50,6 +50,10 @@ for (let d = -4; d <= daysBetween(oldest, newest) + 3; d++) {
     ticks.push({ iso, x: dayX(iso), day, month: day === 1 ? new Intl.DateTimeFormat('en-GB', { month: 'long', timeZone: 'UTC' }).format(Date.UTC(+iso.slice(0, 4), +iso.slice(5, 7) - 1, 1)) : null });
 }
 const year = newest.slice(0, 4);
+// mirrored: the layout above runs left to right newest first; on the track it is flipped, so the newest sits at the
+// right end and older ones lie to the left
+const rx = (x: number) => width - x;
+const rcard = (x: number) => width - x - CARD;
 const gapWords = (g: number) => (g >= QUIET ? 'quiet days' : g === 1 ? 'day' : 'days');
 // the gap's wheels start a little higher and roll down to it on entry; single digits start at 9 so the width never changes
 const gapFrom = (g: number) => (g < 10 ? 9 : Math.min(99, g + 30));
@@ -65,18 +69,18 @@ const gapFrom = (g: number) => (g < 10 ? 9 : Math.min(99, g + 30));
         <span class="year" aria-hidden="true">{year}</span>
         <div class="ruler" aria-hidden="true">
             {ticks.filter((t) => t.month || t.day % 7 === 1).map((t) => (
-                <span class={`tick${t.month ? ' month' : ' week'}`} style={`left:${t.x}px`}>{t.month && <b>{t.month}</b>}</span>
+                <span class={`tick${t.month ? ' month' : ' week'}`} style={`left:${rx(t.x)}px`}>{t.month && <b>{t.month}</b>}</span>
             ))}
         </div>
         {placed.map((p, n) => (
             <>
                 {n > 0 && (
-                    <span class={`gap${p.gap >= QUIET ? ' quiet' : ''}`} style={`left:${(placed[n - 1].x + CARD + p.x) / 2}px`}>
+                    <span class={`gap${p.gap >= QUIET ? ' quiet' : ''}`} style={`left:${rx((placed[n - 1].x + CARD + p.x) / 2)}px`}>
                         {p.gap === 0 ? 'same day' : <><Odo value={p.gap} from={gapFrom(p.gap)} dimLead={false} class="gap-odo" label={`${p.gap}`} /> {gapWords(p.gap)} earlier</>}
                     </span>
                 )}
-                <span class="stem" style={`left:${p.x + CARD / 2}px`} aria-hidden="true"></span>
-                <a class="tcard" href={href(incidentPath(p.i))} style={`left:${p.x}px`}>
+                <span class="stem" style={`left:${rx(p.x + CARD / 2)}px`} aria-hidden="true"></span>
+                <a class="tcard" href={href(incidentPath(p.i))} style={`left:${rcard(p.x)}px`}>
                     <span class="d"><time datetime={happened(p.i)}>{formatDay(happened(p.i))}</time><span>{p.i.data.category}</span></span>
                     <img class="pic" data-src={pic(p.i).src} width={pic(p.i).w} height={pic(p.i).h} alt="" decoding="async" /><noscript><img class="pic" src={pic(p.i).src} width={pic(p.i).w} height={pic(p.i).h} alt="" loading="lazy" /></noscript>
                     <span class="t">{p.i.data.title}</span>
@@ -84,7 +88,7 @@ const gapFrom = (g: number) => (g < 10 ? 9 : Math.min(99, g + 30));
                 </a>
             </>
         ))}
-        <span class="track-end" style={`left:${(placed.at(-1)?.x ?? 0) + CARD + 56}px`}>{incidents.length === 1 ? 'the first on record' : 'the first on record'}, <a href={href('/incidents/')}>every incident</a></span>
+        <span class="track-end" style={`right:${width - ((placed.at(-1)?.x ?? 0) - 56)}px`}>{incidents.length === 1 ? 'the first on record' : 'the first on record'}, <a href={href('/incidents/')}>every incident</a></span>
     </div>
 </div>
 <div class="record-stack col" aria-label="Earlier incidents">
