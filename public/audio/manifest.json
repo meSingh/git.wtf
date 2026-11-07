@@ -59,8 +59,6 @@
   "drip": "sfx-drip",
   "heartbeat": "amb-heartbeat",
   "whistle": "sfx-fall-whistle",
-  "fallwhistle": "sfx-fall-whistle",
-  "gatewhistle": "sfx-ref-whistle",
   "shatter": "sfx-shatter",
   "comicsting": "sfx-comicsting",
   "cough": "sfx-cough",
@@ -86,7 +84,9 @@
   "snapbranch": "sfx-branch-snap",
   "paper": "sfx-paper-blizzard",
   "drop": "sfx-drop",
-  "tbc": "sfx-tbc"
+  "tbc": "sfx-tbc",
+  "whistle-fall": "sfx-fall-whistle",
+  "whistle-gate": "sfx-ref-whistle"
  },
  "music": {
   "theme": "bed-heroic",

@@ -201,3 +201,6 @@
     html:has(.cut-wrap.rendering) .cut-page { padding-top: 0; }
     .cut-wrap.rendering { height: 100vh; }
     .cutscene .bonkstar path { fill: #ffd400; stroke: #0a0a0a; stroke-width: 6; stroke-linejoin: round; }
+    /* the tall frame's lines: large, read on a phone in the feed */
+    .cutscene[data-frame='9:16'] .line text { font-size: 68px; stroke-width: 14px; }
+    .cutscene[data-frame='9:16'] .line .who { font-size: 34px; }

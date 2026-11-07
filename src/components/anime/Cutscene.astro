@@ -69,7 +69,8 @@ const puddles = Array.from({ length: 5 }, (_, k) => V ? { x: 120 + k * 170, y: 1
 // text: where words, lines, cards and the stamp sit in each frame
 const fit = (len: number, per: number, room: number) => Math.min(1, room / (len * per));
 const word = V ? { x: TXC, y: 690, rot: -6, room: TW } : { x: 800, y: 210, rot: -7, room: 1500 };
-const line = V ? { x: TXC, who: 1012, rows: [1072, 1138], room: TW } : { x: 800, who: 742, rows: [800, 858], room: 1500 };
+// tall lines are set large (68 px, two rows of up to 22 characters filling the column); wide ones at 46 px
+const line = V ? { x: TXC, who: 1026, rows: [1100, 1172], one: 1130, whoOne: 1052, per: 37, room: TW - 20 } : { x: 800, who: 742, rows: [800, 858], one: 864, whoOne: 806, per: 25, room: 1500 };
 const tbc = V ? { x: 60, y: 500, k: 0.9 } : { x: 120, y: 840, k: 1 };
 const stampAt = V ? { x: TXC, y: 690, k: Math.min(1, TW / 980) } : { x: 800, y: 600, k: 1 };
 // the title: one row and a band on the wide card, three stacked rows on the tall one
@@ -225,10 +226,10 @@ const longest = (rows: string[]) => Math.max(...rows.map((r) => r.length));
                     )}
                 </g>
                 {s.word && <g class="word" data-at={s.wordAt}><g transform={`translate(${word.x} ${word.y}) scale(${fit(s.word.length, 98, word.room).toFixed(3)}) translate(${-word.x} ${-word.y})`}><text x={word.x} y={word.y} transform={`rotate(${word.rot} ${word.x} ${word.y})`}>{s.word}</text></g></g>}
-                {s.line && (() => { const r = lineRows(s.line.text); const k = fit(longest(r), 25, line.room); return (
-                    <g class="line" data-at={s.lineAt} transform={`translate(${line.x} ${line.rows[0]}) scale(${k.toFixed(3)}) translate(${-line.x} ${-line.rows[0]})`}>
-                        <text x={line.x} y={r.length > 1 ? line.who : line.rows[0] - 58}><tspan class="who">{s.line.who}</tspan></text>
-                        {r.map((t, k2) => <text x={line.x} y={r.length > 1 ? line.rows[k2] : line.rows[0] + 6}>{t}</text>)}
+                {s.line && (() => { const r = lineRows(s.line.text); const k = fit(longest(r), line.per, line.room); const two = r.length > 1; const oy = two ? line.rows[0] : line.one; return (
+                    <g class="line" data-at={s.lineAt}>
+                        <text class="wholine" x={line.x} y={two ? line.who : line.whoOne}><tspan class="who">{s.line.who}</tspan></text>
+                        <g transform={`translate(${line.x} ${oy}) scale(${k.toFixed(3)}) translate(${-line.x} ${-oy})`}>{r.map((t, k2) => <text x={line.x} y={two ? line.rows[k2] : line.one}>{t}</text>)}</g>
                     </g>
                 ); })()}
                 {has(fx, 'titlecard') && (

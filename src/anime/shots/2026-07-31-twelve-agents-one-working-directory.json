@@ -1382,7 +1382,7 @@
    "lineAt": 3.2,
    "sfx": [
     "heartbeat",
-    "whistle@2.0",
+    "whistle-fall@2.0",
     "shatter@2.6"
    ],
    "music": "none",
@@ -1844,7 +1844,7 @@
    "sfx": [
     "rewind@0.3",
     "whirr@0.5",
-    "whistle@2.4",
+    "whistle-gate@2.4",
     "clunk@2.6"
    ],
    "music": "heroic",
