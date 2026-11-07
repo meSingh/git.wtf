@@ -67,6 +67,23 @@
 .ilist .c { font-family: var(--mono); font-size: 0.75rem; color: var(--grey); }
 @media (max-width: 640px) { .ilist li a { grid-template-columns: 1fr; gap: 0.25rem; } .ilist .s { grid-column: auto; } }
 
+.page-head .lede { margin: 1rem 0 0; max-width: 40rem; font-size: 1.1rem; line-height: 1.55; color: var(--paper); }
+/* incident cards */
+.iwrap { width: min(var(--col), 100% - 2.5rem); margin-inline: auto; }
+.icards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr)); gap: 1rem; }
+.icards li { border: 0; }
+.icards a { display: flex; flex-direction: column; height: 100%; background: var(--black); border: 1px solid var(--line-2); border-radius: 4px; overflow: hidden; color: var(--paper); transition: border-color 0.2s ease, transform 0.2s ease; }
+.icards a:hover, .icards a:focus-visible { border-color: var(--yellow); transform: translateY(-4px); text-decoration: none; }
+.icards img { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 630; object-fit: cover; background: var(--tile); }
+.ic-text { display: flex; flex-direction: column; gap: 0.5rem; flex: 1; padding: 0.85rem 1rem 1rem; }
+.ic-meta { display: flex; justify-content: space-between; gap: 1rem; font-family: var(--mono); font-size: 0.72rem; color: var(--grey); }
+.ic-title { font-family: var(--display); font-weight: 900; font-size: clamp(1.4rem, 2vw, 1.7rem); line-height: 0.95; text-transform: uppercase; }
+.ic-status { font-family: var(--mono); font-size: 0.8rem; color: var(--yellow); }
+.ic-status code { color: inherit; background: none; padding: 0; }
+.ic-go { margin-top: auto; padding-top: 0.3rem; font-family: var(--mono); font-size: 0.82rem; color: var(--paper); }
+.icards a:hover .ic-go { color: var(--yellow); }
+@media (prefers-reduced-motion: reduce) { .icards a { transition: none; } }
+
 /* ---------- split-flap ---------- */
 .flaps { display: inline-flex; gap: 0.08em; font-size: var(--flap-size, 6rem); line-height: 1; }
 .flap { position: relative; display: inline-block; width: 0.74em; height: 1.08em; perspective: 2.4em; font-family: var(--display); font-weight: 900; font-variant-numeric: tabular-nums; color: var(--yellow); }
@@ -93,6 +110,28 @@
 .inc-body { margin-top: 0; }
 .inc-status { font-family: var(--mono); color: var(--yellow); font-size: 1rem; }
 .inc-source { font-family: var(--mono); font-size: 0.85rem; color: var(--grey); }
+
+/* incident page (v2): title and verdict, the share image as the hero, the retelling, the stills, share */
+.inc-verdict { margin: 1rem 0 0; font-family: var(--mono); font-size: clamp(1rem, 1.6vw, 1.2rem); color: var(--yellow); }
+.inc-verdict code { color: var(--yellow); background: none; padding: 0; }
+.inc-hero { width: min(var(--col), 100% - 2rem); margin: 0 auto 2.5rem; }
+.inc-hero img { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 630; border-radius: 4px; background: var(--tile); }
+.inc-hero-link { position: relative; display: block; border-radius: 4px; outline-offset: 4px; }
+.inc-play { position: absolute; left: clamp(0.8rem, 2vw, 1.4rem); bottom: clamp(0.8rem, 2vw, 1.4rem); display: inline-flex; align-items: center; gap: 0.6em; padding: 0.85em 1.3em; background: var(--yellow); color: var(--black); border: 2px solid var(--black); border-radius: 3px; box-shadow: 4px 4px 0 var(--black); font: 600 clamp(0.9rem, 1.4vw, 1.05rem)/1 var(--mono); transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.inc-play svg { width: 1.1em; height: 1.1em; fill: currentColor; }
+.inc-hero-link:hover .inc-play, .inc-hero-link:focus-visible .inc-play { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--black); }
+.inc-hero-link:hover { text-decoration: none; }
+.inc-hero figcaption { margin-top: 0.7rem; font-family: var(--mono); font-size: 0.85rem; }
+.inc-hero figcaption a { color: var(--paper); text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 0.25em; }
+.inc-sub { font-family: var(--mono); font-weight: 400; font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--yellow); margin: 0 0 1rem; }
+.inc-stills { width: min(var(--col), 100% - 2rem); margin: 3.5rem auto 0; }
+.inc-stills .stills { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.5rem; }
+.inc-stills .stills a { display: block; border-radius: 3px; overflow: hidden; }
+.inc-stills .stills img { display: block; width: 100%; height: auto; transition: transform 0.25s ease; }
+.inc-stills .stills a:hover img { transform: scale(1.04); }
+@media (max-width: 760px) { .inc-stills .stills { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .inc-play { padding: 0.55em 0.85em; font-size: 0.8rem; box-shadow: 3px 3px 0 var(--black); } }
+@media (prefers-reduced-motion: reduce) { .inc-play, .inc-stills .stills img { transition: none; } }
 
 /* incident page: stills from the cut in place of the strip */
 .cut-stills { width: min(var(--col), 100% - 2rem); margin: 0 auto 3rem; }

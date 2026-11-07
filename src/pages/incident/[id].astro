@@ -30,6 +30,10 @@ const localVideo = existsSync(path.join(process.cwd(), 'public/incident', incide
 const video = d.video ?? (localVideo ? href(`${p}video.mp4`) : null);
 const poster = d.poster ?? (localVideo && existsSync(path.join(process.cwd(), 'public/incident', incident.id, 'poster.jpg')) ? href(`${p}poster.jpg`) : href(`${p}share.png`));
 const vid = video ?? cutVideo;
+// the hero is the share image itself: the story image when the episode has one (webp, with a 2x copy), else share.png
+const heroSrc = cut.story ? href(`/cuts/${incident.id}/${cut.story}`) : href(`${p}share.png`);
+const heroSet = cut.story && cut.story2x ? `${heroSrc} 1200w, ${href(`/cuts/${incident.id}/${cut.story2x}`)} 2400w` : undefined;
+const heroAlt = `${d.title}: the picture that goes with it when it is shared`;
 const jsonld = incidentJsonLd(p, d, { image: `${p}share.png`, video: vid ? { url: vid, poster } : null });
 ---
 <Base title={`${d.title} | git.wtf`} description={`Status: ${d.status}`} image={`${p}share.png`} type="article" jsonld={jsonld}>
@@ -37,27 +41,38 @@ const jsonld = incidentJsonLd(p, d, { image: `${p}share.png`, video: vid ? { url
         <header class="page-head inc-head">
             <p class="meta"><a href={href('/incidents/')}>Incidents</a> <span>{formatDay(happened(incident))}</span> <a class="chip" href={href(`/incidents/${d.category}/`)}>{categoryLabel(d.category)}</a>{tool && <span class="chip">{tool}</span>}</p>
             <h1>{d.title}</h1>
+            <p class="inc-verdict" set:html={`Status: ${inlineCode(d.status)}`} />
         </header>
-        {cut.stills.length ? (
-            <section class="cut-stills" aria-label="Stills from the cut">
-                {list && <p class="watch"><a class="watch-btn" href={href(`${p}cut/`)}>Watch the cut <span aria-hidden="true">&rarr;</span></a>{cutVideo && <a class="watch-alt" href={cutVideo}>or the video</a>}</p>}
-                <div class="stills">
-                    {cut.stills.map((s, k) => <img src={href(`/cuts/${incident.id}/${s.file}`)} alt={`From the cut: ${list?.shots.find((x) => x.id === s.shot)?.line?.text ?? list?.shots.find((x) => x.id === s.shot)?.word ?? d.title}`} width="1280" height="720" loading={k < 2 ? 'eager' : 'lazy'} fetchpriority={k === 0 ? 'high' : undefined} decoding={k === 0 ? 'sync' : 'async'} />)}
-                </div>
-            </section>
-        ) : (
-            <Strip incident={incident} eager class="inc-strip" />
-        )}
+        <figure class="inc-hero">
+            {list ? (
+                <a class="inc-hero-link" href={href(`${p}cut/`)} aria-label={`Watch the cut: ${d.title}`}>
+                    <img src={heroSrc} srcset={heroSet} sizes="(min-width: 1200px) 72rem, 100vw" width="1200" height="630" alt={heroAlt} fetchpriority="high" decoding="sync" />
+                    <span class="inc-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" /></svg>Watch the cut</span>
+                </a>
+            ) : (
+                <img src={heroSrc} srcset={heroSet} sizes="(min-width: 1200px) 72rem, 100vw" width="1200" height="630" alt={heroAlt} fetchpriority="high" decoding="sync" />
+            )}
+            {cutVideo && <figcaption><a href={cutVideo}>Or the video</a></figcaption>}
+        </figure>
         <article class="prose inc-body" id="retelling">
             <h2 class="visually-hidden">What happened</h2>
             <Content />
-            <p class="inc-status" set:html={`Status: ${inlineCode(d.status)}`} />
             <p class="inc-source">Source: <a href={d.source_url} rel="noopener nofollow">{sourceHost(d.source_url)}</a>, {formatDate(d.source_date)}.</p>
             {video && (
                 <p class="video"><video src={video} poster={poster} controls muted playsinline preload="none" width="1080" height="1920">Your browser does not play this video. <a href={video}>Download it.</a></video></p>
             )}
         </article>
-        <ShareCut title={d.title} status={d.status} url={new URL(p, SITE.url).toString()} image={href(`${p}share.png`)} video={cutVideo} slug={incident.id} />
+        {cut.stills.length > 0 ? (
+            <section class="inc-stills" aria-labelledby="stills-h">
+                <h2 id="stills-h" class="inc-sub">From the cut</h2>
+                <div class="stills">
+                    {cut.stills.map((s) => <a href={href(`${p}cut/`)}><img src={href(`/cuts/${incident.id}/${s.file}`)} alt={`From the cut: ${list?.shots.find((x) => x.id === s.shot)?.line?.text ?? list?.shots.find((x) => x.id === s.shot)?.word ?? d.title}`} width="1280" height="720" loading="lazy" decoding="async" /></a>)}
+                </div>
+            </section>
+        ) : (
+            <Strip incident={incident} class="inc-strip" />
+        )}
+        <ShareCut title={d.title} status={d.status} url={new URL(p, SITE.url).toString()} image={href(`${p}share.png`)} video={cutVideo} slug={incident.id} picture={false} />
         {older && (
             <a class="prev-day" href={href(incidentPath(older))}>
                 <span class="pd-label">The day before <span class="pd-date">{formatDay(happened(older))}</span></span>

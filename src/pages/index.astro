@@ -12,6 +12,7 @@ import Score from '../components/Score.astro';
 import Streak from '../components/Streak.astro';
 import Confess from '../components/Confess.astro';
 import ShareCut from '../components/ShareCut.astro';
+import Story from '../components/Story.astro';
 import { heroData } from '../lib/hero';
 import { SITE, href, incidentPath, sortIncidents } from '../lib/site';
 import { cutAssets, shotList } from '../lib/cuts';
@@ -133,16 +134,7 @@ const jsonld = {
     </section>
 
     <section class="beat beat-story over" id="story" aria-labelledby="story-h">
-        <div class="col">
-            <div class="beat-head"><h2 id="story-h" data-lock>The story</h2></div>
-            <div class="story">
-                <p>For 10 years git.wtf was a blog about fixing Git, written for people who had <em>just</em> fucked up and were looking for the fix. Then AI came into the picture and started doing the fixes for them, and the questions stopped coming here.</p>
-                <p><mark>We noticed, envied and wanted revenge.</mark> So we started counting AI's fuck-ups alongside the Git fuck-ups.</p>
-                <p>AI now runs Git commands by itself, and <mark>a good many of the fuck-ups are now its own</mark>. We keep track of those with delight.</p>
-                <p>By the way, the old blog posts are still here, unchanged, in the archive.</p>
-            </div>
-            <p class="story-go"><a class="story-btn" href={href('/archive/')}>Read the old blog: 67 posts</a></p>
-        </div>
+        <Story />
     </section>
 
     <div class="wipes" aria-hidden="true"><i data-wipe="record"></i><i data-wipe="score"></i><i data-wipe="confess"></i></div>
