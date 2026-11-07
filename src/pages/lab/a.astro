@@ -7,9 +7,15 @@ import script from '../../theatre/acts/2026-07-31-twelve-agents-one-working-dire
 import type { ActScript } from '../../theatre/script';
 import { href, incidentPath, sourceHost } from '../../lib/site';
 
-const incident = (await getEntry('incidents', script.incident))!;
-const d = incident.data;
+// the fixture build has no such incident: the page then says so instead of failing
+const incident = await getEntry('incidents', script.incident);
+const d = incident?.data;
 ---
+{!incident || !d ? (
+<Base title="Puppet theatre | git.wtf lab" noindex>
+    <main class="page"><p class="col note">This prototype plays an incident that is not in this build.</p></main>
+</Base>
+) : (
 <Base title={`${d.title} | puppet theatre | git.wtf lab`} noindex>
     <main class="theatre-page">
         <section class="theatre-wrap" id="theatre" aria-label={`${d.title}, acted out`}>
@@ -31,6 +37,7 @@ const d = incident.data;
         if (wrap) mountTheatre(wrap);
     </script>
 </Base>
+)}
 
 <style is:global>
     .theatre-page { padding-top: var(--bar); }

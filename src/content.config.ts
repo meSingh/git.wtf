@@ -21,6 +21,7 @@ export const CATEGORIES = [
 
 export const ACTORS = ['ai', 'human', 'github'] as const;
 export const TOOLS = ['claude-code', 'codex', 'cursor', 'custom', 'human', 'github'] as const;
+export const PANEL_WHO = ['DEV', 'AGENT', 'STATUS PAGE', 'caption'] as const;
 
 // YAML turns an unquoted 2026-11-06 into a Date; accept both and keep the calendar day.
 const toDay = (v: unknown) => (v instanceof Date ? v.toISOString().slice(0, 10) : v);
@@ -43,8 +44,17 @@ const incidents = defineCollection({
         source_date: isoDate,
         status: z.string().min(1),
         // Who caused it (the scoreboard) and with what (the tally by tool). Content sets both (VOICE.md).
-        actor: z.enum(ACTORS).optional(),
+        actor: z.enum(ACTORS),
         tool: z.enum(TOOLS).optional(),
+        // The comic strip's script (VOICE.md, the panels block): four panels, each a scene and optionally who says what.
+        panels: z
+            .array(
+                z
+                    .object({ scene: z.string().min(1), who: z.enum(PANEL_WHO).optional(), bubble: z.string().min(1).optional() })
+                    .refine((p) => !p.who === !p.bubble, 'who and bubble go together'),
+            )
+            .length(4)
+            .optional(),
         // Set by scripts/render-video.mjs once the video is uploaded (phase 2). Absent until then.
         video: z.string().url().optional(),
         poster: z.string().url().optional(),
