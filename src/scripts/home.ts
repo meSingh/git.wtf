@@ -162,7 +162,9 @@ function stepCut(h: import('./anime').CutHandle, ST: typeof import('gsap/ScrollT
     const inside = () => { const t = top(); return scrollY >= t - 1 && scrollY <= t + n * step + 1; };
     // a shot counts as done at its authored length (the plan's, loops or not), never by asking its timeline
     const held = () => performance.now() < holdUntil;
-    const paint = () => { if (count) count.textContent = `${k + 1} / ${n}`; };
+    // the "keep scrolling" hint shows over the first shot only and fades on the reader's first move
+    const down = q('[data-cut-down]');
+    const paint = () => { if (count) count.textContent = `${k + 1} / ${n}`; if (down) gsap.to(down, { autoAlpha: k > 0 ? 0 : 1, duration: 0.3, overwrite: true }); };
     const go = (to: number) => {
         to = Math.max(0, Math.min(n - 1, to));
         k = to;
