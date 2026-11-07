@@ -1,0 +1,34 @@
+---
+// The mascot's pose sheet, for review. Not linked; noindex.
+import Base from '../../layouts/Base.astro';
+import Mascot from '../../components/anime/Mascot.astro';
+const poses = [
+    ['neutral', 'Neutral: the deadpan stare'],
+    ['sip', 'Sip'],
+    ['shock', 'Shock: the work is gone'],
+    ['relief', 'Relief'],
+    ['stack', 'Holding the saved stack'],
+] as const;
+---
+<Base title="Mascot poses | git.wtf lab" noindex>
+    <main class="sheet-page">
+        <h1 class="col">The git.wtf developer</h1>
+        <div class="sheet" id="sheet">
+            {poses.map(([p, label]) => (
+                <figure>
+                    <svg viewBox="-260 -760 520 800" role="img" aria-label={label}><Mascot pose={p} /></svg>
+                    <figcaption>{label}</figcaption>
+                </figure>
+            ))}
+        </div>
+    </main>
+</Base>
+<style is:global>
+    .sheet-page { padding: calc(var(--bar) + 2rem) 0 3rem; }
+    .sheet-page h1 { font-size: 2.4rem; margin-bottom: 1.5rem; }
+    .sheet { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; width: min(84rem, 100% - 2rem); margin: 0 auto; }
+    .sheet figure { margin: 0; background: #8a877f; border-radius: 6px; padding: 1rem 0.5rem 0.8rem; }
+    .sheet svg { display: block; width: 100%; height: auto; }
+    .sheet figcaption { margin-top: 0.6rem; text-align: center; font-family: var(--mono); font-size: 0.85rem; color: #0a0a0a; }
+    @media (max-width: 760px) { .sheet { grid-template-columns: repeat(2, 1fr); } }
+</style>

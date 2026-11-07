@@ -1,0 +1,134 @@
+---
+// The git.wtf developer, from format D: a big round off-white head, half-lidded eyes with small pupils looking
+// down, a flat little mouth, a black hoodie drawn in grey ink with drawstrings, black trousers, a white mug.
+// Full figure, origin at his feet. Poses: neutral (the deadpan stare), sip, shock (his work is gone),
+// relief, stack (holding the saved stack).
+export type MascotPose = 'neutral' | 'sip' | 'shock' | 'relief' | 'stack';
+interface Props { pose?: MascotPose; shadow?: boolean }
+const { pose = 'neutral', shadow = true } = Astro.props;
+const EX = 58, EY = -566;
+---
+<g class={`mascot m-${pose}`}>
+    {shadow && <ellipse class="m-shadow" cx="0" cy="4" rx="150" ry="22" />}
+    <g class="m-body" transform={pose === 'shock' ? 'rotate(-4 0 0)' : undefined}>
+        <!-- trousers and shoes -->
+        <path class="m-pants" d="M-78 -178 L-74 -16 L-14 -16 L-8 -150 L8 -150 L14 -16 L74 -16 L78 -178Z" />
+        <path class="m-shoe" d="M-84 -20 C-84 -6 -66 0 -44 0 L-10 0 C-6 -10 -12 -20 -24 -22Z" />
+        <path class="m-shoe" d="M84 -20 C84 -6 66 0 44 0 L10 0 C6 -10 12 -20 24 -22Z" />
+        <!-- the hoodie -->
+        <path class="m-hood" d="M-96 -398 C-112 -444 -66 -468 0 -468 C66 -468 112 -444 96 -398" />
+        <path class="m-hoodie" d="M-112 -392 C-158 -380 -168 -296 -158 -206 C-154 -174 -128 -164 -104 -164 L104 -164 C128 -164 154 -174 158 -206 C168 -296 158 -380 112 -392 C80 -412 -80 -412 -112 -392Z" />
+        <path class="m-neck" d="M-30 -404 L0 -376 L30 -404Z" />
+        <path class="m-string" d="M-22 -392 L-28 -322 M22 -392 L28 -322" />
+        <circle class="m-tip" cx="-28" cy="-318" r="5" /><circle class="m-tip" cx="28" cy="-318" r="5" />
+        <path class="m-pocket" d="M-86 -228 C-40 -214 40 -214 86 -228" />
+
+        <!-- arms, mug and stack by pose -->
+        {pose === 'neutral' && (
+            <>
+                <path class="m-arm" d="M-140 -340 C-150 -280 -110 -250 -54 -258" />
+                <path class="m-arm" d="M140 -340 C156 -280 150 -230 136 -196" />
+                <circle class="m-hand" cx="134" cy="-190" r="20" />
+                <g class="m-mug" transform="translate(-30 -300)"><path class="m-cup" d="M-30 -36 L36 -36 L32 34 L-26 34Z" /><path class="m-handle" d="M36 -18 C60 -18 60 18 34 18" /><ellipse class="m-coffee" cx="3" cy="-36" rx="33" ry="7" /></g>
+                <path class="m-grip" d="M-70 -300 C-76 -286 -72 -268 -56 -266 C-46 -266 -44 -290 -54 -302Z" />
+            </>
+        )}
+        {pose === 'sip' && (
+            <>
+                <path class="m-arm" d="M140 -340 C156 -280 150 -230 136 -196" />
+                <circle class="m-hand" cx="134" cy="-190" r="20" />
+            </>
+        )}
+        {pose === 'shock' && (
+            <>
+                <path class="m-arm" d="M-140 -350 C-200 -400 -210 -470 -186 -520" />
+                <path class="m-arm" d="M140 -350 C200 -400 210 -470 186 -520" />
+                <circle class="m-hand" cx="-184" cy="-532" r="22" /><circle class="m-hand" cx="184" cy="-532" r="22" />
+                <g class="m-mug m-falling" transform="translate(-150 -120) rotate(-118)"><path class="m-cup" d="M-30 -36 L36 -36 L32 34 L-26 34Z" /><path class="m-handle" d="M36 -18 C60 -18 60 18 34 18" /></g>
+                <path class="m-spill" d="M-190 -60 C-230 -40 -250 -10 -210 -2 C-180 4 -150 -10 -160 -34Z" />
+            </>
+        )}
+        {pose === 'relief' && (
+            <>
+                <path class="m-arm" d="M-140 -340 C-150 -280 -110 -250 -54 -258" />
+                <path class="m-arm" d="M140 -340 C160 -270 150 -220 136 -186" />
+                <circle class="m-hand" cx="134" cy="-180" r="20" />
+                <g class="m-mug" transform="translate(-30 -296)"><path class="m-cup" d="M-30 -36 L36 -36 L32 34 L-26 34Z" /><path class="m-handle" d="M36 -18 C60 -18 60 18 34 18" /><ellipse class="m-coffee" cx="3" cy="-36" rx="33" ry="7" /></g>
+                <path class="m-grip" d="M-70 -296 C-76 -282 -72 -264 -56 -262 C-46 -262 -44 -286 -54 -298Z" />
+            </>
+        )}
+        {pose === 'stack' && (
+            <>
+                <g class="m-stack">{[0, 1, 2, 3, 4, 5, 6, 7].map((k) => <path class="m-sheet" d={`M${-96 + (k % 2) * 6} ${-214 - k * 20} L${96 + (k % 2) * 6} ${-214 - k * 20} L${102 + (k % 2) * 6} ${-196 - k * 20} L${-90 + (k % 2) * 6} ${-196 - k * 20}Z`} />)}<path class="m-lines" d="M-60 -366 h96 M-60 -356 h80" /></g>
+                <path class="m-arm" d="M-140 -340 C-160 -290 -140 -230 -100 -214" />
+                <path class="m-arm" d="M140 -340 C160 -290 140 -230 100 -214" />
+                <circle class="m-hand" cx="-100" cy="-210" r="20" /><circle class="m-hand" cx="100" cy="-210" r="20" />
+            </>
+        )}
+
+        <!-- the head -->
+        <circle class="m-head" cx="0" cy="-560" r="152" />
+        {(pose === 'neutral' || pose === 'stack') && (
+            <>
+                {[-EX, EX].map((x) => <g class="m-eye"><circle class="m-white" cx={x} cy={EY} r="32" /><path class="m-pupil" d={`M${x - 10} ${EY - 4} a13 13 0 0 0 26 0Z`} /><path class="m-lid" d={`M${x - 32} ${EY - 4} L${x + 32} ${EY - 4}`} /></g>)}
+                <path class="m-bag" d={`M${-EX - 22} ${EY + 40} q22 10 44 0 M${EX - 22} ${EY + 40} q22 10 44 0`} />
+                <path class="m-mouth" d="M-16 -486 L12 -486 M-16 -486 l0 -8" />
+            </>
+        )}
+        {pose === 'sip' && (
+            <>
+                {[-EX, EX].map((x) => <path class="m-closed" d={`M${x - 28} ${EY + 2} q28 16 56 0`} />)}
+                <path class="m-arm" d="M-140 -340 C-150 -400 -90 -440 -40 -456" />
+                <g class="m-mug" transform="translate(-6 -470) rotate(-24)"><path class="m-cup" d="M-30 -36 L36 -36 L32 34 L-26 34Z" /><path class="m-handle" d="M36 -18 C60 -18 60 18 34 18" /></g>
+                <path class="m-grip" d="M-52 -470 C-60 -454 -54 -434 -38 -434 C-28 -436 -28 -460 -38 -470Z" />
+                <path class="m-steam" d="M10 -520 c-12 -18 12 -28 0 -48 M40 -528 c-12 -18 12 -28 0 -48" />
+            </>
+        )}
+        {pose === 'shock' && (
+            <>
+                {[-EX, EX].map((x) => <g class="m-eye"><circle class="m-white" cx={x} cy={EY - 8} r="44" /><circle class="m-pupil" cx={x} cy={EY - 8} r="6" /></g>)}
+                <path class="m-brow" d={`M${-EX - 34} ${EY - 74} L${-EX + 26} ${EY - 66} M${EX + 34} ${EY - 74} L${EX - 26} ${EY - 66}`} />
+                <ellipse class="m-scream" cx="0" cy="-466" rx="30" ry="40" />
+                <path class="m-drop" d="M128 -650 C112 -624 114 -598 130 -594 C146 -598 148 -624 128 -650Z" />
+                <path class="m-drop" d="M-136 -630 C-150 -606 -148 -584 -134 -580 C-120 -584 -118 -606 -136 -630Z" />
+                <path class="m-shake" d="M-196 -620 l-24 -10 M-200 -580 l-28 0 M196 -620 l24 -10 M200 -580 l28 0" />
+            </>
+        )}
+        {pose === 'relief' && (
+            <>
+                {[-EX, EX].map((x) => <path class="m-closed" d={`M${x - 28} ${EY + 6} q28 -14 56 0`} />)}
+                <path class="m-mouth" d="M-18 -488 q18 16 36 0" />
+                <path class="m-puff" d="M40 -474 c22 -6 40 4 46 18 c14 -2 26 8 22 22 c-10 10 -30 10 -40 2 c-14 8 -34 2 -36 -14 c-8 -10 -4 -22 8 -28Z" />
+            </>
+        )}
+    </g>
+</g>
+<style is:global>
+    .mascot .m-shadow { fill: #0a0a0a; opacity: 0.22; }
+    .mascot .m-pants { fill: #0a0a0a; stroke: #8a877f; stroke-width: 5; stroke-linejoin: round; }
+    .mascot .m-shoe { fill: #0a0a0a; stroke: #8a877f; stroke-width: 5; }
+    .mascot .m-hood { fill: none; stroke: #8a877f; stroke-width: 6; stroke-linecap: round; }
+    .mascot .m-hoodie { fill: #0a0a0a; stroke: #8a877f; stroke-width: 6; stroke-linejoin: round; }
+    .mascot .m-neck { fill: #f2f0ea; }
+    .mascot .m-string, .mascot .m-pocket { fill: none; stroke: #8a877f; stroke-width: 5; stroke-linecap: round; }
+    .mascot .m-tip { fill: #8a877f; }
+    .mascot .m-arm { fill: none; stroke: #0a0a0a; stroke-width: 50; stroke-linecap: round; filter: drop-shadow(0 0 0 #8a877f) drop-shadow(3px 0 0 #8a877f) drop-shadow(-3px 0 0 #8a877f) drop-shadow(0 3px 0 #8a877f) drop-shadow(0 -3px 0 #8a877f); }
+    .mascot .m-hand, .mascot .m-grip { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 5; }
+    .mascot .m-cup { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 6; stroke-linejoin: round; }
+    .mascot .m-handle { fill: none; stroke: #f2f0ea; stroke-width: 9; }
+    .mascot .m-coffee { fill: #2e2d2a; }
+    .mascot .m-steam { fill: none; stroke: #8a877f; stroke-width: 6; stroke-linecap: round; }
+    .mascot .m-spill { fill: #2e2d2a; stroke: #0a0a0a; stroke-width: 4; }
+    .mascot .m-puff { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 4; opacity: 0.9; }
+    .mascot .m-sheet { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 4; stroke-linejoin: round; }
+    .mascot .m-lines { stroke: #8a877f; stroke-width: 4; }
+    .mascot .m-head { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 7; }
+    .mascot .m-white { fill: #ffffff; stroke: #0a0a0a; stroke-width: 6; }
+    .mascot .m-lid { stroke: #0a0a0a; stroke-width: 7; stroke-linecap: round; }
+    .mascot .m-pupil { fill: #0a0a0a; }
+    .mascot .m-bag, .mascot .m-closed, .mascot .m-mouth, .mascot .m-brow, .mascot .m-shake { fill: none; stroke: #0a0a0a; stroke-width: 6; stroke-linecap: round; }
+    .mascot .m-shake { stroke: #ffd400; }
+    .mascot .m-bag { stroke-width: 4; opacity: 0.6; }
+    .mascot .m-scream { fill: #0a0a0a; }
+    .mascot .m-drop { fill: #dcd9d1; stroke: #0a0a0a; stroke-width: 4; }
+</style>
