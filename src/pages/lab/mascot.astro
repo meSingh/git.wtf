@@ -8,6 +8,11 @@ const poses = [
     ['shock', 'Shock: the work is gone'],
     ['relief', 'Relief'],
     ['stack', 'Holding the saved stack'],
+    ['type', 'Typing at the desk'],
+    ['walk', 'Walking out'],
+    ['enter', 'Back with a fresh mug'],
+    ['terror', 'Terror'],
+    ['asleep', 'Asleep on the desk'],
 ] as const;
 ---
 <Base title="Mascot poses | git.wtf lab" noindex>
@@ -16,7 +21,7 @@ const poses = [
         <div class="sheet" id="sheet">
             {poses.map(([p, label]) => (
                 <figure>
-                    <svg viewBox="-260 -760 520 800" role="img" aria-label={label}><Mascot pose={p} /></svg>
+                    <svg viewBox="-260 -800 520 840" role="img" aria-label={label}>{(p === 'type' || p === 'asleep') && <rect x="-240" y="-262" width="480" height="30" rx="4" fill="#2e2d2a" stroke="#0a0a0a" stroke-width="6" />}<Mascot pose={p} mug={p !== 'terror'} />{(p === 'type' || p === 'asleep') && <rect x="-240" y="-236" width="480" height="30" rx="4" fill="#2e2d2a" stroke="#f2f0ea" stroke-width="4" />}</svg>
                     <figcaption>{label}</figcaption>
                 </figure>
             ))}

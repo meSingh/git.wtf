@@ -1,6 +1,6 @@
 // The shot list: what the daily task writes for each incident in format B. The kit (src/components/anime/, the
 // engine in src/scripts/anime.ts) reads it. Field names here are the contract with Content.
-export type Pose = 'neutral' | 'shocked' | 'dramatic' | 'defeated';
+export type Pose = 'neutral' | 'shocked' | 'dramatic' | 'defeated' | 'terror' | 'asleep' | 'walk' | 'enter';
 export interface CastIn {
     who: 'dev' | 'agent';
     pose?: Pose;
@@ -17,31 +17,49 @@ export interface CastIn {
     /** Drawn as a black silhouette (eyes still glow). */
     silhouette?: boolean;
     /** An arm pose: pointing, a raised flat palm, a hand held high, holding something in front. */
-    arm?: 'point' | 'palm' | 'up' | 'hold';
+    arm?: 'point' | 'palm' | 'up' | 'hold' | 'type' | 'salute' | 'broom';
     /** The pose it turns to on the "turn" effect. */
     turn?: Pose;
     /** A name effects can aim at (the hero, the thief, the catcher...). */
     role?: string;
+    /** Soaked: drips and a darker screen. */
+    wet?: boolean;
+    /** DEV only: false draws no mug in the hand (after it has shattered, or when the mug is a prop). */
+    mug?: boolean;
+}
+type At = { x: number; y: number; scale?: number };
+/** Everything the kit can draw, placed in frame units. */
+export interface Props {
+    folder?: At & { label?: string; empty?: boolean };
+    files?: boolean;
+    counter?: { x: number; y: number; to?: number; from?: number; value?: number };
+    desk?: At;
+    copier?: At;
+    paper?: At & { ring?: boolean };
+    stack?: At & { to?: [number, number]; grow?: [number, number]; ring?: boolean };
+    branch?: At;
+    rain?: boolean;
+    lamp?: At;
+    pages?: Partial<At> & { ring?: boolean; grow?: boolean; scatter?: boolean; puddles?: boolean };
+    note?: At & { text: string; at?: number };
+    door?: At;
+    box?: At & { icon?: 'lifebuoy' };
+    window?: At;
+    skylight?: At;
+    broom?: At;
+    mug?: At;
+    gate?: At & { sign?: string; tally?: boolean; at?: number };
+    farwindow?: At & { folder?: string };
 }
 export interface Shot {
     id: string;
     /** The ground behind: black, white, yellow, speed lines, or three diagonal panels. */
-    bg?: 'black' | 'white' | 'yellow' | 'speedlines' | 'split' | 'split12' | 'dusk' | 'flat';
+    bg?: 'black' | 'white' | 'yellow' | 'speedlines' | 'split' | 'split12' | 'dusk' | 'flat' | 'room' | 'night' | 'paper' | 'stack3';
     cast?: CastIn[];
     /** For bg "split": the three close-ups, top to bottom. */
     panels?: CastIn[];
-    /** Props the kit can draw: the folder, the file blizzard, a counter. */
-    props?: {
-        folder?: { x: number; y: number; scale?: number };
-        files?: boolean;
-        counter?: { to: number; x: number; y: number };
-        desk?: { x: number; y: number };
-        copier?: { x: number; y: number };
-        paper?: { x: number; y: number };
-        stack?: { x: number; y: number; to?: [number, number] };
-        branch?: { x: number; y: number };
-        rain?: boolean;
-    };
+    /** Props the kit can draw (see Props). */
+    props?: Props;
     /** Effects, each optionally at a time: "impact@0.9". See FX in src/scripts/anime.ts. */
     fx?: string[];
     /** One impact word, huge and tilted, and when it lands (seconds into the shot, after its picture). */
@@ -63,8 +81,10 @@ export interface Shot {
     /** What a phone keeps in frame when the 16:9 frame has to be cropped. */
     focus?: [number, number];
     /** The vertical (9:16, 900 x 1600) staging: cast and props placed for the tall frame. Without it, a layout rule
-     *  places them. Keep faces, words and the stamp inside the safe area x 54 to 740, y 240 to 1040. */
-    v?: { cast?: CastIn[]; props?: Shot['props'] };
+     *  places them. Its fx, where given, replace the shared list for the tall frame (camera moves differ); the
+     *  sound plan and timings stay the shared ones. Safe areas: no words above y 190 or below y 1200, nothing to
+     *  read right of x 780 below y 700; words 400 to 900, lines 1000 to 1180. */
+    v?: { cast?: CastIn[]; props?: Props; fx?: string[]; bg?: Shot['bg'] };
     /** Draw this shot as a still on the incident page. */
     still?: boolean;
 }

@@ -1,17 +1,18 @@
 ---
 // AGENT, anime style: a monitor for a head, a terminal face, a hazard stripe, a number on its chest. Bust, origin at
 // the bottom middle. In the dramatic pose the cursor becomes two glowing eyes. THE EXTRA is the same rig, small and
-// grey, with no number and no glow. `turn` draws a second face the "turn" effect switches to.
+// grey, with no number and no glow. `turn` draws a second face the "turn" effect switches to. Arms: point, palm, up
+// (a fist high), hold (a sheet in front), salute, broom (a big broom held across the body). `wet` drips.
 import type { Pose } from '../../anime/types';
-interface Props { pose?: Pose; n?: number; head?: boolean; extra?: boolean; silhouette?: boolean; arm?: 'point' | 'palm' | 'up' | 'hold'; turn?: Pose }
-const { pose = 'neutral', n, head = false, extra = false, silhouette = false, arm, turn } = Astro.props;
+interface Props { pose?: Pose; n?: number; head?: boolean; extra?: boolean; silhouette?: boolean; arm?: 'point' | 'palm' | 'up' | 'hold' | 'type' | 'salute' | 'broom'; turn?: Pose; wet?: boolean }
+const { pose = 'neutral', n, head = false, extra = false, silhouette = false, arm, turn, wet = false } = Astro.props;
 const faces = turn ? [pose, turn] : [pose];
 ---
-<g class={`a-agent pose-${pose}${extra ? ' extra' : ''}${silhouette ? ' sil' : ''}`}>
+<g class={`a-agent pose-${pose}${extra ? ' extra' : ''}${silhouette ? ' sil' : ''}${wet ? ' wet' : ''}`}>
     {!head && (
         <>
-            {arm !== 'up' && arm !== 'point' && arm !== 'hold' && <path class="arm" d="M196 0 L176 -180 L140 -186 L150 0Z" />}
-            {arm !== 'hold' && <path class="arm" d="M-196 0 L-176 -180 L-140 -186 L-150 0Z" />}
+            {arm !== 'up' && arm !== 'point' && arm !== 'hold' && arm !== 'salute' && arm !== 'broom' && <path class="arm" d="M196 0 L176 -180 L140 -186 L150 0Z" />}
+            {arm !== 'hold' && arm !== 'broom' && <path class="arm" d="M-196 0 L-176 -180 L-140 -186 L-150 0Z" />}
             <rect class="torso" x="-150" y="-212" width="300" height="212" rx="10" />
             <rect class="stripe" x="-150" y="-154" width="300" height="34" fill="url(#a-hazard)" />
             {n !== undefined && !extra && <g class="badge"><circle cx="86" cy="-70" r="38" /><text x="86" y="-55">{n}</text></g>}
@@ -40,5 +41,16 @@ const faces = turn ? [pose, turn] : [pose];
         ))}
         <path class="tear" style="visibility:hidden" d="M-82 -386 C-92 -362 -90 -338 -78 -334 C-66 -338 -64 -362 -82 -386Z" />
         <path class="sweat" style="visibility:hidden" d="M190 -560 C172 -530 174 -500 192 -496 C210 -500 212 -530 190 -560Z" />
+        {wet && <g class="drops"><path d="M-150 -566 C-160 -546 -158 -530 -148 -528 C-138 -530 -138 -546 -150 -566Z" /><path d="M120 -566 C110 -540 112 -522 122 -520 C132 -522 132 -540 120 -566Z" /><path d="M-40 -240 C-50 -220 -48 -204 -38 -202 C-28 -204 -28 -220 -40 -240Z" /><path d="M60 -240 C50 -216 52 -198 62 -196 C72 -198 72 -216 60 -240Z" /></g>}
     </g>
+    {!head && arm === 'salute' && (
+        <g class="arm-salute"><path class="limb-o" d="M150 -186 L300 -300 L214 -470" /><path class="limb" d="M150 -186 L300 -300 L214 -470" /><rect class="palm" x="168" y="-512" width="92" height="40" rx="12" transform="rotate(-30 214 -492)" /></g>
+    )}
+    {!head && arm === 'broom' && (
+        <g class="arm-broom">
+            <path class="limb-o" d="M-150 -186 L-200 -260 L-65 -296 M150 -186 L170 -100 L85 -104" /><path class="limb" d="M-150 -186 L-200 -260 L-65 -296 M150 -186 L170 -100 L85 -104" />
+            <g class="broom"><path class="handle" d="M-250 -532 L266 128" /><path class="bristles" d="M205 163 L315 77 L389 172 L279 258Z" /><path class="tie" d="M214 156 L322 70" /></g>
+            <circle class="fist" cx="-65" cy="-296" r="30" /><circle class="fist" cx="85" cy="-104" r="30" />
+        </g>
+    )}
 </g>

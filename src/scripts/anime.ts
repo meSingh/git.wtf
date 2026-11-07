@@ -30,21 +30,21 @@ const FX: Record<string, Fx> = {
         tl.fromTo(q(card, '.tl'), { autoAlpha: 0 }, { autoAlpha: 0.5, duration: 0.15 }, 0.55);
         loops.push(gsap.to(q(card, '.tl'), { rotation: 3, transformOrigin: CENTRE, duration: 0.12, repeat: -1, yoyo: true, ease: 'none', paused: true }));
     },
-    push({ tl, g }, at) { tl.fromTo(q(g, '.cam'), { scale: 1, transformOrigin: focus(g) }, { scale: 1.12, duration: 2.6, ease: 'power1.inOut' }, at); },
-    slowpush({ tl, g }, at) { tl.fromTo(q(g, '.cam'), { scale: 1, transformOrigin: focus(g) }, { scale: 1.08, duration: 4.5, ease: 'sine.inOut' }, at); },
+    push({ tl, g }, at) { tl.fromTo(q(g, '.cam'), { scale: 1, svgOrigin: focus(g) }, { scale: 1.12, duration: 2.6, ease: 'power1.inOut' }, at); },
+    slowpush({ tl, g }, at) { tl.fromTo(q(g, '.cam'), { scale: 1, svgOrigin: focus(g) }, { scale: 1.08, duration: 4.5, ease: 'sine.inOut' }, at); },
     devpush({ tl, g }, at) {
         const d = role(g, 'dev')!.parentElement!;
         const m = d.getAttribute('transform')!.match(/translate\(([-\d.]+) ([-\d.]+)\)/)!;
-        tl.to(q(g, '.cam'), { scale: 1.3, transformOrigin: `${m[1]}px ${Number(m[2]) - 360}px`, duration: 1.4, ease: 'power2.inOut' }, at);
+        tl.to(q(g, '.cam'), { scale: 1.3, svgOrigin: `${m[1]} ${Number(m[2]) - 360}`, duration: 1.4, ease: 'power2.inOut' }, at);
     },
-    zoom({ tl, g }, at) { tl.fromTo(q(g, '.cam'), { scale: 1.6, transformOrigin: focus(g) }, { scale: 1, duration: 0.35, ease: 'power4.out' }, at); },
+    zoom({ tl, g }, at) { tl.fromTo(q(g, '.cam'), { scale: 1.6, svgOrigin: focus(g) }, { scale: 1, duration: 0.35, ease: 'power4.out' }, at); },
     shake({ tl, g }, at) {
         tl.to(q(g, '.cam'), { keyframes: [{ x: -18, y: 8 }, { x: 16, y: -10 }, { x: -10, y: 6 }, { x: 8, y: -4 }, { x: 0, y: 0 }], duration: 0.32, ease: 'none' }, at || 0.12);
     },
     whip({ tl, g }, at) { tl.fromTo(q(g, '.cam'), { x: -1500 }, { x: 0, duration: 0.28, ease: 'power3.out' }, at); },
     spin({ tl, g }, at) {
         // the camera goes once round the ring of pointing arms
-        tl.fromTo(q(g, '.cam'), { rotation: 0, scale: 1.7, transformOrigin: CENTRE }, { rotation: 360, duration: 2.2, ease: 'power2.inOut' }, at);
+        tl.fromTo(q(g, '.cam'), { rotation: 0, scale: 1.7, svgOrigin: CENTRE.replace(/px/g, '') }, { rotation: 360, duration: 2.2, ease: 'power2.inOut' }, at);
         tl.to(q(g, '.cam'), { scale: 1, duration: 0.6, ease: 'power2.out' }, at + 2.0);
     },
     rise({ tl, g, loops }, at) {
@@ -164,11 +164,12 @@ const FX: Record<string, Fx> = {
     },
     tear({ tl, g }, at) {
         const t = q(g, '.fig[data-role="mourner"] .tear') ?? q(g, '.tear');
-        if (t) tl.fromTo(t, { visibility: 'visible', y: -10, opacity: 0 }, { y: 70, opacity: 1, duration: 1.4, ease: 'power1.in' }, at || 0.4);
+        if (t) tl.fromTo(t, { visibility: 'visible', y: -10, opacity: 0 }, { y: 70, opacity: 1, duration: 1.4, ease: 'power1.in', immediateRender: false }, at || 0.4);
     },
     sweat({ tl, g }, at) {
         const drops = qa(g, '.sweat');
-        tl.fromTo(drops, { visibility: 'visible', y: -30, scale: 0.4, transformOrigin: '50% 0%' }, { y: 0, scale: 1, duration: 0.3, ease: 'back.out(3)', stagger: 0.05 }, at || 0.4);
+        tl.set(drops, { visibility: 'hidden' }, 0);
+        tl.fromTo(drops, { visibility: 'visible', y: -30, scale: 0.4, transformOrigin: '50% 0%' }, { y: 0, scale: 1, duration: 0.3, ease: 'back.out(3)', stagger: 0.05, immediateRender: false }, at || 0.4);
         tl.to(drops, { y: 26, duration: 1.4, ease: 'power1.in' }, '>');
     },
     snap({ tl, g }, at) {
@@ -214,16 +215,431 @@ const FX: Record<string, Fx> = {
         const card = q(g, '.endcard')!;
         const t = at || 1.6;
         // freeze frame: the picture drains, the arrow slides in, the stamp slams
-        tl.to(q(g, '.cam'), { filter: 'grayscale(1) contrast(1.25)', duration: 0.3 }, t);
+        tl.to(q(g, '.cam'), { filter: 'grayscale(1) contrast(1.2) brightness(0.5)', duration: 0.3 }, t);
         tl.fromTo(q(card, '.tbc-in'), { x: -700 }, { x: 0, duration: 0.35, ease: 'power3.out' }, t + 0.2);
         tl.fromTo(q(card, '.stampmark'), { autoAlpha: 0, scale: 3.2, transformOrigin: '50% 50%' }, { autoAlpha: 1, scale: 1, duration: 0.25, ease: 'power4.in' }, t + 0.8);
         tl.to(q(g, '.cam'), { keyframes: [{ y: 12 }, { y: -6 }, { y: 0 }], duration: 0.18, ease: 'none' }, '>');
     },
 };
 
+// ---------- the v2 kit (script v2: the twelve agents and the folder) ----------
+/** A figure's place in the frame: where it stands and its scale (x carries the flip). */
+function placeOf(el: Element) {
+    const p = el.closest('.place') ?? el.parentElement!;
+    const t = p.getAttribute('transform') || '';
+    const m = t.match(/translate\(([-\d.]+) ([-\d.]+)\)/);
+    const s = t.match(/scale\(([-\d.]+)(?: ([-\d.]+))?\)/);
+    const sx = s ? Number(s[1]) : 1, sy = s ? Number(s[2] ?? s[1]) : 1;
+    return { x: m ? Number(m[1]) : 0, y: m ? Number(m[2]) : 0, sx, sy };
+}
+/** Where a prop group stands, from its translate. */
+function at(el: Element | null) {
+    const m = el?.getAttribute('transform')?.match(/translate\(([-\d.]+) ([-\d.]+)\)(?: scale\(([-\d.]+)\))?/);
+    return m ? { x: Number(m[1]), y: Number(m[2]), s: Number(m[3] ?? 1) } : { x: 0, y: 0, s: 1 };
+}
+// how many times an effect has run in this shot's timeline (popup, ring and bonk count their calls)
+const calls = new WeakMap<object, Record<string, number>>();
+const nth = (tl: object, k: string) => { const m = calls.get(tl) ?? {}; const v = m[k] ?? 0; m[k] = v + 1; calls.set(tl, m); return v; };
+const fxCount = (g: Element, name: string) => (JSON.parse((g as HTMLElement).dataset.fx || '[]') as string[]).filter((f) => f.split('@')[0] === name).length;
+const dev = (g: Element) => q(g, '.fig[data-who="dev"]');
+const agentN = (g: Element, n: number) => q(g, `.fig[data-who="agent"][data-n="${n}"]`);
+const swap = (tl: gsap.core.Timeline, f: Element | null, t: number) => {
+    if (!f) return;
+    tl.set(qa(f, ':scope > .v-init'), { visibility: 'hidden' }, t);
+    tl.set(qa(f, ':scope > .v-turn'), { visibility: 'visible' }, t);
+};
+const vertical = (g: Element) => (g.closest('svg') as SVGSVGElement | null)?.dataset.frame === '9:16';
+/** A burst of stars over a point, made once per shot. */
+function stars(g: Element, x: number, y: number, key: string) {
+    let s = g.querySelector<El>(`.bonkstar[data-key="${key}"]`);
+    if (!s) {
+        s = document.createElementNS('http://www.w3.org/2000/svg', 'g') as unknown as El;
+        s.setAttribute('class', 'bonkstar');
+        s.setAttribute('data-key', key);
+        s.setAttribute('transform', `translate(${x} ${y})`);
+        s.setAttribute('style', 'visibility:hidden');
+        s.innerHTML = '<g class="st-in"><path d="M0 -54 L14 -16 L54 -14 L22 10 L34 50 L0 26 L-34 50 L-22 10 L-54 -14 L-14 -16Z"/><path class="small" d="M70 -40 l8 18 l20 2 l-15 12 l5 20 l-18 -11 l-18 11 l5 -20 l-15 -12 l20 -2Z"/></g>';
+        q(g, '.cam')!.appendChild(s);
+    }
+    return s;
+}
+function pop(tl: gsap.core.Timeline, s: El, t: number) {
+    tl.fromTo(s, { visibility: 'visible', scale: 0.2, rotation: -20, opacity: 1, transformOrigin: '50% 50%' }, { scale: 1, rotation: 0, duration: 0.14, ease: 'back.out(3)', immediateRender: false }, t);
+    tl.to(s, { opacity: 0, duration: 0.2 }, t + 0.32);
+    tl.set(s, { visibility: 'hidden' }, t + 0.52);
+}
+
+Object.assign(FX, {
+    titlerows({ tl, g, loops }: Ctx) {
+        const rows = qa(g, '.trow');
+        rows.forEach((r, k) => {
+            const t = 0.1 + k * 0.22;
+            tl.fromTo(q(r, '.band'), { scaleX: 0, transformOrigin: '0% 50%' }, { scaleX: 1, duration: 0.16, ease: 'power3.out' }, t);
+            tl.fromTo(q(r, '.ttl'), { autoAlpha: 0, scale: 1.7, transformOrigin: '50% 50%' }, { autoAlpha: 1, scale: 1, duration: 0.16, ease: 'power4.in' }, t + 0.06);
+        });
+        const lines = q(g, '.titlerows .tl');
+        tl.fromTo(lines, { autoAlpha: 0 }, { autoAlpha: 0.5, duration: 0.15 }, 0.6);
+        loops.push(gsap.to(lines, { rotation: 3, transformOrigin: CENTRE, duration: 0.12, repeat: -1, yoyo: true, ease: 'none', paused: true }));
+    },
+    tiltdown({ tl, g }: Ctx) {
+        // from the lamp down to the desk
+        const l = at(q(g, '.lamp'));
+        tl.fromTo(q(g, '.cam'), { scale: 1.9, svgOrigin: `${l.x} ${l.y}` }, { scale: 1, duration: 1.3, ease: 'power2.inOut' }, 0);
+    },
+    type({ tl, g }: Ctx, t: number) {
+        const hands = qa(dev(g) ?? g, '.v-init .m-hand');
+        if (hands.length) tl.fromTo(hands, { y: 0 }, { y: -12, duration: 0.11, repeat: 27, yoyo: true, ease: 'none', stagger: 0.06 }, t);
+    },
+    ring({ tl, g }: Ctx, t: number) {
+        const pile = q(g, '.pile');
+        if (!pile) return;
+        const k = nth(tl, 'ring') + 1;
+        const sheets = qa(pile, '.sheet');
+        if (pile.dataset.grow === '1' && k === 1) tl.set(sheets.slice(1), { visibility: 'hidden' }, 0);
+        const sheet = sheets[Math.min(k, sheets.length - 1)];
+        const mug = q(pile, '.pmug');
+        tl.set(sheet, { visibility: 'visible' }, t - 0.2);
+        tl.fromTo(sheet, { y: -30 }, { y: 0, duration: 0.14, ease: 'power2.in', immediateRender: false }, t - 0.2);
+        if (mug) tl.to(mug, { keyframes: [{ y: 150 - 46 - k * 18 - 30, duration: 0.12, ease: 'power2.in' }, { y: 0, duration: 0.2, ease: 'power2.out', delay: 0.1 }] }, t - 0.1);
+        tl.fromTo(q(sheet, '.ring'), { opacity: 0 }, { opacity: 0.85, duration: 0.1, immediateRender: false }, t + 0.05);
+    },
+    tick({ tl, g }: Ctx, t: number) {
+        const c = q(g, '.counter');
+        if (!c || c.dataset.value) return;
+        // tweened on the element itself (not in onUpdate), so a seek with events off still shows the number
+        tl.fromTo(c, { textContent: Number(c.dataset.from || 0) }, { textContent: Number(c.dataset.to || 0), duration: 2.4, ease: 'power1.in', modifiers: { textContent: (v: number) => Math.round(v).toLocaleString('en-GB') }, immediateRender: false }, t);
+    },
+    yawn({ tl, g }: Ctx, t: number) {
+        const y = q(dev(g) ?? g, '.v-init .m-yawn');
+        if (!y) return;
+        tl.fromTo(y, { visibility: 'visible', scaleY: 0.2, transformOrigin: '50% 0%' }, { scaleY: 1, duration: 0.3, ease: 'power2.out', immediateRender: false }, t);
+        tl.to(y, { scaleY: 0.2, duration: 0.25 }, t + 0.8);
+        tl.set(y, { visibility: 'hidden' }, t + 1.05);
+    },
+    note({ tl, g }: Ctx, t: number) {
+        const n = q(g, '.note .n-in');
+        if (n) tl.fromTo(n, { visibility: 'visible', scale: 1.9, rotation: -16, opacity: 0, transformOrigin: '50% 50%' }, { scale: 1, rotation: -4, opacity: 1, duration: 0.16, ease: 'power4.in', immediateRender: false }, t);
+        if (n) tl.set(n, { visibility: 'hidden' }, 0);
+    },
+    popup({ tl, g }: Ctx, t: number) {
+        // the rows come up from behind the desk, the front row first
+        const ag = agentsOnly(g);
+        const ys = [...new Set(ag.map((f) => Number(f.dataset.y)))].sort((a, b) => b - a);
+        const k = nth(tl, 'popup');
+        const total = fxCount(g, 'popup');
+        if (k === 0) { tl.set(ag, { autoAlpha: 0 }, 0); tl.set(qa(g, '.riser'), { autoAlpha: 0 }, 0); }
+        const mine = k < total - 1 ? [ys[k]] : ys.slice(k);
+        mine.forEach((y, j) => {
+            const row = ag.filter((f) => Number(f.dataset.y) === y);
+            const tt = t + j * 0.18;
+            tl.to(qa(g, `.riser[data-y="${y}"]`), { autoAlpha: 1, duration: 0.1 }, tt);
+            tl.fromTo(row, { autoAlpha: 0, y: 260 }, { autoAlpha: 1, y: 0, duration: 0.28, ease: 'back.out(2)', stagger: 0.04, immediateRender: false }, tt);
+        });
+    },
+    salute({ tl, g }: Ctx, t: number) {
+        const ag = agentsOnly(g).sort((a, b) => Number(b.dataset.y) - Number(a.dataset.y));
+        const arms = ag.map((f) => q(f, '.arm-salute')).filter(Boolean) as El[];
+        tl.set(arms, { rotation: 140, transformOrigin: '0% 100%' }, 0);
+        tl.to(arms, { rotation: 0, duration: 0.12, ease: 'power4.out', stagger: 0.035 }, t);
+    },
+    exit({ tl, g }: Ctx, t: number) {
+        const d = dev(g);
+        if (!d) return;
+        swap(tl, d, t);
+        const p = placeOf(d);
+        tl.to(d, { x: 900 / p.sx, duration: 1.1, ease: 'power1.in' }, t);
+        tl.to(d, { keyframes: [{ y: -12 }, { y: 0 }, { y: -12 }, { y: 0 }], duration: 1.1, ease: 'none' }, t);
+    },
+    exitdown({ tl, g }: Ctx, t: number) {
+        const d = dev(g);
+        if (!d) return;
+        swap(tl, d, t);
+        const p = placeOf(d);
+        tl.to(d, { y: 700 / p.sy, scale: 1.25, transformOrigin: '50% 100%', duration: 1.0, ease: 'power1.in' }, t);
+    },
+    door({ tl, g }: Ctx, t: number) {
+        const d = q(g, '.door');
+        const leaf = q(g, '.door .leaf');
+        if (!d || !leaf) return;
+        const opens = d.dataset.start === 'closed';
+        tl.fromTo(leaf, { scaleX: opens ? 1 : 0.12, transformOrigin: '0% 50%' }, { scaleX: opens ? 0.12 : 1, duration: opens ? 0.35 : 0.14, ease: opens ? 'power2.out' : 'power4.in' }, t);
+    },
+    glintdown(c: Ctx, t: number) { FX.glint(c, t); },
+    speedlinesdown(c: Ctx, t: number) {
+        const s = q(c.g, '.streaks');
+        if (s) c.tl.fromTo(s, { autoAlpha: 0.9, y: -500 }, { y: 500, duration: 0.3, repeat: 9, ease: 'none' }, t);
+        FX.speedlines(c, t);
+    },
+    fall({ tl, g }: Ctx, t: number) {
+        const s = q(g, '.streaks');
+        if (s) tl.fromTo(s, { autoAlpha: 0.9, y: -500 }, { y: 500, duration: 0.3, repeat: 6, ease: 'none' }, t);
+        agentsOnly(g).forEach((f, i) => {
+            const p = placeOf(f);
+            tl.fromTo(f, { y: -(p.y + 500) / p.sy, rotation: 0 }, { y: 0, rotation: 180, transformOrigin: '50% 60%', duration: 0.32, ease: 'power2.in' }, t + i * 0.07);
+        });
+    },
+    dive({ tl, g }: Ctx, t: number) {
+        const fo = at(q(g, '.folder'));
+        agentsOnly(g).forEach((f, i) => {
+            const p = placeOf(f);
+            tl.to(f, { x: (fo.x - p.x) / p.sx, y: (fo.y - 60 * fo.s - p.y) / p.sy + 300, rotation: 180, scale: 0.3, transformOrigin: '50% 60%', duration: 0.3, ease: 'power2.in' }, t + i * 0.1);
+            tl.set(f, { autoAlpha: 0 }, t + i * 0.1 + 0.3);
+        });
+    },
+    squeeze({ tl, g }: Ctx, t: number) {
+        const f = q(g, '.folder .f-in');
+        if (!f) return;
+        for (let k = 0; k < 6; k++) tl.to(f, { scaleX: 1.08 + k * 0.02, scaleY: 1.12 + k * 0.03, transformOrigin: '50% 100%', duration: 0.05, yoyo: true, repeat: 1, ease: 'power1.out' }, t + k * 0.1);
+        tl.to(f, { keyframes: [{ rotation: -4 }, { rotation: 4 }, { rotation: -2 }, { rotation: 0 }], transformOrigin: '50% 100%', duration: 0.5, ease: 'none' }, t + 0.7);
+    },
+    scribble({ tl, g }: Ctx, t: number) {
+        const a = agentN(g, 2);
+        const l = a && q(a, '.held .lines');
+        if (l) tl.fromTo(l, { scaleX: 0, transformOrigin: '0% 50%' }, { scaleX: 1, duration: 0.45, ease: 'none' }, t);
+        if (a) tl.to(a, { keyframes: [{ x: -6 }, { x: 6 }, { x: -6 }, { x: 0 }], duration: 0.45, ease: 'none' }, t);
+    },
+    erase({ tl, g }: Ctx, t: number) {
+        const a = agentN(g, 2), e = agentN(g, 9);
+        const l = a && q(a, '.held .lines');
+        if (e) tl.to(e, { keyframes: [{ x: -14 }, { x: 14 }, { x: -14 }, { x: 14 }, { x: 0 }], duration: 0.36, ease: 'none' }, t);
+        if (l) tl.to(l, { scaleX: 0, transformOrigin: '100% 50%', duration: 0.3, ease: 'power1.in' }, t + 0.05);
+    },
+    file({ tl, g }: Ctx, t: number) {
+        const a = agentN(g, 4);
+        const h = a && q(a, '.held');
+        if (h) tl.to(h, { y: 160, autoAlpha: 0, duration: 0.2, ease: 'power2.in' }, t);
+    },
+    unfile({ tl, g }: Ctx, t: number) {
+        const a = agentN(g, 4), b = agentN(g, 8);
+        const h = a && q(a, '.held');
+        if (b) tl.to(b, { keyframes: [{ x: 30 }, { x: 0 }], duration: 0.2 }, t);
+        if (h) tl.to(h, { y: 0, autoAlpha: 1, duration: 0.16, ease: 'back.out(3)' }, t + 0.05);
+    },
+    bonk({ tl, g }: Ctx, t: number) {
+        const k = nth(tl, 'bonk');
+        const gate = q(g, '.gate');
+        if (gate) {
+            // the gate arm comes down on whoever is first in the queue
+            const arm = q(gate, '.arm')!;
+            const ga = at(gate);
+            const queue = agentsOnly(g).sort((a, b) => Math.hypot(placeOf(a).x - ga.x, placeOf(a).y - ga.y) - Math.hypot(placeOf(b).x - ga.x, placeOf(b).y - ga.y));
+            const f = queue[k % queue.length];
+            tl.to(arm, { keyframes: [{ rotation: -38, duration: 0.07 }, { rotation: 14, duration: 0.06, ease: 'power4.in' }, { rotation: 0, duration: 0.12 }], transformOrigin: '0% 50%' }, t - 0.13);
+            if (f) {
+                const p = placeOf(f);
+                tl.to(f, { keyframes: [{ scaleY: 0.72, scaleX: 1.12, duration: 0.05 }, { scaleY: 1, scaleX: 1, duration: 0.18, ease: 'back.out(3)' }], transformOrigin: '50% 100%' }, t);
+                pop(tl, stars(g, p.x, p.y - 566 * Math.abs(p.sy) - 30, `b${k}`), t);
+            }
+            return;
+        }
+        const e = agentN(g, 9) ?? agentsOnly(g)[0];
+        if (!e) return;
+        const p = placeOf(e);
+        tl.to(e, { keyframes: [{ y: 30, duration: 0.05 }, { y: 0, duration: 0.15, ease: 'back.out(3)' }] }, t);
+        pop(tl, stars(g, p.x, p.y - 566 * Math.abs(p.sy) - 20, `b${k}`), t);
+    },
+    sweep({ tl, g }: Ctx, t: number) {
+        const sw = role(g, 'sweeper');
+        const b = sw && q(sw, '.broom');
+        if (b) tl.to(b, { keyframes: [{ rotation: 40, duration: 0.12 }, { rotation: -70, duration: 0.14, ease: 'power4.in' }, { rotation: 0, duration: 0.4 }], transformOrigin: '30% 40%' }, t);
+        const box = q(g, '.box .b-in');
+        const up = vertical(g) || fxCount(g, 'sweepup') > 0;
+        if (box) tl.to(box, { x: up ? 120 : 1100, y: up ? -900 : -260, rotation: up ? 380 : 260, duration: 0.5, ease: 'power2.in' }, t + 0.12);
+        const hero = role(g, 'hero');
+        if (hero) tl.to(hero, { keyframes: [{ x: -40, rotation: -8 }, { x: 0, rotation: 0 }], transformOrigin: '50% 100%', duration: 0.5 }, t + 0.1);
+    },
+    sweepup(c: Ctx, t: number) { FX.sweep(c, t); },
+    filesup(c: Ctx, t: number) { blizzard(c, t, -Math.PI / 2, 1.1); },
+    restore(c: Ctx, t: number) { gather(c, t, -0.4); },
+    restoreup(c: Ctx, t: number) { gather(c, t, Math.PI / 2); },
+    lift({ tl, g }: Ctx, t: number) {
+        const m = role(g, 'mourner');
+        const h = m && q(m, '.held');
+        if (h) tl.to(h, { y: -70, duration: 0.7, ease: 'power2.out' }, t);
+        const others = agentsOnly(g).filter((f) => f.dataset.role !== 'mourner');
+        tl.to(others.map((f) => q(f, '.monitor')), { rotation: 12, transformOrigin: '50% 100%', duration: 1.2, ease: 'power2.inOut', stagger: 0.03 }, t);
+    },
+    limp({ tl, g }: Ctx, t: number) {
+        const m = role(g, 'mourner');
+        const s = m && q(m, '.held');
+        if (s) tl.to(s, { skewX: 24, scaleY: 0.7, y: -30, transformOrigin: '50% 0%', duration: 0.8, ease: 'power2.in' }, t);
+    },
+    enter({ tl, g }: Ctx, t: number) {
+        const d = dev(g);
+        if (!d) return;
+        const p = placeOf(d), door = at(q(g, '.door'));
+        tl.fromTo(d, { autoAlpha: 0, x: (door.x - p.x) / p.sx, scale: 0.9, transformOrigin: '50% 100%' }, { autoAlpha: 1, x: 0, scale: 1, duration: 0.6, ease: 'power2.out' }, t);
+    },
+    climb({ tl, g }: Ctx, t: number) {
+        agentsOnly(g).forEach((f, i) => {
+            const p = placeOf(f);
+            tl.fromTo(f, { y: 160 / p.sy, rotation: -6 }, { y: 0, rotation: 0, transformOrigin: '50% 100%', duration: 0.5, ease: 'power2.out' }, t + i * 0.12);
+        });
+    },
+    freeze({ tl, g }: Ctx, t: number) {
+        tl.to(agentsOnly(g), { x: '+=6', duration: 0.04, yoyo: true, repeat: 3, ease: 'none' }, t);
+    },
+    terror({ tl, g }: Ctx, t: number) {
+        const d = dev(g);
+        swap(tl, d, t);
+        if (d) tl.to(d, { keyframes: [{ scale: 1.05 }, { scale: 1 }], transformOrigin: '50% 60%', duration: 0.16 }, t);
+    },
+    drop({ tl, g }: Ctx, t: number) {
+        const m = q(g, '.pmugfall');
+        const mg = m && q(m, '.mg');
+        if (!m || !mg) return;
+        const a = at(m);
+        const floor = vertical(g) ? 1560 : 1100;
+        tl.to(mg, { y: (floor - a.y) / a.s, rotation: 220, duration: 0.6, ease: 'power2.in' }, t);
+        tl.set(q(m, '.shards'), { y: (floor - a.y) / a.s }, 0);
+    },
+    followdown({ tl, g }: Ctx, t: number) {
+        tl.to(q(g, '.cam'), { y: -560, duration: 0.6, ease: 'power2.in' }, t);
+    },
+    cutup({ tl, g }: Ctx, t: number) { tl.set(q(g, '.cam'), { y: 0 }, t); },
+    shatter({ tl, g }: Ctx, t: number) {
+        const m = q(g, '.pmugfall');
+        if (!m) return;
+        tl.set(q(m, '.mg'), { visibility: 'hidden' }, t);
+        const sh = q(m, '.shards')!;
+        tl.set(sh, { visibility: 'visible' }, t);
+        tl.fromTo(qa(sh, 'path'), { x: 0, y: 0, scale: 0.4 }, { x: (k: number) => [-90, 80, -30, 120, -130][k], y: (k: number) => [-60, -80, -110, -30, -20][k], scale: 1, duration: 0.3, ease: 'power3.out', immediateRender: false }, t);
+        tl.fromTo(q(sh, '.spill'), { scaleX: 0, transformOrigin: '50% 50%' }, { scaleX: 1, duration: 0.3, ease: 'power2.out', immediateRender: false }, t);
+        tl.to(q(g, '.cam'), { keyframes: [{ x: -14 }, { x: 12 }, { x: 0 }], duration: 0.18, ease: 'none' }, t);
+    },
+    jab({ tl, g }: Ctx, t: number) {
+        const arms = agentsOnly(g).map((f) => q(f, '.arm-point')).filter(Boolean) as El[];
+        tl.to(arms, { keyframes: [{ scaleX: 1.22, duration: 0.08 }, { scaleX: 1, duration: 0.16 }], transformOrigin: '0% 50%', stagger: 0.02 }, t);
+    },
+    ringspin({ tl, g }: Ctx, t: number) {
+        const r = q(g, '.ring');
+        if (!r) return;
+        tl.to(r, { rotation: 360, transformOrigin: '50% 50%', duration: 1.7, ease: 'power2.inOut' }, t);
+        tl.to(agentsOnly(g), { rotation: -360, transformOrigin: '50% 60%', duration: 1.7, ease: 'power2.inOut' }, t);
+    },
+    cough({ tl, g }: Ctx, t: number) {
+        figs(g).filter((f) => f.dataset.role !== 'extra').forEach((f) => { const p = placeOf(f); tl.to(f, { y: 14 / p.sy, duration: 0.12, yoyo: true, repeat: 1 }, t); });
+    },
+    grow({ tl, g }: Ctx, t: number) {
+        const st = q(g, '.stack');
+        if (!st) return;
+        const [a, b] = (st.dataset.grow || '120 180').split(' ').map(Number);
+        const slabs = qa(st, '.slab');
+        const n0 = Math.max(1, Math.round(a / 22));
+        const rest = slabs.slice(n0);
+        tl.set(rest, { visibility: 'hidden' }, 0);
+        const dur = 2.2;
+        rest.forEach((s, k) => tl.set(s, { visibility: 'visible' }, t + Math.pow((k + 1) / rest.length, 0.8) * dur));
+        const top = q(st, '.top');
+        if (top) tl.fromTo(top, { y: (slabs.length - n0) * 22 }, { y: 0, duration: dur, ease: 'power1.in' }, t);
+        void b;
+    },
+    tiltup({ tl, g }: Ctx, t: number) {
+        const cam = q(g, '.cam')!;
+        const ex = role(g, 'extra');
+        if (q(g, '.stack') && ex) {
+            // from the smallest one up the stack to DEV's face
+            const p = placeOf(ex);
+            tl.fromTo(cam, { scale: 1.7, svgOrigin: `${p.x} ${p.y - 200}` }, { scale: 1, duration: 2.4, ease: 'power2.inOut' }, t);
+            return;
+        }
+        const w = at(q(g, '.farwindow'));
+        tl.to(cam, { scale: 1.35, svgOrigin: `${w.x} ${w.y}`, duration: 0.9, ease: 'power2.inOut' }, t);
+    },
+    gatedrop({ tl, g }: Ctx, t: number) {
+        const gi = q(g, '.gate .g-in');
+        if (!gi) return;
+        const a = at(q(g, '.gate'));
+        tl.fromTo(gi, { y: -(a.y + 600) / a.s }, { y: 0, duration: 0.22, ease: 'power4.in' }, t);
+        tl.to(gi, { keyframes: [{ y: -30 }, { y: 0 }], duration: 0.2, ease: 'power2.out' }, t + 0.22);
+    },
+    tiptoe({ tl, g, loops }: Ctx) {
+        const v = vertical(g);
+        agentsOnly(g).forEach((f, i) => {
+            const p = placeOf(f);
+            tl.fromTo(f, { x: v ? 0 : 260 / p.sx, y: v ? 260 / p.sy : 0 }, { x: 0, y: 0, duration: 0.75, ease: 'power1.out' }, i * 0.05);
+            tl.to(f, { keyframes: [{ y: -14 / p.sy }, { y: 0 }, { y: -14 / p.sy }, { y: 0 }], duration: 0.75, ease: 'none' }, i * 0.05);
+        });
+        const z = qa(g, '.m-zzz text');
+        if (z.length) loops.push(gsap.to(z, { y: -20, opacity: 0.4, duration: 0.9, repeat: -1, yoyo: true, ease: 'sine.inOut', stagger: 0.3, paused: true }));
+        if (z.length) tl.to(z, { y: -20, duration: 0.9, repeat: 3, yoyo: true, ease: 'sine.inOut', stagger: 0.3 }, 0);
+    },
+    tally({ tl, g }: Ctx, t: number) {
+        const marks = qa(g, '.gate .tally path');
+        tl.set(marks, { visibility: 'hidden' }, 0);
+        marks.forEach((m, k) => tl.set(m, { visibility: 'visible' }, t + Math.pow(k / marks.length, 0.55) * 1.9));
+    },
+    glance({ tl, g }: Ctx, t: number) {
+        const a = agentN(g, 7);
+        if (a) tl.to(q(a, '.monitor'), { rotation: -14, transformOrigin: '50% 100%', duration: 0.3, ease: 'power2.out' }, t);
+        if (!vertical(g)) {
+            const w = at(q(g, '.farwindow'));
+            tl.to(q(g, '.cam'), { scale: 1.12, svgOrigin: `${w.x} ${w.y}`, duration: 0.8, ease: 'power2.inOut' }, t);
+        }
+    },
+});
+const FXglint = FX.glint;
+FX.glint = (c: Ctx, t: number) => {
+    if (q(c.g, '.panel')) return FXglint(c, t);
+    const s = q(c.g, '.farwindow .spark');
+    if (!s) return;
+    c.tl.fromTo(s, { visibility: 'visible', scale: 0, rotation: -45, transformOrigin: '50% 50%' }, { scale: 1.3, rotation: 0, duration: 0.18, ease: 'back.out(3)', immediateRender: false }, t);
+    c.tl.to(s, { scale: 1, duration: 0.2 }, t + 0.18);
+    c.tl.set(s, { visibility: 'hidden' }, 0);
+};
+const FXfiles = FX.files;
+FX.files = (c: Ctx, t: number) => (vertical(c.g) ? blizzard(c, t, -Math.PI / 2, 1.1) : q(c.g, '.window') ? blizzard(c, t, -0.35, 0.9) : FXfiles(c, t));
+FX.behind = ({ tl, g }: Ctx, t: number) => {
+    const w = role(g, 'thief') ?? role(g, 'sweeper');
+    if (!w) return;
+    tl.set(w, { autoAlpha: 0 }, 0);
+    tl.set(w, { autoAlpha: 1 }, t);
+    tl.fromTo(w, { x: -60, scale: 1.08, transformOrigin: '50% 100%' }, { x: 0, scale: 1, duration: 0.14, ease: 'power4.out', immediateRender: false }, t);
+};
+FX.devpush = ({ tl, g }: Ctx, t: number) => {
+    const d = dev(g);
+    if (!d) return;
+    const p = placeOf(d);
+    tl.to(q(g, '.cam'), { scale: 1.3, svgOrigin: `${p.x} ${p.y - 560 * Math.abs(p.sy)}`, duration: 1.4, ease: 'power2.inOut' }, t);
+};
+FX.turn = ({ tl, g }: Ctx, t: number) => {
+    const fs = agentsOnly(g).filter((f) => f.querySelector('.face-turn'));
+    if (fs.length) {
+        tl.to(fs, { scaleX: 0.86, transformOrigin: '50% 100%', duration: 0.08, yoyo: true, repeat: 1 }, t);
+        tl.set(fs.map((f) => q(f, '.face-init')), { visibility: 'hidden' }, t + 0.08);
+        tl.set(fs.map((f) => q(f, '.face-turn')), { visibility: 'visible' }, t + 0.08);
+    }
+    swap(tl, dev(g), t);
+};
+
+/** Pages out in a blizzard, fanned around a direction (radians). */
+function blizzard({ tl, g }: Ctx, t: number, dir: number, spread: number) {
+    const files = qa(g, '.file');
+    const [fx, fy] = (g.querySelector('.files')?.getAttribute('data-from') || '800 450').split(' ').map(Number);
+    files.forEach((f, i) => {
+        const a = dir + (((i * 2.399) % 2) - 1) * spread;
+        const r = 700 + ((i * 97) % 700);
+        tl.fromTo(f, { visibility: 'visible', x: fx, y: fy, scale: 0.4, rotation: 0 }, { x: fx + Math.cos(a) * r, y: fy + Math.sin(a) * r, scale: 1 + (i % 3) * 0.3, rotation: (i % 2 ? 1 : -1) * (180 + i * 20), duration: 1.2, ease: 'power2.out', immediateRender: false }, t + Math.pow(i / files.length, 1.6) * 0.9);
+    });
+    tl.set(files, { visibility: 'hidden' }, 0);
+}
+/** The blizzard backwards: pages from all round fly home into the folder. */
+function gather({ tl, g }: Ctx, t: number, dir: number) {
+    const files = qa(g, '.file');
+    const [fx, fy] = (g.querySelector('.files')?.getAttribute('data-from') || '800 450').split(' ').map(Number);
+    tl.set(files, { visibility: 'hidden' }, 0);
+    files.forEach((f, i) => {
+        const a = dir + (((i * 2.399) % 2) - 1) * 1.3;
+        const r = 800 + ((i * 97) % 600);
+        const s = t + (i / files.length) * 1.2;
+        tl.fromTo(f, { visibility: 'visible', x: fx + Math.cos(a) * r, y: fy + Math.sin(a) * r, scale: 1.2, rotation: (i % 2 ? 1 : -1) * 200 }, { x: fx, y: fy, scale: 0.3, rotation: 0, duration: 0.7, ease: 'power2.in', immediateRender: false }, s);
+        tl.set(f, { visibility: 'hidden' }, s + 0.7);
+    });
+}
+
 function focus(g: Element) {
     const [x, y] = (g.getAttribute('data-focus') || '800 450').split(' ').map(Number);
-    return `${x}px ${y}px`;
+    return `${x} ${y}`;
 }
 
 /** Words and lines come in after their picture, at the time the shot list gives them. */
@@ -232,16 +648,35 @@ function common({ tl, g, loops }: Ctx) {
     const word = q(g, '.word text');
     if (word) tl.fromTo(word, { autoAlpha: 0, scale: 2.4, transformOrigin: '50% 50%' }, { autoAlpha: 1, scale: 1, duration: 0.22, ease: 'power4.in' }, Number(wg?.getAttribute('data-at') || 0.75));
     const lg = q(g, '.line');
-    const line = q(g, '.line text');
-    if (line) tl.fromTo(line, { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.3, ease: 'power2.out' }, Number(lg?.getAttribute('data-at') || 0.9));
+    const line = qa(g, '.line text');
+    if (line.length) tl.fromTo(line, { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.3, ease: 'power2.out' }, Number(lg?.getAttribute('data-at') || 0.9));
     const counter = q(g, '.counter');
-    if (counter) {
-        const o = { v: 0 };
+    if (counter && !counter.dataset.value && counter.dataset.to && !fxCount(g, 'tick')) {
         const to = Number(counter.getAttribute('data-to') || 0);
-        tl.to(o, { v: to, duration: 2.2, ease: 'power2.in', onUpdate: () => { counter.textContent = Math.round(o.v).toLocaleString('en-GB'); } }, 0.1);
+        tl.fromTo(counter, { textContent: 0 }, { textContent: to, duration: 2.2, ease: 'power2.in', modifiers: { textContent: (v: number) => Math.round(v).toLocaleString('en-GB') }, immediateRender: false }, 0.1);
     }
     const steam = qa(g, '.steam');
     if (steam.length) loops.push(gsap.fromTo(steam, { y: 0, opacity: 0.9 }, { y: -24, opacity: 0, duration: 1.4, repeat: -1, ease: 'sine.out', paused: true }));
+}
+
+/** A shot's timeline: its words and lines, its effects (this frame's list), and a cut flash. */
+function build(g: El, svg: SVGSVGElement, shot: Shot, flash: boolean): Ctx {
+    const loops: gsap.core.Animation[] = [];
+    const ctx: Ctx = { tl: gsap.timeline({ onComplete: () => loops.forEach((l) => l.play()) }), g, shot, svg, loops };
+    common(ctx);
+    const list: string[] = (g as unknown as HTMLElement).dataset.fx ? JSON.parse((g as unknown as HTMLElement).dataset.fx!) : shot.fx ?? [];
+    list.forEach((f) => {
+        const [name, t] = f.split('@');
+        if (!FX[name]) console.warn(`anime: no effect "${name}"`);
+        else FX[name](ctx, Number(t || 0));
+    });
+    // a hard cut reads as a cut: one white frame between shots
+    if (flash) {
+        const fl = q(svg, '.flash')!;
+        ctx.tl.fromTo(fl, { visibility: 'visible', fill: '#f2f0ea', opacity: 0.85 }, { opacity: 0, duration: 0.12, immediateRender: false }, 0);
+        ctx.tl.set(fl, { visibility: 'hidden', opacity: 1 }, 0.12);
+    }
+    return ctx;
 }
 
 export function mountCutscene(wrap: HTMLElement) {
@@ -249,9 +684,13 @@ export function mountCutscene(wrap: HTMLElement) {
     const want = new URLSearchParams(location.search).get('frame');
     const vertical = want ? want === '9:16' : wrap.clientWidth / Math.max(1, wrap.clientHeight) < 0.8;
     const tpl = wrap.querySelector<HTMLTemplateElement>('template[data-frame="9:16"]');
-    if (vertical && tpl) {
-        const v = tpl.content.querySelector('svg.cutscene');
-        if (v) wrap.querySelector('svg.cutscene')!.replaceWith(document.importNode(v, true));
+    const tall = tpl?.content.querySelector('svg.cutscene');
+    let other: SVGSVGElement | null = null;
+    if (vertical && tall) {
+        other = wrap.querySelector<SVGSVGElement>('svg.cutscene');
+        other!.replaceWith(document.importNode(tall, true));
+    } else if (tall) {
+        other = document.importNode(tall, true) as SVGSVGElement;
     }
     const svg = wrap.querySelector<SVGSVGElement>('svg.cutscene')!;
     const frame = (svg.dataset.frame as '16:9' | '9:16') || '16:9';
@@ -269,7 +708,6 @@ export function mountCutscene(wrap: HTMLElement) {
     const auto = /[?&](play=auto|render)\b/.test(location.search);
     const base = (wrap.dataset.base || '').replace(/\/$/, '');
     const soundBtn = wrap.querySelector<HTMLButtonElement>('[data-sound]');
-    let planning = false;
     let audio: CutAudio | null = null;
     let starts: number[] = [];
 
@@ -323,26 +761,15 @@ export function mountCutscene(wrap: HTMLElement) {
         tl?.kill();
         loops.forEach((l) => l.kill());
         loops = [];
-        if (i >= 0) gsap.set(shots[i], { visibility: 'hidden' });
+        if (i >= 0) gsap.set(shots[i], { display: 'none' });
         i = n;
         const g = shots[i];
-        gsap.set(g, { visibility: 'visible' });
+        gsap.set(g, { display: 'inline', visibility: 'visible' });
         fit();
-        const ctx: Ctx = { tl: gsap.timeline({ onComplete: () => loops.forEach((l) => l.play()) }), g, shot: list.shots[i], svg, loops };
+        const ctx = build(g, svg, list.shots[i], n > 0 && !instant);
         tl = ctx.tl;
-        common(ctx);
-        (list.shots[i].fx ?? []).forEach((f) => {
-            const [name, t] = f.split('@');
-            if (!FX[name]) console.warn(`anime: no effect "${name}"`);
-            else FX[name](ctx, Number(t || 0));
-        });
-        // a hard cut reads as a cut: one white frame between shots
-        if (!instant && n > 0) {
-            const fl = q(svg, '.flash')!;
-            tl.fromTo(fl, { visibility: 'visible', fill: '#f2f0ea', opacity: 0.85 }, { opacity: 0, duration: 0.12, immediateRender: false }, 0);
-            tl.set(fl, { visibility: 'hidden', opacity: 1 }, 0.12);
-        }
-        if (!instant && !planning) audio?.shot(i, starts[i] ?? 0);
+        loops = ctx.loops;
+        if (!instant) audio?.shot(i, starts[i] ?? 0);
         if (instant) tl.progress(1);
         if (count) count.textContent = `${i + 1} / ${shots.length}`;
         const last = i === shots.length - 1;
@@ -364,12 +791,25 @@ export function mountCutscene(wrap: HTMLElement) {
     const words = (t: string) => t.split(/\s+/).filter(Boolean).length;
     const lens: number[] = [];
     const stampAt: (number | null)[] = [];
-    planning = true;
+    // both frames stage the same shot differently; the plan takes the longer, so both play to one clock
+    const animOf = (root: SVGSVGElement) => qa(root, '.shot').map((g, k) => {
+        const c = build(g, root, list.shots[k], k > 0);
+        const d = c.tl.duration();
+        c.tl.kill();
+        c.loops.forEach((l) => l.kill());
+        return d;
+    });
+    const here = animOf(svg);
+    let there: number[] = [];
+    if (other) {
+        other.setAttribute('style', 'position:absolute;width:0;height:0;visibility:hidden');
+        wrap.appendChild(other);
+        there = animOf(other);
+        other.remove();
+    }
     for (let k = 0; k < shots.length; k++) {
-        i = k - 1;
-        show(k);
         const s = list.shots[k];
-        const anim = tl!.duration();
+        const anim = Math.max(here[k], there[k] ?? 0);
         const read = (t: string) => Math.max(1.4, 0.32 * words(t) + 0.6);
         const lineEnd = s.line ? (s.lineAt ?? 0.9) + read(`${s.line.text}`) : 0;
         const sayEnd = s.say ? (s.say.at ?? 0) + read(s.say.text) : 0;
@@ -378,12 +818,7 @@ export function mountCutscene(wrap: HTMLElement) {
         const stamp = end ? Number(end.split('@')[1] || 1.6) + 0.8 + 0.25 : null;
         stampAt.push(stamp);
         lens.push(Math.max(Math.max(anim, lineEnd, sayEnd, wordEnd) + 0.5, stamp !== null ? stamp + 3 : 0));
-        tl!.kill();
-        loops.forEach((l) => l.kill());
-        loops = [];
-        gsap.set(shots[k], { visibility: 'hidden' });
     }
-    planning = false;
     i = -1;
     starts = lens.map((_, k) => lens.slice(0, k).reduce((x, y) => x + y, 0));
     const total = starts[starts.length - 1] + lens[lens.length - 1];

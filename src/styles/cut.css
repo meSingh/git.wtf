@@ -130,3 +130,74 @@
     .cutscene .a-agent.sil .gleam { fill: #ffd400; stroke: none; }
     .cut-after:not(.on) { visibility: hidden; }
     html:has(.cut-wrap.still) .cut-after { visibility: visible; }
+
+    /* v2 kit: DEV's room, inside the folder, the night, and the props the story needs */
+    .cutscene .shot.bg-room .bg { fill: #1b1d24; }
+    .cutscene .shot.bg-night .bg { fill: #0c0d12; }
+    .cutscene .shot.bg-paper .bg { fill: #e6cf7a; }
+    .cutscene .floor { fill: #121318; }
+    .cutscene .folds path { fill: none; stroke: #c9b05a; stroke-width: 10; }
+    .cutscene .streaks path { stroke: #f2f0ea; stroke-width: 6; stroke-linecap: round; opacity: 0.5; }
+    .cutscene .lamp .cord { stroke: #5d5a53; stroke-width: 6; }
+    .cutscene .lamp .shade { fill: #2e2d2a; stroke: #0a0a0a; stroke-width: 6; }
+    .cutscene .lamp .bulb { fill: #ffd400; }
+    .cutscene .desk rect { fill: #3a3936; stroke: #0a0a0a; stroke-width: 6; }
+    .cutscene .riser { fill: #2e2d2a; stroke: #0a0a0a; stroke-width: 5; }
+    .cutscene .folder .label { fill: #0a0a0a; font-family: var(--display); font-weight: 900; font-size: 48px; text-anchor: middle; letter-spacing: 1px; }
+    .cutscene .folder.empty .hollow { fill: #c9b05a; stroke: #0a0a0a; stroke-width: 6; }
+    .cutscene .ring { fill: none; stroke: #7a4f2a; stroke-width: 6; opacity: 0.85; }
+    .cutscene .pile .sheet path, .cutscene .stack .top path { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 5; stroke-linejoin: round; }
+    .cutscene .pile .cup, .cutscene .pmugfall .cup { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 6; stroke-linejoin: round; }
+    .cutscene .pile .handle, .cutscene .pmugfall .handle { fill: none; stroke: #f2f0ea; stroke-width: 9; }
+    .cutscene .pmugfall .coffee, .cutscene .pmugfall .spill { fill: #2e2d2a; }
+    .cutscene .pmugfall .shards path { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 4; }
+    .cutscene .scatter rect { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 5; }
+    .cutscene .scatter path { stroke: #8a877f; stroke-width: 5; fill: none; }
+    .cutscene .puddles .pool { fill: #2b3140; opacity: 0.9; }
+    .cutscene .puddles .soaked { fill: #b9b6ae; stroke: #0a0a0a; stroke-width: 6; }
+    .cutscene .note rect { fill: #ffd400; stroke: #0a0a0a; stroke-width: 6; }
+    .cutscene .note text { fill: #0a0a0a; font-family: var(--display); font-weight: 900; font-size: 50px; text-anchor: middle; }
+    .cutscene .door .dark { fill: #0a0a0a; }
+    .cutscene .door .leaf { fill: #5d5a53; stroke: #0a0a0a; stroke-width: 6; }
+    .cutscene .door .knob { fill: #ffd400; }
+    .cutscene .door .jamb { fill: none; stroke: #2e2d2a; stroke-width: 22; }
+    .cutscene .window .sky, .cutscene .skylight .sky { fill: #2b3140; }
+    .cutscene .window .bars, .cutscene .skylight .bars { fill: none; stroke: #0a0a0a; stroke-width: 14; }
+    .cutscene .skylight .star { fill: #f2f0ea; }
+    .cutscene .farwindow .wall { fill: #17181e; }
+    .cutscene .farwindow .lit { fill: #ffd400; }
+    .cutscene .farwindow .fdesk { fill: #2e2d2a; }
+    .cutscene .farwindow .bars { fill: none; stroke: #0a0a0a; stroke-width: 16; }
+    .cutscene .farwindow .ffolder .tab, .cutscene .farwindow .ffolder .body { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 5; }
+    .cutscene .farwindow .ffolder text { fill: #0a0a0a; font-family: var(--display); font-weight: 900; font-size: 30px; text-anchor: middle; }
+    .cutscene .farwindow .spark path { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 4; }
+    .cutscene .box .crate { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 8; }
+    .cutscene .box .buoy circle { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 6; }
+    .cutscene .box .buoy .bands { fill: none; stroke: #ffd400; stroke-width: 30; }
+    .cutscene .box .buoy .hole { fill: #f2f0ea; }
+    .cutscene .box .pages { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 6; }
+    .cutscene .gate .post { fill: #2e2d2a; stroke: #0a0a0a; stroke-width: 6; }
+    .cutscene .gate .bar { stroke: #0a0a0a; stroke-width: 6; }
+    .cutscene .gate .hinge { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 6; }
+    .cutscene .gate .sign rect { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 8; }
+    .cutscene .gate .sign text { fill: #0a0a0a; font-family: var(--display); font-weight: 900; font-size: 64px; text-anchor: middle; }
+    .cutscene .gate .tally path { stroke: #f2f0ea; stroke-width: 7; stroke-linecap: round; }
+    .cutscene .file .ring { stroke-width: 3; }
+    .cutscene .a-agent .limb-o { fill: none; stroke: #0a0a0a; stroke-width: 58; stroke-linecap: round; stroke-linejoin: round; }
+    .cutscene .a-agent .limb { fill: none; stroke: #8a877f; stroke-width: 42; stroke-linecap: round; stroke-linejoin: round; }
+    .cutscene .a-agent .palm { fill: #8a877f; stroke: #0a0a0a; stroke-width: 7; }
+    .cutscene .a-agent .broom .handle { stroke: #7a4f2a; stroke-width: 26; stroke-linecap: round; }
+    .cutscene .a-agent .broom .bristles { fill: #ffd400; stroke: #0a0a0a; stroke-width: 8; stroke-linejoin: round; }
+    .cutscene .a-agent .broom .tie { stroke: #0a0a0a; stroke-width: 10; }
+    .cutscene .a-agent.wet .frame { fill: #b9b6ae; }
+    .cutscene .a-agent .drops path { fill: #9fb3c8; stroke: #0a0a0a; stroke-width: 4; }
+    .cutscene .titlerows .band { fill: #ffd400; }
+    .cutscene .titlerows .ttl { fill: #0a0a0a; font-family: var(--display); font-weight: 900; font-size: 150px; text-anchor: middle; text-transform: uppercase; }
+    .cutscene .titlerows .lines path { fill: #8a877f; }
+    .cutscene .line .who { font-size: 34px; }
+    .cutscene .bg-paper .line text, .cutscene .bg-flat .line text { stroke-width: 12; }
+    /* the recorder's view: the cut alone, the whole viewport, no site bar */
+    html:has(.cut-wrap.rendering) header.bar { display: none; }
+    html:has(.cut-wrap.rendering) .cut-page { padding-top: 0; }
+    .cut-wrap.rendering { height: 100vh; }
+    .cutscene .bonkstar path { fill: #ffd400; stroke: #0a0a0a; stroke-width: 6; stroke-linejoin: round; }

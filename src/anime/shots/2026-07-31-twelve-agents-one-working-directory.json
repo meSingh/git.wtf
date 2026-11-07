@@ -1,635 +1,2074 @@
 {
-    "incident": "2026-07-31-twelve-agents-one-working-directory",
-    "episode": "Episode 31",
-    "title": "Twelve agents, one folder",
-    "shots": [
-        {
-            "id": "title",
-            "bg": "black",
-            "fx": [
-                "titlecard",
-                "shake@0.55"
-            ]
-        },
-        {
-            "id": "horizon",
-            "bg": "dusk",
-            "props": {
-                "desk": {
-                    "x": 800,
-                    "y": 800
-                },
-                "folder": {
-                    "x": 800,
-                    "y": 700,
-                    "scale": 0.32
-                },
-                "paper": {
-                    "x": 860,
-                    "y": 640
-                },
-                "copier": {
-                    "x": 1150,
-                    "y": 905
-                }
-            },
-            "cast": [
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "silhouette": true,
-                    "x": 230,
-                    "y": 600,
-                    "scale": 0.24
-                },
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "silhouette": true,
-                    "x": 330,
-                    "y": 590,
-                    "scale": 0.26
-                },
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "silhouette": true,
-                    "x": 430,
-                    "y": 600,
-                    "scale": 0.24
-                },
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "silhouette": true,
-                    "x": 530,
-                    "y": 585,
-                    "scale": 0.28
-                },
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "silhouette": true,
-                    "x": 630,
-                    "y": 600,
-                    "scale": 0.24
-                },
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "silhouette": true,
-                    "x": 730,
-                    "y": 590,
-                    "scale": 0.26
-                },
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "silhouette": true,
-                    "x": 870,
-                    "y": 590,
-                    "scale": 0.26
-                },
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "silhouette": true,
-                    "x": 970,
-                    "y": 600,
-                    "scale": 0.24
-                },
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "silhouette": true,
-                    "x": 1070,
-                    "y": 585,
-                    "scale": 0.28
-                },
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "silhouette": true,
-                    "x": 1170,
-                    "y": 600,
-                    "scale": 0.24
-                },
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "silhouette": true,
-                    "x": 1270,
-                    "y": 590,
-                    "scale": 0.26
-                },
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "silhouette": true,
-                    "x": 1370,
-                    "y": 600,
-                    "scale": 0.24
-                },
-                {
-                    "who": "agent",
-                    "extra": true,
-                    "pose": "neutral",
-                    "arm": "hold",
-                    "x": 1320,
-                    "y": 905,
-                    "scale": 0.42,
-                    "role": "extra"
-                }
-            ],
-            "fx": [
-                "rise",
-                "push",
-                "wind",
-                "copier"
-            ],
-            "focus": [
-                1000,
-                640
-            ]
-        },
-        {
-            "id": "rivals",
-            "bg": "split",
-            "panels": [
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "x": 0,
-                    "y": 0,
-                    "n": 3
-                },
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "x": 0,
-                    "y": 0,
-                    "n": 7
-                },
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "x": 0,
-                    "y": 0,
-                    "n": 12
-                }
-            ],
-            "fx": [
-                "glint"
-            ],
-            "line": {
-                "who": "AGENT 7",
-                "text": "Only one of us can tidy it."
-            },
-            "lineAt": 1.7
-        },
-        {
-            "id": "dash",
-            "bg": "speedlines",
-            "props": {
-                "folder": {
-                    "x": 800,
-                    "y": 470,
-                    "scale": 0.7
-                },
-                "files": true
-            },
-            "cast": [
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "x": 300,
-                    "y": 760,
-                    "scale": 0.36,
-                    "n": 2
-                },
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "x": 1340,
-                    "y": 740,
-                    "scale": 0.36,
-                    "n": 9,
-                    "flip": true
-                },
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "x": 470,
-                    "y": 830,
-                    "scale": 0.44,
-                    "n": 4
-                },
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "x": 1090,
-                    "y": 830,
-                    "scale": 0.44,
-                    "n": 8,
-                    "flip": true
-                },
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "x": 640,
-                    "y": 930,
-                    "scale": 0.56,
-                    "n": 5
-                },
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "x": 960,
-                    "y": 930,
-                    "scale": 0.56,
-                    "n": 6,
-                    "flip": true
-                },
-                {
-                    "who": "agent",
-                    "extra": true,
-                    "pose": "neutral",
-                    "arm": "hold",
-                    "x": 1250,
-                    "y": 905,
-                    "scale": 0.34,
-                    "role": "extra"
-                }
-            ],
-            "fx": [
-                "speedlines",
-                "dash",
-                "blink@0.35",
-                "shake@0.6",
-                "impact@0.85",
-                "files@0.95",
-                "catch@2.2"
-            ],
-            "word": "2,309 files.",
-            "wordAt": 2.7,
-            "focus": [
-                900,
-                600
-            ]
-        },
-        {
-            "id": "fallen",
-            "bg": "black",
-            "props": {
-                "rain": true,
-                "paper": {
-                    "x": 820,
-                    "y": 140
-                }
-            },
-            "cast": [
-                {
-                    "who": "agent",
-                    "pose": "defeated",
-                    "x": 200,
-                    "y": 650,
-                    "scale": 0.26,
-                    "n": 2
-                },
-                {
-                    "who": "agent",
-                    "pose": "defeated",
-                    "x": 320,
-                    "y": 650,
-                    "scale": 0.26,
-                    "n": 3
-                },
-                {
-                    "who": "agent",
-                    "pose": "defeated",
-                    "x": 440,
-                    "y": 650,
-                    "scale": 0.26,
-                    "n": 4
-                },
-                {
-                    "who": "agent",
-                    "pose": "defeated",
-                    "x": 560,
-                    "y": 650,
-                    "scale": 0.26,
-                    "n": 5
-                },
-                {
-                    "who": "agent",
-                    "pose": "defeated",
-                    "x": 1040,
-                    "y": 650,
-                    "scale": 0.26,
-                    "n": 6
-                },
-                {
-                    "who": "agent",
-                    "pose": "defeated",
-                    "x": 1160,
-                    "y": 650,
-                    "scale": 0.26,
-                    "n": 7
-                },
-                {
-                    "who": "agent",
-                    "pose": "defeated",
-                    "x": 1280,
-                    "y": 650,
-                    "scale": 0.26,
-                    "n": 8
-                },
-                {
-                    "who": "agent",
-                    "pose": "defeated",
-                    "x": 1400,
-                    "y": 650,
-                    "scale": 0.26,
-                    "n": 9
-                },
-                {
-                    "who": "agent",
-                    "pose": "defeated",
-                    "x": 260,
-                    "y": 760,
-                    "scale": 0.3,
-                    "n": 10
-                },
-                {
-                    "who": "agent",
-                    "pose": "defeated",
-                    "x": 1340,
-                    "y": 760,
-                    "scale": 0.3,
-                    "n": 11
-                },
-                {
-                    "who": "agent",
-                    "pose": "defeated",
-                    "x": 1460,
-                    "y": 760,
-                    "scale": 0.3,
-                    "n": 12
-                },
-                {
-                    "who": "agent",
-                    "pose": "defeated",
-                    "arm": "hold",
-                    "x": 800,
-                    "y": 960,
-                    "scale": 0.9,
-                    "n": 1,
-                    "role": "mourner"
-                }
-            ],
-            "fx": [
-                "rain",
-                "drift",
-                "slowpush",
-                "tear@2.3"
-            ],
-            "line": {
-                "who": "AGENT 1",
-                "text": "You were uncommitted. But you were brave."
-            },
-            "lineAt": 3.2,
-            "focus": [
-                800,
-                560
-            ]
-        },
-        {
-            "id": "branch",
-            "bg": "black",
-            "props": {
-                "branch": {
-                    "x": 700,
-                    "y": 230
-                }
-            },
-            "cast": [
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "arm": "up",
-                    "x": 700,
-                    "y": 960,
-                    "scale": 0.85,
-                    "n": 5,
-                    "role": "hero"
-                },
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "x": 1100,
-                    "y": 960,
-                    "scale": 0.85,
-                    "n": 6,
-                    "flip": true,
-                    "role": "thief"
-                }
-            ],
-            "fx": [
-                "impact@0.1",
-                "behind@1.0",
-                "snap@1.5",
-                "shake@1.5"
-            ],
-            "word": "Cleaned.",
-            "wordAt": 2.0,
-            "focus": [
-                850,
-                520
-            ]
-        },
-        {
-            "id": "doorway",
-            "bg": "flat",
-            "cast": [
-                {
-                    "who": "dev",
-                    "pose": "neutral",
-                    "x": 800,
-                    "y": 820,
-                    "scale": 0.82,
-                    "role": "dev"
-                },
-                {
-                    "who": "agent",
-                    "pose": "neutral",
-                    "turn": "dramatic",
-                    "x": 140,
-                    "y": 920,
-                    "scale": 0.4,
-                    "n": 1
-                },
-                {
-                    "who": "agent",
-                    "pose": "neutral",
-                    "turn": "dramatic",
-                    "x": 340,
-                    "y": 940,
-                    "scale": 0.42,
-                    "n": 2
-                },
-                {
-                    "who": "agent",
-                    "pose": "neutral",
-                    "turn": "dramatic",
-                    "x": 1260,
-                    "y": 940,
-                    "scale": 0.42,
-                    "n": 11,
-                    "flip": true
-                },
-                {
-                    "who": "agent",
-                    "pose": "neutral",
-                    "turn": "dramatic",
-                    "x": 1460,
-                    "y": 920,
-                    "scale": 0.4,
-                    "n": 12,
-                    "flip": true
-                }
-            ],
-            "fx": [
-                "door",
-                "sip@0.5",
-                "turn@2.4"
-            ],
-            "line": {
-                "who": "DEV",
-                "text": "Which one of you?"
-            },
-            "lineAt": 3.1,
-            "focus": [
-                800,
-                560
-            ]
-        },
-        {
-            "id": "blame",
-            "bg": "split12",
-            "fx": [
-                "spin@0.3"
-            ]
-        },
-        {
-            "id": "copy",
-            "bg": "speedlines",
-            "props": {
-                "stack": {
-                    "x": 640,
-                    "y": 900,
-                    "to": [
-                        1060,
-                        900
-                    ]
-                }
-            },
-            "cast": [
-                {
-                    "who": "dev",
-                    "pose": "neutral",
-                    "x": 1200,
-                    "y": 900,
-                    "scale": 0.42,
-                    "role": "dev"
-                },
-                {
-                    "who": "agent",
-                    "extra": true,
-                    "pose": "neutral",
-                    "arm": "point",
-                    "x": 700,
-                    "y": 960,
-                    "scale": 1.0,
-                    "role": "extra"
-                }
-            ],
-            "fx": [
-                "whip",
-                "extralines@0.3",
-                "slide@0.6"
-            ],
-            "line": {
-                "who": "THE EXTRA",
-                "text": "I kept a copy. Every cycle."
-            },
-            "lineAt": 1.6,
-            "focus": [
-                860,
-                560
-            ]
-        },
-        {
-            "id": "end",
-            "bg": "black",
-            "props": {
-                "stack": {
-                    "x": 880,
-                    "y": 890
-                }
-            },
-            "cast": [
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "x": 200,
-                    "y": 830,
-                    "scale": 0.36,
-                    "n": 3
-                },
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "x": 330,
-                    "y": 880,
-                    "scale": 0.4,
-                    "n": 7
-                },
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "x": 470,
-                    "y": 830,
-                    "scale": 0.36,
-                    "n": 12
-                },
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "x": 600,
-                    "y": 900,
-                    "scale": 0.44,
-                    "n": 1
-                },
-                {
-                    "who": "dev",
-                    "pose": "neutral",
-                    "arm": "palm",
-                    "x": 1180,
-                    "y": 900,
-                    "scale": 1.0,
-                    "role": "dev"
-                }
-            ],
-            "fx": [
-                "charge",
-                "impact@0.75",
-                "bounce@0.8",
-                "endcard"
-            ],
-            "focus": [
-                1040,
-                560
-            ]
-        }
+ "incident": "2026-07-31-twelve-agents-one-working-directory",
+ "episode": "Episode 31",
+ "title": "The Great Tidying!",
+ "shots": [
+  {
+   "id": "title",
+   "bg": "black",
+   "fx": [
+    "titlecard",
+    "shake@0.55"
+   ],
+   "say": {
+    "who": "NARRATOR",
+    "text": "Episode thirty one. The Great Tidying!",
+    "at": 0.7
+   },
+   "sfx": [
+    "sting@0.55"
+   ],
+   "music": "theme",
+   "v": {
+    "fx": [
+     "titlerows",
+     "shake@0.9"
     ]
+   }
+  },
+  {
+   "id": "work",
+   "bg": "room",
+   "props": {
+    "desk": {
+     "x": 760,
+     "y": 820
+    },
+    "folder": {
+     "x": 990,
+     "y": 770,
+     "scale": 0.36,
+     "label": "UNSAVED WORK"
+    },
+    "counter": {
+     "x": 990,
+     "y": 620,
+     "from": 0,
+     "to": 2309
+    },
+    "pages": {
+     "x": 850,
+     "y": 786,
+     "scale": 0.8,
+     "ring": true,
+     "grow": true
+    },
+    "copier": {
+     "x": 1330,
+     "y": 880
+    },
+    "lamp": {
+     "x": 640,
+     "y": 160
+    }
+   },
+   "cast": [
+    {
+     "who": "dev",
+     "pose": "neutral",
+     "arm": "type",
+     "x": 640,
+     "y": 932,
+     "scale": 0.6,
+     "role": "dev"
+    },
+    {
+     "who": "agent",
+     "extra": true,
+     "pose": "neutral",
+     "arm": "hold",
+     "x": 1200,
+     "y": 880,
+     "scale": 0.4,
+     "role": "extra"
+    }
+   ],
+   "fx": [
+    "type",
+    "ring@0.8",
+    "ring@1.6",
+    "ring@2.4",
+    "tick@0.6",
+    "copier",
+    "yawn@3.4"
+   ],
+   "sfx": [
+    "typing",
+    "clink@0.8",
+    "clink@1.6",
+    "clink@2.4",
+    "tick@0.6",
+    "copierhum"
+   ],
+   "music": "calm",
+   "focus": [
+    880,
+    640
+   ],
+   "v": {
+    "cast": [
+     {
+      "who": "dev",
+      "pose": "neutral",
+      "arm": "type",
+      "x": 330,
+      "y": 1072,
+      "scale": 0.6,
+      "role": "dev"
+     },
+     {
+      "who": "agent",
+      "extra": true,
+      "pose": "neutral",
+      "arm": "hold",
+      "x": 290,
+      "y": 1190,
+      "scale": 0.32,
+      "role": "extra"
+     }
+    ],
+    "props": {
+     "lamp": {
+      "x": 450,
+      "y": 260
+     },
+     "desk": {
+      "x": 450,
+      "y": 960
+     },
+     "folder": {
+      "x": 600,
+      "y": 900,
+      "scale": 0.3,
+      "label": "UNSAVED WORK"
+     },
+     "counter": {
+      "x": 580,
+      "y": 560,
+      "from": 0,
+      "to": 2309
+     },
+     "pages": {
+      "x": 470,
+      "y": 926,
+      "scale": 0.6,
+      "ring": true,
+      "grow": true
+     },
+     "copier": {
+      "x": 150,
+      "y": 1190
+     }
+    },
+    "fx": [
+     "tiltdown",
+     "type",
+     "ring@0.8",
+     "ring@1.6",
+     "ring@2.4",
+     "tick@0.6",
+     "copier",
+     "yawn@3.4"
+    ]
+   },
+   "still": true
+  },
+  {
+   "id": "job",
+   "bg": "room",
+   "props": {
+    "desk": {
+     "x": 800,
+     "y": 820
+    },
+    "folder": {
+     "x": 800,
+     "y": 700,
+     "scale": 0.4,
+     "label": "UNSAVED WORK"
+    },
+    "note": {
+     "x": 800,
+     "y": 640,
+     "text": "TIDY UP. BACK IN 30.",
+     "at": 0.6
+    },
+    "door": {
+     "x": 1460,
+     "y": 860
+    }
+   },
+   "cast": [
+    {
+     "who": "dev",
+     "pose": "neutral",
+     "x": 1000,
+     "y": 880,
+     "scale": 0.6,
+     "role": "dev",
+     "turn": "walk"
+    },
+    {
+     "who": "agent",
+     "pose": "neutral",
+     "arm": "salute",
+     "x": 260,
+     "y": 640,
+     "scale": 0.22,
+     "n": 1
+    },
+    {
+     "who": "agent",
+     "pose": "neutral",
+     "arm": "salute",
+     "x": 360,
+     "y": 640,
+     "scale": 0.22,
+     "n": 2
+    },
+    {
+     "who": "agent",
+     "pose": "neutral",
+     "arm": "salute",
+     "x": 460,
+     "y": 640,
+     "scale": 0.22,
+     "n": 3
+    },
+    {
+     "who": "agent",
+     "pose": "neutral",
+     "arm": "salute",
+     "x": 560,
+     "y": 640,
+     "scale": 0.22,
+     "n": 4
+    },
+    {
+     "who": "agent",
+     "pose": "neutral",
+     "arm": "salute",
+     "x": 660,
+     "y": 640,
+     "scale": 0.22,
+     "n": 5
+    },
+    {
+     "who": "agent",
+     "pose": "neutral",
+     "arm": "salute",
+     "x": 760,
+     "y": 640,
+     "scale": 0.22,
+     "n": 6
+    },
+    {
+     "who": "agent",
+     "pose": "neutral",
+     "arm": "salute",
+     "x": 860,
+     "y": 640,
+     "scale": 0.22,
+     "n": 7
+    },
+    {
+     "who": "agent",
+     "pose": "neutral",
+     "arm": "salute",
+     "x": 960,
+     "y": 640,
+     "scale": 0.22,
+     "n": 8
+    },
+    {
+     "who": "agent",
+     "pose": "neutral",
+     "arm": "salute",
+     "x": 1060,
+     "y": 640,
+     "scale": 0.22,
+     "n": 9
+    },
+    {
+     "who": "agent",
+     "pose": "neutral",
+     "arm": "salute",
+     "x": 1160,
+     "y": 640,
+     "scale": 0.22,
+     "n": 10
+    },
+    {
+     "who": "agent",
+     "pose": "neutral",
+     "arm": "salute",
+     "x": 1260,
+     "y": 640,
+     "scale": 0.22,
+     "n": 11
+    },
+    {
+     "who": "agent",
+     "pose": "neutral",
+     "arm": "salute",
+     "x": 1360,
+     "y": 640,
+     "scale": 0.22,
+     "n": 12
+    }
+   ],
+   "fx": [
+    "note@0.6",
+    "popup@1.8",
+    "salute@2.2",
+    "exit@2.8",
+    "door@3.8"
+   ],
+   "say": {
+    "who": "DEV",
+    "text": "Tidy up. Back in thirty.",
+    "at": 0.9
+   },
+   "sfx": [
+    "slap@0.6",
+    "snap@2.2",
+    "click@3.8"
+   ],
+   "music": "calm",
+   "focus": [
+    820,
+    640
+   ],
+   "v": {
+    "cast": [
+     {
+      "who": "dev",
+      "pose": "neutral",
+      "x": 260,
+      "y": 1380,
+      "scale": 0.5,
+      "role": "dev",
+      "turn": "walk"
+     },
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "arm": "salute",
+      "x": 180,
+      "y": 520,
+      "scale": 0.18,
+      "n": 1
+     },
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "arm": "salute",
+      "x": 340,
+      "y": 520,
+      "scale": 0.18,
+      "n": 2
+     },
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "arm": "salute",
+      "x": 500,
+      "y": 520,
+      "scale": 0.18,
+      "n": 3
+     },
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "arm": "salute",
+      "x": 660,
+      "y": 520,
+      "scale": 0.18,
+      "n": 4
+     },
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "arm": "salute",
+      "x": 180,
+      "y": 690,
+      "scale": 0.2,
+      "n": 5
+     },
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "arm": "salute",
+      "x": 340,
+      "y": 690,
+      "scale": 0.2,
+      "n": 6
+     },
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "arm": "salute",
+      "x": 500,
+      "y": 690,
+      "scale": 0.2,
+      "n": 7
+     },
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "arm": "salute",
+      "x": 660,
+      "y": 690,
+      "scale": 0.2,
+      "n": 8
+     },
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "arm": "salute",
+      "x": 180,
+      "y": 860,
+      "scale": 0.22,
+      "n": 9
+     },
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "arm": "salute",
+      "x": 340,
+      "y": 860,
+      "scale": 0.22,
+      "n": 10
+     },
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "arm": "salute",
+      "x": 500,
+      "y": 860,
+      "scale": 0.22,
+      "n": 11
+     },
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "arm": "salute",
+      "x": 660,
+      "y": 860,
+      "scale": 0.22,
+      "n": 12
+     }
+    ],
+    "props": {
+     "desk": {
+      "x": 450,
+      "y": 1150
+     },
+     "folder": {
+      "x": 450,
+      "y": 1050,
+      "scale": 0.4,
+      "label": "UNSAVED WORK"
+     },
+     "note": {
+      "x": 450,
+      "y": 980,
+      "text": "TIDY UP. BACK IN 30.",
+      "at": 0.6
+     }
+    },
+    "fx": [
+     "note@0.6",
+     "popup@1.6",
+     "popup@1.9",
+     "popup@2.2",
+     "salute@2.4",
+     "exitdown@2.8"
+    ]
+   },
+   "still": true
+  },
+  {
+   "id": "rivals",
+   "bg": "split",
+   "panels": [
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "x": 0,
+     "y": 0,
+     "n": 3
+    },
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "x": 0,
+     "y": 0,
+     "n": 7
+    },
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "x": 0,
+     "y": 0,
+     "n": 12
+    }
+   ],
+   "fx": [
+    "glint",
+    "speedlines"
+   ],
+   "line": {
+    "who": "AGENT 7",
+    "text": "Only one of us\ncan tidy it."
+   },
+   "lineAt": 1.7,
+   "sfx": [
+    "shing@0.3",
+    "shing@0.8",
+    "shing@1.3"
+   ],
+   "music": "heroic",
+   "v": {
+    "fx": [
+     "glintdown",
+     "speedlines"
+    ],
+    "bg": "stack3"
+   }
+  },
+  {
+   "id": "rush",
+   "bg": "speedlines",
+   "props": {
+    "desk": {
+     "x": 800,
+     "y": 820
+    },
+    "folder": {
+     "x": 800,
+     "y": 640,
+     "scale": 0.7,
+     "label": "UNSAVED WORK"
+    }
+   },
+   "cast": [
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "x": 260,
+     "y": 800,
+     "scale": 0.34,
+     "n": 2
+    },
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "x": 1340,
+     "y": 800,
+     "scale": 0.34,
+     "n": 9,
+     "flip": true
+    },
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "x": 440,
+     "y": 860,
+     "scale": 0.42,
+     "n": 4
+    },
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "x": 1160,
+     "y": 860,
+     "scale": 0.42,
+     "n": 8,
+     "flip": true
+    },
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "x": 620,
+     "y": 940,
+     "scale": 0.52,
+     "n": 5
+    },
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "x": 980,
+     "y": 940,
+     "scale": 0.52,
+     "n": 6,
+     "flip": true
+    }
+   ],
+   "fx": [
+    "speedlines",
+    "dash",
+    "blink@0.35",
+    "dive@0.6",
+    "squeeze@0.9",
+    "shake@1.6"
+   ],
+   "sfx": [
+    "whoosh@0.2",
+    "whoosh@0.4",
+    "whoosh@0.6",
+    "creak@0.9"
+   ],
+   "music": "heroic",
+   "focus": [
+    800,
+    620
+   ],
+   "v": {
+    "cast": [
+     {
+      "who": "agent",
+      "pose": "dramatic",
+      "x": 250,
+      "y": 260,
+      "scale": 0.3,
+      "n": 2
+     },
+     {
+      "who": "agent",
+      "pose": "dramatic",
+      "x": 640,
+      "y": 360,
+      "scale": 0.3,
+      "n": 9
+     },
+     {
+      "who": "agent",
+      "pose": "dramatic",
+      "x": 340,
+      "y": 480,
+      "scale": 0.32,
+      "n": 4
+     },
+     {
+      "who": "agent",
+      "pose": "dramatic",
+      "x": 560,
+      "y": 570,
+      "scale": 0.32,
+      "n": 8
+     },
+     {
+      "who": "agent",
+      "pose": "dramatic",
+      "x": 220,
+      "y": 690,
+      "scale": 0.34,
+      "n": 5
+     },
+     {
+      "who": "agent",
+      "pose": "dramatic",
+      "x": 680,
+      "y": 760,
+      "scale": 0.34,
+      "n": 6
+     }
+    ],
+    "props": {
+     "folder": {
+      "x": 450,
+      "y": 1100,
+      "scale": 0.8,
+      "label": "UNSAVED WORK"
+     }
+    },
+    "fx": [
+     "speedlinesdown",
+     "fall",
+     "dive@0.6",
+     "squeeze@0.9",
+     "shake@1.6"
+    ]
+   }
+  },
+  {
+   "id": "inside",
+   "bg": "paper",
+   "props": {
+    "pages": {
+     "scatter": true,
+     "ring": true
+    },
+    "copier": {
+     "x": 1380,
+     "y": 880
+    }
+   },
+   "cast": [
+    {
+     "who": "agent",
+     "pose": "neutral",
+     "arm": "hold",
+     "x": 380,
+     "y": 900,
+     "scale": 0.55,
+     "n": 2
+    },
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "arm": "hold",
+     "x": 620,
+     "y": 900,
+     "scale": 0.55,
+     "n": 9,
+     "flip": true
+    },
+    {
+     "who": "agent",
+     "pose": "neutral",
+     "arm": "hold",
+     "x": 900,
+     "y": 880,
+     "scale": 0.5,
+     "n": 4
+    },
+    {
+     "who": "agent",
+     "pose": "neutral",
+     "arm": "point",
+     "x": 1100,
+     "y": 880,
+     "scale": 0.5,
+     "n": 8,
+     "flip": true
+    },
+    {
+     "who": "agent",
+     "extra": true,
+     "pose": "neutral",
+     "arm": "hold",
+     "x": 1260,
+     "y": 900,
+     "scale": 0.36,
+     "role": "extra"
+    }
+   ],
+   "fx": [
+    "scribble@0.3",
+    "erase@0.9",
+    "file@1.3",
+    "unfile@1.7",
+    "bonk@2.1",
+    "copier"
+   ],
+   "line": {
+    "who": "AGENT 9",
+    "text": "Hey! I was\ntidying that!"
+   },
+   "lineAt": 2.4,
+   "sfx": [
+    "scribble@0.3",
+    "squeak@0.9",
+    "bonk@2.1",
+    "copierhum"
+   ],
+   "music": "heroic",
+   "focus": [
+    820,
+    600
+   ],
+   "v": {
+    "cast": [
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "arm": "hold",
+      "x": 470,
+      "y": 560,
+      "scale": 0.42,
+      "n": 2
+     },
+     {
+      "who": "agent",
+      "pose": "dramatic",
+      "arm": "up",
+      "x": 470,
+      "y": 840,
+      "scale": 0.44,
+      "n": 9
+     },
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "arm": "hold",
+      "x": 330,
+      "y": 1180,
+      "scale": 0.46,
+      "n": 4
+     },
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "arm": "point",
+      "x": 610,
+      "y": 1180,
+      "scale": 0.46,
+      "n": 8,
+      "flip": true
+     },
+     {
+      "who": "agent",
+      "extra": true,
+      "pose": "neutral",
+      "arm": "hold",
+      "x": 210,
+      "y": 790,
+      "scale": 0.28,
+      "role": "extra"
+     }
+    ],
+    "props": {
+     "pages": {
+      "scatter": true,
+      "ring": true
+     },
+     "copier": {
+      "x": 120,
+      "y": 780
+     }
+    }
+   }
+  },
+  {
+   "id": "cleaned",
+   "bg": "black",
+   "props": {
+    "box": {
+     "x": 889,
+     "y": 369,
+     "icon": "lifebuoy"
+    },
+    "window": {
+     "x": 1380,
+     "y": 420
+    },
+    "broom": {
+     "x": 1100,
+     "y": 520
+    }
+   },
+   "cast": [
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "arm": "up",
+     "x": 700,
+     "y": 960,
+     "scale": 0.85,
+     "n": 5,
+     "role": "hero"
+    },
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "arm": "broom",
+     "x": 1100,
+     "y": 960,
+     "scale": 0.85,
+     "n": 6,
+     "flip": true,
+     "role": "sweeper"
+    }
+   ],
+   "fx": [
+    "impact@0.1",
+    "behind@1.2",
+    "sweep@1.8",
+    "shake@1.8",
+    "files@1.9"
+   ],
+   "word": "Cleaned.",
+   "wordAt": 2.8,
+   "say": {
+    "who": "AGENT 6",
+    "text": "Cleaned.",
+    "at": 2.8
+   },
+   "sfx": [
+    "herochord@0.1",
+    "fwip@1.2",
+    "broom@1.8",
+    "impact@1.9",
+    "flutter@2.0"
+   ],
+   "music": "heroic",
+   "focus": [
+    900,
+    520
+   ],
+   "v": {
+    "cast": [
+     {
+      "who": "agent",
+      "pose": "dramatic",
+      "arm": "up",
+      "x": 380,
+      "y": 1380,
+      "scale": 0.75,
+      "n": 5,
+      "role": "hero"
+     },
+     {
+      "who": "agent",
+      "pose": "dramatic",
+      "arm": "broom",
+      "x": 620,
+      "y": 1380,
+      "scale": 0.75,
+      "n": 6,
+      "flip": true,
+      "role": "sweeper"
+     }
+    ],
+    "props": {
+     "box": {
+      "x": 546,
+      "y": 847,
+      "icon": "lifebuoy"
+     },
+     "skylight": {
+      "x": 450,
+      "y": 120
+     },
+     "broom": {
+      "x": 600,
+      "y": 700
+     }
+    },
+    "fx": [
+     "impact@0.1",
+     "behind@1.2",
+     "sweepup@1.8",
+     "shake@1.8",
+     "filesup@1.9"
+    ]
+   },
+   "still": true
+  },
+  {
+   "id": "funeral",
+   "bg": "black",
+   "props": {
+    "rain": true,
+    "pages": {
+     "puddles": true,
+     "ring": true
+    }
+   },
+   "cast": [
+    {
+     "who": "agent",
+     "pose": "defeated",
+     "x": 200,
+     "y": 650,
+     "scale": 0.26,
+     "n": 2
+    },
+    {
+     "who": "agent",
+     "pose": "defeated",
+     "x": 320,
+     "y": 650,
+     "scale": 0.26,
+     "n": 3
+    },
+    {
+     "who": "agent",
+     "pose": "defeated",
+     "x": 440,
+     "y": 650,
+     "scale": 0.26,
+     "n": 4
+    },
+    {
+     "who": "agent",
+     "pose": "defeated",
+     "x": 560,
+     "y": 650,
+     "scale": 0.26,
+     "n": 5
+    },
+    {
+     "who": "agent",
+     "pose": "defeated",
+     "x": 1040,
+     "y": 650,
+     "scale": 0.26,
+     "n": 6
+    },
+    {
+     "who": "agent",
+     "pose": "defeated",
+     "x": 1160,
+     "y": 650,
+     "scale": 0.26,
+     "n": 7
+    },
+    {
+     "who": "agent",
+     "pose": "defeated",
+     "x": 1280,
+     "y": 650,
+     "scale": 0.26,
+     "n": 8
+    },
+    {
+     "who": "agent",
+     "pose": "defeated",
+     "x": 1400,
+     "y": 650,
+     "scale": 0.26,
+     "n": 9
+    },
+    {
+     "who": "agent",
+     "pose": "defeated",
+     "x": 260,
+     "y": 760,
+     "scale": 0.3,
+     "n": 10
+    },
+    {
+     "who": "agent",
+     "pose": "defeated",
+     "x": 1340,
+     "y": 760,
+     "scale": 0.3,
+     "n": 11
+    },
+    {
+     "who": "agent",
+     "pose": "defeated",
+     "x": 1460,
+     "y": 760,
+     "scale": 0.3,
+     "n": 12
+    },
+    {
+     "who": "agent",
+     "pose": "defeated",
+     "arm": "hold",
+     "x": 800,
+     "y": 960,
+     "scale": 0.9,
+     "n": 1,
+     "role": "mourner"
+    }
+   ],
+   "fx": [
+    "rain",
+    "lift@0.4",
+    "limp@1.2",
+    "slowpush",
+    "tear@2.3"
+   ],
+   "line": {
+    "who": "AGENT 1",
+    "text": "You were never saved.\nBut you were brave."
+   },
+   "lineAt": 3.2,
+   "sfx": [
+    "rain",
+    "plink@2.3"
+   ],
+   "music": "sad",
+   "focus": [
+    800,
+    560
+   ],
+   "v": {
+    "cast": [
+     {
+      "who": "agent",
+      "pose": "defeated",
+      "x": 180,
+      "y": 470,
+      "scale": 0.16,
+      "n": 2
+     },
+     {
+      "who": "agent",
+      "pose": "defeated",
+      "x": 340,
+      "y": 470,
+      "scale": 0.16,
+      "n": 3
+     },
+     {
+      "who": "agent",
+      "pose": "defeated",
+      "x": 560,
+      "y": 470,
+      "scale": 0.16,
+      "n": 4
+     },
+     {
+      "who": "agent",
+      "pose": "defeated",
+      "x": 720,
+      "y": 470,
+      "scale": 0.16,
+      "n": 5
+     },
+     {
+      "who": "agent",
+      "pose": "defeated",
+      "x": 150,
+      "y": 600,
+      "scale": 0.18,
+      "n": 6
+     },
+     {
+      "who": "agent",
+      "pose": "defeated",
+      "x": 310,
+      "y": 600,
+      "scale": 0.18,
+      "n": 7
+     },
+     {
+      "who": "agent",
+      "pose": "defeated",
+      "x": 590,
+      "y": 600,
+      "scale": 0.18,
+      "n": 8
+     },
+     {
+      "who": "agent",
+      "pose": "defeated",
+      "x": 750,
+      "y": 600,
+      "scale": 0.18,
+      "n": 9
+     },
+     {
+      "who": "agent",
+      "pose": "defeated",
+      "x": 160,
+      "y": 740,
+      "scale": 0.2,
+      "n": 10
+     },
+     {
+      "who": "agent",
+      "pose": "defeated",
+      "x": 740,
+      "y": 740,
+      "scale": 0.2,
+      "n": 11
+     },
+     {
+      "who": "agent",
+      "pose": "defeated",
+      "x": 450,
+      "y": 600,
+      "scale": 0.16,
+      "n": 12
+     },
+     {
+      "who": "agent",
+      "pose": "defeated",
+      "arm": "hold",
+      "x": 450,
+      "y": 1180,
+      "scale": 0.8,
+      "n": 1,
+      "role": "mourner"
+     }
+    ],
+    "props": {
+     "rain": true,
+     "pages": {
+      "puddles": true,
+      "ring": true
+     }
+    }
+   },
+   "still": true
+  },
+  {
+   "id": "back",
+   "bg": "flat",
+   "props": {
+    "door": {
+     "x": 300,
+     "y": 860
+    },
+    "desk": {
+     "x": 800,
+     "y": 820
+    },
+    "folder": {
+     "x": 800,
+     "y": 720,
+     "scale": 0.4,
+     "label": "UNSAVED WORK",
+     "empty": true
+    },
+    "counter": {
+     "x": 800,
+     "y": 620,
+     "value": 0
+    },
+    "window": {
+     "x": 1340,
+     "y": 460
+    }
+   },
+   "cast": [
+    {
+     "who": "dev",
+     "pose": "enter",
+     "x": 380,
+     "y": 880,
+     "scale": 0.62,
+     "role": "dev"
+    },
+    {
+     "who": "agent",
+     "pose": "shocked",
+     "x": 1240,
+     "y": 620,
+     "scale": 0.26,
+     "n": 1,
+     "wet": true
+    },
+    {
+     "who": "agent",
+     "pose": "shocked",
+     "x": 1340,
+     "y": 600,
+     "scale": 0.26,
+     "n": 7,
+     "wet": true
+    },
+    {
+     "who": "agent",
+     "pose": "shocked",
+     "x": 1440,
+     "y": 620,
+     "scale": 0.26,
+     "n": 12,
+     "wet": true
+    }
+   ],
+   "fx": [
+    "door@0.2",
+    "enter@0.4",
+    "climb@1.4",
+    "freeze@2.4"
+   ],
+   "sfx": [
+    "creak@0.2",
+    "drip@2.6"
+   ],
+   "music": "none",
+   "focus": [
+    760,
+    600
+   ],
+   "v": {
+    "cast": [
+     {
+      "who": "dev",
+      "pose": "enter",
+      "x": 450,
+      "y": 760,
+      "scale": 0.45,
+      "role": "dev"
+     },
+     {
+      "who": "agent",
+      "pose": "shocked",
+      "x": 110,
+      "y": 420,
+      "scale": 0.16,
+      "n": 1,
+      "wet": true
+     },
+     {
+      "who": "agent",
+      "pose": "shocked",
+      "x": 190,
+      "y": 400,
+      "scale": 0.16,
+      "n": 7,
+      "wet": true
+     },
+     {
+      "who": "agent",
+      "pose": "shocked",
+      "x": 270,
+      "y": 420,
+      "scale": 0.16,
+      "n": 12,
+      "wet": true
+     }
+    ],
+    "props": {
+     "door": {
+      "x": 450,
+      "y": 760
+     },
+     "desk": {
+      "x": 450,
+      "y": 1250
+     },
+     "folder": {
+      "x": 450,
+      "y": 1140,
+      "scale": 0.5,
+      "label": "UNSAVED WORK",
+      "empty": true
+     },
+     "counter": {
+      "x": 450,
+      "y": 880,
+      "value": 0
+     },
+     "window": {
+      "x": 170,
+      "y": 380
+     }
+    }
+   }
+  },
+  {
+   "id": "terror",
+   "bg": "flat",
+   "props": {
+    "mug": {
+     "x": 960,
+     "y": 760
+    }
+   },
+   "cast": [
+    {
+     "who": "dev",
+     "pose": "neutral",
+     "turn": "terror",
+     "x": 800,
+     "y": 1100,
+     "scale": 1.6,
+     "role": "dev",
+     "mug": false
+    }
+   ],
+   "fx": [
+    "devpush",
+    "speedlines@1.0",
+    "terror@1.2",
+    "sweat@1.6",
+    "drop@2.0",
+    "shatter@2.6"
+   ],
+   "line": {
+    "who": "DEV",
+    "text": "Which one of you?"
+   },
+   "lineAt": 3.2,
+   "sfx": [
+    "heartbeat",
+    "whistle@2.0",
+    "shatter@2.6"
+   ],
+   "music": "none",
+   "focus": [
+    800,
+    420
+   ],
+   "v": {
+    "cast": [
+     {
+      "who": "dev",
+      "pose": "neutral",
+      "turn": "terror",
+      "x": 450,
+      "y": 1500,
+      "scale": 2.0,
+      "role": "dev",
+      "mug": false
+     }
+    ],
+    "props": {
+     "mug": {
+      "x": 640,
+      "y": 1000
+     }
+    },
+    "fx": [
+     "devpush",
+     "speedlines@1.0",
+     "terror@1.2",
+     "sweat@1.6",
+     "drop@2.0",
+     "followdown@2.0",
+     "shatter@2.6",
+     "cutup@2.9"
+    ]
+   },
+   "still": true
+  },
+  {
+   "id": "blame",
+   "bg": "flat",
+   "cast": [
+    {
+     "who": "dev",
+     "pose": "shocked",
+     "x": 800,
+     "y": 560,
+     "scale": 0.3,
+     "role": "dev",
+     "mug": false
+    },
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "arm": "point",
+     "x": 800,
+     "y": 230,
+     "scale": 0.16,
+     "n": 3
+    },
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "arm": "point",
+     "x": 940,
+     "y": 260,
+     "scale": 0.16,
+     "n": 7
+    },
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "arm": "point",
+     "x": 1040,
+     "y": 350,
+     "scale": 0.16,
+     "n": 12
+    },
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "arm": "point",
+     "x": 1080,
+     "y": 470,
+     "scale": 0.16,
+     "n": 1
+    },
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "arm": "point",
+     "x": 1040,
+     "y": 590,
+     "scale": 0.16,
+     "n": 5
+    },
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "arm": "point",
+     "x": 940,
+     "y": 680,
+     "scale": 0.16,
+     "n": 9
+    },
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "arm": "point",
+     "x": 800,
+     "y": 710,
+     "scale": 0.16,
+     "n": 2
+    },
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "arm": "point",
+     "x": 660,
+     "y": 680,
+     "scale": 0.16,
+     "n": 6,
+     "flip": true
+    },
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "arm": "point",
+     "x": 560,
+     "y": 590,
+     "scale": 0.16,
+     "n": 10,
+     "flip": true
+    },
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "arm": "point",
+     "x": 520,
+     "y": 470,
+     "scale": 0.16,
+     "n": 4,
+     "flip": true
+    },
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "arm": "point",
+     "x": 560,
+     "y": 350,
+     "scale": 0.16,
+     "n": 8,
+     "flip": true
+    },
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "arm": "point",
+     "x": 660,
+     "y": 260,
+     "scale": 0.16,
+     "n": 11,
+     "flip": true
+    }
+   ],
+   "fx": [
+    "jab@0.4",
+    "jab@0.9",
+    "ringspin@1.2",
+    "shake@0.9"
+   ],
+   "say": {
+    "who": "AGENTS",
+    "text": "Seven! Three! Twelve! Five!",
+    "at": 0.5
+   },
+   "sfx": [
+    "comicsting@0.4"
+   ],
+   "music": "comic",
+   "focus": [
+    800,
+    470
+   ],
+   "v": {
+    "cast": [
+     {
+      "who": "dev",
+      "pose": "shocked",
+      "x": 450,
+      "y": 990,
+      "scale": 0.36,
+      "role": "dev",
+      "mug": false
+     },
+     {
+      "who": "agent",
+      "pose": "dramatic",
+      "arm": "point",
+      "x": 450,
+      "y": 590,
+      "scale": 0.18,
+      "n": 3
+     },
+     {
+      "who": "agent",
+      "pose": "dramatic",
+      "arm": "point",
+      "x": 610,
+      "y": 633,
+      "scale": 0.18,
+      "n": 7
+     },
+     {
+      "who": "agent",
+      "pose": "dramatic",
+      "arm": "point",
+      "x": 727,
+      "y": 750,
+      "scale": 0.18,
+      "n": 12
+     },
+     {
+      "who": "agent",
+      "pose": "dramatic",
+      "arm": "point",
+      "x": 770,
+      "y": 910,
+      "scale": 0.18,
+      "n": 1
+     },
+     {
+      "who": "agent",
+      "pose": "dramatic",
+      "arm": "point",
+      "x": 727,
+      "y": 1070,
+      "scale": 0.18,
+      "n": 5
+     },
+     {
+      "who": "agent",
+      "pose": "dramatic",
+      "arm": "point",
+      "x": 610,
+      "y": 1187,
+      "scale": 0.18,
+      "n": 9
+     },
+     {
+      "who": "agent",
+      "pose": "dramatic",
+      "arm": "point",
+      "x": 450,
+      "y": 1230,
+      "scale": 0.18,
+      "n": 2
+     },
+     {
+      "who": "agent",
+      "pose": "dramatic",
+      "arm": "point",
+      "x": 290,
+      "y": 1187,
+      "scale": 0.18,
+      "n": 6,
+      "flip": true
+     },
+     {
+      "who": "agent",
+      "pose": "dramatic",
+      "arm": "point",
+      "x": 173,
+      "y": 1070,
+      "scale": 0.18,
+      "n": 10,
+      "flip": true
+     },
+     {
+      "who": "agent",
+      "pose": "dramatic",
+      "arm": "point",
+      "x": 130,
+      "y": 910,
+      "scale": 0.18,
+      "n": 4,
+      "flip": true
+     },
+     {
+      "who": "agent",
+      "pose": "dramatic",
+      "arm": "point",
+      "x": 173,
+      "y": 750,
+      "scale": 0.18,
+      "n": 8,
+      "flip": true
+     },
+     {
+      "who": "agent",
+      "pose": "dramatic",
+      "arm": "point",
+      "x": 290,
+      "y": 633,
+      "scale": 0.18,
+      "n": 11,
+      "flip": true
+     }
+    ]
+   }
+  },
+  {
+   "id": "copy",
+   "bg": "speedlines",
+   "props": {
+    "stack": {
+     "x": 660,
+     "y": 900,
+     "grow": [
+      120,
+      640
+     ],
+     "ring": true
+    }
+   },
+   "cast": [
+    {
+     "who": "dev",
+     "pose": "shocked",
+     "turn": "neutral",
+     "x": 1100,
+     "y": 900,
+     "scale": 0.6,
+     "role": "dev",
+     "mug": false
+    },
+    {
+     "who": "agent",
+     "extra": true,
+     "pose": "neutral",
+     "arm": "up",
+     "x": 470,
+     "y": 920,
+     "scale": 0.5,
+     "role": "extra"
+    }
+   ],
+   "fx": [
+    "cough@0.1",
+    "extralines@0.5",
+    "grow@0.8",
+    "turn@3.2"
+   ],
+   "line": {
+    "who": "THE EXTRA",
+    "text": "Don't worry.\nI copied every page."
+   },
+   "lineAt": 1.8,
+   "sfx": [
+    "cough@0.1",
+    "shuffle@0.8",
+    "chord@1.8"
+   ],
+   "music": "soft",
+   "focus": [
+    860,
+    560
+   ],
+   "v": {
+    "cast": [
+     {
+      "who": "dev",
+      "pose": "shocked",
+      "turn": "neutral",
+      "x": 620,
+      "y": 700,
+      "scale": 0.5,
+      "role": "dev",
+      "mug": false
+     },
+     {
+      "who": "agent",
+      "extra": true,
+      "pose": "neutral",
+      "arm": "up",
+      "x": 230,
+      "y": 1300,
+      "scale": 0.45,
+      "role": "extra"
+     }
+    ],
+    "props": {
+     "stack": {
+      "x": 430,
+      "y": 1300,
+      "grow": [
+       120,
+       900
+      ],
+      "ring": true
+     }
+    },
+    "fx": [
+     "cough@0.1",
+     "extralines@0.5",
+     "grow@0.8",
+     "tiltup@0.8",
+     "turn@3.2"
+    ]
+   },
+   "still": true
+  },
+  {
+   "id": "fix",
+   "bg": "room",
+   "props": {
+    "desk": {
+     "x": 800,
+     "y": 820
+    },
+    "folder": {
+     "x": 800,
+     "y": 700,
+     "scale": 0.5,
+     "label": "UNSAVED WORK"
+    },
+    "counter": {
+     "x": 1150,
+     "y": 330,
+     "from": 0,
+     "to": 2309
+    },
+    "gate": {
+     "x": 800,
+     "y": 700,
+     "sign": "NO TIDYING",
+     "at": 2.6
+    }
+   },
+   "cast": [
+    {
+     "who": "dev",
+     "pose": "neutral",
+     "arm": "hold",
+     "x": 1120,
+     "y": 880,
+     "scale": 0.6,
+     "role": "dev",
+     "mug": false
+    }
+   ],
+   "fx": [
+    "restore@0.3",
+    "tick@0.5",
+    "gatedrop@2.4",
+    "shake@2.6"
+   ],
+   "sfx": [
+    "rewind@0.3",
+    "whirr@0.5",
+    "whistle@2.4",
+    "clunk@2.6"
+   ],
+   "music": "heroic",
+   "focus": [
+    820,
+    640
+   ],
+   "v": {
+    "cast": [
+     {
+      "who": "dev",
+      "pose": "neutral",
+      "arm": "hold",
+      "x": 200,
+      "y": 1350,
+      "scale": 0.45,
+      "role": "dev",
+      "mug": false
+     }
+    ],
+    "props": {
+     "folder": {
+      "x": 450,
+      "y": 1080,
+      "scale": 0.6,
+      "label": "UNSAVED WORK"
+     },
+     "counter": {
+      "x": 450,
+      "y": 620,
+      "from": 0,
+      "to": 2309
+     },
+     "gate": {
+      "x": 450,
+      "y": 1080,
+      "sign": "NO TIDYING",
+      "at": 2.6
+     }
+    },
+    "fx": [
+     "restoreup@0.3",
+     "tick@0.5",
+     "gatedrop@2.4",
+     "shake@2.6"
+    ]
+   }
+  },
+  {
+   "id": "again",
+   "bg": "night",
+   "props": {
+    "desk": {
+     "x": 760,
+     "y": 820
+    },
+    "folder": {
+     "x": 900,
+     "y": 770,
+     "scale": 0.45,
+     "label": "UNSAVED WORK"
+    },
+    "gate": {
+     "x": 900,
+     "y": 770,
+     "sign": "NO TIDYING",
+     "tally": true
+    },
+    "farwindow": {
+     "x": 1390,
+     "y": 230,
+     "scale": 0.55,
+     "folder": "UNSAVED WORK"
+    }
+   },
+   "cast": [
+    {
+     "who": "dev",
+     "pose": "asleep",
+     "x": 620,
+     "y": 932,
+     "scale": 0.6,
+     "role": "dev",
+     "mug": false
+    },
+    {
+     "who": "agent",
+     "pose": "neutral",
+     "arm": "broom",
+     "x": 1170,
+     "y": 900,
+     "scale": 0.5,
+     "n": 3
+    },
+    {
+     "who": "agent",
+     "pose": "neutral",
+     "arm": "broom",
+     "x": 1300,
+     "y": 900,
+     "scale": 0.46,
+     "n": 7
+    },
+    {
+     "who": "agent",
+     "pose": "neutral",
+     "arm": "broom",
+     "x": 1430,
+     "y": 900,
+     "scale": 0.42,
+     "n": 12
+    }
+   ],
+   "fx": [
+    "tiptoe",
+    "bonk@0.8",
+    "bonk@1.5",
+    "bonk@2.0",
+    "bonk@2.3",
+    "bonk@2.5",
+    "tally@0.8",
+    "glance@3.0",
+    "glint@3.6",
+    "endcard@4.0"
+   ],
+   "say": {
+    "who": "NARRATOR",
+    "text": "To be continued!",
+    "at": 4.1
+   },
+   "sfx": [
+    "tiptoe",
+    "bonk@0.8",
+    "bonk@1.5",
+    "bonk@2.0",
+    "bonk@2.3",
+    "bonk@2.5",
+    "shing@3.6",
+    "freeze@4.0",
+    "stamp@4.6"
+   ],
+   "music": "sneaky",
+   "focus": [
+    980,
+    620
+   ],
+   "v": {
+    "cast": [
+     {
+      "who": "dev",
+      "pose": "asleep",
+      "x": 220,
+      "y": 1232,
+      "scale": 0.45,
+      "role": "dev",
+      "mug": false
+     },
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "arm": "broom",
+      "x": 640,
+      "y": 1330,
+      "scale": 0.32,
+      "n": 3
+     },
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "arm": "broom",
+      "x": 730,
+      "y": 1420,
+      "scale": 0.36,
+      "n": 7
+     },
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "arm": "broom",
+      "x": 820,
+      "y": 1520,
+      "scale": 0.4,
+      "n": 12
+     }
+    ],
+    "props": {
+     "desk": {
+      "x": 450,
+      "y": 1150
+     },
+     "folder": {
+      "x": 560,
+      "y": 1090,
+      "scale": 0.42,
+      "label": "UNSAVED WORK"
+     },
+     "gate": {
+      "x": 560,
+      "y": 1090,
+      "sign": "NO TIDYING",
+      "tally": true
+     },
+     "farwindow": {
+      "x": 450,
+      "y": 330,
+      "scale": 0.6,
+      "folder": "UNSAVED WORK"
+     }
+    },
+    "fx": [
+     "tiptoe",
+     "bonk@0.8",
+     "bonk@1.5",
+     "bonk@2.0",
+     "bonk@2.3",
+     "bonk@2.5",
+     "tally@0.8",
+     "glance@3.0",
+     "tiltup@3.0",
+     "glint@3.6",
+     "endcard@4.0"
+    ]
+   },
+   "still": true
+  }
+ ]
 }
