@@ -32,41 +32,42 @@
    "props": {
     "desk": {
      "x": 760,
-     "y": 820,
+     "y": 740,
      "laptop": {
       "x": -120
      }
     },
     "folder": {
      "x": 990,
-     "y": 740,
+     "y": 660,
      "scale": 0.36,
      "label": "UNSAVED WORK"
     },
     "counter": {
      "x": 990,
-     "y": 620,
+     "y": 540,
      "from": 0,
      "to": 2309
     },
     "pages": {
      "x": 850,
-     "y": 790,
+     "y": 710,
      "scale": 0.8,
      "ring": true,
      "grow": true
     },
     "copier": {
-     "x": 1330,
-     "y": 964
+     "x": 1270,
+     "y": 884,
+     "scale": 0.9
     },
     "lamp": {
      "x": 640,
-     "y": 160
+     "y": 140
     },
     "chair": {
      "x": 640,
-     "y": 932,
+     "y": 852,
      "scale": 0.6
     }
    },
@@ -76,7 +77,7 @@
      "pose": "neutral",
      "arm": "type",
      "x": 640,
-     "y": 932,
+     "y": 852,
      "scale": 0.6,
      "role": "dev"
     },
@@ -85,9 +86,9 @@
      "extra": true,
      "pose": "neutral",
      "arm": "hold",
-     "x": 1200,
-     "y": 964,
-     "scale": 0.4,
+     "x": 1130,
+     "y": 884,
+     "scale": 0.46,
      "role": "extra"
     }
    ],
@@ -129,9 +130,9 @@
       "extra": true,
       "pose": "neutral",
       "arm": "hold",
-      "x": 280,
-      "y": 1185,
-      "scale": 0.3,
+      "x": 300,
+      "y": 1200,
+      "scale": 0.4,
       "role": "extra"
      }
     ],
@@ -167,8 +168,9 @@
       "grow": true
      },
      "copier": {
-      "x": 140,
-      "y": 1185
+      "x": 130,
+      "y": 1200,
+      "scale": 0.9
      },
      "chair": {
       "x": 620,
@@ -1213,7 +1215,7 @@
       "pose": "defeated",
       "arm": "hold",
       "x": 450,
-      "y": 1100,
+      "y": 1040,
       "scale": 0.8,
       "n": 1,
       "role": "mourner"
@@ -1750,8 +1752,8 @@
    "bg": "speedlines",
    "props": {
     "stack": {
-     "x": 660,
-     "y": 900,
+     "x": 460,
+     "y": 940,
      "grow": [
       120,
       640
@@ -1764,8 +1766,8 @@
      "who": "dev",
      "pose": "shocked",
      "turn": "neutral",
-     "x": 1100,
-     "y": 900,
+     "x": 1150,
+     "y": 940,
      "scale": 0.6,
      "role": "dev",
      "mug": false
@@ -1775,9 +1777,9 @@
      "extra": true,
      "pose": "happy",
      "arm": "up",
-     "x": 470,
-     "y": 920,
-     "scale": 0.5,
+     "x": 200,
+     "y": 940,
+     "scale": 0.7,
      "role": "extra"
     }
    ],
@@ -1808,8 +1810,8 @@
       "who": "dev",
       "pose": "shocked",
       "turn": "neutral",
-      "x": 620,
-      "y": 700,
+      "x": 300,
+      "y": 640,
       "scale": 0.5,
       "role": "dev",
       "mug": false
@@ -1819,19 +1821,19 @@
       "extra": true,
       "pose": "happy",
       "arm": "up",
-      "x": 78,
-      "y": 1300,
-      "scale": 0.34,
+      "x": 330,
+      "y": 1420,
+      "scale": 0.6,
       "role": "extra"
      }
     ],
     "props": {
      "stack": {
-      "x": 290,
-      "y": 1300,
+      "x": 800,
+      "y": 1420,
       "grow": [
        120,
-       900
+       1060
       ],
       "ring": true
      }
@@ -2075,32 +2077,33 @@
       "who": "agent",
       "pose": "neutral",
       "arm": "broom",
-      "x": 640,
+      "x": 560,
       "y": 1330,
-      "scale": 0.32,
+      "scale": 0.3,
       "n": 3
      },
      {
       "who": "agent",
       "pose": "neutral",
       "arm": "broom",
-      "x": 730,
+      "x": 640,
       "y": 1420,
-      "scale": 0.36,
+      "scale": 0.33,
       "n": 7
      },
      {
       "who": "agent",
       "pose": "neutral",
       "arm": "broom",
-      "x": 820,
-      "y": 1520,
-      "scale": 0.4,
+      "x": 720,
+      "y": 1510,
+      "scale": 0.36,
       "n": 12
      }
     ]
    },
-   "still": true
+   "still": true,
+   "stillAt": 2.8
   },
   {
    "id": "next",

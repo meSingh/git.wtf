@@ -215,14 +215,17 @@ const FX: Record<string, Fx> = {
         agentsOnly(g).forEach((f, i) => tl.to(f, { x: -260 - i * 90, y: -220 - (i % 2) * 160, rotation: -40 - i * 25, transformOrigin: '50% 50%', duration: 0.6, ease: 'power2.out' }, at + i * 0.03));
     },
     stamp({ tl, g }, at) {
-        // the stamp slams over the scene, which keeps playing: no freeze
+        // the scene dims and the stamp slams over it on its own, so it reads in one look
         const card = q(g, '.endcard')!;
+        tl.set(q(card, '.stampmark'), { autoAlpha: 0 }, 0);
+        tl.to(q(g, '.cam'), { filter: 'brightness(0.35)', duration: 0.25 }, at - 0.1);
         tl.fromTo(q(card, '.stampmark'), { autoAlpha: 0, scale: 3.2, transformOrigin: '50% 50%' }, { autoAlpha: 1, scale: 1, duration: 0.25, ease: 'power4.in', immediateRender: false }, at);
         tl.to(q(g, '.cam'), { keyframes: [{ y: 12 }, { y: -6 }, { y: 0 }], duration: 0.18, ease: 'none' }, at + 0.25);
     },
     continued({ tl, g }, at) {
         // freeze frame, the arrow alone
         const card = q(g, '.endcard')!;
+        tl.set(q(card, '.tbc-in'), { autoAlpha: 0 }, 0);
         tl.to(q(g, '.cam'), { filter: 'grayscale(1) contrast(1.2) brightness(0.5)', duration: 0.3 }, at);
         tl.fromTo(q(card, '.tbc-in'), { autoAlpha: 0, scale: 1.6, transformOrigin: '50% 50%' }, { autoAlpha: 1, scale: 1, duration: 0.3, ease: 'power4.in', immediateRender: false }, at + 0.1);
         tl.to(q(g, '.cam'), { keyframes: [{ x: 10 }, { x: -6 }, { x: 0 }], duration: 0.16, ease: 'none' }, at + 0.4);

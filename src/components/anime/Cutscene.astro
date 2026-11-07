@@ -60,7 +60,7 @@ const files = Array.from({ length: 40 }, (_, i) => i);
 // three panels: bands across the wide frame, stacked down the tall one
 const panels = V
     ? { paths: ['M-400 -400 L1400 -400 L1400 360 L-400 500Z', 'M-400 540 L1400 400 L1400 1080 L-400 1220Z', 'M-400 1260 L1400 1120 L1400 2200 L-400 2200Z'], centre: [[450, 250], [450, 700], [450, 1400]], gutters: 'M-400 520 L1400 380 M-400 1240 L1400 1100' }
-    : { paths: ['M-400 -200 L2000 -200 L2000 170 L-400 330Z', 'M-400 350 L2000 190 L2000 520 L-400 680Z', 'M-400 700 L2000 540 L2000 1100 L-400 1100Z'], centre: [[560, 120], [1040, 440], [640, 770]], gutters: 'M-400 340 L2000 180 M-400 690 L2000 530' };
+    : { paths: ['M-400 -200 L2000 -200 L2000 170 L-400 330Z', 'M-400 350 L2000 190 L2000 520 L-400 680Z', 'M-400 700 L2000 540 L2000 1100 L-400 1100Z'], centre: [[560, 120], [1040, 440], [1240, 770]], gutters: 'M-400 340 L2000 180 M-400 690 L2000 530' };
 // scattered pages inside the folder, and soaked ones in puddles, placed the same every time
 const scatter = Array.from({ length: 14 }, (_, k) => ({ x: Math.round(80 + (((k + 1) * 0.7548776) % 1) * (W - 160)), y: Math.round(100 + (((k + 1) * 0.5698403) % 1) * (H - 200)), r: ((k * 47) % 70) - 35 }));
 const puddles = Array.from({ length: 5 }, (_, k) => V ? { x: 120 + k * 170, y: 1330 + (k % 2) * 90 } : { x: 160 + k * 320, y: 830 + (k % 2) * 40 });
@@ -98,7 +98,7 @@ const longest = (rows: string[]) => Math.max(...rows.map((r) => r.length));
                 {P.laptop && <g class="laptop" transform={`translate(${P.laptop.x} -30)`}><path class="lid" d="M-70 -4 L-62 -96 L78 -96 L70 -4Z" /><rect class="screen" x="-56" y="-88" width="124" height="76" /><rect class="base" x="-90" y="-10" width="170" height="12" rx="3" /></g>}
             </g>
         );
-        const chair = P.chair && <g class="chair" transform={`translate(${P.chair.x} ${P.chair.y}) scale(${P.chair.scale ?? 1})`}><rect class="back" x="-90" y="-250" width="180" height="150" rx="14" /><rect class="post" x="-12" y="-100" width="24" height="100" /></g>;
+        const chair = P.chair && <g class="chair" transform={`translate(${P.chair.x} ${P.chair.y}) scale(${P.chair.scale ?? 1})`}><rect class="back" x="-120" y="-470" width="240" height="320" rx="18" /><rect class="post" x="-14" y="-160" width="28" height="160" /></g>;
         const fromAt = P.box ? `${P.box.x} ${P.box.y}` : P.folder ? `${P.folder.x} ${P.folder.y - 60 * (P.folder.scale ?? 1)}` : `${CX} ${CY}`;
         return (
             <g class={`shot bg-${bg}`} data-shot={s.id} data-i={si} data-focus={focus.join(' ')} data-fx={JSON.stringify(fx)} style="display:none">
@@ -122,7 +122,7 @@ const longest = (rows: string[]) => Math.max(...rows.map((r) => r.length));
                     {P.window && <g class="window" transform={`translate(${P.window.x} ${P.window.y}) scale(${P.window.scale ?? 1})`}><rect class="sky" x="-150" y="-120" width="300" height="240" /><path class="bars" d="M-150 -120 L150 -120 L150 120 L-150 120Z M0 -120 L0 120 M-150 0 L150 0" /></g>}
                     {P.lamp && (
                         <g class="lamp" transform={`translate(${P.lamp.x} ${P.lamp.y}) scale(${P.lamp.scale ?? 1})`}>
-                            <path class="cone" d={`M-60 30 L60 30 L${V ? 330 : 380} ${V ? 760 : 620} L${V ? -330 : -380} ${V ? 760 : 620}Z`} fill="url(#a-pool)" />
+                            <path class="cone" d={`M-60 30 L60 30 L${V ? 360 : 560} ${V ? 900 : 720} L${V ? -360 : -560} ${V ? 900 : 720}Z`} fill="url(#a-pool)" />
                             <path class="cord" d="M0 -600 L0 -40" />
                             <path class="shade" d="M-30 -50 L30 -50 L70 30 L-70 30Z" />
                             <circle class="bulb" cx="0" cy="34" r="16" />
