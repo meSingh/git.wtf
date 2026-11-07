@@ -24,7 +24,7 @@
 .foot-btn:hover .ko, .foot-btn:focus-visible .ko { fill: var(--black); }
 @media (prefers-reduced-motion: reduce) { .foot-btn { transition: none; } }
 .foot-row { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.6rem 1.6rem; margin: 0.4rem 0 0; }
-.foot-nav { display: flex; gap: 1.2rem; font-family: var(--mono); font-size: 0.85rem; }
+.foot-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.2rem; font-family: var(--mono); font-size: 0.85rem; }
 .foot-nav a { color: var(--black); text-decoration: underline; }
 .foot-nav a:hover { color: var(--black); text-decoration-thickness: 2px; }
 .foot-last { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--mono); font-size: 0.85rem; }
