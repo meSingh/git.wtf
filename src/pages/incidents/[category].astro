@@ -8,7 +8,8 @@ import { categoryLabel, href, sortIncidents } from '../../lib/site';
 
 export async function getStaticPaths() {
     const all = sortIncidents(await getCollection('incidents'));
-    return CATEGORIES.map((category) => ({ params: { category }, props: { category, incidents: all.filter((i) => i.data.category === category) } }));
+    // only categories with an incident in them get a page (Mandeep, 8 Nov): an empty one is a 404 until one lands
+    return CATEGORIES.map((category) => ({ params: { category }, props: { category, incidents: all.filter((i) => i.data.category === category) } })).filter((p) => p.props.incidents.length > 0);
 }
 const { category, incidents } = Astro.props;
 ---

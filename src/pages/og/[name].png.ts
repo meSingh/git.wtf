@@ -18,7 +18,8 @@ export async function getStaticPaths() {
     }
     cards.push({ name: 'archive', card: { kind: 'The old blog', title: 'The archive', stamp: 'unchanged.', line: 'The commands still work. The jokes are older.', days } });
     cards.push({ name: 'incidents', card: { kind: 'The record', title: 'The fuck-ups', stamp: 'ongoing.', line: 'Every Git and AI fuck-up we have caught.', days } });
-    for (const c of CATEGORIES) cards.push({ name: `incidents-${c}`, card: { kind: 'Filed under', title: categoryLabel(c), stamp: 'filed.', line: 'More of these will come.', days } });
+    const used = new Set(sortIncidents(await getCollection('incidents')).map((i) => i.data.category));
+    for (const c of CATEGORIES.filter((x) => used.has(x))) cards.push({ name: `incidents-${c}`, card: { kind: 'Filed under', title: categoryLabel(c), stamp: 'filed.', line: 'More of these will come.', days } });
     return cards.map(({ name, card }) => ({ params: { name }, props: { card } }));
 }
 
