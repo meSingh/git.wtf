@@ -48,7 +48,7 @@ const gapFrom = (g: number) => (g < 10 ? 9 : Math.min(99, g + 30));
     <div class="track-head">
         <div class="col beat-head">
             <h2 id="record-h" data-lock>The record</h2>
-            <span class="count">{incidents.length === 1 ? 'One so far, newest first.' : `${incidents.length} incidents, newest first, spaced by the real days between them. Keep scrolling.`}</span>
+            <span class="count">{incidents.length === 1 ? "1 incident so far. It won't be lonely for long." : `${incidents.length} incidents, newest first, going back in time.`}</span>
         </div>
     </div>
     <div class="track" id="track" style={`width:${width}px`}>

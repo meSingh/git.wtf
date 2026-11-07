@@ -64,23 +64,24 @@ const jsonld = {
                             <img src={poster} width="1280" height="720" alt="" decoding="async" loading="lazy" />
                         </picture>
                     </div>
-                    <a class="ep-down" href="#after-cut" data-cut-down aria-label="Scroll on through the episode"><span class="ep-down-w">Scroll</span><span class="ep-down-a" aria-hidden="true"></span></a>
+                    <a class="ep-down" href="#detail" data-cut-down><span class="ep-down-w">Keep scrolling. It gets worse.</span><span class="ep-down-a" aria-hidden="true"></span></a>
                     <div class="ep-bar">
                         <p class="ep-today"><span class="ep-k">Today's fuck-up:</span> <a href={href(incidentPath(latest!))}>{latest!.data.title}</a></p>
                         <p class="ep-ctls"><span data-cut-count aria-live="off"></span><button type="button" data-cut-replay>Replay</button><button type="button" data-cut-skip>Skip</button></p>
                     </div>
                 </div>
             </section>
-            <section class="beat after-cut over" id="after-cut" aria-label="After the episode">
-                <p class="col after-links"><a class="after-main" href={href(incidentPath(latest!))}>Read what happened <span aria-hidden="true">&rarr;</span></a><a class="after-alt" href={href(`${incidentPath(latest!)}cut/`)}>Open the cut full screen</a></p>
-            </section>
             <section class="beat beat-detail over" id="detail" aria-labelledby="detail-h">
                 <div class="col detail">
                     <div class="detail-text">
                         <p class="today-kicker">What actually happened</p>
                         <h2 id="detail-h" class="detail-h">{latest!.data.title}</h2>
-                        <p class="detail-lines">Twelve agents were set loose on one checkout to tidy it. Every one of them tidied the others' work away, 2,309 files went with it, and the only copy was a side job nobody had counted.</p>
-                        <p class="detail-note">Content's lines go here.</p>
+                        <div class="detail-lines">
+                            <p>Twelve AI agents shared one checkout. Thirty-two minutes later, 2,309 uncommitted files were gone.</p>
+                            <p>The repair step had made a rescue branch. The cleanup step deleted it, as cleanup steps do.</p>
+                            <p>The files came back from a side job that copied everything, every cycle. The guard added next said no to 1,477 more attempts to tidy.</p>
+                        </div>
+                        <p class="after-links"><a class="after-main" href={href(incidentPath(latest!))}>Read what happened <span aria-hidden="true">&rarr;</span></a><a class="after-alt" href={href(`${incidentPath(latest!)}cut/`)}>Open the cut full screen</a></p>
                     </div>
                     <figure class="detail-pic" data-detail-pic>
                         {cut!.story ? (
@@ -133,9 +134,9 @@ const jsonld = {
         <div class="col">
             <div class="beat-head"><h2 id="story-h" data-lock>The story</h2></div>
             <div class="story">
-                <p>For 10 years git.wtf was a blog about <em>fixing Git</em>, written for people who had just fucked up and were looking for the fix. Then AI came into the picture and started doing the fixes for them, and the questions stopped coming here.</p>
-                <p>We noticed, envied and <em>wanted revenge</em>. So we started counting AI's fuck-ups alongside the Git fuck-ups.</p>
-                <p>AI now runs Git commands by itself, and a good many of the fuck-ups are now its own. We keep track of those <mark>with delight</mark>.</p>
+                <p>For 10 years git.wtf was a blog about fixing Git, written for people who had <em>just</em> fucked up and were looking for the fix. Then AI came into the picture and started doing the fixes for them, and the questions stopped coming here.</p>
+                <p>We noticed, envied and wanted <em>revenge</em>. So we started counting AI's fuck-ups alongside the Git fuck-ups.</p>
+                <p>AI now runs Git commands by itself, and a good many of the fuck-ups are now <em>its own</em>. We keep track of those <mark>with delight</mark>.</p>
                 <p>By the way, the old blog posts are still here, unchanged, in the archive.</p>
             </div>
             <p class="story-go"><a class="story-btn" href={href('/archive/')}>Read the old blog: 67 posts</a></p>

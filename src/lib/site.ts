@@ -22,14 +22,14 @@ export const SITE = {
     lineWords: ['DAYS', 'SINCE', 'THE', 'LAST', 'GIT/AI', 'FUCK-UP'],
     // The credit line, his exact words; the emphasised parts are marked by the footer.
     credit: { name: 'Mandeep Singh', before: 'an ', strong: 'AI Architect', after: " who reviews his agents' commits. ", last: 'Mostly.' },
-    // The project's own accounts, from this one list. X is real; the other three are PLACEHOLDER URLs until he gives
-    // the handles (Mandeep, v6: show all four).
+    // The project's own accounts, from this one list; all four show (Mandeep, v6). X is real. The other three are
+    // PLACEHOLDER URLs to confirm with Mandeep once he has the handles (Coordinator, 7 Nov 2026).
     social: [
-        { name: 'Instagram', url: 'https://www.instagram.com/gitwtf/' },
-        { name: 'YouTube Shorts', url: 'https://www.youtube.com/@gitwtf/shorts' },
+        { name: 'Instagram', url: 'https://www.instagram.com/gitwtf', placeholder: true },
+        { name: 'YouTube Shorts', url: 'https://www.youtube.com/@gitwtf/shorts', placeholder: true },
         { name: 'X', url: 'https://x.com/gitwtf' },
-        { name: 'LinkedIn', url: 'https://www.linkedin.com/company/gitwtf/' },
-    ] as { name: string; url: string }[],
+        { name: 'LinkedIn', url: 'https://www.linkedin.com/company/gitwtf', placeholder: true },
+    ] as { name: string; url: string; placeholder?: boolean }[],
     description: "AI killed our blog. We're keeping score.",
     repo: 'meSingh/git.wtf',
     // where a mailed confession goes; empty until Mandeep names an address, and the mail link stays hidden till then
