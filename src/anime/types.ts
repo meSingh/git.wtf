@@ -1,6 +1,6 @@
 // The shot list: what the daily task writes for each incident in format B. The kit (src/components/anime/, the
 // engine in src/scripts/anime.ts) reads it. Field names here are the contract with Content.
-export type Pose = 'neutral' | 'shocked' | 'dramatic' | 'defeated' | 'terror' | 'asleep' | 'walk' | 'enter';
+export type Pose = 'neutral' | 'shocked' | 'dramatic' | 'defeated' | 'terror' | 'asleep' | 'walk' | 'enter' | 'angry' | 'relieved' | 'happy' | 'hide';
 export interface CastIn {
     who: 'dev' | 'agent';
     pose?: Pose;
@@ -34,7 +34,7 @@ export interface Props {
     files?: boolean;
     counter?: { x: number; y: number; to?: number; from?: number; value?: number };
     /** The desk: a top, legs and a front. `laptop` is an open laptop on it, x relative to the desk's middle. */
-    desk?: At & { laptop?: { x: number } };
+    desk?: At & { laptop?: { x: number }; /** no front panel: the space under it shows */ open?: boolean };
     chair?: At;
     copier?: At;
     paper?: At & { ring?: boolean };
@@ -52,6 +52,8 @@ export interface Props {
     mug?: At;
     gate?: At & { sign?: string; tally?: boolean; at?: number };
     farwindow?: At & { folder?: string };
+    /** A trail of wet footprints on the floor, from one point to another. */
+    footprints?: { from: [number, number]; to: [number, number] };
 }
 export interface Shot {
     id: string;

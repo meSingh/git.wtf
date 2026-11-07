@@ -182,12 +182,15 @@ const FX: Record<string, Fx> = {
         if (thief) tl.fromTo(thief, { y: 0 }, { y: -20, duration: 0.08, yoyo: true, repeat: 1 }, at);
     },
     door() {},
-    sip({ tl, g }, at) {
-        const d = role(g, 'dev')!;
-        const mug = q(d, '.mug');
+    sip({ tl, g, loops }, at) {
+        const d = role(g, 'dev');
+        const mug = d && (q(d, '.v-init .m-mug') ?? q(d, '.mug'));
         if (!mug) return;
-        tl.to(mug, { x: -120, y: -150, rotation: -30, transformOrigin: '50% 50%', duration: 0.5, ease: 'power2.inOut' }, at);
-        tl.to(mug, { x: 0, y: 0, rotation: 0, duration: 0.5, ease: 'power2.inOut' }, at + 1.1);
+        // already at the mouth in the relieved pose: a long tilt back, then down
+        tl.to(mug, { rotation: -14, transformOrigin: '50% 50%', duration: 0.9, ease: 'sine.inOut' }, at);
+        tl.to(mug, { rotation: 0, duration: 0.5, ease: 'sine.inOut' }, at + 1.6);
+        const steam = qa(d!, '.v-init .m-steam');
+        if (steam.length) loops.push(gsap.fromTo(steam, { y: 0, opacity: 0.9 }, { y: -20, opacity: 0, duration: 1.2, repeat: -1, ease: 'sine.out', paused: true }));
     },
     turn({ tl, g }, at) {
         // all of them at once, eyes on
@@ -210,6 +213,19 @@ const FX: Record<string, Fx> = {
     bounce({ tl, g }, at) {
         // off the palm in a fan, and caught mid-air when the frame freezes
         agentsOnly(g).forEach((f, i) => tl.to(f, { x: -260 - i * 90, y: -220 - (i % 2) * 160, rotation: -40 - i * 25, transformOrigin: '50% 50%', duration: 0.6, ease: 'power2.out' }, at + i * 0.03));
+    },
+    stamp({ tl, g }, at) {
+        // the stamp slams over the scene, which keeps playing: no freeze
+        const card = q(g, '.endcard')!;
+        tl.fromTo(q(card, '.stampmark'), { autoAlpha: 0, scale: 3.2, transformOrigin: '50% 50%' }, { autoAlpha: 1, scale: 1, duration: 0.25, ease: 'power4.in', immediateRender: false }, at);
+        tl.to(q(g, '.cam'), { keyframes: [{ y: 12 }, { y: -6 }, { y: 0 }], duration: 0.18, ease: 'none' }, at + 0.25);
+    },
+    continued({ tl, g }, at) {
+        // freeze frame, the arrow alone
+        const card = q(g, '.endcard')!;
+        tl.to(q(g, '.cam'), { filter: 'grayscale(1) contrast(1.2) brightness(0.5)', duration: 0.3 }, at);
+        tl.fromTo(q(card, '.tbc-in'), { autoAlpha: 0, scale: 1.6, transformOrigin: '50% 50%' }, { autoAlpha: 1, scale: 1, duration: 0.3, ease: 'power4.in', immediateRender: false }, at + 0.1);
+        tl.to(q(g, '.cam'), { keyframes: [{ x: 10 }, { x: -6 }, { x: 0 }], duration: 0.16, ease: 'none' }, at + 0.4);
     },
     endcard({ tl, g }, at) {
         const card = q(g, '.endcard')!;
@@ -245,8 +261,9 @@ const dev = (g: Element) => q(g, '.fig[data-who="dev"]');
 const agentN = (g: Element, n: number) => q(g, `.fig[data-who="agent"][data-n="${n}"]`);
 const swap = (tl: gsap.core.Timeline, f: Element | null, t: number) => {
     if (!f) return;
-    tl.set(qa(f, ':scope > .v-init'), { visibility: 'hidden' }, t);
-    tl.set(qa(f, ':scope > .v-turn'), { visibility: 'visible' }, t);
+    // display, not visibility: an effect may have set a child visible, and that would show through a hidden group
+    tl.set(qa(f, ':scope > .v-init'), { display: 'none' }, t);
+    tl.set(qa(f, ':scope > .v-turn'), { display: 'inline', visibility: 'visible' }, t);
 };
 const vertical = (g: Element) => (g.closest('svg') as SVGSVGElement | null)?.dataset.frame === '9:16';
 /** A burst of stars over a point, made once per shot. */
@@ -327,16 +344,26 @@ Object.assign(FX, {
     popup({ tl, g }: Ctx, t: number) {
         // the rows come up from behind the desk, the front row first
         const ag = agentsOnly(g);
-        const ys = [...new Set(ag.map((f) => Number(f.dataset.y)))].sort((a, b) => b - a);
         const k = nth(tl, 'popup');
         const total = fxCount(g, 'popup');
-        if (k === 0) { tl.set(ag, { autoAlpha: 0 }, 0); tl.set(qa(g, '.riser'), { autoAlpha: 0 }, 0); }
+        if (k === 0) tl.set(ag, { autoAlpha: 0 }, 0);
+        if (ag.some((f) => f.dataset.role === 'stack')) {
+            // towers: each pop raises one column from behind the desk, the bottom agent first, the top one landing last
+            const xs = [...new Set(ag.map((f) => Number(f.dataset.x)))].sort((a, b) => a - b);
+            const mine = k < total - 1 ? [xs[k]] : xs.slice(k);
+            mine.forEach((x, j) => {
+                const col = ag.filter((f) => Number(f.dataset.x) === x).sort((a, b) => Number(b.dataset.y) - Number(a.dataset.y));
+                const tt = t + j * 0.18;
+                col.forEach((f, i) => { const p = placeOf(f); tl.fromTo(f, { autoAlpha: 0, y: (300 + i * 120) / p.sy }, { autoAlpha: 1, y: 0, duration: 0.3 + i * 0.06, ease: 'back.out(1.6)', immediateRender: false }, tt + i * 0.05); });
+                tl.to(col, { keyframes: [{ x: -4 }, { x: 4 }, { x: 0 }], duration: 0.3, ease: 'none' }, tt + 0.4);
+            });
+            return;
+        }
+        const ys = [...new Set(ag.map((f) => Number(f.dataset.y)))].sort((a, b) => b - a);
         const mine = k < total - 1 ? [ys[k]] : ys.slice(k);
         mine.forEach((y, j) => {
             const row = ag.filter((f) => Number(f.dataset.y) === y);
-            const tt = t + j * 0.18;
-            tl.to(qa(g, `.riser[data-y="${y}"]`), { autoAlpha: 1, duration: 0.1 }, tt);
-            tl.fromTo(row, { autoAlpha: 0, y: 260 }, { autoAlpha: 1, y: 0, duration: 0.28, ease: 'back.out(2)', stagger: 0.04, immediateRender: false }, tt);
+            tl.fromTo(row, { autoAlpha: 0, y: 260 }, { autoAlpha: 1, y: 0, duration: 0.28, ease: 'back.out(2)', stagger: 0.04, immediateRender: false }, t + j * 0.18);
         });
     },
     salute({ tl, g }: Ctx, t: number) {
@@ -567,6 +594,33 @@ Object.assign(FX, {
         if (z.length) loops.push(gsap.to(z, { y: -20, opacity: 0.4, duration: 0.9, repeat: -1, yoyo: true, ease: 'sine.inOut', stagger: 0.3, paused: true }));
         if (z.length) tl.to(z, { y: -20, duration: 0.9, repeat: 3, yoyo: true, ease: 'sine.inOut', stagger: 0.3 }, 0);
     },
+    angry({ tl, g }: Ctx, t: number) {
+        const d = dev(g);
+        if (!d) return;
+        tl.set(qa(d, ':scope > .v-init, :scope > .v-turn'), { display: 'none' }, t);
+        tl.set(qa(d, ':scope > .v-angry'), { display: 'inline', visibility: 'visible' }, t);
+        tl.fromTo(d, { scale: 0.96 }, { scale: 1, transformOrigin: '50% 60%', duration: 0.18, ease: 'back.out(3)', immediateRender: false }, t);
+    },
+    steam({ tl, g, loops }: Ctx, t: number) {
+        const st = qa(g, '.v-angry .m-steam-head');
+        if (!st.length) return;
+        tl.set(st, { visibility: 'visible' }, t);
+        tl.fromTo(qa(g, '.v-angry .m-steam-head path'), { y: 20, opacity: 0 }, { y: -30, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'sine.out', immediateRender: false }, t);
+        loops.push(gsap.fromTo(qa(g, '.v-angry .m-steam-head path'), { y: -30, opacity: 1 }, { y: -80, opacity: 0, duration: 1.0, repeat: -1, stagger: 0.2, ease: 'sine.out', paused: true }));
+    },
+    peek({ tl, g }: Ctx, t: number) {
+        // the hiding agents' eyes dart to the side and back
+        const faces = qa(g, '.a-agent.hide .face');
+        if (faces.length) tl.to(faces, { keyframes: [{ x: 18, duration: 0.15 }, { x: 18, duration: 0.5 }, { x: 0, duration: 0.15 }], stagger: 0.08 }, t);
+    },
+    eyes({ tl, g, loops }: Ctx, t: number) {
+        // in the dark, cursor eyes light up
+        const gl = qa(g, '.a-agent.sil .gleam');
+        if (!gl.length) return;
+        tl.set(gl, { opacity: 0 }, 0);
+        tl.to(gl, { opacity: 1, duration: 0.25, stagger: 0.06, immediateRender: false }, t);
+        loops.push(gsap.to(gl, { opacity: 0.6, duration: 0.6, repeat: -1, yoyo: true, ease: 'sine.inOut', paused: true }));
+    },
     tally({ tl, g }: Ctx, t: number) {
         const marks = qa(g, '.gate .tally path');
         tl.set(marks, { visibility: 'hidden' }, 0);
@@ -585,7 +639,11 @@ const FXglint = FX.glint;
 FX.glint = (c: Ctx, t: number) => {
     if (q(c.g, '.panel')) return FXglint(c, t);
     const s = q(c.g, '.farwindow .spark');
-    if (!s) return;
+    if (!s) {
+        const gl = qa(c.g, '.a-agent.sil .gleam');
+        if (gl.length) c.tl.fromTo(gl, { scaleX: 1.6, scaleY: 0.5, transformOrigin: '50% 50%' }, { scaleX: 1, scaleY: 1, duration: 0.3, ease: 'back.out(3)', immediateRender: false }, t);
+        return;
+    }
     c.tl.fromTo(s, { visibility: 'visible', scale: 0, rotation: -45, transformOrigin: '50% 50%' }, { scale: 1.3, rotation: 0, duration: 0.18, ease: 'back.out(3)', immediateRender: false }, t);
     c.tl.to(s, { scale: 1, duration: 0.2 }, t + 0.18);
     c.tl.set(s, { visibility: 'hidden' }, 0);
@@ -722,7 +780,8 @@ export function mountCutscene(wrap: HTMLElement) {
         const g = shots[Math.max(0, i)];
         const [fx, fy] = (g?.getAttribute('data-focus') || '800 450').split(' ').map(Number);
         const words = qa(svg, '.word'), lines = qa(svg, '.line');
-        const fits = Array.from(svg.querySelectorAll<SVGGElement>('.stampfit')), arrows = Array.from(svg.querySelectorAll<SVGGElement>('.tbc'));
+        // the arrow that stands alone (shot 'continued') keeps its centred place; the end card's arrow moves with the crop
+        const fits = Array.from(svg.querySelectorAll<SVGGElement>('.stampfit')), arrows = Array.from(svg.querySelectorAll<SVGGElement>('.tbc:not(.alone)'));
         if (aspect >= 1.4) {
             svg.setAttribute('viewBox', '0 0 1600 900');
             [...words, ...lines, ...fits].forEach((el) => el.removeAttribute('transform'));
@@ -817,10 +876,13 @@ export function mountCutscene(wrap: HTMLElement) {
         const lineEnd = s.line ? (s.lineAt ?? 0.9) + read(`${s.line.text}`) : 0;
         const sayEnd = s.say ? (s.say.at ?? 0) + read(s.say.text) : 0;
         const wordEnd = s.word ? (s.wordAt ?? 0.75) + 1.2 : 0;
-        const end = (s.fx ?? []).find((f) => f.startsWith('endcard'));
-        const stamp = end ? Number(end.split('@')[1] || 1.6) + 0.8 + 0.25 : null;
+        const fxAt = (name: string, d: number) => { const f = (s.fx ?? []).find((x) => x.split('@')[0] === name); return f ? Number(f.split('@')[1] || d) : null; };
+        const end = fxAt('endcard', 1.6), st = fxAt('stamp', 1), co = fxAt('continued', 1);
+        // the stamp lands 0.25 s after its slam starts (0.8 s in on the end card); the card then holds to be read
+        const stamp = end !== null ? end + 0.8 + 0.25 : st !== null ? st + 0.25 : co !== null ? co + 0.4 : null;
+        const hold = end !== null || co !== null ? 3 : 2.5;
         stampAt.push(stamp);
-        lens.push(Math.max(Math.max(anim, lineEnd, sayEnd, wordEnd) + 0.5, stamp !== null ? stamp + 3 : 0));
+        lens.push(Math.max(Math.max(anim, lineEnd, sayEnd, wordEnd) + 0.5, stamp !== null ? stamp + hold : 0));
     }
     i = -1;
     starts = lens.map((_, k) => lens.slice(0, k).reduce((x, y) => x + y, 0));
@@ -837,15 +899,19 @@ export function mountCutscene(wrap: HTMLElement) {
         if (states && s.music && s.music !== state) { state = s.music; cues.push({ t: t0, kind: 'music', name: s.music, shot: s.id }); }
         if (k > 0) cues.push({ t: t0, kind: 'cut', name: 'cut', shot: s.id });
         (s.sfx ?? []).forEach((f) => { const [name, at] = f.split('@'); cues.push({ t: t0 + Number(at || 0), kind: 'sfx', name, shot: s.id }); });
+        // a shot with its own sfx plays no fx sound and no event sound (cut, word, stamp, tbc), so nothing doubles
+        const quiet = !!s.sfx?.length;
         (s.fx ?? []).forEach((f) => {
             const [name, at] = f.split('@');
+            if (quiet) return;
             if (name === 'endcard') cues.push({ t: t0 + Number(at || 1.6) + 0.2, kind: 'tbc', name, shot: s.id });
-            else if (!s.sfx?.length) cues.push({ t: t0 + (name === 'titlecard' ? 0.3 : Number(at || 0)), kind: 'fx', name, shot: s.id });
+            else if (name === 'continued') cues.push({ t: t0 + Number(at || 1) + 0.1, kind: 'tbc', name, shot: s.id });
+            else if (name !== 'stamp') cues.push({ t: t0 + (name === 'titlecard' ? 0.3 : Number(at || 0)), kind: 'fx', name, shot: s.id });
         });
-        if (s.word) cues.push({ t: t0 + (s.wordAt ?? 0.75), kind: 'word', name: s.id, shot: s.id });
+        if (s.word && !quiet) cues.push({ t: t0 + (s.wordAt ?? 0.75), kind: 'word', name: s.id, shot: s.id });
         if (s.line) cues.push({ t: t0 + (s.lineAt ?? 0.9), kind: 'line', name: s.id, shot: s.id });
         else if (s.say) cues.push({ t: t0 + (s.say.at ?? 0), kind: 'say', name: s.id, shot: s.id });
-        if (stampAt[k] !== null) cues.push({ t: t0 + stampAt[k]!, kind: 'stamp', name: 'stamp', shot: s.id });
+        if (stampAt[k] !== null && !quiet && !(s.fx ?? []).some((f) => f.startsWith('continued'))) cues.push({ t: t0 + stampAt[k]!, kind: 'stamp', name: 'stamp', shot: s.id });
     });
     if (!states) cues.push({ t: total, kind: 'music', name: 'end', shot: list.shots[list.shots.length - 1].id });
     cues.forEach((c) => { c.t = +c.t.toFixed(3); });

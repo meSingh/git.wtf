@@ -243,3 +243,10 @@
     .mascot .m-yawn { fill: #0a0a0a; }
     .mascot .m-zzz text { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 8; paint-order: stroke; font-family: var(--display); font-weight: 900; font-size: 70px; }
     .mascot .m-zzz text.big { font-size: 100px; }
+    /* v2.1: the angry face, the hiding agents, the happy face, wet footprints */
+    .mascot .m-teeth { fill: none; stroke: #0a0a0a; stroke-width: 4; }
+    .mascot .m-steam-head path { fill: none; stroke: #f2f0ea; stroke-width: 9; stroke-linecap: round; }
+    .cutscene .a-agent .face-h path { fill: none; stroke: #ffd400; stroke-width: 10; stroke-linecap: round; }
+    .cutscene .a-agent .face-h .grin { stroke-width: 12; }
+    .cutscene .footprints ellipse { fill: #4a5568; opacity: 0.75; }
+    .cutscene .bg-flat .footprints ellipse { fill: #5f6a7a; }

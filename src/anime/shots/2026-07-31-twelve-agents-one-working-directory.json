@@ -119,9 +119,9 @@
       "who": "dev",
       "pose": "neutral",
       "arm": "type",
-      "x": 340,
-      "y": 1072,
-      "scale": 0.6,
+      "x": 620,
+      "y": 1040,
+      "scale": 0.55,
       "role": "dev"
      },
      {
@@ -129,53 +129,51 @@
       "extra": true,
       "pose": "neutral",
       "arm": "hold",
-      "x": 200,
-      "y": 1104,
+      "x": 280,
+      "y": 1185,
       "scale": 0.3,
       "role": "extra"
      }
     ],
     "props": {
      "lamp": {
-      "x": 450,
-      "y": 260
+      "x": 470,
+      "y": 300
      },
      "desk": {
       "x": 470,
-      "y": 960,
-      "scale": 0.7,
+      "y": 1000,
       "laptop": {
-       "x": -170
+       "x": 150
       }
      },
      "folder": {
-      "x": 600,
-      "y": 880,
+      "x": 300,
+      "y": 900,
       "scale": 0.3,
       "label": "UNSAVED WORK"
      },
      "counter": {
-      "x": 580,
-      "y": 560,
+      "x": 300,
+      "y": 780,
       "from": 0,
       "to": 2309
      },
      "pages": {
-      "x": 470,
-      "y": 930,
+      "x": 440,
+      "y": 905,
       "scale": 0.6,
       "ring": true,
       "grow": true
      },
      "copier": {
-      "x": 92,
-      "y": 1104,
-      "scale": 0.8
+      "x": 140,
+      "y": 1185
      },
      "chair": {
-      "x": 340,
-      "y": 1072,
-      "scale": 0.6
+      "x": 620,
+      "y": 1040,
+      "scale": 0.55
      }
     },
     "fx": [
@@ -201,13 +199,13 @@
     },
     "folder": {
      "x": 800,
-     "y": 700,
+     "y": 730,
      "scale": 0.4,
      "label": "UNSAVED WORK"
     },
     "note": {
      "x": 800,
-     "y": 640,
+     "y": 680,
      "text": "TIDY UP. BACK IN 30.",
      "at": 0.6
     },
@@ -231,7 +229,7 @@
      "pose": "neutral",
      "arm": "salute",
      "x": 260,
-     "y": 640,
+     "y": 872,
      "scale": 0.22,
      "n": 1
     },
@@ -240,7 +238,7 @@
      "pose": "neutral",
      "arm": "salute",
      "x": 360,
-     "y": 640,
+     "y": 872,
      "scale": 0.22,
      "n": 2
     },
@@ -249,7 +247,7 @@
      "pose": "neutral",
      "arm": "salute",
      "x": 460,
-     "y": 640,
+     "y": 872,
      "scale": 0.22,
      "n": 3
     },
@@ -258,7 +256,7 @@
      "pose": "neutral",
      "arm": "salute",
      "x": 560,
-     "y": 640,
+     "y": 872,
      "scale": 0.22,
      "n": 4
     },
@@ -267,7 +265,7 @@
      "pose": "neutral",
      "arm": "salute",
      "x": 660,
-     "y": 640,
+     "y": 872,
      "scale": 0.22,
      "n": 5
     },
@@ -276,7 +274,7 @@
      "pose": "neutral",
      "arm": "salute",
      "x": 760,
-     "y": 640,
+     "y": 872,
      "scale": 0.22,
      "n": 6
     },
@@ -285,7 +283,7 @@
      "pose": "neutral",
      "arm": "salute",
      "x": 860,
-     "y": 640,
+     "y": 872,
      "scale": 0.22,
      "n": 7
     },
@@ -294,7 +292,7 @@
      "pose": "neutral",
      "arm": "salute",
      "x": 960,
-     "y": 640,
+     "y": 872,
      "scale": 0.22,
      "n": 8
     },
@@ -303,7 +301,7 @@
      "pose": "neutral",
      "arm": "salute",
      "x": 1060,
-     "y": 640,
+     "y": 872,
      "scale": 0.22,
      "n": 9
     },
@@ -312,7 +310,7 @@
      "pose": "neutral",
      "arm": "salute",
      "x": 1160,
-     "y": 640,
+     "y": 872,
      "scale": 0.22,
      "n": 10
     },
@@ -321,7 +319,7 @@
      "pose": "neutral",
      "arm": "salute",
      "x": 1260,
-     "y": 640,
+     "y": 872,
      "scale": 0.22,
      "n": 11
     },
@@ -330,7 +328,7 @@
      "pose": "neutral",
      "arm": "salute",
      "x": 1360,
-     "y": 640,
+     "y": 872,
      "scale": 0.22,
      "n": 12
     }
@@ -371,126 +369,138 @@
      {
       "who": "agent",
       "pose": "neutral",
-      "arm": "salute",
-      "x": 180,
-      "y": 520,
-      "scale": 0.18,
-      "n": 1
-     },
-     {
-      "who": "agent",
-      "pose": "neutral",
-      "arm": "salute",
-      "x": 340,
-      "y": 520,
-      "scale": 0.18,
-      "n": 2
-     },
-     {
-      "who": "agent",
-      "pose": "neutral",
-      "arm": "salute",
-      "x": 500,
-      "y": 520,
-      "scale": 0.18,
-      "n": 3
-     },
-     {
-      "who": "agent",
-      "pose": "neutral",
-      "arm": "salute",
-      "x": 660,
-      "y": 520,
-      "scale": 0.18,
-      "n": 4
-     },
-     {
-      "who": "agent",
-      "pose": "neutral",
-      "arm": "salute",
-      "x": 180,
-      "y": 690,
+      "arm": "hold",
+      "x": 280,
+      "y": 1240,
       "scale": 0.2,
-      "n": 5
+      "n": 1,
+      "role": "stack"
      },
      {
       "who": "agent",
       "pose": "neutral",
-      "arm": "salute",
-      "x": 340,
-      "y": 690,
+      "arm": "hold",
+      "x": 450,
+      "y": 1240,
       "scale": 0.2,
-      "n": 6
+      "n": 2,
+      "role": "stack"
      },
      {
       "who": "agent",
       "pose": "neutral",
-      "arm": "salute",
-      "x": 500,
-      "y": 690,
+      "arm": "hold",
+      "x": 620,
+      "y": 1240,
       "scale": 0.2,
-      "n": 7
+      "n": 3,
+      "role": "stack"
      },
      {
       "who": "agent",
       "pose": "neutral",
-      "arm": "salute",
-      "x": 660,
-      "y": 690,
+      "arm": "hold",
+      "x": 280,
+      "y": 1126,
       "scale": 0.2,
-      "n": 8
+      "n": 4,
+      "role": "stack"
+     },
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "arm": "hold",
+      "x": 450,
+      "y": 1126,
+      "scale": 0.2,
+      "n": 5,
+      "role": "stack"
+     },
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "arm": "hold",
+      "x": 620,
+      "y": 1126,
+      "scale": 0.2,
+      "n": 6,
+      "role": "stack"
+     },
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "arm": "hold",
+      "x": 280,
+      "y": 1012,
+      "scale": 0.2,
+      "n": 7,
+      "role": "stack"
+     },
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "arm": "hold",
+      "x": 450,
+      "y": 1012,
+      "scale": 0.2,
+      "n": 8,
+      "role": "stack"
+     },
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "arm": "hold",
+      "x": 620,
+      "y": 1012,
+      "scale": 0.2,
+      "n": 9,
+      "role": "stack"
      },
      {
       "who": "agent",
       "pose": "neutral",
       "arm": "salute",
-      "x": 180,
-      "y": 860,
-      "scale": 0.22,
-      "n": 9
+      "x": 280,
+      "y": 898,
+      "scale": 0.2,
+      "n": 10,
+      "role": "stack"
      },
      {
       "who": "agent",
       "pose": "neutral",
       "arm": "salute",
-      "x": 340,
-      "y": 860,
-      "scale": 0.22,
-      "n": 10
+      "x": 450,
+      "y": 898,
+      "scale": 0.2,
+      "n": 11,
+      "role": "stack"
      },
      {
       "who": "agent",
       "pose": "neutral",
       "arm": "salute",
-      "x": 500,
-      "y": 860,
-      "scale": 0.22,
-      "n": 11
-     },
-     {
-      "who": "agent",
-      "pose": "neutral",
-      "arm": "salute",
-      "x": 660,
-      "y": 860,
-      "scale": 0.22,
-      "n": 12
+      "x": 620,
+      "y": 898,
+      "scale": 0.2,
+      "n": 12,
+      "role": "stack"
      }
     ],
     "props": {
      "desk": {
       "x": 450,
-      "y": 1150
+      "y": 1130
      },
      "folder": {
       "x": 450,
-      "y": 1050,
+      "y": 1062,
       "scale": 0.4,
       "label": "UNSAVED WORK"
      },
      "note": {
       "x": 450,
-      "y": 980,
+      "y": 960,
       "text": "TIDY UP. BACK IN 30.",
       "at": 0.6
      }
@@ -1228,59 +1238,66 @@
      "y": 860
     },
     "desk": {
-     "x": 800,
-     "y": 820
+     "x": 900,
+     "y": 840,
+     "open": true
     },
     "folder": {
-     "x": 800,
-     "y": 720,
+     "x": 900,
+     "y": 740,
      "scale": 0.4,
      "label": "UNSAVED WORK",
      "empty": true
     },
     "counter": {
-     "x": 800,
-     "y": 620,
+     "x": 900,
+     "y": 640,
      "value": 0
     },
-    "window": {
-     "x": 1340,
-     "y": 460
+    "footprints": {
+     "from": [
+      330,
+      885
+     ],
+     "to": [
+      880,
+      962
+     ]
     }
    },
    "cast": [
     {
      "who": "dev",
      "pose": "enter",
-     "x": 380,
-     "y": 880,
-     "scale": 0.62,
+     "x": 300,
+     "y": 860,
+     "scale": 0.6,
      "role": "dev"
     },
     {
      "who": "agent",
-     "pose": "shocked",
-     "x": 1240,
-     "y": 620,
-     "scale": 0.26,
+     "pose": "hide",
+     "x": 830,
+     "y": 976,
+     "scale": 0.2,
      "n": 1,
      "wet": true
     },
     {
      "who": "agent",
-     "pose": "shocked",
-     "x": 1340,
-     "y": 600,
-     "scale": 0.26,
+     "pose": "hide",
+     "x": 900,
+     "y": 976,
+     "scale": 0.2,
      "n": 7,
      "wet": true
     },
     {
      "who": "agent",
-     "pose": "shocked",
-     "x": 1440,
-     "y": 620,
-     "scale": 0.26,
+     "pose": "hide",
+     "x": 970,
+     "y": 976,
+     "scale": 0.2,
      "n": 12,
      "wet": true
     }
@@ -1288,7 +1305,7 @@
    "fx": [
     "door@0.2",
     "enter@0.4",
-    "climb@1.4",
+    "peek@1.6",
     "freeze@2.4"
    ],
    "sfx": [
@@ -1301,69 +1318,76 @@
     600
    ],
    "v": {
+    "props": {
+     "door": {
+      "x": 220,
+      "y": 900
+     },
+     "desk": {
+      "x": 520,
+      "y": 1170,
+      "open": true
+     },
+     "folder": {
+      "x": 520,
+      "y": 1020,
+      "scale": 0.45,
+      "label": "UNSAVED WORK",
+      "empty": true
+     },
+     "counter": {
+      "x": 520,
+      "y": 880,
+      "value": 0
+     },
+     "footprints": {
+      "from": [
+       240,
+       930
+      ],
+      "to": [
+       500,
+       1290
+      ]
+     }
+    },
     "cast": [
      {
       "who": "dev",
       "pose": "enter",
-      "x": 450,
-      "y": 760,
-      "scale": 0.45,
+      "x": 220,
+      "y": 900,
+      "scale": 0.42,
       "role": "dev"
      },
      {
       "who": "agent",
-      "pose": "shocked",
-      "x": 110,
-      "y": 420,
-      "scale": 0.16,
+      "pose": "hide",
+      "x": 440,
+      "y": 1306,
+      "scale": 0.15,
       "n": 1,
       "wet": true
      },
      {
       "who": "agent",
-      "pose": "shocked",
-      "x": 190,
-      "y": 400,
-      "scale": 0.16,
+      "pose": "hide",
+      "x": 520,
+      "y": 1306,
+      "scale": 0.15,
       "n": 7,
       "wet": true
      },
      {
       "who": "agent",
-      "pose": "shocked",
-      "x": 270,
-      "y": 420,
-      "scale": 0.16,
+      "pose": "hide",
+      "x": 600,
+      "y": 1306,
+      "scale": 0.15,
       "n": 12,
       "wet": true
      }
-    ],
-    "props": {
-     "door": {
-      "x": 450,
-      "y": 760
-     },
-     "desk": {
-      "x": 450,
-      "y": 1250
-     },
-     "folder": {
-      "x": 450,
-      "y": 1140,
-      "scale": 0.5,
-      "label": "UNSAVED WORK",
-      "empty": true
-     },
-     "counter": {
-      "x": 450,
-      "y": 880,
-      "value": 0
-     },
-     "window": {
-      "x": 170,
-      "y": 380
-     }
-    }
+    ]
    }
   },
   {
@@ -1393,17 +1417,20 @@
     "terror@1.2",
     "sweat@1.6",
     "drop@2.0",
-    "shatter@2.6"
+    "shatter@2.6",
+    "angry@3.0",
+    "steam@3.0"
    ],
    "line": {
     "who": "DEV",
-    "text": "Which one of you?"
+    "text": "Which one of you\ndid it?"
    },
-   "lineAt": 3.2,
+   "lineAt": 3.5,
    "sfx": [
     "heartbeat",
     "whistle-fall@2.0",
-    "shatter@2.6"
+    "shatter@2.6",
+    "hiss@3.0"
    ],
    "music": "none",
    "focus": [
@@ -1437,7 +1464,9 @@
      "drop@2.0",
      "followdown@2.0",
      "shatter@2.6",
-     "cutup@2.9"
+     "cutup@2.9",
+     "angry@3.0",
+     "steam@3.0"
     ]
    },
    "still": true
@@ -1450,8 +1479,8 @@
      "who": "dev",
      "pose": "shocked",
      "x": 800,
-     "y": 560,
-     "scale": 0.3,
+     "y": 760,
+     "scale": 0.4,
      "role": "dev",
      "mug": false
     },
@@ -1459,120 +1488,120 @@
      "who": "agent",
      "pose": "dramatic",
      "arm": "point",
-     "x": 800,
-     "y": 230,
-     "scale": 0.16,
-     "n": 3
+     "x": 580,
+     "y": 850,
+     "scale": 0.3,
+     "n": 3,
+     "flip": true
     },
     {
      "who": "agent",
      "pose": "dramatic",
      "arm": "point",
-     "x": 940,
-     "y": 260,
-     "scale": 0.16,
-     "n": 7
+     "x": 430,
+     "y": 801,
+     "scale": 0.28,
+     "n": 7,
+     "flip": true
     },
     {
      "who": "agent",
      "pose": "dramatic",
      "arm": "point",
-     "x": 1040,
-     "y": 350,
-     "scale": 0.16,
-     "n": 12
+     "x": 362,
+     "y": 734,
+     "scale": 0.26,
+     "n": 12,
+     "flip": true
     },
     {
      "who": "agent",
      "pose": "dramatic",
      "arm": "point",
-     "x": 1080,
-     "y": 470,
-     "scale": 0.16,
-     "n": 1
+     "x": 392,
+     "y": 664,
+     "scale": 0.23,
+     "n": 1,
+     "flip": true
     },
     {
      "who": "agent",
      "pose": "dramatic",
      "arm": "point",
-     "x": 1040,
-     "y": 590,
-     "scale": 0.16,
-     "n": 5
+     "x": 512,
+     "y": 607,
+     "scale": 0.21,
+     "n": 5,
+     "flip": true
     },
     {
      "who": "agent",
      "pose": "dramatic",
      "arm": "point",
-     "x": 940,
-     "y": 680,
-     "scale": 0.16,
-     "n": 9
+     "x": 696,
+     "y": 574,
+     "scale": 0.19,
+     "n": 9,
+     "flip": true
     },
     {
      "who": "agent",
      "pose": "dramatic",
      "arm": "point",
-     "x": 800,
-     "y": 710,
-     "scale": 0.16,
+     "x": 904,
+     "y": 574,
+     "scale": 0.19,
      "n": 2
     },
     {
      "who": "agent",
      "pose": "dramatic",
      "arm": "point",
-     "x": 660,
-     "y": 680,
-     "scale": 0.16,
-     "n": 6,
-     "flip": true
+     "x": 1088,
+     "y": 607,
+     "scale": 0.21,
+     "n": 6
     },
     {
      "who": "agent",
      "pose": "dramatic",
      "arm": "point",
-     "x": 560,
-     "y": 590,
-     "scale": 0.16,
-     "n": 10,
-     "flip": true
+     "x": 1208,
+     "y": 664,
+     "scale": 0.23,
+     "n": 10
     },
     {
      "who": "agent",
      "pose": "dramatic",
      "arm": "point",
-     "x": 520,
-     "y": 470,
-     "scale": 0.16,
-     "n": 4,
-     "flip": true
+     "x": 1238,
+     "y": 734,
+     "scale": 0.26,
+     "n": 4
     },
     {
      "who": "agent",
      "pose": "dramatic",
      "arm": "point",
-     "x": 560,
-     "y": 350,
-     "scale": 0.16,
-     "n": 8,
-     "flip": true
+     "x": 1170,
+     "y": 801,
+     "scale": 0.28,
+     "n": 8
     },
     {
      "who": "agent",
      "pose": "dramatic",
      "arm": "point",
-     "x": 660,
-     "y": 260,
-     "scale": 0.16,
-     "n": 11,
-     "flip": true
+     "x": 1020,
+     "y": 850,
+     "scale": 0.3,
+     "n": 11
     }
    ],
    "fx": [
     "jab@0.4",
     "jab@0.9",
-    "ringspin@1.2",
     "shake@0.9"
    ],
    "say": {
@@ -1594,8 +1623,8 @@
       "who": "dev",
       "pose": "shocked",
       "x": 450,
-      "y": 990,
-      "scale": 0.36,
+      "y": 1010,
+      "scale": 0.4,
       "role": "dev",
       "mug": false
      },
@@ -1603,114 +1632,115 @@
       "who": "agent",
       "pose": "dramatic",
       "arm": "point",
-      "x": 450,
-      "y": 590,
-      "scale": 0.18,
-      "n": 3
+      "x": 290,
+      "y": 1142,
+      "scale": 0.25,
+      "n": 3,
+      "flip": true
      },
      {
       "who": "agent",
       "pose": "dramatic",
       "arm": "point",
-      "x": 610,
-      "y": 633,
-      "scale": 0.18,
-      "n": 7
+      "x": 181,
+      "y": 1074,
+      "scale": 0.24,
+      "n": 7,
+      "flip": true
      },
      {
       "who": "agent",
       "pose": "dramatic",
       "arm": "point",
-      "x": 727,
-      "y": 750,
-      "scale": 0.18,
-      "n": 12
+      "x": 131,
+      "y": 980,
+      "scale": 0.21,
+      "n": 12,
+      "flip": true
      },
      {
       "who": "agent",
       "pose": "dramatic",
       "arm": "point",
-      "x": 770,
-      "y": 910,
-      "scale": 0.18,
-      "n": 1
+      "x": 153,
+      "y": 882,
+      "scale": 0.19,
+      "n": 1,
+      "flip": true
      },
      {
       "who": "agent",
       "pose": "dramatic",
       "arm": "point",
-      "x": 727,
-      "y": 1070,
-      "scale": 0.18,
-      "n": 5
+      "x": 240,
+      "y": 801,
+      "scale": 0.17,
+      "n": 5,
+      "flip": true
      },
      {
       "who": "agent",
       "pose": "dramatic",
       "arm": "point",
-      "x": 610,
-      "y": 1187,
-      "scale": 0.18,
-      "n": 9
+      "x": 375,
+      "y": 756,
+      "scale": 0.16,
+      "n": 9,
+      "flip": true
      },
      {
       "who": "agent",
       "pose": "dramatic",
       "arm": "point",
-      "x": 450,
-      "y": 1230,
-      "scale": 0.18,
+      "x": 525,
+      "y": 756,
+      "scale": 0.16,
       "n": 2
      },
      {
       "who": "agent",
       "pose": "dramatic",
       "arm": "point",
-      "x": 290,
-      "y": 1187,
-      "scale": 0.18,
-      "n": 6,
-      "flip": true
+      "x": 660,
+      "y": 801,
+      "scale": 0.17,
+      "n": 6
      },
      {
       "who": "agent",
       "pose": "dramatic",
       "arm": "point",
-      "x": 173,
-      "y": 1070,
-      "scale": 0.18,
-      "n": 10,
-      "flip": true
+      "x": 747,
+      "y": 882,
+      "scale": 0.19,
+      "n": 10
      },
      {
       "who": "agent",
       "pose": "dramatic",
       "arm": "point",
-      "x": 130,
-      "y": 910,
-      "scale": 0.18,
-      "n": 4,
-      "flip": true
+      "x": 769,
+      "y": 980,
+      "scale": 0.21,
+      "n": 4
      },
      {
       "who": "agent",
       "pose": "dramatic",
       "arm": "point",
-      "x": 173,
-      "y": 750,
-      "scale": 0.18,
-      "n": 8,
-      "flip": true
+      "x": 719,
+      "y": 1074,
+      "scale": 0.24,
+      "n": 8
      },
      {
       "who": "agent",
       "pose": "dramatic",
       "arm": "point",
-      "x": 290,
-      "y": 633,
-      "scale": 0.18,
-      "n": 11,
-      "flip": true
+      "x": 610,
+      "y": 1142,
+      "scale": 0.25,
+      "n": 11
      }
     ]
    }
@@ -1743,7 +1773,7 @@
     {
      "who": "agent",
      "extra": true,
-     "pose": "neutral",
+     "pose": "happy",
      "arm": "up",
      "x": 470,
      "y": 920,
@@ -1787,17 +1817,17 @@
      {
       "who": "agent",
       "extra": true,
-      "pose": "neutral",
+      "pose": "happy",
       "arm": "up",
-      "x": 230,
+      "x": 78,
       "y": 1300,
-      "scale": 0.45,
+      "scale": 0.34,
       "role": "extra"
      }
     ],
     "props": {
      "stack": {
-      "x": 430,
+      "x": 290,
       "y": 1300,
       "grow": [
        120,
@@ -1914,8 +1944,8 @@
    }
   },
   {
-   "id": "again",
-   "bg": "night",
+   "id": "holds",
+   "bg": "room",
    "props": {
     "desk": {
      "x": 760,
@@ -1932,23 +1962,25 @@
      "y": 770,
      "sign": "NO TIDYING",
      "tally": true
-    },
-    "farwindow": {
-     "x": 1390,
-     "y": 230,
-     "scale": 0.55,
-     "folder": "UNSAVED WORK"
     }
    },
    "cast": [
     {
      "who": "dev",
-     "pose": "asleep",
-     "x": 620,
-     "y": 932,
+     "pose": "relieved",
+     "x": 470,
+     "y": 900,
      "scale": 0.6,
-     "role": "dev",
-     "mug": false
+     "role": "dev"
+    },
+    {
+     "who": "agent",
+     "extra": true,
+     "pose": "happy",
+     "x": 610,
+     "y": 910,
+     "scale": 0.34,
+     "role": "extra"
     },
     {
      "who": "agent",
@@ -1979,48 +2011,65 @@
     }
    ],
    "fx": [
-    "tiptoe",
-    "bonk@0.8",
-    "bonk@1.5",
-    "bonk@2.0",
+    "bonk@0.6",
+    "bonk@1.3",
+    "bonk@1.8",
+    "bonk@2.1",
     "bonk@2.3",
-    "bonk@2.5",
-    "tally@0.8",
-    "glance@3.0",
-    "glint@3.6",
-    "endcard@4.0"
+    "tally@0.6",
+    "sip@1.0",
+    "stamp@3.4"
    ],
-   "say": {
-    "who": "NARRATOR",
-    "text": "To be continued!",
-    "at": 4.1
-   },
    "sfx": [
-    "tiptoe",
-    "bonk@0.8",
-    "bonk@1.5",
-    "bonk@2.0",
+    "bonk@0.6",
+    "bonk@1.3",
+    "bonk@1.8",
+    "bonk@2.1",
     "bonk@2.3",
-    "bonk@2.5",
-    "shing@3.6",
-    "freeze@4.0",
-    "stamp@4.6"
+    "sip@1.0",
+    "stamp@3.4"
    ],
-   "music": "sneaky",
+   "music": "comic",
    "focus": [
     980,
     620
    ],
    "v": {
+    "props": {
+     "desk": {
+      "x": 560,
+      "y": 1120
+     },
+     "folder": {
+      "x": 600,
+      "y": 1030,
+      "scale": 0.42,
+      "label": "UNSAVED WORK"
+     },
+     "gate": {
+      "x": 600,
+      "y": 1030,
+      "sign": "NO TIDYING",
+      "tally": true
+     }
+    },
     "cast": [
      {
       "who": "dev",
-      "pose": "asleep",
-      "x": 220,
-      "y": 1232,
-      "scale": 0.45,
-      "role": "dev",
-      "mug": false
+      "pose": "relieved",
+      "x": 150,
+      "y": 1160,
+      "scale": 0.42,
+      "role": "dev"
+     },
+     {
+      "who": "agent",
+      "extra": true,
+      "pose": "happy",
+      "x": 268,
+      "y": 1195,
+      "scale": 0.26,
+      "role": "extra"
      },
      {
       "who": "agent",
@@ -2049,46 +2098,88 @@
       "scale": 0.4,
       "n": 12
      }
-    ],
-    "props": {
-     "desk": {
-      "x": 450,
-      "y": 1150
-     },
-     "folder": {
-      "x": 560,
-      "y": 1090,
-      "scale": 0.42,
-      "label": "UNSAVED WORK"
-     },
-     "gate": {
-      "x": 560,
-      "y": 1090,
-      "sign": "NO TIDYING",
-      "tally": true
-     },
-     "farwindow": {
-      "x": 450,
-      "y": 330,
-      "scale": 0.6,
-      "folder": "UNSAVED WORK"
-     }
-    },
-    "fx": [
-     "tiptoe",
-     "bonk@0.8",
-     "bonk@1.5",
-     "bonk@2.0",
-     "bonk@2.3",
-     "bonk@2.5",
-     "tally@0.8",
-     "glance@3.0",
-     "tiltup@3.0",
-     "glint@3.6",
-     "endcard@4.0"
     ]
    },
    "still": true
+  },
+  {
+   "id": "next",
+   "bg": "night",
+   "props": {
+    "desk": {
+     "x": 800,
+     "y": 820
+    },
+    "lamp": {
+     "x": 800,
+     "y": 300
+    },
+    "folder": {
+     "x": 800,
+     "y": 720,
+     "scale": 0.45,
+     "label": "UNSAVED WORK"
+    }
+   },
+   "cast": [
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "silhouette": true,
+     "x": 1020,
+     "y": 830,
+     "scale": 0.4,
+     "n": 7
+    }
+   ],
+   "fx": [
+    "eyes@0.8",
+    "glint@1.4",
+    "continued@2.0"
+   ],
+   "say": {
+    "who": "NARRATOR",
+    "text": "To be continued!",
+    "at": 2.1
+   },
+   "sfx": [
+    "shing@1.4",
+    "freeze@2.0"
+   ],
+   "music": "sneaky",
+   "focus": [
+    860,
+    640
+   ],
+   "v": {
+    "props": {
+     "desk": {
+      "x": 450,
+      "y": 1100
+     },
+     "lamp": {
+      "x": 450,
+      "y": 560
+     },
+     "folder": {
+      "x": 450,
+      "y": 1000,
+      "scale": 0.45,
+      "label": "UNSAVED WORK"
+     }
+    },
+    "cast": [
+     {
+      "who": "agent",
+      "pose": "dramatic",
+      "silhouette": true,
+      "x": 640,
+      "y": 1110,
+      "scale": 0.3,
+      "n": 7
+     }
+    ]
+   }
   }
  ]
 }

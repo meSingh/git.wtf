@@ -6,7 +6,7 @@
 // type (both hands forward on a keyboard), walk (mid-stride, mug in hand), enter (a fresh mug, steaming), terror (the
 // close-up: eyes wide, pupils as dots, sweat), asleep (head down on folded arms). `mug={false}` empties his hands.
 // Drawn to read at phone size: heavy ink, few small details.
-export type MascotPose = 'neutral' | 'sip' | 'shock' | 'relief' | 'stack' | 'type' | 'walk' | 'enter' | 'terror' | 'asleep';
+export type MascotPose = 'neutral' | 'sip' | 'shock' | 'relief' | 'stack' | 'type' | 'walk' | 'enter' | 'terror' | 'asleep' | 'angry' | 'relieved';
 interface Props { pose?: MascotPose; shadow?: boolean; mug?: boolean }
 const { pose = 'neutral', shadow = true, mug: hasMug = true } = Astro.props;
 const EX = 58, EY = -566;
@@ -26,13 +26,15 @@ const arms: Record<MascotPose, { l: [number, number][]; r: [number, number][]; f
     enter: { l: [L.s, [-156, -290], [-70, -262]], r: [R.s, [150, -282], [134, -200]] },
     terror: { l: [L.s, [-160, -290], [-120, -214]], r: [R.s, [160, -290], [120, -214]] },
     asleep: { l: [L.s, [-176, -246], [44, -250]], r: [R.s, [176, -246], [-44, -250]] },
+    angry: { l: [L.s, [-170, -300], [-150, -200]], r: [R.s, [170, -300], [150, -200]] },
+    relieved: { l: [L.s, [-150, -286], [-46, -404]], r: [R.s, [150, -282], [134, -200]], front: true },
 };
 // the head drops onto the folded arms when he sleeps
 const hy = pose === 'asleep' ? 150 : sh;
 const hx = pose === 'asleep' ? 40 : 0;
 const a = arms[pose];
 const mug = (x: number, y: number, rot = 0) => ({ x, y, rot });
-const mugAt = !hasMug ? null : pose === 'neutral' || pose === 'enter' ? mug(-30, -296) : pose === 'relief' ? mug(-30, -282) : pose === 'sip' ? mug(-14, -458, -24) : pose === 'walk' ? mug(-176, -200, 8) : null;
+const mugAt = !hasMug ? null : pose === 'neutral' || pose === 'enter' ? mug(-30, -296) : pose === 'relief' ? mug(-30, -282) : pose === 'sip' || pose === 'relieved' ? mug(-14, -458, -24) : pose === 'walk' ? mug(-176, -200, 8) : null;
 ---
 <g class={`mascot m-${pose}`}>
     {shadow && <ellipse class="m-shadow" cx="0" cy="4" rx="150" ry="22" />}
@@ -106,9 +108,19 @@ const mugAt = !hasMug ? null : pose === 'neutral' || pose === 'enter' ? mug(-30,
                     <g class="m-zzz"><text x="150" y="-700">z</text><text x="196" y="-760" class="big">Z</text></g>
                 </>
             )}
-            {pose === 'sip' && (
+            {(pose === 'sip' || pose === 'relieved') && (
                 <>
                     {[-EX, EX].map((x) => <path class="m-closed" d={`M${x - 28} ${EY + 2} q28 16 56 0`} />)}
+                    {pose === 'relieved' && <path class="m-mouth" d="M-18 -486 q18 12 36 0" />}
+                </>
+            )}
+            {pose === 'angry' && (
+                <>
+                    {[-EX, EX].map((x) => <g class="m-eye"><circle class="m-white" cx={x} cy={EY} r="32" /><circle class="m-pupil" cx={x + Math.sign(x) * 2} cy={EY - 2} r="11" /><path class="m-lid" d={`M${x - 34} ${EY - 14 + Math.sign(x) * 4} L${x + 34} ${EY - 14 - Math.sign(x) * 4}`} /></g>)}
+                    <path class="m-brow" d={`M${-EX - 44} ${EY - 62} L${-EX + 34} ${EY - 36} M${EX + 44} ${EY - 62} L${EX - 34} ${EY - 36}`} />
+                    <path class="m-mouth" d="M-26 -478 L26 -478" />
+                    <path class="m-teeth" d="M-26 -478 L26 -478 M-18 -488 L-18 -468 M-6 -488 L-6 -468 M6 -488 L6 -468 M18 -488 L18 -468" />
+                    <g class="m-steam-head" style="visibility:hidden"><path d="M-70 -720 c-14 -22 14 -34 0 -62" /><path d="M0 -736 c-14 -22 14 -34 0 -62" /><path d="M70 -720 c-14 -22 14 -34 0 -62" /></g>
                 </>
             )}
             {pose === 'shock' && (
