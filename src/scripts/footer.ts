@@ -2,7 +2,7 @@
 // place; when the credits come into view, roll them up once and let the cast rise after them. The arrival is done
 // with the Web Animations API rather than stylesheet keyframes: an animation rule sitting in the page's CSS cost the
 // hero's first paint about 150 ms under Lighthouse, measured. With reduced motion the cast still arrives, and
-// everything is simply there. Called from the layout's script on every page, after the first frame.
+// everything is simply there. Loaded by the layout's script only once the footer is within a screen.
 const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';
 export function mountFooter() {
     const foot = document.querySelector<HTMLElement>('[data-foot]');

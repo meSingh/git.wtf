@@ -106,11 +106,14 @@ const fontCss = fonts.map(([file, family, weight]) => `@font-face{font-family:'$
     <script>
         import { syncOdos } from '../scripts/odometer';
         import { lateImages } from '../scripts/late-images';
-        import { mountFooter } from '../scripts/footer';
         syncOdos();
         lateImages();
-        // the footer's motion waits for the first frame to be painted, so the hero's paint never waits for it
-        requestAnimationFrame(() => requestAnimationFrame(mountFooter));
+        // the footer's script loads only when the footer is within a screen of the viewport, so nothing of it runs at load
+        const foot = document.querySelector('[data-foot]');
+        if (foot && 'IntersectionObserver' in window) {
+            const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); import('../scripts/footer').then((m) => m.mountFooter()); } }, { rootMargin: '100% 0px' });
+            io.observe(foot);
+        }
     </script>
 </body>
 </html>
