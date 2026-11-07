@@ -1,6 +1,5 @@
 // The odometer: wheels of 0 to 9 (plus a wrap 0) moved with carry, like a trip meter. Every number on the homepage
 // uses it. A wheel's position is in digits; the strip has 11 cells, so one digit is 100/11 % of its height.
-import gsap from 'gsap';
 
 export function todayIST(now = new Date()): string {
     return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata', year: 'numeric', month: '2-digit', day: '2-digit' }).format(now);
@@ -48,32 +47,6 @@ function dimLeading(el: HTMLElement, v: number) {
 export function target(el: HTMLElement): number {
     const since = el.dataset.since;
     return since ? Math.max(0, daysBetween(since, todayIST())) : Number(el.dataset.value || 0);
-}
-
-/** Rolls a wheel from `from` to `to`, decelerating. Returns the tween so it can sit in a timeline. */
-export function roll(el: HTMLElement, to: number, from: number, duration = 1.1, ease = 'power3.out', onSpeed?: (digitsPerSecond: number) => void) {
-    const meter = { v: from };
-    let last = from;
-    let lastT = performance.now();
-    place(el, from);
-    return gsap.to(meter, {
-        v: to,
-        duration,
-        ease,
-        onUpdate() {
-            place(el, meter.v);
-            if (onSpeed) {
-                const now = performance.now();
-                onSpeed(Math.abs(meter.v - last) / Math.max(0.001, (now - lastT) / 1000));
-                last = meter.v;
-                lastT = now;
-            }
-        },
-        onComplete() {
-            place(el, to);
-            onSpeed?.(0);
-        },
-    });
 }
 
 /** Sets every live wheel on the page to today's value, without motion. */

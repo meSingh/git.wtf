@@ -3,7 +3,11 @@ import type { CollectionEntry } from 'astro:content';
 export const SITE = {
     name: 'git.wtf',
     title: 'Days since the last Git fuck-up',
-    description: 'One real Git fuck-up a day, retold deadpan. The counter resets when a new one lands.',
+    // the tagline, approved by Mandeep on 7 Nov 2026 (notes/content/STORY.md)
+    description: "AI killed our blog. We're keeping score.",
+    repo: 'meSingh/git.wtf',
+    // where a mailed confession goes; empty until Mandeep names an address, and the mail link stays hidden till then
+    confessEmail: '',
     url: 'https://git.wtf',
     twitter: '@gitwtf',
     x: 'https://x.com/gitwtf',
@@ -83,13 +87,23 @@ export function inlineCode(text: string): string {
 /** Splits a retelling into sentences for the scroll-typed card. Keeps the punctuation with its sentence. */
 export function sentences(text: string): string[] {
     const clean = text.replace(/\s+/g, ' ').trim();
+    // a full stop inside a `code` span (git checkout -- .) never ends a sentence
     const out: string[] = [];
-    const re = /[^.!?]+(?:[.!?]+["')\]]*|$)/g;
-    let m: RegExpExecArray | null;
-    while ((m = re.exec(clean))) {
-        const s = m[0].trim();
-        if (s) out.push(s);
+    let cur = '';
+    let inCode = false;
+    for (let i = 0; i < clean.length; i++) {
+        const c = clean[i];
+        cur += c;
+        if (c === '`') inCode = !inCode;
+        if (!inCode && /[.!?]/.test(c)) {
+            while (i + 1 < clean.length && /[.!?"')\]]/.test(clean[i + 1])) cur += clean[++i];
+            if (i + 1 >= clean.length || clean[i + 1] === ' ') {
+                out.push(cur.trim());
+                cur = '';
+            }
+        }
     }
+    if (cur.trim()) out.push(cur.trim());
     return out.length ? out : [clean];
 }
 
@@ -118,4 +132,18 @@ export function flapDigits(n: number | null, min = 2): string[] {
     if (n === null) return Array(min).fill('-');
     const s = String(Math.max(0, Math.floor(n)));
     return s.padStart(min, '0').split('');
+}
+
+/** How a tool reads on the page and on the scoreboard. */
+export const TOOL_LABELS: Record<string, string> = {
+    'claude-code': 'Claude Code',
+    codex: 'Codex',
+    cursor: 'Cursor',
+    custom: 'a home-made loop',
+    human: 'a human',
+    github: 'GitHub',
+};
+
+export function toolLabel(slug: string | undefined): string | null {
+    return slug ? TOOL_LABELS[slug] ?? slug : null;
 }

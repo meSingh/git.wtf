@@ -67,8 +67,8 @@ const gapFrom = (g: number) => (g < 10 ? 9 : Math.min(99, g + 30));
                 <span class="stem" style={`left:${p.x + CARD / 2}px`} aria-hidden="true"></span>
                 <a class="tcard" href={href(incidentPath(p.i))} style={`left:${p.x}px`}>
                     <span class="d"><time datetime={happened(p.i)}>{formatDay(happened(p.i))}</time><span>{p.i.data.category}</span></span>
+                    <img class="pic" data-src={href(`/strips/${p.i.id}/p4-480.webp`)} width="480" height="268" alt="" decoding="async" /><noscript><img class="pic" src={href(`/strips/${p.i.id}/p4-480.webp`)} width="480" height="268" alt="" loading="lazy" /></noscript>
                     <span class="t">{p.i.data.title}</span>
-                    <span class="x">{p.first}</span>
                     <span class="s" set:html={`Status: ${inlineCode(p.i.data.status)}`} />
                 </a>
             </>
@@ -81,8 +81,8 @@ const gapFrom = (g: number) => (g < 10 ? 9 : Math.min(99, g + 30));
         <>
             <a class="tcard" href={href(incidentPath(p.i))}>
                 <span class="d"><time datetime={happened(p.i)}>{formatDay(happened(p.i))}</time><span>{p.i.data.category}</span></span>
+                <img class="pic" data-src={href(`/strips/${p.i.id}/p4-480.webp`)} width="480" height="268" alt="" decoding="async" /><noscript><img class="pic" src={href(`/strips/${p.i.id}/p4-480.webp`)} width="480" height="268" alt="" loading="lazy" /></noscript>
                 <span class="t">{p.i.data.title}</span>
-                <span class="x">{p.first}</span>
                 <span class="s" set:html={`Status: ${inlineCode(p.i.data.status)}`} />
             </a>
             {n < arr.length - 1 && (

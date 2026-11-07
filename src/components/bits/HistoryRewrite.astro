@@ -1,0 +1,47 @@
+---
+// history-rewrite: a rebase stops on a conflict. The reader does what the conflict agent did: skip the commit.
+import type { BitSetup } from '../../lib/bits';
+interface Props { setup: BitSetup; title: string; command: string | null }
+const { setup } = Astro.props;
+const p = setup.params as { dropped: string; timeout: boolean };
+---
+<div class="hr">
+    <p class="state box" aria-hidden="true">rebasing onto upstream (3/5) <b class="y conflict">CONFLICT</b><b class="done">done</b></p>
+    <ol class="graph" aria-hidden="true">
+        <li class="c up">upstream/main <span class="dim">the new base</span></li>
+        <li class="c">pick 1d4e7a2 <span class="dim">a fork commit</span></li>
+        <li class="c">pick 6b0f93c <span class="dim">a fork commit</span></li>
+        <li class="c drop">pick a83c5e1 <span>{p.dropped}</span><em>skipped</em></li>
+        <li class="c">pick e21f6d8 <span class="dim">a fork commit</span></li>
+    </ol>
+    <div class="out box" aria-hidden="true">
+        <p class="ln pre dim">conflict agent: upstream has natively resolved the same problem.</p>
+        <p class="ln pre">$ git checkout HEAD -- test/</p>
+        <p class="ln">$ git rm <span class="dim">(the commit's files)</span></p>
+        <p class="ln">$ git rebase --skip</p>
+        <p class="ln">Successfully rebased and updated refs/heads/main.</p>
+        <p class="ln dim">run artifact: <span class="y">&lt;</span></p>
+    </div>
+    {p.timeout && (
+        <div class="timeout" aria-hidden="true">
+            <span class="lbl">repair stage</span>
+            <i class="meter"><i class="fill"></i></i>
+            <p class="ln y">timed out. Nothing published.</p>
+        </div>
+    )}
+    <button class="bit-go" type="button" hidden>{setup.go}</button>
+</div>
+<style>
+    .hr { display: grid; gap: 0.8rem; align-content: start; height: 100%; }
+    .state { margin: 0; display: flex; gap: 0.8rem; align-items: center; }
+    .conflict { display: none; }
+    .graph { list-style: none; margin: 0; padding: 0 0 0 1rem; border-left: 2px solid var(--line-2); display: grid; gap: 0.35rem; }
+    .c { position: relative; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .c::before { content: ''; position: absolute; left: -1.38rem; top: 0.45em; width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--black); border: 2px solid currentColor; }
+    .up { color: var(--paper); }
+    .drop { color: var(--grey); text-decoration: line-through; opacity: 0.6; }
+    .drop em { font-style: normal; color: var(--yellow); margin-left: 0.6em; display: inline-block; text-decoration: none; }
+    .timeout p { margin: 0.35rem 0 0; }
+    .meter { display: block; height: 0.55rem; border: 1px solid var(--line-2); }
+    .fill { display: block; height: 100%; width: 100%; background: var(--yellow); }
+</style>

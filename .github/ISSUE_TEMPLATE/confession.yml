@@ -1,0 +1,24 @@
+name: Confession
+description: A Git fuck-up of your own, for the daily search.
+title: "Confession: "
+labels: ["confession"]
+body:
+  - type: textarea
+    id: ran
+    attributes:
+      label: What you ran
+      description: The command, or what the agent ran.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: happened
+    attributes:
+      label: What happened
+    validations:
+      required: true
+  - type: input
+    id: link
+    attributes:
+      label: A link
+      description: An issue, a post, a commit. Optional.

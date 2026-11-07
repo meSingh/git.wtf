@@ -1,0 +1,36 @@
+---
+// An incident's comic strip as its four panels (cut by scripts/make-panels.mjs from incidents/<id>/strip.png, or
+// the placeholder until the strip exists). Two by two from 640 px up, stacked below. On the homepage the panels
+// are dealt in one by one on scroll (src/scripts/home.ts); here they are plain images.
+import { href, type Incident } from '../lib/site';
+
+interface Props {
+    incident: Incident;
+    /** The first screen of the incident page: load now, the first panel at high priority. */
+    eager?: boolean;
+    class?: string;
+}
+const { incident, eager = false, class: cls = '' } = Astro.props;
+const base = `/strips/${incident.id}`;
+const WIDTHS = [480, 800, 1280];
+// the panel script's lines when Content has written them; until then a plain description that cannot be wrong
+const panels = (incident.data as { panels?: string[] }).panels;
+const alt = (p: number) => panels?.[p] ?? `Comic panel ${p + 1} of 4: ${incident.data.title}${p === 3 ? `. Status: ${incident.data.status.replace(/`/g, '')}` : ''}`;
+---
+<figure class={`strip ${cls}`.trim()} data-strip>
+    {[0, 1, 2, 3].map((p) => {
+        const src = href(`${base}/p${p + 1}-800.webp`);
+        const srcset = WIDTHS.map((w) => `${href(`${base}/p${p + 1}-${w}.webp`)} ${w}w`).join(', ');
+        const sizes = '(min-width: 640px) min(34rem, 48vw), 100vw';
+        // below the first screen the source is given after the page has loaded (src/scripts/late-images.ts), so the
+        // panels never compete with the first paint; without JavaScript the noscript copy shows
+        return eager ? (
+            <img class={`panel p${p + 1}`} src={src} srcset={srcset} sizes={sizes} width="1376" height="768" alt={alt(p)} loading="eager" fetchpriority={p === 0 ? 'high' : undefined} decoding="async" />
+        ) : (
+            <>
+                <img class={`panel p${p + 1}`} data-src={src} data-srcset={srcset} sizes={sizes} width="1376" height="768" alt={alt(p)} decoding="async" />
+                <noscript><img class={`panel p${p + 1}`} src={src} srcset={srcset} sizes={sizes} width="1376" height="768" alt={alt(p)} loading="lazy" /></noscript>
+            </>
+        );
+    })}
+</figure>

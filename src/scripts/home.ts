@@ -4,13 +4,14 @@
 // 1 The opening: the trip meter rolls down from the days since the first incident to today's count with motion
 //   blur, the headline locks in word by word behind sweeping stripes. On scroll the wheels shrink and dock into
 //   the bar as the odometer badge (scrubbed, so scrolling back undocks).
-// 2 Today's card slides up beneath the docking wheels, its title locking in word by word and its first words
-//   already typing; then it pins and the retelling types with the scroll, and the status stamps in.
+// 2 Today's strip slides up beneath the docking wheels, its title locking in word by word; its four panels are
+//   dealt in one by one on scroll, the stamp on panel 4 landing last.
 // 3 The record scrolls sideways; each gap's wheels roll to its day count as it comes into view.
-// 4 The tally's wheels roll to their counts on entry. Section headings lock in word by word, once.
+// 4 The score and the streak roll to their counts on entry, the tool bars grow. Headings lock in word by word, once.
 // Between sections a band of hazard stripes wipes across, scrubbed to scroll.
 import gsap from 'gsap';
-import { roll, syncOdos, target } from './odometer';
+import { syncOdos, target } from './odometer';
+import { roll } from './odo-roll';
 
 const q = <T extends HTMLElement = HTMLElement>(s: string, root: ParentNode = document) => root.querySelector<T>(s);
 const qa = <T extends HTMLElement = HTMLElement>(s: string, root: ParentNode = document) => Array.from(root.querySelectorAll<T>(s));
@@ -120,67 +121,43 @@ export async function home() {
             .to(odoWrap, { x: () => dock().x, y: () => dock().y, scale: () => dock().scale, duration: 1, ease: 'power2.inOut' }, 0)
             .to(odoWrap, { autoAlpha: 0, duration: 0.03, ease: 'none' }, 0.97);
 
-        // 2 Today's card: title locks in and the first words type while it slides up, then it pins and types on.
+        // 2 Today's strip: the title locks in word by word as it slides up under the docking wheels, then the panels
+        // are dealt in one by one with the scroll, a slide and a settle each, panel 4 and its stamp landing last.
         const todaySec = q('#today');
-        const term = todaySec && q('.term', todaySec);
-        if (todaySec && term) {
-            const sents = qa('.typed .sent', term);
-            sents.forEach((el) => {
-                const text = el.textContent ?? '';
-                el.textContent = '';
-                const frag = document.createDocumentFragment();
-                for (const ch of text) { const s = document.createElement('span'); s.className = 'ch'; s.textContent = ch; frag.appendChild(s); }
-                el.appendChild(frag);
-            });
-            const chars = qa('.typed .ch', term);
-            const tws = qa('.term-title .tw', term);
-            const stamp = q('.stamp', term)!;
-            const stampRow = stamp.parentElement as HTMLElement;
-            const meta = q('.term-meta', term)!;
-            const fullHeight = term.offsetHeight;
-            chars.forEach((c) => c.classList.add('hid'));
-            gsap.set(stamp, { autoAlpha: 0, scale: 2.2, rotate: -14 });
-            gsap.set(meta, { autoAlpha: 0, y: 8 });
-            if (!desktop) gsap.set([stampRow, meta], { display: 'none' });
-            let shown = 0;
-            const proxy = { n: 0 };
-            const pre = { n: 0 };
-            const reveal = () => {
-                const n = Math.max(0, Math.min(chars.length, Math.round(Math.max(proxy.n, pre.n))));
-                if (n === shown) return;
-                if (n > shown) for (let i = shown; i < n; i++) chars[i].classList.remove('hid');
-                else for (let i = n; i < shown; i++) chars[i].classList.add('hid');
-                chars[shown - 1]?.classList.remove('at');
-                chars[n - 1]?.classList.add('at');
-                shown = n;
-            };
-            const arrive = gsap.timeline({ scrollTrigger: { trigger: todaySec, start: 'top 92%', end: 'top top', scrub: 0.3 } });
-            tws.forEach((w, i) => {
-                const left = i % 2 === 0;
-                arrive.fromTo(w, { autoAlpha: 0, x: left ? -80 : 80 }, { autoAlpha: 1, x: 0, duration: 0.25, ease: 'power4.out' }, i * 0.12);
-            });
-            arrive.to(pre, { n: Math.min(28, chars.length), duration: 0.5, ease: 'none', onUpdate: reveal }, Math.max(0.25, tws.length * 0.12 - 0.1));
-
-            // about 4 px of scroll per character, plus a short hold for the stamp: a four-sentence piece pins for ~2,400 px
-            const tl = gsap.timeline({ scrollTrigger: { trigger: todaySec, start: 'top top', end: () => `+=${Math.round(chars.length * 4 + window.innerHeight * 0.3)}`, pin: true, scrub: 0.35, invalidateOnRefresh: true } });
-            let cum = 0;
-            sents.forEach((s) => {
-                const len = s.querySelectorAll('.ch').length;
-                cum += len;
-                tl.to(proxy, { n: cum, duration: len * 0.012, ease: 'none', onUpdate: reveal });
-                tl.to({}, { duration: 0.16 });
-            });
-            if (!desktop) {
-                const lift = Math.max(0, fullHeight + 24 - (window.innerHeight - 68));
-                if (lift) tl.to(term, { y: -lift, duration: 0.3, ease: 'power1.inOut' }, '-=0.2');
-                tl.set(stampRow, { display: 'flex' }).set(meta, { display: 'flex' });
+        if (todaySec) {
+            const tws = qa('.today-title .tw', todaySec);
+            if (tws.length) {
+                const arrive = gsap.timeline({ scrollTrigger: { trigger: todaySec, start: 'top 92%', end: 'top 35%', scrub: 0.3 } });
+                tws.forEach((w, i) => {
+                    const left = i % 2 === 0;
+                    arrive.fromTo(w, { autoAlpha: 0, x: left ? -80 : 80 }, { autoAlpha: 1, x: 0, duration: 0.25, ease: 'power4.out' }, i * 0.12);
+                });
             }
-            tl.to(stamp, { autoAlpha: 1, scale: 1, rotate: -2, duration: 0.22, ease: 'power4.in' });
-            tl.fromTo(term, { x: 0 }, { x: -4, duration: 0.03, yoyo: true, repeat: 3, ease: 'none' }, '<0.18');
-            tl.to(stamp, { rotate: -2.6, scale: 1.01, duration: 0.08, ease: 'power2.out' });
-            tl.to(stamp, { rotate: -2, scale: 1, duration: 0.1, ease: 'power2.inOut' });
-            tl.to(meta, { autoAlpha: 1, y: 0, duration: 0.2, ease: 'power2.out' }, '<');
-            tl.to({}, { duration: 0.12 });
+            const panels = qa('.today-strip .panel', todaySec);
+            const deal = (p: HTMLElement, i: number) => {
+                const last = i === panels.length - 1;
+                const from = desktop ? { x: i % 2 === 0 ? -120 : 120, y: 40, rotate: i % 2 === 0 ? -6 : 6 } : { x: i % 2 === 0 ? -60 : 60, y: 30, rotate: i % 2 === 0 ? -4 : 4 };
+                return [
+                    { autoAlpha: 0, scale: last ? 1.18 : 1, ...from },
+                    { autoAlpha: 1, x: 0, y: 0, rotate: 0, scale: 1, duration: 0.3, ease: last ? 'power4.in' : 'back.out(1.6)' },
+                ] as const;
+            };
+            if (desktop) {
+                // two by two: one timeline across the strip's arrival, a panel at a time
+                const tl = gsap.timeline({ scrollTrigger: { trigger: '.today-strip', start: 'top 85%', end: 'top 15%', scrub: 0.4 } });
+                panels.forEach((p, i) => {
+                    const [a, b] = deal(p, i);
+                    tl.fromTo(p, a, b, i * 0.36);
+                });
+                const p4 = panels[panels.length - 1];
+                if (p4) tl.to(p4, { keyframes: [{ x: -5 }, { x: 4 }, { x: -2 }, { x: 0 }], duration: 0.12, ease: 'none' });
+            } else {
+                // stacked: each panel deals in as it comes up
+                panels.forEach((p, i) => {
+                    const [a, b] = deal(p, i);
+                    gsap.fromTo(p, a, { ...b, scrollTrigger: { trigger: p, start: 'top 95%', end: 'top 60%', scrub: 0.4 } });
+                });
+            }
         }
 
         // Section headings lock in word by word, once.
@@ -214,8 +191,13 @@ export async function home() {
             qa('.record-stack .odo').forEach((g) => ScrollTrigger.create({ trigger: g, start: 'top 90%', once: true, onEnter: () => rollOnce(g, 0.9) }));
         }
 
-        // 4 The tally rolls to its counts.
-        qa('.tally .odo').forEach((n, i) => ScrollTrigger.create({ trigger: n, start: 'top 92%', once: true, onEnter: () => gsap.delayedCall(i * 0.05, () => rollOnce(n, 1.0)) }));
+        // 4 and 5 The score and the streak roll to their counts; the tool bars grow from nothing.
+        qa('.score .odo, .streak .odo').forEach((n, i) => ScrollTrigger.create({ trigger: n, start: 'top 90%', once: true, onEnter: () => gsap.delayedCall((i % 3) * 0.12, () => rollOnce(n, 1.1)) }));
+        const fills = qa('.score .tools .fill');
+        if (fills.length) {
+            gsap.set(fills, { scaleX: 0 });
+            ScrollTrigger.create({ trigger: '.score .tools', start: 'top 88%', once: true, onEnter: () => gsap.to(fills, { scaleX: 1, duration: 0.7, ease: 'power3.out', stagger: 0.07 }) });
+        }
 
         // Wipes between sections, scrubbed: a band of stripes crosses the screen as the next section arrives.
         qa('.wipes i').forEach((band) => {

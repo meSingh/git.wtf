@@ -1,0 +1,13 @@
+---
+import { confessionCount, confessIssueUrl, confessMailto } from '../lib/confessions';
+const n = await confessionCount();
+---
+<div class="confess col">
+    <div class="beat-head"><h2 id="confess-h" data-lock>Confess</h2>{n !== null && <span class="count">{n} received so far</span>}</div>
+    <p class="ask">Have a fuck-up? Confess it.</p>
+    <p class="ways">
+        <a class="big" href={confessIssueUrl} rel="noopener">Open a confession on GitHub</a>
+        {confessMailto && <a class="mail" href={confessMailto}>or send it to the daily search</a>}
+    </p>
+    <p class="how">What you ran, what happened, a link if there is one.</p>
+</div>

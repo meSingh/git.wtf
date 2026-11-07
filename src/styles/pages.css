@@ -1,0 +1,82 @@
+/* The reading pages (incident, archive, lists, 404) and the lab's split-flaps: kept off the homepage, whose first
+   paint carries only what it shows. Imported by those pages after global.css. */
+
+/* ---------- reading pages (incident, archive) ---------- */
+.page { padding-top: calc(var(--bar) + 2.5rem); }
+.page-head { width: min(var(--read), 100% - 2.5rem); margin: 0 auto 1.5rem; }
+.page-head h1 { font-size: clamp(2.4rem, 6vw, 4.6rem); }
+.page-head .meta { margin-top: 0.8rem; font-family: var(--mono); font-size: 0.8rem; color: var(--grey); display: flex; flex-wrap: wrap; gap: 0.5rem 1.2rem; align-items: center; }
+.prose { width: min(var(--read), 100% - 2.5rem); margin-inline: auto; font-size: 1.08rem; line-height: 1.65; color: var(--paper); }
+.prose p { margin: 0 0 1.1em; }
+.prose h2, .prose h3 { font-family: var(--body); text-transform: none; font-weight: 600; line-height: 1.25; margin: 1.8em 0 0.5em; }
+.prose h2 { font-size: 1.5rem; } .prose h3 { font-size: 1.2rem; }
+.prose pre { background: rgba(242, 240, 234, 0.05); border: 1px solid var(--line); padding: 1rem 1.1rem; overflow-x: auto; font-size: 0.9rem; line-height: 1.6; }
+.prose :not(pre) > code { background: rgba(242, 240, 234, 0.08); padding: 0.1em 0.35em; border-radius: 2px; }
+.prose img, .prose video, .prose iframe { max-width: 100%; height: auto; }
+.prose blockquote { border-left: 2px solid var(--yellow); margin: 1.2em 0; padding: 0.2em 1.2em; color: var(--grey); }
+.prose table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+.prose td, .prose th { border: 1px solid var(--line); padding: 0.45rem 0.6rem; text-align: left; }
+.prose figure { margin: 1.5rem 0; } .prose figcaption { color: var(--grey); font-size: 0.85rem; }
+.prose .kg-bookmark-card { border: 1px solid var(--line); padding: 0.8rem 1rem; }
+.prose .git-article-source { display: inline-block; margin-top: 1rem; font-family: var(--mono); font-size: 0.8rem; color: var(--grey); }
+.prose a { color: var(--yellow); text-decoration: underline; text-decoration-color: rgba(255, 212, 0, 0.4); text-underline-offset: 0.2em; }
+.pager { width: min(var(--read), 100% - 2.5rem); margin: 3rem auto 0; display: flex; justify-content: space-between; gap: 1.5rem; font-family: var(--mono); font-size: 0.82rem; border-top: 1px solid var(--line); padding-top: 1.2rem; }
+.pager a { color: var(--paper); }
+.pager a:hover { color: var(--yellow); }
+.pager .next { text-align: right; }
+.tags { width: min(var(--read), 100% - 2.5rem); margin: 2rem auto 0; font-family: var(--mono); font-size: 0.78rem; color: var(--grey); }
+.share img { display: block; width: 100%; height: auto; border: 1px solid var(--line); }
+.video { margin: 2rem 0 0; }
+.video video { display: block; width: 100%; max-width: 22rem; aspect-ratio: 9 / 16; background: #000; border: 1px solid var(--line); }
+.note { padding: 0.8rem 1rem; border: 1px solid var(--line); color: var(--paper); font-size: 0.95rem; }
+
+/* archive index */
+.index { width: min(var(--col), 100% - 2.5rem); margin-inline: auto; }
+.index h2 { font-size: clamp(2.2rem, 7vw, 5rem); color: var(--line-2); margin: 2.5rem 0 0.6rem; }
+.index ol { list-style: none; margin: 0; padding: 0; }
+.index li { border-top: 1px solid var(--line); }
+.index li:last-child { border-bottom: 1px solid var(--line); }
+.index li a { display: grid; grid-template-columns: 6.5rem 1fr; gap: 1rem; align-items: baseline; padding: 0.75rem 0; color: var(--paper); font-family: var(--display); font-weight: 700; font-size: clamp(1.25rem, 2.4vw, 1.8rem); text-transform: uppercase; line-height: 1; }
+.index li a:hover { color: var(--yellow); text-decoration: none; }
+.index li a .d { font-family: var(--mono); font-size: 0.75rem; color: var(--grey); text-transform: none; font-weight: 400; }
+@media (max-width: 520px) { .index li a { grid-template-columns: 1fr; gap: 0.2rem; } }
+
+/* incident list */
+.ilist { width: min(var(--col), 100% - 2.5rem); margin-inline: auto; }
+.ilist ol { list-style: none; margin: 0; padding: 0; }
+.ilist li { border-top: 1px solid var(--line); }
+.ilist li:last-child { border-bottom: 1px solid var(--line); }
+.ilist li a { display: grid; grid-template-columns: 7rem 1fr auto; gap: 1rem; align-items: baseline; padding: 0.9rem 0; color: var(--paper); }
+.ilist li a:hover { text-decoration: none; color: var(--yellow); }
+.ilist .d { font-family: var(--mono); font-size: 0.76rem; color: var(--grey); }
+.ilist .t { font-family: var(--display); font-weight: 900; font-size: clamp(1.5rem, 3vw, 2.2rem); text-transform: uppercase; line-height: 0.95; }
+.ilist .s { font-family: var(--mono); font-size: 0.78rem; color: var(--grey); grid-column: 2; }
+.ilist .c { font-family: var(--mono); font-size: 0.75rem; color: var(--grey); }
+@media (max-width: 640px) { .ilist li a { grid-template-columns: 1fr; gap: 0.25rem; } .ilist .s { grid-column: auto; } }
+
+/* ---------- split-flap ---------- */
+.flaps { display: inline-flex; gap: 0.08em; font-size: var(--flap-size, 6rem); line-height: 1; }
+.flap { position: relative; display: inline-block; width: 0.74em; height: 1.08em; perspective: 2.4em; font-family: var(--display); font-weight: 900; font-variant-numeric: tabular-nums; color: var(--yellow); }
+.flap-half, .flap-leaf { position: absolute; left: 0; right: 0; height: 50%; overflow: hidden; background: #171717; }
+.flap-top, .flap-leaf-top { top: 0; border-radius: 0.05em 0.05em 0 0; }
+.flap-bottom, .flap-leaf-bottom { bottom: 0; border-radius: 0 0 0.05em 0.05em; }
+.flap-top, .flap-leaf-top { background: linear-gradient(to bottom, #1d1d1d, #151515); }
+.flap-bottom, .flap-leaf-bottom { background: linear-gradient(to bottom, #131313, #0f0f0f); }
+.flap-digit { position: absolute; left: 0; right: 0; top: 0; height: 1.08em; line-height: 1.08em; text-align: center; font-size: 1em; }
+.flap-bottom .flap-digit, .flap-leaf-bottom .flap-digit { top: -0.54em; }
+.flap-leaf { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.flap-leaf-top { transform-origin: 50% 100%; }
+.flap-leaf-bottom { transform-origin: 50% 0%; transform: rotateX(90deg); }
+.flap::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 0.02em; margin-top: -0.01em; background: var(--black); z-index: 3; }
+.flap.dim { color: rgba(255, 212, 0, 0.3); }
+.flaps.badge-flaps .flap { perspective: 3em; }
+
+
+/* incident page: the strip first, the retelling below at reading size */
+.inc-head { width: min(var(--col), 100% - 2rem); }
+.inc-head .meta { margin: 0 0 0.9rem; }
+.inc-head h1 { font-size: clamp(2.4rem, 6vw, 4.8rem); line-height: 0.92; max-width: 18ch; }
+.inc-strip { width: min(var(--col), 100% - 2rem); margin: 0 auto 3rem; }
+.inc-body { margin-top: 0; }
+.inc-status { font-family: var(--mono); color: var(--yellow); font-size: 1rem; }
+.inc-source { font-family: var(--mono); font-size: 0.85rem; color: var(--grey); }

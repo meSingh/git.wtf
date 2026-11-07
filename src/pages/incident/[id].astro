@@ -3,8 +3,10 @@ import { getCollection } from 'astro:content';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import Base from '../../layouts/Base.astro';
-import Term from '../../components/Term.astro';
-import { SITE, formatDay, happened, href, incidentPath, sortIncidents, type Incident } from '../../lib/site';
+import '../../styles/pages.css';
+import { render } from 'astro:content';
+import Strip from '../../components/Strip.astro';
+import { SITE, categoryLabel, formatDate, formatDay, happened, href, incidentPath, inlineCode, sortIncidents, sourceHost, toolLabel, type Incident } from '../../lib/site';
 
 export async function getStaticPaths() {
     const all = sortIncidents(await getCollection('incidents'));
@@ -13,6 +15,8 @@ export async function getStaticPaths() {
 interface Props { incident: Incident; newer: Incident | null; older: Incident | null }
 const { incident, newer, older } = Astro.props;
 const d = incident.data;
+const { Content } = await render(incident);
+const tool = toolLabel(d.tool);
 const p = incidentPath(incident);
 const localVideo = existsSync(path.join(process.cwd(), 'public/incident', incident.id, 'video.mp4'));
 const video = d.video ?? (localVideo ? href(`${p}video.mp4`) : null);
@@ -31,27 +35,24 @@ const jsonld = {
 ---
 <Base title={`${d.title} | git.wtf`} description={`Status: ${d.status}`} image={`${p}share.png`} type="article" jsonld={jsonld}>
     <main class="page">
-        <div class="page-head">
-            <p class="meta"><a href={href('/incidents/')}>Incidents</a> <span>{formatDay(happened(incident))}</span></p>
-        </div>
-        <Term incident={incident} id="incident" />
-        <div class="prose">
+        <header class="page-head inc-head">
+            <p class="meta"><a href={href('/incidents/')}>Incidents</a> <span>{formatDay(happened(incident))}</span> <a class="chip" href={href(`/incidents/${d.category}/`)}>{categoryLabel(d.category)}</a>{tool && <span class="chip">{tool}</span>}</p>
+            <h1>{d.title}</h1>
+        </header>
+        <Strip incident={incident} eager class="inc-strip" />
+        <article class="prose inc-body" id="retelling">
+            <h2 class="visually-hidden">What happened</h2>
+            <Content />
+            <p class="inc-status" set:html={`Status: ${inlineCode(d.status)}`} />
+            <p class="inc-source">Source: <a href={d.source_url} rel="noopener nofollow">{sourceHost(d.source_url)}</a>, {formatDate(d.source_date)}.</p>
             {video && (
                 <p class="video"><video src={video} poster={poster} controls muted playsinline preload="none" width="1080" height="1920">Your browser does not play this video. <a href={video}>Download it.</a></video></p>
             )}
-            <p class="share" style="margin-top:2rem"><img src={href(`${p}share.png`)} alt={`Share image: ${d.title}`} width="1200" height="630" loading="lazy" /></p>
-        </div>
+            <p class="share"><img src={href(`${p}share.png`)} alt={`Share image: ${d.title}`} width="1200" height="630" loading="lazy" /></p>
+        </article>
         <nav class="pager" aria-label="Other incidents">
             <span>{older && <a href={href(incidentPath(older))}>&larr; {older.data.title}</a>}</span>
             <span class="next">{newer && <a href={href(incidentPath(newer))}>{newer.data.title} &rarr;</a>}</span>
         </nav>
     </main>
-    <script>
-        import gsap from 'gsap';
-        import { reducedMotion } from '../../scripts/flaps';
-        const stamp = document.querySelector('#incident .stamp');
-        if (stamp && !reducedMotion()) {
-            gsap.fromTo(stamp, { autoAlpha: 0, scale: 2, rotate: -12 }, { autoAlpha: 1, scale: 1, rotate: -2, duration: 0.35, ease: 'power4.in', delay: 0.35 });
-        }
-    </script>
 </Base>

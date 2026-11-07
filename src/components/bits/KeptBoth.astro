@@ -1,0 +1,34 @@
+---
+// kept-both: a conflict with the shared closing brace below the markers, written once (Git's default style).
+// The reader accepts both; the sides join as written and the first function never closes.
+import type { BitSetup } from '../../lib/bits';
+interface Props { setup: BitSetup; title: string; command: string | null }
+const { setup } = Astro.props;
+const scored = setup.variant === 'scored';
+const p = setup.params as { right?: number; of?: number };
+---
+<div class="kb">
+    <p class="lens"><span aria-hidden="true">Accept Current Change</span><span aria-hidden="true">|</span><span aria-hidden="true">Accept Incoming Change</span><span aria-hidden="true">|</span><button class="bit-go" type="button" hidden>{setup.go}</button><span class="end" aria-hidden="true">Accept Both Changes</span><span aria-hidden="true">|</span><span aria-hidden="true">Compare Changes</span></p>
+    <pre class="code box" aria-hidden="true"><span class="ln mk">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span><span class="ln">test('keeps ours', () =&gt; {'{'}</span><span class="ln">  expect(merge(a)).toEqual(a);</span><span class="ln slot"><span class="ghost">{'}'});</span><em>missing</em></span><span class="ln mk">=======</span><span class="ln">test('keeps theirs', () =&gt; {'{'}</span><span class="ln">  expect(merge(b)).toEqual(b);</span><span class="ln mk">&gt;&gt;&gt;&gt;&gt;&gt;&gt; theirs</span><span class="ln brace">{'}'});<i class="drop">{'}'});</i></span></pre>
+    <p class="err" aria-hidden="true">SyntaxError: Unexpected end of input</p>
+    {scored && <p class="right" aria-hidden="true"><span class="num" data-count>{p.right}</span><span>right, of <b>{p.of}</b> merges that touched this file</span></p>}
+</div>
+<style>
+    .kb { display: grid; gap: 0.9rem; align-content: start; height: 100%; }
+    .lens { margin: 0; display: flex; flex-wrap: wrap; gap: 0.35rem 0.55rem; align-items: center; color: var(--grey); font-size: 0.9em; }
+    .lens .end { color: var(--paper); text-decoration: underline; text-underline-offset: 0.2em; }
+    :global(html.motion) .lens .end { display: none; }
+    :global(html:not(.motion)) .lens .bit-go { display: none; }
+    .lens .bit-go { padding: 0.35em 0.55em; font-size: 1em; }
+    /* as tall as the conflict before it is joined, so setting the start never moves the page */
+    .code { margin: 0; font: inherit; font-size: 1.08em; line-height: 1.65; overflow: hidden; min-height: calc(8 * 1.65em + 1.4rem); }
+    .ln { display: block; height: 1.65em; white-space: pre; overflow: hidden; }
+    .mk { height: 0; opacity: 0; color: #d9c56a; }
+    .slot { position: relative; color: var(--yellow); }
+    .ghost { opacity: 0.55; outline: 1px dashed var(--yellow); outline-offset: 1px; }
+    .slot em { font-style: normal; margin-left: 1em; font-size: 0.8em; letter-spacing: 0.06em; text-transform: uppercase; }
+    .brace { position: relative; overflow: visible; }
+    .drop { position: absolute; left: 0; top: 0; font-style: normal; color: var(--yellow); opacity: 0; }
+    .err { margin: 0; color: var(--yellow); }
+    .right { margin: 0; display: flex; align-items: baseline; gap: 0.8rem; }
+</style>

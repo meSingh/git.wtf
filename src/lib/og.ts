@@ -77,7 +77,7 @@ export async function shareSvg(opts: { title: string; status: string; days?: num
         ]),
         h('div', { display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: 'JetBrains Mono', fontSize: 24, color: GREY, height: 44 }, [
             { type: 'img', props: { src: LOGO_URI, height: 44, width: Math.round((44 * LOGO.width) / LOGO.height), style: { display: 'flex' } } },
-            h('div', {}, 'one real Git fuck-up a day'),
+            h('div', {}, "AI killed our blog. We're keeping score."),
         ]),
         stripes(),
     ]);

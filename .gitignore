@@ -11,3 +11,5 @@ tests/fixtures/archive/
 # local video renders (scripts/render-video.mjs --local) and phase-2 render scratch
 public/incident/
 .render/
+# comic panels cut from incidents/<id>/strip.png at build time (scripts/make-panels.mjs)
+public/strips/

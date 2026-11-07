@@ -2,17 +2,17 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Odo from '../components/Odo.astro';
-import Term from '../components/Term.astro';
+import Strip from '../components/Strip.astro';
 import Record from '../components/Record.astro';
-import Tally from '../components/Tally.astro';
-import Marquee from '../components/Marquee.astro';
+import Score from '../components/Score.astro';
+import Streak from '../components/Streak.astro';
+import Confess from '../components/Confess.astro';
 import { heroData } from '../lib/hero';
 import { SITE, href, incidentPath, sortIncidents } from '../lib/site';
 
 const incidents = sortIncidents(await getCollection('incidents'));
 const latest = incidents[0] ?? null;
 const d = await heroData();
-const archive = (await getCollection('archive')).filter((p) => p.data.type === 'post').sort((a, b) => (a.data.published_at < b.data.published_at ? 1 : -1));
 const image = latest ? `${incidentPath(latest)}share.png` : '/share.png';
 const words = ['DAYS', 'SINCE', 'THE', 'LAST', 'GIT', 'FUCK-UP'];
 ---
@@ -31,12 +31,16 @@ const words = ['DAYS', 'SINCE', 'THE', 'LAST', 'GIT', 'FUCK-UP'];
     </section>
 
     {latest ? (
-        <section class="beat beat-today over" id="today" aria-labelledby="today-h">
-            <h2 class="visually-hidden" id="today-h">Today's incident</h2>
-            <Term incident={latest} typed linkTitle lockTitle />
+        <section class="beat beat-today" id="today" aria-labelledby="today-h">
+            <div class="col today-head">
+                <p class="today-kicker">Today's fuck-up</p>
+                <h2 class="today-title" id="today-h"><a href={href(incidentPath(latest))}><span class="visually-hidden">{latest.data.title}</span><span aria-hidden="true">{latest.data.title.split(/\s+/).map((w, i, a) => <><span class="tw">{w}</span>{i < a.length - 1 && ' '}</>)}</span></a></h2>
+            </div>
+            <Strip incident={latest} class="col today-strip" />
+            <p class="col today-more"><a href={href(incidentPath(latest))}>Read the full fuck-up <span aria-hidden="true">&rarr;</span></a></p>
         </section>
     ) : (
-        <section class="beat col over" id="today"><p class="note">No incident on record yet. The first one lands when the daily search finds one that passes the rules.</p></section>
+        <section class="beat col" id="today"><p class="note">No incident on record yet. The first one lands when the daily search finds one that passes the rules.</p></section>
     )}
 
     {incidents.length > 1 && (
@@ -45,21 +49,31 @@ const words = ['DAYS', 'SINCE', 'THE', 'LAST', 'GIT', 'FUCK-UP'];
         </section>
     )}
 
-    <section class="beat beat-tally col" id="by-category" aria-labelledby="tally-h">
-        <div class="beat-head">
-            <h2 id="tally-h" data-lock>By category</h2>
-            <span class="count">how they go wrong</span>
+    <section class="beat beat-score" id="score" aria-labelledby="score-h">
+        <Score incidents={incidents} />
+    </section>
+
+    <section class="beat beat-streak" id="streak" aria-labelledby="streak-h">
+        <Streak incidents={incidents} />
+    </section>
+
+    <section class="beat beat-confess" id="confess" aria-labelledby="confess-h">
+        <Confess />
+    </section>
+
+    <section class="beat beat-story" id="story" aria-labelledby="story-h">
+        <div class="col">
+            <div class="beat-head"><h2 id="story-h" data-lock>The story</h2></div>
+            <div class="story">
+                <p>For 10 years git.wtf was a blog about fixing Git, written for people who had just fucked up and were looking for the fix. Then AI came into the picture and started doing the fixes for them, and the questions stopped coming here.</p>
+                <p>We noticed, envied and wanted revenge. So we started counting AI's fuck-ups alongside the Git fuck-ups.</p>
+                <p>AI now runs Git commands by itself, and a good many of the fuck-ups are now its own. We keep track of those with delight.</p>
+                <p>By the way, the old blog posts are still here, unchanged, in the archive. <a href={href('/archive/')}>Find them here.</a></p>
+            </div>
         </div>
-        <Tally incidents={incidents} />
     </section>
 
-    <section class="beat beat-archive" id="archive" aria-labelledby="archive-h">
-        <div class="col beat-head"><h2 id="archive-h" data-lock>The old blog</h2><span class="count">{archive.length} posts, 2016 to 2025</span></div>
-        <p class="lede">git.wtf used to be a blog about fixing Git. <a href={href('/archive/')}>The archive lives here</a>, {archive.length} posts at their old addresses.</p>
-        <Marquee posts={archive} />
-    </section>
-
-    <div class="wipes" aria-hidden="true"><i data-wipe="record"></i><i data-wipe="by-category"></i><i data-wipe="archive"></i></div>
+    <div class="wipes" aria-hidden="true"><i data-wipe="record"></i><i data-wipe="score"></i><i data-wipe="confess"></i></div>
 
     <script>
         // The motion loads after the first frame is painted, so the opening's still is never kept waiting for it.

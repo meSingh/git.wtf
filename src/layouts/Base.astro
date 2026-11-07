@@ -71,6 +71,7 @@ const fontCss = fonts.map(([file, family, weight]) => `@font-face{font-family:'$
     <meta name="twitter:image" content={img} />
     <meta name="theme-color" content="#0a0a0a" />
     {jsonld && <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />}
+    <script is:inline>document.documentElement.classList.add('js')</script>
     {motionFlag && (
         <script is:inline>
             // Before first paint: decide whether the opening runs. With reduced motion (or ?reduce) the page is the
@@ -101,7 +102,9 @@ const fontCss = fonts.map(([file, family, weight]) => `@font-face{font-family:'$
     <Footer />
     <script>
         import { syncOdos } from '../scripts/odometer';
+        import { lateImages } from '../scripts/late-images';
         syncOdos();
+        lateImages();
     </script>
 </body>
 </html>

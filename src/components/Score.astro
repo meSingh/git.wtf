@@ -1,0 +1,30 @@
+---
+// The revenge section: who caused them, and with what.
+import Odo from './Odo.astro';
+import { SITE, TOOL_LABELS, type Incident } from '../lib/site';
+import { TOOLS } from '../content.config';
+interface Props { incidents: Incident[] }
+const { incidents } = Astro.props;
+const by = (actor: string) => incidents.filter((i) => i.data.actor === actor).length;
+const humans = by('human');
+const ai = by('ai');
+const github = by('github');
+const tools = TOOLS.map((t) => ({ t, n: incidents.filter((i) => i.data.tool === t).length }));
+const max = Math.max(1, ...tools.map((x) => x.n));
+const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+---
+<div class="score col">
+    <div class="beat-head"><h2 id="score-h" data-lock>The score</h2><span class="count">{incidents.length} on record</span></div>
+    <div class="sides">
+        <p class="side"><Odo value={humans} from={0} min={2} class="score-odo wheel" label={`${humans} caused by humans`} /><span class="who">Humans</span></p>
+        <p class="vs" aria-hidden="true">vs</p>
+        <p class="side ai"><Odo value={ai} from={0} min={2} class="score-odo wheel" label={`${ai} caused by AI`} /><span class="who">AI</span></p>
+        <p class="side gh"><Odo value={github} from={0} min={2} class="score-odo small wheel" label={`${github} caused by GitHub itself`} /><span class="who">GitHub itself</span></p>
+    </div>
+    <ul class="tools" aria-label="By tool">
+        {tools.map(({ t, n }) => (
+            <li><span class="l">{cap(TOOL_LABELS[t] ?? t)}</span><span class="gauge"><i class="fill" style={`--w:${n / max}`}></i></span><span class="n">{n}</span></li>
+        ))}
+    </ul>
+    <p class="tagline">{SITE.description}</p>
+</div>

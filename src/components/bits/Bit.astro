@@ -1,0 +1,82 @@
+---
+// One incident, acted out. The stage is the category's bit (picked by src/lib/bits.ts); the retelling's sentences are
+// its captions; the status is the punchline. The HTML is the end state, which is what reduced motion and no
+// JavaScript see; src/scripts/bits/run.ts sets the start and plays it when the reader presses the control.
+import '../../styles/bits.css';
+import { bitSetup, firstCommand } from '../../lib/bits';
+import { categoryLabel, formatDate, href, incidentPath, inlineCode, sentences, sourceHost, toolLabel, type Incident } from '../../lib/site';
+import ForcePush from './ForcePush.astro';
+import ResetHard from './ResetHard.astro';
+import PushedToMain from './PushedToMain.astro';
+import CommittedSecret from './CommittedSecret.astro';
+import KeptBoth from './KeptBoth.astro';
+import WipedWorktree from './WipedWorktree.astro';
+import HistoryRewrite from './HistoryRewrite.astro';
+import GithubStatus from './GithubStatus.astro';
+import Generic from './Generic.astro';
+
+interface Props {
+    incident: Incident;
+    /** h1 on the incident page, h2 on the homepage. */
+    heading?: 'h1' | 'h2';
+    linkTitle?: boolean;
+    /** Split the title into words for the lock-in on the homepage. */
+    lockTitle?: boolean;
+    id?: string;
+}
+const { incident, heading = 'h2', linkTitle = false, lockTitle = false, id } = Astro.props;
+const d = incident.data;
+const setup = bitSetup(incident);
+const STAGES = {
+    'force-push': ForcePush,
+    'reset-hard': ResetHard,
+    'pushed-to-main': PushedToMain,
+    'committed-secret': CommittedSecret,
+    'kept-both': KeptBoth,
+    'wiped-worktree': WipedWorktree,
+    'history-rewrite': HistoryRewrite,
+    github: GithubStatus,
+    generic: Generic,
+} as const;
+const Stage = STAGES[setup.kind];
+const sents = sentences(incident.body ?? '');
+const Tag = heading;
+const path = incidentPath(incident);
+const tool = toolLabel(d.tool);
+const words = d.title.split(/\s+/);
+const command = firstCommand(incident.body ?? '');
+---
+<article class={`bit bit-${setup.kind}`} id={id} data-bit={setup.kind} data-variant={setup.variant} data-params={JSON.stringify(setup.params)} data-incident={incident.id}>
+    <header class="bit-head">
+        <Tag class="bit-title">
+            {(() => {
+                const inner = lockTitle ? <><span class="visually-hidden">{d.title}</span><span aria-hidden="true">{words.map((w, i) => <><span class="tw">{w}</span>{i < words.length - 1 && ' '}</>)}</span></> : d.title;
+                return linkTitle ? <a href={href(path)}>{inner}</a> : inner;
+            })()}
+        </Tag>
+        <p class="bit-meta">
+            <time datetime={d.source_date}>{formatDate(d.source_date)}</time>
+            <a class="chip" href={href(`/incidents/${d.category}/`)}>{categoryLabel(d.category)}</a>
+            {tool && <span class="chip who">{tool}</span>}
+            <a class="src" href={d.source_url} rel="noopener nofollow">Source: {sourceHost(d.source_url)}</a>
+        </p>
+    </header>
+    <div class="bit-body">
+        <div class="bit-stage">
+            <div class="bit-bar" aria-hidden="true"><span class="lights"><i></i><i></i><i></i></span><span class="path">{setup.kind === 'generic' ? `incidents/${incident.id}.md` : `bits/${setup.kind}`}</span></div>
+            <div class="bit-scene">
+                <Stage setup={setup} title={d.title} command={command} />
+            </div>
+        </div>
+        <div class="bit-side">
+            <p class="visually-hidden">{sents.join(' ')}</p>
+            <ol class="bit-caps" aria-hidden="true">
+                {sents.map((s) => <li set:html={inlineCode(s)} />)}
+            </ol>
+            <div class="stamp-row">
+                <span class="stamp" set:html={`<span class="lbl">Status</span>${inlineCode(d.status)}`} />
+            </div>
+            <button class="bit-again" type="button" hidden>Run it again</button>
+        </div>
+    </div>
+</article>

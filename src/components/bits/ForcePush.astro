@@ -1,0 +1,52 @@
+---
+// force-push: two lanes of a commit graph. The reader pushes; the remote's newer commits slide off the end.
+import type { BitSetup } from '../../lib/bits';
+interface Props { setup: BitSetup; title: string; command: string | null }
+const { setup } = Astro.props;
+const { branch, theirs } = setup.params as { branch: string; theirs: string[] };
+const v = setup.variant;
+const H = ['7c2e0d1', '91b3f5a', 'c04d7e2'];
+const tip = H[Math.min(theirs.length, H.length) - 1];
+const pre = v === 'lease' ? ['$ git fetch origin', '$ git rebase origin/main'] : v === 'robots' ? ['$ git rebase origin/main   # a stale local copy'] : [];
+---
+<div class="fp">
+    <div class="lanes" aria-hidden="true">
+        <div class="lane remote">
+            <span class="lbl">origin/{branch}</span>
+            <ol>
+                <li class="c">a1f3c9e <span class="dim">base</span></li>
+                {theirs.map((t, i) => <li class="c theirs">{H[i]} <span>{t}</span><em>gone</em></li>)}
+                <li class="c mine">4e1a9c2 <span>the rebase</span></li>
+            </ol>
+        </div>
+        <div class="lane local">
+            <span class="lbl">{branch}, local{v === 'robots' ? ' and stale' : ''}</span>
+            <ol>
+                <li class="c">a1f3c9e <span class="dim">base</span></li>
+                <li class="c">4e1a9c2 <span>the rebase</span></li>
+            </ol>
+        </div>
+    </div>
+    <div class="out box" aria-hidden="true">
+        {pre.map((l) => <p class="pre">{l}</p>)}
+        <p class="run">$ {setup.go}</p>
+        {v === 'lease' && <p class="run y"># lease: origin/{branch} is {tip}, the remote is {tip}. ok</p>}
+        <p class="run"> + {tip}...4e1a9c2 {branch} -&gt; {branch} (forced update)</p>
+        {v === 'robots' && <><p class="run">review-bot: changes requested <span class="dim">(it read the old code)</span></p><p class="run y">fix attempts: limit reached</p></>}
+    </div>
+    <button class="bit-go" type="button" hidden>{setup.go}</button>
+</div>
+<style>
+    .fp { display: grid; gap: 1rem; align-content: start; height: 100%; }
+    .lanes { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .lane ol { list-style: none; margin: 0; padding: 0 0 0 1rem; border-left: 2px solid var(--line-2); display: grid; gap: 0.45rem; }
+    .lane.remote ol { border-left-color: var(--yellow); }
+    .c { position: relative; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .c::before { content: ''; position: absolute; left: -1.38rem; top: 0.45em; width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--black); border: 2px solid currentColor; }
+    .c em { display: none; font-style: normal; color: var(--yellow); margin-left: 0.5em; }
+    /* the end: their commits struck and faded, the rebase on top */
+    .theirs { color: var(--grey); text-decoration: line-through; opacity: 0.55; }
+    .theirs em { display: inline; text-decoration: none; }
+    .mine { color: var(--yellow); }
+    @media (max-width: 560px) { .lanes { grid-template-columns: 1fr; } }
+</style>

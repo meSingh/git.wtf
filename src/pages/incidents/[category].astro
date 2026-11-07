@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import { CATEGORIES } from '../../content.config';
 import Base from '../../layouts/Base.astro';
+import '../../styles/pages.css';
 import { categoryLabel, formatDate, happened, href, incidentPath, inlineCode, sortIncidents } from '../../lib/site';
 
 export async function getStaticPaths() {
