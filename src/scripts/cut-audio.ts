@@ -5,30 +5,47 @@
 //
 // The manifest is Video's (see video/audio/README.md):
 //   sounds: [{ id, file, web, kind: sfx|music|voice, tags, duration, source, license, date, cost }]
-//   fx:     { "<effect name>": "<sound id>" | null }
-//   events: { cut, word, stamp, tbc, music, musicEnd }: sound ids
+//   fx:     { "<effect name>": "<sound id>" | null }       sounds for the engine's effects
+//   sfx:    { "<sound name>": "<sound id>" }               a shot's own sounds ("clink@0.8")
+//   music:  { "<state>": "<bed id>" | null }               a shot's music state; "none" is silence
+//   events: { cut, word, stamp, tbc, music, musicEnd }: a sound id, or several played together
 //   voices: { "<incident id>": { "<shot id>": "<sound id>" } }   (else a voice sound tagged [incident, shotId])
+//   mix:    { music, sfx, voice, duckUnderVoice } in dB
+// A sound tagged "loop" runs until its shot ends (beds run until the state changes).
 
 export interface Sound { id: string; file?: string; web?: string; kind?: string; tags?: string[]; duration?: number; gain?: number }
+type Ids = string | string[] | null | undefined;
 export interface Manifest {
     sounds: Sound[];
     fx?: Record<string, string | null>;
-    events?: Partial<Record<'cut' | 'word' | 'stamp' | 'tbc' | 'music' | 'musicEnd', string | null>>;
+    sfx?: Record<string, string | null>;
+    music?: Record<string, string | null>;
+    events?: Record<string, Ids>;
     voices?: Record<string, Record<string, string>>;
+    mix?: { music?: number; sfx?: number; voice?: number; duckUnderVoice?: number };
 }
 /** A timed moment of the cut, as the page publishes it (shared with the video recorder). */
-export interface Cue { t: number; kind: 'fx' | 'line' | 'word' | 'cut' | 'stamp' | 'tbc' | 'music'; name: string; shot: string }
+export interface Cue { t: number; kind: 'fx' | 'sfx' | 'line' | 'say' | 'word' | 'cut' | 'stamp' | 'tbc' | 'music'; name: string; shot: string }
 
 const GAIN: Record<string, number> = { music: 0.32, voice: 1, sfx: 0.75 };
+const db = (x: number) => Math.pow(10, x / 20);
 
-/** The sound a cue plays, if the library has one. */
-export function soundFor(m: Manifest | null, incident: string, c: Cue): Sound | null {
-    if (!m) return null;
-    const byId = (id: string | null | undefined) => (id ? m.sounds.find((s) => s.id === id) ?? null : null);
+/** The sounds a cue plays, if the library has them. */
+export function soundsFor(m: Manifest | null, incident: string, c: Cue): Sound[] {
+    if (!m) return [];
+    const byId = (ids: Ids) => [ids ?? []].flat().map((id) => m.sounds.find((s) => s.id === id)).filter((s): s is Sound => !!s);
     if (c.kind === 'fx') return byId(m.fx?.[c.name]);
-    if (c.kind === 'line') return byId(m.voices?.[incident]?.[c.name]) ?? m.sounds.find((s) => s.kind === 'voice' && s.tags?.includes(incident) && s.tags?.includes(c.name)) ?? null;
-    if (c.kind === 'music') return byId(c.name === 'end' ? m.events?.musicEnd : m.events?.music);
-    return byId(m.events?.[c.kind as 'cut' | 'word' | 'stamp' | 'tbc']);
+    if (c.kind === 'sfx') return byId(m.sfx?.[c.name]);
+    if (c.kind === 'line' || c.kind === 'say') {
+        const v = byId(m.voices?.[incident]?.[c.name]);
+        return v.length ? v : m.sounds.filter((s) => s.kind === 'voice' && s.tags?.includes(incident) && s.tags?.includes(c.name)).slice(0, 1);
+    }
+    if (c.kind === 'music') {
+        if (c.name === 'start') return byId(m.events?.music);
+        if (c.name === 'end') return byId(m.events?.musicEnd);
+        return byId(m.music?.[c.name]);
+    }
+    return byId(m.events?.[c.kind]);
 }
 
 export class CutAudio {
@@ -37,7 +54,8 @@ export class CutAudio {
     private m: Manifest | null = null;
     private buffers = new Map<string, AudioBuffer>();
     private master: GainNode | null = null;
-    private bed: AudioBufferSourceNode | null = null;
+    private musicBus: GainNode | null = null;
+    private bed: { src: AudioBufferSourceNode; g: GainNode; name: string } | null = null;
     private pending: AudioBufferSourceNode[] = [];
     private ready: Promise<boolean> | null = null;
 
@@ -53,21 +71,21 @@ export class CutAudio {
                 const res = await fetch(`${this.base}/audio/manifest.json`);
                 if (!res.ok) return false;
                 this.m = (await res.json()) as Manifest;
-                const need = new Map<string, Sound>();
-                this.allCues().forEach((c) => { const s = soundFor(this.m, this.incident, c); if (s?.web) need.set(s.web, s); });
+                const need = new Set<string>();
+                this.allCues().forEach((c) => soundsFor(this.m, this.incident, c).forEach((s) => s.web && need.add(s.web)));
                 if (!need.size) return false;
                 this.ctx = new AudioContext();
                 this.master = this.ctx.createGain();
                 this.master.gain.value = this.on ? 1 : 0;
                 this.master.connect(this.ctx.destination);
-                await Promise.all([...need.keys()].map(async (f) => {
+                this.musicBus = this.ctx.createGain();
+                this.musicBus.connect(this.master);
+                await Promise.all([...need].map(async (f) => {
                     try {
                         const r = await fetch(`${this.base}/audio/${f}`);
                         if (r.ok) this.buffers.set(f, await this.ctx!.decodeAudioData(await r.arrayBuffer()));
                     } catch { /* a missing file is a silent cue */ }
                 }));
-                const bed = soundFor(this.m, this.incident, { t: 0, kind: 'music', name: 'start', shot: '' });
-                if (bed) this.bed = this.play(bed, 0, true);
                 return true;
             } catch {
                 return false;
@@ -76,18 +94,52 @@ export class CutAudio {
         return this.ready;
     }
 
-    private play(s: Sound, when: number, loop = false) {
-        if (!this.ctx || !this.master || !s.web) return null;
+    private level(s: Sound) {
+        if (s.gain) return s.gain;
+        const k = s.kind ?? 'sfx';
+        const mix = this.m?.mix?.[k as 'music' | 'sfx' | 'voice'];
+        return typeof mix === 'number' ? db(mix) : GAIN[k] ?? 0.75;
+    }
+
+    private play(s: Sound, when: number, loop = false, out: AudioNode | null = this.master) {
+        if (!this.ctx || !out || !s.web) return null;
         const b = this.buffers.get(s.web);
         if (!b) return null;
         const src = this.ctx.createBufferSource();
         src.buffer = b;
         src.loop = loop;
         const g = this.ctx.createGain();
-        g.gain.value = s.gain ?? GAIN[s.kind ?? 'sfx'] ?? 0.75;
-        src.connect(g).connect(this.master);
+        g.gain.value = this.level(s);
+        src.connect(g).connect(out);
         src.start(this.ctx.currentTime + Math.max(0, when));
-        return src;
+        return { src, g };
+    }
+
+    /** The bed in effect at a moment: the last music cue at or before it ("end" and "none" are silence). */
+    private bedAt(t: number) {
+        let c: Cue | undefined;
+        this.allCues().forEach((x) => { if (x.kind === 'music' && x.t <= t + 1e-3) c = x; });
+        return c;
+    }
+
+    private setBed(c: Cue | undefined, when: number) {
+        if (!this.ctx) return;
+        const name = c?.name ?? 'none';
+        if (this.bed?.name === name) return;
+        const at = this.ctx.currentTime + Math.max(0, when);
+        if (this.bed) {
+            const old = this.bed;
+            old.g.gain.setTargetAtTime(0, at, 0.12);
+            try { old.src.stop(at + 0.8); } catch { /* over */ }
+            this.bed = null;
+        }
+        const s = c ? soundsFor(this.m, this.incident, c)[0] : undefined;
+        const p = s ? this.play(s, when, true, this.musicBus) : null;
+        if (p && s) {
+            p.g.gain.setValueAtTime(0, at);
+            p.g.gain.setTargetAtTime(this.level(s), at, 0.12);
+            this.bed = { ...p, name };
+        }
     }
 
     /** A shot comes on: its sounds are scheduled from now, at their times in the shot. */
@@ -95,17 +147,30 @@ export class CutAudio {
         this.stopPending();
         if (!this.ctx) return;
         if (this.ctx.state === 'suspended') void this.ctx.resume();
+        this.setBed(this.bedAt(shotStart), 0);
+        const duck = this.m?.mix?.duckUnderVoice;
         this.cuesFor(k).forEach((c) => {
-            if (c.kind === 'music') return;
-            const s = soundFor(this.m, this.incident, c);
-            const src = s ? this.play(s, c.t - shotStart) : null;
-            if (src) this.pending.push(src);
+            const when = c.t - shotStart;
+            if (c.kind === 'music') { if (when > 1e-3) this.setBed(c, when); return; }
+            soundsFor(this.m, this.incident, c).forEach((s) => {
+                const p = this.play(s, when, !!s.tags?.includes('loop'));
+                if (!p) return;
+                this.pending.push(p.src);
+                // the music steps back while someone speaks
+                if ((c.kind === 'line' || c.kind === 'say') && typeof duck === 'number' && this.musicBus && this.ctx) {
+                    const at = this.ctx.currentTime + Math.max(0, when);
+                    const len = p.src.buffer?.duration ?? 1.5;
+                    this.musicBus.gain.setTargetAtTime(db(duck), at, 0.08);
+                    this.musicBus.gain.setTargetAtTime(1, at + len, 0.25);
+                }
+            });
         });
     }
 
     stopPending() {
         this.pending.forEach((s) => { try { s.stop(); } catch { /* already over */ } });
         this.pending = [];
+        if (this.musicBus && this.ctx) { this.musicBus.gain.cancelScheduledValues(this.ctx.currentTime); this.musicBus.gain.setTargetAtTime(1, this.ctx.currentTime, 0.1); }
     }
 
     toggle() {

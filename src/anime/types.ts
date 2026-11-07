@@ -50,6 +50,16 @@ export interface Shot {
     /** Or one line, said by someone, and when. */
     line?: { who: string; text: string };
     lineAt?: number;
+    /** A voiced line with nothing drawn (the title read aloud, a narrator), and when, in seconds into the shot.
+     *  A shot has at most one voiced line: line or say. */
+    say?: { who: string; text: string; at: number };
+    /** Sounds, each optionally at a time: "clink@0.8"; with no time it starts with the shot. Names are Video's
+     *  (manifest.sfx). A looped sound (typing, rain...) runs until the shot ends. When a shot has sfx, its fx make
+     *  no sound, so nothing doubles. */
+    sfx?: string[];
+    /** The music for this shot and on, until a shot names another. "none" is silence. Names are Video's
+     *  (manifest.music). */
+    music?: 'heroic' | 'calm' | 'sad' | 'comic' | 'soft' | 'sneaky' | 'theme' | 'none' | (string & {});
     /** What a phone keeps in frame when the 16:9 frame has to be cropped. */
     focus?: [number, number];
     /** The vertical (9:16, 900 x 1600) staging: cast and props placed for the tall frame. Without it, a layout rule

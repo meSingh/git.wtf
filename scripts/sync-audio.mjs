@@ -18,5 +18,5 @@ for (const s of m.sounds ?? []) {
     // the page needs where and what; the licence record stays in Video's manifest
     sounds.push({ id: s.id, web: s.web, kind: s.kind, tags: s.tags, duration: s.duration, ...(s.gain ? { gain: s.gain } : {}) });
 }
-writeFileSync(path.join(out, 'manifest.json'), JSON.stringify({ about: 'Copied from video/audio by scripts/sync-audio.mjs; edit the library there.', fx: m.fx ?? {}, events: m.events ?? {}, voices: m.voices ?? {}, sounds }, null, 1));
+writeFileSync(path.join(out, 'manifest.json'), JSON.stringify({ about: 'Copied from video/audio by scripts/sync-audio.mjs; edit the library there.', fx: m.fx ?? {}, sfx: m.sfx ?? {}, music: m.music ?? {}, events: m.events ?? {}, voices: m.voices ?? {}, ...(m.mix ? { mix: m.mix } : {}), sounds }, null, 1));
 console.log(`[audio] ${sounds.length} sounds copied to public/audio`);

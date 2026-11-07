@@ -359,8 +359,8 @@ export function mountCutscene(wrap: HTMLElement) {
 
     addEventListener('resize', fit);
     // The plan: each shot's length, decided once from its own timeline (Video's rule, shared with the recorder):
-    // length = max(animation, lineAt + read(line), wordAt + 1.2) + 0.5 s, read = max(1.4, 0.32 s a word + 0.6);
-    // the end card holds 3 s after the stamp lands.
+    // length = max(animation, lineAt + read(line), say.at + read(say), wordAt + 1.2) + 0.5 s,
+    // read = max(1.4, 0.32 s a word + 0.6); the end card holds 3 s after the stamp lands.
     const words = (t: string) => t.split(/\s+/).filter(Boolean).length;
     const lens: number[] = [];
     const stampAt: (number | null)[] = [];
@@ -370,12 +370,14 @@ export function mountCutscene(wrap: HTMLElement) {
         show(k);
         const s = list.shots[k];
         const anim = tl!.duration();
-        const lineEnd = s.line ? (s.lineAt ?? 0.9) + Math.max(1.4, 0.32 * words(`${s.line.text}`) + 0.6) : 0;
+        const read = (t: string) => Math.max(1.4, 0.32 * words(t) + 0.6);
+        const lineEnd = s.line ? (s.lineAt ?? 0.9) + read(`${s.line.text}`) : 0;
+        const sayEnd = s.say ? (s.say.at ?? 0) + read(s.say.text) : 0;
         const wordEnd = s.word ? (s.wordAt ?? 0.75) + 1.2 : 0;
         const end = (s.fx ?? []).find((f) => f.startsWith('endcard'));
         const stamp = end ? Number(end.split('@')[1] || 1.6) + 0.8 + 0.25 : null;
         stampAt.push(stamp);
-        lens.push(Math.max(Math.max(anim, lineEnd, wordEnd) + 0.5, stamp !== null ? stamp + 3 : 0));
+        lens.push(Math.max(Math.max(anim, lineEnd, sayEnd, wordEnd) + 0.5, stamp !== null ? stamp + 3 : 0));
         tl!.kill();
         loops.forEach((l) => l.kill());
         loops = [];
@@ -386,16 +388,28 @@ export function mountCutscene(wrap: HTMLElement) {
     starts = lens.map((_, k) => lens.slice(0, k).reduce((x, y) => x + y, 0));
     const total = starts[starts.length - 1] + lens[lens.length - 1];
     const plan = list.shots.map((s, k) => ({ id: s.id, start: +starts[k].toFixed(3), length: +lens[k].toFixed(3) }));
-    const cues: Cue[] = [{ t: 0, kind: 'music', name: 'start', shot: list.shots[0].id }];
+    // The sound plan, shared with the recorder. A shot list that names music states gets a music cue wherever the
+    // state changes; an older one keeps the single bed from start to end. A shot with sfx plays those, and its fx
+    // stay silent so nothing doubles.
+    const states = list.shots.some((s) => s.music);
+    const cues: Cue[] = states ? [] : [{ t: 0, kind: 'music', name: 'start', shot: list.shots[0].id }];
+    let state: string | undefined;
     list.shots.forEach((s, k) => {
         const t0 = starts[k];
+        if (states && s.music && s.music !== state) { state = s.music; cues.push({ t: t0, kind: 'music', name: s.music, shot: s.id }); }
         if (k > 0) cues.push({ t: t0, kind: 'cut', name: 'cut', shot: s.id });
-        (s.fx ?? []).forEach((f) => { const [name, at] = f.split('@'); if (name !== 'endcard' && name !== 'titlecard') cues.push({ t: t0 + Number(at || 0), kind: 'fx', name, shot: s.id }); else cues.push({ t: t0 + (name === 'endcard' ? Number(at || 1.6) + 0.2 : 0.3), kind: name === 'endcard' ? 'tbc' : 'fx', name, shot: s.id }); });
+        (s.sfx ?? []).forEach((f) => { const [name, at] = f.split('@'); cues.push({ t: t0 + Number(at || 0), kind: 'sfx', name, shot: s.id }); });
+        (s.fx ?? []).forEach((f) => {
+            const [name, at] = f.split('@');
+            if (name === 'endcard') cues.push({ t: t0 + Number(at || 1.6) + 0.2, kind: 'tbc', name, shot: s.id });
+            else if (!s.sfx?.length) cues.push({ t: t0 + (name === 'titlecard' ? 0.3 : Number(at || 0)), kind: 'fx', name, shot: s.id });
+        });
         if (s.word) cues.push({ t: t0 + (s.wordAt ?? 0.75), kind: 'word', name: s.id, shot: s.id });
         if (s.line) cues.push({ t: t0 + (s.lineAt ?? 0.9), kind: 'line', name: s.id, shot: s.id });
+        else if (s.say) cues.push({ t: t0 + (s.say.at ?? 0), kind: 'say', name: s.id, shot: s.id });
         if (stampAt[k] !== null) cues.push({ t: t0 + stampAt[k]!, kind: 'stamp', name: 'stamp', shot: s.id });
     });
-    cues.push({ t: total, kind: 'music', name: 'end', shot: list.shots[list.shots.length - 1].id });
+    if (!states) cues.push({ t: total, kind: 'music', name: 'end', shot: list.shots[list.shots.length - 1].id });
     cues.forEach((c) => { c.t = +c.t.toFixed(3); });
     cues.sort((x, y) => x.t - y.t);
     audio = auto ? null : new CutAudio(base, list.incident, (k) => cues.filter((c) => c.shot === list.shots[k].id), () => cues);
