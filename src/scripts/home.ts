@@ -6,10 +6,11 @@
 //   the bar as the odometer badge (scrubbed, so scrolling back undocks).
 // 2 About two seconds in, the page scrolls slowly to the cut with a hint; any input stops it. With reduced motion
 //   there is no auto-scroll, only the hint.
-// 3 The episode plays full screen at the page's pace: the player fragment and the engine load after the first
-//   paint; the stage sticks in a tall section, and each gesture (wheel, swipe, key) plays the next shot at its own
-//   timing, input held while a shot plays, never more than one shot a gesture. Sound is off until turned on.
-// 4 The record scrolls sideways, newest first; the score and the streak roll to their counts on entry. Headings lock in word by word, once.
+// 3 The episode plays full screen by itself while it is in view, shot after shot on its planned clock, and pauses
+//   when it leaves; the page scrolls past it freely. Replay and Sound sit in the player bar. Sound is off until
+//   turned on. With reduced motion nothing plays until Replay is pressed.
+// 4 The record scrolls sideways on its own (swipe, drag, the arrows), newest first on the left; the score and the
+//   streak roll to their counts on entry. Headings lock in word by word, once.
 // Between sections a band of hazard stripes wipes across, scrubbed to scroll.
 import gsap from 'gsap';
 import { syncOdos, target } from './odometer';
@@ -131,118 +132,81 @@ function opening(odo: HTMLElement, odoWrap: HTMLElement) {
     if (location.search.includes('debug')) { intro.pause(0); (window as any).__hero = { tl: intro, gsap }; }
 }
 
-/** Reduced motion: the cut's frames follow the scroll, nothing plays by itself. */
-function scrubByScroll(h: import('./anime').CutHandle) {
+/** 3 The episode plays by itself: in view (most of it on screen), each shot runs at its planned length and the next
+ *  follows; out of view, it pauses and the shot restarts on return; at the end it rests on the end card until
+ *  Replay. The page's scroll is never held. Skip episode goes on to the next block and stops the run. */
+function playCut(h: import('./anime').CutHandle, autoplay: boolean) {
     const sec = q('#cut');
-    const count = q('[data-cut-count]');
     if (!sec) return;
-    const onScroll = () => {
-        const r = sec.getBoundingClientRect();
-        const span = r.height - innerHeight;
-        const k = h.frameAt(Math.max(0, Math.min(1, -r.top / Math.max(1, span))) * h.total);
-        if (count) count.textContent = `${k + 1} / ${h.n}`;
+    const count = q('[data-cut-count]');
+    const down = q('[data-cut-down]');
+    // the sound button comes with the player; it moves into the bar beside Replay
+    const slot = q('[data-cut-sound-slot]');
+    const sound = q('#cut-stage .cut-sound');
+    if (slot && sound) slot.appendChild(sound);
+    const n = h.n;
+    let k = 0;
+    let timer: gsap.core.Tween | null = null;
+    let started = false, done = false, inView = false;
+    const paint = () => {
+        if (count) count.textContent = `${k + 1} / ${n}`;
+        // the "keep scrolling" hint shows over the first shot and the end, never over the lines in between
+        if (down) gsap.to(down, { autoAlpha: k === 0 || done ? 1 : 0, duration: 0.3, overwrite: true });
     };
-    addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    const stop = () => { timer?.kill(); timer = null; h.audio?.stopPending(); };
+    const schedule = () => {
+        timer?.kill();
+        timer = gsap.delayedCall(h.plan[k]?.length ?? 3, () => {
+            timer = null;
+            if (k < n - 1) { k++; h.play(k); paint(); schedule(); }
+            else { done = true; paint(); }
+        });
+    };
+    const run = (from: number) => { done = false; started = true; k = from; h.play(k); paint(); schedule(); };
+    paint();
+    if (autoplay) {
+        new IntersectionObserver(([e]) => {
+            inView = e.intersectionRatio >= 0.6;
+            if (inView) { if (!started) run(0); else if (!done && !timer) { h.play(k); schedule(); } }
+            else if (e.intersectionRatio < 0.3 && timer) stop();
+        }, { threshold: [0, 0.3, 0.6, 1] }).observe(sec);
+    }
+    q('[data-cut-replay]')?.addEventListener('click', () => { stop(); run(0); });
+    const next = () => { const d = q('#detail'); scrollTo({ top: Math.round(d ? d.getBoundingClientRect().top + scrollY : sec.getBoundingClientRect().bottom + scrollY), behavior: 'smooth' }); };
+    q('[data-cut-skip]')?.addEventListener('click', () => { stop(); done = true; started = true; paint(); next(); });
+    down?.addEventListener('click', (e) => { e.preventDefault(); next(); });
+    void inView;
 }
 
-/** 3 The episode at the page's pace. The section is as tall as one step a shot; the stage sticks. Inside it, a
- *  gesture plays the next shot at its authored timing and moves the page one step; while a shot plays, input is
- *  held; a wheel's inertia or a long swipe counts once. At the last shot's end the page scrolls on as usual. Skip
- *  episode leaves the episode for the next block without playing the shots on the way. */
-function stepCut(h: import('./anime').CutHandle, ST: typeof import('gsap/ScrollTrigger').ScrollTrigger) {
-    const sec = q('#cut');
-    const count = q('[data-cut-count]');
-    if (!sec) return;
-    const n = h.n;
-    const step = parseFloat(getComputedStyle(sec).getPropertyValue('--cut-step')) || 360;
-    let k = -1;
-    let holdUntil = 0;
-    let wanted = 0; // a move that arrived while a shot was playing: taken when the shot is done
-    let skipping = false; // Skip episode: the page is on its way to the next block, no shot plays on the way
-    const top = () => sec.getBoundingClientRect().top + scrollY;
-    const inside = () => { const t = top(); return scrollY >= t - 1 && scrollY <= t + n * step + 1; };
-    // a shot counts as done at its authored length (the plan's, loops or not), never by asking its timeline
-    const held = () => performance.now() < holdUntil;
-    // the "keep scrolling" hint shows over the first shot only and fades on the reader's first move
-    const down = q('[data-cut-down]');
-    const paint = () => { if (count) count.textContent = `${k + 1} / ${n}`; if (down) gsap.to(down, { autoAlpha: k > 0 ? 0 : 1, duration: 0.3, overwrite: true }); };
-    const go = (to: number) => {
-        to = Math.max(0, Math.min(n - 1, to));
-        if (to === k && k === n - 1) return; // past the last shot there is nothing to play: the page scrolls on
-        k = to;
-        scrollTo({ top: Math.round(top() + k * step), behavior: 'auto' });
-        h.play(k);
-        holdUntil = performance.now() + Math.min(5000, Math.max(600, (h.plan[k]?.length ?? 1) * 1000));
-        paint();
-        // the reader kept scrolling during the shot: the next shot follows by itself when this one is done
-        wanted = 0;
-        gsap.delayedCall((holdUntil - performance.now()) / 1000 + 0.02, () => { if (wanted && inside()) { const d = wanted; wanted = 0; if (k + d >= 0 && k + d < n) go(k + d); } });
+/** 4 The record's own sideways scroll: the arrows step about a screen, a mouse can drag it, a trackpad swipes it.
+ *  The page's up and down scroll passes it by. */
+function recordNav() {
+    const sc = q('#track-scroll');
+    const nav = q('[data-track-nav]');
+    if (!sc) return;
+    const btns = qa<HTMLButtonElement>('[data-track-go]');
+    const paint = () => {
+        const max = sc.scrollWidth - sc.clientWidth;
+        btns.forEach((b) => { b.disabled = Number(b.dataset.trackGo) < 0 ? sc.scrollLeft <= 2 : sc.scrollLeft >= max - 2; });
+        if (nav) nav.hidden = max <= 2;
     };
-    // a scroll the page did not make (the scrollbar, the auto-scroll arriving, a jump back): show that step's shot
-    ST.create({
-        trigger: sec, start: 'top top', end: 'bottom bottom',
-        onUpdate: (self) => { if (skipping) return; const to = Math.min(n - 1, Math.round(self.progress * n)); if (to !== k) { k = to; h.play(k); paint(); } },
-        onEnter: () => { if (k < 0) go(0); },
+    btns.forEach((b) => b.addEventListener('click', () => sc.scrollBy({ left: Number(b.dataset.trackGo) * Math.max(320, sc.clientWidth * 0.8), behavior: 'smooth' })));
+    sc.addEventListener('scroll', paint, { passive: true });
+    addEventListener('resize', paint);
+    paint();
+    // a mouse drag scrolls it; a drag of more than a few pixels is not a click on a card
+    let x0 = 0, left0 = 0, id = -1, moved = false;
+    sc.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse' || e.button !== 0) return; id = e.pointerId; x0 = e.clientX; left0 = sc.scrollLeft; moved = false; });
+    sc.addEventListener('pointermove', (e) => {
+        if (e.pointerId !== id) return;
+        const dx = e.clientX - x0;
+        if (!moved && Math.abs(dx) > 6) { moved = true; sc.classList.add('dragging'); sc.setPointerCapture(id); }
+        if (moved) sc.scrollLeft = left0 - dx;
     });
-    // arriving at the top by any route (the auto-scroll lands exactly there): the first shot plays
-    const sync = () => { if (skipping && scrollY >= top() + n * step - 1) skipping = false; if (k < 0 && !skipping && scrollY >= top() - 1 && scrollY <= top() + step) go(0); };
-    addEventListener('scroll', sync, { passive: true });
-    sync();
-    const forward = (dir: number) => {
-        if (skipping) return true;
-        if (held()) { wanted = k + dir >= 0 && k + dir < n ? dir : 0; return true; } // held: remembered, taken when the shot is done
-        go(k + dir);
-        return true;
-    };
-    // the wheel: while a shot plays, its events are eaten (and the direction remembered); once it is done, the
-    // next event steps. Steady scrolling therefore advances one shot per authored length, a flick one shot.
-    addEventListener('wheel', (e) => {
-        if (!inside() || skipping) return;
-        const dir = e.deltaY > 0 ? 1 : e.deltaY < 0 ? -1 : 0;
-        if (!dir) return;
-        if (dir > 0 && k >= n - 1 && !held()) return; // the end: the page goes on
-        if (dir < 0 && k <= 0 && scrollY <= top() + 1) return; // the start: back to the hero
-        e.preventDefault();
-        forward(dir);
-    }, { passive: false });
-    // a swipe: the touch moves nothing itself; on lift, its direction is one step
-    let y0: number | null = null;
-    addEventListener('touchstart', (e) => { y0 = inside() && !skipping ? e.touches[0].clientY : null; }, { passive: true });
-    addEventListener('touchmove', (e) => {
-        if (y0 === null || !inside()) return;
-        const dy = y0 - e.touches[0].clientY;
-        if (dy > 0 && k >= n - 1 && !held()) return;
-        if (dy < 0 && k <= 0) return;
-        e.preventDefault();
-    }, { passive: false });
-    addEventListener('touchend', (e) => {
-        if (y0 === null) return;
-        const dy = y0 - e.changedTouches[0].clientY;
-        y0 = null;
-        if (Math.abs(dy) < 24 || !inside()) return;
-        if (dy > 0 && k >= n - 1 && !held()) return;
-        if (dy < 0 && k <= 0) return;
-        forward(dy > 0 ? 1 : -1);
-    }, { passive: true });
-    addEventListener('keydown', (e) => {
-        if (!inside() || skipping || (e.target instanceof HTMLElement && e.target.closest('input, textarea, button, a'))) return;
-        const dir = [' ', 'ArrowDown', 'PageDown', 'Enter'].includes(e.key) ? 1 : ['ArrowUp', 'PageUp'].includes(e.key) ? -1 : 0;
-        if (!dir) return;
-        if (dir > 0 && k >= n - 1 && !held()) return;
-        if (dir < 0 && k <= 0) return;
-        e.preventDefault();
-        forward(dir);
-    });
-    q('[data-cut-replay]')?.addEventListener('click', () => { k = -1; go(0); });
-    // Skip episode: out of the episode altogether, smoothly down to the next block, no shot played on the way; a
-    // reader who comes back up finds the episode at the step they land on
-    q('[data-cut-skip]')?.addEventListener('click', () => {
-        skipping = true; wanted = 0; holdUntil = 0;
-        const detail = q('#detail');
-        scrollTo({ top: Math.round(detail ? detail.getBoundingClientRect().top + scrollY : top() + n * step + 1), behavior: 'smooth' });
-    });
-    q('[data-cut-down]')?.addEventListener('click', (e) => { e.preventDefault(); if (k >= n - 1 && !held()) scrollTo({ top: top() + n * step + 1, behavior: 'smooth' }); else forward(1); });
+    const end = (e: PointerEvent) => { if (e.pointerId !== id) return; id = -1; if (moved) requestAnimationFrame(() => sc.classList.remove('dragging')); };
+    sc.addEventListener('pointerup', end);
+    sc.addEventListener('pointercancel', end);
+    sc.addEventListener('dragstart', (e) => e.preventDefault());
 }
 
 export async function home() {
@@ -252,18 +216,16 @@ export async function home() {
     const odo = q('.hh-odo');
     const badge = q('#badge');
     if (!hero || !odoWrap || !odo || !badge) return;
+    recordNav();
 
     if (!html.classList.contains('js-anim')) {
         // no opening: the finished page. With reduced motion the cut is scrubbed by hand and nothing auto-scrolls;
         // when only the flag was lost (a slow cold load), the paced episode and the auto-scroll still run.
         document.body.classList.add('docked');
         const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || location.search.includes('reduce');
-        if (reduce) { setTimeout(() => mountCut()?.then((h) => h && scrubByScroll(h)), 300); return; }
-        mountCut();
+        if (reduce) { setTimeout(() => mountCut()?.then((h) => h && playCut(h, false)), 300); return; }
+        mountCut()?.then((h) => h && playCut(h, true));
         autoScroll(1.2);
-        const { ScrollTrigger: ST } = await import('gsap/ScrollTrigger');
-        gsap.registerPlugin(ST);
-        mountCut()?.then((h) => h && stepCut(h, ST));
         return;
     }
     (window as any).__heroRan = true;
@@ -311,8 +273,8 @@ export async function home() {
             .to(odoWrap, { x: () => dock().x, y: () => dock().y, scale: () => dock().scale, duration: 1, ease: 'power2.inOut' }, 0)
             .to(odoWrap, { autoAlpha: 0, duration: 0.03, ease: 'none' }, 0.97);
 
-        // 3 The cut: the stage is sticky in a tall section; the scroll through that section is the cut's clock
-        mountCut()?.then((h) => h && stepCut(h, ScrollTrigger));
+        // 3 The cut plays by itself while it is in view
+        mountCut()?.then((h) => h && playCut(h, true));
 
         // Section headings lock in word by word, once.
         qa('[data-lock]').forEach((h) => {
@@ -329,21 +291,10 @@ export async function home() {
             });
         });
 
-        // 4 The record: sideways on desktop, each gap rolling as it comes into view; stacked on phones.
+        // 4 The record scrolls itself sideways (recordNav); the gaps roll as it comes into view, the nearest first
         const wrap = q('#track-wrap');
-        const track = q('#track');
-        if (desktop && wrap && track) {
-            const distance = () => Math.max(0, track.offsetWidth - window.innerWidth);
-            // the track is anchored to the right edge (the newest card in view); the scroll slides it rightward, so
-            // the older cards come in from the left, back in time
-            const sideways = gsap.fromTo(track, { x: 0 }, {
-                x: () => distance(),
-                ease: 'none',
-                scrollTrigger: { trigger: wrap, start: 'top top', end: () => `+=${Math.max(1, qa('#track .tcard').length) * 350}`, pin: true, scrub: 0.6, invalidateOnRefresh: true },
-            });
-            void sideways;
-            // the gaps roll as the record pins, the nearest first
-            ScrollTrigger.create({ trigger: wrap, start: 'top 60%', once: true, onEnter: () => qa('#track .gap .odo').forEach((g, i) => gsap.delayedCall(i * 0.15, () => rollOnce(g, 0.9))) });
+        if (desktop && wrap) {
+            ScrollTrigger.create({ trigger: wrap, start: 'top 75%', once: true, onEnter: () => qa('#track .gap .odo').forEach((g, i) => gsap.delayedCall(i * 0.15, () => rollOnce(g, 0.9))) });
         } else {
             qa('.record-stack .odo').forEach((g) => ScrollTrigger.create({ trigger: g, start: 'top 90%', once: true, onEnter: () => rollOnce(g, 0.9) }));
         }

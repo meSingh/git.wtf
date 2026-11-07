@@ -1,6 +1,6 @@
 ---
-// The homepage (v6, Mandeep's notes of 7 Nov 2026): the counter, then today's episode full screen with the page
-// setting the pace through it, the story detail, share, the record back in time, the score, the streak, confess,
+// The homepage (v6, Mandeep's notes of 7 Nov 2026): the counter, then today's episode full screen, playing by
+// itself while it is in view and never holding the page's scroll, the story detail, share, the record back in time, the score, the streak, confess,
 // the story. The first paint carries the counter and the episode's poster only; the cut, its engine and its sound
 // load afterwards.
 import { getCollection } from 'astro:content';
@@ -26,9 +26,6 @@ const cut = latest && list ? cutAssets(latest.id) : null;
 const posterOf = (f: string | null) => (latest && f ? href(`/cuts/${latest.id}/${f}`) : null);
 const poster = posterOf(cut?.poster ?? null), posterTall = posterOf(cut?.posterTall ?? null);
 const hasCut = !!(cut && poster && list);
-// the scroll the episode takes: one step a shot, reserved in the page so nothing moves when the player mounts
-const STEP = 360;
-const cutScroll = hasCut ? list!.shots.length * STEP : 0;
 const jsonld = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -56,7 +53,7 @@ const jsonld = {
 
     {hasCut ? (
         <>
-            <section class="beat beat-cut" id="cut" aria-label={`Today's fuck-up: ${latest!.data.title}, as an anime cutscene`} style={`--cut-scroll:${cutScroll}px;--cut-step:${STEP}px`}>
+            <section class="beat beat-cut" id="cut" aria-label={`Today's fuck-up: ${latest!.data.title}, as an anime cutscene`}>
                 <div class="ep" id="cut-stage" data-player={href(`${incidentPath(latest!)}cut/player/`)} data-cut={latest!.id} data-n={list!.shots.length}>
                     <div class="ep-box" data-cut-box>
                         <picture class="ep-poster">
@@ -67,8 +64,12 @@ const jsonld = {
                     <a class="ep-down" href="#detail" data-cut-down><span class="ep-down-w">Keep scrolling. It gets worse.</span><span class="ep-down-a" aria-hidden="true"></span></a>
                     <button type="button" class="ep-skip" data-cut-skip>Skip episode <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2l8 6-8 6z" /><rect x="11.5" y="2" width="2.5" height="12" /></svg></button>
                     <div class="ep-bar">
+                        <p class="ep-ctls">
+                            <button type="button" class="ep-replay" data-cut-replay aria-label="Replay the episode"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5V1L7 6l5 5V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z" /></svg><span>Replay</span></button>
+                            <span class="ep-sound" data-cut-sound-slot></span>
+                            <span class="ep-count" data-cut-count aria-live="off"></span>
+                        </p>
                         <p class="ep-today"><span class="ep-k">Today's fuck-up:</span> <a href={href(incidentPath(latest!))}>{latest!.data.title}</a></p>
-                        <p class="ep-ctls"><span data-cut-count aria-live="off"></span><button type="button" data-cut-replay>Replay</button></p>
                     </div>
                 </div>
             </section>
