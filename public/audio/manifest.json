@@ -1,0 +1,242 @@
+{
+ "about": "Copied from video/audio by scripts/sync-audio.mjs; edit the library there.",
+ "fx": {},
+ "events": {},
+ "voices": {},
+ "sounds": [
+  {
+   "id": "amb-rain",
+   "web": "web/amb-rain.mp3",
+   "kind": "sfx",
+   "tags": [
+    "rain",
+    "ambience",
+    "loop"
+   ],
+   "duration": 48.014
+  },
+  {
+   "id": "sfx-blink",
+   "web": "web/sfx-blink.mp3",
+   "kind": "sfx",
+   "tags": [
+    "blink",
+    "teleport"
+   ],
+   "duration": 1.08
+  },
+  {
+   "id": "sfx-boing",
+   "web": "web/sfx-boing.mp3",
+   "kind": "sfx",
+   "tags": [
+    "boing",
+    "bounce",
+    "cartoon"
+   ],
+   "duration": 2.173
+  },
+  {
+   "id": "sfx-branch-snap",
+   "web": "web/sfx-branch-snap.mp3",
+   "kind": "sfx",
+   "tags": [
+    "branch",
+    "snap"
+   ],
+   "duration": 0.567
+  },
+  {
+   "id": "sfx-copier",
+   "web": "web/sfx-copier.mp3",
+   "kind": "sfx",
+   "tags": [
+    "copier",
+    "printer",
+    "machine"
+   ],
+   "duration": 3
+  },
+  {
+   "id": "sfx-door",
+   "web": "web/sfx-door.mp3",
+   "kind": "sfx",
+   "tags": [
+    "door"
+   ],
+   "duration": 1.789
+  },
+  {
+   "id": "sfx-drop",
+   "web": "web/sfx-drop.mp3",
+   "kind": "sfx",
+   "tags": [
+    "drop",
+    "tear",
+    "sweat"
+   ],
+   "duration": 0.356
+  },
+  {
+   "id": "sfx-glint",
+   "web": "web/sfx-glint.mp3",
+   "kind": "sfx",
+   "tags": [
+    "glint",
+    "sparkle"
+   ],
+   "duration": 0.936
+  },
+  {
+   "id": "sfx-impact",
+   "web": "web/sfx-impact.mp3",
+   "kind": "sfx",
+   "tags": [
+    "impact",
+    "hit",
+    "boom"
+   ],
+   "duration": 0.635
+  },
+  {
+   "id": "sfx-paper-blizzard",
+   "web": "web/sfx-paper-blizzard.mp3",
+   "kind": "sfx",
+   "tags": [
+    "paper",
+    "files",
+    "blizzard"
+   ],
+   "duration": 3.408
+  },
+  {
+   "id": "sfx-paper-flutter",
+   "web": "web/sfx-paper-flutter.mp3",
+   "kind": "sfx",
+   "tags": [
+    "paper",
+    "drift"
+   ],
+   "duration": 1.81
+  },
+  {
+   "id": "sfx-pop",
+   "web": "web/sfx-pop.mp3",
+   "kind": "sfx",
+   "tags": [
+    "pop",
+    "line",
+    "catch"
+   ],
+   "duration": 0.24
+  },
+  {
+   "id": "sfx-punch",
+   "web": "web/sfx-punch.mp3",
+   "kind": "sfx",
+   "tags": [
+    "impact",
+    "light",
+    "word"
+   ],
+   "duration": 0.267
+  },
+  {
+   "id": "sfx-riser",
+   "web": "web/sfx-riser.mp3",
+   "kind": "sfx",
+   "tags": [
+    "riser",
+    "rise",
+    "charge"
+   ],
+   "duration": 2.574
+  },
+  {
+   "id": "sfx-rumble",
+   "web": "web/sfx-rumble.mp3",
+   "kind": "sfx",
+   "tags": [
+    "shake",
+    "rumble"
+   ],
+   "duration": 2.2
+  },
+  {
+   "id": "sfx-sip",
+   "web": "web/sfx-sip.mp3",
+   "kind": "sfx",
+   "tags": [
+    "mug",
+    "sip",
+    "coffee"
+   ],
+   "duration": 1.22
+  },
+  {
+   "id": "sfx-stamp",
+   "web": "web/sfx-stamp.mp3",
+   "kind": "sfx",
+   "tags": [
+    "stamp",
+    "slam"
+   ],
+   "duration": 0.524
+  },
+  {
+   "id": "sfx-swish",
+   "web": "web/sfx-swish.mp3",
+   "kind": "sfx",
+   "tags": [
+    "swish",
+    "turn",
+    "cut"
+   ],
+   "duration": 0.435
+  },
+  {
+   "id": "sfx-tbc",
+   "web": "web/sfx-tbc.mp3",
+   "kind": "sfx",
+   "tags": [
+    "to-be-continued",
+    "sting",
+    "endcard"
+   ],
+   "duration": 4.421
+  },
+  {
+   "id": "sfx-whoosh",
+   "web": "web/sfx-whoosh.mp3",
+   "kind": "sfx",
+   "tags": [
+    "whoosh",
+    "dash",
+    "whip",
+    "slide"
+   ],
+   "duration": 0.233
+  },
+  {
+   "id": "sfx-whoosh-big",
+   "web": "web/sfx-whoosh-big.mp3",
+   "kind": "sfx",
+   "tags": [
+    "whoosh",
+    "speedlines",
+    "spin"
+   ],
+   "duration": 2.96
+  },
+  {
+   "id": "sfx-wind",
+   "web": "web/sfx-wind.mp3",
+   "kind": "sfx",
+   "tags": [
+    "wind",
+    "gust"
+   ],
+   "duration": 1.603
+  }
+ ]
+}

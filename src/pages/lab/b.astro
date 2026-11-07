@@ -18,11 +18,12 @@ const d = incident?.data;
 ) : (
 <Base title={`${d.title} | anime cutscene | git.wtf lab`} noindex>
     <main class="cut-page">
-        <section class="cut-wrap" id="cutscene" aria-label={`${d.title}, as an anime cutscene`}>
+        <section class="cut-wrap" id="cutscene" aria-label={`${d.title}, as an anime cutscene`} data-base={import.meta.env.BASE_URL}>
             <Cutscene list={list as ShotList} status={d.status} />
             <p class="cut-hint" data-hint aria-hidden="true">Click, tap or press space</p>
             <p class="cut-count" data-count aria-hidden="true"></p>
             <button type="button" class="cut-skip" data-skip>Skip to the end</button>
+            <button type="button" class="cut-sound" data-sound aria-pressed="true" hidden>Sound on</button>
         </section>
         <div class="cut-after" data-after>
             <p class="still-caption">Twelve agents shared one checkout. 2,309 uncommitted files went, and nothing recorded which agent did it.</p>
@@ -52,6 +53,10 @@ const d = incident?.data;
     .cut-count { right: 1rem; }
     .cut-skip { position: absolute; top: 0.8rem; right: 1rem; appearance: none; background: rgba(10, 10, 10, 0.6); border: 1px solid var(--line-2); border-radius: 2px; color: var(--paper); font: 400 0.78rem/1 var(--mono); padding: 0.55em 0.8em; cursor: pointer; }
     .cut-skip:hover { border-color: var(--yellow); color: var(--yellow); }
+    .cut-sound { position: absolute; top: 0.8rem; left: 1rem; appearance: none; background: rgba(10, 10, 10, 0.6); border: 1px solid var(--line-2); border-radius: 2px; color: var(--paper); font: 400 0.78rem/1 var(--mono); padding: 0.55em 0.8em; cursor: pointer; }
+    .cut-sound[hidden] { display: none; }
+    .cut-sound[aria-pressed='false'] { color: var(--grey); }
+    .cut-wrap.rendering .cut-skip, .cut-wrap.rendering .cut-sound, .cut-wrap.rendering .cut-hint, .cut-wrap.rendering .cut-count { display: none; }
     .cut-wrap.at-end .cut-skip, .cut-wrap.still .cut-skip, .cut-wrap.still .cut-count { display: none; }
     .cut-after { width: min(var(--col), 100% - 2rem); margin: 2rem auto 0; }
     .still-caption { display: none; font-family: var(--body); font-size: 1.15rem; max-width: 40em; margin: 0 0 1rem; }

@@ -4,6 +4,7 @@
 // shows as a still, stamp down.
 import gsap from 'gsap';
 import type { Shot, ShotList } from '../anime/types';
+import { CutAudio, type Cue } from './cut-audio';
 
 type El = SVGGraphicsElement;
 
@@ -251,6 +252,13 @@ export function mountCutscene(wrap: HTMLElement) {
     let i = -1;
     let tl: gsap.core.Timeline | null = null;
     let loops: gsap.core.Animation[] = [];
+    // ?play=auto (Video's recorder) or ?render: the cut runs by itself on the planned clock, no input, no sound
+    const auto = /[?&](play=auto|render)\b/.test(location.search);
+    const base = (wrap.dataset.base || '').replace(/\/$/, '');
+    const soundBtn = wrap.querySelector<HTMLButtonElement>('[data-sound]');
+    let planning = false;
+    let audio: CutAudio | null = null;
+    let starts: number[] = [];
 
     // a phone keeps the shot's focus in the middle and puts words above and lines below the picture
     const fit = () => {
@@ -315,7 +323,12 @@ export function mountCutscene(wrap: HTMLElement) {
             else FX[name](ctx, Number(t || 0));
         });
         // a hard cut reads as a cut: one white frame between shots
-        if (!instant && n > 0) { const fl = q(svg, '.flash')!; gsap.fromTo(fl, { visibility: 'visible', fill: '#f2f0ea', opacity: 0.85 }, { opacity: 0, duration: 0.12, onComplete: () => gsap.set(fl, { visibility: 'hidden', opacity: 1 }) }); }
+        if (!instant && n > 0) {
+            const fl = q(svg, '.flash')!;
+            tl.fromTo(fl, { visibility: 'visible', fill: '#f2f0ea', opacity: 0.85 }, { opacity: 0, duration: 0.12, immediateRender: false }, 0);
+            tl.set(fl, { visibility: 'hidden', opacity: 1 }, 0.12);
+        }
+        if (!instant && !planning) audio?.shot(i, starts[i] ?? 0);
         if (instant) tl.progress(1);
         if (count) count.textContent = `${i + 1} / ${shots.length}`;
         const last = i === shots.length - 1;
@@ -330,9 +343,81 @@ export function mountCutscene(wrap: HTMLElement) {
     };
     const prev = () => show(i - 1);
 
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || location.search.includes('reduce');
     addEventListener('resize', fit);
+    // The plan: each shot's length, decided once from its own timeline (Video's rule, shared with the recorder):
+    // length = max(animation, lineAt + read(line), wordAt + 1.2) + 0.5 s, read = max(1.4, 0.32 s a word + 0.6);
+    // the end card holds 3 s after the stamp lands.
+    const words = (t: string) => t.split(/\s+/).filter(Boolean).length;
+    const lens: number[] = [];
+    const stampAt: (number | null)[] = [];
+    planning = true;
+    for (let k = 0; k < shots.length; k++) {
+        i = k - 1;
+        show(k);
+        const s = list.shots[k];
+        const anim = tl!.duration();
+        const lineEnd = s.line ? (s.lineAt ?? 0.9) + Math.max(1.4, 0.32 * words(`${s.line.text}`) + 0.6) : 0;
+        const wordEnd = s.word ? (s.wordAt ?? 0.75) + 1.2 : 0;
+        const end = (s.fx ?? []).find((f) => f.startsWith('endcard'));
+        const stamp = end ? Number(end.split('@')[1] || 1.6) + 0.8 + 0.25 : null;
+        stampAt.push(stamp);
+        lens.push(Math.max(Math.max(anim, lineEnd, wordEnd) + 0.5, stamp !== null ? stamp + 3 : 0));
+        tl!.kill();
+        loops.forEach((l) => l.kill());
+        loops = [];
+        gsap.set(shots[k], { visibility: 'hidden' });
+    }
+    planning = false;
+    i = -1;
+    starts = lens.map((_, k) => lens.slice(0, k).reduce((x, y) => x + y, 0));
+    const total = starts[starts.length - 1] + lens[lens.length - 1];
+    const plan = list.shots.map((s, k) => ({ id: s.id, start: +starts[k].toFixed(3), length: +lens[k].toFixed(3) }));
+    const cues: Cue[] = [{ t: 0, kind: 'music', name: 'start', shot: list.shots[0].id }];
+    list.shots.forEach((s, k) => {
+        const t0 = starts[k];
+        if (k > 0) cues.push({ t: t0, kind: 'cut', name: 'cut', shot: s.id });
+        (s.fx ?? []).forEach((f) => { const [name, at] = f.split('@'); if (name !== 'endcard' && name !== 'titlecard') cues.push({ t: t0 + Number(at || 0), kind: 'fx', name, shot: s.id }); else cues.push({ t: t0 + (name === 'endcard' ? Number(at || 1.6) + 0.2 : 0.3), kind: name === 'endcard' ? 'tbc' : 'fx', name, shot: s.id }); });
+        if (s.word) cues.push({ t: t0 + (s.wordAt ?? 0.75), kind: 'word', name: s.id, shot: s.id });
+        if (s.line) cues.push({ t: t0 + (s.lineAt ?? 0.9), kind: 'line', name: s.id, shot: s.id });
+        if (stampAt[k] !== null) cues.push({ t: t0 + stampAt[k]!, kind: 'stamp', name: 'stamp', shot: s.id });
+    });
+    cues.push({ t: total, kind: 'music', name: 'end', shot: list.shots[list.shots.length - 1].id });
+    cues.forEach((c) => { c.t = +c.t.toFixed(3); });
+    cues.sort((x, y) => x.t - y.t);
+    audio = auto ? null : new CutAudio(base, list.incident, (k) => cues.filter((c) => c.shot === list.shots[k].id), () => cues);
+
+    if (auto) {
+        // no input, no waiting: each shot comes on at its planned start, on GSAP's clock only
+        wrap.classList.add('rendering');
+        gsap.ticker.lagSmoothing(0);
+        const master = gsap.timeline({ paused: true });
+        plan.forEach((p, k) => master.call(() => show(k), [], p.start));
+        master.to({}, { duration: 0.001 }, total);
+        // a frame for any time, the same every time: for exporters that seek rather than run a clock
+        const frameAt = (t: number) => {
+            const k = Math.max(0, starts.findLastIndex((x) => x <= t));
+            if (k !== i) show(k);
+            tl!.pause();
+            const local = t - starts[k];
+            tl!.seek(Math.min(local, tl!.duration()), true);
+            loops.forEach((l) => { l.pause(); l.totalTime(Math.max(0, local - tl!.duration())); });
+            return k;
+        };
+        const ready = (document.fonts?.ready ?? Promise.resolve()).then(() => { master.play(0); });
+        (window as any).__cut = { plan, total, cues, ready, show, get i() { return i; }, get tl() { return tl; }, n: shots.length, master, frameAt };
+        return;
+    }
+
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || location.search.includes('reduce');
     if (reduce) { show(shots.length - 1, true); wrap.classList.add('still'); return; }
+
+    // sound: fetched on the viewer's first click, tap or key (a gesture the browser lets audio start from)
+    const startSound = () => { audio?.start().then((ok) => { if (soundBtn) soundBtn.hidden = !ok; if (ok) audio!.shot(Math.max(0, i), starts[Math.max(0, i)]); }); };
+    const paintSound = () => { if (soundBtn && audio) { soundBtn.textContent = audio.on ? 'Sound on' : 'Sound off'; soundBtn.setAttribute('aria-pressed', String(audio.on)); } };
+    paintSound();
+    soundBtn?.addEventListener('click', (e) => { e.stopPropagation(); startSound(); audio?.toggle(); paintSound(); });
+    wrap.addEventListener('pointerdown', startSound, { once: true });
+    addEventListener('keydown', startSound, { once: true });
 
     // input: click or tap, space and the arrows, and the wheel (one shot per gesture)
     wrap.addEventListener('click', (e) => { if ((e.target as HTMLElement).closest('a, button')) return; next(); });
@@ -352,6 +437,6 @@ export function mountCutscene(wrap: HTMLElement) {
     }, { passive: false });
     wrap.querySelector('[data-skip]')?.addEventListener('click', (e) => { e.stopPropagation(); show(shots.length - 1); });
     document.querySelectorAll('[data-replay]').forEach((b) => b.addEventListener('click', () => { scrollTo({ top: 0, behavior: 'smooth' }); i = -1; show(0); }));
-    if (location.search.includes('debug')) (window as any).__cut = { show, get i() { return i; }, get tl() { return tl; }, n: shots.length };
+    if (location.search.includes('debug')) (window as any).__cut = { show, get i() { return i; }, get tl() { return tl; }, n: shots.length, plan, total, cues };
     show(0);
 }
