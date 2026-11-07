@@ -59,6 +59,10 @@ const incidents = defineCollection({
         video: z.string().url().optional(),
         poster: z.string().url().optional(),
         fixture: z.boolean().optional(),
+        // The homepage's "What actually happened": a few short lines (else the retelling's first sentences), and
+        // the words for the story image that sits beside them.
+        detail: z.array(z.string().min(1)).max(4).optional(),
+        story_alt: z.string().optional(),
     }),
 });
 

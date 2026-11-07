@@ -36,6 +36,6 @@ export async function highlightHtml(html: string): Promise<string> {
         const pre = h.codeToHtml(code, { lang, theme: 'vitesse-dark' });
         const cmds = lang === 'bash' ? commandsOf(code) : null;
         const label = LABEL[lang] ?? (lang === 'text' ? 'code' : lang);
-        return `<div class="code"><div class="code-bar"><span class="code-lang">${label}</span><span class="code-acts" hidden><button type="button" class="code-copy" data-copy="${attr(code)}">Copy</button>${cmds ? `<button type="button" class="code-copy" data-copy="${attr(cmds)}">Copy commands</button>` : ''}</span></div>${pre}</div>`;
+        return `<div class="code"><div class="code-bar" data-nosnippet><span class="code-lang">${label}</span><span class="code-acts" hidden><button type="button" class="code-copy" data-copy="${attr(code)}">Copy</button>${cmds ? `<button type="button" class="code-copy" data-copy="${attr(cmds)}">Copy commands</button>` : ''}</span></div>${pre}</div>`;
     });
 }

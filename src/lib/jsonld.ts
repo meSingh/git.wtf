@@ -67,7 +67,7 @@ export function archiveJsonLd(slug: string, d: ArchiveData) {
     const description = clip(d.meta_description || d.excerpt || text(d.html), 300);
     const crumbs = breadcrumbs(d.type === 'post' ? [['git.wtf', '/'], ['Archive', '/archive/'], [d.title, `/${slug}/`]] : [['git.wtf', '/'], [d.title, `/${slug}/`]]);
     if (d.type !== 'post') {
-        return { '@context': 'https://schema.org', '@graph': [{ '@type': 'WebPage', '@id': url, url, name: d.title, description, isPartOf: { '@id': `${SITE.url}/#website` }, publisher: { '@id': ORG['@id'] } }, crumbs, ORG] };
+        return { '@context': 'https://schema.org', '@graph': [{ '@type': 'WebPage', '@id': url, url, name: d.title, description, isPartOf: { '@id': `${SITE.url}/#site` }, publisher: { '@id': ORG['@id'] } }, crumbs, ORG] };
     }
     const author = d.authors[0] && d.authors[0] !== SITE.owner.name ? { '@type': 'Person', name: d.authors[0] } : { '@id': OWNER['@id'] };
     const steps = howToSteps(d.title, d.html);
@@ -80,7 +80,7 @@ export function archiveJsonLd(slug: string, d: ArchiveData) {
         datePublished: d.published_at,
         dateModified: d.updated_at ?? d.published_at,
         inLanguage: 'en',
-        image: d.feature_image ? abs(d.feature_image) : abs('/share.png'),
+        image: abs(`/og/${slug}.png`),
         author,
         publisher: { '@id': ORG['@id'] },
         keywords: d.tags.length ? d.tags.join(', ') : undefined,

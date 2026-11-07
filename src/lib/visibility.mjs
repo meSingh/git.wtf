@@ -18,8 +18,29 @@ export function liveCategories() {
     return new Set(readAll().filter((x) => !x.hidden).map((x) => x.data.category).filter(Boolean));
 }
 
+export function publishedIncidentIds() {
+    return new Set(readAll().filter((x) => !x.hidden).map((x) => x.id));
+}
+
 export function hiddenIncidentIds() {
     return new Set(readAll().filter((x) => x.hidden).map((x) => x.id));
+}
+
+/** Last-modified dates for the sitemap: archive entries by updated_at (else published_at), incidents by date. */
+export function lastModified() {
+    const out = new Map();
+    for (const x of readAll()) if (x.data.date) out.set(`/incident/${x.id}/`, new Date(x.data.date).toISOString());
+    const adir = path.join(root, process.env.GITWTF_FIXTURE === '1' ? 'tests/fixtures/archive' : 'archive');
+    let files = [];
+    try { files = readdirSync(adir).filter((f) => f.endsWith('.md')); } catch { return out; }
+    for (const f of files) {
+        try {
+            const { data } = matter(readFileSync(path.join(adir, f), 'utf8'));
+            const d = data.updated_at || data.published_at;
+            if (d) out.set(`/${f.replace(/\.md$/, '')}/`, new Date(d).toISOString());
+        } catch { /* skip */ }
+    }
+    return out;
 }
 
 function readAll() {

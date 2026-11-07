@@ -54,7 +54,7 @@ export async function llmsTxt(): Promise<string> {
     const out: string[] = [];
     out.push(`# ${SITE.name}`, '', `> ${oneLine(LLMS_COPY.summary)}`, '', oneLine(LLMS_COPY.about), '');
     out.push('## Key pages', '');
-    out.push(`- [Home](${abs('/')}): the day count since the last incident and today's incident`);
+    out.push(`- [Home](${abs('/')}): the day count since the last incident and the latest incident`);
     out.push(`- [Incidents](${abs('/incidents/')}): every published incident, newest first`);
     out.push(`- [Archive](${abs('/archive/')}): the older Git answers, one per page`);
     out.push(`- [Full text for language models](${abs('/llms-full.txt')}): every incident and archive answer as plain text`);
