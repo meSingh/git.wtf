@@ -15,3 +15,12 @@
 
 /incident/*/share.png
   Cache-Control: public, max-age=86400
+
+/og/*
+  Cache-Control: public, max-age=86400
+
+/cuts/*
+  Cache-Control: public, max-age=604800
+
+/audio/*
+  Cache-Control: public, max-age=2592000

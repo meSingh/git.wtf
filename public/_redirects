@@ -1,16 +1,6 @@
-# Old git.wtf URLs. Cloudflare serves this file natively. Order matters: first match wins.
+# Old git.wtf URLs. Cloudflare serves this file natively. First match wins; exact paths first (faster), then the
+# patterns: Ghost listing pages to the archive, amp copies to their post, member and admin pages home.
 
-# Ghost listing pages: every tag, category, author and paginated page goes to the archive index.
-/tag/*            /archive/   301
-/category/*       /archive/   301
-/author/*         /archive/   301
-/page/*           /archive/   301
-
-# Ghost AMP copies of every post.
-/:slug/amp/       /:slug/     301
-/:slug/amp        /:slug/     301
-
-# Feeds and sitemaps.
 /rss/             /rss.xml    301
 /rss              /rss.xml    301
 /feed             /rss.xml    301
@@ -20,15 +10,8 @@
 /sitemap-pages.xml   /sitemap-index.xml 301
 /sitemap-tags.xml    /sitemap-index.xml 301
 /sitemap-authors.xml /sitemap-index.xml 301
-
-# Ghost members, portal and admin. Comments and the newsletter are gone.
-/members/*        /           301
 /signup/          /           301
 /signin/          /           301
-/ghost/*          /           301
-/webmentions/*    /           301
-
-# Laravel-era paths (2016 to 2021) and the slugs Ghost renamed in 2023.
 /git-frustrations /archive/   301
 /contributors     /archive/   301
 /contributors/    /archive/   301
@@ -47,3 +30,17 @@
 /how-to-remove-stagged-changes-from-git/                             /how-to-remove-staged-changes-from-git/                      301
 /how-to-stop-password-prompts-on-any-git-command-on-macos            /how-to-stop-password-prompts-on-any-git-command-in-macos/   301
 /how-to-stop-password-prompts-on-any-git-command-on-macos/           /how-to-stop-password-prompts-on-any-git-command-in-macos/   301
+/about            /archive/   301
+/about/           /archive/   301
+/how-to-remove-a-file-or-directory-from-git-without-deleting-it-from-your-working-directory-2   /how-to-remove-a-file-or-directory-from-git-without-deleting-it-from-your-working-directory/   301
+/how-to-remove-a-file-or-directory-from-git-without-deleting-it-from-your-working-directory-2/  /how-to-remove-a-file-or-directory-from-git-without-deleting-it-from-your-working-directory/   301
+
+/tag/*            /archive/   301
+/category/*       /archive/   301
+/author/*         /archive/   301
+/page/*           /archive/   301
+/:slug/amp/       /:slug/     301
+/:slug/amp        /:slug/     301
+/members/*        /           301
+/ghost/*          /           301
+/webmentions/*    /           301

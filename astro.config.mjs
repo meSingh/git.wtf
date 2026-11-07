@@ -4,7 +4,8 @@ import { buildRedirects } from './src/redirects.mjs';
 import { existsSync, readdirSync, rmSync } from 'node:fs';
 import { hiddenIncidentIds, lastModified, liveCategories, publishedIncidentIds } from './src/lib/visibility.mjs';
 
-// BASE_PATH is '' on git.wtf and '/git.wtf' on the project Pages URL before the custom domain is set.
+// The site is served from the root on Cloudflare (git.wtf and git-wtf.<account>.workers.dev). BASE_PATH stays as an
+// option for a host that serves from a subfolder; such a build is never indexed (Base.astro).
 const base = (process.env.BASE_PATH || '/').replace(/\/?$/, '/');
 const { redirects, unmapped } = buildRedirects({ base });
 const hidden = hiddenIncidentIds();
