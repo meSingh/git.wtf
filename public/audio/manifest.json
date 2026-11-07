@@ -32,7 +32,53 @@
   "slide": "sfx-whoosh",
   "charge": "sfx-riser",
   "bounce": "sfx-boing",
-  "endcard": null
+  "endcard": null,
+  "titlerows": "sfx-title-hit",
+  "tiltdown": null,
+  "type": "amb-typing",
+  "ring": "sfx-whoosh-big",
+  "tick": "sfx-tick",
+  "yawn": null,
+  "note": "sfx-slap",
+  "popup": "sfx-pop",
+  "salute": "sfx-snap",
+  "exit": "sfx-door",
+  "exitdown": "sfx-door",
+  "glintdown": "sfx-shing",
+  "speedlinesdown": "sfx-whoosh-big",
+  "fall": "sfx-fall-whistle",
+  "dive": "sfx-whoosh",
+  "squeeze": "sfx-squeak",
+  "scribble": "sfx-scribble",
+  "erase": "sfx-squeak",
+  "file": "sfx-paper-flutter",
+  "unfile": "sfx-shuffle",
+  "bonk": "sfx-bonk",
+  "sweep": "sfx-broom",
+  "sweepup": "sfx-broom",
+  "filesup": "sfx-paper-blizzard",
+  "restore": "sfx-rewind",
+  "restoreup": "sfx-rewind",
+  "lift": "sfx-whoosh",
+  "limp": null,
+  "enter": "sfx-door",
+  "climb": null,
+  "freeze": "sfx-freeze",
+  "terror": "amb-heartbeat",
+  "drop": null,
+  "followdown": null,
+  "cutup": null,
+  "shatter": "sfx-shatter",
+  "jab": "sfx-punch",
+  "ringspin": "sfx-whoosh-big",
+  "cough": "sfx-cough",
+  "grow": null,
+  "tiltup": null,
+  "gatedrop": "sfx-clunk",
+  "tiptoe": "amb-tiptoe",
+  "tally": null,
+  "glance": null,
+  "swap": "sfx-swish"
  },
  "sfx": {
   "sting": "sfx-title-hit",
@@ -126,7 +172,8 @@
    "terror": "voice-2026-07-31-terror",
    "copy": "voice-2026-07-31-copy",
    "again": "voice-2026-07-31-again",
-   "blame": "voice-2026-07-31-blame"
+   "blame": "voice-2026-07-31-blame",
+   "next": "voice-2026-07-31-next"
   }
  },
  "mix": {
@@ -866,7 +913,7 @@
     "copy",
     "extra"
    ],
-   "duration": 2.708
+   "duration": 3.237
   },
   {
    "id": "voice-2026-07-31-funeral",
@@ -904,6 +951,17 @@
    "duration": 2.472
   },
   {
+   "id": "voice-2026-07-31-next",
+   "web": "web/voice-2026-07-31-next.mp3",
+   "kind": "voice",
+   "tags": [
+    "2026-07-31-twelve-agents-one-working-directory",
+    "next",
+    "narrator"
+   ],
+   "duration": 2.679
+  },
+  {
    "id": "voice-2026-07-31-rivals",
    "web": "web/voice-2026-07-31-rivals.mp3",
    "kind": "voice",
@@ -924,7 +982,7 @@
     "terror",
     "dev"
    ],
-   "duration": 1.107
+   "duration": 3.932
   },
   {
    "id": "voice-2026-07-31-title",

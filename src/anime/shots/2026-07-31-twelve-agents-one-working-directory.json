@@ -834,7 +834,7 @@
       "pose": "neutral",
       "arm": "hold",
       "x": 330,
-      "y": 1180,
+      "y": 1320,
       "scale": 0.46,
       "n": 4
      },
@@ -843,7 +843,7 @@
       "pose": "neutral",
       "arm": "point",
       "x": 610,
-      "y": 1180,
+      "y": 1320,
       "scale": 0.46,
       "n": 8,
       "flip": true
@@ -1213,7 +1213,7 @@
       "pose": "defeated",
       "arm": "hold",
       "x": 450,
-      "y": 1180,
+      "y": 1100,
       "scale": 0.8,
       "n": 1,
       "role": "mourner"

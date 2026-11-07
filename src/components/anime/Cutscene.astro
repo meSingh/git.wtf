@@ -3,9 +3,8 @@
 // src/scripts/anime.ts. Two frames: 9:16 (900 x 1600, the phone, Reels, Shorts and TikTok first) and 16:9
 // (1600 x 900, the website and link posts). The tall frame is staged, not cropped: a shot's `v` block gives its own
 // cast, props, ground and camera moves; without one, a layout rule places the wide staging.
-// Tall safe areas (Content's script, to be checked by Video per platform): nothing to read above y 190 or below
-// y 1200, nothing to read right of x 780 below y 700; impact words, the title and the stamp in y 400 to 900; spoken
-// lines in two rows in y 1000 to 1180.
+// Tall safe box (Video, checked against Reels, Shorts and TikTok): everything to be read inside x 54 to 740,
+// y 240 to 1040. Impact words, the title and the stamp sit in y 400 to 900; spoken lines in two rows in y 860 to 1030.
 import type { CastIn, Props as Kit, Shot, ShotList } from '../../anime/types';
 import Agent from './Agent.astro';
 import Mascot, { type MascotPose } from './Mascot.astro';
@@ -60,7 +59,7 @@ const rainLines = Array.from({ length: 110 }, (_, i) => { const x = (i * 211) % 
 const files = Array.from({ length: 40 }, (_, i) => i);
 // three panels: bands across the wide frame, stacked down the tall one
 const panels = V
-    ? { paths: ['M-400 -400 L1400 -400 L1400 420 L-400 560Z', 'M-400 600 L1400 460 L1400 1020 L-400 1160Z', 'M-400 1200 L1400 1060 L1400 2200 L-400 2200Z'], centre: [[450, 330], [450, 820], [450, 1360]], gutters: 'M-400 580 L1400 440 M-400 1180 L1400 1040' }
+    ? { paths: ['M-400 -400 L1400 -400 L1400 360 L-400 500Z', 'M-400 540 L1400 400 L1400 1080 L-400 1220Z', 'M-400 1260 L1400 1120 L1400 2200 L-400 2200Z'], centre: [[450, 250], [450, 700], [450, 1400]], gutters: 'M-400 520 L1400 380 M-400 1240 L1400 1100' }
     : { paths: ['M-400 -200 L2000 -200 L2000 170 L-400 330Z', 'M-400 350 L2000 190 L2000 520 L-400 680Z', 'M-400 700 L2000 540 L2000 1100 L-400 1100Z'], centre: [[560, 120], [1040, 440], [640, 770]], gutters: 'M-400 340 L2000 180 M-400 690 L2000 530' };
 // scattered pages inside the folder, and soaked ones in puddles, placed the same every time
 const scatter = Array.from({ length: 14 }, (_, k) => ({ x: Math.round(80 + (((k + 1) * 0.7548776) % 1) * (W - 160)), y: Math.round(100 + (((k + 1) * 0.5698403) % 1) * (H - 200)), r: ((k * 47) % 70) - 35 }));
@@ -68,11 +67,12 @@ const puddles = Array.from({ length: 5 }, (_, k) => V ? { x: 120 + k * 170, y: 1
 
 // text: where words, lines, cards and the stamp sit in each frame
 const fit = (len: number, per: number, room: number) => Math.min(1, room / (len * per));
-const word = V ? { x: TXC, y: 690, rot: -6, room: TW } : { x: 800, y: 210, rot: -7, room: 1500 };
-// tall lines are set large (68 px, two rows of up to 22 characters filling the column); wide ones at 46 px
-const line = V ? { x: TXC, who: 1004, rows: [1098, 1172], one: 1134, whoOne: 1044, per: 37, room: TW - 20 } : { x: 800, who: 742, rows: [800, 858], one: 864, whoOne: 806, per: 25, room: 1500 };
+const word = V ? { x: TXC, y: 690, rot: -6, room: TW - 40 } : { x: 800, y: 210, rot: -7, room: 1500 };
+// tall lines are set large (68 px, two rows of up to 22 characters filling the column) and sit inside Video's safe
+// box (x 54 to 740, y 240 to 1040): the bottom band below is where Reels, Shorts and TikTok draw captions; wide at 46 px
+const line = V ? { x: TXC, who: 862, rows: [944, 1014], one: 980, whoOne: 898, per: 37, room: TW - 20 } : { x: 800, who: 742, rows: [800, 858], one: 864, whoOne: 806, per: 25, room: 1500 };
 const tbc = V ? { x: 60, y: 500, k: 0.9 } : { x: 120, y: 840, k: 1 };
-const stampAt = V ? { x: TXC, y: 690, k: Math.min(1, TW / 980) } : { x: 800, y: 600, k: 1 };
+const stampAt = V ? { x: TXC, y: 690, k: Math.min(1, (TW - 60) / 980) } : { x: 800, y: 600, k: 1 };
 // the title: one row and a band on the wide card, three stacked rows on the tall one
 const tw = list.title.toUpperCase().split(' ');
 const titleRows = [list.episode.toUpperCase(), tw.slice(0, -1).join(' '), tw.at(-1)!].filter(Boolean);
