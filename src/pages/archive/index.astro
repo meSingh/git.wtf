@@ -7,7 +7,7 @@ import { href } from '../../lib/site';
 
 const posts = (await getCollection('archive')).filter((p) => p.data.type === 'post').sort((a, b) => (a.data.published_at < b.data.published_at ? 1 : -1));
 ---
-<Base title="The archive | git.wtf" description="Every post from the years git.wtf was a blog about fixing Git, at the same URLs.">
+<Base title="The archive | git.wtf" image="/og/archive.png" description="Every post from the years git.wtf was a blog about fixing Git, at the same URLs.">
     <main class="page">
         <div class="page-head inc-head">
             <h1>The archive</h1>

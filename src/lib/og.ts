@@ -90,3 +90,46 @@ export async function shareSvg(opts: { title: string; status: string; days?: num
         ],
     });
 }
+
+/** The page card: the share image for every page that is not an incident (archive posts, the archive, the lists).
+ *  Text first: the kind of page on a yellow plate, the page's title large, a status stamp with the page's joke and a
+ *  line under it, then the mark and the live count along the bottom, over the hazard stripes. */
+export interface PageCard { kind: string; title: string; stamp: string; line?: string; days: number }
+
+export async function pageCardSvg(c: PageCard): Promise<string> {
+    const f = await loadFonts();
+    const title = c.title.length > 110 ? c.title.slice(0, 107).trimEnd() + '...' : c.title;
+    const size = title.length <= 26 ? 118 : title.length <= 44 ? 96 : title.length <= 70 ? 78 : 64;
+    const digits = String(Math.max(0, c.days)).padStart(2, '0').split('');
+    const tile = (d: string) => h('div', { width: 46, height: 62, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#161616', borderRadius: 5, fontFamily: 'Big Shoulders Display', fontSize: 54, color: YELLOW }, d);
+    const tree = h('div', { width: 1088, height: 544, display: 'flex', flexDirection: 'column', background: BLACK, color: PAPER, padding: '40px 56px 46px', position: 'relative', overflow: 'hidden' }, [
+        h('div', { display: 'flex', justifyContent: 'space-between', alignItems: 'center' }, [
+            { type: 'img', props: { src: LOGO_URI, height: 46, width: Math.round((46 * LOGO.width) / LOGO.height), style: { display: 'flex' } } },
+            h('div', { display: 'flex', fontFamily: 'JetBrains Mono', fontSize: 22, letterSpacing: 3, color: BLACK, background: YELLOW, padding: '8px 14px', textTransform: 'uppercase' }, c.kind),
+        ]),
+        h('div', { display: 'flex', flexDirection: 'column', justifyContent: 'center', flexGrow: 1 }, [
+            h('div', { fontFamily: 'Big Shoulders Display', fontSize: size, lineHeight: 0.94, textTransform: 'uppercase', color: PAPER, maxWidth: 1060 }, title),
+            h('div', { display: 'flex', alignItems: 'center', gap: 26, marginTop: 30 }, [
+                h('div', { display: 'flex', fontFamily: 'Big Shoulders Display', fontSize: 34, lineHeight: 1, color: YELLOW, border: `5px solid ${YELLOW}`, padding: '9px 16px', transform: 'rotate(-2deg)', textTransform: 'uppercase', letterSpacing: 1 }, `Status: ${c.stamp}`),
+                c.line ? h('div', { display: 'flex', fontFamily: 'JetBrains Mono', fontSize: 23, color: GREY, maxWidth: 560 }, c.line) : h('div', { display: 'flex' }, ''),
+            ]),
+        ]),
+        h('div', { display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 16, height: 62 }, [
+            h('div', { display: 'flex', gap: 5 }, digits.map(tile)),
+            h('div', { display: 'flex', fontFamily: 'JetBrains Mono', fontSize: 21, color: GREY, width: 300, lineHeight: 1.25 }, 'days since the last Git or AI fuck-up'),
+        ]),
+        stripes(),
+    ]);
+    return satori(tree as any, {
+        width: 1200,
+        height: 630,
+        fonts: [
+            { name: 'Big Shoulders Display', data: f.display, weight: 900, style: 'normal' },
+            { name: 'JetBrains Mono', data: f.mono, weight: 600, style: 'normal' },
+        ],
+    });
+}
+
+export async function pageCard(c: PageCard): Promise<Uint8Array> {
+    return new Resvg(await pageCardSvg(c), { fitTo: { mode: 'width', value: 1200 } }).render().asPng();
+}

@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 }
 const { category, incidents } = Astro.props;
 ---
-<Base title={`${categoryLabel(category)} | git.wtf`} description={`Git fuck-ups filed under ${categoryLabel(category)}.`} noindex={incidents.length === 0}>
+<Base title={`${categoryLabel(category)} | git.wtf`} image={`/og/incidents-${category}.png`} description={`Git fuck-ups filed under ${categoryLabel(category)}.`} noindex={incidents.length === 0}>
     <main class="page">
         <div class="page-head inc-head">
             <h1>{categoryLabel(category)}</h1>

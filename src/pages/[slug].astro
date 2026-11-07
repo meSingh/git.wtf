@@ -22,7 +22,7 @@ const html = await highlightHtml(base ? d.html.replace(/(src|href)="\/(content\/
 const hasCode = html.includes('class="code"');
 const jsonld = archiveJsonLd(entry.id, d);
 ---
-<Base title={d.meta_title ?? `${d.title} | git.wtf`} description={d.meta_description ?? d.excerpt} image={d.feature_image ?? '/share.png'} canonical={d.canonical_url ?? undefined} type={isPost ? 'article' : 'website'} jsonld={jsonld}>
+<Base title={d.meta_title ?? `${d.title} | git.wtf`} description={d.meta_description ?? d.excerpt} image={`/og/${entry.id}.png`} canonical={d.canonical_url ?? undefined} type={isPost ? 'article' : 'website'} jsonld={jsonld}>
     <main class="page">
         <article>
             <header class="page-head">

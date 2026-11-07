@@ -8,7 +8,7 @@ import Streak from '../../components/Streak.astro';
 import { sortIncidents } from '../../lib/site';
 const incidents = sortIncidents(await getCollection('incidents'));
 ---
-<Base title="The fuck-ups | git.wtf" description="Every Git and AI fuck-up we have caught, newest first, each with its status.">
+<Base title="The fuck-ups | git.wtf" image="/og/incidents.png" description="Every Git and AI fuck-up we have caught, newest first, each with its status.">
     <main class="page">
         <div class="page-head inc-head"><h1>The fuck-ups</h1><p class="lede">Every Git and AI fuck-up we have caught, newest first. Each one comes with a status. Few of them are good.</p></div>
         <div class="iwrap"><IncidentCards incidents={incidents} /></div>
