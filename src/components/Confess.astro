@@ -1,7 +1,8 @@
 ---
 import { confessionCount, confessIssueUrl, confessMailto } from '../lib/confessions';
+import { href } from '../lib/site';
 const n = await confessionCount();
-// the description is a PLACEHOLDER until Content's lands; the image slot waits for Video's (1200 by 630)
+// the description is a PLACEHOLDER until Content's lands; the image is Video's (public/img/confess.webp, with a 2x copy)
 ---
 <div class="confess col">
     <div class="beat-head"><h2 id="confess-h" data-lock>Confess</h2>{n !== null && <span class="count">{n} received so far</span>}</div>
@@ -15,8 +16,8 @@ const n = await confessionCount();
             </p>
             <p class="how">What you ran, what happened, a link if there is one.</p>
         </div>
-        <figure class="confess-pic" data-confess-pic>
-            <div class="confess-slot" role="img" aria-label="Image to come">1200 &times; 630</div>
+        <figure class="confess-pic">
+            <img src={href('/img/confess.webp')} srcset={`${href('/img/confess.webp')} 1200w, ${href('/img/confess@2x.webp')} 2400w`} sizes="(min-width: 761px) min(32rem, 45vw), 100vw" width="1200" height="630" alt="DEV sits in a confession booth holding his mug and looking at the floor; on the other side of a glowing grille the small grey helper listens beside a stack of pages, and an agent with a broom waits nervously outside." loading="lazy" decoding="async" />
         </figure>
     </div>
 </div>
