@@ -3,6 +3,7 @@
 // lands, LLMS_COPY holds a plain placeholder that only states facts already on the site.
 import { getCollection } from 'astro:content';
 import { SITE, href, incidentPath, sortIncidents } from './site';
+import { hiddenIncidentIds } from './visibility.mjs';
 
 export const LLMS_COPY = {
     // PLACEHOLDER until Content's launch copy lands; replace both strings with notes/content/launch-copy.md
@@ -39,7 +40,9 @@ export function htmlToText(html: string): string {
 }
 
 export async function llmsData() {
-    const incidents = sortIncidents(await getCollection('incidents')).filter((i) => !i.data.fixture);
+    const hidden = hiddenIncidentIds();
+    // only published incidents: at launch that is one, the rest are hidden (lib/visibility.mjs)
+    const incidents = sortIncidents(await getCollection('incidents')).filter((i) => !i.data.fixture && !hidden.has(i.id));
     const archive = (await getCollection('archive')).sort((a, b) => (a.data.published_at < b.data.published_at ? 1 : -1));
     return { incidents, posts: archive.filter((p) => p.data.type === 'post'), pages: archive.filter((p) => p.data.type === 'page') };
 }
@@ -52,7 +55,7 @@ export async function llmsTxt(): Promise<string> {
     out.push(`# ${SITE.name}`, '', `> ${oneLine(LLMS_COPY.summary)}`, '', oneLine(LLMS_COPY.about), '');
     out.push('## Key pages', '');
     out.push(`- [Home](${abs('/')}): the day count since the last incident and today's incident`);
-    out.push(`- [Incidents](${abs('/incidents/')}): every logged incident, newest first`);
+    out.push(`- [Incidents](${abs('/incidents/')}): every published incident, newest first`);
     out.push(`- [Archive](${abs('/archive/')}): the older Git answers, one per page`);
     out.push(`- [Full text for language models](${abs('/llms-full.txt')}): every incident and archive answer as plain text`);
     out.push('');

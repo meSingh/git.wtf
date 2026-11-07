@@ -1,10 +1,13 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { buildRedirects } from './src/redirects.mjs';
+import { hiddenIncidentIds, liveCategories } from './src/lib/visibility.mjs';
 
 // BASE_PATH is '' on git.wtf and '/git.wtf' on the project Pages URL before the custom domain is set.
 const base = (process.env.BASE_PATH || '/').replace(/\/?$/, '/');
 const { redirects, unmapped } = buildRedirects({ base });
+const hidden = hiddenIncidentIds();
+const categories = liveCategories();
 if (unmapped.length) console.warn(`[redirects] ${unmapped.length} old paths have no mapping: ${unmapped.join(', ')}`);
 
 export default defineConfig({
@@ -15,8 +18,15 @@ export default defineConfig({
     redirects,
     integrations: [
         sitemap({
-            // labs, hero openings and the bare cutscene player are noindex; they stay out of the sitemap too
-            filter: (page) => !/\/(lab|hero)\//.test(new URL(page).pathname) && !/\/incident\/[^/]+\/cut\/$/.test(new URL(page).pathname),
+            // labs, hero openings, the cutscene player routes, hidden incidents and empty categories stay out of the sitemap
+            filter: (page) => {
+                const p = new URL(page).pathname;
+                if (/\/(lab|hero)\//.test(p) || /\/incident\/[^/]+\/cut\//.test(p)) return false;
+                const m = p.match(/\/incident\/([^/]+)\//);
+                if (m && hidden.has(m[1])) return false;
+                const c = p.match(/\/incidents\/([^/]+)\/$/);
+                return !(c && !categories.has(c[1]));
+            },
         }),
     ],
 });

@@ -1,9 +1,11 @@
 # git.wtf: open to search engines and AI answer engines. The lab and hero pages and the bare cutscene player
-# carry a noindex tag and are left out of the sitemap; they stay crawlable so the tag is seen.
+# carry a noindex tag and are left out of the sitemap; they stay crawlable so the tag is seen. The cutscene
+# player partial (/incident/<id>/cut/player/) has no head to carry a tag, so it is disallowed instead.
 
 User-agent: *
 Allow: /
 Disallow: /ghost/
+Disallow: /incident/*/cut/player/
 
 # Search and AI answer crawlers, named so the allow is explicit
 User-agent: Googlebot
@@ -22,5 +24,6 @@ User-agent: Perplexity-User
 User-agent: DuckAssistBot
 Allow: /
 Disallow: /ghost/
+Disallow: /incident/*/cut/player/
 
 Sitemap: https://git.wtf/sitemap-index.xml
