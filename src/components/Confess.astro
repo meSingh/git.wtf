@@ -2,14 +2,15 @@
 import { confessionCount, confessIssueUrl, confessMailto } from '../lib/confessions';
 import { href } from '../lib/site';
 const n = await confessionCount();
-// the description is a PLACEHOLDER until Content's lands; the image is Video's (public/img/confess.webp, with a 2x copy)
+// the description is Content's (notes/content/homepage-v7-copy.md); the image is Video's (public/img/confess.webp, with a 2x copy)
 ---
 <div class="confess col">
     <div class="beat-head"><h2 id="confess-h" data-lock>Confess</h2>{n !== null && <span class="count">{n} received so far</span>}</div>
     <div class="confess-in">
         <div class="confess-text">
+            <p class="desc">Yours or your agent's. We don't judge, we count.</p>
+            <p class="desc desc-2">The good ones become episodes. Names left out, fuck-up left in.</p>
             <p class="ask">Have a fuck-up? Confess it.</p>
-            <p class="desc" data-confess-desc>Yours, a colleague's, an agent's. Tell the daily search what ran and what it broke, and it goes on the record with the rest.</p>
             <p class="ways">
                 <a class="big" href={confessIssueUrl} rel="noopener">Open a confession on GitHub</a>
                 {confessMailto && <a class="mail" href={confessMailto}>or send it to the daily search</a>}
