@@ -24,3 +24,9 @@
 
 /audio/*
   Cache-Control: public, max-age=2592000
+
+/foot-cast/*
+  X-Robots-Tag: noindex
+
+/incident/*/cut/player/*
+  X-Robots-Tag: noindex
