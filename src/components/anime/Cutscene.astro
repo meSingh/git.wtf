@@ -218,7 +218,7 @@ const longest = (rows: string[]) => Math.max(...rows.map((r) => r.length));
                                     <g class="sign" transform={`translate(${V ? 0 : 80} -238)`}><rect x="-170" y="0" width="340" height="96" rx="6" /><text x="0" y="66">{P.gate.sign}</text></g>
                                 </g>
                                 <circle class="hinge" cx="-185" cy="-273" r="18" />
-                                {P.gate.tally && <g class="tally" transform="translate(-196 -110)">{Array.from({ length: 20 }, (_, k) => { const gx = Math.floor(k / 5) * 40, j = k % 5; return j === 4 ? <path data-k={k} d={`M${gx - 10} ${-6} L${gx + 34} 46`} /> : <path data-k={k} d={`M${gx + j * 8} 0 L${gx + j * 8} 42`} />; })}</g>}
+                                {P.gate.tally && <g class="tally" transform="translate(-196 -135)">{Array.from({ length: 20 }, (_, k) => { const gx = Math.floor(k / 5) * 40, j = k % 5; return j === 4 ? <path data-k={k} d={`M${gx - 10} ${-6} L${gx + 34} 46`} /> : <path data-k={k} d={`M${gx + j * 8} 0 L${gx + j * 8} 42`} />; })}</g>}
                             </g>
                         </g>
                     )}

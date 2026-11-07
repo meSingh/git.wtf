@@ -78,7 +78,16 @@
   "tiptoe": "amb-tiptoe",
   "tally": null,
   "glance": null,
-  "swap": "sfx-swish"
+  "swap": "sfx-swish",
+  "stamp": [
+   "sfx-stamp",
+   "sting-stamp"
+  ],
+  "continued": "sfx-tbc",
+  "angry": "sfx-hiss",
+  "steam": "sfx-hiss",
+  "peek": null,
+  "eyes": "sfx-glint"
  },
  "sfx": {
   "sting": "sfx-title-hit",
@@ -115,7 +124,10 @@
   "clunk": "sfx-clunk",
   "tiptoe": "amb-tiptoe",
   "freeze": "sfx-freeze",
-  "stamp": "sfx-stamp",
+  "stamp": [
+   "sfx-stamp",
+   "sting-stamp"
+  ],
   "punch": "sfx-punch",
   "boing": "sfx-boing",
   "blink": "sfx-blink",
@@ -132,7 +144,8 @@
   "drop": "sfx-drop",
   "tbc": "sfx-tbc",
   "whistle-fall": "sfx-fall-whistle",
-  "whistle-gate": "sfx-ref-whistle"
+  "whistle-gate": "sfx-ref-whistle",
+  "hiss": "sfx-hiss"
  },
  "music": {
   "theme": "bed-heroic",
@@ -574,6 +587,17 @@
     "brass"
    ],
    "duration": 2.6
+  },
+  {
+   "id": "sfx-hiss",
+   "web": "web/sfx-hiss.mp3",
+   "kind": "sfx",
+   "tags": [
+    "steam",
+    "hiss",
+    "anger"
+   ],
+   "duration": 1.411
   },
   {
    "id": "sfx-impact",
