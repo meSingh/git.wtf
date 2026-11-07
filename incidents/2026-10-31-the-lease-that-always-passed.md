@@ -7,6 +7,7 @@ tool: custom
 source_url: https://github.com/satmihir/re-agent/issues/205
 source_date: 2026-10-31
 status: "`--force`, with extra typing."
+published: false
 panels:
   - scene: "AGENT types \"git push --force-with-lease\" while DEV sips coffee"
   - scene: "The lease checks the remote's ID against a mirror"

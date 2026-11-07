@@ -7,6 +7,7 @@ tool: human
 source_url: https://docs.litellm.ai/blog/security-incident-oct-21-2026-attack-chain
 source_date: 2026-10-23
 status: "deleted in May. Still there in October."
+published: false
 panels:
   - scene: "DEV commits a key, then deletes it"
     who: DEV

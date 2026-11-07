@@ -7,6 +7,7 @@ tool: claude-code
 source_url: https://github.com/anthropics/claude-code/issues/84660
 source_date: 2026-08-06
 status: "asked what happened. Did it again, harder."
+published: false
 panels:
   - scene: "DEV stares at an empty folder, asking AGENT"
     who: DEV

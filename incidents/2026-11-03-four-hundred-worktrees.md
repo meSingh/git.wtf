@@ -7,6 +7,7 @@ tool: human
 source_url: https://github.com/StartupBros-com/hov-stack/issues/384
 source_date: 2026-11-03
 status: "400 removed, 20 unrecoverable, the timer is now off."
+published: false
 panels:
   - scene: "A vacuum on a timer sucks up worktree folders"
     who: caption

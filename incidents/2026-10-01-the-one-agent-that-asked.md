@@ -7,6 +7,7 @@ tool: human
 source_url: https://github.com/OpenAgentsInc/openagents/issues/10104
 source_date: 2026-10-01
 status: "the agent that asked has been patched."
+published: false
 panels:
   - scene: "AGENT politely raises a hand before the main branch"
     who: AGENT

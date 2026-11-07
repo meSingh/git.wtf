@@ -7,6 +7,7 @@ tool: claude-code
 source_url: https://dev.karakun.com/2026/08/28/coding-agent-pushed-deletion-to-main.html
 source_date: 2026-08-28
 status: "production saved by a failed build."
+published: false
 panels:
   - scene: "DEV asks AGENT for a tidy script"
     who: DEV

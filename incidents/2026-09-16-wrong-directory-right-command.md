@@ -7,6 +7,7 @@ tool: custom
 source_url: https://github.com/ll7/robot_sf_ll7/issues/9445
 source_date: 2026-09-16
 status: "recovered from unnamed blobs. Git's idea of a backup."
+published: false
 panels:
   - scene: "AGENT stands in the main checkout, thinking it's the worktree"
     who: AGENT

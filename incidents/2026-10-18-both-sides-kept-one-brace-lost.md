@@ -7,6 +7,7 @@ tool: human
 source_url: https://github.com/vitali87/croft/issues/1858
 source_date: 2026-10-18
 status: "both sides kept. One brace lost. Six for 81."
+published: false
 panels:
   - scene: "DEV replays a tall stack of merges"
     who: DEV

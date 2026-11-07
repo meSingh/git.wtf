@@ -7,6 +7,7 @@ tool: custom
 source_url: https://github.com/tyne-chat/tyne/issues/514
 source_date: 2026-11-05
 status: "conflict resolved. Saved by a timeout."
+published: false
 panels:
   - scene: "AGENT rebases a fork at night and hits a conflict"
     who: AGENT

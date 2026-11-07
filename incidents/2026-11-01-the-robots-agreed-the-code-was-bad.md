@@ -7,6 +7,7 @@ tool: custom
 source_url: https://github.com/Unthred/DevTest-Infrastructure/issues/158
 source_date: 2026-11-01
 status: "two bots, one branch, no witnesses."
+published: false
 panels:
   - scene: "AGENT force-pushes a stale branch, a \"71 lines\" fix falls"
   - scene: "A second AGENT reads the code and shakes its head"

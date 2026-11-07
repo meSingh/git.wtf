@@ -7,6 +7,7 @@ tool: github
 source_url: https://www.githubstatus.com/history
 source_date: 2026-11-06
 status: "resolved. Thank you for your patience."
+published: false
 panels:
   - scene: "THE STATUS PAGE stands beside DEV, whose push fails"
     who: STATUS PAGE
