@@ -3,14 +3,21 @@
 // incidents is their real gap in days, a ruler of day ticks and month labels underneath, the year behind. Phones
 // get the same cards stacked.
 import Odo from './Odo.astro';
+import { getCollection } from 'astro:content';
 import { daysBetween, formatDay, happened, href, incidentPath, inlineCode, sentences, sortIncidents, type Incident } from '../lib/site';
 import { cutAssets } from '../lib/cuts';
 // the card's picture: the episode's story image, else its title card, else the strip's last panel
-const pic = (i: Incident) => { const c = cutAssets(i.id); return c.story ? { src: href(`/cuts/${i.id}/${c.story}`), w: 1200, h: 630 } : c.poster ? { src: href(`/cuts/${i.id}/${c.poster}`), w: 1280, h: 720 } : { src: href(`/strips/${i.id}/p4-480.webp`), w: 480, h: 268 }; };
+const pic = (i: Incident) => { const c = cutAssets(i.id); if (PREVIEW && !c.story && stand && standId) return { src: href(`/cuts/${standId}/${stand.story}`), w: 1200, h: 630 }; return c.story ? { src: href(`/cuts/${i.id}/${c.story}`), w: 1200, h: 630 } : c.poster ? { src: href(`/cuts/${i.id}/${c.poster}`), w: 1280, h: 720 } : { src: href(`/strips/${i.id}/p4-480.webp`), w: 480, h: 268 }; };
 
 interface Props { incidents: Incident[] }
-const { incidents } = Astro.props;
-const asc = sortIncidents(incidents); // newest first, left to right, back in time
+const { incidents: shown } = Astro.props;
+// RECORD_PREVIEW=1 (a review build only): every incident, hidden ones included, all with the published episode's
+// image, so the scroll can be felt before the others are published. The launch build shows the published ones.
+const PREVIEW = process.env.RECORD_PREVIEW === '1';
+const incidents = PREVIEW ? sortIncidents(await getCollection('incidents'), true) : shown;
+const stand = PREVIEW ? shown.map((i) => cutAssets(i.id)).find((c) => c.story) ?? null : null;
+const standId = PREVIEW ? shown.find((i) => cutAssets(i.id).story)?.id ?? null : null;
+const asc = incidents; // newest first, left to right, back in time
 const CARD = 400, MIN = 56, PPD = 50, QUIET = 21, PAD = 72;
 type Placed = { i: Incident; x: number; gap: number; first: string };
 const placed: Placed[] = [];

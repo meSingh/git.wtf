@@ -67,9 +67,9 @@ export function happened(i: Incident): string {
     return i.data.source_date;
 }
 
-/** The published incidents, newest first by the day it happened, then by publish date. */
-export function sortIncidents(list: Incident[]): Incident[] {
-    return published(list).sort((x, y) => {
+/** The published incidents, newest first by the day it happened, then by publish date (all of them with `all`). */
+export function sortIncidents(list: Incident[], all = false): Incident[] {
+    return (all ? [...list] : published(list)).sort((x, y) => {
         const a = happened(x), b = happened(y);
         if (a !== b) return a < b ? 1 : -1;
         if (x.data.date !== y.data.date) return x.data.date < y.data.date ? 1 : -1;

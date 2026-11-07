@@ -78,9 +78,12 @@ const fontCss = fonts.map(([file, family, weight]) => `@font-face{font-family:'$
             // finished still; if the motion script has not started within 2.5 s, fall back to the still.
             (function () {
                 var d = document.documentElement;
+                // the page always opens at its top: a reload must not keep the old scroll position (the opening and the
+                // auto-scroll start from the counter)
+                if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
                 if (matchMedia('(prefers-reduced-motion: reduce)').matches || location.search.indexOf('reduce') > -1) return;
                 d.classList.add('js-anim');
-                setTimeout(function () { if (!window.__heroRan) d.classList.remove('js-anim'); }, 2500);
+                setTimeout(function () { if (!window.__heroRan) d.classList.remove('js-anim'); }, 4000);
             })();
         </script>
     )}

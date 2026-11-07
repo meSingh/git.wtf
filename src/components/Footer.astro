@@ -6,8 +6,12 @@ import { SITE, href } from '../lib/site';
 const c = SITE.credit;
 ---
 <footer class="foot">
+    <div class="foot-stripe" aria-hidden="true"></div>
     <div class="col foot-in">
-        <p class="foot-line">The count resets when someone fucks up. Someone always does.</p>
+        <div class="foot-top">
+            <a class="foot-mark" href={href('/')} aria-label="git.wtf, home"><Logo height="clamp(2.4rem, 6vw, 4rem)" title="" /></a>
+            <p class="foot-line">The count resets when someone fucks up. Someone always does.</p>
+        </div>
         <p class="credit">{c.name}, {c.before}<em>{c.strong}</em>{c.after}<em>{c.last}</em></p>
         <div class="foot-rows">
             <nav class="foot-social" aria-label="git.wtf elsewhere">
@@ -17,7 +21,6 @@ const c = SITE.credit;
                 <a href={href('/incidents/')}>Incidents</a>
                 <a href={href('/archive/')}>Archive</a>
                 <a href={href('/rss.xml')}>RSS</a>
-                <a class="foot-mark" href={href('/')} aria-label="git.wtf, home"><Logo height="1.3rem" title="" /></a>
             </nav>
         </div>
         <p class="foot-last">No agents were harmed in the making of this site. Several were bonked.</p>

@@ -65,18 +65,29 @@ function mountCut() {
     return cutReady;
 }
 
-/** 2 The auto-scroll: slowly down to the cut after the opening, unless the reader has already moved. */
+/** 2 The auto-scroll: slowly down to the cut after the opening, unless the reader has moved by then. Only a
+ *  deliberate move counts: a wheel tick, a touch, a key or a click after the first moment of the load (a browser
+ *  can fire a stray pointer or wheel event while the page settles), or a scroll the page did not make itself. */
 let moved = false;
-const stopAuto = () => { moved = true; };
-['wheel', 'touchstart', 'pointerdown', 'keydown'].forEach((ev) => addEventListener(ev, stopAuto, { passive: true, once: true }));
+const armedAt = performance.now() + 900;
+const stopAuto = () => { if (performance.now() > armedAt) moved = true; };
+['wheel', 'touchstart', 'pointerdown', 'keydown'].forEach((ev) => addEventListener(ev, stopAuto, { passive: true }));
 function autoScroll(delay: number) {
     const to = q('#cut') ?? q('#today');
     if (!to) return;
+    // start at the top whatever the browser remembered
+    if (scrollY > 0) scrollTo(0, 0);
     gsap.delayedCall(delay, () => {
         if (moved || scrollY > 10) return;
         const target = to.getBoundingClientRect().top + scrollY;
         const o = { y: scrollY };
-        const tween = gsap.to(o, { y: target, duration: 3.2, ease: 'power1.inOut', onUpdate: () => { if (moved) { tween.kill(); return; } scrollTo(0, o.y); } });
+        let last = scrollY;
+        const tween = gsap.to(o, { y: target, duration: 3.2, ease: 'power1.inOut', onUpdate: () => {
+            // a scroll the page did not make is the reader's: stop
+            if (moved || Math.abs(scrollY - last) > 40) { tween.kill(); return; }
+            scrollTo(0, o.y);
+            last = scrollY;
+        } });
     });
 }
 
@@ -146,18 +157,22 @@ function stepCut(h: import('./anime').CutHandle, ST: typeof import('gsap/ScrollT
     const step = parseFloat(getComputedStyle(sec).getPropertyValue('--cut-step')) || 360;
     let k = -1;
     let holdUntil = 0;
-    let lastWheel = 0;
+    let wanted = 0; // a move that arrived while a shot was playing: taken when the shot is done
     const top = () => sec.getBoundingClientRect().top + scrollY;
     const inside = () => { const t = top(); return scrollY >= t - 1 && scrollY <= t + n * step + 1; };
-    const held = () => h.busy() || performance.now() < holdUntil;
+    // a shot counts as done at its authored length (the plan's, loops or not), never by asking its timeline
+    const held = () => performance.now() < holdUntil;
     const paint = () => { if (count) count.textContent = `${k + 1} / ${n}`; };
     const go = (to: number) => {
         to = Math.max(0, Math.min(n - 1, to));
         k = to;
         scrollTo({ top: Math.round(top() + k * step), behavior: 'auto' });
         h.play(k);
-        holdUntil = performance.now() + 450;
+        holdUntil = performance.now() + Math.min(5000, Math.max(600, (h.plan[k]?.length ?? 1) * 1000));
         paint();
+        // the reader kept scrolling during the shot: the next shot follows by itself when this one is done
+        wanted = 0;
+        gsap.delayedCall((holdUntil - performance.now()) / 1000 + 0.02, () => { if (wanted && inside()) { const d = wanted; wanted = 0; go(k + d); } });
     };
     // a scroll the page did not make (the scrollbar, the auto-scroll arriving, a jump back): show that step's shot
     ST.create({
@@ -170,22 +185,19 @@ function stepCut(h: import('./anime').CutHandle, ST: typeof import('gsap/ScrollT
     addEventListener('scroll', sync, { passive: true });
     sync();
     const forward = (dir: number) => {
-        if (held()) return true; // held: eaten
+        if (held()) { wanted = dir; return true; } // held: remembered, taken when the shot is done
         go(k + dir);
         return true;
     };
-    // the wheel: one gesture is one step; a stream of inertia events is one gesture
+    // the wheel: while a shot plays, its events are eaten (and the direction remembered); once it is done, the
+    // next event steps. Steady scrolling therefore advances one shot per authored length, a flick one shot.
     addEventListener('wheel', (e) => {
         if (!inside()) return;
         const dir = e.deltaY > 0 ? 1 : e.deltaY < 0 ? -1 : 0;
         if (!dir) return;
-        if (dir > 0 && k >= n - 1 && !h.busy()) return; // the end: the page goes on
+        if (dir > 0 && k >= n - 1 && !held()) return; // the end: the page goes on
         if (dir < 0 && k <= 0 && scrollY <= top() + 1) return; // the start: back to the hero
         e.preventDefault();
-        const now = performance.now();
-        const fresh = now - lastWheel > 220;
-        lastWheel = now;
-        if (!fresh) return;
         forward(dir);
     }, { passive: false });
     // a swipe: the touch moves nothing itself; on lift, its direction is one step
@@ -194,7 +206,7 @@ function stepCut(h: import('./anime').CutHandle, ST: typeof import('gsap/ScrollT
     addEventListener('touchmove', (e) => {
         if (y0 === null || !inside()) return;
         const dy = y0 - e.touches[0].clientY;
-        if (dy > 0 && k >= n - 1 && !h.busy()) return;
+        if (dy > 0 && k >= n - 1 && !held()) return;
         if (dy < 0 && k <= 0) return;
         e.preventDefault();
     }, { passive: false });
@@ -203,7 +215,7 @@ function stepCut(h: import('./anime').CutHandle, ST: typeof import('gsap/ScrollT
         const dy = y0 - e.changedTouches[0].clientY;
         y0 = null;
         if (Math.abs(dy) < 24 || !inside()) return;
-        if (dy > 0 && k >= n - 1 && !h.busy()) return;
+        if (dy > 0 && k >= n - 1 && !held()) return;
         if (dy < 0 && k <= 0) return;
         forward(dy > 0 ? 1 : -1);
     }, { passive: true });
@@ -211,14 +223,14 @@ function stepCut(h: import('./anime').CutHandle, ST: typeof import('gsap/ScrollT
         if (!inside() || (e.target instanceof HTMLElement && e.target.closest('input, textarea, button, a'))) return;
         const dir = [' ', 'ArrowDown', 'PageDown', 'Enter'].includes(e.key) ? 1 : ['ArrowUp', 'PageUp'].includes(e.key) ? -1 : 0;
         if (!dir) return;
-        if (dir > 0 && k >= n - 1 && !h.busy()) return;
+        if (dir > 0 && k >= n - 1 && !held()) return;
         if (dir < 0 && k <= 0) return;
         e.preventDefault();
         forward(dir);
     });
     q('[data-cut-replay]')?.addEventListener('click', () => { k = -1; go(0); });
     q('[data-cut-skip]')?.addEventListener('click', () => go(n - 1));
-    q('[data-cut-down]')?.addEventListener('click', (e) => { e.preventDefault(); if (k >= n - 1 && !h.busy()) scrollTo({ top: top() + n * step + 1, behavior: 'smooth' }); else forward(1); });
+    q('[data-cut-down]')?.addEventListener('click', (e) => { e.preventDefault(); if (k >= n - 1 && !held()) scrollTo({ top: top() + n * step + 1, behavior: 'smooth' }); else forward(1); });
 }
 
 export async function home() {
@@ -230,9 +242,16 @@ export async function home() {
     if (!hero || !odoWrap || !odo || !badge) return;
 
     if (!html.classList.contains('js-anim')) {
-        // reduced motion: the finished page, the hint, the cut scrubbed by hand, no auto-scroll
+        // no opening: the finished page. With reduced motion the cut is scrubbed by hand and nothing auto-scrolls;
+        // when only the flag was lost (a slow cold load), the paced episode and the auto-scroll still run.
         document.body.classList.add('docked');
-        setTimeout(() => mountCut()?.then((h) => h && scrubByScroll(h)), 300);
+        const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || location.search.includes('reduce');
+        if (reduce) { setTimeout(() => mountCut()?.then((h) => h && scrubByScroll(h)), 300); return; }
+        mountCut();
+        autoScroll(1.2);
+        const { ScrollTrigger: ST } = await import('gsap/ScrollTrigger');
+        gsap.registerPlugin(ST);
+        mountCut()?.then((h) => h && stepCut(h, ST));
         return;
     }
     (window as any).__heroRan = true;

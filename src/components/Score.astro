@@ -10,10 +10,16 @@ const ai = by('ai');
 ---
 <div class="score col">
     <div class="beat-head"><h2 id="score-h" data-lock>The score</h2><span class="count">{incidents.length} on record</span></div>
-    <div class="sides">
-        <p class="side"><Odo value={humans} from={0} min={2} class="score-odo wheel" label={`${humans} caused by humans`} /><span class="who">Humans</span></p>
+    <div class="board">
+        <div class="side">
+            <p class="who">Humans</p>
+            <Odo value={humans} from={0} min={2} class="score-odo wheel" label={`${humans} caused by humans`} />
+        </div>
         <p class="vs" aria-hidden="true"><span class="vs-mark"><span class="vs-v">V</span><span class="vs-s">S</span></span></p>
-        <p class="side ai"><Odo value={ai} from={0} min={2} class="score-odo wheel" label={`${ai} caused by AI`} /><span class="who">AI</span></p>
+        <div class="side ai">
+            <p class="who">AI</p>
+            <Odo value={ai} from={0} min={2} class="score-odo wheel" label={`${ai} caused by AI`} />
+        </div>
     </div>
     <p class="tagline">{SITE.description}</p>
 </div>
