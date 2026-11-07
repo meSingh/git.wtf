@@ -24,6 +24,10 @@ export const RENAMED = {
     '/how-to-stop-password-prompts-on-any-git-command-on-macos': '/how-to-stop-password-prompts-on-any-git-command-in-macos/',
     '/git-frustrations': '/archive/',
     '/contributors': '/archive/',
+    // Mandeep, 8 Nov 2026: the About page's story now opens the archive; the duplicate post (the same article
+    // twice on Ghost, the copy ending mid-sentence) gives way to the original
+    '/about': '/archive/',
+    '/how-to-remove-a-file-or-directory-from-git-without-deleting-it-from-your-working-directory-2': '/how-to-remove-a-file-or-directory-from-git-without-deleting-it-from-your-working-directory/',
 };
 
 export function archiveSlugs(dir = path.join(root, 'archive')) {
@@ -42,6 +46,7 @@ export function mapPath(p, slugs) {
     if (RENAMED[clean]) return RENAMED[clean];
     let m;
     if ((m = clean.match(/^\/([^/]+)\/amp$/)) && slugs.has(m[1])) return `/${m[1]}/`;
+    if (m && RENAMED[`/${m[1]}`]) return RENAMED[`/${m[1]}`];
     if (/^\/(tag|category|author|authors|page)(\/|$)/.test(clean)) return "/archive/";
     if ((m = clean.match(/^\/([^/]+)\/page\/\d+$/)) ) return '/archive/';
     if (/^\/(rss|feed)$/.test(clean)) return null; // real pages: src/pages/rss and src/pages/feed refresh to /rss.xml
