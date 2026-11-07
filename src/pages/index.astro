@@ -80,10 +80,14 @@ const jsonld = {
                         <p class="today-kicker">What actually happened</p>
                         <h2 id="detail-h" class="detail-h">{latest!.data.title}</h2>
                         <p class="detail-lines">Twelve agents were set loose on one checkout to tidy it. Every one of them tidied the others' work away, 2,309 files went with it, and the only copy was a side job nobody had counted.</p>
-                        <p class="detail-note">Content's lines go here; Video's image fills the frame and becomes this incident's share image.</p>
+                        <p class="detail-note">Content's lines go here.</p>
                     </div>
                     <figure class="detail-pic" data-detail-pic>
-                        <div class="detail-slot" role="img" aria-label="Image to come: a still of this incident">1200 &times; 630</div>
+                        {cut!.story ? (
+                            <img src={href(`/cuts/${latest!.id}/${cut!.story}`)} srcset={cut!.story2x ? `${href(`/cuts/${latest!.id}/${cut!.story}`)} 1200w, ${href(`/cuts/${latest!.id}/${cut!.story2x}`)} 2400w` : undefined} sizes="(min-width: 761px) min(38rem, 55vw), 100vw" width="1200" height="630" alt="DEV sips from his mug beside a desk while a gate arm bonks an agent with a broom; a queue of agents with brooms waits behind it, and the small grey helper stands by a tall stack of copied pages." loading="lazy" decoding="async" />
+                        ) : (
+                            <div class="detail-slot" role="img" aria-label="Image to come: a still of this incident">1200 &times; 630</div>
+                        )}
                     </figure>
                 </div>
             </section>

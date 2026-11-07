@@ -50,7 +50,9 @@ await shoot(1600, 900, keys, async (k, png) => {
 // the posters: the title card, in each frame
 await shoot(1600, 900, [0], async (_, png) => { await sharp(png).resize({ width: 1280 }).webp({ quality: 82 }).toFile(path.join(out, 'poster.webp')); console.log('poster'); });
 await shoot(900, 1600, [0], async (_, png) => { await sharp(png).resize({ width: 720 }).webp({ quality: 82 }).toFile(path.join(out, 'poster-tall.webp')); console.log('poster-tall'); });
-// the share image: the shot with the stamp (else the last), stamp down, framed for 1200 x 630
+// the share image: Video's story image when the cut has one (cut/story.webp, placed as share.png by hand), else the
+// shot with the stamp (or the last), stamp down, framed for 1200 x 630
+if (existsSync(path.join(out, 'story.webp'))) { console.log('share: kept (the story image is the share image)'); await browser.close(); process.exit(0); }
 const stampShot = list.shots.findLastIndex((s) => (s.fx ?? []).some((f) => /^(stamp|endcard)(@|$)/.test(f)));
 await shoot(1200, 630, [stampShot >= 0 ? stampShot : list.shots.length - 1], async (_, png) => {
     await sharp(png).resize(1200, 630, { fit: 'cover' }).png().toFile(path.join(root, 'incidents', id, 'share.png'));
