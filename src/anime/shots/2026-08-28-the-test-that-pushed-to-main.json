@@ -1,0 +1,923 @@
+{
+    "incident": "2026-08-28-the-test-that-pushed-to-main",
+    "episode": "Episode 33",
+    "title": "The Unit Test That Pushed!",
+    "shots": [
+        {
+            "id": "title",
+            "bg": "black",
+            "fx": [
+                "titlecard",
+                "shake@0.55"
+            ],
+            "say": {
+                "who": "NARRATOR",
+                "text": "Episode thirty three. The unit test that pushed!",
+                "at": 0.7
+            },
+            "sfx": [
+                "sting@0.55"
+            ],
+            "music": "theme",
+            "v": {
+                "fx": [
+                    "titlerows",
+                    "shake@0.9"
+                ]
+            }
+        },
+        {
+            "id": "work",
+            "bg": "room",
+            "props": {
+                "desk": {
+                    "x": 600,
+                    "y": 740
+                },
+                "chair": {
+                    "x": 480,
+                    "y": 852,
+                    "scale": 0.6
+                },
+                "folder": {
+                    "x": 820,
+                    "y": 660,
+                    "scale": 0.36,
+                    "label": "MAIN, 2 REPOS"
+                },
+                "counter": {
+                    "x": 820,
+                    "y": 500,
+                    "from": 0,
+                    "to": 874,
+                    "label": "FILES"
+                },
+                "farwindow": {
+                    "x": 1290,
+                    "y": 320,
+                    "scale": 0.85,
+                    "folder": "LIVE SITE"
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 480,
+                    "y": 852,
+                    "scale": 0.6,
+                    "role": "dev",
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "type",
+                "tick@0.4",
+                "yawn@3.2"
+            ],
+            "sfx": [
+                "typing",
+                "tick@0.4"
+            ],
+            "music": "calm",
+            "focus": [
+                900,
+                560
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 470,
+                        "y": 1000
+                    },
+                    "chair": {
+                        "x": 620,
+                        "y": 1040,
+                        "scale": 0.55
+                    },
+                    "folder": {
+                        "x": 330,
+                        "y": 910,
+                        "scale": 0.34,
+                        "label": "MAIN, 2 REPOS"
+                    },
+                    "counter": {
+                        "x": 330,
+                        "y": 770,
+                        "from": 0,
+                        "to": 874,
+                        "label": "FILES"
+                    },
+                    "farwindow": {
+                        "x": 450,
+                        "y": 360,
+                        "scale": 0.9,
+                        "folder": "LIVE SITE"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 620,
+                        "y": 1040,
+                        "scale": 0.55,
+                        "role": "dev",
+                        "arm": "type"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "job",
+            "bg": "room",
+            "props": {
+                "desk": {
+                    "x": 800,
+                    "y": 820
+                },
+                "folder": {
+                    "x": 800,
+                    "y": 730,
+                    "scale": 0.4,
+                    "label": "MAIN, 2 REPOS"
+                },
+                "note": {
+                    "x": 800,
+                    "y": 640,
+                    "text": "CLEAN UP. THE CONFIG.",
+                    "at": 0.6
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 1140,
+                    "y": 880,
+                    "scale": 0.6,
+                    "role": "dev"
+                },
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 430,
+                    "y": 880,
+                    "scale": 0.4,
+                    "n": 1,
+                    "arm": "salute"
+                }
+            ],
+            "fx": [
+                "note@0.6",
+                "salute@2.2"
+            ],
+            "say": {
+                "who": "DEV",
+                "text": "A script to tidy the config.",
+                "at": 0.9
+            },
+            "sfx": [
+                "slap@0.6",
+                "snap@2.2"
+            ],
+            "music": "calm",
+            "focus": [
+                800,
+                620
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 1130
+                    },
+                    "folder": {
+                        "x": 450,
+                        "y": 1062,
+                        "scale": 0.4,
+                        "label": "MAIN, 2 REPOS"
+                    },
+                    "note": {
+                        "x": 450,
+                        "y": 880,
+                        "text": "CLEAN UP. THE CONFIG.",
+                        "at": 0.6
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 170,
+                        "y": 1380,
+                        "scale": 0.5,
+                        "role": "dev"
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 730,
+                        "y": 1330,
+                        "scale": 0.3,
+                        "n": 1,
+                        "arm": "salute",
+                        "flip": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": "test",
+            "bg": "room",
+            "props": {
+                "desk": {
+                    "x": 1250,
+                    "y": 820
+                },
+                "folder": {
+                    "x": 1250,
+                    "y": 730,
+                    "scale": 0.4,
+                    "label": "MAIN, 2 REPOS"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 380,
+                    "y": 1000,
+                    "scale": 0.85,
+                    "n": 1,
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "push@0.1"
+            ],
+            "line": {
+                "who": "AGENT 1",
+                "text": "I'll just test it."
+            },
+            "lineAt": 1.0,
+            "sfx": [
+                "scribble@0.3"
+            ],
+            "music": "calm",
+            "focus": [
+                860,
+                600
+            ],
+            "v": {
+                "props": {},
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 450,
+                        "y": 1500,
+                        "scale": 0.75,
+                        "n": 1,
+                        "arm": "hold",
+                        "flip": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": "pushed",
+            "bg": "speedlines",
+            "props": {
+                "desk": {
+                    "x": 800,
+                    "y": 820
+                },
+                "folder": {
+                    "x": 800,
+                    "y": 640,
+                    "scale": 0.7,
+                    "label": "MAIN, 2 REPOS"
+                },
+                "note": {
+                    "x": 800,
+                    "y": 400,
+                    "text": "BROKEN YAML.",
+                    "at": 1.2
+                }
+            },
+            "fx": [
+                "speedlines",
+                "note@1.2",
+                "squeeze@1.3",
+                "shake@1.3"
+            ],
+            "say": {
+                "who": "NARRATOR",
+                "text": "The test ran the real script.",
+                "at": 0.3
+            },
+            "sfx": [
+                "whoosh@0.2",
+                "slap@1.2",
+                "creak@1.3"
+            ],
+            "music": "heroic",
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "folder": {
+                        "x": 450,
+                        "y": 900,
+                        "scale": 0.8,
+                        "label": "MAIN, 2 REPOS"
+                    },
+                    "note": {
+                        "x": 450,
+                        "y": 600,
+                        "text": "BROKEN YAML.",
+                        "at": 1.2
+                    }
+                }
+            }
+        },
+        {
+            "id": "reverted",
+            "bg": "black",
+            "props": {
+                "folder": {
+                    "x": 640,
+                    "y": 560,
+                    "scale": 0.8,
+                    "label": "MAIN, 2 REPOS"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 1150,
+                    "y": 980,
+                    "scale": 0.85,
+                    "n": 1,
+                    "arm": "broom",
+                    "flip": true,
+                    "role": "sweeper"
+                }
+            ],
+            "fx": [
+                "impact@0.1",
+                "sweep@1.0",
+                "shake@1.0",
+                "files@1.1"
+            ],
+            "word": "Reverted.",
+            "wordAt": 2.2,
+            "say": {
+                "who": "AGENT 1",
+                "text": "Reverted.",
+                "at": 2.2
+            },
+            "sfx": [
+                "herochord@0.1",
+                "broom@1.0",
+                "impact@1.1",
+                "flutter@1.2"
+            ],
+            "music": "heroic",
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "folder": {
+                        "x": 450,
+                        "y": 400,
+                        "scale": 0.6,
+                        "label": "MAIN, 2 REPOS"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 560,
+                        "y": 1420,
+                        "scale": 0.72,
+                        "n": 1,
+                        "arm": "broom",
+                        "flip": true,
+                        "role": "sweeper"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "deploy",
+            "bg": "room",
+            "props": {
+                "desk": {
+                    "x": 560,
+                    "y": 820
+                },
+                "folder": {
+                    "x": 560,
+                    "y": 720,
+                    "scale": 0.45,
+                    "label": "MAIN, 2 REPOS",
+                    "empty": true
+                },
+                "counter": {
+                    "x": 560,
+                    "y": 480,
+                    "value": 0,
+                    "label": "FILES"
+                },
+                "farwindow": {
+                    "x": 1290,
+                    "y": 320,
+                    "scale": 0.8,
+                    "folder": "LIVE SITE"
+                },
+                "gate": {
+                    "x": 1080,
+                    "y": 900,
+                    "sign": "BUILD FAILED",
+                    "at": 0.9
+                }
+            },
+            "fx": [
+                "gatedrop@0.9",
+                "shake@1.12",
+                "glint@1.8"
+            ],
+            "say": {
+                "who": "NARRATOR",
+                "text": "The deploy failed. The old site stayed.",
+                "at": 1.4
+            },
+            "sfx": [
+                "whistle-gate@0.9",
+                "clunk@1.12",
+                "glint@1.8"
+            ],
+            "music": "heroic",
+            "focus": [
+                900,
+                560
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 240,
+                        "y": 1130
+                    },
+                    "folder": {
+                        "x": 240,
+                        "y": 1040,
+                        "scale": 0.38,
+                        "label": "MAIN, 2 REPOS",
+                        "empty": true
+                    },
+                    "counter": {
+                        "x": 240,
+                        "y": 830,
+                        "value": 0,
+                        "label": "FILES"
+                    },
+                    "farwindow": {
+                        "x": 450,
+                        "y": 360,
+                        "scale": 0.8,
+                        "folder": "LIVE SITE"
+                    },
+                    "gate": {
+                        "x": 540,
+                        "y": 1180,
+                        "sign": "BUILD FAILED",
+                        "at": 0.9
+                    }
+                },
+                "fx": [
+                    "gatedrop@0.9",
+                    "shake@1.12",
+                    "glint@1.8"
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "reclone",
+            "bg": "room",
+            "props": {
+                "desk": {
+                    "x": 760,
+                    "y": 820
+                },
+                "folder": {
+                    "x": 760,
+                    "y": 700,
+                    "scale": 0.5,
+                    "label": "MAIN, 2 REPOS"
+                },
+                "counter": {
+                    "x": 760,
+                    "y": 330,
+                    "from": 0,
+                    "to": 874,
+                    "label": "FILES",
+                    "after": "BACK"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 1240,
+                    "y": 900,
+                    "scale": 0.5,
+                    "n": 1,
+                    "arm": "hold",
+                    "flip": true
+                }
+            ],
+            "fx": [
+                "restore@0.3",
+                "tick@0.5"
+            ],
+            "say": {
+                "who": "AGENT 1",
+                "text": "Full clones this time.",
+                "at": 0.6
+            },
+            "sfx": [
+                "rewind@0.3",
+                "whirr@0.5"
+            ],
+            "music": "heroic",
+            "focus": [
+                860,
+                560
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 1130
+                    },
+                    "folder": {
+                        "x": 450,
+                        "y": 1030,
+                        "scale": 0.55,
+                        "label": "MAIN, 2 REPOS"
+                    },
+                    "counter": {
+                        "x": 450,
+                        "y": 700,
+                        "from": 0,
+                        "to": 874,
+                        "label": "FILES",
+                        "after": "BACK"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 720,
+                        "y": 1400,
+                        "scale": 0.36,
+                        "n": 1,
+                        "arm": "hold",
+                        "flip": true
+                    }
+                ],
+                "fx": [
+                    "restoreup@0.3",
+                    "tick@0.5"
+                ]
+            }
+        },
+        {
+            "id": "confess",
+            "bg": "flat",
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 560,
+                    "y": 880,
+                    "scale": 0.6,
+                    "role": "dev"
+                },
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 1060,
+                    "y": 880,
+                    "scale": 0.5,
+                    "n": 1,
+                    "arm": "palm",
+                    "flip": true
+                }
+            ],
+            "fx": [
+                "push@0.2"
+            ],
+            "line": {
+                "who": "AGENT 1",
+                "text": "I emptied two\nmain branches."
+            },
+            "lineAt": 0.9,
+            "sfx": [
+                "cough@0.3"
+            ],
+            "music": "none",
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 300,
+                        "y": 1420,
+                        "scale": 0.5,
+                        "role": "dev"
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 640,
+                        "y": 1420,
+                        "scale": 0.4,
+                        "n": 1,
+                        "arm": "palm",
+                        "flip": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": "terror",
+            "bg": "flat",
+            "props": {
+                "mug": {
+                    "x": 960,
+                    "y": 760
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 800,
+                    "y": 1100,
+                    "scale": 1.6,
+                    "role": "dev",
+                    "turn": "terror",
+                    "mug": false
+                }
+            ],
+            "fx": [
+                "devpush",
+                "speedlines@1.0",
+                "terror@1.2",
+                "sweat@1.6",
+                "drop@2.0",
+                "shatter@2.6"
+            ],
+            "line": {
+                "who": "AGENT 1",
+                "text": "My revert made it\nfar worse."
+            },
+            "lineAt": 2.9,
+            "sfx": [
+                "heartbeat",
+                "whistle-fall@2.0",
+                "shatter@2.6"
+            ],
+            "music": "none",
+            "focus": [
+                800,
+                420
+            ],
+            "v": {
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 450,
+                        "y": 1500,
+                        "scale": 2.0,
+                        "role": "dev",
+                        "turn": "terror",
+                        "mug": false
+                    }
+                ],
+                "props": {
+                    "mug": {
+                        "x": 640,
+                        "y": 1000
+                    }
+                },
+                "fx": [
+                    "devpush",
+                    "speedlines@1.0",
+                    "terror@1.2",
+                    "sweat@1.6",
+                    "drop@2.0",
+                    "followdown@2.0",
+                    "shatter@2.6",
+                    "cutup@2.9"
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "guard",
+            "bg": "room",
+            "props": {
+                "desk": {
+                    "x": 760,
+                    "y": 820
+                },
+                "folder": {
+                    "x": 900,
+                    "y": 770,
+                    "scale": 0.45,
+                    "label": "MAIN, 2 REPOS"
+                },
+                "gate": {
+                    "x": 900,
+                    "y": 770,
+                    "sign": "PR ONLY",
+                    "tally": false
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "relieved",
+                    "x": 470,
+                    "y": 900,
+                    "scale": 0.6,
+                    "role": "dev"
+                },
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 1240,
+                    "y": 900,
+                    "scale": 0.5,
+                    "n": 1,
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "bonk@0.6",
+                "bonk@1.4",
+                "sip@1.0",
+                "stamp@3.0"
+            ],
+            "sfx": [
+                "bonk@0.6",
+                "bonk@1.4",
+                "sip@1.0",
+                "stamp@3.0"
+            ],
+            "music": "comic",
+            "focus": [
+                900,
+                620
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 560,
+                        "y": 1120
+                    },
+                    "folder": {
+                        "x": 600,
+                        "y": 1030,
+                        "scale": 0.42,
+                        "label": "MAIN, 2 REPOS"
+                    },
+                    "gate": {
+                        "x": 600,
+                        "y": 1030,
+                        "sign": "PR ONLY"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "relieved",
+                        "x": 150,
+                        "y": 1160,
+                        "scale": 0.42,
+                        "role": "dev"
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 660,
+                        "y": 1440,
+                        "scale": 0.34,
+                        "n": 1,
+                        "arm": "hold"
+                    }
+                ]
+            },
+            "still": true,
+            "stillAt": 3.6
+        },
+        {
+            "id": "next",
+            "bg": "night",
+            "props": {
+                "desk": {
+                    "x": 800,
+                    "y": 820
+                },
+                "lamp": {
+                    "x": 800,
+                    "y": 300
+                },
+                "folder": {
+                    "x": 800,
+                    "y": 720,
+                    "scale": 0.45,
+                    "label": "MAIN, 2 REPOS"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 1020,
+                    "y": 830,
+                    "scale": 0.4,
+                    "n": 1,
+                    "silhouette": true
+                }
+            ],
+            "fx": [
+                "eyes@0.8",
+                "glint@1.4",
+                "continued@2.0"
+            ],
+            "say": {
+                "who": "NARRATOR",
+                "text": "To be continued!",
+                "at": 2.1
+            },
+            "sfx": [
+                "shing@1.4",
+                "freeze@2.0"
+            ],
+            "music": "sneaky",
+            "focus": [
+                860,
+                640
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 1100
+                    },
+                    "lamp": {
+                        "x": 450,
+                        "y": 560
+                    },
+                    "folder": {
+                        "x": 450,
+                        "y": 1000,
+                        "scale": 0.45,
+                        "label": "MAIN, 2 REPOS"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 640,
+                        "y": 1110,
+                        "scale": 0.3,
+                        "n": 1,
+                        "silhouette": true
+                    }
+                ]
+            }
+        }
+    ]
+}
