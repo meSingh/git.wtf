@@ -1,103 +1,119 @@
 ---
+// The homepage, one story top to bottom (v5, Mandeep's notes of 7 Nov 2026): the counter, then the cut of today's
+// incident playing as the reader scrolls, share it, the record back in time, the score, confess, the story. The
+// first paint carries the counter and the cut's poster only; the cut, its engine and its sound load afterwards.
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Odo from '../components/Odo.astro';
 import Strip from '../components/Strip.astro';
-import CutBox from '../components/CutBox.astro';
 import Record from '../components/Record.astro';
 import Score from '../components/Score.astro';
-import Streak from '../components/Streak.astro';
 import Confess from '../components/Confess.astro';
+import ShareCut from '../components/ShareCut.astro';
 import { heroData } from '../lib/hero';
-import { SITE, formatDate, happened, href, incidentPath, sortIncidents } from '../lib/site';
+import { SITE, href, incidentPath, sortIncidents } from '../lib/site';
 import { cutAssets, shotList } from '../lib/cuts';
 
 const incidents = sortIncidents(await getCollection('incidents'));
 const latest = incidents[0] ?? null;
 const d = await heroData();
 const image = latest ? `${incidentPath(latest)}share.png` : '/share.png';
-// today's incident plays as the web cutscene when it has one: a poster and a play button here, the player fetched
-// and mounted on the press (src/scripts/home.ts), so the first paint carries none of it
-// The cut plays for the newest incident that has one: in today's place when that is today's, else in its own beat.
-const featured = incidents.find((i) => shotList(i.id) && cutAssets(i.id).poster) ?? null;
-const cut = featured ? cutAssets(featured.id) : null;
-const posterOf = (f: string | null) => (featured && f ? href(`/cuts/${featured.id}/${f}`) : null);
+// the hero line: the last word in yellow
+const words = SITE.line.toUpperCase().split(' ');
+// today's cut, when today's incident has one: its poster now, the player and the engine after the first paint
+const list = latest ? shotList(latest.id) : null;
+const cut = latest && list ? cutAssets(latest.id) : null;
+const posterOf = (f: string | null) => (latest && f ? href(`/cuts/${latest.id}/${f}`) : null);
 const poster = posterOf(cut?.poster ?? null), posterTall = posterOf(cut?.posterTall ?? null);
-const cutIsToday = !!featured && !!latest && featured.id === latest.id;
+const hasCut = !!(cut && poster && list);
+// the scroll the cut takes: about 600 px a shot, reserved in the page so nothing moves when the player mounts
+const cutScroll = hasCut ? list!.shots.length * 600 : 0;
 const jsonld = {
     '@context': 'https://schema.org',
     '@graph': [
-        { '@type': 'Organization', '@id': `${SITE.url}/#org`, name: SITE.name, url: `${SITE.url}/`, logo: `${SITE.url}/apple-touch-icon.png`, sameAs: [SITE.x, SITE.repo ? `https://github.com/${SITE.repo}` : null].filter(Boolean), founder: { '@type': 'Person', name: SITE.owner.name, url: SITE.owner.url, sameAs: [SITE.owner.linkedin] } },
-        { '@type': 'WebSite', '@id': `${SITE.url}/#site`, name: SITE.name, alternateName: SITE.title, url: `${SITE.url}/`, description: SITE.description, inLanguage: 'en', publisher: { '@id': `${SITE.url}/#org` } },
+        { '@type': 'Organization', '@id': `${SITE.url}/#org`, name: SITE.name, url: `${SITE.url}/`, logo: `${SITE.url}/apple-touch-icon.png`, sameAs: [...SITE.social.filter((s) => s.url).map((s) => s.url), `https://github.com/${SITE.repo}`], founder: { '@type': 'Person', name: SITE.owner.name } },
+        { '@type': 'WebSite', '@id': `${SITE.url}/#site`, name: SITE.name, alternateName: SITE.line, url: `${SITE.url}/`, description: SITE.description, inLanguage: 'en', publisher: { '@id': `${SITE.url}/#org` } },
     ],
 };
-const words = ['DAYS', 'SINCE', 'THE', 'LAST', 'GIT', 'FUCK-UP'];
+// PLACEHOLDER highlights and headings around his story text until Content's land (notes/content/homepage-v5-copy.md)
 ---
-<Base title={`${SITE.title} | git.wtf`} image={image} badge={false} motionFlag jsonld={jsonld}>
+<Base title={`${SITE.line} | git.wtf`} image={image} badge={false} motionFlag jsonld={jsonld}>
     <section class="hh" id="hero">
         <svg class="hh-defs" width="0" height="0" aria-hidden="true"><filter id="vblur" x="0" y="-20%" width="100%" height="140%"><feGaussianBlur stdDeviation="0 0" /></filter></svg>
         <div class="hh-odo-wrap" id="hero-odo">
-            <Odo value={d.days} from={Math.max(d.total, d.days + 20)} min={2} since={d.since} class="hh-odo wheel" label={`${d.days} days since the last Git fuck-up`} />
+            <Odo value={d.days} from={Math.max(d.total, d.days + 20)} min={2} since={d.since} class="hh-odo wheel" label={`${d.days} ${SITE.line.replace(/^Days /, 'days ')}`} />
         </div>
         <h1 class="hh-words">
-            <span class="visually-hidden">Days since the last Git fuck-up</span>
+            <span class="visually-hidden">{SITE.line}</span>
             {words.map((w) => <span class="w" aria-hidden="true">{w}</span>)}
         </h1>
-        {latest && <div class="hh-foot"><a class="hero-today hh-today" href="#today">Today's: <em>{latest.data.title}</em><span aria-hidden="true"> &darr;</span></a></div>}
+        <div class="hh-foot">
+            {latest && <a class="hero-today hh-today" href={hasCut ? '#cut' : '#today'}>Today's: <em>{latest.data.title}</em><span aria-hidden="true"> &darr;</span></a>}
+            <a class="hh-hint" href={hasCut ? '#cut' : '#today'} data-hint><span class="hh-hint-w">{hasCut ? 'Scroll to watch' : 'Keep scrolling'}</span><span class="hh-hint-a" aria-hidden="true"></span></a>
+        </div>
         <div class="hh-wipe" aria-hidden="true"></div>
     </section>
 
-    {latest ? (
+    {hasCut ? (
+        <section class="beat beat-cut" id="cut" aria-labelledby="cut-h" style={`--cut-scroll:${cutScroll}px`}>
+            <div class="cut-stage" id="cut-stage" data-player={href(`${incidentPath(latest!)}cut/player/`)} data-cut={latest!.id}>
+                <div class="cut-top col">
+                    <p class="today-kicker">Today's fuck-up</p>
+                    <h2 class="cut-title" id="cut-h"><a href={href(incidentPath(latest!))}>{latest!.data.title}</a></h2>
+                </div>
+                <div class="cut-box" data-cut-box>
+                    <picture class="cut-poster">
+                        {posterTall && <source media="(max-aspect-ratio: 4/5)" srcset={posterTall} width="720" height="1280" />}
+                        <img src={poster} width="1280" height="720" alt={`The cut: ${latest!.data.title}`} decoding="async" loading="lazy" />
+                    </picture>
+                    <p class="cut-wait" data-cut-wait>Loading the cut</p>
+                </div>
+                <p class="cut-under col"><span data-cut-count aria-live="off"></span><a href={href(incidentPath(latest!))}>Read what happened <span aria-hidden="true">&rarr;</span></a><a href={href(`${incidentPath(latest!)}cut/`)}>Open the cut full screen</a></p>
+            </div>
+        </section>
+    ) : latest ? (
         <section class="beat beat-today" id="today" aria-labelledby="today-h">
             <div class="col today-head">
                 <p class="today-kicker">Today's fuck-up</p>
-                <h2 class="today-title" id="today-h"><a href={href(incidentPath(latest))}><span class="visually-hidden">{latest.data.title}</span><span aria-hidden="true">{latest.data.title.split(/\s+/).map((w, i, a) => <><span class="tw">{w}</span>{i < a.length - 1 && ' '}</>)}</span></a></h2>
+                <h2 class="today-title" id="today-h"><a href={href(incidentPath(latest))}>{latest.data.title}</a></h2>
             </div>
-            {cutIsToday ? <CutBox incident={featured!} poster={poster!} posterTall={posterTall} /> : <Strip incident={latest} class="col today-strip" />}
-            <p class="col today-more"><a href={href(incidentPath(latest))}>Read the full fuck-up <span aria-hidden="true">&rarr;</span></a>{cutIsToday && <> <a class="today-cutlink" href={href(`${incidentPath(latest)}cut/`)}>Open the cut full screen</a></>}</p>
+            <Strip incident={latest} class="col today-strip" />
+            <p class="col today-more"><a href={href(incidentPath(latest))}>Read the full fuck-up <span aria-hidden="true">&rarr;</span></a></p>
         </section>
     ) : (
         <section class="beat col" id="today"><p class="note">No incident on record yet. The first one lands when the daily search finds one that passes the rules.</p></section>
     )}
 
-    {featured && !cutIsToday && (
-        <section class="beat beat-today beat-cut" id="cut" aria-labelledby="cut-h">
-            <div class="col today-head">
-                <p class="today-kicker">The cut: {formatDate(happened(featured))}</p>
-                <h2 class="today-title" id="cut-h"><a href={href(incidentPath(featured))}>{featured.data.title}</a></h2>
-            </div>
-            <CutBox incident={featured} poster={poster!} posterTall={posterTall} />
-            <p class="col today-more"><a href={href(incidentPath(featured))}>Read the full fuck-up <span aria-hidden="true">&rarr;</span></a> <a class="today-cutlink" href={href(`${incidentPath(featured)}cut/`)}>Open the cut full screen</a></p>
-        </section>
+    {latest && (
+        <div class="beat over" id="share">
+            <ShareCut title={latest.data.title} status={latest.data.status} url={new URL(incidentPath(latest), SITE.url).toString()} image={href(`${incidentPath(latest)}share.png`)} video={cut?.video ? href(`/cuts/${latest.id}/${cut.video}`) : null} slug={latest.id} />
+        </div>
     )}
 
-    {incidents.length > 1 && (
-        <section class="beat beat-record" id="record" aria-labelledby="record-h">
+    {incidents.length > 0 && (
+        <section class="beat beat-record over" id="record" aria-labelledby="record-h">
             <Record incidents={incidents} />
         </section>
     )}
 
-    <section class="beat beat-score" id="score" aria-labelledby="score-h">
+    <section class="beat beat-score over" id="score" aria-labelledby="score-h">
         <Score incidents={incidents} />
     </section>
 
-    <section class="beat beat-streak" id="streak" aria-labelledby="streak-h">
-        <Streak incidents={incidents} />
-    </section>
-
-    <section class="beat beat-confess" id="confess" aria-labelledby="confess-h">
+    <section class="beat beat-confess over" id="confess" aria-labelledby="confess-h">
         <Confess />
     </section>
 
-    <section class="beat beat-story" id="story" aria-labelledby="story-h">
+    <section class="beat beat-story over" id="story" aria-labelledby="story-h">
         <div class="col">
-            <div class="beat-head"><h2 id="story-h" data-lock>The story</h2></div>
+            <div class="beat-head"><h2 id="story-h" data-lock>The story</h2><span class="count">in his words</span></div>
             <div class="story">
-                <p>For 10 years git.wtf was a blog about fixing Git, written for people who had just fucked up and were looking for the fix. Then AI came into the picture and started doing the fixes for them, and the questions stopped coming here.</p>
-                <p>We noticed, envied and wanted revenge. So we started counting AI's fuck-ups alongside the Git fuck-ups.</p>
-                <p>AI now runs Git commands by itself, and a good many of the fuck-ups are now its own. We keep track of those with delight.</p>
-                <p>By the way, the old blog posts are still here, unchanged, in the archive. <a href={href('/archive/')}>Find them here.</a></p>
+                <p>For <mark>10 years</mark> git.wtf was a blog about <mark>fixing Git</mark>, written for people who had just fucked up and were looking for the fix. Then AI came into the picture and started doing the fixes for them, and <mark>the questions stopped coming here</mark>.</p>
+                <p class="story-big">We noticed, envied and wanted revenge. So we started <mark>counting AI's fuck-ups</mark> alongside the Git fuck-ups.</p>
+                <p>AI now runs Git commands by itself, and a good many of the fuck-ups are now its own. We keep track of those <mark>with delight</mark>.</p>
+                <p>By the way, the old blog posts are still here, unchanged, in the archive. Find them here.</p>
             </div>
+            <p class="story-go"><a class="story-btn" href={href('/archive/')}>Read the old posts <span aria-hidden="true">&rarr;</span></a><span class="story-n">67 posts, 2016 to 2021, as they were.</span></p>
         </div>
     </section>
 

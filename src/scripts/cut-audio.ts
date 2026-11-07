@@ -59,8 +59,20 @@ export class CutAudio {
     private pending: AudioBufferSourceNode[] = [];
     private ready: Promise<boolean> | null = null;
 
-    constructor(private base: string, private incident: string, private cuesFor: (shot: number) => Cue[], private allCues: () => Cue[]) {
-        try { this.on = localStorage.getItem('gitwtf-sound') !== 'off'; } catch { /* private mode: on */ }
+    constructor(private base: string, private incident: string, private cuesFor: (shot: number) => Cue[], private allCues: () => Cue[], opts: { defaultOn?: boolean } = {}) {
+        const def = opts.defaultOn ?? true;
+        try { const v = localStorage.getItem('gitwtf-sound'); this.on = v ? v === 'on' : def; } catch { this.on = def; }
+    }
+
+    /** Scrolled playback: the cues crossed between two moments play now; the bed follows the music state at t. */
+    scrub(prev: number, t: number) {
+        if (!this.ctx) return;
+        if (this.ctx.state === 'suspended') void this.ctx.resume();
+        this.setBed(this.bedAt(t), 0);
+        if (t <= prev || t - prev > 1.5) { this.stopPending(); return; }
+        this.allCues().filter((c) => c.kind !== 'music' && c.t > prev && c.t <= t).forEach((c) => {
+            soundsFor(this.m, this.incident, c).forEach((s) => { const p = this.play(s, 0, false); if (p) this.pending.push(p.src); });
+        });
     }
 
     /** On the viewer's first click, tap or key: the manifest, then only this cut's sounds. */

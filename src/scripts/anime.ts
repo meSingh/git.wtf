@@ -746,7 +746,10 @@ function build(g: El, svg: SVGSVGElement, shot: Shot, flash: boolean): Ctx {
     return ctx;
 }
 
-export function mountCutscene(wrap: HTMLElement) {
+/** What a scrolled cut hands the page: its length, a seek, and its sound. */
+export interface CutHandle { total: number; n: number; plan: { id: string; start: number; length: number }[]; frameAt: (t: number) => number; audio: CutAudio | null }
+
+export function mountCutscene(wrap: HTMLElement, opts: { mode?: 'scroll'; soundDefault?: boolean } = {}): CutHandle | undefined {
     // the frame: ?frame=9:16 or 16:9, else the screen's shape (phones and anything tall get the staged vertical one)
     const want = new URLSearchParams(location.search).get('frame');
     const vertical = want ? want === '9:16' : wrap.clientWidth / Math.max(1, wrap.clientHeight) < 0.8;
@@ -773,6 +776,8 @@ export function mountCutscene(wrap: HTMLElement) {
     let loops: gsap.core.Animation[] = [];
     // ?play=auto (Video's recorder) or ?render: the cut runs by itself on the planned clock, no input, no sound
     const auto = /[?&](play=auto|render)\b/.test(location.search);
+    // scroll: the page drives the clock (the homepage), no input of its own, sound off unless the reader turns it on
+    const scrolled = opts.mode === 'scroll' && !auto;
     const base = (wrap.dataset.base || '').replace(/\/$/, '');
     const soundBtn = wrap.querySelector<HTMLButtonElement>('[data-sound]');
     let audio: CutAudio | null = null;
@@ -922,7 +927,17 @@ export function mountCutscene(wrap: HTMLElement) {
     if (!states) cues.push({ t: total, kind: 'music', name: 'end', shot: list.shots[list.shots.length - 1].id });
     cues.forEach((c) => { c.t = +c.t.toFixed(3); });
     cues.sort((x, y) => x.t - y.t);
-    audio = auto ? null : new CutAudio(base, list.incident, (k) => cues.filter((c) => c.shot === list.shots[k].id), () => cues);
+    audio = auto ? null : new CutAudio(base, list.incident, (k) => cues.filter((c) => c.shot === list.shots[k].id), () => cues, { defaultOn: scrolled ? opts.soundDefault ?? false : true });
+    // a frame for any time, the same every time: for exporters that seek, and for the scrolled homepage
+    const frameAt = (t: number) => {
+        const k = Math.max(0, starts.findLastIndex((x) => x <= t));
+        if (k !== i) show(k);
+        tl!.pause();
+        const local = t - starts[k];
+        tl!.seek(Math.min(local, tl!.duration()), true);
+        loops.forEach((l) => { l.pause(); l.totalTime(Math.max(0, local - tl!.duration())); });
+        return k;
+    };
 
     if (auto) {
         // no input, no waiting: each shot comes on at its planned start, on GSAP's clock only
@@ -931,19 +946,31 @@ export function mountCutscene(wrap: HTMLElement) {
         const master = gsap.timeline({ paused: true });
         plan.forEach((p, k) => master.call(() => show(k), [], p.start));
         master.to({}, { duration: 0.001 }, total);
-        // a frame for any time, the same every time: for exporters that seek rather than run a clock
-        const frameAt = (t: number) => {
-            const k = Math.max(0, starts.findLastIndex((x) => x <= t));
-            if (k !== i) show(k);
-            tl!.pause();
-            const local = t - starts[k];
-            tl!.seek(Math.min(local, tl!.duration()), true);
-            loops.forEach((l) => { l.pause(); l.totalTime(Math.max(0, local - tl!.duration())); });
-            return k;
-        };
         const ready = (document.fonts?.ready ?? Promise.resolve()).then(() => { master.play(0); });
         (window as any).__cut = { frame, plan, total, cues, ready, show, get i() { return i; }, get tl() { return tl; }, n: shots.length, master, frameAt };
         return;
+    }
+
+    if (scrolled) {
+        wrap.classList.add('scrolled');
+        hint?.remove();
+        wrap.querySelector('[data-skip]')?.remove();
+        // the sound button shows at once; the first press is the gesture audio needs, and turns it on
+        const paint = () => { if (soundBtn && audio) { soundBtn.textContent = audio.on ? 'Sound on' : 'Sound off'; soundBtn.setAttribute('aria-pressed', String(audio.on)); } };
+        if (soundBtn) { soundBtn.hidden = false; paint(); }
+        soundBtn?.addEventListener('click', (e) => { e.stopPropagation(); audio?.start().then((ok) => { if (!ok && soundBtn) soundBtn.hidden = true; }); audio?.toggle(); paint(); });
+        let last = 0;
+        const seek = (t: number) => {
+            // at rest at the top the title has already landed, so the stage never shows an empty frame
+            const k = frameAt(Math.max(0.7, Math.min(total, t)));
+            // shots are silent until the viewer turns sound on, and the audio only exists after that press
+            audio?.scrub(last, t);
+            last = t;
+            return k;
+        };
+        show(0);
+        seek(0);
+        return { total, n: shots.length, plan, frameAt: seek, audio };
     }
 
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || location.search.includes('reduce');

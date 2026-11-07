@@ -88,9 +88,9 @@ const fontCss = fonts.map(([file, family, weight]) => `@font-face{font-family:'$
 <body>
     <header class="bar">
         <a class="brand" href={href('/')} aria-label="git.wtf, home"><Logo height="1.75rem" title="" /></a>
-        <a class={`badge${badge ? ' on' : ''}`} id="badge" href={href('/')} aria-label={`${days ?? 'unknown'} days since the last Git fuck-up`}>
+        <a class={`badge${badge ? ' on' : ''}`} id="badge" href={href('/')} aria-label={`${days ?? 'unknown'} ${SITE.line.replace(/^Days /, 'days ')}`}>
             <Odo value={days ?? 0} min={2} class="badge-odo wheel" since={latest ? happened(latest) : null} label={`${days ?? 0}`} />
-            <span class="badge-label">days since the last Git fuck-up</span>
+            <span class="badge-label">{SITE.line.replace(/^Days /, 'days ')}</span>
         </a>
         <nav aria-label="Site">
             <a href={href('/incidents/')}>Incidents</a>

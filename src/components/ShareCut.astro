@@ -1,32 +1,42 @@
 ---
-// Share an incident's cut: the image or the video, downloaded, handed to the device's share sheet (with the file
-// when the browser can), the link copied, or plain intent links for X, LinkedIn and Bluesky. No third-party script.
+// Share the cut: one card with the share image, one primary action (the device's share sheet where there is one,
+// the link copied where there is not), then the image (and the video when it exists) to download, the link, X and
+// LinkedIn. No third-party script. Used on the homepage after the story and on every incident page.
 import { SITE } from '../lib/site';
-interface Props { title: string; status: string; url: string; image: string; video?: string | null; slug: string }
-const { title, status, url, image, video = null, slug } = Astro.props;
+interface Props { title: string; status: string; url: string; image: string; video?: string | null; slug: string; heading?: string; lead?: string }
+// PLACEHOLDER copy until Content's lands (notes/content/homepage-v5-copy.md)
+const { title, status, url, image, video = null, slug, heading = 'Share the cut', lead = 'Send it to the person who was in the room.' } = Astro.props;
 const text = `${title}. Status: ${status.replace(/`/g, '')}`;
 const enc = encodeURIComponent;
-const intents = [
-    ['X', `https://twitter.com/intent/tweet?text=${enc(text)}&url=${enc(url)}&via=${enc(SITE.twitter.replace('@', ''))}`],
-    ['LinkedIn', `https://www.linkedin.com/sharing/share-offsite/?url=${enc(url)}`],
-    ['Bluesky', `https://bsky.app/intent/compose?text=${enc(`${text} ${url}`)}`],
-];
+const x = `https://twitter.com/intent/tweet?text=${enc(text)}&url=${enc(url)}&via=${enc(SITE.twitter.replace('@', ''))}`;
+const li = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(url)}`;
+const I = {
+    share: 'M18 16a3 3 0 0 0-2.4 1.2l-7-4a3 3 0 0 0 0-2.4l7-4A3 3 0 1 0 15 5a3 3 0 0 0 .1.6l-7 4a3 3 0 1 0 0 4.8l7 4A3 3 0 1 0 18 16z',
+    down: 'M12 3v10.2l3.6-3.6 1.4 1.4-6 6-6-6 1.4-1.4 3.6 3.6V3zM4 19h16v2H4z',
+    link: 'M10.6 13.4a1 1 0 0 1 0 1.4l-1 1a3.5 3.5 0 0 1-5-5l3-3a3.5 3.5 0 0 1 5 0 1 1 0 0 1-1.4 1.4 1.5 1.5 0 0 0-2.2 0l-3 3a1.5 1.5 0 0 0 2.2 2.2l1-1a1 1 0 0 1 1.4 0zm2.8-2.8a1 1 0 0 1 0-1.4l1-1a3.5 3.5 0 0 1 5 5l-3 3a3.5 3.5 0 0 1-5 0 1 1 0 0 1 1.4-1.4 1.5 1.5 0 0 0 2.2 0l3-3a1.5 1.5 0 0 0-2.2-2.2l-1 1a1 1 0 0 1-1.4 0z',
+    x: 'M18.2 2h3.4l-7.4 8.5L23 22h-6.8l-5.3-7-6.1 7H1.4l7.9-9.1L1 2h7l4.8 6.4zm-1.2 18h1.9L7.1 3.9H5.1z',
+    li: 'M6.9 8.5v12.1H3V8.5zM5 2.8a2.2 2.2 0 1 1 0 4.4 2.2 2.2 0 0 1 0-4.4zM21 13.4v7.2h-3.9v-6.5c0-1.6-.6-2.7-2-2.7-1.1 0-1.7.7-2 1.4-.1.3-.1.6-.1 1v6.8h-3.9s.1-11 0-12.1H13v1.7c.5-.8 1.4-1.9 3.5-1.9 2.6 0 4.5 1.7 4.5 5.1z',
+};
 ---
-<section class="share-cut" aria-labelledby="share-h" data-share data-title={title} data-text={text} data-url={url} data-image={image} data-video={video ?? undefined} data-slug={slug}>
-    <h2 id="share-h">Share the cut</h2>
-    <div class="sc-body">
-        <figure class="sc-pic">
-            {video ? <video src={video} poster={image} controls muted playsinline preload="none" width="1280" height="720"><a href={video}>Download the video</a></video> : <img src={image} alt={`A still from the cut: ${title}`} width="1200" height="630" loading="lazy" />}
+<section class="share" aria-labelledby="share-h" data-share data-title={title} data-text={text} data-url={url} data-image={image} data-video={video ?? undefined} data-slug={slug}>
+    <div class="col share-in">
+        <figure class="share-pic">
+            {video ? <video src={video} poster={image} controls muted playsinline preload="none" width="1280" height="720"><a href={video}>Download the video</a></video> : <img src={image} alt={`A still from the cut: ${title}`} width="1200" height="630" loading="lazy" decoding="async" />}
         </figure>
-        <div class="sc-actions">
-            <button type="button" class="sc-main" data-share-native hidden>Share…</button>
-            <p class="sc-row">
-                <a class="sc-btn" href={image} download={`git-wtf-${slug}.png`}>Download the image</a>
-                {video && <a class="sc-btn" href={video} download={`git-wtf-${slug}.mp4`}>Download the video</a>}
-                <button type="button" class="sc-btn" data-copy>Copy the link</button>
-            </p>
-            <p class="sc-row sc-intents">{intents.map(([name, href]) => <a class="sc-btn" href={href} target="_blank" rel="noopener">Post to {name}</a>)}</p>
-            <p class="sc-note" data-share-note aria-live="polite"></p>
+        <div class="share-side">
+            <p class="share-kicker">Share</p>
+            <h2 id="share-h" class="share-title">{heading}</h2>
+            <p class="share-lead">{lead}</p>
+            <div class="share-acts">
+                <button type="button" class="share-main" data-share-native hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d={I.share} /></svg>Share</button>
+                <button type="button" class="share-main share-main-copy" data-copy data-copy-main><svg viewBox="0 0 24 24" aria-hidden="true"><path d={I.link} /></svg>Copy the link</button>
+                <a class="share-btn" href={image} download={`git-wtf-${slug}.png`}><svg viewBox="0 0 24 24" aria-hidden="true"><path d={I.down} /></svg>Image</a>
+                {video && <a class="share-btn" href={video} download={`git-wtf-${slug}.mp4`}><svg viewBox="0 0 24 24" aria-hidden="true"><path d={I.down} /></svg>Video</a>}
+                <button type="button" class="share-btn" data-copy data-copy-small hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d={I.link} /></svg>Link</button>
+                <a class="share-btn" href={x} target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d={I.x} /></svg>Post on X</a>
+                <a class="share-btn" href={li} target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d={I.li} /></svg>LinkedIn</a>
+            </div>
+            <p class="share-note" data-share-note aria-live="polite"></p>
         </div>
     </div>
 </section>
@@ -36,17 +46,21 @@ const intents = [
         const note = box.querySelector<HTMLElement>('[data-share-note]');
         const say = (m: string) => { if (note) note.textContent = m; };
         const native = box.querySelector<HTMLButtonElement>('[data-share-native]');
+        const copyMain = box.querySelector<HTMLButtonElement>('[data-copy-main]');
+        const copySmall = box.querySelector<HTMLButtonElement>('[data-copy-small]');
         if (native && 'share' in navigator) {
+            // the share sheet takes the main place; the link moves down to the row
             native.hidden = false;
+            if (copyMain) copyMain.hidden = true;
+            if (copySmall) copySmall.hidden = false;
             native.addEventListener('click', async () => {
-                // the video if there is one, else the image, as a file when the browser takes files
                 let files: File[] = [];
                 try {
                     const src = video || image;
                     const blob = await (await fetch(src)).blob();
                     const f = new File([blob], `git-wtf-${slug}.${video ? 'mp4' : 'png'}`, { type: blob.type });
                     if (navigator.canShare?.({ files: [f] })) files = [f];
-                } catch { /* share the link alone */ }
+                } catch { /* the link alone, then */ }
                 try {
                     await navigator.share(files.length ? { files, title, text: `${text} ${url}` } : { title, text, url });
                 } catch (e) {
@@ -54,24 +68,28 @@ const intents = [
                 }
             });
         }
-        box.querySelector('[data-copy]')?.addEventListener('click', async () => {
+        box.querySelectorAll('[data-copy]').forEach((b) => b.addEventListener('click', async () => {
             try { await navigator.clipboard.writeText(url); say('Link copied.'); }
             catch { say(url); }
-        });
+        }));
     });
 </script>
-<style>
-    .share-cut { width: min(var(--col), 100% - 2rem); margin: 4rem auto 0; border-top: 1px solid var(--line); padding-top: 1.4rem; }
-    .share-cut h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 1.2rem; }
-    .sc-body { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 1.6rem; align-items: start; }
-    @media (max-width: 760px) { .sc-body { grid-template-columns: 1fr; } }
-    .sc-pic { margin: 0; }
-    .sc-pic img, .sc-pic video { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 3px; background: #0a0a0a; }
-    .sc-actions { display: grid; gap: 0.9rem; }
-    .sc-row { margin: 0; display: flex; flex-wrap: wrap; gap: 0.6rem; }
-    .sc-main { appearance: none; border: 0; border-radius: 2px; background: var(--yellow); color: var(--black); font: 400 1.05rem/1 var(--mono); padding: 0.95em 1.3em; cursor: pointer; justify-self: start; }
-    .sc-main[hidden] { display: none; }
-    .sc-btn { appearance: none; display: inline-block; background: none; border: 1px solid var(--line-2); border-radius: 2px; color: var(--paper); font: 400 0.88rem/1 var(--mono); padding: 0.75em 0.95em; cursor: pointer; text-decoration: none; }
-    .sc-btn:hover { border-color: var(--yellow); color: var(--yellow); text-decoration: none; }
-    .sc-note { margin: 0; min-height: 1.2em; font-family: var(--mono); font-size: 0.82rem; color: var(--grey); }
+<style is:global>
+    .share { padding: 4rem 0 1rem; }
+    .share-in { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(1.2rem, 3vw, 2.6rem); align-items: center; border: 1px solid var(--line-2); border-radius: 4px; padding: clamp(1rem, 2.5vw, 2rem); background: var(--tile); }
+    @media (max-width: 760px) { .share-in { grid-template-columns: 1fr; } }
+    .share-pic { margin: 0; }
+    .share-pic img, .share-pic video { display: block; width: 100%; height: auto; border-radius: 3px; background: #0a0a0a; }
+    .share-kicker { margin: 0 0 0.5rem; font-family: var(--mono); font-size: 0.82rem; color: var(--yellow); letter-spacing: 0.04em; text-transform: uppercase; }
+    .share-title { font-size: clamp(2.2rem, 5vw, 3.6rem); margin-bottom: 0.6rem; }
+    .share-lead { margin: 0 0 1.4rem; font-family: var(--body); font-size: 1.05rem; color: var(--paper); max-width: 28em; }
+    .share-acts { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+    .share-main, .share-btn { appearance: none; display: inline-flex; align-items: center; gap: 0.55em; border-radius: 2px; font-family: var(--mono); cursor: pointer; text-decoration: none; }
+    .share-main { flex-basis: 100%; justify-content: center; border: 0; background: var(--yellow); color: var(--black); font-size: 1.05rem; padding: 1em 1.4em; }
+    .share-main:hover { background: var(--paper); text-decoration: none; }
+    .share-main[hidden], .share-btn[hidden] { display: none; }
+    .share-btn { background: none; border: 1px solid var(--line-2); color: var(--paper); font-size: 0.88rem; padding: 0.75em 0.95em; }
+    .share-btn:hover { border-color: var(--yellow); color: var(--yellow); text-decoration: none; }
+    .share-main svg, .share-btn svg { width: 1.1em; height: 1.1em; fill: currentColor; }
+    .share-note { margin: 0.8rem 0 0; min-height: 1.2em; font-family: var(--mono); font-size: 0.82rem; color: var(--grey); }
 </style>

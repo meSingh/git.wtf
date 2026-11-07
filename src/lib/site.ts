@@ -16,6 +16,18 @@ export function published(list: Incident[]): Incident[] {
 export const SITE = {
     name: 'git.wtf',
     title: 'Days since the last Git fuck-up',
+    // The hero line, which must cover Git and AI (Mandeep, 7 Nov 2026). PLACEHOLDER until Content picks the wording
+    // (notes/content/homepage-v5-copy.md); the last word is the one in yellow.
+    line: 'Days since the last Git or AI fuck-up',
+    // The credit line, his exact words; the emphasised parts are marked by the footer.
+    credit: { name: 'Mandeep Singh', before: 'an ', strong: 'AI Architect', after: " who reviews his agents' commits. ", last: 'Mostly.' },
+    // The project's own accounts, from this one list: only the ones with a URL are shown. X exists; the rest land when he gives the handles.
+    social: [
+        { name: 'YouTube', url: '' },
+        { name: 'Instagram', url: '' },
+        { name: 'X', url: 'https://x.com/gitwtf' },
+        { name: 'LinkedIn', url: '' },
+    ] as { name: 'YouTube' | 'Instagram' | 'X' | 'LinkedIn'; url: string }[],
     // the tagline, approved by Mandeep on 7 Nov 2026 (notes/content/STORY.md)
     description: "AI killed our blog. We're keeping score.",
     repo: 'meSingh/git.wtf',
