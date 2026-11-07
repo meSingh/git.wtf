@@ -18,10 +18,10 @@ export default defineConfig({
     redirects,
     integrations: [
         sitemap({
-            // labs, hero openings, the cutscene player routes, hidden incidents and empty categories stay out of the sitemap
+            // labs, hero openings, the cutscene player routes, the footer's cast partial, hidden incidents and empty categories stay out of the sitemap
             filter: (page) => {
                 const p = new URL(page).pathname;
-                if (/\/(lab|hero)\//.test(p) || /\/incident\/[^/]+\/cut\//.test(p)) return false;
+                if (/\/(lab|hero)\//.test(p) || /\/incident\/[^/]+\/cut\//.test(p) || p === '/foot-cast/') return false;
                 const m = p.match(/\/incident\/([^/]+)\//);
                 if (m && hidden.has(m[1])) return false;
                 const c = p.match(/\/incidents\/([^/]+)\/$/);

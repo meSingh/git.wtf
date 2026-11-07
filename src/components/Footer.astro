@@ -1,39 +1,47 @@
 ---
-// The footer, grand: the hazard band, the mark large, the count line in big display type, his credit line with its
-// two emphasised parts, the project's four accounts as bordered buttons from one list, the site's links, and the
-// last line with a bonked agent beside it.
+// The footer (Mandeep's pick, 7 Nov 2026: concept A2, cast layout 1): the site's end credits, seven generic rows
+// from Content that never change with an incident; the cast along the bottom (a sweeper, a sleeper, one mid-bonk,
+// THE EXTRA waving behind its stack, DEV walking off); a short yellow end card with the mark on a black plate, the
+// four accounts, the site's links and the bonked line, an agent peeking over its edge; then his line on the black
+// strip at the very bottom. The cast and its styles come from the foot-cast partial, fetched by the script as the
+// footer approaches, so the first paint carries none of it; the credits roll up once when the footer arrives.
 import Logo from './Logo.astro';
 import { SITE, href } from '../lib/site';
+import '../styles/footer.css';
 const c = SITE.credit;
+// Content's A2 generic credits (notes/content/footer-concepts-copy.md), the Coordinator's cut of seven; the command in the code face
+const credits: [string, string][] = [
+    ['Starring', 'AI agents, as themselves'],
+    ['Also starring', 'Humans, occasionally'],
+    ['The developer', 'DEV, still holding the mug'],
+    ['The little grey one', 'Uncredited, as usual'],
+    ['Written by', 'Whoever pushed last'],
+    ['Stunts', '<code>--force</code>'],
+    ['Catering', 'Cold coffee'],
+];
 ---
-<footer class="foot">
-    <div class="foot-stripe" aria-hidden="true"></div>
-    <div class="col foot-in">
-        <a class="foot-mark" href={href('/')} aria-label="git.wtf, home"><Logo height="clamp(3.6rem, 11vw, 8.5rem)" title="" /></a>
-        <p class="foot-line">The count resets when someone fucks up. Someone always does.</p>
-        <p class="credit">{c.name}, {c.before}<em>{c.strong}</em>{c.after}<em>{c.last}</em></p>
-        <div class="foot-rows">
+<footer class="foot" data-foot data-cast={href('/foot-cast/')}>
+    <div class="foot-credits">
+        <div class="col roll">
+            <p class="roll-head">The end</p>
+            {credits.map(([k, v]) => <p class="cr"><span class="ck">{k}</span><span class="cv" set:html={v} /></p>)}
+        </div>
+    </div>
+    <div class="foot-card">
+        <div class="col foot-card-in">
+            <a class="foot-mark" href={href('/')} aria-label="git.wtf, home"><Logo height="clamp(2.6rem, 7vw, 4.8rem)" title="" /></a>
+            <p class="foot-follow">Follow the count</p>
             <nav class="foot-social" aria-label="git.wtf elsewhere">
                 {SITE.social.map((s) => <a class="foot-btn" href={s.url} rel="noopener" aria-label={`git.wtf on ${s.name}`}>{s.name}</a>)}
             </nav>
-            <nav class="foot-nav" aria-label="Site">
-                <a href={href('/incidents/')}>Incidents</a>
-                <a href={href('/archive/')}>Archive</a>
-                <a href={href('/rss.xml')}>RSS</a>
-            </nav>
+            <p class="foot-row">
+                <nav class="foot-nav" aria-label="Site"><a href={href('/incidents/')}>Incidents</a><a href={href('/archive/')}>Archive</a><a href={href('/rss.xml')}>RSS</a></nav>
+                <span class="foot-last">
+                    <svg class="bonked" viewBox="0 0 120 92" width="44" height="34" aria-hidden="true"><path d="M62 6 l5 12 13 1 -10 8 4 13 -12 -7 -12 7 4 -13 -10 -8 13 -1z" fill="#0a0a0a" /><path d="M100 14 l3 7 8 1 -6 5 2 8 -7 -4 -7 4 2 -8 -6 -5 8 -1z" fill="#0a0a0a" /><path d="M18 22 l3 7 8 1 -6 5 2 8 -7 -4 -7 4 2 -8 -6 -5 8 -1z" fill="#0a0a0a" /><ellipse cx="60" cy="34" rx="16" ry="9" fill="#f2f0ea" stroke="#0a0a0a" stroke-width="3" /><rect x="24" y="36" width="72" height="52" rx="6" fill="#f2f0ea" stroke="#0a0a0a" stroke-width="3" /><rect x="31" y="43" width="58" height="38" rx="3" fill="#0a0a0a" /><text x="40" y="70" fill="#ffd400" font-family="JetBrains Mono, ui-monospace, monospace" font-size="20">&gt;_</text></svg>
+                    <span>No agents were harmed in the making of this site. Several were bonked.</span>
+                </span>
+            </p>
         </div>
-        <p class="foot-last">
-            <svg class="bonked" viewBox="0 0 120 92" width="60" height="46" aria-hidden="true">
-                <path d="M62 6 l5 12 13 1 -10 8 4 13 -12 -7 -12 7 4 -13 -10 -8 13 -1z" fill="#ffd400" stroke="#0a0a0a" stroke-width="2" />
-                <path d="M100 14 l3 7 8 1 -6 5 2 8 -7 -4 -7 4 2 -8 -6 -5 8 -1z" fill="#ffd400" stroke="#0a0a0a" stroke-width="2" />
-                <path d="M18 22 l3 7 8 1 -6 5 2 8 -7 -4 -7 4 2 -8 -6 -5 8 -1z" fill="#ffd400" stroke="#0a0a0a" stroke-width="2" />
-                <ellipse cx="60" cy="34" rx="16" ry="9" fill="#f2f0ea" stroke="#0a0a0a" stroke-width="3" />
-                <rect x="24" y="36" width="72" height="52" rx="6" fill="#f2f0ea" stroke="#0a0a0a" stroke-width="3" />
-                <rect x="31" y="43" width="58" height="38" rx="3" fill="#0a0a0a" />
-                <text x="40" y="70" fill="#ffd400" font-family="JetBrains Mono, ui-monospace, monospace" font-size="20">&gt;_</text>
-                <path d="M46 20 l-6 -8 M74 20 l6 -8" stroke="#ffd400" stroke-width="3" stroke-linecap="round" />
-            </svg>
-            <span>No agents were harmed in the making of this site. Several were bonked.</span>
-        </p>
     </div>
+    <div class="foot-strip"><p class="col credit">{c.name}, {c.before}<em>{c.strong}</em>{c.after}<em>{c.last}</em></p></div>
 </footer>

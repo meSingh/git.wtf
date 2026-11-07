@@ -106,8 +106,11 @@ const fontCss = fonts.map(([file, family, weight]) => `@font-face{font-family:'$
     <script>
         import { syncOdos } from '../scripts/odometer';
         import { lateImages } from '../scripts/late-images';
+        import { mountFooter } from '../scripts/footer';
         syncOdos();
         lateImages();
+        // the footer's motion waits for the first frame to be painted, so the hero's paint never waits for it
+        requestAnimationFrame(() => requestAnimationFrame(mountFooter));
     </script>
 </body>
 </html>

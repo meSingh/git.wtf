@@ -1,0 +1,102 @@
+/* The footer's cast: the anime kit's agent and mascot rules, copied from cut.css so the footer paints without
+   the cut's stylesheet (the cut pages load both; same selectors, same values), the cast's placing and its loops.
+   Inlined by the foot-cast partial, which the footer's script fetches as the footer approaches, so none of it is
+   in the page's first paint. */
+.cutscene { display: block; width: 100%; height: 100%; }
+.cutscene .a-agent .torso, .cutscene .a-agent .arm, .cutscene .a-agent .neck { fill: #8a877f; stroke: #0a0a0a; stroke-width: 8; }
+.cutscene .a-agent .stripe { stroke: #0a0a0a; stroke-width: 6; }
+.cutscene .a-agent .badge circle { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 6; }
+.cutscene .a-agent .badge text { fill: #0a0a0a; font-family: var(--display); font-weight: 900; font-size: 48px; text-anchor: middle; }
+.cutscene .a-agent .frame { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 9; }
+.cutscene .a-agent .screen { fill: #0a0a0a; }
+.cutscene .a-agent .cursor { fill: #ffd400; font-family: var(--mono); font-size: 110px; }
+.cutscene .a-agent .smile { fill: none; stroke: #ffd400; stroke-width: 9; stroke-linecap: round; }
+.cutscene .a-agent .gleam { fill: #ffd400; }
+.cutscene .a-agent .face-s circle, .cutscene .a-agent .face-s ellipse { fill: none; stroke: #f2f0ea; stroke-width: 7; }
+.cutscene .a-agent .face-s .dot { fill: #f2f0ea; }
+.cutscene .a-agent .face-x path { stroke: #f2f0ea; stroke-width: 8; stroke-linecap: round; fill: none; }
+.cutscene .a-agent .fist, .cutscene .a-agent .tip { fill: #8a877f; stroke: #0a0a0a; stroke-width: 7; }
+.cutscene .a-agent .tip { fill: #ffd400; }
+.cutscene .a-agent .tear { fill: #dcd9d1; stroke: #f2f0ea; stroke-width: 3; }
+.cutscene .a-agent.extra .frame { fill: #8a877f; }
+.cutscene .a-agent.extra .screen { fill: #2e2d2a; }
+.cutscene .a-agent.extra .torso, .cutscene .a-agent.extra .arm, .cutscene .a-agent.extra .neck { fill: #5d5a53; }
+.cutscene .a-agent.extra .cursor { fill: #8a877f; }
+.cutscene .a-agent.extra .smile { stroke: #8a877f; }
+.cutscene .a-agent.extra .stripe { opacity: 0.45; }
+.cutscene .a-agent.sil * { fill: #0a0a0a; stroke: #0a0a0a; }
+.cutscene .a-agent.sil .gleam { fill: #ffd400; stroke: none; }
+.cutscene .a-agent .limb-o { fill: none; stroke: #0a0a0a; stroke-width: 58; stroke-linecap: round; stroke-linejoin: round; }
+.cutscene .a-agent .limb { fill: none; stroke: #8a877f; stroke-width: 42; stroke-linecap: round; stroke-linejoin: round; }
+.cutscene .a-agent .palm { fill: #8a877f; stroke: #0a0a0a; stroke-width: 7; }
+.cutscene .a-agent .broom .handle { stroke: #7a4f2a; stroke-width: 26; stroke-linecap: round; }
+.cutscene .a-agent .broom .bristles { fill: #ffd400; stroke: #0a0a0a; stroke-width: 8; stroke-linejoin: round; }
+.cutscene .a-agent .broom .tie { stroke: #0a0a0a; stroke-width: 10; }
+.cutscene .a-agent.wet .frame { fill: #b9b6ae; }
+.cutscene .a-agent .drops path { fill: #9fb3c8; stroke: #0a0a0a; stroke-width: 4; }
+.mascot .m-shadow { fill: #0a0a0a; opacity: 0.22; }
+.mascot .m-pants, .mascot .m-shoe { fill: #0a0a0a; stroke: #8a877f; stroke-width: 6; stroke-linejoin: round; }
+.mascot .m-hood { fill: #0a0a0a; stroke: #8a877f; stroke-width: 7; stroke-linecap: round; }
+.mascot .m-hoodie { fill: #0a0a0a; stroke: #8a877f; stroke-width: 7; stroke-linejoin: round; }
+.mascot .m-hem, .mascot .m-pocket { fill: none; stroke: #8a877f; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+.mascot .m-neck { fill: #f2f0ea; }
+.mascot .m-string { fill: none; stroke: #8a877f; stroke-width: 6; stroke-linecap: round; }
+.mascot .m-tip { fill: #8a877f; }
+.mascot .m-sleeve-o { fill: none; stroke: #8a877f; stroke-width: 58; stroke-linecap: round; stroke-linejoin: round; }
+.mascot .m-sleeve-o.front { stroke-width: 64; }
+.mascot .m-sleeve { fill: none; stroke: #0a0a0a; stroke-width: 46; stroke-linecap: round; stroke-linejoin: round; }
+.mascot .m-hand { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 6; }
+.mascot .m-cup { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 7; stroke-linejoin: round; }
+.mascot .m-handle { fill: none; stroke: #f2f0ea; stroke-width: 10; }
+.mascot .m-coffee { fill: #2e2d2a; }
+.mascot .m-steam { fill: none; stroke: #8a877f; stroke-width: 7; stroke-linecap: round; }
+.mascot .m-spill { fill: #2e2d2a; stroke: #0a0a0a; stroke-width: 5; }
+.mascot .m-sheet { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 7; stroke-linejoin: round; }
+.mascot .m-head { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 8; }
+.mascot .m-white { fill: #ffffff; stroke: #0a0a0a; stroke-width: 7; }
+.mascot .m-lid { stroke: #0a0a0a; stroke-width: 8; stroke-linecap: round; }
+.mascot .m-pupil { fill: #0a0a0a; }
+.mascot .m-closed, .mascot .m-mouth { fill: none; stroke: #0a0a0a; stroke-width: 8; stroke-linecap: round; }
+.mascot .m-brow { fill: none; stroke: #0a0a0a; stroke-width: 14; stroke-linecap: round; }
+.mascot .m-shake { fill: none; stroke: #ffd400; stroke-width: 9; stroke-linecap: round; }
+.mascot .m-exhale-o { fill: none; stroke: #0a0a0a; stroke-width: 16; stroke-linecap: round; }
+.mascot .m-exhale { fill: none; stroke: #f2f0ea; stroke-width: 8; stroke-linecap: round; }
+.mascot .m-scream { fill: #0a0a0a; }
+.mascot .m-drop { fill: #dcd9d1; stroke: #0a0a0a; stroke-width: 5; }
+.mascot .m-brow.thin { stroke-width: 10; }
+.mascot .m-yawn { fill: #0a0a0a; }
+.mascot .m-zzz text { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 8; paint-order: stroke; font-family: var(--display); font-weight: 900; font-size: 70px; }
+.mascot .m-zzz text.big { font-size: 100px; }
+.mascot .m-teeth { fill: none; stroke: #0a0a0a; stroke-width: 4; }
+.mascot .m-steam-head path { fill: none; stroke: #f2f0ea; stroke-width: 9; stroke-linecap: round; }
+.cutscene .a-agent .face-h path { fill: none; stroke: #ffd400; stroke-width: 10; stroke-linecap: round; }
+.cutscene .a-agent .face-h .grin { stroke-width: 12; }
+
+/* svg. in the selectors: the cut player, mounted later on the homepage, inlines cut.css and its .cutscene sizing rule would otherwise win */
+svg.foot-cast { position: absolute; left: 50%; bottom: 0; width: min(100%, 1600px); height: auto; transform: translateX(-50%); display: block; }
+.foot-cast .zz { fill: var(--paper); font-family: var(--display); font-weight: 900; font-size: 44px; }
+.foot-cast .zz.big { font-size: 64px; }
+.foot-cast .st { fill: var(--yellow); stroke: #0a0a0a; stroke-width: 6; stroke-linejoin: round; }
+svg.foot-peek { position: absolute; left: 24%; top: 0; width: 13rem; height: auto; transform: translate(-50%, -100%); overflow: hidden; }
+/* motion: the cast's loops; the rise on arrival is in src/scripts/footer.ts. None of it with reduced motion. */
+.foot-cast .c-sweep .broom, .foot-cast .zz, .foot-cast .st, .foot-cast .c-wave .arm-up, .foot-peek .c-peek { transform-box: fill-box; }
+.foot-cast .c-sweep .broom { transform-origin: 30% 10%; animation: foot-sweep 1.5s ease-in-out infinite alternate; }
+.foot-cast .zz { transform-origin: 50% 100%; animation: foot-z 2.6s ease-out infinite; }
+.foot-cast .zz.big { animation-delay: 0.9s; }
+.foot-cast .st { transform-origin: 50% 50%; animation: foot-star 1.8s ease-in-out infinite; }
+.foot-cast .st.small { animation-delay: 0.5s; }
+.foot-cast g ~ g .st.small { animation-delay: 1.1s; }
+.foot-cast .c-wave .arm-up { transform-origin: 10% 95%; animation: foot-wave 1.1s ease-in-out infinite alternate; }
+.foot-peek .c-peek { transform-origin: 50% 100%; animation: foot-peek 7s ease-in-out infinite; }
+@keyframes foot-sweep { from { transform: rotate(-9deg); } to { transform: rotate(9deg); } }
+@keyframes foot-z { 0% { opacity: 0; transform: translateY(14px) scale(0.8); } 25% { opacity: 1; } 100% { opacity: 0; transform: translateY(-40px) scale(1.1); } }
+@keyframes foot-star { 0%, 100% { transform: scale(0.75); } 50% { transform: scale(1.15); } }
+@keyframes foot-wave { from { transform: rotate(-14deg); } to { transform: rotate(16deg); } }
+@keyframes foot-peek { 0%, 55% { transform: translateY(0); } 62%, 80% { transform: translateY(260px); } 88%, 100% { transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) {
+    .foot-cast *, .foot-peek * { animation: none !important; }
+}
+@media (max-width: 639px) {
+    svg.foot-cast { width: 135%; max-width: none; }
+    svg.foot-peek { width: 8rem; }
+}

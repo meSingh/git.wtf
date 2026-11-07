@@ -280,24 +280,6 @@ html.js-anim .hh-hint { opacity: 0; visibility: hidden; }
 .story-btn:hover { text-decoration: none; box-shadow: 0 0 0 3px var(--black), 0 0 0 6px var(--yellow); }
 
 
-/* ---------- footer: the same lines, set on a wider stage (a hazard band, the mark, more air), no heavy weights ---------- */
-.foot { margin-top: 5rem; background: linear-gradient(to bottom, var(--black), #0f0f0e); }
-.foot-stripe { height: 0.9rem; background: repeating-linear-gradient(-45deg, var(--yellow) 0 1.1rem, var(--black) 1.1rem 2.2rem); }
-.foot-in { padding: clamp(2.4rem, 5vw, 4rem) 0 2.4rem; display: grid; gap: clamp(1.2rem, 2.5vw, 2rem); }
-.foot-mark { display: inline-block; justify-self: start; }
-.foot-line { margin: 0; font-family: var(--display); font-weight: 900; font-size: clamp(2.4rem, 6.2vw, 5.6rem); line-height: 0.92; text-transform: uppercase; color: var(--paper); max-width: 16ch; }
-.foot-line::after { content: ''; display: block; width: 6rem; height: 5px; margin-top: 1rem; background: var(--yellow); }
-.foot .credit { margin: 0; padding: 1.1rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: var(--body); font-size: clamp(1rem, 1.5vw, 1.2rem); color: var(--paper); max-width: 44em; }
-.foot .credit em { font-style: normal; color: var(--yellow); }
-.foot-rows { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem 2rem; }
-.foot-social { display: flex; flex-wrap: wrap; gap: 0.6rem; }
-.foot-btn { display: inline-block; border: 1px solid var(--line-2); border-radius: 2px; padding: 0.7em 1.1em; font-family: var(--mono); font-size: 0.85rem; color: var(--paper); transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease; }
-.foot-btn:hover { box-shadow: 0 0 0 3px var(--black), 0 0 0 4px var(--yellow); }
-.foot-btn:hover { border-color: var(--yellow); color: var(--yellow); text-decoration: none; }
-.foot-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 1.2rem; font-family: var(--mono); font-size: 0.8rem; }
-.foot-nav a { color: var(--grey); }
-.foot-nav a:hover { color: var(--yellow); }
-.foot-last { margin: 0; padding-top: 1.2rem; border-top: 1px solid var(--line); display: flex; align-items: center; gap: 0.9rem; font-family: var(--mono); font-size: 0.9rem; color: var(--grey); }
-.foot-last .bonked { flex: none; }
+/* ---------- footer: src/styles/footer.css ---------- */
 
 @media (prefers-reduced-motion: reduce) { .tcard, .tcard::before, .tcard .s, .badge { transition: none; } .ep-down-a { animation: none; } }

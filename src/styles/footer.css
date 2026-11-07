@@ -1,0 +1,34 @@
+/* The footer (A2, layout 1): the site's end credits with the cast along the bottom (the cast and its rules come
+   from the foot-cast partial, fetched as the footer approaches), a short yellow end card, his line on the black
+   strip under it. */
+.foot { margin-top: 5rem; background: var(--black); color: var(--paper); overflow: hidden; }
+.foot-credits { position: relative; padding: clamp(2rem, 4vw, 3.5rem) 0 clamp(6rem, 26vw, 28rem); }
+.foot .roll { width: min(52rem, 100%); margin: 0 auto; text-align: center; position: relative; z-index: 2; }
+.foot .roll-head { margin: 0 0 1.6rem; font-family: var(--display); font-weight: 900; font-size: clamp(3rem, 9vw, 8rem); line-height: 0.9; text-transform: uppercase; color: var(--yellow); }
+.foot .cr { display: grid; grid-template-columns: 1fr 1fr; gap: 0 2rem; margin: 0 0 0.55rem; font-family: var(--mono); font-size: clamp(0.9rem, 1.5vw, 1.15rem); }
+.foot .ck { text-align: right; color: var(--grey); }
+.foot .cv { text-align: left; color: var(--paper); }
+.foot .cv code { font-family: var(--mono); color: var(--yellow); }
+.foot-card { position: relative; background: var(--yellow); color: var(--black); padding: 2.2rem 0 1.6rem; }
+.foot-card-in { display: grid; gap: 0.9rem; justify-items: center; text-align: center; }
+.foot-mark { display: inline-block; background: var(--black); padding: 0.55rem 0.8rem 0.5rem; border-radius: 3px; line-height: 0; }
+.foot-mark .logo { display: block; }
+.foot-follow { margin: 0; font-family: var(--display); font-weight: 900; font-size: clamp(1.4rem, 3.4vw, 2.4rem); text-transform: uppercase; }
+.foot-social { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; }
+.foot-btn { display: inline-block; border: 2px solid var(--black); border-radius: 2px; padding: 0.65em 1.1em; font-family: var(--mono); font-size: 0.9rem; color: var(--black); transition: background 0.2s ease, color 0.2s ease; }
+.foot-btn:hover { background: var(--black); color: var(--yellow); text-decoration: none; }
+.foot-row { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.6rem 1.6rem; margin: 0.4rem 0 0; }
+.foot-nav { display: flex; gap: 1.2rem; font-family: var(--mono); font-size: 0.85rem; }
+.foot-nav a { color: var(--black); text-decoration: underline; }
+.foot-nav a:hover { color: var(--black); text-decoration-thickness: 2px; }
+.foot-last { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--mono); font-size: 0.85rem; }
+.foot-last .bonked { flex: none; }
+.foot-strip { padding: 1.6rem 0 2rem; }
+.foot .credit { margin: 0; text-align: center; font-family: var(--body); font-size: clamp(1rem, 1.5vw, 1.2rem); color: var(--paper); }
+.foot .credit em { font-style: normal; color: var(--yellow); }
+
+@media (max-width: 639px) {
+    .foot .cr { grid-template-columns: 1fr; gap: 0; }
+    .foot .ck, .foot .cv { text-align: center; }
+    .foot-credits { padding-bottom: 10rem; }
+}
