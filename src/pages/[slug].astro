@@ -2,8 +2,9 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import '../styles/pages.css';
-import { formatDate, href } from '../lib/site';
+import { href } from '../lib/site';
 import { archiveJsonLd } from '../lib/jsonld';
+import { highlightHtml } from '../lib/highlight';
 
 export async function getStaticPaths() {
     const all = (await getCollection('archive')).sort((a, b) => (a.data.published_at < b.data.published_at ? 1 : -1));
@@ -17,7 +18,8 @@ const { entry, newer, older } = Astro.props;
 const d = entry.data;
 const isPost = d.type === 'post';
 const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
-const html = base ? d.html.replace(/(src|href)="\/(content\/images\/)/g, `$1="${base}/$2`) : d.html;
+const html = await highlightHtml(base ? d.html.replace(/(src|href)="\/(content\/images\/)/g, `$1="${base}/$2`) : d.html);
+const hasCode = html.includes('class="code"');
 const jsonld = archiveJsonLd(entry.id, d);
 ---
 <Base title={d.meta_title ?? `${d.title} | git.wtf`} description={d.meta_description ?? d.excerpt} image={d.feature_image ?? '/share.png'} canonical={d.canonical_url ?? undefined} type={isPost ? 'article' : 'website'} jsonld={jsonld}>
@@ -27,7 +29,6 @@ const jsonld = archiveJsonLd(entry.id, d);
                 <h1>{d.title}</h1>
                 {isPost && (
                     <p class="meta">
-                        <time datetime={d.published_at}>{formatDate(d.published_at.slice(0, 10))}</time>
                         {d.authors.length > 0 && <span>{d.authors.join(', ')}</span>}
                         <a href={href('/archive/')}>from the archive</a>
                     </p>
@@ -38,10 +39,11 @@ const jsonld = archiveJsonLd(entry.id, d);
             {d.tags.length > 0 && <p class="tags">Tagged {d.tags.join(', ')}</p>}
             {isPost && (
                 <nav class="pager" aria-label="Other posts">
-                    <span>{older && <a href={href(`/${older.id}/`)}>&larr; {older.data.title}</a>}</span>
-                    <span class="next">{newer && <a href={href(`/${newer.id}/`)}>{newer.data.title} &rarr;</a>}</span>
+                    <span>{older && <a href={href(`/${older.id}/`)}><small>Older post</small>&larr; {older.data.title}</a>}</span>
+                    <span class="next">{newer && <a href={href(`/${newer.id}/`)}><small>Newer post</small>{newer.data.title} &rarr;</a>}</span>
                 </nav>
             )}
         </article>
     </main>
+    {hasCode && <script>import '../scripts/code-copy';</script>}
 </Base>
