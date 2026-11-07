@@ -14,11 +14,12 @@ const c = SITE.credit;
 ---
 <footer class="foot">
     <div class="col foot-in">
-        <a class="foot-mark" href={href('/')} aria-label="git.wtf, home"><Logo height="clamp(3.2rem, 11vw, 8rem)" title="" /></a>
+        <p class="foot-big">The count resets when someone fucks up. Someone always does.</p>
         <p class="credit">{c.name}, {c.before}<em>{c.strong}</em>{c.after}<em>{c.last}</em></p>
         <div class="foot-rows">
             {social.length > 0 && (
-                <nav class="foot-social" aria-label="git.wtf elsewhere">
+                <nav class="foot-social" aria-label="Follow the count">
+                    <span class="foot-follow">Follow the count</span>
                     {social.map((s) => <a href={s.url} rel="noopener" aria-label={`git.wtf on ${s.name}`}><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d={icons[s.name]} fill="currentColor" /></svg><span>{s.name}</span></a>)}
                 </nav>
             )}
@@ -28,5 +29,6 @@ const c = SITE.credit;
                 <a href={href('/rss.xml')}>RSS</a>
             </nav>
         </div>
+        <p class="foot-last"><a class="foot-mark" href={href('/')} aria-label="git.wtf, home"><Logo height="1.6rem" title="" /></a><span>Every fuck-up on this site links to its source.</span></p>
     </div>
 </footer>

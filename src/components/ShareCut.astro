@@ -3,10 +3,12 @@
 // the link copied where there is not), then the image (and the video when it exists) to download, the link, X and
 // LinkedIn. No third-party script. Used on the homepage after the story and on every incident page.
 import { SITE } from '../lib/site';
-interface Props { title: string; status: string; url: string; image: string; video?: string | null; slug: string; heading?: string; lead?: string }
-// PLACEHOLDER copy until Content's lands (notes/content/homepage-v5-copy.md)
-const { title, status, url, image, video = null, slug, heading = 'Share the cut', lead = 'Send it to the person who was in the room.' } = Astro.props;
-const text = `${title}. Status: ${status.replace(/`/g, '')}`;
+interface Props { title: string; status: string; url: string; image: string; video?: string | null; slug: string; episode?: { episode: string; title: string } | null }
+// Content's strings (notes/content/homepage-v5-copy.md): the post reads "{episode}: {title} {Status}. {url}"
+const { title, status, url, image, video = null, slug, episode = null } = Astro.props;
+const heading = 'Spread the damage';
+const st = status.replace(/`/g, '');
+const text = episode ? `${episode.episode}: ${episode.title} ${st.charAt(0).toUpperCase()}${st.slice(1)}` : `${title}. ${st.charAt(0).toUpperCase()}${st.slice(1)}`;
 const enc = encodeURIComponent;
 const x = `https://twitter.com/intent/tweet?text=${enc(text)}&url=${enc(url)}&via=${enc(SITE.twitter.replace('@', ''))}`;
 const li = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(url)}`;
@@ -26,15 +28,14 @@ const I = {
         <div class="share-side">
             <p class="share-kicker">Share</p>
             <h2 id="share-h" class="share-title">{heading}</h2>
-            <p class="share-lead">{lead}</p>
             <div class="share-acts">
                 <button type="button" class="share-main" data-share-native hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d={I.share} /></svg>Share</button>
-                <button type="button" class="share-main share-main-copy" data-copy data-copy-main><svg viewBox="0 0 24 24" aria-hidden="true"><path d={I.link} /></svg>Copy the link</button>
-                <a class="share-btn" href={image} download={`git-wtf-${slug}.png`}><svg viewBox="0 0 24 24" aria-hidden="true"><path d={I.down} /></svg>Image</a>
-                {video && <a class="share-btn" href={video} download={`git-wtf-${slug}.mp4`}><svg viewBox="0 0 24 24" aria-hidden="true"><path d={I.down} /></svg>Video</a>}
-                <button type="button" class="share-btn" data-copy data-copy-small hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d={I.link} /></svg>Link</button>
+                <button type="button" class="share-main share-main-copy" data-copy data-copy-main><svg viewBox="0 0 24 24" aria-hidden="true"><path d={I.link} /></svg><span data-copy-label>Copy the link</span></button>
+                <a class="share-btn" href={image} download={`git-wtf-${slug}.png`}><svg viewBox="0 0 24 24" aria-hidden="true"><path d={I.down} /></svg>Download the image</a>
+                {video && <a class="share-btn" href={video} download={`git-wtf-${slug}.mp4`}><svg viewBox="0 0 24 24" aria-hidden="true"><path d={I.down} /></svg>Download the video</a>}
+                <button type="button" class="share-btn" data-copy data-copy-small hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d={I.link} /></svg><span data-copy-label>Copy the link</span></button>
                 <a class="share-btn" href={x} target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d={I.x} /></svg>Post on X</a>
-                <a class="share-btn" href={li} target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d={I.li} /></svg>LinkedIn</a>
+                <a class="share-btn" href={li} target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d={I.li} /></svg>Post on LinkedIn</a>
             </div>
             <p class="share-note" data-share-note aria-live="polite"></p>
         </div>
@@ -68,9 +69,12 @@ const I = {
                 }
             });
         }
-        box.querySelectorAll('[data-copy]').forEach((b) => b.addEventListener('click', async () => {
-            try { await navigator.clipboard.writeText(url); say('Link copied.'); }
-            catch { say(url); }
+        box.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((b) => b.addEventListener('click', async () => {
+            const label = b.querySelector<HTMLElement>('[data-copy-label]');
+            try {
+                await navigator.clipboard.writeText(url);
+                if (label) { label.textContent = 'Copied'; setTimeout(() => { label.textContent = 'Copy the link'; }, 2000); }
+            } catch { say(url); }
         }));
     });
 </script>

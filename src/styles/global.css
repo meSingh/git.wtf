@@ -65,7 +65,8 @@ html.js-anim .odo[data-from] .odo-strip { transform: translateY(calc(var(--d0) *
 .hh { position: relative; z-index: 0; height: 100svh; overflow: hidden; display: grid; grid-template-columns: auto 1fr; grid-template-rows: 1fr auto; column-gap: clamp(1.5rem, 4vw, 4rem); padding: calc(var(--bar) + 1rem) clamp(1rem, 4vw, 3.5rem) clamp(1rem, 4vh, 2.4rem); background: var(--black); }
 .hh-defs { position: absolute; }
 .hh-odo-wrap { grid-column: 1; grid-row: 1 / 3; align-self: center; transform-origin: 0 0; }
-.hh-odo { font-size: min(calc(100svh - var(--bar) - 3rem), 56vw); }
+/* sized by the wheel count (--n from the odometer), so three wheels take the room two did */
+.hh-odo { font-size: min(calc(100svh - var(--bar) - 3rem), calc(112vw / var(--n, 2))); }
 .hh-words { grid-column: 2; grid-row: 1; align-self: center; margin: 0; display: flex; flex-wrap: wrap; align-content: center; gap: 0 0.22em; font-family: var(--display); font-weight: 900; font-size: clamp(2.6rem, min(12vh, 7.4vw), 8.5rem); line-height: 0.9; color: var(--paper); z-index: 2; }
 .hh-words .w { display: inline-block; }
 .hh-words .w:last-of-type { color: var(--yellow); }
@@ -80,15 +81,17 @@ html.js-anim .hh-words .w, html.js-anim .hh-today { opacity: 0; visibility: hidd
 @media (max-width: 767px) {
     .hh { grid-template-columns: 1fr; grid-template-rows: 1fr auto auto; row-gap: 1.2rem; padding: calc(var(--bar) + 0.5rem) 1rem 1.6rem; }
     .hh-odo-wrap { grid-column: 1; grid-row: 1; justify-self: center; }
-    .hh-odo { font-size: min(52svh, calc((100vw - 2rem) / 1.14)); }
-    .hh-words { grid-column: 1; grid-row: 2; font-size: clamp(2.2rem, 12.5vw, 4rem); }
+    .hh-odo { font-size: min(52svh, calc((100vw - 2rem) / (0.57 * var(--n, 2)))); }
+    .hh-words { grid-column: 1; grid-row: 2; font-size: clamp(2rem, 11vw, 4rem); min-width: 0; }
+    .hh-odo-wrap, .hh-foot { min-width: 0; max-width: 100%; }
     .hh-foot { grid-column: 1; grid-row: 3; justify-self: start; }
     .hh-today { text-align: left; }
     .hh-wipe { width: 40vw; }
 }
 
 /* the lock-in: words of headings and today's title */
-.lw { display: inline-block; }
+.lw { display: inline-block; margin-right: 0.24em; }
+.lw:last-child { margin-right: 0; }
 
 /* the wipes between sections: one band each, moved by the scroll */
 .wipes i { position: fixed; top: 0; bottom: 0; left: 0; width: 26vw; z-index: 40; pointer-events: none; visibility: hidden; background: repeating-linear-gradient(-45deg, var(--yellow) 0 2.4vmin, var(--black) 2.4vmin 4.8vmin); }
@@ -116,8 +119,10 @@ html.js-anim .hh-words .w, html.js-anim .hh-today { opacity: 0; visibility: hidd
 html:not(.js) img[data-src] { display: none; }
 
 /* the hero's hint: shown when the words have landed, then the page drifts down to the cut */
-.hh-hint { display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 0.7rem; font-family: var(--mono); font-size: 0.8rem; color: var(--grey); text-decoration: none; }
+.hh-hint { display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 0.7rem; font-family: var(--mono); font-size: 0.8rem; color: var(--paper); text-decoration: none; }
 .hh-hint:hover { color: var(--yellow); text-decoration: none; }
+.hh-hint-w { color: var(--paper); }
+.hh-hint:hover .hh-hint-w { color: var(--yellow); }
 .hh-hint-a { width: 0.55rem; height: 0.55rem; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); animation: hint-bob 1.4s ease-in-out infinite; }
 @keyframes hint-bob { 0%, 100% { transform: translateY(-2px) rotate(45deg); } 50% { transform: translateY(3px) rotate(45deg); } }
 html.js-anim .hh-hint { opacity: 0; visibility: hidden; }
@@ -172,7 +177,10 @@ html.js-anim .hh-hint { opacity: 0; visibility: hidden; }
 .beat-score, .beat-confess, .beat-story { padding: 5rem 0 1rem; }
 .score { border-top: 1px solid var(--line); padding-top: 1.2rem; }
 .score-kicker { margin: 0 0 0.6rem; font-family: var(--mono); font-size: 0.82rem; color: var(--yellow); letter-spacing: 0.04em; text-transform: uppercase; }
-.score-title { font-size: clamp(2.4rem, 7vw, 6.4rem); line-height: 0.9; max-width: 14ch; margin-bottom: 2rem; }
+.score-title { font-size: clamp(2.4rem, 7vw, 6.4rem); line-height: 0.9; max-width: 14ch; margin-bottom: 0.8rem; }
+.score-sub { margin: 0 0 1.8rem; font-family: var(--mono); font-size: 0.92rem; color: var(--grey); }
+.score .unit { font-family: var(--mono); font-size: 0.85rem; color: var(--grey); }
+.run-every { font-family: var(--mono); font-size: 1rem; color: var(--paper); display: inline-flex; align-items: baseline; gap: 0.5rem; }
 .score .board { display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: clamp(1rem, 4vw, 3rem); padding: clamp(1rem, 3vw, 2rem) 0; border-top: 3px solid var(--yellow); border-bottom: 1px solid var(--line-2); }
 .score .team { display: grid; gap: 0.6rem; justify-items: start; }
 .score .team.ai { justify-items: end; text-align: right; }
@@ -180,7 +188,7 @@ html.js-anim .hh-hint { opacity: 0; visibility: hidden; }
 .score .team.ai .who { color: var(--yellow); }
 .score .vs { align-self: center; font-family: var(--display); font-weight: 900; font-size: clamp(2rem, 5vw, 4.5rem); color: var(--grey); text-transform: uppercase; }
 .score-odo { font-size: clamp(6rem, 18vw, 15rem); }
-.score .run { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; margin: 0; padding: 1px 0 0; background: none; }
+.score .run { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin: 0; padding: 1px 0 0; background: none; }
 .score .run > div { display: grid; align-content: space-between; gap: 0.8rem; padding: 1.2rem 1.2rem 1.1rem; box-shadow: 0 0 0 1px var(--line); background: var(--black); }
 .score .run dt { font-family: var(--mono); font-size: 0.8rem; color: var(--grey); }
 .score .run dd { margin: 0; display: flex; align-items: baseline; gap: 0.8rem; flex-wrap: wrap; }
@@ -203,7 +211,9 @@ html.js-anim .hh-hint { opacity: 0; visibility: hidden; }
 .story p { margin: 0 0 0.9em; }
 .story p:last-child { margin-bottom: 0; }
 .story mark { background: none; color: var(--yellow); box-shadow: inset 0 -0.18em 0 0 rgba(255, 212, 0, 0.35); }
-.story .story-big { font-family: var(--display); font-weight: 900; font-size: clamp(2rem, 5.4vw, 4.4rem); line-height: 0.95; text-transform: uppercase; max-width: 16ch; margin: 1.1em 0; }
+.story-h { font-size: clamp(2.2rem, 6vw, 5rem); margin-bottom: 1.4rem; }
+.story .story-big { font-family: var(--display); font-weight: 900; font-size: clamp(2.2rem, 6vw, 5rem); line-height: 0.95; text-transform: uppercase; color: var(--yellow); max-width: 14ch; margin: 1.1em 0 0.6em; }
+.story p a { color: var(--yellow); text-decoration: underline; text-decoration-color: rgba(255, 212, 0, 0.45); text-underline-offset: 0.18em; }
 .story .story-big mark { box-shadow: none; }
 .story-go { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.6rem; margin: 2rem 0 0; }
 .story-btn { display: inline-block; background: var(--yellow); color: var(--black); font: 400 clamp(1rem, 1.6vw, 1.2rem) / 1 var(--mono); padding: 1.05em 1.35em; border-radius: 2px; box-shadow: 0 0 0 3px var(--black), 0 0 0 4px rgba(255, 212, 0, 0.5); }
@@ -214,7 +224,10 @@ html.js-anim .hh-hint { opacity: 0; visibility: hidden; }
 .foot { margin-top: 5rem; border-top: 3px solid var(--yellow); background: var(--black); }
 .foot-in { padding: clamp(2rem, 5vw, 4rem) 0 2rem; display: grid; gap: clamp(1.2rem, 3vw, 2rem); }
 .foot-mark { display: inline-block; justify-self: start; }
-.foot .credit { margin: 0; font-family: var(--display); font-weight: 900; font-size: clamp(1.8rem, 5vw, 4.2rem); line-height: 0.95; text-transform: uppercase; color: var(--paper); max-width: 22ch; }
+.foot-big { margin: 0; font-family: var(--display); font-weight: 900; font-size: clamp(2.4rem, 7.5vw, 7rem); line-height: 0.92; text-transform: uppercase; color: var(--paper); max-width: 16ch; }
+.foot .credit { margin: 0; font-family: var(--display); font-weight: 900; font-size: clamp(1.4rem, 3.4vw, 2.8rem); line-height: 0.98; text-transform: uppercase; color: var(--grey); max-width: 28ch; }
+.foot-follow { font-family: var(--display); font-weight: 900; font-size: 1.1rem; text-transform: uppercase; color: var(--paper); margin-right: 0.4rem; }
+.foot-last { display: flex; align-items: center; gap: 1rem; margin: 0; padding-top: 1rem; border-top: 1px solid var(--line); font-family: var(--mono); font-size: 0.82rem; color: var(--grey); }
 .foot .credit em { font-style: normal; color: var(--yellow); }
 .foot-rows { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem 2rem; padding-top: 1rem; border-top: 1px solid var(--line); }
 .foot-social { display: flex; flex-wrap: wrap; gap: 1.2rem; }

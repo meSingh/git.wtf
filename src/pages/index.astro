@@ -19,7 +19,7 @@ const latest = incidents[0] ?? null;
 const d = await heroData();
 const image = latest ? `${incidentPath(latest)}share.png` : '/share.png';
 // the hero line: the last word in yellow
-const words = SITE.line.toUpperCase().split(' ');
+const words = SITE.lineWords;
 // today's cut, when today's incident has one: its poster now, the player and the engine after the first paint
 const list = latest ? shotList(latest.id) : null;
 const cut = latest && list ? cutAssets(latest.id) : null;
@@ -35,7 +35,6 @@ const jsonld = {
         { '@type': 'WebSite', '@id': `${SITE.url}/#site`, name: SITE.name, alternateName: SITE.line, url: `${SITE.url}/`, description: SITE.description, inLanguage: 'en', publisher: { '@id': `${SITE.url}/#org` } },
     ],
 };
-// PLACEHOLDER highlights and headings around his story text until Content's land (notes/content/homepage-v5-copy.md)
 ---
 <Base title={`${SITE.line} | git.wtf`} image={image} badge={false} motionFlag jsonld={jsonld}>
     <section class="hh" id="hero">
@@ -49,7 +48,7 @@ const jsonld = {
         </h1>
         <div class="hh-foot">
             {latest && <a class="hero-today hh-today" href={hasCut ? '#cut' : '#today'}>Today's: <em>{latest.data.title}</em><span aria-hidden="true"> &darr;</span></a>}
-            <a class="hh-hint" href={hasCut ? '#cut' : '#today'} data-hint><span class="hh-hint-w">{hasCut ? 'Scroll to watch' : 'Keep scrolling'}</span><span class="hh-hint-a" aria-hidden="true"></span></a>
+            <a class="hh-hint" href={hasCut ? '#cut' : '#today'} data-hint><span class="hh-hint-w">Keep scrolling. It gets worse.</span><span class="hh-hint-a" aria-hidden="true"></span></a>
         </div>
         <div class="hh-wipe" aria-hidden="true"></div>
     </section>
@@ -86,7 +85,7 @@ const jsonld = {
 
     {latest && (
         <div class="beat over" id="share">
-            <ShareCut title={latest.data.title} status={latest.data.status} url={new URL(incidentPath(latest), SITE.url).toString()} image={href(`${incidentPath(latest)}share.png`)} video={cut?.video ? href(`/cuts/${latest.id}/${cut.video}`) : null} slug={latest.id} />
+            <ShareCut title={latest.data.title} status={latest.data.status} url={new URL(incidentPath(latest), SITE.url).toString()} image={href(`${incidentPath(latest)}share.png`)} video={cut?.video ? href(`/cuts/${latest.id}/${cut.video}`) : null} slug={latest.id} episode={list ? { episode: list.episode, title: list.title } : null} />
         </div>
     )}
 
@@ -106,14 +105,16 @@ const jsonld = {
 
     <section class="beat beat-story over" id="story" aria-labelledby="story-h">
         <div class="col">
-            <div class="beat-head"><h2 id="story-h" data-lock>The story</h2><span class="count">in his words</span></div>
+            <p class="today-kicker">The story</p>
+            <h2 id="story-h" class="story-h" data-lock>How we got here</h2>
             <div class="story">
-                <p>For <mark>10 years</mark> git.wtf was a blog about <mark>fixing Git</mark>, written for people who had just fucked up and were looking for the fix. Then AI came into the picture and started doing the fixes for them, and <mark>the questions stopped coming here</mark>.</p>
-                <p class="story-big">We noticed, envied and wanted revenge. So we started <mark>counting AI's fuck-ups</mark> alongside the Git fuck-ups.</p>
+                <p>For 10 years git.wtf was a blog about fixing Git, written for people who had just fucked up and were looking for the fix. Then AI came into the picture and started doing the fixes for them, and the questions stopped coming here.</p>
+                <p class="story-big" aria-hidden="true">We noticed, envied and wanted revenge.</p>
+                <p>We noticed, envied and wanted revenge. So we started counting AI's fuck-ups alongside the Git fuck-ups.</p>
                 <p>AI now runs Git commands by itself, and a good many of the fuck-ups are now its own. We keep track of those <mark>with delight</mark>.</p>
-                <p>By the way, the old blog posts are still here, unchanged, in the archive. Find them here.</p>
+                <p>By the way, the old blog posts are still here, unchanged, in the archive. <a href={href('/archive/')}>Find them here.</a></p>
             </div>
-            <p class="story-go"><a class="story-btn" href={href('/archive/')}>Read the old posts <span aria-hidden="true">&rarr;</span></a><span class="story-n">67 posts, 2016 to 2021, as they were.</span></p>
+            <p class="story-go"><a class="story-btn" href={href('/archive/')}>Read the old blog: 67 posts</a></p>
         </div>
     </section>
 

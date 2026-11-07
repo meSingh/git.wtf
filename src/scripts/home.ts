@@ -30,7 +30,7 @@ function splitWords(el: HTMLElement): HTMLElement[] {
         s.className = 'lw';
         s.textContent = w;
         el.appendChild(s);
-        if (i < words.length - 1) el.appendChild(document.createTextNode(' '));
+        if (i < words.length - 1) el.appendChild(document.createTextNode(' ')); // the gap is the span's margin as well, so a font swap cannot swallow it
     });
     el.dataset.split = '1';
     return qa('.lw', el);
@@ -225,25 +225,16 @@ export async function home() {
         // 4 and 5 The score and the streak roll to their counts; the tool bars grow from nothing.
         qa('.score .odo').forEach((n, i) => ScrollTrigger.create({ trigger: n, start: 'top 90%', once: true, onEnter: () => gsap.delayedCall((i % 3) * 0.12, () => rollOnce(n, 1.1)) }));
 
-        // Wipes between sections, scrubbed: a band of stripes crosses the screen as the next section arrives.
+        // Wipes between sections: as a section arrives, a band of stripes crosses the screen once, in half a second,
+        // and is gone. Never scrubbed, so it can never rest over the content at any scroll position.
         qa('.wipes i').forEach((band) => {
             const next = q(`#${band.dataset.wipe}`);
             if (!next) return;
-            gsap.fromTo(band, { x: 0, xPercent: -110 }, {
-                x: 0,
-                xPercent: () => (window.innerWidth / band.offsetWidth) * 100 + 30,
-                ease: 'none',
-                // clamp: near the foot of the page the scroll may end before the section reaches its mark; the wipe
-                // must still finish, and a band is only shown while it is actually crossing
-                scrollTrigger: {
-                    trigger: next,
-                    start: 'clamp(top 98%)',
-                    end: 'clamp(top 45%)',
-                    scrub: true,
-                    invalidateOnRefresh: true,
-                    onUpdate: (self) => gsap.set(band, { autoAlpha: self.progress > 0.001 && self.progress < 0.995 ? 1 : 0 }),
-                    onToggle: (self) => { if (!self.isActive) gsap.set(band, { autoAlpha: 0 }); },
-                },
+            ScrollTrigger.create({
+                trigger: next,
+                start: 'top 85%',
+                once: true,
+                onEnter: () => gsap.fromTo(band, { autoAlpha: 1, x: 0, xPercent: -110 }, { xPercent: (window.innerWidth / band.offsetWidth) * 100 + 30, duration: 0.55, ease: 'power2.inOut', onComplete: () => gsap.set(band, { autoAlpha: 0 }) }),
             });
         });
     });

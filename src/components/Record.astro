@@ -16,7 +16,7 @@ const pic = (i: Incident) => {
 const gapFrom = (g: number) => (g < 10 ? 9 : Math.min(99, g + 30));
 ---
 <div class="record col">
-    <div class="beat-head"><h2 id="record-h" data-lock>The record</h2><span class="count">{list.length === 1 ? 'one on record, newest first' : `${list.length} on record, newest first`}</span></div>
+    <div class="beat-head"><h2 id="record-h" data-lock>The record</h2><span class="count">Newest first, going back in time.</span></div>
     <ol class="rlist">
         {list.map((i, n) => {
             const p = pic(i);
@@ -42,7 +42,7 @@ const gapFrom = (g: number) => (g < 10 ? 9 : Math.min(99, g + 30));
         })}
     </ol>
     {list.length === 1 ? (
-        <p class="rfoot">The first on record. The next one goes here when the daily search finds it.</p>
+        <p class="rfoot">Just one so far. It won't be lonely for long.</p>
     ) : (
         <p class="rfoot"><a href={href('/incidents/')}>Every incident, by category <span aria-hidden="true">&rarr;</span></a></p>
     )}

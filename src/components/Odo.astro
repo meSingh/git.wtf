@@ -24,7 +24,7 @@ const dim = (i: number) => dimLead && i < n - 1 && (lead === -1 || i < lead);
 // so a rolling wheel never counts as a new largest paint, and the page carries ten times fewer elements.
 const digits = '0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0';
 ---
-<span class={`odo ${cls}`.trim()} data-value={v} data-from={f} data-since={since ?? undefined} data-dim={dimLead ? '1' : undefined} role="img" aria-label={label ?? String(v)}>
+<span class={`odo ${cls}`.trim()} style={`--n:${n}`} data-value={v} data-from={f} data-since={since ?? undefined} data-dim={dimLead ? '1' : undefined} role="img" aria-label={label ?? String(v)}>
     {cols.map((d, i) => (
         <span class={`odo-col${dim(i) ? ' dim' : ''}`} style={`--df:${d};--d0:${starts[i]}`} aria-hidden="true">
             <span class="odo-strip">{digits}</span>
