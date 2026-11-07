@@ -208,3 +208,38 @@
     .cutscene .chair .back, .cutscene .chair .post { fill: #5d5a53; stroke: #0a0a0a; stroke-width: 6; }
     .cutscene .laptop .lid, .cutscene .laptop .base { fill: #5d5a53; stroke: #0a0a0a; stroke-width: 5; }
     .cutscene .laptop .screen { fill: #0a0a0a; }
+
+    /* the mascot (DEV): heavy ink, few small details, so it reads at phone size */
+    .mascot .m-shadow { fill: #0a0a0a; opacity: 0.22; }
+    .mascot .m-pants, .mascot .m-shoe { fill: #0a0a0a; stroke: #8a877f; stroke-width: 6; stroke-linejoin: round; }
+    .mascot .m-hood { fill: #0a0a0a; stroke: #8a877f; stroke-width: 7; stroke-linecap: round; }
+    .mascot .m-hoodie { fill: #0a0a0a; stroke: #8a877f; stroke-width: 7; stroke-linejoin: round; }
+    .mascot .m-hem, .mascot .m-pocket { fill: none; stroke: #8a877f; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+    .mascot .m-neck { fill: #f2f0ea; }
+    .mascot .m-string { fill: none; stroke: #8a877f; stroke-width: 6; stroke-linecap: round; }
+    .mascot .m-tip { fill: #8a877f; }
+    .mascot .m-sleeve-o { fill: none; stroke: #8a877f; stroke-width: 58; stroke-linecap: round; stroke-linejoin: round; }
+    .mascot .m-sleeve-o.front { stroke-width: 64; }
+    .mascot .m-sleeve { fill: none; stroke: #0a0a0a; stroke-width: 46; stroke-linecap: round; stroke-linejoin: round; }
+    .mascot .m-hand { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 6; }
+    .mascot .m-cup { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 7; stroke-linejoin: round; }
+    .mascot .m-handle { fill: none; stroke: #f2f0ea; stroke-width: 10; }
+    .mascot .m-coffee { fill: #2e2d2a; }
+    .mascot .m-steam { fill: none; stroke: #8a877f; stroke-width: 7; stroke-linecap: round; }
+    .mascot .m-spill { fill: #2e2d2a; stroke: #0a0a0a; stroke-width: 5; }
+    .mascot .m-sheet { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 7; stroke-linejoin: round; }
+    .mascot .m-head { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 8; }
+    .mascot .m-white { fill: #ffffff; stroke: #0a0a0a; stroke-width: 7; }
+    .mascot .m-lid { stroke: #0a0a0a; stroke-width: 8; stroke-linecap: round; }
+    .mascot .m-pupil { fill: #0a0a0a; }
+    .mascot .m-closed, .mascot .m-mouth { fill: none; stroke: #0a0a0a; stroke-width: 8; stroke-linecap: round; }
+    .mascot .m-brow { fill: none; stroke: #0a0a0a; stroke-width: 14; stroke-linecap: round; }
+    .mascot .m-shake { fill: none; stroke: #ffd400; stroke-width: 9; stroke-linecap: round; }
+    .mascot .m-exhale-o { fill: none; stroke: #0a0a0a; stroke-width: 16; stroke-linecap: round; }
+    .mascot .m-exhale { fill: none; stroke: #f2f0ea; stroke-width: 8; stroke-linecap: round; }
+    .mascot .m-scream { fill: #0a0a0a; }
+    .mascot .m-drop { fill: #dcd9d1; stroke: #0a0a0a; stroke-width: 5; }
+    .mascot .m-brow.thin { stroke-width: 10; }
+    .mascot .m-yawn { fill: #0a0a0a; }
+    .mascot .m-zzz text { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 8; paint-order: stroke; font-family: var(--display); font-weight: 900; font-size: 70px; }
+    .mascot .m-zzz text.big { font-size: 100px; }

@@ -12,14 +12,16 @@ export function shotList(id: string): ShotList | null {
     return hit ? hit[1].default : null;
 }
 
-export interface CutAssets { stills: { file: string; shot: string }[]; video: string | null }
+export interface CutAssets { stills: { file: string; shot: string }[]; video: string | null; poster: string | null; posterTall: string | null }
 
 export function cutAssets(id: string): CutAssets {
     const dir = path.join(process.cwd(), 'public/cuts', id);
-    if (!existsSync(dir)) return { stills: [], video: null };
+    if (!existsSync(dir)) return { stills: [], video: null, poster: null, posterTall: null };
     const files = readdirSync(dir).sort();
     return {
         stills: files.filter((f) => /^still-\d+-.+\.webp$/.test(f)).map((f) => ({ file: f, shot: f.replace(/^still-\d+-|\.webp$/g, '') })),
         video: files.includes('cut.mp4') ? 'cut.mp4' : null,
+        poster: files.includes('poster.webp') ? 'poster.webp' : null,
+        posterTall: files.includes('poster-tall.webp') ? 'poster-tall.webp' : null,
     };
 }

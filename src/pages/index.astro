@@ -3,20 +3,37 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Odo from '../components/Odo.astro';
 import Strip from '../components/Strip.astro';
+import CutBox from '../components/CutBox.astro';
 import Record from '../components/Record.astro';
 import Score from '../components/Score.astro';
 import Streak from '../components/Streak.astro';
 import Confess from '../components/Confess.astro';
 import { heroData } from '../lib/hero';
-import { SITE, href, incidentPath, sortIncidents } from '../lib/site';
+import { SITE, formatDate, happened, href, incidentPath, sortIncidents } from '../lib/site';
+import { cutAssets, shotList } from '../lib/cuts';
 
 const incidents = sortIncidents(await getCollection('incidents'));
 const latest = incidents[0] ?? null;
 const d = await heroData();
 const image = latest ? `${incidentPath(latest)}share.png` : '/share.png';
+// today's incident plays as the web cutscene when it has one: a poster and a play button here, the player fetched
+// and mounted on the press (src/scripts/home.ts), so the first paint carries none of it
+// The cut plays for the newest incident that has one: in today's place when that is today's, else in its own beat.
+const featured = incidents.find((i) => shotList(i.id) && cutAssets(i.id).poster) ?? null;
+const cut = featured ? cutAssets(featured.id) : null;
+const posterOf = (f: string | null) => (featured && f ? href(`/cuts/${featured.id}/${f}`) : null);
+const poster = posterOf(cut?.poster ?? null), posterTall = posterOf(cut?.posterTall ?? null);
+const cutIsToday = !!featured && !!latest && featured.id === latest.id;
+const jsonld = {
+    '@context': 'https://schema.org',
+    '@graph': [
+        { '@type': 'Organization', '@id': `${SITE.url}/#org`, name: SITE.name, url: `${SITE.url}/`, logo: `${SITE.url}/apple-touch-icon.png`, sameAs: [SITE.x, SITE.repo ? `https://github.com/${SITE.repo}` : null].filter(Boolean), founder: { '@type': 'Person', name: SITE.owner.name, url: SITE.owner.url, sameAs: [SITE.owner.linkedin] } },
+        { '@type': 'WebSite', '@id': `${SITE.url}/#site`, name: SITE.name, alternateName: SITE.title, url: `${SITE.url}/`, description: SITE.description, inLanguage: 'en', publisher: { '@id': `${SITE.url}/#org` } },
+    ],
+};
 const words = ['DAYS', 'SINCE', 'THE', 'LAST', 'GIT', 'FUCK-UP'];
 ---
-<Base title={`${SITE.title} | git.wtf`} image={image} badge={false} motionFlag>
+<Base title={`${SITE.title} | git.wtf`} image={image} badge={false} motionFlag jsonld={jsonld}>
     <section class="hh" id="hero">
         <svg class="hh-defs" width="0" height="0" aria-hidden="true"><filter id="vblur" x="0" y="-20%" width="100%" height="140%"><feGaussianBlur stdDeviation="0 0" /></filter></svg>
         <div class="hh-odo-wrap" id="hero-odo">
@@ -36,11 +53,22 @@ const words = ['DAYS', 'SINCE', 'THE', 'LAST', 'GIT', 'FUCK-UP'];
                 <p class="today-kicker">Today's fuck-up</p>
                 <h2 class="today-title" id="today-h"><a href={href(incidentPath(latest))}><span class="visually-hidden">{latest.data.title}</span><span aria-hidden="true">{latest.data.title.split(/\s+/).map((w, i, a) => <><span class="tw">{w}</span>{i < a.length - 1 && ' '}</>)}</span></a></h2>
             </div>
-            <Strip incident={latest} class="col today-strip" />
-            <p class="col today-more"><a href={href(incidentPath(latest))}>Read the full fuck-up <span aria-hidden="true">&rarr;</span></a></p>
+            {cutIsToday ? <CutBox incident={featured!} poster={poster!} posterTall={posterTall} /> : <Strip incident={latest} class="col today-strip" />}
+            <p class="col today-more"><a href={href(incidentPath(latest))}>Read the full fuck-up <span aria-hidden="true">&rarr;</span></a>{cutIsToday && <> <a class="today-cutlink" href={href(`${incidentPath(latest)}cut/`)}>Open the cut full screen</a></>}</p>
         </section>
     ) : (
         <section class="beat col" id="today"><p class="note">No incident on record yet. The first one lands when the daily search finds one that passes the rules.</p></section>
+    )}
+
+    {featured && !cutIsToday && (
+        <section class="beat beat-today beat-cut" id="cut" aria-labelledby="cut-h">
+            <div class="col today-head">
+                <p class="today-kicker">The cut: {formatDate(happened(featured))}</p>
+                <h2 class="today-title" id="cut-h"><a href={href(incidentPath(featured))}>{featured.data.title}</a></h2>
+            </div>
+            <CutBox incident={featured} poster={poster!} posterTall={posterTall} />
+            <p class="col today-more"><a href={href(incidentPath(featured))}>Read the full fuck-up <span aria-hidden="true">&rarr;</span></a> <a class="today-cutlink" href={href(`${incidentPath(featured)}cut/`)}>Open the cut full screen</a></p>
+        </section>
     )}
 
     {incidents.length > 1 && (

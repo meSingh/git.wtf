@@ -110,6 +110,18 @@ html.js-anim .hh-words .w, html.js-anim .hh-today { opacity: 0; visibility: hidd
 .today-title a { color: var(--paper); }
 .today-title a:hover { color: var(--yellow); text-decoration: none; }
 .today-title .tw { display: inline-block; }
+/* today's cut: a poster with a play button; the player takes its place when pressed (16:9, or 9:16 on phones) */
+.today-cut { position: relative; aspect-ratio: 16 / 9; background: var(--tile); border-radius: 4px; overflow: hidden; }
+.today-cut .today-poster img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.today-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 0.7em; appearance: none; border: 0; border-radius: 2px; background: var(--yellow); color: var(--black); font: 400 1.05rem/1 var(--mono); padding: 1em 1.4em; cursor: pointer; }
+.today-play .tri { width: 0; height: 0; border-style: solid; border-width: 0.45em 0 0.45em 0.8em; border-color: transparent transparent transparent var(--black); }
+.today-play:hover { background: var(--paper); }
+.today-play:disabled { opacity: 0.7; cursor: wait; }
+.today-cut.playing { aspect-ratio: auto; height: min(calc(100svh - var(--bar) - 2rem), calc(min(var(--col), 100vw - 2.5rem) * 9 / 16)); }
+.today-cut .cut-wrap { height: 100%; }
+.today-cutlink { margin-left: 1.5em; }
+.beat-cut { padding-top: 3rem; }
+@media (max-width: 639px) { .today-cut { aspect-ratio: 9 / 16; } .today-cut.playing { height: calc(100svh - var(--bar) - 1rem); } .today-cutlink { display: block; margin: 0.6em 0 0; } }
 .today-more { margin-top: 1.4rem; font-family: var(--mono); font-size: 1rem; }
 .today-more a { color: var(--yellow); text-decoration: underline; text-decoration-color: rgba(255, 212, 0, 0.45); text-underline-offset: 0.25em; }
 

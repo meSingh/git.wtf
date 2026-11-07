@@ -2,7 +2,8 @@
 // Draws an incident's key shots and its share image from its cutscene, for the incident page.
 // Usage: node scripts/render-cut.mjs <incident id> [--base http://127.0.0.1:8787]
 // Needs the site served (npm run build && npm run preview) and Playwright (npm i --no-save playwright).
-// Writes incidents/<id>/cut/still-NN-<shot id>.webp (1280 wide) and incidents/<id>/share.png (1200 x 630).
+// Writes incidents/<id>/cut/still-NN-<shot id>.webp (1280 wide), poster.webp and poster-tall.webp (the title card in
+// each frame, for the homepage's play button) and incidents/<id>/share.png (1200 x 630).
 // Key shots: those marked "still": true in the shot list, else every shot with a line or an impact word, and the end.
 import { existsSync, mkdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
@@ -27,7 +28,7 @@ mkdirSync(out, { recursive: true });
 const browser = await chromium.launch();
 const shoot = async (w, h, ks, save) => {
     const page = await browser.newPage({ viewport: { width: w, height: h }, deviceScaleFactor: 1 });
-    await page.goto(`${base}/incident/${id}/cut/?render`, { waitUntil: 'load' });
+    await page.goto(`${base}/incident/${id}/cut/?render&frame=${w < h ? '9:16' : '16:9'}`, { waitUntil: 'load' });
     await page.evaluate(async () => { await window.__cut.ready; });
     await page.evaluate(() => { window.__cut.master.pause(); });
     const plan = await page.evaluate(() => window.__cut.plan);
@@ -46,6 +47,9 @@ await shoot(1600, 900, keys, async (k, png) => {
     await sharp(png).resize({ width: 1280 }).webp({ quality: 82 }).toFile(path.join(out, name));
     console.log('still', name);
 });
+// the posters: the title card, in each frame
+await shoot(1600, 900, [0], async (_, png) => { await sharp(png).resize({ width: 1280 }).webp({ quality: 82 }).toFile(path.join(out, 'poster.webp')); console.log('poster'); });
+await shoot(900, 1600, [0], async (_, png) => { await sharp(png).resize({ width: 720 }).webp({ quality: 82 }).toFile(path.join(out, 'poster-tall.webp')); console.log('poster-tall'); });
 // the share image: the end card, stamp down, framed for 1200 x 630
 await shoot(1200, 630, [list.shots.length - 1], async (_, png) => {
     await sharp(png).resize(1200, 630, { fit: 'cover' }).png().toFile(path.join(root, 'incidents', id, 'share.png'));

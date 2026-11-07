@@ -9,6 +9,7 @@
 // 3 The record scrolls sideways; each gap's wheels roll to its day count as it comes into view.
 // 4 The score and the streak roll to their counts on entry, the tool bars grow. Headings lock in word by word, once.
 // Between sections a band of hazard stripes wipes across, scrubbed to scroll.
+// Today's cut: a poster and a play button; the player fragment and the engine load on the press.
 import gsap from 'gsap';
 import { syncOdos, target } from './odometer';
 import { roll } from './odo-roll';
@@ -34,6 +35,28 @@ function splitWords(el: HTMLElement): HTMLElement[] {
     el.dataset.split = '1';
     return qa('.lw', el);
 }
+
+/** Today's cut: fetch the player fragment into the poster's place, load the engine, mount. */
+function playCut() {
+    const box = q('[data-player]');
+    const btn = box && q<HTMLButtonElement>('[data-play]', box);
+    if (!box || !btn) return;
+    btn.addEventListener('click', async () => {
+        btn.disabled = true;
+        btn.textContent = 'Loading the cut';
+        try {
+            const [html, { mountCutscene }] = await Promise.all([fetch(box.dataset.player!).then((r) => { if (!r.ok) throw new Error(String(r.status)); return r.text(); }), import('./anime')]);
+            box.innerHTML = html;
+            box.classList.add('playing');
+            const wrap = q('#cutscene', box);
+            if (wrap) mountCutscene(wrap);
+        } catch {
+            btn.disabled = false;
+            btn.textContent = 'Play the cut';
+        }
+    }, { once: false });
+}
+playCut();
 
 /** Rolls a wheel from its start value to its target once, when told to. */
 function rollOnce(el: HTMLElement, duration = 1.0) {
