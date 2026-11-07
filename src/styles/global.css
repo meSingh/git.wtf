@@ -193,7 +193,7 @@ html.js-anim .hh-hint { opacity: 0; visibility: hidden; }
 .tcard:hover, .tcard:focus-visible { transform: translateY(-8px); border-color: var(--yellow); text-decoration: none; }
 .tcard:hover::before, .tcard:focus-visible::before { transform: scaleX(1); }
 .tcard .d { font-family: var(--mono); font-size: 0.78rem; color: var(--grey); display: flex; justify-content: space-between; gap: 0.5rem; }
-.tcard .pic { display: block; width: 100%; height: auto; aspect-ratio: 480 / 268; margin: 0.7rem 0 0; border-radius: 3px; background: var(--tile); }
+.tcard .pic { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 630; object-fit: cover; margin: 0.7rem 0 0; border-radius: 3px; background: var(--tile); }
 .tcard .t { display: block; font-family: var(--display); font-weight: 900; font-size: 2.3rem; text-transform: uppercase; line-height: 0.95; margin: 0.6rem 0 0.7rem; }
 .tcard .x { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; font-family: var(--mono); font-size: 0.86rem; line-height: 1.5; color: var(--grey); }
 .tcard .s { display: block; margin-top: auto; padding-top: 0.9rem; font-family: var(--mono); font-size: 0.86rem; color: var(--yellow); }

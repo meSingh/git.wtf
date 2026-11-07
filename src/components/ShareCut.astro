@@ -3,9 +3,9 @@
 // the link copied where there is not), then the image (and the video when it exists) to download, the link, X and
 // LinkedIn. No third-party script. Used on the homepage after the story and on every incident page.
 import { SITE } from '../lib/site';
-interface Props { title: string; status: string; url: string; image: string; video?: string | null; slug: string; episode?: { episode: string; title: string } | null }
+interface Props { title: string; status: string; url: string; image: string; video?: string | null; slug: string; episode?: { episode: string; title: string } | null; /** show the image in the block (off on the homepage, where the story detail already shows it) */ picture?: boolean }
 // Content's strings (notes/content/homepage-v5-copy.md): the post reads "{episode}: {title} {Status}. {url}"
-const { title, status, url, image, video = null, slug, episode = null } = Astro.props;
+const { title, status, url, image, video = null, slug, episode = null, picture = true } = Astro.props;
 const heading = 'Spread the damage';
 const st = status.replace(/`/g, '');
 const text = episode ? `${episode.episode}: ${episode.title} ${st.charAt(0).toUpperCase()}${st.slice(1)}` : `${title}. ${st.charAt(0).toUpperCase()}${st.slice(1)}`;
@@ -21,10 +21,12 @@ const I = {
 };
 ---
 <section class="share" aria-labelledby="share-h" data-share data-title={title} data-text={text} data-url={url} data-image={image} data-video={video ?? undefined} data-slug={slug}>
-    <div class="col share-in">
-        <figure class="share-pic">
-            {video ? <video src={video} poster={image} controls muted playsinline preload="none" width="1280" height="720"><a href={video}>Download the video</a></video> : <img src={image} alt={`A still from the cut: ${title}`} width="1200" height="630" loading="lazy" decoding="async" />}
-        </figure>
+    <div class={`col share-in${picture ? '' : ' share-in-bare'}`}>
+        {picture && (
+            <figure class="share-pic">
+                {video ? <video src={video} poster={image} controls muted playsinline preload="none" width="1280" height="720"><a href={video}>Download the video</a></video> : <img src={image} alt={`A still from the cut: ${title}`} width="1200" height="630" loading="lazy" decoding="async" />}
+            </figure>
+        )}
         <div class="share-side">
             <p class="share-kicker">Share</p>
             <h2 id="share-h" class="share-title">{heading}</h2>
@@ -81,6 +83,7 @@ const I = {
 <style is:global>
     .share { padding: 3rem 0 1rem; }
     .share-in { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(1.2rem, 3vw, 2.6rem); align-items: center; }
+    .share-in-bare { grid-template-columns: 1fr; }
     @media (max-width: 760px) { .share-in { grid-template-columns: 1fr; } }
     .share-pic { margin: 0; }
     .share-pic img, .share-pic video { display: block; width: 100%; height: auto; border-radius: 3px; background: #0a0a0a; }

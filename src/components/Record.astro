@@ -4,6 +4,9 @@
 // get the same cards stacked.
 import Odo from './Odo.astro';
 import { daysBetween, formatDay, happened, href, incidentPath, inlineCode, sentences, sortIncidents, type Incident } from '../lib/site';
+import { cutAssets } from '../lib/cuts';
+// the card's picture: the episode's story image, else its title card, else the strip's last panel
+const pic = (i: Incident) => { const c = cutAssets(i.id); return c.story ? { src: href(`/cuts/${i.id}/${c.story}`), w: 1200, h: 630 } : c.poster ? { src: href(`/cuts/${i.id}/${c.poster}`), w: 1280, h: 720 } : { src: href(`/strips/${i.id}/p4-480.webp`), w: 480, h: 268 }; };
 
 interface Props { incidents: Incident[] }
 const { incidents } = Astro.props;
@@ -68,7 +71,7 @@ const gapFrom = (g: number) => (g < 10 ? 9 : Math.min(99, g + 30));
                 <span class="stem" style={`left:${p.x + CARD / 2}px`} aria-hidden="true"></span>
                 <a class="tcard" href={href(incidentPath(p.i))} style={`left:${p.x}px`}>
                     <span class="d"><time datetime={happened(p.i)}>{formatDay(happened(p.i))}</time><span>{p.i.data.category}</span></span>
-                    <img class="pic" data-src={href(`/strips/${p.i.id}/p4-480.webp`)} width="480" height="268" alt="" decoding="async" /><noscript><img class="pic" src={href(`/strips/${p.i.id}/p4-480.webp`)} width="480" height="268" alt="" loading="lazy" /></noscript>
+                    <img class="pic" data-src={pic(p.i).src} width={pic(p.i).w} height={pic(p.i).h} alt="" decoding="async" /><noscript><img class="pic" src={pic(p.i).src} width={pic(p.i).w} height={pic(p.i).h} alt="" loading="lazy" /></noscript>
                     <span class="t">{p.i.data.title}</span>
                     <span class="s" set:html={`Status: ${inlineCode(p.i.data.status)}`} />
                 </a>
@@ -82,7 +85,7 @@ const gapFrom = (g: number) => (g < 10 ? 9 : Math.min(99, g + 30));
         <>
             <a class="tcard" href={href(incidentPath(p.i))}>
                 <span class="d"><time datetime={happened(p.i)}>{formatDay(happened(p.i))}</time><span>{p.i.data.category}</span></span>
-                <img class="pic" data-src={href(`/strips/${p.i.id}/p4-480.webp`)} width="480" height="268" alt="" decoding="async" /><noscript><img class="pic" src={href(`/strips/${p.i.id}/p4-480.webp`)} width="480" height="268" alt="" loading="lazy" /></noscript>
+                <img class="pic" data-src={pic(p.i).src} width={pic(p.i).w} height={pic(p.i).h} alt="" decoding="async" /><noscript><img class="pic" src={pic(p.i).src} width={pic(p.i).w} height={pic(p.i).h} alt="" loading="lazy" /></noscript>
                 <span class="t">{p.i.data.title}</span>
                 <span class="s" set:html={`Status: ${inlineCode(p.i.data.status)}`} />
             </a>

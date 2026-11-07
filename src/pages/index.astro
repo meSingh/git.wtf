@@ -108,7 +108,7 @@ const jsonld = {
 
     {latest && (
         <div class="beat over" id="share">
-            <ShareCut title={latest.data.title} status={latest.data.status} url={new URL(incidentPath(latest), SITE.url).toString()} image={href(`${incidentPath(latest)}share.png`)} video={cut?.video ? href(`/cuts/${latest.id}/${cut.video}`) : null} slug={latest.id} episode={list ? { episode: list.episode, title: list.title } : null} />
+            <ShareCut title={latest.data.title} status={latest.data.status} url={new URL(incidentPath(latest), SITE.url).toString()} image={href(`${incidentPath(latest)}share.png`)} video={cut?.video ? href(`/cuts/${latest.id}/${cut.video}`) : null} slug={latest.id} episode={list ? { episode: list.episode, title: list.title } : null} picture={false} />
         </div>
     )}
 

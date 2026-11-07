@@ -1,16 +1,12 @@
 ---
-// The revenge section: humans against AI, and with what.
+// The revenge section: humans against AI. No count per tool (Mandeep, 7 Nov: we don't keep track of each AI's mistakes).
 import Odo from './Odo.astro';
-import { SITE, TOOL_LABELS, type Incident } from '../lib/site';
-import { TOOLS } from '../content.config';
+import { SITE, type Incident } from '../lib/site';
 interface Props { incidents: Incident[] }
 const { incidents } = Astro.props;
 const by = (actor: string) => incidents.filter((i) => i.data.actor === actor).length;
 const humans = by('human');
 const ai = by('ai');
-const tools = TOOLS.map((t) => ({ t, n: incidents.filter((i) => i.data.tool === t).length }));
-const max = Math.max(1, ...tools.map((x) => x.n));
-const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 ---
 <div class="score col">
     <div class="beat-head"><h2 id="score-h" data-lock>The score</h2><span class="count">{incidents.length} on record</span></div>
@@ -19,10 +15,5 @@ const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
         <p class="vs" aria-hidden="true"><span class="vs-mark"><span class="vs-v">V</span><span class="vs-s">S</span></span></p>
         <p class="side ai"><Odo value={ai} from={0} min={2} class="score-odo wheel" label={`${ai} caused by AI`} /><span class="who">AI</span></p>
     </div>
-    <ul class="tools" aria-label="By tool">
-        {tools.map(({ t, n }) => (
-            <li><span class="l">{cap(TOOL_LABELS[t] ?? t)}</span><span class="gauge"><i class="fill" style={`--w:${n / max}`}></i></span><span class="n">{n}</span></li>
-        ))}
-    </ul>
     <p class="tagline">{SITE.description}</p>
 </div>

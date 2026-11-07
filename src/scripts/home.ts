@@ -9,8 +9,7 @@
 // 3 The episode plays full screen at the page's pace: the player fragment and the engine load after the first
 //   paint; the stage sticks in a tall section, and each gesture (wheel, swipe, key) plays the next shot at its own
 //   timing, input held while a shot plays, never more than one shot a gesture. Sound is off until turned on.
-// 4 The record scrolls sideways, newest first; the score and the streak roll to their counts on entry, the tool
-//   bars grow. Headings lock in word by word, once.
+// 4 The record scrolls sideways, newest first; the score and the streak roll to their counts on entry. Headings lock in word by word, once.
 // Between sections a band of hazard stripes wipes across, scrubbed to scroll.
 import gsap from 'gsap';
 import { syncOdos, target } from './odometer';
@@ -316,11 +315,7 @@ export async function home() {
 
         // 4 and 5 The score and the streak roll to their counts; the tool bars grow from nothing.
         qa('.score .odo, .streak .odo').forEach((n, i) => ScrollTrigger.create({ trigger: n, start: 'top 90%', once: true, onEnter: () => gsap.delayedCall((i % 3) * 0.12, () => rollOnce(n, 1.1)) }));
-        const fills = qa('.score .tools .fill');
-        if (fills.length) {
-            gsap.set(fills, { scaleX: 0 });
-            ScrollTrigger.create({ trigger: '.score .tools', start: 'top 88%', once: true, onEnter: () => gsap.to(fills, { scaleX: 1, duration: 0.7, ease: 'power3.out', stagger: 0.07 }) });
-        }
+
 
         // Wipes between sections: as a section arrives, a band of stripes crosses the screen once, in half a second,
         // and is gone. Never scrubbed, so it can never rest over the content at any scroll position.
