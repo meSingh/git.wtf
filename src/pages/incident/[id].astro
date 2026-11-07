@@ -8,6 +8,7 @@ import { render } from 'astro:content';
 import Strip from '../../components/Strip.astro';
 import ShareCut from '../../components/ShareCut.astro';
 import { cutAssets, shotList } from '../../lib/cuts';
+import { incidentJsonLd } from '../../lib/jsonld';
 import { SITE, categoryLabel, formatDate, formatDay, happened, href, incidentPath, inlineCode, sortIncidents, sourceHost, toolLabel, type Incident } from '../../lib/site';
 
 export async function getStaticPaths() {
@@ -28,17 +29,8 @@ const p = incidentPath(incident);
 const localVideo = existsSync(path.join(process.cwd(), 'public/incident', incident.id, 'video.mp4'));
 const video = d.video ?? (localVideo ? href(`${p}video.mp4`) : null);
 const poster = d.poster ?? (localVideo && existsSync(path.join(process.cwd(), 'public/incident', incident.id, 'poster.jpg')) ? href(`${p}poster.jpg`) : href(`${p}share.png`));
-const jsonld = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: d.title,
-    datePublished: d.date,
-    url: new URL(p, SITE.url).toString(),
-    image: new URL(`${p}share.png`, SITE.url).toString(),
-    author: { '@type': 'Person', name: SITE.owner.name, url: SITE.owner.url },
-    publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
-    citation: d.source_url,
-};
+const vid = video ?? cutVideo;
+const jsonld = incidentJsonLd(p, d, { image: `${p}share.png`, video: vid ? { url: vid, poster } : null });
 ---
 <Base title={`${d.title} | git.wtf`} description={`Status: ${d.status}`} image={`${p}share.png`} type="article" jsonld={jsonld}>
     <main class="page">

@@ -1,4 +1,26 @@
+# git.wtf: open to search engines and AI answer engines. The lab and hero pages and the bare cutscene player
+# carry a noindex tag and are left out of the sitemap; they stay crawlable so the tag is seen.
+
 User-agent: *
 Allow: /
 Disallow: /ghost/
+
+# Search and AI answer crawlers, named so the allow is explicit
+User-agent: Googlebot
+User-agent: Google-Extended
+User-agent: Bingbot
+User-agent: Applebot
+User-agent: Applebot-Extended
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /ghost/
+
 Sitemap: https://git.wtf/sitemap-index.xml

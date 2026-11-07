@@ -13,5 +13,10 @@ export default defineConfig({
     trailingSlash: 'always',
     build: { format: 'directory', inlineStylesheets: 'always' },
     redirects,
-    integrations: [sitemap()],
+    integrations: [
+        sitemap({
+            // labs, hero openings and the bare cutscene player are noindex; they stay out of the sitemap too
+            filter: (page) => !/\/(lab|hero)\//.test(new URL(page).pathname) && !/\/incident\/[^/]+\/cut\/$/.test(new URL(page).pathname),
+        }),
+    ],
 });

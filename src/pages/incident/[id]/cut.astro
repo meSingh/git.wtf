@@ -17,7 +17,7 @@ const d = incident.data;
 const list = shotList(incident.id)!;
 const p = incidentPath(incident);
 ---
-<Base title={`${d.title} | the cut | git.wtf`} description={`Status: ${d.status}`} image={`${p}share.png`}>
+<Base title={`${d.title} | the cut | git.wtf`} description={`Status: ${d.status}`} image={`${p}share.png`} noindex>
     <main class="cut-page">
         <CutPlayer list={list} status={d.status} title={d.title} />
         <div class="cut-after" data-after>

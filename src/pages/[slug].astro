@@ -2,7 +2,8 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import '../styles/pages.css';
-import { SITE, formatDate, href } from '../lib/site';
+import { formatDate, href } from '../lib/site';
+import { archiveJsonLd } from '../lib/jsonld';
 
 export async function getStaticPaths() {
     const all = (await getCollection('archive')).sort((a, b) => (a.data.published_at < b.data.published_at ? 1 : -1));
@@ -17,19 +18,7 @@ const d = entry.data;
 const isPost = d.type === 'post';
 const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
 const html = base ? d.html.replace(/(src|href)="\/(content\/images\/)/g, `$1="${base}/$2`) : d.html;
-const jsonld = isPost
-    ? {
-          '@context': 'https://schema.org',
-          '@type': 'Article',
-          headline: d.title,
-          datePublished: d.published_at,
-          dateModified: d.updated_at ?? d.published_at,
-          url: new URL(`/${entry.id}/`, SITE.url).toString(),
-          image: d.feature_image ? new URL(d.feature_image, SITE.url).toString() : undefined,
-          author: { '@type': 'Person', name: d.authors[0] ?? SITE.owner.name, url: SITE.owner.url },
-          publisher: { '@type': 'Organization', name: 'git.wtf', url: SITE.url },
-      }
-    : undefined;
+const jsonld = archiveJsonLd(entry.id, d);
 ---
 <Base title={d.meta_title ?? `${d.title} | git.wtf`} description={d.meta_description ?? d.excerpt} image={d.feature_image ?? '/share.png'} canonical={d.canonical_url ?? undefined} type={isPost ? 'article' : 'website'} jsonld={jsonld}>
     <main class="page">
