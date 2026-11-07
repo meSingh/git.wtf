@@ -65,9 +65,10 @@ const jsonld = {
                         </picture>
                     </div>
                     <a class="ep-down" href="#detail" data-cut-down><span class="ep-down-w">Keep scrolling. It gets worse.</span><span class="ep-down-a" aria-hidden="true"></span></a>
+                    <button type="button" class="ep-skip" data-cut-skip>Skip episode <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2l8 6-8 6z" /><rect x="11.5" y="2" width="2.5" height="12" /></svg></button>
                     <div class="ep-bar">
                         <p class="ep-today"><span class="ep-k">Today's fuck-up:</span> <a href={href(incidentPath(latest!))}>{latest!.data.title}</a></p>
-                        <p class="ep-ctls"><span data-cut-count aria-live="off"></span><button type="button" data-cut-replay>Replay</button><button type="button" data-cut-skip>Skip</button></p>
+                        <p class="ep-ctls"><span data-cut-count aria-live="off"></span><button type="button" data-cut-replay>Replay</button></p>
                     </div>
                 </div>
             </section>

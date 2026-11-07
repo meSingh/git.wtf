@@ -148,7 +148,8 @@ function scrubByScroll(h: import('./anime').CutHandle) {
 
 /** 3 The episode at the page's pace. The section is as tall as one step a shot; the stage sticks. Inside it, a
  *  gesture plays the next shot at its authored timing and moves the page one step; while a shot plays, input is
- *  held; a wheel's inertia or a long swipe counts once. At the last shot's end the page scrolls on as usual. */
+ *  held; a wheel's inertia or a long swipe counts once. At the last shot's end the page scrolls on as usual. Skip
+ *  episode leaves the episode for the next block without playing the shots on the way. */
 function stepCut(h: import('./anime').CutHandle, ST: typeof import('gsap/ScrollTrigger').ScrollTrigger) {
     const sec = q('#cut');
     const count = q('[data-cut-count]');
@@ -158,6 +159,7 @@ function stepCut(h: import('./anime').CutHandle, ST: typeof import('gsap/ScrollT
     let k = -1;
     let holdUntil = 0;
     let wanted = 0; // a move that arrived while a shot was playing: taken when the shot is done
+    let skipping = false; // Skip episode: the page is on its way to the next block, no shot plays on the way
     const top = () => sec.getBoundingClientRect().top + scrollY;
     const inside = () => { const t = top(); return scrollY >= t - 1 && scrollY <= t + n * step + 1; };
     // a shot counts as done at its authored length (the plan's, loops or not), never by asking its timeline
@@ -180,14 +182,15 @@ function stepCut(h: import('./anime').CutHandle, ST: typeof import('gsap/ScrollT
     // a scroll the page did not make (the scrollbar, the auto-scroll arriving, a jump back): show that step's shot
     ST.create({
         trigger: sec, start: 'top top', end: 'bottom bottom',
-        onUpdate: (self) => { const to = Math.min(n - 1, Math.round(self.progress * n)); if (to !== k) { k = to; h.play(k); paint(); } },
+        onUpdate: (self) => { if (skipping) return; const to = Math.min(n - 1, Math.round(self.progress * n)); if (to !== k) { k = to; h.play(k); paint(); } },
         onEnter: () => { if (k < 0) go(0); },
     });
     // arriving at the top by any route (the auto-scroll lands exactly there): the first shot plays
-    const sync = () => { if (k < 0 && scrollY >= top() - 1 && scrollY <= top() + step) go(0); };
+    const sync = () => { if (skipping && scrollY >= top() + n * step - 1) skipping = false; if (k < 0 && !skipping && scrollY >= top() - 1 && scrollY <= top() + step) go(0); };
     addEventListener('scroll', sync, { passive: true });
     sync();
     const forward = (dir: number) => {
+        if (skipping) return true;
         if (held()) { wanted = k + dir >= 0 && k + dir < n ? dir : 0; return true; } // held: remembered, taken when the shot is done
         go(k + dir);
         return true;
@@ -195,7 +198,7 @@ function stepCut(h: import('./anime').CutHandle, ST: typeof import('gsap/ScrollT
     // the wheel: while a shot plays, its events are eaten (and the direction remembered); once it is done, the
     // next event steps. Steady scrolling therefore advances one shot per authored length, a flick one shot.
     addEventListener('wheel', (e) => {
-        if (!inside()) return;
+        if (!inside() || skipping) return;
         const dir = e.deltaY > 0 ? 1 : e.deltaY < 0 ? -1 : 0;
         if (!dir) return;
         if (dir > 0 && k >= n - 1 && !held()) return; // the end: the page goes on
@@ -205,7 +208,7 @@ function stepCut(h: import('./anime').CutHandle, ST: typeof import('gsap/ScrollT
     }, { passive: false });
     // a swipe: the touch moves nothing itself; on lift, its direction is one step
     let y0: number | null = null;
-    addEventListener('touchstart', (e) => { y0 = inside() ? e.touches[0].clientY : null; }, { passive: true });
+    addEventListener('touchstart', (e) => { y0 = inside() && !skipping ? e.touches[0].clientY : null; }, { passive: true });
     addEventListener('touchmove', (e) => {
         if (y0 === null || !inside()) return;
         const dy = y0 - e.touches[0].clientY;
@@ -223,7 +226,7 @@ function stepCut(h: import('./anime').CutHandle, ST: typeof import('gsap/ScrollT
         forward(dy > 0 ? 1 : -1);
     }, { passive: true });
     addEventListener('keydown', (e) => {
-        if (!inside() || (e.target instanceof HTMLElement && e.target.closest('input, textarea, button, a'))) return;
+        if (!inside() || skipping || (e.target instanceof HTMLElement && e.target.closest('input, textarea, button, a'))) return;
         const dir = [' ', 'ArrowDown', 'PageDown', 'Enter'].includes(e.key) ? 1 : ['ArrowUp', 'PageUp'].includes(e.key) ? -1 : 0;
         if (!dir) return;
         if (dir > 0 && k >= n - 1 && !held()) return;
@@ -232,7 +235,13 @@ function stepCut(h: import('./anime').CutHandle, ST: typeof import('gsap/ScrollT
         forward(dir);
     });
     q('[data-cut-replay]')?.addEventListener('click', () => { k = -1; go(0); });
-    q('[data-cut-skip]')?.addEventListener('click', () => go(n - 1));
+    // Skip episode: out of the episode altogether, smoothly down to the next block, no shot played on the way; a
+    // reader who comes back up finds the episode at the step they land on
+    q('[data-cut-skip]')?.addEventListener('click', () => {
+        skipping = true; wanted = 0; holdUntil = 0;
+        const detail = q('#detail');
+        scrollTo({ top: Math.round(detail ? detail.getBoundingClientRect().top + scrollY : top() + n * step + 1), behavior: 'smooth' });
+    });
     q('[data-cut-down]')?.addEventListener('click', (e) => { e.preventDefault(); if (k >= n - 1 && !held()) scrollTo({ top: top() + n * step + 1, behavior: 'smooth' }); else forward(1); });
 }
 

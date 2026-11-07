@@ -149,10 +149,13 @@ html.js-anim .hh-hint { opacity: 0; visibility: hidden; }
 .ep-ctls button { appearance: none; background: none; border: 1px solid var(--line-2); border-radius: 2px; min-height: 28px; min-width: 28px; padding: 0.4em 0.7em; color: var(--grey); font: inherit; cursor: pointer; }
 .ep-ctls button:hover { color: var(--yellow); border-color: var(--yellow); }
 .ep-ctls button:hover { color: var(--yellow); }
+.ep-skip { position: absolute; right: clamp(1rem, 2.5vw, 2rem); bottom: 4.6rem; z-index: 4; appearance: none; display: inline-flex; align-items: center; gap: 0.5em; min-height: 44px; padding: 0.6em 1em; border: 1px solid rgba(242, 240, 234, 0.6); border-radius: 2px; background: rgba(10, 10, 10, 0.72); color: var(--paper); font-family: var(--mono); font-size: 0.85rem; cursor: pointer; }
+.ep-skip:hover { border-color: var(--yellow); color: var(--yellow); }
+.ep-skip svg { width: 1em; height: 1em; fill: currentColor; }
 .ep-down { position: absolute; left: 50%; bottom: 4.4rem; z-index: 3; transform: translateX(-50%); display: inline-flex; flex-direction: column; align-items: center; gap: 0.4rem; font-family: var(--mono); font-size: 0.8rem; color: var(--paper); text-decoration: none; white-space: nowrap; text-shadow: 0 1px 6px rgba(10, 10, 10, 0.9); }
 .ep-down-a { width: 0.7rem; height: 0.7rem; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); animation: hint-bob 1.4s ease-in-out infinite; }
 .ep-down:hover { color: var(--yellow); text-decoration: none; }
-@media (max-width: 639px) { .ep-ctls span { display: none; } .ep-bar { font-size: 0.78rem; flex-wrap: wrap; gap: 0.5rem 1rem; } .ep-today { flex: 1 1 100%; } .ep-ctls { margin-left: auto; } }
+@media (max-width: 639px) { .ep-ctls span { display: none; } .ep-bar { font-size: 0.78rem; flex-wrap: wrap; gap: 0.5rem 1rem; } .ep-today { flex: 1 1 100%; } .ep-ctls { margin-left: auto; } .ep-skip { bottom: 6.2rem; right: 1rem; } .ep-down { bottom: 10.2rem; } }
 .beat-detail { scroll-margin-top: var(--bar); }
 .after-links { display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem 1.6rem; margin: 0; font-family: var(--mono); }
 .after-main { display: inline-block; background: var(--yellow); color: var(--black); font-size: 1rem; padding: 0.95em 1.3em; border-radius: 2px; }
