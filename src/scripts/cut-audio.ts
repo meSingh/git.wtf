@@ -179,6 +179,12 @@ export class CutAudio {
         });
     }
 
+    /** Out of view or off the page: everything stops, the music included; the next shot picks it up again. */
+    pause() {
+        this.stopPending();
+        if (this.ctx && this.ctx.state === 'running') void this.ctx.suspend();
+    }
+
     stopPending() {
         this.pending.forEach((s) => { try { s.stop(); } catch { /* already over */ } });
         this.pending = [];

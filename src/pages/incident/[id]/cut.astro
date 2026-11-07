@@ -24,6 +24,7 @@ const p = incidentPath(incident);
             <p class="still-caption">{d.title}.</p>
             <p class="cut-links">
                 <button type="button" class="replay" data-replay>Replay</button>
+                <a href={href(`${p}#share-h`)}>Share it</a>
                 <a href={href(`${p}#retelling`)}>What actually happened</a>
                 <a href={d.source_url} rel="noopener nofollow">Source: {sourceHost(d.source_url)}</a>
             </p>

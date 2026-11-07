@@ -772,6 +772,7 @@ export function mountCutscene(wrap: HTMLElement, opts: { mode?: 'scroll'; soundD
     const hint = wrap.querySelector<HTMLElement>('[data-hint]');
     const after = document.querySelector<HTMLElement>('[data-after]');
     let i = -1;
+    let onShown: (() => void) | null = null; // the full-screen cut's autoplay, set once input is wired
     let tl: gsap.core.Timeline | null = null;
     let loops: gsap.core.Animation[] = [];
     // ?play=auto (Video's recorder) or ?render: the cut runs by itself on the planned clock, no input, no sound
@@ -849,6 +850,7 @@ export function mountCutscene(wrap: HTMLElement, opts: { mode?: 'scroll'; soundD
         wrap.classList.toggle('at-end', last);
         if (hint) hint.hidden = last;
         if (after) after.classList.toggle('on', last);
+        onShown?.();
     };
     // an input while a shot is still playing finishes that shot, line and all; the next input moves on
     const next = () => {
@@ -927,7 +929,8 @@ export function mountCutscene(wrap: HTMLElement, opts: { mode?: 'scroll'; soundD
     if (!states) cues.push({ t: total, kind: 'music', name: 'end', shot: list.shots[list.shots.length - 1].id });
     cues.forEach((c) => { c.t = +c.t.toFixed(3); });
     cues.sort((x, y) => x.t - y.t);
-    audio = auto ? null : new CutAudio(base, list.incident, (k) => cues.filter((c) => c.shot === list.shots[k].id), () => cues, { defaultOn: scrolled ? opts.soundDefault ?? false : true });
+    // sound is off until the viewer turns it on, on the homepage and the full-screen cut alike (a choice is remembered)
+    audio = auto ? null : new CutAudio(base, list.incident, (k) => cues.filter((c) => c.shot === list.shots[k].id), () => cues, { defaultOn: scrolled ? opts.soundDefault ?? false : false });
     // a frame for any time, the same every time: for exporters that seek, and for the scrolled homepage
     const frameAt = (t: number) => {
         const k = Math.max(0, starts.findLastIndex((x) => x <= t));
@@ -956,7 +959,7 @@ export function mountCutscene(wrap: HTMLElement, opts: { mode?: 'scroll'; soundD
         hint?.remove();
         wrap.querySelector('[data-skip]')?.remove();
         // the sound button shows at once; the first press is the gesture audio needs, and turns it on
-        const paint = () => { if (soundBtn && audio) { soundBtn.textContent = audio.on ? 'Sound on' : 'Sound off'; soundBtn.setAttribute('aria-pressed', String(audio.on)); } };
+        const paint = () => { if (soundBtn && audio) { soundBtn.textContent = audio.on ? 'Sound: on' : 'Sound: off'; soundBtn.setAttribute('aria-pressed', String(audio.on)); } };
         if (soundBtn) { soundBtn.hidden = false; paint(); }
         soundBtn?.addEventListener('click', (e) => { e.stopPropagation(); audio?.start().then((ok) => { if (!ok && soundBtn) soundBtn.hidden = true; }); audio?.toggle(); paint(); });
         let last = 0;
@@ -976,13 +979,24 @@ export function mountCutscene(wrap: HTMLElement, opts: { mode?: 'scroll'; soundD
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || location.search.includes('reduce');
     if (reduce) { show(shots.length - 1, true); wrap.classList.add('still'); return; }
 
-    // sound: fetched on the viewer's first click, tap or key (a gesture the browser lets audio start from)
-    const startSound = () => { audio?.start().then((ok) => { if (soundBtn) soundBtn.hidden = !ok; if (ok) audio!.shot(Math.max(0, i), starts[Math.max(0, i)]); }); };
-    const paintSound = () => { if (soundBtn && audio) { soundBtn.textContent = audio.on ? 'Sound on' : 'Sound off'; soundBtn.setAttribute('aria-pressed', String(audio.on)); } };
+    // sound: off until turned on. The files are fetched only when it is on: on the Sound press, or on the first
+    // click, tap or Enter/Space/arrow of a viewer who turned it on before (a gesture the browser lets audio start from)
+    const startSound = () => { if (!audio?.on) return; audio.start().then((ok) => { if (soundBtn) soundBtn.hidden = !ok; if (ok) audio!.shot(Math.max(0, i), starts[Math.max(0, i)]); }); };
+    const paintSound = () => { if (soundBtn && audio) { soundBtn.textContent = audio.on ? 'Sound: on' : 'Sound: off'; soundBtn.setAttribute('aria-pressed', String(audio.on)); } };
     paintSound();
-    soundBtn?.addEventListener('click', (e) => { e.stopPropagation(); startSound(); audio?.toggle(); paintSound(); });
+    soundBtn?.addEventListener('click', (e) => { e.stopPropagation(); audio?.toggle(); startSound(); paintSound(); });
     wrap.addEventListener('pointerdown', startSound, { once: true });
-    addEventListener('keydown', startSound, { once: true });
+    const keyStart = (e: KeyboardEvent) => { if ([' ', 'Enter', 'ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp'].includes(e.key)) { removeEventListener('keydown', keyStart); startSound(); } };
+    addEventListener('keydown', keyStart);
+    addEventListener('pagehide', () => audio?.pause());
+    document.addEventListener('visibilitychange', () => { if (document.hidden) audio?.pause(); });
+
+    // the cut plays by itself, each shot at its planned length; a click, tap, key or wheel moves on sooner
+    let autoTimer = 0;
+    onShown = () => {
+        clearTimeout(autoTimer);
+        if (i < shots.length - 1) autoTimer = window.setTimeout(() => show(i + 1), (lens[i] ?? 3) * 1000);
+    };
 
     // input: click or tap, space and the arrows, and the wheel (one shot per gesture)
     wrap.addEventListener('click', (e) => { if ((e.target as HTMLElement).closest('a, button')) return; next(); });

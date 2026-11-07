@@ -56,14 +56,20 @@ const I = {
             native.hidden = false;
             if (copyMain) copyMain.hidden = true;
             if (copySmall) copySmall.hidden = false;
-            native.addEventListener('click', async () => {
-                let files: File[] = [];
+            // the file is fetched ahead, as the block comes near, so the tap goes straight to the share sheet (a
+            // browser drops the tap's permission if the sheet waits for a download); not ready yet: the link alone
+            let files: File[] = [];
+            const prefetch = async () => {
                 try {
                     const src = video || image;
                     const blob = await (await fetch(src)).blob();
                     const f = new File([blob], `git-wtf-${slug}.${video ? 'mp4' : 'png'}`, { type: blob.type });
                     if (navigator.canShare?.({ files: [f] })) files = [f];
                 } catch { /* the link alone, then */ }
+            };
+            const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); void prefetch(); } }, { rootMargin: '600px 0px' });
+            io.observe(box);
+            native.addEventListener('click', async () => {
                 try {
                     await navigator.share(files.length ? { files, title, text: `${text} ${url}` } : { title, text, url });
                 } catch (e) {

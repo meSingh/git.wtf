@@ -153,7 +153,7 @@ function playCut(h: import('./anime').CutHandle, autoplay: boolean) {
         // the "keep scrolling" hint shows over the first shot and the end, never over the lines in between
         if (down) gsap.to(down, { autoAlpha: k === 0 || done ? 1 : 0, duration: 0.3, overwrite: true });
     };
-    const stop = () => { timer?.kill(); timer = null; h.audio?.stopPending(); };
+    const stop = () => { timer?.kill(); timer = null; h.audio?.pause(); };
     const schedule = () => {
         timer?.kill();
         timer = gsap.delayedCall(h.plan[k]?.length ?? 3, () => {
@@ -166,16 +166,19 @@ function playCut(h: import('./anime').CutHandle, autoplay: boolean) {
     paint();
     if (autoplay) {
         new IntersectionObserver(([e]) => {
-            inView = e.intersectionRatio >= 0.6;
+            // a third of the stage in view starts it, so a reader who stops scrolling short still sees it play
+            inView = e.intersectionRatio >= 0.35;
             if (inView) { if (!started) run(0); else if (!done && !timer) { h.play(k); schedule(); } }
-            else if (e.intersectionRatio < 0.3 && timer) stop();
-        }, { threshold: [0, 0.3, 0.6, 1] }).observe(sec);
+            else if (e.intersectionRatio < 0.15) { if (timer) stop(); else h.audio?.pause(); }
+        }, { threshold: [0, 0.15, 0.35, 0.6, 1] }).observe(sec);
+        // leaving the page or the tab stops the sound as well
+        addEventListener('pagehide', stop);
+        document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); else if (inView && started && !done && !timer) { h.play(k); schedule(); } });
     }
     q('[data-cut-replay]')?.addEventListener('click', () => { stop(); run(0); });
     const next = () => { const d = q('#detail'); scrollTo({ top: Math.round(d ? d.getBoundingClientRect().top + scrollY : sec.getBoundingClientRect().bottom + scrollY), behavior: 'smooth' }); };
     q('[data-cut-skip]')?.addEventListener('click', () => { stop(); done = true; started = true; paint(); next(); });
     down?.addEventListener('click', (e) => { e.preventDefault(); next(); });
-    void inView;
 }
 
 /** 4 The record's own sideways scroll: the arrows step about a screen, a mouse can drag it, a trackpad swipes it.
@@ -238,6 +241,8 @@ export async function home() {
     // largest paint does not have to share the line with it.
     const { ScrollTrigger } = await import('gsap/ScrollTrigger');
     gsap.registerPlugin(ScrollTrigger);
+    // 3 The cut plays by itself while it is in view (once, outside matchMedia, so a rotation never starts a second run)
+    mountCut()?.then((h) => h && playCut(h, true));
     const mm = gsap.matchMedia();
     // GSAP only runs the setup when a condition matches, so one condition is always true
     mm.add({ any: '(min-width: 0px)', desktop: '(min-width: 768px)' }, (ctx) => {
@@ -273,8 +278,6 @@ export async function home() {
             .to(odoWrap, { x: () => dock().x, y: () => dock().y, scale: () => dock().scale, duration: 1, ease: 'power2.inOut' }, 0)
             .to(odoWrap, { autoAlpha: 0, duration: 0.03, ease: 'none' }, 0.97);
 
-        // 3 The cut plays by itself while it is in view
-        mountCut()?.then((h) => h && playCut(h, true));
 
         // Section headings lock in word by word, once.
         qa('[data-lock]').forEach((h) => {
