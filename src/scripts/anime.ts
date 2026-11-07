@@ -11,6 +11,8 @@ type El = SVGGraphicsElement;
 interface Ctx { tl: gsap.core.Timeline; g: El; shot: Shot; svg: SVGSVGElement; loops: gsap.core.Animation[] }
 
 const q = (g: Element, s: string) => g.querySelector<El>(s);
+/** The middle of the active frame (800 450 for 16:9, 450 800 for 9:16). */
+let CENTRE = '800px 450px';
 const qa = (g: Element, s: string) => Array.from(g.querySelectorAll<El>(s));
 
 // ---------- the kit: one function per effect; each starts at `at` seconds into its shot ----------
@@ -26,7 +28,7 @@ const FX: Record<string, Fx> = {
         tl.fromTo(q(card, '.ep'), { autoAlpha: 0, y: -30 }, { autoAlpha: 1, y: 0, duration: 0.35, ease: 'power3.out' }, 0.2);
         tl.fromTo(q(card, '.ttl'), { autoAlpha: 0, scale: 1.6, transformOrigin: '50% 50%' }, { autoAlpha: 1, scale: 1, duration: 0.25, ease: 'power4.in' }, 0.3);
         tl.fromTo(q(card, '.tl'), { autoAlpha: 0 }, { autoAlpha: 0.5, duration: 0.15 }, 0.55);
-        loops.push(gsap.to(q(card, '.tl'), { rotation: 3, transformOrigin: '800px 450px', duration: 0.12, repeat: -1, yoyo: true, ease: 'none', paused: true }));
+        loops.push(gsap.to(q(card, '.tl'), { rotation: 3, transformOrigin: CENTRE, duration: 0.12, repeat: -1, yoyo: true, ease: 'none', paused: true }));
     },
     push({ tl, g }, at) { tl.fromTo(q(g, '.cam'), { scale: 1, transformOrigin: focus(g) }, { scale: 1.12, duration: 2.6, ease: 'power1.inOut' }, at); },
     slowpush({ tl, g }, at) { tl.fromTo(q(g, '.cam'), { scale: 1, transformOrigin: focus(g) }, { scale: 1.08, duration: 4.5, ease: 'sine.inOut' }, at); },
@@ -42,7 +44,7 @@ const FX: Record<string, Fx> = {
     whip({ tl, g }, at) { tl.fromTo(q(g, '.cam'), { x: -1500 }, { x: 0, duration: 0.28, ease: 'power3.out' }, at); },
     spin({ tl, g }, at) {
         // the camera goes once round the ring of pointing arms
-        tl.fromTo(q(g, '.cam'), { rotation: 0, scale: 1.7, transformOrigin: '800px 450px' }, { rotation: 360, duration: 2.2, ease: 'power2.inOut' }, at);
+        tl.fromTo(q(g, '.cam'), { rotation: 0, scale: 1.7, transformOrigin: CENTRE }, { rotation: 360, duration: 2.2, ease: 'power2.inOut' }, at);
         tl.to(q(g, '.cam'), { scale: 1, duration: 0.6, ease: 'power2.out' }, at + 2.0);
     },
     rise({ tl, g, loops }, at) {
@@ -101,8 +103,8 @@ const FX: Record<string, Fx> = {
     speedlines({ tl, g, loops }, at) {
         const lines = q(g, '.lines');
         if (!lines) return;
-        tl.fromTo(lines, { autoAlpha: 0, scale: 1.3, transformOrigin: '800px 450px' }, { autoAlpha: 1, scale: 1, duration: 0.2 }, at);
-        loops.push(gsap.to(lines, { rotation: 2, transformOrigin: '800px 450px', duration: 0.08, repeat: -1, yoyo: true, ease: 'none', paused: true }));
+        tl.fromTo(lines, { autoAlpha: 0, scale: 1.3, transformOrigin: CENTRE }, { autoAlpha: 1, scale: 1, duration: 0.2 }, at);
+        loops.push(gsap.to(lines, { rotation: 2, transformOrigin: CENTRE, duration: 0.08, repeat: -1, yoyo: true, ease: 'none', paused: true }));
     },
     extralines({ tl, g, loops }, at) {
         // for the first time, speed lines behind THE EXTRA
@@ -111,7 +113,7 @@ const FX: Record<string, Fx> = {
         tl.set(lines, { autoAlpha: 0 }, 0);
         // centred on THE EXTRA, wherever the shot puts it
         const ex = role(g, 'extra')?.parentElement?.getAttribute('transform')?.match(/translate\(([-\d.]+) ([-\d.]+)\)/);
-        const o = ex ? `${ex[1]}px ${Number(ex[2]) - 360}px` : '800px 450px';
+        const o = ex ? `${ex[1]}px ${Number(ex[2]) - 360}px` : CENTRE;
         tl.fromTo(lines, { autoAlpha: 0, scale: 1.4, transformOrigin: o }, { autoAlpha: 0.9, scale: 1, duration: 0.25 }, at);
         loops.push(gsap.to(lines, { rotation: 1.5, transformOrigin: o, duration: 0.08, repeat: -1, yoyo: true, ease: 'none', paused: true }));
     },
@@ -243,7 +245,18 @@ function common({ tl, g, loops }: Ctx) {
 }
 
 export function mountCutscene(wrap: HTMLElement) {
+    // the frame: ?frame=9:16 or 16:9, else the screen's shape (phones and anything tall get the staged vertical one)
+    const want = new URLSearchParams(location.search).get('frame');
+    const vertical = want ? want === '9:16' : wrap.clientWidth / Math.max(1, wrap.clientHeight) < 0.8;
+    const tpl = wrap.querySelector<HTMLTemplateElement>('template[data-frame="9:16"]');
+    if (vertical && tpl) {
+        const v = tpl.content.querySelector('svg.cutscene');
+        if (v) wrap.querySelector('svg.cutscene')!.replaceWith(document.importNode(v, true));
+    }
     const svg = wrap.querySelector<SVGSVGElement>('svg.cutscene')!;
+    const frame = (svg.dataset.frame as '16:9' | '9:16') || '16:9';
+    wrap.dataset.frame = frame;
+    CENTRE = (svg.dataset.centre || '800 450').split(' ').map((n) => `${n}px`).join(' ');
     const list = JSON.parse(svg.dataset.list || '{}') as ShotList;
     const shots = qa(svg, '.shot');
     const count = wrap.querySelector<HTMLElement>('[data-count]');
@@ -262,6 +275,7 @@ export function mountCutscene(wrap: HTMLElement) {
 
     // a phone keeps the shot's focus in the middle and puts words above and lines below the picture
     const fit = () => {
+        if (frame === '9:16') { svg.setAttribute('viewBox', '0 0 900 1600'); return; }
         const w = wrap.clientWidth, h = wrap.clientHeight;
         const aspect = w / Math.max(1, h);
         const g = shots[Math.max(0, i)];
@@ -404,7 +418,7 @@ export function mountCutscene(wrap: HTMLElement) {
             return k;
         };
         const ready = (document.fonts?.ready ?? Promise.resolve()).then(() => { master.play(0); });
-        (window as any).__cut = { plan, total, cues, ready, show, get i() { return i; }, get tl() { return tl; }, n: shots.length, master, frameAt };
+        (window as any).__cut = { frame, plan, total, cues, ready, show, get i() { return i; }, get tl() { return tl; }, n: shots.length, master, frameAt };
         return;
     }
 
@@ -437,6 +451,6 @@ export function mountCutscene(wrap: HTMLElement) {
     }, { passive: false });
     wrap.querySelector('[data-skip]')?.addEventListener('click', (e) => { e.stopPropagation(); show(shots.length - 1); });
     document.querySelectorAll('[data-replay]').forEach((b) => b.addEventListener('click', () => { scrollTo({ top: 0, behavior: 'smooth' }); i = -1; show(0); }));
-    if (location.search.includes('debug')) (window as any).__cut = { show, get i() { return i; }, get tl() { return tl; }, n: shots.length, plan, total, cues };
+    if (location.search.includes('debug')) (window as any).__cut = { frame, show, get i() { return i; }, get tl() { return tl; }, n: shots.length, plan, total, cues };
     show(0);
 }

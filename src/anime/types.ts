@@ -50,7 +50,12 @@ export interface Shot {
     /** Or one line, said by someone, and when. */
     line?: { who: string; text: string };
     lineAt?: number;
-    /** What a phone keeps in frame. */
+    /** What a phone keeps in frame when the 16:9 frame has to be cropped. */
     focus?: [number, number];
+    /** The vertical (9:16, 900 x 1600) staging: cast and props placed for the tall frame. Without it, a layout rule
+     *  places them. Keep faces, words and the stamp inside the safe area x 54 to 740, y 240 to 1040. */
+    v?: { cast?: CastIn[]; props?: Shot['props'] };
+    /** Draw this shot as a still on the incident page. */
+    still?: boolean;
 }
 export interface ShotList { incident: string; episode: string; title: string; shots: Shot[] }
