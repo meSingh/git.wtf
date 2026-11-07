@@ -1,0 +1,195 @@
+---
+// Git City, a toy town on a table, seen at an isometric tilt. Everything is drawn in its resting place here; the
+// event script (src/town/events/<id>.json) and the engine (src/scripts/town.ts) move it. Off-white ground, grey
+// buildings, yellow for agents and anything that matters, black ink, a soft shadow under everything.
+import { BUILDINGS, GRID, STREETS, STREET_NAMES, TREES } from '../../town/city';
+import { P, box, centre, floor, roof } from '../../town/iso';
+import type { TownEvent } from '../../town/types';
+interface Props { event: TownEvent; status: string }
+const { event, status } = Astro.props;
+const st = status.replace(/`/g, '');
+const cut = st.length > 24 ? st.indexOf(',') : -1;
+const stampLines = cut > 0 ? [st.slice(0, cut + 1), st.slice(cut + 1).trim()] : [st];
+
+const tbl = box(-1.5, -1.5, GRID + 3, GRID + 3, 26, -26);
+const tiles: [number, number][] = [];
+for (let x = 0; x < GRID; x++) for (let y = 0; y < GRID; y++) tiles.push([x, y]);
+const target = BUILDINGS.find((b) => b.id === event.target)!;
+const tx = target.x + target.w / 2, ty = target.y + target.d / 2;
+const [tcx, tcy] = P(tx, ty);
+const n = event.cast.agents;
+const R = event.roads ?? 0;
+// radial streets into the target, in tile space so they lie flat on the iso ground
+const roadAngles = Array.from({ length: R }, (_, k) => (k / R) * Math.PI * 2 + Math.PI / R / 2);
+const L0 = 0.9, L1 = 5.2, HW = 0.24, STOP = 2.35;
+const at = (a: number, r: number, side = 0): [number, number] => [tx + Math.cos(a) * r - Math.sin(a) * side, ty + Math.sin(a) * r + Math.cos(a) * side];
+const quad = (a: number, r0: number, r1: number, hw: number) => {
+    const c = [at(a, r0, -hw), at(a, r1, -hw), at(a, r1, hw), at(a, r0, hw)].map(([x, y]) => P(x, y));
+    return 'M' + c.map(([x, y]) => `${x.toFixed(1)} ${y.toFixed(1)}`).join('L') + 'Z';
+};
+const streetTiles = new Set<string>();
+if (!R) STREETS.forEach(([x0, y0, x1, y1]) => { for (let x = Math.min(x0, x1); x <= Math.max(x0, x1); x++) for (let y = Math.min(y0, y1); y <= Math.max(y0, y1); y++) streetTiles.add(`${x},${y}`); });
+const blds = [...BUILDINGS].sort((a, b) => a.x + a.y - (b.x + b.y));
+// the bulldozers start at the far ends of the roads (or round the target when there are no roads)
+const dozers = Array.from({ length: n }, (_, i) => {
+    const a = R ? roadAngles[i % R] : (i / n) * Math.PI * 2;
+    const [sx, sy] = P(...at(a, L1 + 1.2));
+    const [ex, ey] = P(...at(a, STOP));
+    return { i, a, sx: Math.round(sx), sy: Math.round(sy), ex: Math.round(ex), ey: Math.round(ey), flip: Math.cos(a) - Math.sin(a) > 0 };
+});
+// THE EXTRA's kerb: between two roads, beside the house
+const [kx, ky] = P(...at(R ? 0 : 0.3, 1.55));
+const parcels = Array.from({ length: 36 }, (_, i) => i);
+const [mx, my] = P(-1.0, 4.2, 0);
+---
+<svg class="town" viewBox="-900 -260 1800 1200" preserveAspectRatio="xMidYMid meet" role="img" aria-label={`Git City, a toy town, acting out: ${event.title}. Status: ${st}`} data-event={JSON.stringify(event)} data-target={JSON.stringify([tcx, tcy])} data-mug={JSON.stringify([mx, my])} data-kerb={JSON.stringify([kx, ky])}>
+    <defs>
+        <pattern id="t-hazard" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="4" height="8" fill="#ffd400" /><rect x="4" width="4" height="8" fill="#0a0a0a" /></pattern>
+    </defs>
+    <rect class="room" x="-6000" y="-6000" width="12000" height="12000" />
+    <g class="world">
+        <g class="table"><path class="t-left" d={tbl.left} /><path class="t-right" d={tbl.right} /><path class="t-top" d={tbl.top} /></g>
+        <g class="ground">
+            {tiles.map(([x, y]) => <path class={streetTiles.has(`${x},${y}`) ? 'street' : (x + y) % 2 ? 'grass a' : 'grass'} d={floor(x, y, 1, 1)} />)}
+            {!R && STREETS.map(([x0, y0, x1, y1]) => { const [ax, ay] = centre(x0, y0); const [bx, by] = centre(x1, y1); return <path class="dash" d={`M${ax} ${ay} L${bx} ${by}`} />; })}
+            {!R && STREET_NAMES.map((s) => { const [x, y] = P(s.x, s.y); return <text class="streetname" x={x} y={y} transform={`rotate(26.57 ${x} ${y})`}>{s.text}</text>; })}
+            {R > 0 && (
+                <g class="roads">
+                    <path class="plaza" d={floor(tx - 1.05, ty - 1.05, 2.1, 2.1)} />
+                    {roadAngles.map((a) => <path class="road" d={quad(a, L0, L1, HW)} />)}
+                    {roadAngles.map((a) => <path class="stopline" d={quad(a, STOP - 0.42, STOP - 0.34, HW)} />)}
+                    <g class="tracks" style="visibility:hidden">{roadAngles.map((a) => <path d={quad(a, 0.45, L1, 0.07)} />)}</g>
+                </g>
+            )}
+        </g>
+        <g class="trees">{TREES.map(([x, y]) => { const [cx, cy] = centre(x, y); return <g class="tree react" transform={`translate(${cx} ${cy})`}><ellipse class="shadow" cx="0" cy="2" rx="22" ry="10" /><rect class="trunk" x="-3" y="-22" width="6" height="22" /><circle class="leaves" cx="0" cy="-34" r="18" /></g>; })}</g>
+
+        <g class="scar" style="visibility:hidden">
+            <path class="cardboard" d={floor(target.x - 0.25, target.y - 0.25, target.w + 0.5, target.d + 0.5)} />
+            <g class="statue" transform={`translate(${P(tx + 2.9, ty - 1.4)[0]} ${P(tx + 2.9, ty - 1.4)[1]})`}><g class="st-in">
+                <ellipse class="shadow" cx="0" cy="3" rx="22" ry="9" />
+                <rect class="plinth" x="-18" y="-22" width="36" height="22" />
+                <rect class="s-body" x="-8" y="-40" width="16" height="18" /><rect class="s-head" x="-11" y="-58" width="22" height="18" rx="3" />
+                <rect class="s-copy" x="6" y="-40" width="14" height="10" />
+            </g></g>
+        </g>
+
+        <g class="buildings">
+            {blds.map((b) => {
+                const bx = box(b.x, b.y, b.w, b.d, b.h);
+                const [cx, cy] = centre(b.x, b.y, b.w, b.d);
+                const top = P(b.x + b.w / 2, b.y + b.d / 2, b.h);
+                const isT = b.id === event.target;
+                return (
+                    <g class={`bld b-${b.type} react`} data-id={b.id} data-cx={cx} data-cy={cy}>
+                        <path class="shadow" d={floor(b.x - 0.08, b.y - 0.08, b.w + 0.2, b.d + 0.2)} />
+                        <g class="body">
+                            <path class="left" d={bx.left} /><path class="right" d={bx.right} /><path class="top" d={bx.top} />
+                            {b.type === 'house' && (() => { const r = roof(b.x, b.y, b.w, b.d, b.h, b.w * 30); return <><path class="roof-l" d={r.left} /><path class="roof-r" d={r.right} /></>; })()}
+                            {b.type === 'tower' && Array.from({ length: 6 }, (_, k) => { const [wx, wy] = P(b.x + b.w, b.y + 0.5, 30 + k * 26); return <rect class="win" x={wx + 6} y={wy} width="16" height="10" />; })}
+                            {b.type === 'office' && Array.from({ length: 3 }, (_, k) => { const [wx, wy] = P(b.x + 0.4, b.y + b.d, 26 + k * 28); return <rect class="win" x={wx} y={wy} width="40" height="12" />; })}
+                            {b.type === 'warehouse' && (() => { const [dx, dy] = P(b.x + 1.1, b.y + b.d, 0); return <rect class="door" x={dx} y={dy - 40} width="44" height="40" />; })()}
+                            {b.type === 'gate' && (() => { const [dx, dy] = P(b.x + 0.5, b.y + b.d, 0); return <rect class="bar" x={dx - 60} y={dy - 30} width="120" height="10" fill="url(#t-hazard)" />; })()}
+                            {isT && (() => { const [dx, dy] = P(b.x + 0.4, b.y + b.d, 0); return <rect class="door" x={dx} y={dy - 26} width="18" height="26" />; })()}
+                        </g>
+                        {b.label && <g class="label" transform={`translate(${top[0]} ${top[1] - (b.type === 'house' ? b.w * 30 + 22 : 22)})`}><g class="l-in"><rect x={-b.label.length * 5 - 10} y="-15" width={b.label.length * 10 + 20} height="24" rx="3" /><text x="0" y="2">{b.label}</text></g></g>}
+                        {isT && <g class="roofnum" transform={`translate(${top[0]} ${top[1] - b.w * 30 - 56})`}><text class="rn" x="0" y="0">0</text></g>}
+                    </g>
+                );
+            })}
+        </g>
+
+        <g class="parcels">{parcels.map(() => { const pb = box(-0.1, -0.1, 0.2, 0.2, 14); return <g class="parcel" transform={`translate(${tcx} ${tcy})`} style="visibility:hidden"><path class="left" d={pb.left} /><path class="right" d={pb.right} /><path class="top" d={pb.top} /><path class="tape" d={`M${P(-0.1, 0, 14).join(' ')} L${P(0.1, 0, 14).join(' ')}`} /></g>; })}</g>
+
+        <g class="stretcher" style="visibility:hidden" transform={`translate(${P(tx + 0.4, ty + 1.7)[0]} ${P(tx + 0.4, ty + 1.7)[1]})`}><g class="sx-in">
+            <rect class="bed" x="-30" y="-12" width="60" height="10" rx="2" /><rect class="leg" x="-26" y="-2" width="4" height="8" /><rect class="leg" x="22" y="-2" width="4" height="8" />
+            <rect class="one" x="-9" y="-24" width="18" height="12" /><path class="sheet" d="M-28 -12 C-20 -30 20 -30 28 -12Z" style="visibility:hidden" />
+        </g></g>
+
+        <g class="vehicles">
+            {dozers.map((d) => {
+                const body = box(-0.32, -0.2, 0.64, 0.4, 20);
+                return (
+                    <g class="dozer react" data-i={d.i} data-ex={d.ex} data-ey={d.ey} data-a={d.a.toFixed(3)} transform={`translate(${d.sx} ${d.sy})`} style="visibility:hidden">
+                        <g class="veh" transform={d.flip ? 'scale(-0.8 0.8)' : 'scale(0.8 0.8)'}>
+                            <ellipse class="shadow" cx="0" cy="4" rx="34" ry="12" />
+                            <path class="blade" d="M22 -6 L44 6 L44 -16 L22 -28Z" />
+                            <path class="left" d={body.left} /><path class="right" d={body.right} /><path class="top" d={body.top} />
+                            <circle class="horn" cx="-18" cy="-24" r="5" />
+                            <g class="bot"><rect class="b-body" x="-8" y="-40" width="16" height="12" /><rect class="b-head" x="-11" y="-56" width="22" height="17" rx="3" /><rect class="b-screen" x="-8" y="-53" width="16" height="11" /><path class="b-eyes" d="M-5 -48 h3 M2 -48 h3" /><path class="b-arm" d="M8 -38 l14 -2" /></g>
+                        </g>
+                        <g class="honk" style="visibility:hidden"><g class="h-in"><rect x="-32" y="-96" width="64" height="26" rx="13" /><text x="0" y="-77">HONK</text></g></g>
+                    </g>
+                );
+            })}
+            {event.cast.extra && (() => {
+                const tb = box(-0.42, -0.22, 0.84, 0.44, 26);
+                return (
+                    <g class="truck react" data-role="extra" transform={`translate(${kx} ${ky})`}>
+                        <g class="veh" transform="scale(0.85 0.85)">
+                            <ellipse class="shadow" cx="0" cy="4" rx="44" ry="14" />
+                            <path class="left" d={tb.left} /><path class="right" d={tb.right} /><path class="top" d={tb.top} />
+                            <rect class="copier" x="-28" y="-50" width="26" height="18" rx="2" /><rect class="beam" x="-26" y="-46" width="22" height="3" />
+                            <g class="load">{[0, 1, 2, 3, 4, 5].map((k) => <rect x={-36 + (k % 2) * 4} y={-38 - k * 6} width="22" height="6" rx="1" style="visibility:hidden" />)}</g>
+                            <g class="bot"><rect class="b-body" x="14" y="-44" width="16" height="12" /><rect class="b-head" x="11" y="-60" width="22" height="17" rx="3" /><rect class="b-screen" x="14" y="-57" width="16" height="11" /><text class="b-cur" x="16" y="-48">&gt;_</text><rect class="cap" x="10" y="-64" width="24" height="5" rx="2" /><rect class="paper" x="26" y="-48" width="16" height="12" /></g>
+                        </g>
+                    </g>
+                );
+            })()}
+            <g class="ambulance react" transform={`translate(${P(16, 4)[0]} ${P(16, 4)[1]})`}>
+                <g class="veh" transform="scale(-1 1)">
+                    <ellipse class="shadow" cx="0" cy="4" rx="40" ry="13" />
+                    {(() => { const ab = box(-0.38, -0.22, 0.76, 0.44, 30); return <><path class="left" d={ab.left} /><path class="right" d={ab.right} /><path class="top" d={ab.top} /></>; })()}
+                    <rect class="stripe" x="-30" y="-20" width="60" height="6" fill="url(#t-hazard)" />
+                    <rect class="siren" x="-6" y="-44" width="12" height="8" rx="2" />
+                </g>
+            </g>
+        </g>
+
+        <g class="pile" transform={`translate(${mx + 150} ${my + 20})`}>{[0, 1, 2, 3, 4, 5].map((k) => { const pb = box(-0.14 + (k % 2) * 0.03, -0.1, 0.28, 0.2, 9, k * 9); return <g class="pl" style="visibility:hidden"><path class="left" d={pb.left} /><path class="right" d={pb.right} /><path class="top" d={pb.top} /></g>; })}</g>
+
+        {event.cast.dev && (
+            <g class="dev" transform={`translate(${mx} ${my})`}>
+                <g class="mug react">
+                    <ellipse class="shadow" cx="0" cy="8" rx="110" ry="40" />
+                    <path class="cup" d="M-90 -230 L90 -230 L80 0 L-80 0Z" />
+                    <ellipse class="rim" cx="0" cy="-230" rx="90" ry="26" />
+                    <ellipse class="coffee" cx="0" cy="-226" rx="80" ry="20" />
+                    <rect class="band" x="-88" y="-160" width="172" height="34" />
+                    <path class="handle" d="M88 -190 C150 -190 150 -80 82 -76" />
+                    <path class="steam" d="M-30 -270 c-18 -26 18 -40 0 -70 M24 -266 c-18 -26 18 -40 0 -70" />
+                </g>
+            </g>
+        )}
+
+        <g class="imprint" style="visibility:hidden" transform={`translate(${tcx} ${tcy + 30}) matrix(1 0.5 -1 0.5 0 0)`}>
+            <rect class="plate" x="-250" y="-90" width="500" height={stampLines.length > 1 ? 180 : 120} rx="6" />
+            <rect class="inner" x="-238" y="-78" width="476" height={stampLines.length > 1 ? 156 : 96} rx="4" />
+            <text class="slbl" x="-220" y="-48">STATUS</text>
+            {stampLines.map((t, i) => <text class="stext" x="0" y={stampLines.length > 1 ? 4 + i * 56 : 18}>{t}</text>)}
+        </g>
+
+        <g class="hand" style="visibility:hidden" transform={`translate(${tcx} ${tcy})`}><g class="hd-in">
+            <rect class="sleeve" x="-60" y="-1500" width="120" height="1180" />
+            <g class="open"><path class="finger" d="M-62 -260 L-76 -150 M-24 -260 L-28 -126 M14 -260 L16 -122 M52 -260 L64 -150" /><path class="finger f2" d="M-62 -260 L-76 -150 M-24 -260 L-28 -126 M14 -260 L16 -122 M52 -260 L64 -150" /><path class="palm" d="M-84 -340 C-90 -280 -70 -240 0 -240 C70 -240 90 -280 84 -340Z" /></g>
+            <g class="thumb" style="visibility:hidden"><path class="fist" d="M-70 -320 C-80 -250 -60 -220 0 -220 C60 -220 80 -250 70 -320Z" /><path class="up" d="M60 -300 C90 -300 100 -360 96 -420 C92 -446 66 -446 64 -420 L60 -330Z" /></g>
+        </g></g>
+
+        <g class="stamper" style="visibility:hidden" transform={`translate(${tcx} ${tcy})`}><g class="sp-in">
+            <rect class="sp-handle" x="-30" y="-560" width="60" height="200" rx="12" />
+            <ellipse class="sp-knob" cx="0" cy="-570" rx="60" ry="30" />
+            <rect class="sp-block" x="-170" y="-360" width="340" height="70" rx="8" />
+            <rect class="sp-pad" x="-180" y="-290" width="360" height="24" rx="4" />
+        </g></g>
+
+        <g class="lines">
+            {event.beats.filter((b) => b.line && b.line.who !== 'caption').map((b) => (
+                <g class="bubble" data-beat={b.id} style="visibility:hidden"><g class="b-in">
+                    <rect x={-b.line!.text.length * 6.6 - 22} y="-34" width={b.line!.text.length * 13.2 + 44} height="44" rx="10" />
+                    <path class="tail" d="M-10 9 L0 28 L12 9Z" />
+                    <text x="0" y="-5">{b.line!.text}</text>
+                </g></g>
+            ))}
+        </g>
+    </g>
+</svg>

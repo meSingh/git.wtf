@@ -1,0 +1,171 @@
+---
+// Format C, the toy town: a prototype for one incident. Not linked from the site; noindex.
+import { getEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Town from '../../components/town/Town.astro';
+import ev from '../../town/events/2026-07-31-twelve-agents-one-working-directory.json';
+import type { TownEvent } from '../../town/types';
+import { href, incidentPath, sourceHost } from '../../lib/site';
+
+// the fixture build has no such incident: the page then says so instead of failing
+const incident = await getEntry('incidents', ev.incident);
+const d = incident?.data;
+---
+{!incident || !d ? (
+<Base title="Toy town | git.wtf lab" noindex>
+    <main class="page"><p class="col note">This prototype plays an incident that is not in this build.</p></main>
+</Base>
+) : (
+<Base title={`${d.title} | toy town | git.wtf lab`} noindex>
+    <main class="town-page">
+        <section class="town-wrap" id="town" aria-label={`${d.title}, in Git City`}>
+            <Town event={ev as TownEvent} status={d.status} />
+            <p class="town-caption" data-caption hidden></p>
+            <button type="button" class="poke" data-poke hidden>Poke</button>
+            <p class="town-hint" data-hint aria-hidden="true">Scroll or tap. Poke anything.</p>
+            <p class="town-count" data-count aria-hidden="true"></p>
+        </section>
+        <div class="town-after" data-after>
+            <p class="still-caption">Twelve agents shared one checkout. 2,309 uncommitted files went, and nothing recorded which agent did it.</p>
+            <p class="town-links">
+                <button type="button" class="replay" data-replay>Replay</button>
+                <a href={href(`${incidentPath(incident)}#retelling`)}>What actually happened</a>
+                <a href={d.source_url} rel="noopener nofollow">Source: {sourceHost(d.source_url)}</a>
+            </p>
+        </div>
+    </main>
+    <script>
+        import { mountTown } from '../../scripts/town';
+        const wrap = document.querySelector<HTMLElement>('#town');
+        if (wrap) mountTown(wrap);
+    </script>
+</Base>
+)}
+
+<style is:global>
+    .town-page { padding-top: var(--bar); }
+    .town-wrap { position: relative; height: calc(100svh - var(--bar)); overflow: hidden; background: #1d1c1a; cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; }
+    .town-wrap.still { cursor: default; }
+    .town { display: block; width: 100%; height: 100%; }
+    .town-hint, .town-count { position: absolute; bottom: 0.9rem; margin: 0; font-family: var(--mono); font-size: 0.78rem; color: var(--grey); pointer-events: none; }
+    .town-hint { left: 1rem; }
+    .town-hint[hidden] { display: none; }
+    .town-count { right: 1rem; }
+    .town-wrap.still .town-count { display: none; }
+    .poke { position: absolute; left: 50%; bottom: 3rem; transform: translateX(-50%); appearance: none; border: 0; border-radius: 2px; background: var(--yellow); color: var(--black); font: 400 1.05rem/1 var(--mono); padding: 0.9em 1.3em; cursor: pointer; box-shadow: 0 0 0 3px var(--black), 0 0 0 4px rgba(255, 212, 0, 0.5); animation: poke-nudge 1.4s ease-in-out infinite; }
+    .poke[hidden] { display: none; }
+    @keyframes poke-nudge { 50% { box-shadow: 0 0 0 3px var(--black), 0 0 0 10px rgba(255, 212, 0, 0.2); } }
+    @media (prefers-reduced-motion: reduce) { .poke { animation: none; } }
+    .town-after { width: min(var(--col), 100% - 2rem); margin: 2rem auto 0; }
+    .town-after:not(.on) { visibility: hidden; }
+    html:has(.town-wrap.still) .town-after { visibility: visible; }
+    .still-caption { display: none; font-family: var(--body); font-size: 1.15rem; max-width: 40em; margin: 0 0 1rem; }
+    html:has(.town-wrap.still) .still-caption { display: block; }
+    html:has(.town-wrap.still) .replay { display: none; }
+    .town-links { display: flex; flex-wrap: wrap; gap: 0.8rem 1.6rem; align-items: center; margin: 0; font-family: var(--mono); font-size: 0.95rem; }
+    .town-links .replay { appearance: none; border: 0; border-radius: 2px; background: var(--yellow); color: var(--black); font: 400 1rem/1 var(--mono); padding: 0.85em 1.2em; cursor: pointer; }
+    .town-links a { color: var(--paper); text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 0.25em; }
+    .town-links a:hover { color: var(--yellow); }
+
+    /* the toy: chunky, flat, black ink, a soft shadow under everything */
+    .town .room { fill: #1d1c1a; }
+    .town .table .t-top { fill: #2e2d2a; }
+    .town .table .t-left { fill: #141413; }
+    .town .table .t-right { fill: #0a0a0a; }
+    .town .grass { fill: #f2f0ea; stroke: #dcd9d1; stroke-width: 1.5; }
+    .town .grass.a { fill: #ebe8e0; }
+    .town .street { fill: #8a877f; stroke: #7a776f; stroke-width: 1.5; }
+    .town .dash { stroke: #f2f0ea; stroke-width: 3; stroke-dasharray: 12 14; fill: none; }
+    .town .streetname { fill: #f2f0ea; font-family: var(--mono); font-size: 14px; }
+    .town .shadow { fill: #0a0a0a; opacity: 0.16; }
+    .town .tree .trunk { fill: #5d5a53; }
+    .town .tree .leaves { fill: #8a877f; stroke: #0a0a0a; stroke-width: 2.5; }
+    .town .bld .left, .town .bld .right, .town .bld .top, .town .bld [class^='roof'] { stroke: #0a0a0a; stroke-width: 2.5; stroke-linejoin: round; }
+    .town .bld .top { fill: #dcd9d1; }
+    .town .bld .left { fill: #b9b5ab; }
+    .town .bld .right { fill: #8a877f; }
+    .town .b-house .roof-l { fill: #5d5a53; }
+    .town .b-house .roof-r { fill: #2e2d2a; }
+    .town .bld[data-id='myfolder'] .roof-l { fill: #ffd400; }
+    .town .bld[data-id='myfolder'] .roof-r { fill: #d9b400; }
+    .town .bld .win { fill: #2e2d2a; }
+    .town .bld .door { fill: #0a0a0a; }
+    .town .bld .label rect { fill: #0a0a0a; }
+    .town .bld .label text { fill: #f2f0ea; font-family: var(--mono); font-size: 15px; text-anchor: middle; }
+    .town .bld[data-id='myfolder'] .label rect { fill: #ffd400; stroke: #0a0a0a; stroke-width: 2; }
+    .town .bld[data-id='myfolder'] .label text { fill: #0a0a0a; }
+    .town .roofnum .rn { fill: #ffd400; stroke: #0a0a0a; stroke-width: 6; paint-order: stroke; font-family: var(--display); font-weight: 900; font-size: 54px; text-anchor: middle; }
+    .town-caption { position: absolute; left: 50%; top: 1.2rem; transform: translateX(-50%); margin: 0; max-width: calc(100% - 2rem); padding: 0.6em 1em; background: var(--black); border: 3px solid var(--yellow); color: var(--yellow); font-family: var(--display); font-weight: 900; font-size: clamp(1.1rem, 2.4vw, 1.7rem); text-align: center; letter-spacing: 0.02em; pointer-events: none; }
+    .town-caption[hidden] { display: none; }
+    .town .roads .plaza { fill: #8a877f; }
+    .town .roads .road { fill: #8a877f; stroke: #7a776f; stroke-width: 1; }
+    .town .roads .stopline { fill: #f2f0ea; }
+    .town .roads .tracks path { fill: #5d5a53; opacity: 0.55; }
+    .town .dozer .horn { fill: #2e2d2a; stroke: #0a0a0a; stroke-width: 1.5; }
+    .town-wrap.poking .dozer[data-i='0'] .horn { fill: #ffd400; animation: horn-glow 0.8s ease-in-out infinite; }
+    @keyframes horn-glow { 50% { fill: #f2f0ea; } }
+    .town .honk .h-in rect { fill: #ffd400; stroke: #0a0a0a; stroke-width: 2.5; }
+    .town .honk .h-in text { fill: #0a0a0a; font-family: var(--display); font-weight: 900; font-size: 17px; text-anchor: middle; }
+    .town .truck .cap { fill: #5d5a53; }
+    .town .truck .paper { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 1.2; }
+    .town .stretcher .bed, .town .stretcher .leg { fill: #dcd9d1; stroke: #0a0a0a; stroke-width: 1.5; }
+    .town .stretcher .one { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 1.5; }
+    .town .stretcher .sheet { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 2; }
+    .town .scar .cardboard { fill: #b9a77e; stroke: #0a0a0a; stroke-width: 2.5; }
+    .town .statue .plinth { fill: #5d5a53; stroke: #0a0a0a; stroke-width: 1.5; }
+    .town .statue .s-body, .town .statue .s-head, .town .statue .s-copy { fill: #8a877f; stroke: #0a0a0a; stroke-width: 1.5; }
+    .town .pile .pl .left { fill: #dcd9d1; } .town .pile .pl .right { fill: #b9b5ab; } .town .pile .pl .top { fill: #f2f0ea; }
+    .town .pile .pl path { stroke: #0a0a0a; stroke-width: 1.5; }
+    .town .hand .palm, .town .hand .fist, .town .hand .up { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 7; }
+    .town .hand .finger { stroke: #0a0a0a; stroke-width: 26; stroke-linecap: round; }
+    .town .hand .open .finger.f2 { stroke: #f2f0ea; stroke-width: 18; }
+    .town .hand .sleeve { fill: #2e2d2a; stroke: #0a0a0a; stroke-width: 7; }
+    .town .stamper .sp-handle, .town .stamper .sp-knob { fill: #5d5a53; stroke: #0a0a0a; stroke-width: 6; }
+    .town .stamper .sp-block { fill: #ffd400; stroke: #0a0a0a; stroke-width: 6; }
+    .town .stamper .sp-pad { fill: #0a0a0a; }
+    .town .parcel .left { fill: #dcd9d1; } .town .parcel .right { fill: #b9b5ab; } .town .parcel .top { fill: #f2f0ea; }
+    .town .parcel path { stroke: #0a0a0a; stroke-width: 1.5; }
+    .town .parcel .tape { stroke: #ffd400; stroke-width: 3; }
+    .town .dozer .left { fill: #d9b400; } .town .dozer .right { fill: #b89800; } .town .dozer .top { fill: #ffd400; }
+    .town .dozer path { stroke: #0a0a0a; stroke-width: 2; stroke-linejoin: round; }
+    .town .dozer .blade { fill: #8a877f; }
+    .town .bot .b-body { fill: #8a877f; stroke: #0a0a0a; stroke-width: 1.5; }
+    .town .bot .b-head { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 1.5; }
+    .town .bot .b-screen { fill: #0a0a0a; }
+    .town .bot .b-eyes { stroke: #ffd400; stroke-width: 2; }
+    .town .bot .b-arm { stroke: #8a877f; stroke-width: 4; stroke-linecap: round; }
+    .town .bot .b-cur { fill: #8a877f; font-family: var(--mono); font-size: 9px; }
+    .town .honk rect { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 2; }
+    .town .honk text { fill: #0a0a0a; font-family: var(--display); font-weight: 900; font-size: 16px; text-anchor: middle; }
+    .town .truck .left { fill: #8a877f; } .town .truck .right { fill: #5d5a53; } .town .truck .top { fill: #b9b5ab; }
+    .town .truck path { stroke: #0a0a0a; stroke-width: 2; }
+    .town .truck .copier { fill: #5d5a53; stroke: #0a0a0a; stroke-width: 1.5; }
+    .town .truck .beam { fill: #dcd9d1; }
+    .town .truck .load rect { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 1.5; }
+    .town .ambulance .left { fill: #dcd9d1; } .town .ambulance .right { fill: #b9b5ab; } .town .ambulance .top { fill: #f2f0ea; }
+    .town .ambulance path { stroke: #0a0a0a; stroke-width: 2; }
+    .town .ambulance .siren { fill: #ffd400; stroke: #0a0a0a; stroke-width: 1.5; }
+    .town .dev .cup { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 6; }
+    .town .dev .rim { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 6; }
+    .town .dev .coffee { fill: #2e2d2a; }
+    .town .dev .band { fill: #ffd400; }
+    .town .dev .handle { fill: none; stroke: #0a0a0a; stroke-width: 22; }
+    .town .dev .steam { fill: none; stroke: #8a877f; stroke-width: 7; stroke-linecap: round; opacity: 0.7; }
+    .town .hand .sleeve { fill: #2e2d2a; stroke: #0a0a0a; stroke-width: 6; }
+    .town .hand .fist { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 6; }
+    .town .hand .handle { fill: #5d5a53; stroke: #0a0a0a; stroke-width: 5; }
+    .town .hand .stampbody { fill: #ffd400; stroke: #0a0a0a; stroke-width: 6; }
+    .town .imprint .plate { fill: rgba(10, 10, 10, 0.78); stroke: #ffd400; stroke-width: 10; }
+    .town .imprint .inner { fill: none; stroke: #ffd400; stroke-width: 3; }
+    .town .imprint .slbl { fill: #ffd400; font-family: var(--display); font-weight: 900; font-size: 20px; letter-spacing: 3px; }
+    .town .imprint .stext { fill: #ffd400; font-family: var(--display); font-weight: 900; font-size: 40px; text-anchor: middle; text-transform: uppercase; }
+    .town .scar .crater { fill: #5d5a53; opacity: 0.5; }
+    .town .scar .fence rect { fill: #ffd400; stroke: #0a0a0a; stroke-width: 1.5; }
+    .town .scar .fence path { stroke: #0a0a0a; stroke-width: 3; }
+    .town .scar .plaque rect { fill: #0a0a0a; }
+    .town .scar .plaque text { fill: #ffd400; font-family: var(--display); font-weight: 900; font-size: 18px; text-anchor: middle; }
+    .town .bubble rect, .town .bubble .tail { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 3; }
+    .town .bubble text { fill: #0a0a0a; font-family: var(--display); font-weight: 900; font-size: 26px; text-anchor: middle; }
+    .town .hud .flash { fill: #f2f0ea; }
+    .town .react { cursor: pointer; }
+</style>
