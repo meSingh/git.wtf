@@ -4,9 +4,13 @@ import { hiddenIncidentIds } from './visibility.mjs';
 // Launch rule (Mandeep, 7 Nov): one incident is published, the rest stay hidden (`published: false`, `draft: true`
 // or `hidden: true` in the front matter, or the GITWTF_ONLY_INCIDENTS / GITWTF_HIDE_INCIDENTS preview). Read once.
 const HIDDEN = hiddenIncidentIds();
+/** Whether an incident is published (not hidden by its front matter or the preview variables). */
+export function isPublished(i: Incident): boolean {
+    return !HIDDEN.has(i.id);
+}
 /** The incidents the site shows: the published ones. */
 export function published(list: Incident[]): Incident[] {
-    return list.filter((i) => !HIDDEN.has(i.id));
+    return list.filter(isPublished);
 }
 
 export const SITE = {
