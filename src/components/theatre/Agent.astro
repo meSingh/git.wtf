@@ -1,0 +1,27 @@
+---
+// AGENT: a boxy little robot on a stick. Terminal face with a yellow cursor, hazard stripe across the chest, stubby
+// arms that turn at the shoulder, two legs that kick. Origin at its feet; the engine moves the outer group.
+import { rect } from '../../theatre/rough';
+interface Props { n: number; x?: number; hidden?: boolean }
+const { n, x = 1720, hidden = true } = Astro.props;
+const s = 100 + n * 7;
+---
+<g transform="translate(0 760)"><g class="puppet agent" data-agent={n} data-x={x} style={hidden ? 'visibility:hidden' : undefined}>
+    <g class="bob">
+        <line class="stick" x1="0" y1="-50" x2="0" y2="260" />
+        <g class="body">
+            <path class="leg leg-l" d={rect(-15, -28, 11, 28, s, 1)} />
+            <path class="leg leg-r" d={rect(4, -28, 11, 28, s + 1, 1)} />
+            <path class="arm arm-l" d={rect(-38, -78, 12, 34, s + 2, 1.2)} />
+            <path class="arm arm-r" d={rect(26, -78, 12, 34, s + 3, 1.2)} />
+            <path class="torso" d={rect(-27, -84, 54, 58, s + 4, 1.6)} />
+            <g class="stripe"><rect x="-27" y="-56" width="54" height="11" fill="url(#hazard)" /></g>
+            <g class="head">
+                <path class="frame" d={rect(-31, -134, 62, 50, s + 5, 1.6)} />
+                <rect class="screen" x="-24" y="-127" width="48" height="35" rx="3" />
+                <text class="cursor" x="-16" y="-104">&gt;_</text>
+                <path class="smile" d="M-8 -99 q8 6 16 0" />
+            </g>
+        </g>
+    </g>
+</g></g>

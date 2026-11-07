@@ -1,0 +1,101 @@
+---
+// Format A, the paper puppet theatre: a prototype for one incident. Not linked from the site; noindex.
+import { getEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Stage from '../../components/theatre/Stage.astro';
+import script from '../../theatre/acts/2026-07-31-twelve-agents-one-working-directory.json';
+import type { ActScript } from '../../theatre/script';
+import { href, incidentPath, sourceHost } from '../../lib/site';
+
+const incident = (await getEntry('incidents', script.incident))!;
+const d = incident.data;
+---
+<Base title={`${d.title} | puppet theatre | git.wtf lab`} noindex>
+    <main class="theatre-page">
+        <section class="theatre-wrap" id="theatre" aria-label={`${d.title}, acted out`}>
+            <Stage script={script as ActScript} title={d.title} status={d.status} />
+            <p class="theatre-hint" aria-hidden="true">Scroll to play</p>
+        </section>
+        <div class="theatre-after">
+            <p class="still-caption">Twelve agents shared one checkout. 2,309 uncommitted files went, and nothing recorded which agent did it.</p>
+            <p class="theatre-links">
+                <button type="button" class="replay" data-replay>Replay</button>
+                <a href={href(`${incidentPath(incident)}#retelling`)}>What actually happened</a>
+                <a class="src" href={d.source_url} rel="noopener nofollow">Source: {sourceHost(d.source_url)}</a>
+            </p>
+        </div>
+    </main>
+    <script>
+        import { mountTheatre } from '../../scripts/theatre';
+        const wrap = document.querySelector<HTMLElement>('#theatre');
+        if (wrap) mountTheatre(wrap);
+    </script>
+</Base>
+
+<style is:global>
+    .theatre-page { padding-top: var(--bar); }
+    .theatre-wrap { position: relative; height: calc(100svh - var(--bar)); overflow: hidden; background: #0a0a0a; }
+    .theatre-wrap .stage { display: block; width: 100%; height: 100%; }
+    .theatre-hint { position: absolute; left: 0; right: 0; bottom: 1rem; margin: 0; text-align: center; font-family: var(--mono); font-size: 0.8rem; color: var(--grey); pointer-events: none; }
+    .theatre-wrap.still .theatre-hint { display: none; }
+    .theatre-after { width: min(var(--col), 100% - 2rem); margin: 2rem auto 0; }
+    .still-caption { display: none; font-family: var(--body); font-size: 1.15rem; max-width: 40em; margin: 0 0 1rem; }
+    html:has(.theatre-wrap.still) .still-caption { display: block; }
+    .theatre-links { display: flex; flex-wrap: wrap; gap: 0.8rem 1.6rem; align-items: center; margin: 0; font-family: var(--mono); font-size: 0.95rem; }
+    .theatre-links .replay { appearance: none; border: 0; border-radius: 2px; background: var(--yellow); color: var(--black); font: 400 1rem/1 var(--mono); padding: 0.85em 1.2em; cursor: pointer; }
+    .theatre-links a { color: var(--paper); text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 0.25em; }
+    .theatre-links a:hover { color: var(--yellow); }
+    html:has(.theatre-wrap.still) .replay { display: none; }
+
+    /* the paper */
+    .stage .sky { fill: #0a0a0a; }
+    .stage .stars rect { fill: #f2f0ea; opacity: 0.55; }
+    .stage .moon { fill: #f2f0ea; }
+    .stage .wall { fill: #1d1c1a; }
+    .stage .floor { fill: #2c2b28; }
+    .stage .lip { fill: #0a0a0a; }
+    .stage .valance > path { fill: #141413; }
+    .stage .titlesign path { fill: #ffd400; }
+    .stage .titlesign text { fill: #0a0a0a; font-family: var(--display); font-weight: 900; font-size: 40px; text-anchor: middle; text-transform: uppercase; letter-spacing: 0.5px; }
+    .stage .curtain > path:first-child { fill: #f2f0ea; }
+    .stage .curtain .pleat { stroke: #8a877f; stroke-width: 3; opacity: 0.5; }
+    .stage .grain { pointer-events: none; }
+    .stage .stick { stroke: #8a877f; stroke-width: 5; stroke-linecap: round; }
+
+    .stage .house .walls { fill: #f2f0ea; }
+    .stage .house .walls-edge { fill: none; stroke: #0a0a0a; stroke-width: 3; opacity: 0.25; }
+    .stage .house .roof { fill: #8a877f; stroke: #0a0a0a; stroke-width: 3; }
+    .stage .house .chimney path { fill: #8a877f; stroke: #0a0a0a; stroke-width: 3; }
+    .stage .house .door path { fill: #0a0a0a; }
+    .stage .house .knob { fill: #ffd400; }
+    .stage .house .sign path { fill: #ffd400; stroke: #0a0a0a; stroke-width: 2; }
+    .stage .house .sign text { fill: #0a0a0a; font-family: var(--display); font-weight: 900; font-size: 22px; text-anchor: middle; }
+    .stage .house .roofnum { fill: #ffd400; font-family: var(--display); font-weight: 900; font-size: 34px; text-anchor: middle; }
+    .stage .house .flatdoor path { fill: #0a0a0a; stroke: #f2f0ea; stroke-width: 2; }
+    .stage .sock { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 3; }
+    .stage .chimney-arm path, .stage .chimney-arm circle { fill: #8a877f; stroke: #0a0a0a; stroke-width: 2; }
+    .stage .paper path:first-child, .stage .stack .sheet, .stage .pile .sheet { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 1.5; }
+    .stage .paper .lines { stroke: #8a877f; stroke-width: 1.4; fill: none; }
+
+    .stage .agent .torso, .stage .agent .arm, .stage .agent .leg { fill: #8a877f; stroke: #0a0a0a; stroke-width: 2.5; }
+    .stage .agent .frame { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 2.5; }
+    .stage .agent .screen { fill: #0a0a0a; }
+    .stage .agent .cursor { fill: #ffd400; font-family: var(--mono); font-size: 16px; font-weight: 400; }
+    .stage .agent .smile { fill: none; stroke: #ffd400; stroke-width: 2.5; stroke-linecap: round; }
+    .stage .dev .skull { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 3; }
+    .stage .dev .eye { fill: #0a0a0a; }
+    .stage .dev .mouth { stroke: #0a0a0a; stroke-width: 2.5; stroke-linecap: round; }
+    .stage .dev .hoodie, .stage .dev .sleeve, .stage .dev .leg { fill: #3a3936; stroke: #f2f0ea; stroke-width: 2.5; }
+    .stage .dev .pocket { stroke: #8a877f; stroke-width: 2; }
+    .stage .dev .palm { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 2; }
+    .stage .dev .cup { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 2.5; }
+    .stage .dev .handle { fill: none; stroke: #f2f0ea; stroke-width: 4; }
+    .stage .puppet .body, .stage .house .shell { filter: url(#lift); }
+
+    .stage .bubble path { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 2.5; }
+    .stage .bubble text { fill: #0a0a0a; font-family: var(--display); font-weight: 900; font-size: 30px; text-anchor: middle; dominant-baseline: middle; }
+    .stage .stampmark .plate { fill: rgba(10, 10, 10, 0.82); stroke: #ffd400; stroke-width: 12; }
+    .stage .stampmark .inner { fill: none; stroke: #ffd400; stroke-width: 3; }
+    .stage .stampmark .slbl { fill: #ffd400; font-family: var(--display); font-weight: 900; font-size: 26px; letter-spacing: 4px; }
+    .stage .stampmark .stext { fill: #ffd400; font-family: var(--display); font-weight: 900; font-size: 58px; text-anchor: middle; text-transform: uppercase; }
+</style>

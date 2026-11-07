@@ -1,0 +1,60 @@
+{
+    "incident": "2026-07-31-twelve-agents-one-working-directory",
+    "set": { "house": { "sign": "my folder", "number": 2309 }, "sock": true },
+    "cast": { "dev": true, "agents": 12 },
+    "acts": [
+        { "id": "curtain", "beats": [{ "do": "curtainUp" }] },
+        {
+            "id": "stocking",
+            "beats": [
+                { "do": "walk", "who": "dev", "from": -140, "to": 560 },
+                { "do": "sip", "who": "dev" },
+                { "do": "hangSock", "who": "dev" },
+                { "do": "pat", "who": "dev", "times": 2 },
+                { "do": "walk", "who": "dev", "to": -160, "yawn": true }
+            ]
+        },
+        {
+            "id": "queue",
+            "line": { "who": "house", "text": "Plenty of room.", "x": 800, "y": 300 },
+            "beats": [
+                { "do": "queue", "who": "agents", "from": 1720 },
+                { "do": "squeezeIn", "who": "agents", "door": 800 }
+            ]
+        },
+        {
+            "id": "tidying",
+            "line": { "who": "chimney", "text": "Tidying up!", "x": 900, "y": 330 },
+            "beats": [
+                { "do": "chimneyArm" },
+                { "do": "papers", "count": 46, "toSock": 6, "with": true },
+                { "do": "count", "with": true }
+            ]
+        },
+        {
+            "id": "rescue",
+            "line": { "who": "agent", "text": "Saved!", "x": 640, "y": 470 },
+            "beats": [
+                { "do": "rescue" }
+            ]
+        },
+        {
+            "id": "witnesses",
+            "line": { "who": "dev", "text": "Which one of you?", "x": 700, "y": 440 },
+            "beats": [
+                { "do": "deflate" },
+                { "do": "walk", "who": "dev", "from": -140, "to": 600 },
+                { "do": "peek", "who": "dev" },
+                { "do": "ring", "who": "agents" }
+            ]
+        },
+        {
+            "id": "sock",
+            "beats": [
+                { "do": "pullPile", "who": "dev" },
+                { "do": "palmBounce", "who": "agents" },
+                { "do": "stamp" }
+            ]
+        }
+    ]
+}

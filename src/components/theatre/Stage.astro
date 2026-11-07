@@ -1,0 +1,82 @@
+---
+// The paper stage: layers of cut paper (sky, back wall, floor, the house, the lip at the front), a proscenium with
+// the incident's title painted on its sign, a curtain, the cast on sticks, the props, the lines as cut-paper
+// bubbles, and the stamp. Everything is drawn here in its resting place; src/scripts/theatre.ts plays the script.
+import { rect, rough, rng } from '../../theatre/rough';
+import type { ActScript } from '../../theatre/script';
+import Agent from './Agent.astro';
+import Dev from './Dev.astro';
+import House from './House.astro';
+interface Props { script: ActScript; title: string; status: string }
+const { script, title, status } = Astro.props;
+const r = rng(7);
+const stars = Array.from({ length: 26 }, () => [Math.round(r() * 1600), Math.round(-600 + r() * 900), 2 + Math.round(r() * 3)]);
+const papers = Array.from({ length: 48 }, (_, i) => i);
+const lines = script.acts.filter((a) => a.line).map((a) => ({ id: a.id, ...a.line! }));
+const pile = Array.from({ length: 14 }, (_, i) => i);
+// the sign is as wide as the title painted on it (Big Shoulders 900 at 40 px is about 17 px a letter)
+const signW = Math.max(360, Math.round(title.length * 17.5 + 70));
+// the stamp's words: the status, split on its first comma onto two lines when long
+const st = status.replace(/`/g, '');
+const cut = st.length > 24 ? st.indexOf(',') : -1;
+const stamp = cut > 0 ? [st.slice(0, cut + 1), st.slice(cut + 1).trim()] : [st];
+---
+<svg class="stage" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label={`A paper puppet theatre acting out: ${title}. Status: ${st}`} data-script={JSON.stringify(script)}>
+    <defs>
+        <pattern id="hazard" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="7" height="14" fill="#ffd400" /><rect x="7" width="7" height="14" fill="#0a0a0a" /></pattern>
+        <filter id="lift" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.55" /></filter>
+        <filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="4" /><feColorMatrix values="0 0 0 0 0.95  0 0 0 0 0.94  0 0 0 0 0.92  0 0 0 0.07 0" /></filter>
+    </defs>
+
+    <!-- back to front: sky, wall, floor -->
+    <rect class="sky" x="-1200" y="-1400" width="4000" height="2400" />
+    <g class="stars">{stars.map(([x, y, s]) => <rect x={x} y={y} width={s} height={s} />)}</g>
+    <path class="moon" d={rough([[1240, 90], [1290, 70], [1330, 100], [1320, 150], [1275, 170], [1235, 140]], 9, 2)} filter="url(#lift)" />
+    <path class="wall" d={rough([[-1200, 560], [200, 540], [520, 575], [900, 548], [1300, 572], [2800, 552], [2800, 900], [-1200, 900]], 11, 3)} filter="url(#lift)" />
+    <path class="floor" d={rect(-1200, 735, 4000, 200, 12, 3)} filter="url(#lift)" />
+
+    <House sign={script.set.house?.sign ?? ''} number={script.set.house?.number} />
+    <g class="pile" transform="translate(600 760)">
+        {pile.map((i) => <path class="sheet" d={rect(-46 + (i % 3) * 3, -18 - i * 22, 92, 20, 80 + i, 1.2)} style="visibility:hidden" />)}
+    </g>
+    <g transform="translate(0 760)"><g class="stack" style="visibility:hidden">
+        {[0, 1, 2, 3].map((i) => <path class="sheet" d={rect(-20, -60 - i * 7, 40, 7, 90 + i, 0.8)} />)}
+    </g></g>
+    <path class="sock" d={rough([[0, 0], [22, 0], [24, 38], [38, 50], [36, 64], [16, 62], [2, 38]], 63, 1)} transform="translate(896 460)" style="visibility:hidden" />
+    <g class="chimney-arm" transform="translate(882 442)" style="visibility:hidden"><path d={rect(-6, -40, 12, 40, 70, 1)} /><circle cx="0" cy="-44" r="7" /></g>
+    <g class="papers">{papers.map((i) => <g class="paper" transform="translate(882 444)" style="visibility:hidden"><path d={rect(-9, -11, 18, 22, 200 + i, 0.9)} /><path class="lines" d="M-5 -5h10M-5 0h10M-5 5h7" /></g>)}</g>
+
+    {script.cast.dev && <Dev />}
+    {Array.from({ length: script.cast.agents }, (_, i) => <Agent n={i} />)}
+
+    {lines.map((l) => (
+        <g class="bubble" data-act={l.id} transform={`translate(${l.x} ${l.y})`} style="visibility:hidden">
+            <path d={rough([[-l.text.length * 7.6 - 26, -38], [l.text.length * 7.6 + 26, -38], [l.text.length * 7.6 + 26, 22], [14, 22], [0, 48], [-6, 22], [-l.text.length * 7.6 - 26, 22]], l.text.length, 1.8)} filter="url(#lift)" />
+            <text x="0" y="0">{l.text}</text>
+        </g>
+    ))}
+
+    <!-- the lip at the front of the stage hides where the sticks are held -->
+    <path class="lip" d={rough([[-1200, 800], [400, 792], [800, 802], [1200, 793], [2800, 800], [2800, 1200], [-1200, 1200]], 13, 3)} filter="url(#lift)" />
+
+    <g class="stampspot" transform="translate(800 430) rotate(-5)"><g class="stampfit"><g class="stampmark" style="visibility:hidden">
+        <path class="plate" d={rect(-470, -104, 940, stamp.length > 1 ? 208 : 130, 31, 3)} />
+        <path class="inner" d={rect(-454, -90, 908, stamp.length > 1 ? 180 : 102, 32, 2)} />
+        <text class="slbl" x="-430" y="-52">STATUS</text>
+        {stamp.map((t, i) => <text class="stext" x="0" y={stamp.length > 1 ? 18 + i * 74 : 20}>{t}</text>)}
+    </g></g></g>
+
+    <!-- proscenium: valance with the painted sign, then the curtain over everything -->
+    <g class="curtain">
+        <path d={rough([[-1200, -1400], [2800, -1400], [2800, 812], [-1200, 812]], 21, 3)} />
+        {Array.from({ length: 40 }, (_, i) => <path class="pleat" d={`M${-1200 + i * 100 + 50} -1400 V812`} />)}
+    </g>
+    <g class="valance">
+        <path d={rough([[-1200, -1400], [2800, -1400], [2800, 64], [1300, 70], [800, 62], [300, 71], [-1200, 64]], 22, 3)} filter="url(#lift)" />
+        <g class="titlesign" transform="translate(800 56)"><g class="signfit" data-w={signW}>
+            <path d={rect(-signW / 2, -36, signW, 72, 23, 2.4)} filter="url(#lift)" />
+            <text x="0" y="16">{title}</text>
+        </g></g>
+    </g>
+    <rect class="grain" x="-1200" y="-1400" width="4000" height="2600" filter="url(#grain)" />
+</svg>
