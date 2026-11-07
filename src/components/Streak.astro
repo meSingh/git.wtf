@@ -27,9 +27,16 @@ const year = (iso: string) => iso.slice(0, 4);
             <Odo value={currentIsBest ? current : best.n} from={0} min={2} class="streak-odo wheel" label={`record: ${currentIsBest ? current : best.n} days`} />
             <p>{currentIsBest ? 'record: this one, still going' : `record: ${best.n} days, ${formatDay(best.from)} to ${formatDay(best.to)}`}</p>
         </div>
-        <div class="board">
-            <Odo value={Math.round(avg)} from={0} min={2} class="streak-odo wheel" label={`${avg.toFixed(1)} days between fuck-ups on average`} />
-            <p>days between fuck-ups, on average ({avg.toFixed(1)})</p>
-        </div>
+        {days.length > 1 ? (
+            <div class="board">
+                <Odo value={Math.round(avg)} from={0} min={2} class="streak-odo wheel" label={`${avg.toFixed(1)} days between fuck-ups on average`} />
+                <p>days between fuck-ups, on average ({avg.toFixed(1)})</p>
+            </div>
+        ) : (
+            <div class="board">
+                <Odo value={days.length} from={0} min={2} class="streak-odo wheel" label={`${days.length} fuck-up on record`} />
+                <p>fuck-up on record. An average takes two.</p>
+            </div>
+        )}
     </div>
 </div>

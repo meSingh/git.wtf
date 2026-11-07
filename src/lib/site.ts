@@ -15,7 +15,7 @@ export function published(list: Incident[]): Incident[] {
 
 export const SITE = {
     name: 'git.wtf',
-    title: 'Days since the last Git fuck-up',
+    title: 'Days since the last Git or AI fuck-up',
     // The hero line, spelt out for screen readers and labels (Content, notes/content/homepage-v5-copy.md).
     line: 'Days since the last Git or AI fuck-up',
     // the same line as the hero's giant words (Content's pick: GIT/AI reads as one word on the wheel)
@@ -30,7 +30,9 @@ export const SITE = {
         { name: 'X', url: 'https://x.com/gitwtf' },
         { name: 'LinkedIn', url: 'https://www.linkedin.com/company/gitwtf', placeholder: true },
     ] as { name: string; url: string; placeholder?: boolean }[],
-    description: "AI killed our blog. We're keeping score.",
+    // the score's line, as it was
+    tagline: "AI killed our blog. We're keeping score.",
+    description: "A running count of the days since the last Git or AI fuck-up, each new one retold as an anime episode. Plus the old git.wtf blog on fixing Git, kept as it was.",
     repo: 'meSingh/git.wtf',
     // where a mailed confession goes; empty until Mandeep names an address, and the mail link stays hidden till then
     confessEmail: '',

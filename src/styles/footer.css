@@ -19,6 +19,8 @@
 .foot-btn svg { width: 1.15em; height: 1.15em; flex: none; }
 .foot-btn:hover, .foot-btn:focus-visible { background: var(--black); color: var(--yellow); text-decoration: none; transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--black); }
 .foot-btn .ko { fill: var(--paper); }
+/* on the yellow card the focus ring is black, so it shows */
+.foot-card :focus-visible { outline-color: var(--black); }
 .foot-btn:hover .ko, .foot-btn:focus-visible .ko { fill: var(--black); }
 @media (prefers-reduced-motion: reduce) { .foot-btn { transition: none; } }
 .foot-row { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.6rem 1.6rem; margin: 0.4rem 0 0; }

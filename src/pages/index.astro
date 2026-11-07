@@ -14,7 +14,7 @@ import Confess from '../components/Confess.astro';
 import ShareCut from '../components/ShareCut.astro';
 import Story from '../components/Story.astro';
 import { heroData } from '../lib/hero';
-import { SITE, href, incidentPath, sortIncidents } from '../lib/site';
+import { SITE, href, incidentPath, sentences, sortIncidents } from '../lib/site';
 import { cutAssets, shotList } from '../lib/cuts';
 
 const incidents = sortIncidents(await getCollection('incidents'));
@@ -27,6 +27,8 @@ const cut = latest && list ? cutAssets(latest.id) : null;
 const posterOf = (f: string | null) => (latest && f ? href(`/cuts/${latest.id}/${f}`) : null);
 const poster = posterOf(cut?.poster ?? null), posterTall = posterOf(cut?.posterTall ?? null);
 const hasCut = !!(cut && poster && list);
+// the lines under "What actually happened" come with the incident (its detail), else its retelling's first sentences
+const detailLines = latest ? latest.data.detail ?? sentences(latest.body ?? '').slice(0, 3) : [];
 const jsonld = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -36,6 +38,7 @@ const jsonld = {
 };
 ---
 <Base title={`${SITE.title} | git.wtf`} image={image} badge={false} motionFlag jsonld={jsonld}>
+    <main>
     <section class="hh" id="hero">
         <svg class="hh-defs" width="0" height="0" aria-hidden="true"><filter id="vblur" x="0" y="-20%" width="100%" height="140%"><feGaussianBlur stdDeviation="0 0" /></filter></svg>
         <div class="hh-odo-wrap" id="hero-odo">
@@ -46,7 +49,7 @@ const jsonld = {
             {words.map((w) => <span class="w" aria-hidden="true">{w}</span>)}
         </h1>
         <div class="hh-foot">
-            {latest && <a class="hero-today hh-today" href={hasCut ? '#cut' : '#today'}>Today's: <em>{latest.data.title}</em><span aria-hidden="true"> &darr;</span></a>}
+            {latest && <a class="hero-today hh-today" href={hasCut ? '#cut' : '#today'}>Latest: <em>{latest.data.title}</em><span aria-hidden="true"> &darr;</span></a>}
             <a class="hh-hint" href={hasCut ? '#cut' : '#today'} data-hint><span class="hh-hint-w">Keep scrolling. It gets worse.</span><span class="hh-hint-a" aria-hidden="true"></span></a>
         </div>
         <div class="hh-wipe" aria-hidden="true"></div>
@@ -54,7 +57,7 @@ const jsonld = {
 
     {hasCut ? (
         <>
-            <section class="beat beat-cut" id="cut" aria-label={`Today's fuck-up: ${latest!.data.title}, as an anime cutscene`}>
+            <section class="beat beat-cut" id="cut" aria-label={`The latest fuck-up: ${latest!.data.title}, as an anime cutscene`}>
                 <div class="ep" id="cut-stage" data-player={href(`${incidentPath(latest!)}cut/player/`)} data-cut={latest!.id} data-n={list!.shots.length}>
                     <div class="ep-box" data-cut-box>
                         <picture class="ep-poster">
@@ -70,7 +73,7 @@ const jsonld = {
                             <span class="ep-sound" data-cut-sound-slot></span>
                             <span class="ep-count" data-cut-count aria-live="off"></span>
                         </p>
-                        <p class="ep-today"><span class="ep-k">Today's fuck-up:</span> <a href={href(incidentPath(latest!))}>{latest!.data.title}</a></p>
+                        <p class="ep-today"><span class="ep-k">Latest fuck-up:</span> <a href={href(incidentPath(latest!))}>{latest!.data.title}</a></p>
                     </div>
                 </div>
             </section>
@@ -80,15 +83,13 @@ const jsonld = {
                         <p class="today-kicker">What actually happened</p>
                         <h2 id="detail-h" class="detail-h">{latest!.data.title}</h2>
                         <div class="detail-lines">
-                            <p>Twelve AI agents shared one checkout. Thirty-two minutes later, 2,309 uncommitted files were gone.</p>
-                            <p>The repair step had made a rescue branch. The cleanup step deleted it, as cleanup steps do.</p>
-                            <p>The files came back from a side job that copied everything, every cycle. The guard added next said no to 1,477 more attempts to tidy.</p>
+                            {detailLines.map((l) => <p>{l}</p>)}
                         </div>
                         <p class="after-links"><a class="after-main" href={href(incidentPath(latest!))}>Read what happened <span aria-hidden="true">&rarr;</span></a><a class="after-alt" href={href(`${incidentPath(latest!)}cut/`)}>Open the cut full screen</a></p>
                     </div>
                     <figure class="detail-pic" data-detail-pic>
                         {cut!.story ? (
-                            <img src={href(`/cuts/${latest!.id}/${cut!.story}`)} srcset={cut!.story2x ? `${href(`/cuts/${latest!.id}/${cut!.story}`)} 1200w, ${href(`/cuts/${latest!.id}/${cut!.story2x}`)} 2400w` : undefined} sizes="(min-width: 761px) min(38rem, 55vw), 100vw" width="1200" height="630" alt="DEV sips from his mug beside a desk while a gate arm bonks an agent with a broom; a queue of agents with brooms waits behind it, and the small grey helper stands by a tall stack of copied pages." loading="lazy" decoding="async" />
+                            <img src={href(`/cuts/${latest!.id}/${cut!.story}`)} srcset={cut!.story2x ? `${href(`/cuts/${latest!.id}/${cut!.story}`)} 1200w, ${href(`/cuts/${latest!.id}/${cut!.story2x}`)} 2400w` : undefined} sizes="(min-width: 761px) min(38rem, 55vw), 100vw" width="1200" height="630" alt={latest!.data.story_alt ?? `The story image for ${latest!.data.title}`} loading="lazy" decoding="async" />
                         ) : (
                             <div class="detail-slot" role="img" aria-label="Image to come: a still of this incident">1200 &times; 630</div>
                         )}
@@ -99,7 +100,7 @@ const jsonld = {
     ) : latest ? (
         <section class="beat beat-today" id="today" aria-labelledby="today-h">
             <div class="col today-head">
-                <p class="today-kicker">Today's fuck-up</p>
+                <p class="today-kicker">The latest fuck-up</p>
                 <h2 class="today-title" id="today-h"><a href={href(incidentPath(latest))}>{latest.data.title}</a></h2>
             </div>
             <Strip incident={latest} class="col today-strip" />
@@ -136,6 +137,8 @@ const jsonld = {
     <section class="beat beat-story over" id="story" aria-labelledby="story-h">
         <Story />
     </section>
+
+    </main>
 
     <div class="wipes" aria-hidden="true"><i data-wipe="record"></i><i data-wipe="score"></i><i data-wipe="confess"></i></div>
 

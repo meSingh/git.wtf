@@ -20,14 +20,15 @@ const cols = String(v).padStart(n, '0').split('').map(Number);
 const starts = f === undefined ? cols : String(f).padStart(n, '0').split('').map(Number);
 const lead = cols.findIndex((d) => d !== 0);
 const dim = (i: number) => dimLead && i < n - 1 && (lead === -1 || i < lead);
-// One element per wheel, the eleven digits as lines of one text node: painted once at first paint and then only moved,
-// so a rolling wheel never counts as a new largest paint, and the page carries ten times fewer elements.
-const digits = '0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0';
+// One element per wheel, the eleven digits drawn by CSS (the strip's ::before, so they are painted once and then only
+// moved, and stay out of the page's text: a search engine or an AI reading the page gets the number, not 0 to 9
+// eleven times). The number itself is in the page as plain text, hidden from view.
 ---
 <span class={`odo ${cls}`.trim()} style={`--n:${n}`} data-value={v} data-from={f} data-since={since ?? undefined} data-dim={dimLead ? '1' : undefined} role="img" aria-label={label ?? String(v)}>
     {cols.map((d, i) => (
         <span class={`odo-col${dim(i) ? ' dim' : ''}`} style={`--df:${d};--d0:${starts[i]}`} aria-hidden="true">
-            <span class="odo-strip">{digits}</span>
+            <span class="odo-strip"></span>
         </span>
     ))}
+    <span class="visually-hidden">{v}</span>
 </span>
