@@ -255,7 +255,7 @@ html.js-anim .hh-hint { opacity: 0; visibility: hidden; }
 .beat-confess { padding: 7rem 0 7rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .confess-in { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(1.4rem, 4vw, 3.2rem); align-items: center; }
 .confess .desc { margin: 0 0 0.3rem; font-family: var(--body); font-size: clamp(1.05rem, 1.5vw, 1.25rem); line-height: 1.45; max-width: 30em; color: var(--paper); }
-.confess .desc-2 { margin-bottom: 1.6rem; color: var(--grey); }
+.confess .desc-2 { margin-bottom: 1.6rem; color: var(--grey); font-size: clamp(0.95rem, 1.1vw, 1.05rem); max-width: 48em; }
 .confess-pic { margin: 0; }
 .confess-slot { aspect-ratio: 1200 / 630; display: grid; place-items: center; border: 1px dashed var(--line-2); border-radius: 3px; font-family: var(--mono); font-size: 0.85rem; color: var(--grey); background: var(--tile); }
 .confess-pic img { display: block; width: 100%; height: auto; border-radius: 3px; }
