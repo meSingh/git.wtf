@@ -1,6 +1,7 @@
 ---
-// The footer, quiet: the count line, his credit line with its two emphasised parts, the project's four accounts as
-// small bordered buttons from one list, and the site's own links.
+// The footer, grand: the hazard band, the mark large, the count line in big display type, his credit line with its
+// two emphasised parts, the project's four accounts as bordered buttons from one list, the site's links, and the
+// last line with a bonked agent beside it.
 import Logo from './Logo.astro';
 import { SITE, href } from '../lib/site';
 const c = SITE.credit;
@@ -8,10 +9,8 @@ const c = SITE.credit;
 <footer class="foot">
     <div class="foot-stripe" aria-hidden="true"></div>
     <div class="col foot-in">
-        <div class="foot-top">
-            <a class="foot-mark" href={href('/')} aria-label="git.wtf, home"><Logo height="clamp(2.4rem, 6vw, 4rem)" title="" /></a>
-            <p class="foot-line">The count resets when someone fucks up. Someone always does.</p>
-        </div>
+        <a class="foot-mark" href={href('/')} aria-label="git.wtf, home"><Logo height="clamp(3.6rem, 11vw, 8.5rem)" title="" /></a>
+        <p class="foot-line">The count resets when someone fucks up. Someone always does.</p>
         <p class="credit">{c.name}, {c.before}<em>{c.strong}</em>{c.after}<em>{c.last}</em></p>
         <div class="foot-rows">
             <nav class="foot-social" aria-label="git.wtf elsewhere">
@@ -23,6 +22,18 @@ const c = SITE.credit;
                 <a href={href('/rss.xml')}>RSS</a>
             </nav>
         </div>
-        <p class="foot-last">No agents were harmed in the making of this site. Several were bonked.</p>
+        <p class="foot-last">
+            <svg class="bonked" viewBox="0 0 120 92" width="60" height="46" aria-hidden="true">
+                <path d="M62 6 l5 12 13 1 -10 8 4 13 -12 -7 -12 7 4 -13 -10 -8 13 -1z" fill="#ffd400" stroke="#0a0a0a" stroke-width="2" />
+                <path d="M100 14 l3 7 8 1 -6 5 2 8 -7 -4 -7 4 2 -8 -6 -5 8 -1z" fill="#ffd400" stroke="#0a0a0a" stroke-width="2" />
+                <path d="M18 22 l3 7 8 1 -6 5 2 8 -7 -4 -7 4 2 -8 -6 -5 8 -1z" fill="#ffd400" stroke="#0a0a0a" stroke-width="2" />
+                <ellipse cx="60" cy="34" rx="16" ry="9" fill="#f2f0ea" stroke="#0a0a0a" stroke-width="3" />
+                <rect x="24" y="36" width="72" height="52" rx="6" fill="#f2f0ea" stroke="#0a0a0a" stroke-width="3" />
+                <rect x="31" y="43" width="58" height="38" rx="3" fill="#0a0a0a" />
+                <text x="40" y="70" fill="#ffd400" font-family="JetBrains Mono, ui-monospace, monospace" font-size="20">&gt;_</text>
+                <path d="M46 20 l-6 -8 M74 20 l6 -8" stroke="#ffd400" stroke-width="3" stroke-linecap="round" />
+            </svg>
+            <span>No agents were harmed in the making of this site. Several were bonked.</span>
+        </p>
     </div>
 </footer>

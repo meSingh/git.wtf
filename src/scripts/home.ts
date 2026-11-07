@@ -167,6 +167,7 @@ function stepCut(h: import('./anime').CutHandle, ST: typeof import('gsap/ScrollT
     const paint = () => { if (count) count.textContent = `${k + 1} / ${n}`; if (down) gsap.to(down, { autoAlpha: k > 0 ? 0 : 1, duration: 0.3, overwrite: true }); };
     const go = (to: number) => {
         to = Math.max(0, Math.min(n - 1, to));
+        if (to === k && k === n - 1) return; // past the last shot there is nothing to play: the page scrolls on
         k = to;
         scrollTo({ top: Math.round(top() + k * step), behavior: 'auto' });
         h.play(k);
@@ -174,7 +175,7 @@ function stepCut(h: import('./anime').CutHandle, ST: typeof import('gsap/ScrollT
         paint();
         // the reader kept scrolling during the shot: the next shot follows by itself when this one is done
         wanted = 0;
-        gsap.delayedCall((holdUntil - performance.now()) / 1000 + 0.02, () => { if (wanted && inside()) { const d = wanted; wanted = 0; go(k + d); } });
+        gsap.delayedCall((holdUntil - performance.now()) / 1000 + 0.02, () => { if (wanted && inside()) { const d = wanted; wanted = 0; if (k + d >= 0 && k + d < n) go(k + d); } });
     };
     // a scroll the page did not make (the scrollbar, the auto-scroll arriving, a jump back): show that step's shot
     ST.create({
@@ -187,7 +188,7 @@ function stepCut(h: import('./anime').CutHandle, ST: typeof import('gsap/ScrollT
     addEventListener('scroll', sync, { passive: true });
     sync();
     const forward = (dir: number) => {
-        if (held()) { wanted = dir; return true; } // held: remembered, taken when the shot is done
+        if (held()) { wanted = k + dir >= 0 && k + dir < n ? dir : 0; return true; } // held: remembered, taken when the shot is done
         go(k + dir);
         return true;
     };
