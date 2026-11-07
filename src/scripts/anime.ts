@@ -108,8 +108,11 @@ const FX: Record<string, Fx> = {
         const lines = q(g, '.lines');
         if (!lines) return;
         tl.set(lines, { autoAlpha: 0 }, 0);
-        tl.fromTo(lines, { autoAlpha: 0, scale: 1.4, transformOrigin: '260px 640px' }, { autoAlpha: 0.9, scale: 1, duration: 0.25 }, at);
-        loops.push(gsap.to(lines, { rotation: 1.5, transformOrigin: '260px 640px', duration: 0.08, repeat: -1, yoyo: true, ease: 'none', paused: true }));
+        // centred on THE EXTRA, wherever the shot puts it
+        const ex = role(g, 'extra')?.parentElement?.getAttribute('transform')?.match(/translate\(([-\d.]+) ([-\d.]+)\)/);
+        const o = ex ? `${ex[1]}px ${Number(ex[2]) - 360}px` : '800px 450px';
+        tl.fromTo(lines, { autoAlpha: 0, scale: 1.4, transformOrigin: o }, { autoAlpha: 0.9, scale: 1, duration: 0.25 }, at);
+        loops.push(gsap.to(lines, { rotation: 1.5, transformOrigin: o, duration: 0.08, repeat: -1, yoyo: true, ease: 'none', paused: true }));
     },
     glint({ tl, g, loops }) {
         const gleams = qa(g, '.gleam');
@@ -117,6 +120,10 @@ const FX: Record<string, Fx> = {
         // one after another, the third last
         qa(g, '.panel').forEach((p, i) => tl.fromTo(qa(p, '.gleam'), { scaleX: 0, transformOrigin: '50% 50%' }, { scaleX: 1, duration: 0.16, ease: 'back.out(3)' }, 0.6 + i * 0.35));
         loops.push(gsap.to(gleams, { opacity: 0.55, duration: 0.5, repeat: -1, yoyo: true, ease: 'sine.inOut', stagger: 0.1, paused: true }));
+        // speed lines behind each face, flickering
+        const pl = qa(g, '.plines');
+        tl.fromTo(pl, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.15, stagger: 0.14 }, 0.2);
+        loops.push(gsap.to(pl, { opacity: 0.6, duration: 0.07, repeat: -1, yoyo: true, ease: 'none', stagger: 0.03, paused: true }));
     },
     files({ tl, g }, at) {
         const files = qa(g, '.file');

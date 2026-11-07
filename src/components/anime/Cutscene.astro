@@ -45,6 +45,7 @@ const panelPaths = ['M-400 -200 L2000 -200 L2000 170 L-400 330Z', 'M-400 350 L20
                 {s.bg === 'split' && (s.panels ?? []).map((c, i) => (
                     <g class="panel" clip-path={`url(#a-panel-${i})`}>
                         <rect class="pbg" x="-400" y="-200" width="2400" height="1300" />
+                        <g class="plines" transform={`translate(${[560, 1040, 640][i] - 800} ${[120, 440, 770][i] - 450})`}>{wedges.map((d) => <path d={d} />)}</g>
                         <g transform={`translate(${[560, 1040, 640][i]} ${[120, 440, 770][i] + 404}) scale(${i === 1 ? -1 : 1} 1)`}><Agent pose={c.pose} n={c.n} head /></g>
                     </g>
                 ))}
