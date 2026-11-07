@@ -299,6 +299,7 @@ html.js-anim .hh-hint { opacity: 0; visibility: hidden; }
 .story p:last-child { margin-bottom: 0; }
 .story em { font-style: italic; }
 .story mark { background: var(--yellow); color: var(--black); padding: 0.04em 0.12em; margin: 0 -0.08em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.story-top { font-size: clamp(1.1rem, 1.9vw, 1.45rem); }
 .story-go { margin: 1.8rem 0 0; }
 .story-btn { display: inline-block; background: var(--yellow); color: var(--black); font: 400 clamp(1rem, 1.6vw, 1.2rem) / 1 var(--mono); padding: 1.05em 1.35em; border-radius: 2px; box-shadow: 0 0 0 3px var(--black), 0 0 0 4px rgba(255, 212, 0, 0.5); }
 .story-btn:hover { text-decoration: none; box-shadow: 0 0 0 3px var(--black), 0 0 0 6px var(--yellow); }
