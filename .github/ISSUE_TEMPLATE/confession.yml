@@ -1,8 +1,12 @@
 name: Confession
-description: A Git fuck-up of your own, for the daily search.
+description: A Git or AI fuck-up of your own, for the daily search. Public, so leave out secrets and names.
 title: "Confession: "
 labels: ["confession"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue is public, so everyone can read it. Before you post, take out keys, tokens, passwords, internal URLs and the names of anyone who didn't agree to be in it.
   - type: textarea
     id: ran
     attributes:
