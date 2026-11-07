@@ -65,13 +65,14 @@ html.js-anim .odo[data-from] .odo-strip { transform: translateY(calc(var(--d0) *
 .hh { position: relative; z-index: 0; height: 100svh; overflow: hidden; display: grid; grid-template-columns: auto 1fr; grid-template-rows: 1fr auto; column-gap: clamp(1.5rem, 4vw, 4rem); padding: calc(var(--bar) + 1rem) clamp(1rem, 4vw, 3.5rem) clamp(1rem, 4vh, 2.4rem); background: var(--black); }
 .hh-defs { position: absolute; }
 .hh-odo-wrap { grid-column: 1; grid-row: 1 / 3; align-self: center; transform-origin: 0 0; }
-/* sized by the wheel count (--n from the odometer), so three wheels take the room two did */
-.hh-odo { font-size: min(calc(100svh - var(--bar) - 3rem), calc(112vw / var(--n, 2))); }
+/* sized by the wheel count (--n from the odometer): whatever the count, the wheels take about half the width, so
+   the words keep the other half (Mandeep, 8 Nov: at 100 days the number took two thirds and squeezed them) */
+.hh-odo { font-size: min(calc(80svh - var(--bar)), calc(84vw / var(--n, 2))); }
 .hh-words { grid-column: 2; grid-row: 1; align-self: center; margin: 0; display: flex; flex-wrap: wrap; align-content: center; gap: 0 0.22em; font-family: var(--display); font-weight: 900; font-size: clamp(2.6rem, min(12vh, 7.4vw), 8.5rem); line-height: 0.9; color: var(--paper); z-index: 2; }
 .hh-words .w { display: inline-block; }
 .hh-words .w:last-of-type { color: var(--yellow); }
-.hh-foot { grid-column: 2; grid-row: 2; justify-self: end; align-self: end; z-index: 3; }
-.hero-today { font-family: var(--mono); font-size: clamp(0.8rem, 1.5vh + 0.3vw, 1.15rem); color: var(--paper); text-align: right; text-wrap: balance; }
+.hh-foot { grid-column: 2; grid-row: 2; justify-self: start; align-self: end; z-index: 3; }
+.hero-today { font-family: var(--mono); font-size: clamp(0.8rem, 1.5vh + 0.3vw, 1.15rem); color: var(--paper); text-align: left; text-wrap: balance; }
 .hero-today em { font-style: normal; color: var(--yellow); }
 .hero-today:hover { text-decoration: none; color: var(--yellow); }
 .hh-wipe { position: absolute; top: 0; bottom: 0; left: 0; width: 22vw; z-index: 5; visibility: hidden; background: repeating-linear-gradient(-45deg, var(--yellow) 0 2.4vmin, var(--black) 2.4vmin 4.8vmin); }
