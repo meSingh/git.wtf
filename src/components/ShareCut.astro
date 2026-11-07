@@ -1,0 +1,77 @@
+---
+// Share an incident's cut: the image or the video, downloaded, handed to the device's share sheet (with the file
+// when the browser can), the link copied, or plain intent links for X, LinkedIn and Bluesky. No third-party script.
+import { SITE } from '../lib/site';
+interface Props { title: string; status: string; url: string; image: string; video?: string | null; slug: string }
+const { title, status, url, image, video = null, slug } = Astro.props;
+const text = `${title}. Status: ${status.replace(/`/g, '')}`;
+const enc = encodeURIComponent;
+const intents = [
+    ['X', `https://twitter.com/intent/tweet?text=${enc(text)}&url=${enc(url)}&via=${enc(SITE.twitter.replace('@', ''))}`],
+    ['LinkedIn', `https://www.linkedin.com/sharing/share-offsite/?url=${enc(url)}`],
+    ['Bluesky', `https://bsky.app/intent/compose?text=${enc(`${text} ${url}`)}`],
+];
+---
+<section class="share-cut" aria-labelledby="share-h" data-share data-title={title} data-text={text} data-url={url} data-image={image} data-video={video ?? undefined} data-slug={slug}>
+    <h2 id="share-h">Share the cut</h2>
+    <div class="sc-body">
+        <figure class="sc-pic">
+            {video ? <video src={video} poster={image} controls muted playsinline preload="none" width="1280" height="720"><a href={video}>Download the video</a></video> : <img src={image} alt={`A still from the cut: ${title}`} width="1200" height="630" loading="lazy" />}
+        </figure>
+        <div class="sc-actions">
+            <button type="button" class="sc-main" data-share-native hidden>Share…</button>
+            <p class="sc-row">
+                <a class="sc-btn" href={image} download={`git-wtf-${slug}.png`}>Download the image</a>
+                {video && <a class="sc-btn" href={video} download={`git-wtf-${slug}.mp4`}>Download the video</a>}
+                <button type="button" class="sc-btn" data-copy>Copy the link</button>
+            </p>
+            <p class="sc-row sc-intents">{intents.map(([name, href]) => <a class="sc-btn" href={href} target="_blank" rel="noopener">Post to {name}</a>)}</p>
+            <p class="sc-note" data-share-note aria-live="polite"></p>
+        </div>
+    </div>
+</section>
+<script>
+    document.querySelectorAll<HTMLElement>('[data-share]').forEach((box) => {
+        const { title = '', text = '', url = '', image = '', video, slug = 'cut' } = box.dataset;
+        const note = box.querySelector<HTMLElement>('[data-share-note]');
+        const say = (m: string) => { if (note) note.textContent = m; };
+        const native = box.querySelector<HTMLButtonElement>('[data-share-native]');
+        if (native && 'share' in navigator) {
+            native.hidden = false;
+            native.addEventListener('click', async () => {
+                // the video if there is one, else the image, as a file when the browser takes files
+                let files: File[] = [];
+                try {
+                    const src = video || image;
+                    const blob = await (await fetch(src)).blob();
+                    const f = new File([blob], `git-wtf-${slug}.${video ? 'mp4' : 'png'}`, { type: blob.type });
+                    if (navigator.canShare?.({ files: [f] })) files = [f];
+                } catch { /* share the link alone */ }
+                try {
+                    await navigator.share(files.length ? { files, title, text: `${text} ${url}` } : { title, text, url });
+                } catch (e) {
+                    if ((e as Error).name !== 'AbortError') say('Sharing did not work here. Copy the link instead.');
+                }
+            });
+        }
+        box.querySelector('[data-copy]')?.addEventListener('click', async () => {
+            try { await navigator.clipboard.writeText(url); say('Link copied.'); }
+            catch { say(url); }
+        });
+    });
+</script>
+<style>
+    .share-cut { width: min(var(--col), 100% - 2rem); margin: 4rem auto 0; border-top: 1px solid var(--line); padding-top: 1.4rem; }
+    .share-cut h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 1.2rem; }
+    .sc-body { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 1.6rem; align-items: start; }
+    @media (max-width: 760px) { .sc-body { grid-template-columns: 1fr; } }
+    .sc-pic { margin: 0; }
+    .sc-pic img, .sc-pic video { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 3px; background: #0a0a0a; }
+    .sc-actions { display: grid; gap: 0.9rem; }
+    .sc-row { margin: 0; display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .sc-main { appearance: none; border: 0; border-radius: 2px; background: var(--yellow); color: var(--black); font: 400 1.05rem/1 var(--mono); padding: 0.95em 1.3em; cursor: pointer; justify-self: start; }
+    .sc-main[hidden] { display: none; }
+    .sc-btn { appearance: none; display: inline-block; background: none; border: 1px solid var(--line-2); border-radius: 2px; color: var(--paper); font: 400 0.88rem/1 var(--mono); padding: 0.75em 0.95em; cursor: pointer; text-decoration: none; }
+    .sc-btn:hover { border-color: var(--yellow); color: var(--yellow); text-decoration: none; }
+    .sc-note { margin: 0; min-height: 1.2em; font-family: var(--mono); font-size: 0.82rem; color: var(--grey); }
+</style>

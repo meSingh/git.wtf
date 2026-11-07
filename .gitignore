@@ -13,3 +13,5 @@ public/incident/
 .render/
 # comic panels cut from incidents/<id>/strip.png at build time (scripts/make-panels.mjs)
 public/strips/
+# rendered cutscene stills and video, copied from incidents/<id>/cut/ at build time (scripts/copy-cuts.mjs)
+public/cuts/

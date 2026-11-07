@@ -6,6 +6,8 @@ import Base from '../../layouts/Base.astro';
 import '../../styles/pages.css';
 import { render } from 'astro:content';
 import Strip from '../../components/Strip.astro';
+import ShareCut from '../../components/ShareCut.astro';
+import { cutAssets, shotList } from '../../lib/cuts';
 import { SITE, categoryLabel, formatDate, formatDay, happened, href, incidentPath, inlineCode, sortIncidents, sourceHost, toolLabel, type Incident } from '../../lib/site';
 
 export async function getStaticPaths() {
@@ -17,6 +19,11 @@ const { incident, newer, older } = Astro.props;
 const d = incident.data;
 const { Content } = await render(incident);
 const tool = toolLabel(d.tool);
+// a cutscene, and what was rendered from it: its key shots stand in for the strip, its end card is the share image
+const list = shotList(incident.id);
+const cut = cutAssets(incident.id);
+const cutVideo = cut.video ? href(`/cuts/${incident.id}/${cut.video}`) : null;
+const olderCut = older ? cutAssets(older.id) : null;
 const p = incidentPath(incident);
 const localVideo = existsSync(path.join(process.cwd(), 'public/incident', incident.id, 'video.mp4'));
 const video = d.video ?? (localVideo ? href(`${p}video.mp4`) : null);
@@ -39,7 +46,16 @@ const jsonld = {
             <p class="meta"><a href={href('/incidents/')}>Incidents</a> <span>{formatDay(happened(incident))}</span> <a class="chip" href={href(`/incidents/${d.category}/`)}>{categoryLabel(d.category)}</a>{tool && <span class="chip">{tool}</span>}</p>
             <h1>{d.title}</h1>
         </header>
-        <Strip incident={incident} eager class="inc-strip" />
+        {cut.stills.length ? (
+            <section class="cut-stills" aria-label="Stills from the cut">
+                {list && <p class="watch"><a class="watch-btn" href={href(`${p}cut/`)}>Watch the cut <span aria-hidden="true">&rarr;</span></a>{cutVideo && <a class="watch-alt" href={cutVideo}>or the video</a>}</p>}
+                <div class="stills">
+                    {cut.stills.map((s, k) => <img src={href(`/cuts/${incident.id}/${s.file}`)} alt={`From the cut: ${list?.shots.find((x) => x.id === s.shot)?.line?.text ?? list?.shots.find((x) => x.id === s.shot)?.word ?? d.title}`} width="1280" height="720" loading={k < 2 ? 'eager' : 'lazy'} fetchpriority={k === 0 ? 'high' : undefined} decoding={k === 0 ? 'sync' : 'async'} />)}
+                </div>
+            </section>
+        ) : (
+            <Strip incident={incident} eager class="inc-strip" />
+        )}
         <article class="prose inc-body" id="retelling">
             <h2 class="visually-hidden">What happened</h2>
             <Content />
@@ -48,11 +64,17 @@ const jsonld = {
             {video && (
                 <p class="video"><video src={video} poster={poster} controls muted playsinline preload="none" width="1080" height="1920">Your browser does not play this video. <a href={video}>Download it.</a></video></p>
             )}
-            <p class="share"><img src={href(`${p}share.png`)} alt={`Share image: ${d.title}`} width="1200" height="630" loading="lazy" /></p>
         </article>
-        <nav class="pager" aria-label="Other incidents">
-            <span>{older && <a href={href(incidentPath(older))}>&larr; {older.data.title}</a>}</span>
-            <span class="next">{newer && <a href={href(incidentPath(newer))}>{newer.data.title} &rarr;</a>}</span>
-        </nav>
+        <ShareCut title={d.title} status={d.status} url={new URL(p, SITE.url).toString()} image={href(`${p}share.png`)} video={cutVideo} slug={incident.id} />
+        {older && (
+            <a class="prev-day" href={href(incidentPath(older))}>
+                <span class="pd-label">The day before <span class="pd-date">{formatDay(happened(older))}</span></span>
+                <img src={href(`${incidentPath(older)}share.png`)} alt="" width="1200" height="630" loading="lazy" decoding="async" />
+                <span class="pd-title">{older.data.title}</span>
+                <span class="pd-status" set:html={`Status: ${inlineCode(older.data.status)}`} />
+                <span class="pd-go">{olderCut?.stills.length ? 'Watch it' : 'Read it'} <span aria-hidden="true">&rarr;</span></span>
+            </a>
+        )}
+        {newer && <p class="next-day"><a href={href(incidentPath(newer))}>The day after: {newer.data.title} &rarr;</a></p>}
     </main>
 </Base>

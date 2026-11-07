@@ -5,9 +5,9 @@
     "type": "module",
     "scripts": {
         "dev": "astro dev",
-        "prebuild": "node scripts/make-panels.mjs",
+        "prebuild": "node scripts/make-panels.mjs && node scripts/copy-cuts.mjs",
         "build": "astro build",
-        "build:fixture": "node scripts/ghost-to-archive.mjs tests/fixtures/ghost-export.json --out tests/fixtures/archive --no-url-list && GITWTF_FIXTURE=1 node scripts/make-panels.mjs && GITWTF_FIXTURE=1 astro build",
+        "build:fixture": "node scripts/ghost-to-archive.mjs tests/fixtures/ghost-export.json --out tests/fixtures/archive --no-url-list && GITWTF_FIXTURE=1 node scripts/make-panels.mjs && GITWTF_FIXTURE=1 node scripts/copy-cuts.mjs && GITWTF_FIXTURE=1 astro build",
         "redirects": "node src/redirects.mjs",
         "preview": "node scripts/serve-dist.mjs dist 8787",
         "check": "astro check",
