@@ -1,0 +1,864 @@
+{
+    "incident": "2026-10-07-maintenance-ignored-the-pause",
+    "episode": "Episode 77",
+    "title": "The Pause Button!",
+    "theme": "mint",
+    "bed": "comic",
+    "shots": [
+        {
+            "id": "hook",
+            "bg": "halftone",
+            "hook": "GitHub *paused* maintenance.\nMaintenance *didn't*.",
+            "props": {
+                "building": {
+                    "x": 960,
+                    "y": 880,
+                    "scale": 0.8,
+                    "sign": "GITHUB",
+                    "shut": true
+                },
+                "gate": {
+                    "x": 520,
+                    "y": 900,
+                    "scale": 0.8,
+                    "sign": "PAUSED"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 1380,
+                    "y": 900,
+                    "scale": 0.5,
+                    "n": 3,
+                    "arm": "broom",
+                    "role": "hop"
+                }
+            ],
+            "fx": [
+                "tiptoe",
+                "hop@0.9",
+                "shutter@1.3",
+                "shake@1.7"
+            ],
+            "sfx": [
+                "tiptoe",
+                "spring@0.9",
+                "clunk@1.3",
+                "wobble@1.75"
+            ],
+            "focus": [
+                900,
+                600
+            ],
+            "v": {
+                "props": {
+                    "building": {
+                        "x": 450,
+                        "y": 1180,
+                        "scale": 0.75,
+                        "sign": "GITHUB",
+                        "shut": true
+                    },
+                    "gate": {
+                        "x": 300,
+                        "y": 1450,
+                        "scale": 0.6,
+                        "sign": "PAUSED"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 640,
+                        "y": 1460,
+                        "scale": 0.42,
+                        "n": 3,
+                        "arm": "broom",
+                        "role": "hop"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "work",
+            "bg": "office",
+            "tag": "7 Oct, 15:05 UTC",
+            "props": {
+                "desk": {
+                    "x": 700,
+                    "y": 760
+                },
+                "chair": {
+                    "x": 600,
+                    "y": 872,
+                    "scale": 0.6
+                },
+                "parcel": {
+                    "x": 860,
+                    "y": 730,
+                    "scale": 0.55,
+                    "label": "PUSH"
+                },
+                "clock": {
+                    "x": 380,
+                    "y": 260,
+                    "scale": 0.7
+                },
+                "plant": {
+                    "x": 1480,
+                    "y": 900,
+                    "scale": 0.75
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 600,
+                    "y": 872,
+                    "scale": 0.6,
+                    "role": "dev",
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "type",
+                "ship@1.9"
+            ],
+            "sfx": [
+                "typing",
+                "zip@1.9",
+                "whoosh@2.0"
+            ],
+            "focus": [
+                760,
+                600
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 470,
+                        "y": 1060
+                    },
+                    "chair": {
+                        "x": 380,
+                        "y": 1172,
+                        "scale": 0.55
+                    },
+                    "parcel": {
+                        "x": 620,
+                        "y": 1030,
+                        "scale": 0.5,
+                        "label": "PUSH"
+                    },
+                    "clock": {
+                        "x": 680,
+                        "y": 520,
+                        "scale": 0.6
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 380,
+                        "y": 1172,
+                        "scale": 0.55,
+                        "role": "dev",
+                        "arm": "type"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "newbox",
+            "bg": "servers",
+            "props": {
+                "whiteboard": {
+                    "x": 1160,
+                    "y": 330,
+                    "scale": 0.8,
+                    "text": "SEND WRITES TO:\nDB 4 (RETIRED)\nDB 7 (RETIRED)"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 330,
+                    "y": 900,
+                    "scale": 0.6,
+                    "n": 5,
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "dash@0.1",
+                "nod@1.2"
+            ],
+            "line": {
+                "who": "AGENT 5, THE NEW MACHINE",
+                "text": "Reporting for duty.\nI brought my old list."
+            },
+            "lineAt": 1.2,
+            "sfx": [
+                "slideup@0.1",
+                "pop@0.45",
+                "bop@1.2"
+            ],
+            "focus": [
+                800,
+                500
+            ],
+            "v": {
+                "props": {
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 520,
+                        "scale": 0.85,
+                        "text": "SEND WRITES TO:\nDB 4 (RETIRED)\nDB 7 (RETIRED)"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 450,
+                        "y": 1440,
+                        "scale": 0.6,
+                        "n": 5,
+                        "arm": "hold"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "nowhere",
+            "bg": "skyline",
+            "props": {
+                "parcel": {
+                    "x": 400,
+                    "y": 880,
+                    "scale": 0.7,
+                    "label": "WRITE"
+                },
+                "counter": {
+                    "x": 1180,
+                    "y": 560,
+                    "from": 0,
+                    "to": 26,
+                    "label": "% OF GIT LOGINS FAILING"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "shocked",
+                    "x": 760,
+                    "y": 900,
+                    "scale": 0.45,
+                    "n": 5,
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "ship@0.3",
+                "tick@0.6"
+            ],
+            "word": "No such server.",
+            "wordAt": 2.9,
+            "sfx": [
+                "zip@0.3",
+                "tick@0.6",
+                "boing@1.1",
+                "sadtrombone@3.0"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "parcel": {
+                        "x": 250,
+                        "y": 1400,
+                        "scale": 0.6,
+                        "label": "WRITE"
+                    },
+                    "counter": {
+                        "x": 450,
+                        "y": 1000,
+                        "from": 0,
+                        "to": 26,
+                        "label": "% GIT LOGINS FAILING"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "shocked",
+                        "x": 640,
+                        "y": 1460,
+                        "scale": 0.36,
+                        "n": 5,
+                        "arm": "hold"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "fail",
+            "bg": "flat",
+            "props": {
+                "terminal": {
+                    "x": 1050,
+                    "y": 380,
+                    "scale": 0.75,
+                    "text": "git push ... fatal: unable to access",
+                    "red": true
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "shocked",
+                    "x": 420,
+                    "y": 980,
+                    "scale": 0.85,
+                    "role": "dev",
+                    "mug": false
+                }
+            ],
+            "fx": [
+                "zoom",
+                "sweat@2.2"
+            ],
+            "sfx": [
+                "typing",
+                "honk@0.6",
+                "drip@2.3"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "props": {
+                    "terminal": {
+                        "x": 450,
+                        "y": 560,
+                        "scale": 0.9,
+                        "text": "git push ... fatal: unable to access",
+                        "red": true
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "shocked",
+                        "x": 450,
+                        "y": 1480,
+                        "scale": 0.75,
+                        "role": "dev",
+                        "mug": false
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "pause",
+            "bg": "servers",
+            "tag": "15:16",
+            "props": {
+                "gate": {
+                    "x": 760,
+                    "y": 900,
+                    "sign": "PAUSED",
+                    "at": 0.4
+                },
+                "note": {
+                    "x": 400,
+                    "y": 380,
+                    "text": "AUTOMATION. ON HOLD.",
+                    "at": 1.6
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 1260,
+                    "y": 900,
+                    "scale": 0.5,
+                    "n": 3,
+                    "arm": "broom",
+                    "role": "shrug"
+                }
+            ],
+            "fx": [
+                "gatedrop@0.4",
+                "shake@0.62",
+                "note@1.6",
+                "shrug@2.3"
+            ],
+            "sfx": [
+                "whistle-gate@0.4",
+                "clunk@0.62",
+                "slap@1.6",
+                "squeak@2.3"
+            ],
+            "focus": [
+                860,
+                560
+            ],
+            "v": {
+                "props": {
+                    "gate": {
+                        "x": 450,
+                        "y": 1250,
+                        "scale": 0.8,
+                        "sign": "PAUSED",
+                        "at": 0.4
+                    },
+                    "note": {
+                        "x": 450,
+                        "y": 560,
+                        "text": "AUTOMATION. ON HOLD.",
+                        "at": 1.6
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 620,
+                        "y": 1450,
+                        "scale": 0.4,
+                        "n": 3,
+                        "arm": "broom",
+                        "role": "shrug"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "stable",
+            "bg": "office",
+            "tag": "16:25",
+            "props": {
+                "desk": {
+                    "x": 760,
+                    "y": 820
+                },
+                "whiteboard": {
+                    "x": 1100,
+                    "y": 330,
+                    "scale": 0.75,
+                    "text": "FULLY RECOVERED.\nSTABLE."
+                },
+                "clock": {
+                    "x": 320,
+                    "y": 260,
+                    "scale": 0.7
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "relieved",
+                    "x": 520,
+                    "y": 900,
+                    "scale": 0.6,
+                    "role": "dev"
+                }
+            ],
+            "fx": [
+                "slowpush",
+                "sip@0.8"
+            ],
+            "sfx": [
+                "sip@0.8",
+                "chord@0.2"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 470,
+                        "y": 1180
+                    },
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 520,
+                        "scale": 0.85,
+                        "text": "FULLY RECOVERED.\nSTABLE."
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "relieved",
+                        "x": 300,
+                        "y": 1290,
+                        "scale": 0.5,
+                        "role": "dev"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "sneak",
+            "bg": "night",
+            "tag": "16:52",
+            "props": {
+                "gate": {
+                    "x": 420,
+                    "y": 900,
+                    "sign": "PAUSED"
+                },
+                "door": {
+                    "x": 1420,
+                    "y": 900,
+                    "scale": 0.8
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 1180,
+                    "y": 900,
+                    "scale": 0.5,
+                    "n": 3,
+                    "arm": "broom"
+                }
+            ],
+            "fx": [
+                "tiptoe",
+                "peek@1.2"
+            ],
+            "line": {
+                "who": "AGENT 3, THE MAINTENANCE TASK",
+                "text": "Pause? Not on my list."
+            },
+            "lineAt": 1.3,
+            "sfx": [
+                "tiptoe",
+                "squeak@1.2"
+            ],
+            "focus": [
+                860,
+                540
+            ],
+            "v": {
+                "props": {
+                    "gate": {
+                        "x": 250,
+                        "y": 1300,
+                        "scale": 0.6,
+                        "sign": "PAUSED"
+                    },
+                    "door": {
+                        "x": 760,
+                        "y": 1250,
+                        "scale": 0.55
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 560,
+                        "y": 1460,
+                        "scale": 0.42,
+                        "n": 3,
+                        "arm": "broom"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "again",
+            "bg": "black",
+            "props": {
+                "building": {
+                    "x": 800,
+                    "y": 880,
+                    "scale": 0.9,
+                    "sign": "GITHUB",
+                    "shut": true
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 260,
+                    "y": 900,
+                    "scale": 0.55,
+                    "n": 3,
+                    "arm": "broom"
+                },
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 1340,
+                    "y": 900,
+                    "scale": 0.55,
+                    "n": 5,
+                    "arm": "hold",
+                    "flip": true
+                }
+            ],
+            "fx": [
+                "impact@0.1",
+                "shutter@0.8",
+                "shake@1.2"
+            ],
+            "word": "Again.",
+            "wordAt": 1.6,
+            "sfx": [
+                "herochord@0.1",
+                "impact@0.15",
+                "clunk@0.8",
+                "wobble@1.25",
+                "sadtrombone@1.7"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "building": {
+                        "x": 450,
+                        "y": 1150,
+                        "scale": 0.75,
+                        "sign": "GITHUB",
+                        "shut": true
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 190,
+                        "y": 1460,
+                        "scale": 0.4,
+                        "n": 3,
+                        "arm": "broom"
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 710,
+                        "y": 1460,
+                        "scale": 0.4,
+                        "n": 5,
+                        "arm": "hold",
+                        "flip": true
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "pulled",
+            "bg": "servers",
+            "tag": "17:02",
+            "props": {
+                "bin": {
+                    "x": 1300,
+                    "y": 900,
+                    "scale": 0.9
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "shocked",
+                    "x": 760,
+                    "y": 900,
+                    "scale": 0.55,
+                    "n": 5,
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "bounce@0.6",
+                "shake@1.3"
+            ],
+            "sfx": [
+                "boing@0.6",
+                "whistle-fall@0.7",
+                "bonk@1.3"
+            ],
+            "focus": [
+                800,
+                500
+            ],
+            "v": {
+                "props": {
+                    "bin": {
+                        "x": 650,
+                        "y": 1450,
+                        "scale": 0.8
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "shocked",
+                        "x": 450,
+                        "y": 1400,
+                        "scale": 0.5,
+                        "n": 5,
+                        "arm": "hold"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "honours",
+            "bg": "blueprint",
+            "props": {
+                "whiteboard": {
+                    "x": 800,
+                    "y": 330,
+                    "scale": 0.85,
+                    "text": "THE AUTOMATION\nNOW HONOURS\nTHE PAUSE."
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 800,
+                    "y": 920,
+                    "scale": 0.5,
+                    "n": 3,
+                    "arm": "salute"
+                }
+            ],
+            "fx": [
+                "salute@0.5",
+                "nod@1.2",
+                "stamp@2.6"
+            ],
+            "sfx": [
+                "snap@0.5",
+                "bop@1.2",
+                "stamp@2.6"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "props": {
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 480,
+                        "scale": 0.9,
+                        "text": "THE AUTOMATION\nNOW HONOURS\nTHE PAUSE."
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 450,
+                        "y": 1440,
+                        "scale": 0.45,
+                        "n": 3,
+                        "arm": "salute"
+                    }
+                ]
+            },
+            "still": true,
+            "stillAt": 3
+        },
+        {
+            "id": "next",
+            "bg": "servers",
+            "props": {
+                "poster": {
+                    "x": 400,
+                    "y": 330,
+                    "scale": 0.8,
+                    "text": "PUPPET"
+                },
+                "clock": {
+                    "x": 1200,
+                    "y": 260,
+                    "scale": 0.7
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 860,
+                    "y": 960,
+                    "scale": 0.68,
+                    "n": 3,
+                    "arm": "broom",
+                    "silhouette": true
+                }
+            ],
+            "fx": [
+                "clockspin@0.2",
+                "eyes@1.4",
+                "continued@2.4"
+            ],
+            "sfx": [
+                "whirr@0.2",
+                "tick@0.4",
+                "shing@1.4",
+                "freeze@2.4"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "poster": {
+                        "x": 260,
+                        "y": 560,
+                        "scale": 0.7,
+                        "text": "PUPPET"
+                    },
+                    "clock": {
+                        "x": 640,
+                        "y": 520,
+                        "scale": 0.6
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 450,
+                        "y": 1440,
+                        "scale": 0.45,
+                        "n": 3,
+                        "arm": "broom",
+                        "silhouette": true
+                    }
+                ]
+            },
+            "tag": "Next Puppet update"
+        }
+    ]
+}
