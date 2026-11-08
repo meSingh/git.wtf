@@ -17,10 +17,11 @@ export const CATEGORIES = [
     'history-rewrite',
     'wiped-worktree',
     'github',
+    'off-script',
 ] as const;
 
 export const ACTORS = ['ai', 'human', 'github'] as const;
-export const TOOLS = ['claude-code', 'codex', 'cursor', 'custom', 'human', 'github'] as const;
+export const TOOLS = ['claude-code', 'codex', 'cursor', 'custom', 'human', 'github', 'openai', 'anthropic'] as const;
 export const PANEL_WHO = ['DEV', 'AGENT', 'STATUS PAGE', 'caption'] as const;
 
 // YAML turns an unquoted 2026-11-06 into a Date; accept both and keep the calendar day.

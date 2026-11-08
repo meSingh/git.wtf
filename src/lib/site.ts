@@ -152,6 +152,7 @@ export const CATEGORY_LABELS: Record<string, string> = {
     'history-rewrite': 'rewrote history',
     'wiped-worktree': 'wiped the worktree',
     github: 'GitHub itself',
+    'off-script': 'went off script',
 };
 
 export function categoryLabel(slug: string): string {
@@ -173,6 +174,8 @@ export const TOOL_LABELS: Record<string, string> = {
     custom: 'a home-made loop',
     human: 'a human',
     github: 'GitHub',
+    openai: 'OpenAI',
+    anthropic: 'Anthropic',
 };
 
 export function toolLabel(slug: string | undefined): string | null {

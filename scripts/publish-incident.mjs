@@ -8,7 +8,7 @@ import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import matter from 'gray-matter';
 
-const CATEGORIES = ['force-push', 'reset-hard', 'deleted-tests', 'committed-secret', 'renamed-main', 'pr-flood', 'kept-both', 'commit-message', 'pushed-to-main', 'history-rewrite', 'wiped-worktree', 'github'];
+const CATEGORIES = ['force-push', 'reset-hard', 'deleted-tests', 'committed-secret', 'renamed-main', 'pr-flood', 'kept-both', 'commit-message', 'pushed-to-main', 'history-rewrite', 'wiped-worktree', 'github', 'off-script'];
 const root = path.resolve(new URL('..', import.meta.url).pathname);
 const args = process.argv.slice(2);
 const draft = args.find((a) => !a.startsWith('--'));
