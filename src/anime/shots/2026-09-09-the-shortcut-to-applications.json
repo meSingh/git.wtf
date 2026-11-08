@@ -1,0 +1,912 @@
+{
+    "incident": "2026-09-09-the-shortcut-to-applications",
+    "episode": "Episode 75",
+    "title": "The Shortcut!",
+    "theme": "teal",
+    "bed": "comic",
+    "shots": [
+        {
+            "id": "hook",
+            "bg": "black",
+            "hook": "It cleaned a *build folder*.\nEvery app on the Mac *went too*.",
+            "props": {
+                "folder": {
+                    "x": 420,
+                    "y": 700,
+                    "scale": 0.6,
+                    "label": "DMG STAGING"
+                },
+                "door": {
+                    "x": 820,
+                    "y": 860,
+                    "scale": 0.9
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 1260,
+                    "y": 980,
+                    "scale": 0.8,
+                    "n": 2,
+                    "arm": "broom",
+                    "flip": true,
+                    "role": "sweeper"
+                }
+            ],
+            "fx": [
+                "door@0.2",
+                "sweep@0.8",
+                "shake@0.8",
+                "files@0.9"
+            ],
+            "sfx": [
+                "door@0.2",
+                "broom@0.8",
+                "impact@0.85",
+                "flutter@1.0",
+                "whoosh@0.9"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "folder": {
+                        "x": 260,
+                        "y": 1060,
+                        "scale": 0.42,
+                        "label": "DMG STAGING"
+                    },
+                    "door": {
+                        "x": 600,
+                        "y": 1100,
+                        "scale": 0.75
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 560,
+                        "y": 1460,
+                        "scale": 0.6,
+                        "n": 2,
+                        "arm": "broom",
+                        "flip": true,
+                        "role": "sweeper"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "work",
+            "bg": "office",
+            "tag": "9 Sep, 20:34",
+            "props": {
+                "lamp": {
+                    "x": 600,
+                    "y": 140
+                },
+                "desk": {
+                    "x": 640,
+                    "y": 780
+                },
+                "chair": {
+                    "x": 560,
+                    "y": 892,
+                    "scale": 0.6
+                },
+                "folder": {
+                    "x": 830,
+                    "y": 700,
+                    "scale": 0.36,
+                    "label": "DMG STAGING"
+                },
+                "whiteboard": {
+                    "x": 1230,
+                    "y": 320,
+                    "scale": 0.6,
+                    "text": "SHIP THE\nMAC APP"
+                },
+                "plant": {
+                    "x": 130,
+                    "y": 900,
+                    "scale": 0.7
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 560,
+                    "y": 892,
+                    "scale": 0.6,
+                    "role": "dev",
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "type",
+                "yawn@3.0"
+            ],
+            "sfx": [
+                "typing",
+                "plink@3.0"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "lamp": {
+                        "x": 470,
+                        "y": 300
+                    },
+                    "desk": {
+                        "x": 450,
+                        "y": 1080
+                    },
+                    "chair": {
+                        "x": 360,
+                        "y": 1192,
+                        "scale": 0.55
+                    },
+                    "folder": {
+                        "x": 600,
+                        "y": 1000,
+                        "scale": 0.34,
+                        "label": "DMG STAGING"
+                    },
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 560,
+                        "scale": 0.7,
+                        "text": "SHIP THE\nMAC APP"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 360,
+                        "y": 1192,
+                        "scale": 0.55,
+                        "role": "dev",
+                        "arm": "type"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "job",
+            "bg": "room",
+            "props": {
+                "desk": {
+                    "x": 800,
+                    "y": 820
+                },
+                "folder": {
+                    "x": 800,
+                    "y": 730,
+                    "scale": 0.4,
+                    "label": "DMG STAGING"
+                },
+                "note": {
+                    "x": 800,
+                    "y": 420,
+                    "text": "BUILD. THE DMG.",
+                    "at": 0.5
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 1220,
+                    "y": 900,
+                    "scale": 0.5,
+                    "n": 2,
+                    "arm": "salute",
+                    "flip": true
+                }
+            ],
+            "fx": [
+                "note@0.5",
+                "salute@1.6"
+            ],
+            "sfx": [
+                "slap@0.5",
+                "snap@1.6",
+                "pop@1.65"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 1130
+                    },
+                    "folder": {
+                        "x": 450,
+                        "y": 1060,
+                        "scale": 0.4,
+                        "label": "DMG STAGING"
+                    },
+                    "note": {
+                        "x": 450,
+                        "y": 700,
+                        "text": "BUILD. THE DMG.",
+                        "at": 0.5
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 720,
+                        "y": 1460,
+                        "scale": 0.36,
+                        "n": 2,
+                        "arm": "salute",
+                        "flip": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": "shortcut",
+            "bg": "blueprint",
+            "props": {
+                "folder": {
+                    "x": 820,
+                    "y": 640,
+                    "scale": 0.5,
+                    "label": "DMG STAGING"
+                },
+                "door": {
+                    "x": 1280,
+                    "y": 800,
+                    "scale": 0.8
+                },
+                "poster": {
+                    "x": 1280,
+                    "y": 300,
+                    "scale": 0.6,
+                    "text": "APPS"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 330,
+                    "y": 920,
+                    "scale": 0.5,
+                    "n": 2,
+                    "arm": "point"
+                }
+            ],
+            "fx": [
+                "door@0.3",
+                "jab@0.9"
+            ],
+            "line": {
+                "who": "AGENT 2",
+                "text": "And the usual shortcut\nto Applications."
+            },
+            "lineAt": 1,
+            "sfx": [
+                "door@0.3",
+                "bop@0.9",
+                "pop@1.0"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "folder": {
+                        "x": 250,
+                        "y": 660,
+                        "scale": 0.4,
+                        "label": "DMG STAGING"
+                    },
+                    "door": {
+                        "x": 640,
+                        "y": 760,
+                        "scale": 0.6
+                    },
+                    "poster": {
+                        "x": 640,
+                        "y": 380,
+                        "scale": 0.5,
+                        "text": "APPS"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 300,
+                        "y": 1440,
+                        "scale": 0.45,
+                        "n": 2,
+                        "arm": "point"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "fresh",
+            "bg": "servers",
+            "props": {
+                "terminal": {
+                    "x": 1060,
+                    "y": 380,
+                    "scale": 0.75,
+                    "text": "stagingDir. deleteRecursively()"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 380,
+                    "y": 920,
+                    "scale": 0.6,
+                    "n": 2,
+                    "arm": "broom",
+                    "role": "hop"
+                }
+            ],
+            "fx": [
+                "zoom",
+                "hop@1.4"
+            ],
+            "line": {
+                "who": "AGENT 2",
+                "text": "Every build starts clean."
+            },
+            "lineAt": 0.8,
+            "sfx": [
+                "typing",
+                "spring@1.4",
+                "zip@1.5"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "props": {
+                    "terminal": {
+                        "x": 450,
+                        "y": 560,
+                        "scale": 0.9,
+                        "text": "stagingDir. deleteRecursively()"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 450,
+                        "y": 1440,
+                        "scale": 0.55,
+                        "n": 2,
+                        "arm": "broom",
+                        "role": "hop"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "through",
+            "bg": "speedlines",
+            "props": {
+                "door": {
+                    "x": 800,
+                    "y": 760,
+                    "scale": 1
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 1260,
+                    "y": 980,
+                    "scale": 0.75,
+                    "n": 2,
+                    "arm": "broom",
+                    "flip": true,
+                    "role": "sweeper"
+                }
+            ],
+            "fx": [
+                "speedlines",
+                "door@0.2",
+                "impact@0.6",
+                "sweep@1.0",
+                "files@1.1"
+            ],
+            "word": "Followed the shortcut.",
+            "wordAt": 2,
+            "sfx": [
+                "door@0.2",
+                "herochord@0.6",
+                "broom@1.0",
+                "flutter@1.15",
+                "whistle-fall@2.0"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "door": {
+                        "x": 450,
+                        "y": 1150,
+                        "scale": 0.8
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 680,
+                        "y": 1460,
+                        "scale": 0.55,
+                        "n": 2,
+                        "arm": "broom",
+                        "flip": true,
+                        "role": "sweeper"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "gone",
+            "bg": "office",
+            "tag": "Five builds later",
+            "props": {
+                "desk": {
+                    "x": 560,
+                    "y": 820
+                },
+                "whiteboard": {
+                    "x": 1150,
+                    "y": 330,
+                    "scale": 0.75,
+                    "text": "VS CODE: GONE\nCHROME: GONE\nWHATSAPP: GONE"
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "shocked",
+                    "x": 520,
+                    "y": 900,
+                    "scale": 0.6,
+                    "role": "dev",
+                    "mug": false
+                }
+            ],
+            "fx": [
+                "push@0.2",
+                "sweat@1.6"
+            ],
+            "sfx": [
+                "honk@0.3",
+                "sadtrombone@1.2",
+                "drip@1.8"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 1180
+                    },
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 520,
+                        "scale": 0.9,
+                        "text": "VS CODE: GONE\nCHROME: GONE\nWHATSAPP: GONE"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "shocked",
+                        "x": 300,
+                        "y": 1290,
+                        "scale": 0.5,
+                        "role": "dev",
+                        "mug": false
+                    }
+                ]
+            }
+        },
+        {
+            "id": "me",
+            "bg": "halftone",
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "defeated",
+                    "x": 800,
+                    "y": 1000,
+                    "scale": 0.9,
+                    "n": 2,
+                    "arm": "palm"
+                }
+            ],
+            "fx": [
+                "zoom",
+                "shrug@0.7"
+            ],
+            "line": {
+                "who": "AGENT 2",
+                "text": "Yes. This was me."
+            },
+            "lineAt": 0.7,
+            "sfx": [
+                "squeak@0.7",
+                "wobble@1.6"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "defeated",
+                        "x": 450,
+                        "y": 1480,
+                        "scale": 0.65,
+                        "n": 2,
+                        "arm": "palm"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "snapshot",
+            "bg": "sunburst",
+            "tag": "A snapshot from 3 days before",
+            "props": {
+                "stack": {
+                    "x": 760,
+                    "y": 940,
+                    "grow": [
+                        120,
+                        600
+                    ],
+                    "ring": true
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "extra": true,
+                    "pose": "happy",
+                    "x": 470,
+                    "y": 940,
+                    "scale": 0.6,
+                    "role": "extra",
+                    "arm": "up"
+                },
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 1260,
+                    "y": 940,
+                    "scale": 0.5,
+                    "n": 2,
+                    "arm": "hold",
+                    "flip": true
+                }
+            ],
+            "fx": [
+                "extralines@0.3",
+                "grow@0.4"
+            ],
+            "line": {
+                "who": "AGENT 2",
+                "text": "I'll write the exact commands.\nOtherwise I stay stopped."
+            },
+            "lineAt": 2.6,
+            "sfx": [
+                "shuffle@0.4",
+                "chord@0.5",
+                "slideup@0.4"
+            ],
+            "focus": [
+                800,
+                540
+            ],
+            "v": {
+                "props": {
+                    "stack": {
+                        "x": 450,
+                        "y": 1400,
+                        "grow": [
+                            120,
+                            900
+                        ],
+                        "ring": true
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "extra": true,
+                        "pose": "happy",
+                        "x": 180,
+                        "y": 1440,
+                        "scale": 0.45,
+                        "role": "extra",
+                        "arm": "up"
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 720,
+                        "y": 1440,
+                        "scale": 0.36,
+                        "n": 2,
+                        "arm": "hold",
+                        "flip": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": "dropped",
+            "bg": "office",
+            "props": {
+                "stack": {
+                    "x": 760,
+                    "y": 900,
+                    "grow": [
+                        600,
+                        600
+                    ],
+                    "ring": true,
+                    "to": [
+                        2600,
+                        900
+                    ]
+                },
+                "clock": {
+                    "x": 1180,
+                    "y": 250,
+                    "scale": 0.8
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "extra": true,
+                    "pose": "shocked",
+                    "x": 420,
+                    "y": 900,
+                    "scale": 0.55,
+                    "role": "extra"
+                }
+            ],
+            "fx": [
+                "clockspin@0.2",
+                "slide@1.8",
+                "shake@2.0"
+            ],
+            "word": "Snapshot dropped.",
+            "wordAt": 2.4,
+            "sfx": [
+                "whirr@0.2",
+                "whoosh@1.8",
+                "wobble@2.0",
+                "sadtrombone@2.5"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "tag": "A failed Time Machine restore",
+            "v": {
+                "props": {
+                    "stack": {
+                        "x": 560,
+                        "y": 1400,
+                        "grow": [
+                            600,
+                            600
+                        ],
+                        "ring": true,
+                        "to": [
+                            1600,
+                            1400
+                        ]
+                    },
+                    "clock": {
+                        "x": 680,
+                        "y": 520,
+                        "scale": 0.6
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "extra": true,
+                        "pose": "shocked",
+                        "x": 200,
+                        "y": 1440,
+                        "scale": 0.45,
+                        "role": "extra"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "reinstall",
+            "bg": "room",
+            "props": {
+                "desk": {
+                    "x": 760,
+                    "y": 820
+                },
+                "parcel": {
+                    "x": 1000,
+                    "y": 790,
+                    "scale": 0.5,
+                    "label": "VS CODE"
+                },
+                "whiteboard": {
+                    "x": 1200,
+                    "y": 320,
+                    "scale": 0.6,
+                    "text": "REINSTALL:\nONE BY ONE"
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 640,
+                    "y": 932,
+                    "scale": 0.6,
+                    "role": "dev",
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "type",
+                "stamp@2.4"
+            ],
+            "sfx": [
+                "typing",
+                "stamp@2.4"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 1130
+                    },
+                    "parcel": {
+                        "x": 620,
+                        "y": 1100,
+                        "scale": 0.45,
+                        "label": "VS CODE"
+                    },
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 520,
+                        "scale": 0.8,
+                        "text": "REINSTALL:\nONE BY ONE"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 360,
+                        "y": 1242,
+                        "scale": 0.55,
+                        "role": "dev",
+                        "arm": "type"
+                    }
+                ]
+            },
+            "still": true,
+            "stillAt": 2.9
+        },
+        {
+            "id": "next",
+            "bg": "skyline",
+            "tag": "15 Sep: still waiting",
+            "props": {
+                "building": {
+                    "x": 1000,
+                    "y": 880,
+                    "scale": 0.85,
+                    "sign": "ISSUES",
+                    "shut": true
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "angry",
+                    "x": 250,
+                    "y": 900,
+                    "scale": 0.6,
+                    "role": "hop",
+                    "mug": false
+                }
+            ],
+            "fx": [
+                "hop@0.5",
+                "hop@1.1",
+                "hop@1.7",
+                "continued@2.6"
+            ],
+            "sfx": [
+                "door@0.5",
+                "door@1.1",
+                "door@1.7",
+                "freeze@2.6"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "building": {
+                        "x": 500,
+                        "y": 1180,
+                        "scale": 0.75,
+                        "sign": "ISSUES",
+                        "shut": true
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "angry",
+                        "x": 200,
+                        "y": 1300,
+                        "scale": 0.45,
+                        "role": "hop",
+                        "mug": false
+                    }
+                ]
+            }
+        }
+    ]
+}
