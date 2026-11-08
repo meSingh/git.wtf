@@ -28,10 +28,10 @@ export const SITE = {
     // The credit line, his exact words; the emphasised parts are marked by the footer.
     credit: { name: 'Mandeep Singh', before: 'an ', strong: 'AI Architect', after: " who reviews his agents' commits. ", last: '“Mostly.”' },
     // The project's own accounts, from this one list; all four show (Mandeep, v6). X is real. The other three are
-    // X and LinkedIn (a showcase page) are live. Instagram and YouTube are PLACEHOLDER URLs until he creates them (social session, 8 Nov 2026).
+    // X, LinkedIn (a showcase page) and YouTube (handle @gitwtf) are live. Instagram is a PLACEHOLDER URL: @gitwtf there is taken, so it changes once he picks a handle (social session, 8 Nov 2026).
     social: [
         { name: 'Instagram', url: 'https://www.instagram.com/gitwtf', placeholder: true },
-        { name: 'YouTube Shorts', url: 'https://www.youtube.com/@gitwtf/shorts', placeholder: true },
+        { name: 'YouTube Shorts', url: 'https://www.youtube.com/@gitwtf/shorts' },
         { name: 'X', url: 'https://x.com/gitwtf' },
         { name: 'LinkedIn', url: 'https://www.linkedin.com/showcase/gitwtf/' },
     ] as { name: string; url: string; placeholder?: boolean }[],
