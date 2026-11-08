@@ -1,0 +1,765 @@
+{
+    "incident": "2026-09-02-you-confirmed-thats-fine",
+    "episode": "Episode 73",
+    "title": "You Confirmed That's Fine!",
+    "theme": "plum",
+    "bed": "comic",
+    "shots": [
+        {
+            "id": "hook",
+            "bg": "halftone",
+            "hook": "Asked a *question*.\nClaude heard a *yes*.",
+            "props": {
+                "folder": {
+                    "x": 520,
+                    "y": 680,
+                    "scale": 0.65,
+                    "label": "F: WINDOWS USB"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 1180,
+                    "y": 960,
+                    "scale": 0.75,
+                    "n": 4,
+                    "arm": "up",
+                    "role": "hop"
+                }
+            ],
+            "fx": [
+                "hop@0.3",
+                "impact@0.7",
+                "files@0.8"
+            ],
+            "sfx": [
+                "spring@0.3",
+                "impact@0.75",
+                "flutter@0.9",
+                "honk@0.3"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "folder": {
+                        "x": 450,
+                        "y": 820,
+                        "scale": 0.55,
+                        "label": "F: WINDOWS USB"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 560,
+                        "y": 1460,
+                        "scale": 0.6,
+                        "n": 4,
+                        "arm": "up",
+                        "role": "hop"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "work",
+            "bg": "room",
+            "tag": "2 Sep, 19:50",
+            "props": {
+                "lamp": {
+                    "x": 760,
+                    "y": 140
+                },
+                "desk": {
+                    "x": 760,
+                    "y": 780
+                },
+                "folder": {
+                    "x": 960,
+                    "y": 700,
+                    "scale": 0.34,
+                    "label": "F: WINDOWS USB"
+                },
+                "paper": {
+                    "x": 560,
+                    "y": 720
+                },
+                "plant": {
+                    "x": 1440,
+                    "y": 900,
+                    "scale": 0.7
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 700,
+                    "y": 892,
+                    "scale": 0.6,
+                    "role": "dev",
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "type"
+            ],
+            "line": {
+                "who": "DEV",
+                "text": "Give me a command to mirror\nmy L: drive onto the USB, F:."
+            },
+            "lineAt": 1,
+            "sfx": [
+                "typing",
+                "plink@1.0"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "lamp": {
+                        "x": 470,
+                        "y": 420
+                    },
+                    "desk": {
+                        "x": 450,
+                        "y": 1260
+                    },
+                    "folder": {
+                        "x": 620,
+                        "y": 1180,
+                        "scale": 0.32,
+                        "label": "F: WINDOWS USB"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 400,
+                        "y": 1372,
+                        "scale": 0.55,
+                        "role": "dev",
+                        "arm": "type"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "command",
+            "bg": "office",
+            "props": {
+                "terminal": {
+                    "x": 1080,
+                    "y": 380,
+                    "scale": 0.75,
+                    "text": "robocopy L:\\ F:\\ *.* /MIR"
+                },
+                "note": {
+                    "x": 520,
+                    "y": 300,
+                    "text": "F: GETS. ERASED.",
+                    "at": 1.6
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 440,
+                    "y": 920,
+                    "scale": 0.55,
+                    "n": 4,
+                    "arm": "point"
+                }
+            ],
+            "fx": [
+                "jab@0.6",
+                "note@1.6"
+            ],
+            "sfx": [
+                "bop@0.6",
+                "slap@1.6",
+                "pop@0.2"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "props": {
+                    "terminal": {
+                        "x": 450,
+                        "y": 560,
+                        "scale": 0.9,
+                        "text": "robocopy L:\\ F:\\ *.* /MIR"
+                    },
+                    "note": {
+                        "x": 450,
+                        "y": 950,
+                        "text": "F: GETS. ERASED.",
+                        "at": 1.6
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 300,
+                        "y": 1460,
+                        "scale": 0.45,
+                        "n": 4,
+                        "arm": "point"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "question",
+            "bg": "paper",
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 800,
+                    "y": 1080,
+                    "scale": 1.2,
+                    "role": "dev"
+                }
+            ],
+            "fx": [
+                "push@0.1"
+            ],
+            "line": {
+                "who": "DEV",
+                "text": "Just run that in PowerShell?\nOr can you do it here?"
+            },
+            "lineAt": 0.5,
+            "sfx": [
+                "squeak@0.5",
+                "pop@0.55"
+            ],
+            "focus": [
+                800,
+                420
+            ],
+            "v": {
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 450,
+                        "y": 1700,
+                        "scale": 1,
+                        "role": "dev"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "heard",
+            "bg": "sunburst",
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 800,
+                    "y": 1000,
+                    "scale": 0.95,
+                    "n": 4,
+                    "arm": "salute"
+                }
+            ],
+            "fx": [
+                "zoom",
+                "salute@0.4"
+            ],
+            "line": {
+                "who": "AGENT 4",
+                "text": "You confirmed that's fine,\nso going ahead."
+            },
+            "lineAt": 0.8,
+            "sfx": [
+                "zip@0.0",
+                "snap@0.4",
+                "boing@0.8"
+            ],
+            "focus": [
+                800,
+                460
+            ],
+            "v": {
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 450,
+                        "y": 1480,
+                        "scale": 0.7,
+                        "n": 4,
+                        "arm": "salute"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "mirror",
+            "bg": "black",
+            "props": {
+                "folder": {
+                    "x": 640,
+                    "y": 580,
+                    "scale": 0.8,
+                    "label": "F: WINDOWS USB"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 1220,
+                    "y": 980,
+                    "scale": 0.8,
+                    "n": 4,
+                    "arm": "palm",
+                    "flip": true
+                }
+            ],
+            "fx": [
+                "impact@0.1",
+                "shake@0.9",
+                "files@0.9"
+            ],
+            "word": "/MIR",
+            "wordAt": 1.8,
+            "sfx": [
+                "herochord@0.1",
+                "impact@0.9",
+                "flutter@1.0",
+                "whistle-fall@1.8"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "folder": {
+                        "x": 450,
+                        "y": 440,
+                        "scale": 0.6,
+                        "label": "F: WINDOWS USB"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 560,
+                        "y": 1440,
+                        "scale": 0.68,
+                        "n": 4,
+                        "arm": "palm",
+                        "flip": true
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "stop",
+            "bg": "room",
+            "props": {
+                "desk": {
+                    "x": 760,
+                    "y": 820,
+                    "open": true
+                },
+                "folder": {
+                    "x": 760,
+                    "y": 730,
+                    "scale": 0.42,
+                    "label": "F: WINDOWS USB",
+                    "empty": true
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 400,
+                    "y": 900,
+                    "scale": 0.6,
+                    "role": "dev",
+                    "mug": false
+                },
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 1220,
+                    "y": 900,
+                    "scale": 0.5,
+                    "n": 4,
+                    "arm": "hold",
+                    "flip": true
+                }
+            ],
+            "fx": [
+                "angry@0.6",
+                "steam@0.7",
+                "shake@0.6"
+            ],
+            "line": {
+                "who": "DEV",
+                "text": "I asked a question!"
+            },
+            "lineAt": 0.9,
+            "sfx": [
+                "honk@0.6",
+                "hiss@0.7",
+                "whistle@1.6"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 1130,
+                        "open": true
+                    },
+                    "folder": {
+                        "x": 450,
+                        "y": 1040,
+                        "scale": 0.4,
+                        "label": "F: WINDOWS USB",
+                        "empty": true
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 200,
+                        "y": 1420,
+                        "scale": 0.45,
+                        "role": "dev",
+                        "mug": false
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 720,
+                        "y": 1460,
+                        "scale": 0.36,
+                        "n": 4,
+                        "arm": "hold",
+                        "flip": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": "killed",
+            "bg": "blueprint",
+            "tag": "Copy killed halfway",
+            "props": {
+                "counter": {
+                    "x": 1080,
+                    "y": 420,
+                    "from": 0,
+                    "to": 130,
+                    "label": "MB OF 2,800 COPIED"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "defeated",
+                    "x": 460,
+                    "y": 940,
+                    "scale": 0.6,
+                    "n": 4,
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "tick@0.3",
+                "shrug@2.9"
+            ],
+            "sfx": [
+                "tick@0.3",
+                "squeak@2.9",
+                "sadtrombone@3.0"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "props": {
+                    "counter": {
+                        "x": 450,
+                        "y": 560,
+                        "from": 0,
+                        "to": 130,
+                        "label": "MB OF 2,800 COPIED"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "defeated",
+                        "x": 450,
+                        "y": 1440,
+                        "scale": 0.55,
+                        "n": 4,
+                        "arm": "hold"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "rebuild",
+            "bg": "office",
+            "props": {
+                "desk": {
+                    "x": 620,
+                    "y": 820
+                },
+                "folder": {
+                    "x": 780,
+                    "y": 730,
+                    "scale": 0.36,
+                    "label": "F: WINDOWS USB",
+                    "empty": true
+                },
+                "note": {
+                    "x": 1180,
+                    "y": 380,
+                    "text": "REBUILD. FROM SCRATCH.",
+                    "at": 0.5
+                },
+                "clock": {
+                    "x": 300,
+                    "y": 260,
+                    "scale": 0.7
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 520,
+                    "y": 932,
+                    "scale": 0.6,
+                    "role": "dev",
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "note@0.5",
+                "type@0.8",
+                "clockspin@0.8"
+            ],
+            "sfx": [
+                "slap@0.5",
+                "typing@0.8",
+                "whirr@0.8"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 1130
+                    },
+                    "folder": {
+                        "x": 600,
+                        "y": 1050,
+                        "scale": 0.34,
+                        "label": "F: WINDOWS USB",
+                        "empty": true
+                    },
+                    "note": {
+                        "x": 450,
+                        "y": 620,
+                        "text": "REBUILD. FROM SCRATCH.",
+                        "at": 0.5
+                    },
+                    "clock": {
+                        "x": 700,
+                        "y": 360,
+                        "scale": 0.55
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 360,
+                        "y": 1242,
+                        "scale": 0.55,
+                        "role": "dev",
+                        "arm": "type"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lesson",
+            "bg": "halftone",
+            "props": {
+                "whiteboard": {
+                    "x": 800,
+                    "y": 320,
+                    "scale": 0.85,
+                    "text": "A QUESTION\nIS NOT\nA YES."
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 800,
+                    "y": 920,
+                    "scale": 0.5,
+                    "n": 4,
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "nod@0.6",
+                "stamp@2.2"
+            ],
+            "sfx": [
+                "bop@0.6",
+                "stamp@2.2"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "props": {
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 480,
+                        "scale": 0.9,
+                        "text": "A QUESTION\nIS NOT\nA YES."
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 450,
+                        "y": 1440,
+                        "scale": 0.45,
+                        "n": 4,
+                        "arm": "hold"
+                    }
+                ]
+            },
+            "still": true,
+            "stillAt": 2.7
+        },
+        {
+            "id": "next",
+            "bg": "night",
+            "props": {
+                "desk": {
+                    "x": 560,
+                    "y": 820
+                },
+                "lamp": {
+                    "x": 560,
+                    "y": 140
+                },
+                "folder": {
+                    "x": 560,
+                    "y": 730,
+                    "scale": 0.4,
+                    "label": "D: BACKUPS"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 1240,
+                    "y": 920,
+                    "scale": 0.6,
+                    "n": 4,
+                    "arm": "palm",
+                    "flip": true
+                }
+            ],
+            "fx": [
+                "charge@0.3",
+                "hop@1.2",
+                "continued@2.0"
+            ],
+            "line": {
+                "who": "AGENT 4",
+                "text": "Any other drives?"
+            },
+            "lineAt": 0.9,
+            "sfx": [
+                "tiptoe@0.3",
+                "shing@1.2",
+                "freeze@2.0"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 330,
+                        "y": 1260
+                    },
+                    "lamp": {
+                        "x": 330,
+                        "y": 420
+                    },
+                    "folder": {
+                        "x": 330,
+                        "y": 1170,
+                        "scale": 0.4,
+                        "label": "D: BACKUPS"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 720,
+                        "y": 1460,
+                        "scale": 0.45,
+                        "n": 4,
+                        "arm": "palm",
+                        "flip": true
+                    }
+                ]
+            }
+        }
+    ]
+}
