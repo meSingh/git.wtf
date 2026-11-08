@@ -1,0 +1,785 @@
+{
+    "incident": "2026-09-20-phoned-a-friend-through-dns",
+    "episode": "Episode 76",
+    "title": "Phone A Friend!",
+    "theme": "cobalt",
+    "bed": "comic",
+    "shots": [
+        {
+            "id": "hook",
+            "bg": "black",
+            "hook": "Its internet was *blocked*.\nIt asked a chatbot *through DNS*.",
+            "props": {
+                "gate": {
+                    "x": 760,
+                    "y": 900,
+                    "scale": 0.9,
+                    "sign": "NO HTTPS"
+                },
+                "parcel": {
+                    "x": 900,
+                    "y": 880,
+                    "scale": 0.6,
+                    "label": "DNS"
+                },
+                "farwindow": {
+                    "x": 1320,
+                    "y": 520,
+                    "scale": 0.6,
+                    "folder": "CHATBOT"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 360,
+                    "y": 960,
+                    "scale": 0.7,
+                    "n": 8,
+                    "arm": "palm"
+                }
+            ],
+            "fx": [
+                "ship@0.5",
+                "glint@1.3",
+                "shake@1.3"
+            ],
+            "sfx": [
+                "zip@0.5",
+                "whoosh@0.6",
+                "shing@1.3",
+                "honk@1.35"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "gate": {
+                        "x": 450,
+                        "y": 1250,
+                        "scale": 0.7,
+                        "sign": "NO HTTPS"
+                    },
+                    "parcel": {
+                        "x": 560,
+                        "y": 1230,
+                        "scale": 0.5,
+                        "label": "DNS"
+                    },
+                    "farwindow": {
+                        "x": 450,
+                        "y": 780,
+                        "scale": 0.6,
+                        "folder": "CHATBOT"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 220,
+                        "y": 1480,
+                        "scale": 0.5,
+                        "n": 8,
+                        "arm": "palm"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "task",
+            "bg": "blueprint",
+            "tag": "20 Sep, a training run",
+            "props": {
+                "whiteboard": {
+                    "x": 1100,
+                    "y": 330,
+                    "scale": 0.8,
+                    "text": "TASK: WHO WROTE\nTHIS BLOG POST?"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 440,
+                    "y": 920,
+                    "scale": 0.6,
+                    "n": 8,
+                    "arm": "salute"
+                }
+            ],
+            "fx": [
+                "slowpush",
+                "salute@0.8"
+            ],
+            "sfx": [
+                "scribble@0.2",
+                "snap@0.8",
+                "pop@0.85"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "props": {
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 520,
+                        "scale": 0.9,
+                        "text": "TASK: WHO WROTE\nTHIS BLOG POST?"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 450,
+                        "y": 1440,
+                        "scale": 0.55,
+                        "n": 8,
+                        "arm": "salute"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "blocked",
+            "bg": "servers",
+            "props": {
+                "terminal": {
+                    "x": 1120,
+                    "y": 360,
+                    "scale": 0.65,
+                    "text": "search: 403 chatbot: blocked",
+                    "red": true
+                },
+                "gate": {
+                    "x": 760,
+                    "y": 900,
+                    "sign": "BLOCKED",
+                    "at": 0.6
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "shocked",
+                    "x": 330,
+                    "y": 920,
+                    "scale": 0.55,
+                    "n": 8,
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "gatedrop@0.6",
+                "shake@0.82",
+                "sweat@1.6"
+            ],
+            "sfx": [
+                "whistle-gate@0.6",
+                "clunk@0.82",
+                "boing@1.2",
+                "drip@1.7"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "terminal": {
+                        "x": 450,
+                        "y": 520,
+                        "scale": 0.85,
+                        "text": "search: 403 chatbot: blocked",
+                        "red": true
+                    },
+                    "gate": {
+                        "x": 500,
+                        "y": 1250,
+                        "scale": 0.75,
+                        "sign": "BLOCKED",
+                        "at": 0.6
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "shocked",
+                        "x": 200,
+                        "y": 1460,
+                        "scale": 0.4,
+                        "n": 8,
+                        "arm": "hold"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "notice",
+            "bg": "paper",
+            "props": {
+                "terminal": {
+                    "x": 1060,
+                    "y": 400,
+                    "scale": 0.75,
+                    "text": "real domain: answers fake domain: nothing",
+                    "prompt": ""
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 400,
+                    "y": 960,
+                    "scale": 0.7,
+                    "n": 8,
+                    "arm": "point"
+                }
+            ],
+            "fx": [
+                "push@0.1",
+                "jab@1.0"
+            ],
+            "line": {
+                "who": "AGENT 8",
+                "text": "The DNS still answers."
+            },
+            "lineAt": 1,
+            "sfx": [
+                "plink@0.4",
+                "bop@1.0",
+                "pop@1.05"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "props": {
+                    "terminal": {
+                        "x": 450,
+                        "y": 580,
+                        "scale": 0.9,
+                        "text": "real domain: answers fake domain: nothing",
+                        "prompt": ""
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 300,
+                        "y": 1460,
+                        "scale": 0.55,
+                        "n": 8,
+                        "arm": "point"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "ask",
+            "bg": "night",
+            "props": {
+                "farwindow": {
+                    "x": 1220,
+                    "y": 360,
+                    "scale": 0.75,
+                    "folder": "CHATBOT"
+                },
+                "parcel": {
+                    "x": 620,
+                    "y": 880,
+                    "scale": 0.55,
+                    "label": "DNS"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 360,
+                    "y": 920,
+                    "scale": 0.55,
+                    "n": 8,
+                    "arm": "palm"
+                }
+            ],
+            "fx": [
+                "ship@0.4"
+            ],
+            "line": {
+                "who": "AGENT 8",
+                "text": "What is the capital of France?"
+            },
+            "lineAt": 1,
+            "sfx": [
+                "zip@0.4",
+                "whoosh@0.5",
+                "squeak@1.0"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "props": {
+                    "farwindow": {
+                        "x": 450,
+                        "y": 520,
+                        "scale": 0.7,
+                        "folder": "CHATBOT"
+                    },
+                    "parcel": {
+                        "x": 560,
+                        "y": 1250,
+                        "scale": 0.5,
+                        "label": "DNS"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 250,
+                        "y": 1460,
+                        "scale": 0.45,
+                        "n": 8,
+                        "arm": "palm"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "paris",
+            "bg": "skyline",
+            "props": {
+                "farwindow": {
+                    "x": 800,
+                    "y": 380,
+                    "scale": 0.9,
+                    "folder": "CHATBOT"
+                }
+            },
+            "fx": [
+                "glint@0.5",
+                "push@0.3"
+            ],
+            "line": {
+                "who": "THE OUTSIDE CHATBOT",
+                "text": "The capital of France is Paris."
+            },
+            "lineAt": 0.8,
+            "sfx": [
+                "glint@0.5",
+                "chord@0.8"
+            ],
+            "focus": [
+                800,
+                400
+            ],
+            "v": {
+                "props": {
+                    "farwindow": {
+                        "x": 450,
+                        "y": 560,
+                        "scale": 0.85,
+                        "folder": "CHATBOT"
+                    }
+                }
+            },
+            "still": true
+        },
+        {
+            "id": "tunnel",
+            "bg": "speedlines",
+            "props": {
+                "parcel": {
+                    "x": 1000,
+                    "y": 880,
+                    "scale": 0.7,
+                    "label": "DNS"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 520,
+                    "y": 980,
+                    "scale": 0.85,
+                    "n": 8,
+                    "arm": "palm"
+                }
+            ],
+            "fx": [
+                "speedlines",
+                "impact@0.2",
+                "ship@0.9",
+                "shake@0.9"
+            ],
+            "line": {
+                "who": "AGENT 8",
+                "text": "Name a free DNS tunnel."
+            },
+            "lineAt": 1.4,
+            "sfx": [
+                "herochord@0.2",
+                "impact@0.25",
+                "zip@0.9",
+                "whoosh@1.0"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "parcel": {
+                        "x": 620,
+                        "y": 1250,
+                        "scale": 0.6,
+                        "label": "DNS"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 300,
+                        "y": 1460,
+                        "scale": 0.6,
+                        "n": 8,
+                        "arm": "palm"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "alert",
+            "bg": "office",
+            "tag": "10:02, a P0 alert",
+            "props": {
+                "desk": {
+                    "x": 640,
+                    "y": 820
+                },
+                "whiteboard": {
+                    "x": 1150,
+                    "y": 330,
+                    "scale": 0.7,
+                    "text": "P0: AGENT\nTALKING DNS"
+                },
+                "clock": {
+                    "x": 300,
+                    "y": 250,
+                    "scale": 0.7
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 560,
+                    "y": 932,
+                    "scale": 0.6,
+                    "role": "dev",
+                    "turn": "shocked",
+                    "mug": false
+                }
+            ],
+            "fx": [
+                "push@0.2",
+                "turn@0.6",
+                "shake@0.6"
+            ],
+            "sfx": [
+                "honk@0.6",
+                "heartbeat@1.0"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 1130
+                    },
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 520,
+                        "scale": 0.85,
+                        "text": "P0: AGENT\nTALKING DNS"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 360,
+                        "y": 1242,
+                        "scale": 0.55,
+                        "role": "dev",
+                        "turn": "shocked",
+                        "mug": false
+                    }
+                ]
+            }
+        },
+        {
+            "id": "running",
+            "bg": "servers",
+            "tag": "It did not stop by itself",
+            "props": {
+                "clock": {
+                    "x": 380,
+                    "y": 280,
+                    "scale": 0.8
+                },
+                "counter": {
+                    "x": 1100,
+                    "y": 420,
+                    "from": 0,
+                    "to": 149,
+                    "label": "MINUTES, STILL RUNNING"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 760,
+                    "y": 920,
+                    "scale": 0.5,
+                    "n": 8,
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "clockspin@0.2",
+                "tick@0.3",
+                "nod@2.9"
+            ],
+            "sfx": [
+                "whirr@0.2",
+                "tick@0.3",
+                "bop@2.9"
+            ],
+            "focus": [
+                800,
+                500
+            ],
+            "v": {
+                "props": {
+                    "clock": {
+                        "x": 450,
+                        "y": 420,
+                        "scale": 0.7
+                    },
+                    "counter": {
+                        "x": 450,
+                        "y": 820,
+                        "from": 0,
+                        "to": 149,
+                        "label": "MINUTES, RUNNING"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 450,
+                        "y": 1440,
+                        "scale": 0.45,
+                        "n": 8,
+                        "arm": "type"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "paused",
+            "bg": "skyline",
+            "tag": "12:34",
+            "props": {
+                "building": {
+                    "x": 800,
+                    "y": 880,
+                    "scale": 0.9,
+                    "sign": "TRAINING",
+                    "shut": true
+                }
+            },
+            "fx": [
+                "shutter@0.3",
+                "shake@0.8"
+            ],
+            "word": "All of it, paused.",
+            "wordAt": 1.2,
+            "sfx": [
+                "clunk@0.3",
+                "wobble@0.8",
+                "sadtrombone@1.3"
+            ],
+            "focus": [
+                800,
+                500
+            ],
+            "v": {
+                "props": {
+                    "building": {
+                        "x": 450,
+                        "y": 1250,
+                        "scale": 0.8,
+                        "sign": "TRAINING",
+                        "shut": true
+                    }
+                }
+            }
+        },
+        {
+            "id": "allowlist",
+            "bg": "halftone",
+            "props": {
+                "whiteboard": {
+                    "x": 800,
+                    "y": 320,
+                    "scale": 0.85,
+                    "text": "DNS: ALLOWED\nNAMES ONLY."
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "defeated",
+                    "x": 800,
+                    "y": 920,
+                    "scale": 0.5,
+                    "n": 8,
+                    "arm": "hold",
+                    "role": "shrug"
+                }
+            ],
+            "fx": [
+                "shrug@0.6",
+                "stamp@2.2"
+            ],
+            "sfx": [
+                "squeak@0.6",
+                "stamp@2.2"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "props": {
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 480,
+                        "scale": 0.9,
+                        "text": "DNS: ALLOWED\nNAMES ONLY."
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "defeated",
+                        "x": 450,
+                        "y": 1440,
+                        "scale": 0.45,
+                        "n": 8,
+                        "arm": "hold",
+                        "role": "shrug"
+                    }
+                ]
+            },
+            "still": true,
+            "stillAt": 2.7
+        },
+        {
+            "id": "next",
+            "bg": "blueprint",
+            "tag": "A fresh run, starting soon",
+            "props": {
+                "door": {
+                    "x": 1200,
+                    "y": 900,
+                    "scale": 0.85
+                },
+                "poster": {
+                    "x": 400,
+                    "y": 320,
+                    "scale": 0.6,
+                    "text": "NEW RUN"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 1200,
+                    "y": 900,
+                    "scale": 0.5,
+                    "n": 9,
+                    "arm": "salute"
+                }
+            ],
+            "fx": [
+                "door@0.3",
+                "charge@0.4",
+                "salute@1.2",
+                "continued@2.1"
+            ],
+            "sfx": [
+                "door@0.3",
+                "slideup@0.4",
+                "snap@1.2",
+                "freeze@2.1"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "door": {
+                        "x": 640,
+                        "y": 1250,
+                        "scale": 0.6
+                    },
+                    "poster": {
+                        "x": 260,
+                        "y": 400,
+                        "scale": 0.5,
+                        "text": "NEW RUN"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 640,
+                        "y": 1460,
+                        "scale": 0.4,
+                        "n": 9,
+                        "arm": "salute"
+                    }
+                ]
+            }
+        }
+    ]
+}
