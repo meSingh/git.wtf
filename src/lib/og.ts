@@ -63,7 +63,7 @@ export async function shareSvg(opts: { title: string; status: string; days?: num
     // satori sizes the content box, so width and height leave room for the padding: 1200 x 630 overall.
     const tree = h('div', { width: 1088, height: 544, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', background: BLACK, color: PAPER, padding: '40px 56px 46px', position: 'relative', overflow: 'hidden' }, [
         h('div', { display: 'flex', alignItems: 'center', justifyContent: 'space-between' }, [
-            h('div', { fontFamily: 'Big Shoulders Display', fontSize: 44, letterSpacing: 1, color: PAPER }, 'DAYS SINCE THE LAST GIT FUCK-UP'),
+            h('div', { fontFamily: 'Big Shoulders Display', fontSize: 44, letterSpacing: 1, color: PAPER }, 'DAYS SINCE THE LAST GIT AND AI FUCK-UP'),
             h('div', { fontFamily: 'JetBrains Mono', fontSize: 22, color: GREY }, opts.date ?? ''),
         ]),
         h('div', { display: 'flex', alignItems: 'center', gap: 44, height: 340 }, [
@@ -116,7 +116,7 @@ export async function pageCardSvg(c: PageCard): Promise<string> {
         ]),
         h('div', { display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 16, height: 62 }, [
             h('div', { display: 'flex', gap: 5 }, digits.map(tile)),
-            h('div', { display: 'flex', fontFamily: 'JetBrains Mono', fontSize: 21, color: GREY, width: 300, lineHeight: 1.25 }, 'days since the last Git or AI fuck-up'),
+            h('div', { display: 'flex', fontFamily: 'JetBrains Mono', fontSize: 21, color: GREY, width: 300, lineHeight: 1.25 }, 'days since the last Git and AI fuck-up'),
         ]),
         stripes(),
     ]);

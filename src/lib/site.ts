@@ -20,11 +20,11 @@ export function published(list: Incident[]): Incident[] {
 
 export const SITE = {
     name: 'git.wtf',
-    title: 'Days since the last Git or AI fuck-up',
+    title: 'Days since the last Git and AI fuck-up',
     // The hero line, spelt out for screen readers and labels (Content, notes/content/homepage-v5-copy.md).
-    line: 'Days since the last Git or AI fuck-up',
-    // the same line as the hero's giant words (Content's pick: GIT/AI reads as one word on the wheel)
-    lineWords: ['DAYS', 'SINCE', 'THE', 'LAST', 'GIT/AI', 'FUCK-UP'],
+    line: 'Days since the last Git and AI fuck-up',
+    // the same line as the hero's giant words; GIT & AI stays one word on the wheel (Mandeep, 8 Nov 2026: "Git and AI", not "or")
+    lineWords: ['DAYS', 'SINCE', 'THE', 'LAST', 'GIT & AI', 'FUCK-UP'],
     // The credit line, his exact words; the emphasised parts are marked by the footer.
     credit: { name: 'Mandeep Singh', before: 'an ', strong: 'AI Architect', after: " who reviews his agents' commits. ", last: '“Mostly.”' },
     // The project's own accounts, from this one list; all four show (Mandeep, v6). X is real. The other three are
@@ -40,7 +40,7 @@ export const SITE = {
     gtm: 'GTM-PPTBFGT',
     // the score's line, as it was
     tagline: "AI killed our blog. We're keeping score.",
-    description: "A running count of the days since the last Git or AI fuck-up, each new one retold as an anime episode. Plus the old git.wtf blog on fixing Git, kept as it was.",
+    description: "A running count of the days since the last Git and AI fuck-up, each new one retold as an anime episode. Plus the old git.wtf blog on fixing Git, kept as it was.",
     repo: 'meSingh/git.wtf',
     // where a mailed confession goes; empty until Mandeep names an address, and the mail link stays hidden till then
     confessEmail: '',
