@@ -21,8 +21,10 @@ source: rewritten
 <h2>The incidents and episodes</h2>
 <p>git.wtf is a parody site about AI and the people who work with it. Each incident starts from a real event in a public report, linked as its source, and is retold as comedy. The episodes exaggerate on purpose: scenes, lines, characters and timings are often invented for the joke, so not everything in them happened the way it is shown. Nothing here is news or a statement of fact about any person, project or company.</p>
 <p>The characters are cartoons. DEV, the agents and THE EXTRA stand in for nobody in particular. If you are in one of the stories and think it crosses a line, <a href="https://github.com/meSingh/git.wtf/issues">open an issue</a> and we will look at it.</p>
-<h2>Sharing</h2>
-<p>Share the incidents, the episodes and the images as much as you like, with a link back to git.wtf.</p>
+<h2>The artwork, and sharing it</h2>
+<p>The episodes, illustrations, characters, stills and other artwork on git.wtf are copyright git.wtf. All rights reserved.</p>
+<p>Share them as much as you like: post an image, link an episode or send one to a friend. Keep the git.wtf mark on the image and link back to git.wtf.</p>
+<p>Sharing is all they are for. You may not use the artwork in your own projects or for any commercial use without our written permission. To ask, <a href="https://github.com/meSingh/git.wtf/issues">open an issue</a>.</p>
 <h2>Names</h2>
 <p>GitHub, X, LinkedIn, Instagram, YouTube and the tools named in incidents belong to their owners. Naming them here is not an endorsement, and they do not endorse us.</p>
 <h2>Changes</h2>
