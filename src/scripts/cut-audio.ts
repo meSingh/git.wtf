@@ -87,6 +87,7 @@ export class CutAudio {
                 this.allCues().forEach((c) => soundsFor(this.m, this.incident, c).forEach((s) => s.web && need.add(s.web)));
                 if (!need.size) return false;
                 this.ctx = new AudioContext();
+                this.ctx.onstatechange = () => this.onState?.();
                 this.master = this.ctx.createGain();
                 this.master.gain.value = this.on ? 1 : 0;
                 this.master.connect(this.ctx.destination);
@@ -189,6 +190,16 @@ export class CutAudio {
         this.pending.forEach((s) => { try { s.stop(); } catch { /* already over */ } });
         this.pending = [];
         if (this.musicBus && this.ctx) { this.musicBus.gain.cancelScheduledValues(this.ctx.currentTime); this.musicBus.gain.setTargetAtTime(1, this.ctx.currentTime, 0.1); }
+    }
+
+    /** Whether sound can actually be heard: a browser keeps audio suspended until the viewer clicks or presses a key. */
+    get live() { return !!this.ctx && this.ctx.state === 'running'; }
+    /** Called when the audio starts or stops being able to play, so the button can show the truth. */
+    onState: (() => void) | null = null;
+    /** After a click or key: start the sound the viewer chose (it is remembered across visits). */
+    unlock() {
+        if (!this.on) return Promise.resolve(false);
+        return this.start().then((ok) => { if (ok && this.ctx && this.ctx.state !== 'running') return this.ctx.resume().then(() => true, () => false); return ok; });
     }
 
     toggle() {

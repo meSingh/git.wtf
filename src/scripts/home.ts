@@ -140,10 +140,7 @@ function playCut(h: import('./anime').CutHandle, autoplay: boolean) {
     if (!sec) return;
     const count = q('[data-cut-count]');
     const down = q('[data-cut-down]');
-    // the sound button comes with the player; it moves into the bar beside Replay
-    const slot = q('[data-cut-sound-slot]');
-    const sound = q('#cut-stage .cut-sound');
-    if (slot && sound) slot.appendChild(sound);
+    // the sound button stays in the player, top right (Mandeep, 8 Nov 2026)
     const n = h.n;
     let k = 0;
     let timer: gsap.core.Tween | null = null;

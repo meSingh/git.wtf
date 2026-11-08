@@ -145,7 +145,14 @@
   "tbc": "sfx-tbc",
   "whistle-fall": "sfx-fall-whistle",
   "whistle-gate": "sfx-ref-whistle",
-  "hiss": "sfx-hiss"
+  "hiss": "sfx-hiss",
+  "slideup": "sfx-toon-slideup",
+  "spring": "sfx-toon-spring",
+  "zip": "sfx-toon-zip",
+  "honk": "sfx-toon-honk",
+  "wobble": "sfx-toon-wobble",
+  "sadtrombone": "sfx-toon-sadtrombone",
+  "bop": "sfx-toon-bop"
  },
  "music": {
   "theme": "bed-heroic",
@@ -1018,6 +1025,83 @@
     "narrator"
    ],
    "duration": 5.028
+  },
+  {
+   "id": "sfx-toon-slideup",
+   "web": "web/sfx-toon-slideup.mp3",
+   "kind": "sfx",
+   "tags": [
+    "toon",
+    "slideup",
+    "slide whistle up"
+   ],
+   "duration": 0.6
+  },
+  {
+   "id": "sfx-toon-spring",
+   "web": "web/sfx-toon-spring.mp3",
+   "kind": "sfx",
+   "tags": [
+    "toon",
+    "spring",
+    "spring boing"
+   ],
+   "duration": 0.95
+  },
+  {
+   "id": "sfx-toon-zip",
+   "web": "web/sfx-toon-zip.mp3",
+   "kind": "sfx",
+   "tags": [
+    "toon",
+    "zip",
+    "zip, running off"
+   ],
+   "duration": 0.22
+  },
+  {
+   "id": "sfx-toon-honk",
+   "web": "web/sfx-toon-honk.mp3",
+   "kind": "sfx",
+   "tags": [
+    "toon",
+    "honk",
+    "bike horn honk-honk"
+   ],
+   "duration": 0.46
+  },
+  {
+   "id": "sfx-toon-wobble",
+   "web": "web/sfx-toon-wobble.mp3",
+   "kind": "sfx",
+   "tags": [
+    "toon",
+    "wobble",
+    "dazed wobble"
+   ],
+   "duration": 0.8
+  },
+  {
+   "id": "sfx-toon-sadtrombone",
+   "web": "web/sfx-toon-sadtrombone.mp3",
+   "kind": "sfx",
+   "tags": [
+    "toon",
+    "sadtrombone",
+    "sad trombone, wah wah wah waaah"
+   ],
+   "duration": 2.18
+  },
+  {
+   "id": "sfx-toon-bop",
+   "web": "web/sfx-toon-bop.mp3",
+   "kind": "sfx",
+   "tags": [
+    "toon",
+    "bop",
+    "cartoon bop on the head"
+   ],
+   "duration": 0.18
   }
  ]
 }

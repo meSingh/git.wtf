@@ -1,17 +1,30 @@
 /* The anime cutscene player: the frame, its controls, and the cel-shaded ink of the kit. Shared by every cut page. */
 .cut-page { padding-top: var(--bar); }
-    .cut-wrap { position: relative; height: calc(100svh - var(--bar)); overflow: hidden; background: #0a0a0a; cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; }
+    /* the box takes the frame's shape and the whole frame shows in it; a strip of the next section stays in view */
+    .cut-wrap { --cut-room: calc(100svh - var(--bar) - 5rem); position: relative; height: min(var(--cut-room), calc(100vw * 9 / 16)); overflow: hidden; background: #0a0a0a; cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; }
     .cut-wrap.at-end, .cut-wrap.still { cursor: default; }
     .cutscene { display: block; width: 100%; height: 100%; }
-    .cut-hint, .cut-count { position: absolute; bottom: 0.9rem; margin: 0; font-family: var(--mono); font-size: 0.78rem; color: var(--grey); pointer-events: none; }
+    @media (max-aspect-ratio: 4/5) { .cut-wrap { height: min(var(--cut-room), calc(100vw * 16 / 9)); } }
+    .cut-wrap[data-frame='16:9'] { height: min(var(--cut-room), calc(100vw * 9 / 16)); }
+    .cut-wrap[data-frame='9:16'] { height: min(var(--cut-room), calc(100vw * 16 / 9)); }
+    /* the hint, the count and Skip sit in a strip under the frame, never over the words in it */
+    .cut-wrap { box-sizing: content-box; padding-bottom: 2.6rem; }
+    .cut-wrap.rendering { padding-bottom: 0; height: 100svh !important; }
+    html:has(.cut-wrap.rendering) .cut-page { padding-top: 0; }
+    .cut-hint, .cut-count { position: absolute; bottom: 0.85rem; margin: 0; font-family: var(--mono); font-size: 0.78rem; color: var(--grey); pointer-events: none; }
     .cut-hint { left: 1rem; }
     .cut-hint[hidden] { display: none; }
-    .cut-count { right: 1rem; }
-    .cut-skip { position: absolute; top: 0.8rem; right: 1rem; appearance: none; background: rgba(10, 10, 10, 0.6); border: 1px solid var(--line-2); border-radius: 2px; color: var(--paper); font: 400 0.78rem/1 var(--mono); padding: 0.55em 0.8em; cursor: pointer; }
+    .cut-count { left: 50%; transform: translateX(-50%); }
+    .cut-skip { position: absolute; bottom: 0.6rem; right: 1rem; appearance: none; background: rgba(10, 10, 10, 0.6); border: 1px solid var(--line-2); border-radius: 2px; color: var(--paper); font: 400 0.78rem/1 var(--mono); padding: 0.55em 0.8em; cursor: pointer; }
     .cut-skip:hover { border-color: var(--yellow); color: var(--yellow); }
-    .cut-sound { position: absolute; top: 0.8rem; left: 1rem; appearance: none; background: rgba(10, 10, 10, 0.6); border: 1px solid var(--line-2); border-radius: 2px; color: var(--paper); font: 400 0.78rem/1 var(--mono); padding: 0.55em 0.8em; cursor: pointer; }
+    /* the speaker, top right: off is loud yellow so it reads as "press me" (a browser only lets sound start after a click) */
+    .cut-sound { position: absolute; top: 0.8rem; right: 1rem; z-index: 5; appearance: none; display: inline-flex; align-items: center; gap: 0.5em; min-height: 40px; background: rgba(10, 10, 10, 0.72); border: 1px solid rgba(242, 240, 234, 0.55); border-radius: 999px; color: var(--paper); font: 600 0.82rem/1 var(--mono); padding: 0.5em 0.95em 0.5em 0.75em; cursor: pointer; }
+    .cut-sound::before { content: ''; width: 1.25em; height: 1.25em; background: currentColor; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z'/%3E%3C/svg%3E") center / contain no-repeat; }
+    .cut-sound[aria-pressed='false'] { background: var(--yellow); border-color: var(--yellow); color: var(--black); }
+    .cut-sound[aria-pressed='false']::before { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 5V4L7 9H3zm13.6 3 2.7-2.7-1.2-1.2-2.7 2.7-2.7-2.7-1.2 1.2 2.7 2.7-2.7 2.7 1.2 1.2 2.7-2.7 2.7 2.7 1.2-1.2z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 5V4L7 9H3zm13.6 3 2.7-2.7-1.2-1.2-2.7 2.7-2.7-2.7-1.2 1.2 2.7 2.7-2.7 2.7 1.2 1.2 2.7-2.7 2.7 2.7 1.2-1.2z'/%3E%3C/svg%3E"); }
+    .cut-sound:hover { border-color: var(--yellow); }
     .cut-sound[hidden] { display: none; }
-    .cut-sound[aria-pressed='false'] { color: var(--grey); }
+    
     .cut-wrap.rendering .cut-skip, .cut-wrap.rendering .cut-sound, .cut-wrap.rendering .cut-hint, .cut-wrap.rendering .cut-count { display: none; }
     .cut-wrap.at-end .cut-skip, .cut-wrap.still .cut-skip, .cut-wrap.still .cut-count { display: none; }
     .cut-after { width: min(var(--col), 100% - 2rem); margin: 2rem auto 0; }
@@ -132,16 +145,16 @@
     html:has(.cut-wrap.still) .cut-after { visibility: visible; }
 
     /* v2 kit: DEV's room, inside the folder, the night, and the props the story needs */
-    .cutscene .shot.bg-room .bg { fill: #1b1d24; }
+    .cutscene .shot.bg-room .bg, .cutscene .shot.bg-office .bg { fill: var(--a-wall, #1b1d24); }
     .cutscene .shot.bg-night .bg { fill: #0c0d12; }
-    .cutscene .shot.bg-paper .bg { fill: #e6cf7a; }
-    .cutscene .floor { fill: #121318; }
+    .cutscene .shot.bg-paper .bg { fill: var(--a-paper, #e6cf7a); }
+    .cutscene .floor { fill: var(--a-floor, #121318); }
     .cutscene .folds path { fill: none; stroke: #c9b05a; stroke-width: 10; }
     .cutscene .streaks path { stroke: #f2f0ea; stroke-width: 6; stroke-linecap: round; opacity: 0.5; }
     .cutscene .lamp .cord { stroke: #5d5a53; stroke-width: 6; }
     .cutscene .lamp .shade { fill: #2e2d2a; stroke: #0a0a0a; stroke-width: 6; }
     .cutscene .lamp .bulb { fill: #ffd400; }
-    .cutscene .desk rect { fill: #3a3936; stroke: #0a0a0a; stroke-width: 6; }
+    .cutscene .desk rect { fill: var(--a-desk, #3a3936); stroke: #0a0a0a; stroke-width: 6; }
     .cutscene .riser { fill: #2e2d2a; stroke: #0a0a0a; stroke-width: 5; }
     .cutscene .folder .label { fill: #0a0a0a; font-family: var(--display); font-weight: 900; font-size: 48px; text-anchor: middle; letter-spacing: 1px; }
     .cutscene .folder.empty .hollow { fill: #c9b05a; stroke: #0a0a0a; stroke-width: 6; }
@@ -161,7 +174,7 @@
     .cutscene .door .leaf { fill: #5d5a53; stroke: #0a0a0a; stroke-width: 6; }
     .cutscene .door .knob { fill: #ffd400; }
     .cutscene .door .jamb { fill: none; stroke: #2e2d2a; stroke-width: 22; }
-    .cutscene .window .sky, .cutscene .skylight .sky { fill: #2b3140; }
+    .cutscene .window .sky, .cutscene .skylight .sky { fill: var(--a-sky, #2b3140); }
     .cutscene .window .bars, .cutscene .skylight .bars { fill: none; stroke: #0a0a0a; stroke-width: 14; }
     .cutscene .skylight .star { fill: #f2f0ea; }
     .cutscene .farwindow .wall { fill: #17181e; }
@@ -196,6 +209,84 @@
     .cutscene .titlerows .lines path { fill: #8a877f; }
     .cutscene .line .who { font-size: 34px; }
     .cutscene .bg-paper .line text, .cutscene .bg-flat .line text { stroke-width: 12; }
+    /* v3 kit (8 Nov 2026): grounds, props, the hook and the tag. Rooms take the episode's palette (--a-*) */
+    .cutscene .shot.bg-servers .bg { fill: #0d1626; }
+    .cutscene .shot.bg-skyline .bg { fill: var(--a-sky2, #0c0d12); }
+    .cutscene .shot.bg-blueprint .bg { fill: #1d4f91; }
+    .cutscene .shot.bg-halftone .bg { fill: var(--a-accent, #ffd400); }
+    .cutscene .shot.bg-sunburst .bg { fill: var(--a-accent, #ffd400); }
+    .cutscene .g-burst path { fill: #0a0a0a; opacity: 0.14; }
+    .cutscene .bg-halftone .word text, .cutscene .bg-sunburst .word text { fill: #f2f0ea; stroke: #0a0a0a; }
+    .cutscene .g-office .wains { fill: #0a0a0a; opacity: 0.35; }
+    .cutscene .blinds .pane { fill: var(--a-sky, #2b3140); stroke: #0a0a0a; stroke-width: 14; }
+    .cutscene .blinds .slat { fill: #e8e2d2; stroke: #0a0a0a; stroke-width: 3; opacity: 0.92; }
+    .cutscene .blinds .sill { stroke: #0a0a0a; stroke-width: 18; }
+    .cutscene .blinds .cordl { stroke: #e8e2d2; stroke-width: 4; }
+    .cutscene .rack .body { fill: #1a2438; stroke: #0a0a0a; stroke-width: 8; }
+    .cutscene .rack .unit { fill: #24314a; stroke: #0a0a0a; stroke-width: 4; }
+    .cutscene .rack .vent { stroke: #0d1626; stroke-width: 5; }
+    .cutscene .led-0 { fill: #3ee06a; } .cutscene .led-1 { fill: #ffd400; } .cutscene .led-2 { fill: #5fb8ff; }
+    .cutscene .g-skyline .moon { fill: #f2f0ea; opacity: 0.9; }
+    .cutscene .g-skyline .bldg { fill: #0a0a0a; opacity: 0.88; }
+    .cutscene .g-skyline .win { fill: #ffd400; opacity: 0.85; }
+    .cutscene .g-skyline .ledge { fill: #17181e; }
+    .cutscene .clock .face { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 10; }
+    .cutscene .clock .tick { stroke: #0a0a0a; stroke-width: 6; }
+    .cutscene .clock .hh { stroke: #0a0a0a; stroke-width: 12; stroke-linecap: round; }
+    .cutscene .clock .mh { stroke: #d0312d; stroke-width: 7; stroke-linecap: round; }
+    .cutscene .clock .pin { fill: #0a0a0a; }
+    .cutscene .poster .frame { fill: #0a0a0a; }
+    .cutscene .poster .art { fill: var(--a-accent, #ffd400); }
+    .cutscene .poster text { fill: #0a0a0a; font-family: var(--display); font-weight: 900; font-size: 54px; text-anchor: middle; }
+    .cutscene .whiteboard .board { fill: #f7f5ef; stroke: #8a877f; stroke-width: 14; }
+    .cutscene .whiteboard .tray { fill: #8a877f; }
+    .cutscene .whiteboard text { fill: #2457c5; font-family: var(--body); font-weight: 700; font-style: italic; font-size: 52px; }
+    .cutscene .building .roof { fill: #8a3b2e; stroke: #0a0a0a; stroke-width: 8; stroke-linejoin: round; }
+    .cutscene .building .wallb { fill: #d9d2c3; stroke: #0a0a0a; stroke-width: 8; }
+    .cutscene .building .col { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 5; }
+    .cutscene .building .signb { fill: #0a0a0a; }
+    .cutscene .building text { fill: #ffd400; font-family: var(--display); font-weight: 900; font-size: 52px; text-anchor: middle; }
+    .cutscene .building .opening { fill: #0a0a0a; }
+    .cutscene .building .shutter rect { fill: #9a978f; stroke: #0a0a0a; stroke-width: 6; }
+    .cutscene .building .shutter path { stroke: #5d5a53; stroke-width: 5; }
+    .cutscene .building[data-shut='0'] .shutter { transform: scaleY(0); }
+    .cutscene .building .step { fill: #5d5a53; }
+    .cutscene .terminal .monitor { fill: #0a0a0a; stroke: #2e2d2a; stroke-width: 14; }
+    .cutscene .terminal .screen { fill: #0f1a12; }
+    .cutscene .terminal .stand { fill: #2e2d2a; stroke: #0a0a0a; stroke-width: 6; }
+    .cutscene .terminal .tline { fill: #3ee06a; font-family: var(--mono); font-size: 44px; }
+    .cutscene .terminal.red .tline { fill: #ff5a4d; }
+    .cutscene .terminal .cursor { fill: #3ee06a; }
+    .cutscene .terminal.red .cursor { fill: #ff5a4d; }
+    .cutscene .plant .pot { fill: #c2643a; stroke: #0a0a0a; stroke-width: 7; }
+    .cutscene .plant .rim { fill: #a4502b; stroke: #0a0a0a; stroke-width: 6; }
+    .cutscene .plant ellipse { fill: var(--a-leaf, #3f8f5a); stroke: #0a0a0a; stroke-width: 6; }
+    .cutscene .plant .stem { stroke: #0a0a0a; stroke-width: 8; }
+    .cutscene .bin .can { fill: #5d6573; stroke: #0a0a0a; stroke-width: 7; }
+    .cutscene .bin .ribs { stroke: #3e4450; stroke-width: 6; }
+    .cutscene .bin .lip { fill: #7a8291; stroke: #0a0a0a; stroke-width: 6; }
+    .cutscene .logbook .cover { fill: #7a2f2a; stroke: #0a0a0a; stroke-width: 8; }
+    .cutscene .logbook .pg, .cutscene .logbook .leafp { fill: #f7f1de; stroke: #0a0a0a; stroke-width: 5; }
+    .cutscene .logbook .ink { stroke: #5d5a53; stroke-width: 6; stroke-linecap: round; }
+    .cutscene .logbook .spine { stroke: #0a0a0a; stroke-width: 6; }
+    .cutscene .logbook text { fill: #d0312d; font-family: var(--display); font-weight: 900; font-size: 40px; text-anchor: middle; }
+    .cutscene .parcel .boxp { fill: #c8955a; stroke: #0a0a0a; stroke-width: 7; }
+    .cutscene .parcel .tape { fill: #e8c48a; }
+    .cutscene .parcel .lbl { fill: #f7f5ef; stroke: #0a0a0a; stroke-width: 4; }
+    .cutscene .parcel text { fill: #0a0a0a; font-family: var(--display); font-weight: 900; font-size: 34px; text-anchor: middle; }
+    .cutscene .bulldozer .body, .cutscene .bulldozer .cab { fill: #ffb000; stroke: #0a0a0a; stroke-width: 8; stroke-linejoin: round; }
+    .cutscene .bulldozer .glass { fill: #9fd0ff; stroke: #0a0a0a; stroke-width: 6; }
+    .cutscene .bulldozer .pipe, .cutscene .bulldozer .armb { fill: #2e2d2a; stroke: #0a0a0a; stroke-width: 6; }
+    .cutscene .bulldozer .blade { fill: #8a877f; stroke: #0a0a0a; stroke-width: 8; stroke-linejoin: round; }
+    .cutscene .bulldozer .track { fill: #2e2d2a; stroke: #0a0a0a; stroke-width: 8; }
+    .cutscene .bulldozer .wheel { fill: #5d5a53; stroke: #0a0a0a; stroke-width: 6; }
+    .cutscene .bulldozer text { fill: #0a0a0a; font-family: var(--display); font-weight: 900; font-size: 52px; text-anchor: middle; }
+    .cutscene .hook rect { fill: #0a0a0a; opacity: 0.88; }
+    .cutscene .hook text { fill: #f2f0ea; font-family: var(--display); font-weight: 900; text-anchor: middle; text-transform: uppercase; letter-spacing: 1px; }
+    .cutscene .hook .hi { fill: #ffd400; }
+    .cutscene .tag rect { fill: #ffd400; stroke: #0a0a0a; stroke-width: 5; }
+    .cutscene .tag text { fill: #0a0a0a; font-family: var(--mono); font-weight: 700; font-size: 32px; text-transform: uppercase; }
+    .cutscene .stampmark .epl { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 8; paint-order: stroke; font-family: var(--display); font-weight: 900; font-size: 44px; text-anchor: middle; text-transform: uppercase; letter-spacing: 1px; }
     /* the recorder's view: the cut alone, the whole viewport, no site bar */
     html:has(.cut-wrap.rendering) header.bar { display: none; }
     html:has(.cut-wrap.rendering) .cut-page { padding-top: 0; }

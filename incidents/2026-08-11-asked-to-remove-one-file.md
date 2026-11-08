@@ -12,7 +12,7 @@ detail:
   - "A worker agent was told to delete one cache file and nothing else."
   - "It used `git clean -fX` on that one file. Git printed `Removing data/` and took the whole ignored folder, database and all."
   - "A Windows snapshot from 26 minutes earlier had a copy. It matched byte for byte."
-story_alt: "DEV sips from his mug beside a desk with a full folder labelled DATA, NOT IN GIT; the small grey helper stands by a photocopier and an agent still holds a broom."
+story_alt: "DEV looks into an empty yellow folder as his mug falls from his hand; an agent leans on its broom beside a swept-up heap of pages, and the small grey helper stands by the copier with a tall stack of copies."
 panels:
   - scene: "AGENT 1 sticks \"ONE FILE. NOTHING ELSE.\" on a folder; AGENT 2 salutes"
   - scene: "A gate bonks AGENT 2's broom; AGENT 2 reaches for a bigger one"

@@ -1,34 +1,121 @@
 {
  "incident": "2026-07-31-twelve-agents-one-working-directory",
- "episode": "Episode 31",
+ "episode": "Episode 67",
  "title": "The Great Tidying!",
  "shots": [
   {
-   "id": "title",
+   "id": "hook",
    "bg": "black",
-   "fx": [
-    "titlecard",
-    "shake@0.55"
-   ],
-   "say": {
-    "who": "NARRATOR",
-    "text": "Episode thirty one. The Great Tidying!",
-    "at": 0.7
+   "props": {
+    "box": {
+     "x": 889,
+     "y": 369,
+     "icon": "lifebuoy"
+    },
+    "window": {
+     "x": 1380,
+     "y": 420
+    },
+    "broom": {
+     "x": 1100,
+     "y": 520
+    }
    },
-   "sfx": [
-    "sting@0.55"
+   "cast": [
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "arm": "up",
+     "x": 700,
+     "y": 960,
+     "scale": 0.85,
+     "n": 5,
+     "role": "hero"
+    },
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "arm": "broom",
+     "x": 1100,
+     "y": 960,
+     "scale": 0.85,
+     "n": 6,
+     "flip": true,
+     "role": "sweeper"
+    }
    ],
-   "music": "theme",
+   "fx": [
+    "impact@0.1",
+    "behind@1.2",
+    "sweep@1.8",
+    "shake@1.8",
+    "files@1.9"
+   ],
+   "sfx": [
+    "herochord@0.1",
+    "fwip@1.2",
+    "broom@1.8",
+    "impact@1.9",
+    "flutter@2.0",
+    "slideup@1.80"
+   ],
+   "music": "heroic",
+   "focus": [
+    900,
+    520
+   ],
    "v": {
+    "cast": [
+     {
+      "who": "agent",
+      "pose": "dramatic",
+      "arm": "up",
+      "x": 380,
+      "y": 1380,
+      "scale": 0.75,
+      "n": 5,
+      "role": "hero"
+     },
+     {
+      "who": "agent",
+      "pose": "dramatic",
+      "arm": "broom",
+      "x": 620,
+      "y": 1380,
+      "scale": 0.75,
+      "n": 6,
+      "flip": true,
+      "role": "sweeper"
+     }
+    ],
+    "props": {
+     "box": {
+      "x": 546,
+      "y": 847,
+      "icon": "lifebuoy"
+     },
+     "skylight": {
+      "x": 450,
+      "y": 120
+     },
+     "broom": {
+      "x": 600,
+      "y": 700
+     }
+    },
     "fx": [
-     "titlerows",
-     "shake@0.9"
+     "impact@0.1",
+     "behind@1.2",
+     "sweepup@1.8",
+     "shake@1.8",
+     "filesup@1.9"
     ]
-   }
+   },
+   "hook": "12 AI agents.\n*One* folder."
   },
   {
    "id": "work",
-   "bg": "room",
+   "bg": "office",
    "props": {
     "desk": {
      "x": 760,
@@ -70,6 +157,16 @@
      "x": 640,
      "y": 852,
      "scale": 0.6
+    },
+    "clock": {
+     "x": 240,
+     "y": 260,
+     "scale": 0.8
+    },
+    "plant": {
+     "x": 1500,
+     "y": 860,
+     "scale": 0.7
     }
    },
    "cast": [
@@ -178,6 +275,11 @@
       "x": 620,
       "y": 1040,
       "scale": 0.55
+     },
+     "clock": {
+      "x": 150,
+      "y": 520,
+      "scale": 0.6
      }
     },
     "fx": [
@@ -191,7 +293,8 @@
      "yawn@3.4"
     ]
    },
-   "still": true
+   "still": true,
+   "tag": "Thirty minutes earlier"
   },
   {
    "id": "job",
@@ -342,17 +445,15 @@
     "popup@1.8",
     "salute@2.2",
     "exit@2.8",
-    "door@3.8"
+    "door@3.8",
+    "nod@3.0"
    ],
-   "say": {
-    "who": "DEV",
-    "text": "Tidy up. Back in thirty.",
-    "at": 0.9
-   },
    "sfx": [
     "slap@0.6",
     "snap@2.2",
-    "click@3.8"
+    "click@3.8",
+    "pop@2.20",
+    "zip@2.80"
    ],
    "music": "calm",
    "focus": [
@@ -558,7 +659,8 @@
    "sfx": [
     "shing@0.3",
     "shing@0.8",
-    "shing@1.3"
+    "shing@1.3",
+    "plink@0.6"
    ],
    "music": "heroic",
    "v": {
@@ -649,7 +751,8 @@
     "whoosh@0.2",
     "whoosh@0.4",
     "whoosh@0.6",
-    "creak@0.9"
+    "creak@0.9",
+    "zip@0.00"
    ],
    "music": "heroic",
    "focus": [
@@ -806,7 +909,8 @@
     "scribble@0.3",
     "squeak@0.9",
     "bonk@2.1",
-    "copierhum"
+    "copierhum",
+    "spring@2.18"
    ],
    "music": "heroic",
    "focus": [
@@ -925,17 +1029,13 @@
    ],
    "word": "Cleaned.",
    "wordAt": 2.8,
-   "say": {
-    "who": "AGENT 6",
-    "text": "Cleaned.",
-    "at": 2.8
-   },
    "sfx": [
     "herochord@0.1",
     "fwip@1.2",
     "broom@1.8",
     "impact@1.9",
-    "flutter@2.0"
+    "flutter@2.0",
+    "slideup@1.80"
    ],
    "music": "heroic",
    "focus": [
@@ -1115,7 +1215,8 @@
    "lineAt": 3.2,
    "sfx": [
     "rain",
-    "plink@2.3"
+    "plink@2.3",
+    "sadtrombone@1.0"
    ],
    "music": "sad",
    "focus": [
@@ -1315,7 +1416,9 @@
    ],
    "sfx": [
     "creak@0.2",
-    "drip@2.6"
+    "drip@2.6",
+    "squeak@1.6",
+    "pop@2.4"
    ],
    "music": "none",
    "focus": [
@@ -1436,7 +1539,8 @@
     "heartbeat",
     "whistle-fall@2.0",
     "shatter@2.6",
-    "hiss@3.0"
+    "hiss@3.0",
+    "sadtrombone@3.00"
    ],
    "music": "none",
    "focus": [
@@ -1610,13 +1714,9 @@
     "jab@0.9",
     "shake@0.9"
    ],
-   "say": {
-    "who": "AGENTS",
-    "text": "Seven! Three! Twelve! Five!",
-    "at": 0.5
-   },
    "sfx": [
-    "comicsting@0.4"
+    "comicsting@0.4",
+    "bop@0.40"
    ],
    "music": "comic",
    "focus": [
@@ -1799,9 +1899,9 @@
    },
    "lineAt": 1.8,
    "sfx": [
-    "cough@0.1",
     "shuffle@0.8",
-    "chord@1.8"
+    "chord@1.8",
+    "slideup@0.80"
    ],
    "music": "soft",
    "focus": [
@@ -1903,7 +2003,8 @@
     "rewind@0.3",
     "whirr@0.5",
     "whistle-gate@2.4",
-    "clunk@2.6"
+    "clunk@2.6",
+    "spring@2.7"
    ],
    "music": "heroic",
    "focus": [
@@ -2037,7 +2138,9 @@
     "bonk@2.1",
     "bonk@2.3",
     "sip@1.0",
-    "stamp@3.4"
+    "stamp@3.4",
+    "spring@0.68",
+    "spring@1.38"
    ],
    "music": "comic",
    "focus": [
@@ -2115,7 +2218,7 @@
   },
   {
    "id": "next",
-   "bg": "night",
+   "bg": "skyline",
    "props": {
     "desk": {
      "x": 800,
@@ -2148,11 +2251,6 @@
     "glint@1.4",
     "continued@2.0"
    ],
-   "say": {
-    "who": "NARRATOR",
-    "text": "To be continued!",
-    "at": 2.1
-   },
    "sfx": [
     "shing@1.4",
     "freeze@2.0"
@@ -2189,8 +2287,10 @@
       "scale": 0.3,
       "n": 7
      }
-    ]
+    ],
+    "bg": "skyline"
    }
   }
- ]
+ ],
+ "theme": "midnight"
 }

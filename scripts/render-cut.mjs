@@ -2,7 +2,7 @@
 // Draws an incident's key shots and its share image from its cutscene, for the incident page.
 // Usage: node scripts/render-cut.mjs <incident id> [--base http://127.0.0.1:8787]
 // Needs the site served (npm run build && npm run preview) and Playwright (npm i --no-save playwright).
-// Writes incidents/<id>/cut/still-NN-<shot id>.webp (1280 wide), poster.webp and poster-tall.webp (the title card in
+// Writes incidents/<id>/cut/still-NN-<shot id>.webp (1280 wide), poster.webp and poster-tall.webp (the opening hook in
 // each frame, for the homepage's play button) and incidents/<id>/share.png (1200 x 630).
 // Key shots: those marked "still": true in the shot list, else every shot with a line or an impact word, and the end.
 import { existsSync, mkdirSync, readFileSync } from 'node:fs';
@@ -18,7 +18,8 @@ const listFile = path.join(root, 'src/anime/shots', `${id}.json`);
 if (!existsSync(listFile)) { console.error(`no shot list at ${listFile}`); process.exit(1); }
 const list = JSON.parse(readFileSync(listFile, 'utf8'));
 let chromium;
-try { ({ chromium } = await import('playwright')); } catch { console.error('Playwright is needed: npm i --no-save playwright && npx playwright install chromium'); process.exit(1); }
+// PLAYWRIGHT_MODULE: a path to a Playwright install elsewhere, when the repo has none
+try { ({ chromium } = await import(process.env.PLAYWRIGHT_MODULE || 'playwright')); } catch { console.error('Playwright is needed: npm i --no-save playwright && npx playwright install chromium'); process.exit(1); }
 
 const marked = list.shots.map((s, k) => (s.still ? k : -1)).filter((k) => k >= 0);
 const keys = marked.length ? marked : list.shots.map((s, k) => (s.line || s.word || k === list.shots.length - 1 ? k : -1)).filter((k) => k >= 0).slice(0, 7);
@@ -37,7 +38,7 @@ const shoot = async (w, h, ks, save) => {
         const at = list.shots[k].stillAt;
         await page.evaluate((t) => { window.__cut.frameAt(t); }, plan[k].start + (typeof at === 'number' ? Math.min(at, plan[k].length - 0.05) : plan[k].length - 0.25));
         await page.waitForTimeout(60);
-        const png = await page.locator('svg.cutscene').screenshot({ animations: 'disabled', timeout: 15000 });
+        const png = await page.locator('#cutscene svg.cutscene').screenshot({ animations: 'disabled', timeout: 15000 });
         await save(k, png);
     }
     await page.close();
@@ -47,7 +48,7 @@ await shoot(1600, 900, keys, async (k, png) => {
     await sharp(png).resize({ width: 1280 }).webp({ quality: 82 }).toFile(path.join(out, name));
     console.log('still', name);
 });
-// the posters: the title card, in each frame
+// the posters: the opening (the hook), in each frame
 await shoot(1600, 900, [0], async (_, png) => { await sharp(png).resize({ width: 1280 }).webp({ quality: 82 }).toFile(path.join(out, 'poster.webp')); console.log('poster'); });
 await shoot(900, 1600, [0], async (_, png) => { await sharp(png).resize({ width: 720 }).webp({ quality: 82 }).toFile(path.join(out, 'poster-tall.webp')); console.log('poster-tall'); });
 // the share image: Video's story image when the cut has one (cut/story.webp, placed as share.png by hand), else the

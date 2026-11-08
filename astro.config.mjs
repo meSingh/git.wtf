@@ -41,16 +41,19 @@ export default defineConfig({
             },
         }),
         {
-            // a launch build carries the strips of published incidents only: hidden ones (and leftovers of renamed ones)
+            // a launch build carries the strips and cuts of published incidents only: hidden ones (and leftovers of renamed ones)
             // stay out, so their addresses are not public before they are
             name: 'gitwtf-hidden-strips',
             hooks: {
                 'astro:build:done': ({ dir }) => {
                     if (preview) return;
-                    const strips = new URL('strips/', dir);
-                    if (!existsSync(strips)) return;
                     const keep = publishedIncidentIds();
-                    for (const id of readdirSync(strips)) if (!keep.has(id)) rmSync(new URL(`${id}/`, strips), { recursive: true, force: true });
+                    // the strips and the rendered cuts (stills, posters) of hidden incidents both stay out
+                    for (const sub of ['strips/', 'cuts/']) {
+                        const d = new URL(sub, dir);
+                        if (!existsSync(d)) continue;
+                        for (const id of readdirSync(d)) if (!keep.has(id)) rmSync(new URL(`${id}/`, d), { recursive: true, force: true });
+                    }
                 },
             },
         },

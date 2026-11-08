@@ -12,7 +12,7 @@ detail:
   - "An agent's handoff notes quoted `git push --force origin main` in backticks."
   - "The shell ran it. Main lost three merges and nothing printed a word."
   - "Main was put back about 3 hours 40 minutes later. The rule against force pushes on main: not yet."
-story_alt: "DEV sips from his mug beside a desk while a gate marked READS QUOTES bonks an agent holding its handoff notes."
+story_alt: "An agent writes notes at a little desk while five other agents point at it; behind it a bulldozer has flattened a yellow folder, and DEV peeks in from the edge with his mug."
 panels:
   - scene: "AGENT 2 writes handoff notes beside a folder marked MAIN"
     who: AGENT

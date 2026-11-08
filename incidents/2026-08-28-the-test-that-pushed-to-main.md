@@ -12,7 +12,7 @@ detail:
   - "An agent's unit test ran the real script and pushed broken YAML to main in two repositories."
   - "Its fix, a revert in a shallow clone, deleted 151 files in one and 723 in the other."
   - "Vercel tried to deploy one of them. The build failed, so the old site stayed up."
-story_alt: "DEV sips from his mug beside a desk while a gate marked PR ONLY bonks an agent holding a sheet."
+story_alt: "An agent proudly holds up a clipboard with a big tick while a parcel flies out of the door behind it; DEV stares at it over two empty folders, his mug in pieces at his feet."
 panels:
   - scene: "DEV sticks \"CLEAN UP. THE CONFIG.\" on a folder; AGENT salutes"
     who: AGENT

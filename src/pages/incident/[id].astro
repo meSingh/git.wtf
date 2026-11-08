@@ -7,6 +7,7 @@ import '../../styles/pages.css';
 import { render } from 'astro:content';
 import Strip from '../../components/Strip.astro';
 import ShareCut from '../../components/ShareCut.astro';
+import CutPlayer from '../../components/anime/CutPlayer.astro';
 import { cutAssets, shotList } from '../../lib/cuts';
 import { incidentJsonLd } from '../../lib/jsonld';
 import { SITE, sentences, categoryLabel, formatDate, formatDay, happened, href, incidentPath, inlineCode, sortIncidents, sourceHost, toolLabel, type Incident } from '../../lib/site';
@@ -39,23 +40,27 @@ const summary = `${sentences(incident.body ?? '').slice(0, 2).join(' ')} Status:
 const jsonld = incidentJsonLd(p, d, { image: `${p}share.png`, video: vid ? { url: vid, poster } : null, summary });
 ---
 <Base title={`${d.title} | git.wtf`} description={summary.length > 300 ? summary.slice(0, 297).trimEnd() + '...' : summary} image={`${p}share.png`} type="article" jsonld={jsonld}>
-    <main class="page">
+    {list && (
+        <section class="inc-ep" aria-label={`The episode: ${d.title}`}>
+            <CutPlayer list={list} status={d.status} title={d.title} embed />
+            <nav class="inc-ep-bar" aria-label="Episodes">
+                <button type="button" class="ep-btn" data-replay>Replay</button>
+                <a href={href(`${p}cut/`)}>Full screen</a>
+                <a href="#retelling">What actually happened <span aria-hidden="true">&darr;</span></a>
+                <span class="inc-ep-nav">{older && shotList(older.id) && <a href={href(incidentPath(older))}>&larr; Older episode</a>}{newer && shotList(newer.id) && <a href={href(incidentPath(newer))}>Newer episode &rarr;</a>}</span>
+            </nav>
+        </section>
+    )}
+    <main class={list ? 'page page-after-ep' : 'page'}>
         <header class="page-head inc-head">
             <p class="meta"><a href={href('/incidents/')}>Incidents</a> <span>{formatDay(happened(incident))}</span> <a class="chip" href={href(`/incidents/${d.category}/`)}>{categoryLabel(d.category)}</a>{tool && <span class="chip">{tool}</span>}</p>
             <h1>{d.title}</h1>
             <p class="inc-verdict" set:html={`Status: ${inlineCode(d.status)}`} />
         </header>
-        <figure class="inc-hero">
-            {list ? (
-                <a class="inc-hero-link" href={href(`${p}cut/`)} aria-label={`Watch the cut: ${d.title}`}>
-                    <img src={heroSrc} srcset={heroSet} sizes="(min-width: 1200px) 72rem, 100vw" width="1200" height="630" alt={heroAlt} fetchpriority="high" decoding="sync" />
-                    <span class="inc-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" /></svg>Watch the cut</span>
-                </a>
-            ) : (
-                <img src={heroSrc} srcset={heroSet} sizes="(min-width: 1200px) 72rem, 100vw" width="1200" height="630" alt={heroAlt} fetchpriority="high" decoding="sync" />
-            )}
+        {!list && <figure class="inc-hero">
+            <img src={heroSrc} srcset={heroSet} sizes="(min-width: 1200px) 72rem, 100vw" width="1200" height="630" alt={heroAlt} fetchpriority="high" decoding="sync" />
             {cutVideo && <figcaption><a href={cutVideo}>Or the video</a></figcaption>}
-        </figure>
+        </figure>}
         <article class="prose inc-body" id="retelling">
             <h2 class="visually-hidden">What happened</h2>
             <Content />

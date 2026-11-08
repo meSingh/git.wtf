@@ -157,3 +157,13 @@
 .next-day { width: min(var(--col), 100% - 2rem); margin: 1.4rem auto 0; font-family: var(--mono); font-size: 0.85rem; }
 .next-day a { color: var(--paper); }
 .next-day a:hover { color: var(--yellow); }
+
+/* an incident with an episode opens on it, playing (Mandeep, 8 Nov 2026); the write-up follows below */
+.inc-ep { padding-top: var(--bar); background: #0a0a0a; }
+.inc-ep .cut-wrap { margin: 0 auto; max-width: 100%; }
+.inc-ep-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1.4rem; width: min(var(--col), 100% - 2rem); margin: 0 auto; padding: 0.8rem 0 1rem; font-family: var(--mono); font-size: 0.85rem; }
+.inc-ep-bar a { color: var(--paper); text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 0.25em; }
+.inc-ep-bar a:hover { color: var(--yellow); }
+.inc-ep-bar .ep-btn { appearance: none; border: 0; border-radius: 2px; background: var(--yellow); color: var(--black); font: 600 0.85rem/1 var(--mono); padding: 0.7em 1em; cursor: pointer; }
+.inc-ep-nav { margin-left: auto; display: flex; gap: 1.2rem; }
+.page-after-ep { padding-top: 2.5rem; }

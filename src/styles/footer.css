@@ -32,6 +32,9 @@
 .foot-strip { padding: 1.6rem 0 2rem; }
 .foot .credit { margin: 0; text-align: center; font-family: var(--body); font-size: clamp(1rem, 1.5vw, 1.2rem); color: var(--paper); }
 .foot .credit em { font-style: normal; color: var(--yellow); }
+.foot .disclaimer { margin: 0.9rem auto 0; max-width: 44rem; text-align: center; font-family: var(--mono); font-size: 0.78rem; line-height: 1.6; color: var(--grey); }
+.foot .disclaimer a { color: inherit; text-underline-offset: 0.2em; }
+.foot .disclaimer a:hover { color: var(--yellow); }
 
 @media (max-width: 639px) {
     .foot .cr { grid-template-columns: 1fr; gap: 0; }

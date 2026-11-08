@@ -4,19 +4,19 @@
 import '../../styles/cut.css';
 import Cutscene from './Cutscene.astro';
 import type { ShotList } from '../../anime/types';
-interface Props { list: ShotList; status: string; title: string }
-const { list, status, title } = Astro.props;
+interface Props { list: ShotList; status: string; title: string; /** on an incident's page: plays first, the page keeps its scroll */ embed?: boolean }
+const { list, status, title, embed = false } = Astro.props;
 ---
-<section class="cut-wrap" id="cutscene" aria-label={`${title}, as an anime cutscene`} data-base={import.meta.env.BASE_URL}>
+<section class="cut-wrap" id="cutscene" data-embed={embed ? 1 : undefined} aria-label={`${title}, as an anime cutscene`} data-base={import.meta.env.BASE_URL}>
     <Cutscene list={list} status={status} frame="16:9" />
     <template data-frame="9:16"><Cutscene list={list} status={status} frame="9:16" /></template>
     <p class="cut-hint" data-hint aria-hidden="true">Tap, click or press space</p>
     <p class="cut-count" data-count aria-hidden="true"></p>
     <button type="button" class="cut-skip" data-skip>Skip to the end</button>
-    <button type="button" class="cut-sound" data-sound aria-pressed="true" hidden>Sound on</button>
+    <button type="button" class="cut-sound" data-sound aria-pressed="false" aria-label="Sound is off. Turn it on" hidden>Sound off</button>
 </section>
 <script>
     import { mountCutscene } from '../../scripts/anime';
     const wrap = document.querySelector<HTMLElement>('#cutscene');
-    if (wrap) mountCutscene(wrap);
+    if (wrap) mountCutscene(wrap, wrap.dataset.embed ? { mode: 'embed' } : {});
 </script>

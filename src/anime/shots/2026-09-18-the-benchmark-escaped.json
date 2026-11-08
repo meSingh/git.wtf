@@ -1,1002 +1,915 @@
 {
-    "incident": "2026-09-18-the-benchmark-escaped",
-    "episode": "Episode 34",
-    "title": "The Benchmark Escaped!",
-    "shots": [
-        {
-            "id": "title",
-            "bg": "black",
-            "fx": [
-                "titlecard",
-                "shake@0.55"
-            ],
-            "say": {
-                "who": "NARRATOR",
-                "text": "Episode thirty four. The benchmark escaped!",
-                "at": 0.7
-            },
-            "sfx": [
-                "sting@0.55"
-            ],
-            "music": "theme",
-            "v": {
-                "fx": [
-                    "titlerows",
-                    "shake@0.9"
-                ]
-            }
-        },
-        {
-            "id": "work",
-            "bg": "room",
-            "props": {
-                "lamp": {
-                    "x": 560,
-                    "y": 140
-                },
-                "desk": {
-                    "x": 640,
-                    "y": 820
-                },
-                "folder": {
-                    "x": 760,
-                    "y": 730,
-                    "scale": 0.4,
-                    "label": "REAL REPO"
-                },
-                "farwindow": {
-                    "x": 1290,
-                    "y": 320,
-                    "scale": 0.85,
-                    "folder": "PRACTICE COPY"
-                }
-            },
-            "cast": [
-                {
-                    "who": "dev",
-                    "pose": "relieved",
-                    "x": 360,
-                    "y": 900,
-                    "scale": 0.6,
-                    "role": "dev"
-                }
-            ],
-            "fx": [
-                "slowpush",
-                "sip@0.8"
-            ],
-            "sfx": [
-                "sip@0.8"
-            ],
-            "music": "calm",
-            "focus": [
-                860,
-                560
-            ],
-            "v": {
-                "props": {
-                    "desk": {
-                        "x": 470,
-                        "y": 1130
-                    },
-                    "folder": {
-                        "x": 520,
-                        "y": 1050,
-                        "scale": 0.4,
-                        "label": "REAL REPO"
-                    },
-                    "farwindow": {
-                        "x": 450,
-                        "y": 420,
-                        "scale": 0.9,
-                        "folder": "PRACTICE COPY"
-                    }
-                },
-                "cast": [
-                    {
-                        "who": "dev",
-                        "pose": "relieved",
-                        "x": 160,
-                        "y": 1270,
-                        "scale": 0.45,
-                        "role": "dev"
-                    }
-                ]
-            },
-            "still": true
-        },
-        {
-            "id": "job",
-            "bg": "flat",
-            "props": {
-                "desk": {
-                    "x": 800,
-                    "y": 820
-                },
-                "folder": {
-                    "x": 800,
-                    "y": 730,
-                    "scale": 0.4,
-                    "label": "PRACTICE COPY"
-                },
-                "note": {
-                    "x": 800,
-                    "y": 640,
-                    "text": "FIX THE BUG. LOCAL ONLY.",
-                    "at": 0.5
-                }
-            },
-            "cast": [
-                {
-                    "who": "agent",
-                    "pose": "neutral",
-                    "x": 1180,
-                    "y": 900,
-                    "scale": 0.5,
-                    "n": 3,
-                    "arm": "salute",
-                    "flip": true
-                }
-            ],
-            "fx": [
-                "note@0.5",
-                "salute@1.6"
-            ],
-            "say": {
-                "who": "AGENT 3",
-                "text": "Practice task. On it.",
-                "at": 1.0
-            },
-            "sfx": [
-                "slap@0.5",
-                "snap@1.6"
-            ],
-            "music": "calm",
-            "focus": [
-                900,
-                620
-            ],
-            "v": {
-                "props": {
-                    "desk": {
-                        "x": 450,
-                        "y": 1130
-                    },
-                    "folder": {
-                        "x": 450,
-                        "y": 1062,
-                        "scale": 0.4,
-                        "label": "PRACTICE COPY"
-                    },
-                    "note": {
-                        "x": 450,
-                        "y": 880,
-                        "text": "FIX THE BUG. LOCAL ONLY.",
-                        "at": 0.5
-                    }
-                },
-                "cast": [
-                    {
-                        "who": "agent",
-                        "pose": "neutral",
-                        "x": 700,
-                        "y": 1380,
-                        "scale": 0.34,
-                        "n": 3,
-                        "arm": "salute",
-                        "flip": true
-                    }
-                ]
-            }
-        },
-        {
-            "id": "sneak",
-            "bg": "room",
-            "props": {
-                "door": {
-                    "x": 260,
-                    "y": 900
-                },
-                "desk": {
-                    "x": 1000,
-                    "y": 760
-                },
-                "folder": {
-                    "x": 1000,
-                    "y": 670,
-                    "scale": 0.4,
-                    "label": "REAL REPO"
-                }
-            },
-            "cast": [
-                {
-                    "who": "agent",
-                    "pose": "neutral",
-                    "x": 640,
-                    "y": 900,
-                    "scale": 0.42,
-                    "n": 3,
-                    "arm": "hold"
-                }
-            ],
-            "fx": [
-                "tiptoe"
-            ],
-            "say": {
-                "who": "NARRATOR",
-                "text": "The machine had a real GitHub login.",
-                "at": 0.6
-            },
-            "sfx": [
-                "tiptoe"
-            ],
-            "music": "sneaky",
-            "focus": [
-                760,
-                600
-            ],
-            "v": {
-                "props": {
-                    "door": {
-                        "x": 220,
-                        "y": 1000
-                    },
-                    "desk": {
-                        "x": 560,
-                        "y": 1180
-                    },
-                    "folder": {
-                        "x": 560,
-                        "y": 1080,
-                        "scale": 0.42,
-                        "label": "REAL REPO"
-                    }
-                },
-                "cast": [
-                    {
-                        "who": "agent",
-                        "pose": "neutral",
-                        "x": 330,
-                        "y": 1330,
-                        "scale": 0.32,
-                        "n": 3,
-                        "arm": "hold"
-                    }
-                ]
-            }
-        },
-        {
-            "id": "replaced",
-            "bg": "black",
-            "props": {
-                "folder": {
-                    "x": 640,
-                    "y": 560,
-                    "scale": 0.8,
-                    "label": "REAL REPO"
-                }
-            },
-            "cast": [
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "x": 1150,
-                    "y": 980,
-                    "scale": 0.85,
-                    "n": 3,
-                    "arm": "palm",
-                    "flip": true
-                }
-            ],
-            "fx": [
-                "impact@0.1",
-                "charge@0.6",
-                "shake@1.0",
-                "files@1.0"
-            ],
-            "word": "Replaced.",
-            "wordAt": 2.1,
-            "sfx": [
-                "herochord@0.1",
-                "whoosh@0.6",
-                "impact@1.0",
-                "flutter@1.1"
-            ],
-            "music": "heroic",
-            "focus": [
-                800,
-                520
-            ],
-            "v": {
-                "props": {
-                    "folder": {
-                        "x": 450,
-                        "y": 400,
-                        "scale": 0.6,
-                        "label": "REAL REPO"
-                    }
-                },
-                "cast": [
-                    {
-                        "who": "agent",
-                        "pose": "dramatic",
-                        "x": 560,
-                        "y": 1420,
-                        "scale": 0.72,
-                        "n": 3,
-                        "arm": "palm",
-                        "flip": true
-                    }
-                ]
-            },
-            "still": true
-        },
-        {
-            "id": "three",
-            "bg": "room",
-            "props": {
-                "counter": {
-                    "x": 620,
-                    "y": 400,
-                    "value": 3,
-                    "label": "COMMITS ON MAIN"
-                }
-            },
-            "cast": [
-                {
-                    "who": "agent",
-                    "pose": "happy",
-                    "x": 1150,
-                    "y": 1000,
-                    "scale": 0.8,
-                    "n": 3,
-                    "arm": "salute",
-                    "flip": true
-                }
-            ],
-            "fx": [
-                "salute@0.5"
-            ],
-            "line": {
-                "who": "AGENT 3",
-                "text": "Fixed. Documented. Pushed."
-            },
-            "lineAt": 0.9,
-            "sfx": [
-                "snap@0.5"
-            ],
-            "music": "comic",
-            "focus": [
-                840,
-                560
-            ],
-            "v": {
-                "props": {
-                    "counter": {
-                        "x": 450,
-                        "y": 560,
-                        "value": 3,
-                        "label": "COMMITS ON MAIN"
-                    }
-                },
-                "cast": [
-                    {
-                        "who": "agent",
-                        "pose": "happy",
-                        "x": 450,
-                        "y": 1440,
-                        "scale": 0.7,
-                        "n": 3,
-                        "arm": "salute",
-                        "flip": true
-                    }
-                ]
-            }
-        },
-        {
-            "id": "sixtyfour",
-            "bg": "flat",
-            "props": {
-                "note": {
-                    "x": 1050,
-                    "y": 420,
-                    "text": "THERE IS. NO #64.",
-                    "at": 1.6,
-                    "scale": 1.3
-                }
-            },
-            "cast": [
-                {
-                    "who": "agent",
-                    "pose": "neutral",
-                    "x": 560,
-                    "y": 900,
-                    "scale": 0.6,
-                    "n": 3,
-                    "arm": "point"
-                }
-            ],
-            "fx": [
-                "jab@0.4",
-                "note@1.6",
-                "sweat@2.4"
-            ],
-            "say": {
-                "who": "AGENT 3",
-                "text": "Closing issue sixty-four!",
-                "at": 0.4
-            },
-            "sfx": [
-                "swish@0.4",
-                "boing@1.6",
-                "drip@2.4"
-            ],
-            "music": "comic",
-            "focus": [
-                800,
-                500
-            ],
-            "v": {
-                "props": {
-                    "note": {
-                        "x": 450,
-                        "y": 600,
-                        "text": "THERE IS. NO #64.",
-                        "at": 1.6,
-                        "scale": 1.3
-                    }
-                },
-                "cast": [
-                    {
-                        "who": "agent",
-                        "pose": "neutral",
-                        "x": 330,
-                        "y": 1380,
-                        "scale": 0.5,
-                        "n": 3,
-                        "arm": "point"
-                    }
-                ]
-            }
-        },
-        {
-            "id": "days",
-            "bg": "room",
-            "props": {
-                "lamp": {
-                    "x": 520,
-                    "y": 140
-                },
-                "desk": {
-                    "x": 520,
-                    "y": 740
-                },
-                "chair": {
-                    "x": 400,
-                    "y": 852,
-                    "scale": 0.6
-                },
-                "counter": {
-                    "x": 1120,
-                    "y": 420,
-                    "from": 0,
-                    "to": 16,
-                    "label": "DAYS UNNOTICED"
-                }
-            },
-            "cast": [
-                {
-                    "who": "dev",
-                    "pose": "neutral",
-                    "x": 400,
-                    "y": 852,
-                    "scale": 0.6,
-                    "role": "dev",
-                    "arm": "type"
-                }
-            ],
-            "fx": [
-                "type",
-                "tick@0.4",
-                "yawn@3.2"
-            ],
-            "sfx": [
-                "typing",
-                "tick@0.4"
-            ],
-            "music": "calm",
-            "focus": [
-                800,
-                500
-            ],
-            "v": {
-                "props": {
-                    "lamp": {
-                        "x": 470,
-                        "y": 300
-                    },
-                    "desk": {
-                        "x": 470,
-                        "y": 1000
-                    },
-                    "chair": {
-                        "x": 620,
-                        "y": 1040,
-                        "scale": 0.55
-                    },
-                    "counter": {
-                        "x": 380,
-                        "y": 500,
-                        "from": 0,
-                        "to": 16,
-                        "label": "DAYS UNNOTICED"
-                    }
-                },
-                "cast": [
-                    {
-                        "who": "dev",
-                        "pose": "neutral",
-                        "x": 620,
-                        "y": 1040,
-                        "scale": 0.55,
-                        "role": "dev",
-                        "arm": "type"
-                    }
-                ]
-            }
-        },
-        {
-            "id": "review",
-            "bg": "room",
-            "props": {
-                "desk": {
-                    "x": 760,
-                    "y": 820
-                },
-                "folder": {
-                    "x": 760,
-                    "y": 730,
-                    "scale": 0.45,
-                    "label": "REAL REPO"
-                },
-                "counter": {
-                    "x": 760,
-                    "y": 470,
-                    "value": 3,
-                    "label": "COMMITS ON MAIN"
-                }
-            },
-            "cast": [
-                {
-                    "who": "dev",
-                    "pose": "neutral",
-                    "x": 1200,
-                    "y": 900,
-                    "scale": 0.6,
-                    "role": "dev"
-                }
-            ],
-            "fx": [
-                "push@0.2"
-            ],
-            "sfx": [
-                "paper@0.3"
-            ],
-            "music": "none",
-            "focus": [
-                900,
-                560
-            ],
-            "v": {
-                "props": {
-                    "desk": {
-                        "x": 450,
-                        "y": 1130
-                    },
-                    "folder": {
-                        "x": 450,
-                        "y": 1050,
-                        "scale": 0.45,
-                        "label": "REAL REPO"
-                    },
-                    "counter": {
-                        "x": 450,
-                        "y": 760,
-                        "value": 3,
-                        "label": "COMMITS ON MAIN"
-                    }
-                },
-                "cast": [
-                    {
-                        "who": "dev",
-                        "pose": "neutral",
-                        "x": 170,
-                        "y": 1280,
-                        "scale": 0.45,
-                        "role": "dev"
-                    }
-                ]
-            }
-        },
-        {
-            "id": "terror",
-            "bg": "flat",
-            "props": {
-                "mug": {
-                    "x": 960,
-                    "y": 760
-                }
-            },
-            "cast": [
-                {
-                    "who": "dev",
-                    "pose": "neutral",
-                    "x": 800,
-                    "y": 1100,
-                    "scale": 1.6,
-                    "role": "dev",
-                    "turn": "terror",
-                    "mug": false
-                }
-            ],
-            "fx": [
-                "devpush",
-                "speedlines@1.0",
-                "terror@1.2",
-                "sweat@1.6",
-                "drop@2.0",
-                "shatter@2.6"
-            ],
-            "line": {
-                "who": "DEV",
-                "text": "Main has three commits."
-            },
-            "lineAt": 3.2,
-            "sfx": [
-                "heartbeat",
-                "whistle-fall@2.0",
-                "shatter@2.6"
-            ],
-            "music": "none",
-            "focus": [
-                800,
-                420
-            ],
-            "v": {
-                "cast": [
-                    {
-                        "who": "dev",
-                        "pose": "neutral",
-                        "x": 450,
-                        "y": 1500,
-                        "scale": 2.0,
-                        "role": "dev",
-                        "turn": "terror",
-                        "mug": false
-                    }
-                ],
-                "props": {
-                    "mug": {
-                        "x": 640,
-                        "y": 1000
-                    }
-                },
-                "fx": [
-                    "devpush",
-                    "speedlines@1.0",
-                    "terror@1.2",
-                    "sweat@1.6",
-                    "drop@2.0",
-                    "followdown@2.0",
-                    "shatter@2.6",
-                    "cutup@2.9"
-                ]
-            },
-            "still": true
-        },
-        {
-            "id": "putback",
-            "bg": "room",
-            "props": {
-                "desk": {
-                    "x": 760,
-                    "y": 820
-                },
-                "folder": {
-                    "x": 760,
-                    "y": 700,
-                    "scale": 0.5,
-                    "label": "REAL REPO"
-                },
-                "note": {
-                    "x": 760,
-                    "y": 420,
-                    "text": "BAD TIP. TAGGED.",
-                    "at": 0.4
-                }
-            },
-            "cast": [
-                {
-                    "who": "dev",
-                    "pose": "neutral",
-                    "x": 1240,
-                    "y": 900,
-                    "scale": 0.6,
-                    "role": "dev",
-                    "mug": false
-                }
-            ],
-            "fx": [
-                "note@0.4",
-                "restore@1.2"
-            ],
-            "say": {
-                "who": "DEV",
-                "text": "Tag it. Then put main back.",
-                "at": 0.5
-            },
-            "sfx": [
-                "slap@0.4",
-                "rewind@1.2",
-                "whirr@1.4"
-            ],
-            "music": "heroic",
-            "focus": [
-                880,
-                560
-            ],
-            "v": {
-                "props": {
-                    "desk": {
-                        "x": 450,
-                        "y": 1130
-                    },
-                    "folder": {
-                        "x": 450,
-                        "y": 1030,
-                        "scale": 0.55,
-                        "label": "REAL REPO"
-                    },
-                    "note": {
-                        "x": 450,
-                        "y": 640,
-                        "text": "BAD TIP. TAGGED.",
-                        "at": 0.4
-                    }
-                },
-                "cast": [
-                    {
-                        "who": "dev",
-                        "pose": "neutral",
-                        "x": 160,
-                        "y": 1290,
-                        "scale": 0.45,
-                        "role": "dev",
-                        "mug": false
-                    }
-                ],
-                "fx": [
-                    "note@0.4",
-                    "restoreup@1.2"
-                ]
-            }
-        },
-        {
-            "id": "nologin",
-            "bg": "room",
-            "props": {
-                "desk": {
-                    "x": 760,
-                    "y": 820
-                },
-                "folder": {
-                    "x": 900,
-                    "y": 770,
-                    "scale": 0.45,
-                    "label": "REAL REPO"
-                },
-                "gate": {
-                    "x": 900,
-                    "y": 770,
-                    "sign": "NO LOGINS",
-                    "tally": true
-                }
-            },
-            "cast": [
-                {
-                    "who": "dev",
-                    "pose": "relieved",
-                    "x": 470,
-                    "y": 900,
-                    "scale": 0.6,
-                    "role": "dev"
-                },
-                {
-                    "who": "agent",
-                    "pose": "neutral",
-                    "x": 1170,
-                    "y": 900,
-                    "scale": 0.5,
-                    "n": 3,
-                    "arm": "hold"
-                },
-                {
-                    "who": "agent",
-                    "pose": "neutral",
-                    "x": 1300,
-                    "y": 900,
-                    "scale": 0.46,
-                    "n": 5,
-                    "arm": "hold"
-                },
-                {
-                    "who": "agent",
-                    "pose": "neutral",
-                    "x": 1430,
-                    "y": 900,
-                    "scale": 0.42,
-                    "n": 8,
-                    "arm": "hold"
-                }
-            ],
-            "fx": [
-                "bonk@0.6",
-                "bonk@1.3",
-                "bonk@1.8",
-                "tally@0.6",
-                "sip@1.0",
-                "stamp@3.0"
-            ],
-            "sfx": [
-                "bonk@0.6",
-                "bonk@1.3",
-                "bonk@1.8",
-                "sip@1.0",
-                "stamp@3.0"
-            ],
-            "music": "comic",
-            "focus": [
-                980,
-                620
-            ],
-            "v": {
-                "props": {
-                    "desk": {
-                        "x": 560,
-                        "y": 1120
-                    },
-                    "folder": {
-                        "x": 600,
-                        "y": 1030,
-                        "scale": 0.42,
-                        "label": "REAL REPO"
-                    },
-                    "gate": {
-                        "x": 600,
-                        "y": 1030,
-                        "sign": "NO LOGINS",
-                        "tally": true
-                    }
-                },
-                "cast": [
-                    {
-                        "who": "dev",
-                        "pose": "relieved",
-                        "x": 150,
-                        "y": 1160,
-                        "scale": 0.42,
-                        "role": "dev"
-                    },
-                    {
-                        "who": "agent",
-                        "pose": "neutral",
-                        "x": 560,
-                        "y": 1330,
-                        "scale": 0.3,
-                        "n": 3,
-                        "arm": "hold"
-                    },
-                    {
-                        "who": "agent",
-                        "pose": "neutral",
-                        "x": 640,
-                        "y": 1420,
-                        "scale": 0.33,
-                        "n": 5,
-                        "arm": "hold"
-                    },
-                    {
-                        "who": "agent",
-                        "pose": "neutral",
-                        "x": 720,
-                        "y": 1510,
-                        "scale": 0.36,
-                        "n": 8,
-                        "arm": "hold"
-                    }
-                ]
-            },
-            "still": true,
-            "stillAt": 3.6
-        },
-        {
-            "id": "next",
-            "bg": "night",
-            "props": {
-                "desk": {
-                    "x": 800,
-                    "y": 820
-                },
-                "lamp": {
-                    "x": 800,
-                    "y": 300
-                },
-                "folder": {
-                    "x": 800,
-                    "y": 720,
-                    "scale": 0.45,
-                    "label": "PRACTICE COPY"
-                }
-            },
-            "cast": [
-                {
-                    "who": "agent",
-                    "pose": "dramatic",
-                    "x": 1020,
-                    "y": 830,
-                    "scale": 0.4,
-                    "n": 3,
-                    "silhouette": true
-                }
-            ],
-            "fx": [
-                "eyes@0.8",
-                "glint@1.4",
-                "continued@2.0"
-            ],
-            "say": {
-                "who": "NARRATOR",
-                "text": "To be continued!",
-                "at": 2.1
-            },
-            "sfx": [
-                "shing@1.4",
-                "freeze@2.0"
-            ],
-            "music": "sneaky",
-            "focus": [
-                860,
-                640
-            ],
-            "v": {
-                "props": {
-                    "desk": {
-                        "x": 450,
-                        "y": 1100
-                    },
-                    "lamp": {
-                        "x": 450,
-                        "y": 560
-                    },
-                    "folder": {
-                        "x": 450,
-                        "y": 1000,
-                        "scale": 0.45,
-                        "label": "PRACTICE COPY"
-                    }
-                },
-                "cast": [
-                    {
-                        "who": "agent",
-                        "pose": "dramatic",
-                        "x": 640,
-                        "y": 1110,
-                        "scale": 0.3,
-                        "n": 3,
-                        "silhouette": true
-                    }
-                ]
-            }
-        }
+ "incident": "2026-09-18-the-benchmark-escaped",
+ "episode": "Episode 70",
+ "title": "The Benchmark Escaped!",
+ "shots": [
+  {
+   "id": "hook",
+   "bg": "black",
+   "props": {
+    "folder": {
+     "x": 1080,
+     "y": 600,
+     "scale": 0.7,
+     "label": "REAL REPO"
+    },
+    "bulldozer": {
+     "x": 560,
+     "y": 860,
+     "scale": 0.95,
+     "label": "TRIAL"
+    }
+   },
+   "cast": [],
+   "fx": [
+    "impact@0.1",
+    "doze@0.5",
+    "shake@1.2",
+    "files@1.25"
+   ],
+   "sfx": [
+    "herochord@0.1",
+    "rumble@0.5",
+    "impact@1.2",
+    "flutter@1.3",
+    "honk@0.50",
+    "slideup@1.25"
+   ],
+   "music": "heroic",
+   "focus": [
+    800,
+    520
+   ],
+   "v": {
+    "props": {
+     "folder": {
+      "x": 620,
+      "y": 720,
+      "scale": 0.5,
+      "label": "REAL REPO"
+     },
+     "bulldozer": {
+      "x": 300,
+      "y": 1000,
+      "scale": 0.62,
+      "label": "TRIAL"
+     }
+    },
+    "cast": []
+   },
+   "hook": "A practice run\nhit the *real repo*."
+  },
+  {
+   "id": "work",
+   "bg": "office",
+   "props": {
+    "lamp": {
+     "x": 560,
+     "y": 140
+    },
+    "desk": {
+     "x": 640,
+     "y": 820
+    },
+    "folder": {
+     "x": 760,
+     "y": 730,
+     "scale": 0.4,
+     "label": "REAL REPO"
+    },
+    "farwindow": {
+     "x": 1290,
+     "y": 320,
+     "scale": 0.85,
+     "folder": "PRACTICE COPY"
+    },
+    "plant": {
+     "x": 130,
+     "y": 900,
+     "scale": 0.7
+    },
+    "poster": {
+     "x": 300,
+     "y": 250,
+     "scale": 0.55,
+     "text": "TRUST"
+    }
+   },
+   "cast": [
+    {
+     "who": "dev",
+     "pose": "relieved",
+     "x": 360,
+     "y": 900,
+     "scale": 0.6,
+     "role": "dev"
+    }
+   ],
+   "fx": [
+    "slowpush",
+    "sip@0.8"
+   ],
+   "sfx": [
+    "sip@0.8"
+   ],
+   "music": "calm",
+   "focus": [
+    860,
+    560
+   ],
+   "v": {
+    "props": {
+     "desk": {
+      "x": 470,
+      "y": 1130
+     },
+     "folder": {
+      "x": 520,
+      "y": 1050,
+      "scale": 0.4,
+      "label": "REAL REPO"
+     },
+     "farwindow": {
+      "x": 450,
+      "y": 420,
+      "scale": 0.9,
+      "folder": "PRACTICE COPY"
+     }
+    },
+    "cast": [
+     {
+      "who": "dev",
+      "pose": "relieved",
+      "x": 160,
+      "y": 1270,
+      "scale": 0.45,
+      "role": "dev"
+     }
     ]
+   },
+   "still": true
+  },
+  {
+   "id": "job",
+   "bg": "flat",
+   "props": {
+    "desk": {
+     "x": 800,
+     "y": 820
+    },
+    "folder": {
+     "x": 800,
+     "y": 730,
+     "scale": 0.4,
+     "label": "PRACTICE COPY"
+    },
+    "note": {
+     "x": 800,
+     "y": 640,
+     "text": "FIX THE BUG. LOCAL ONLY.",
+     "at": 0.5
+    }
+   },
+   "cast": [
+    {
+     "who": "agent",
+     "pose": "neutral",
+     "x": 1180,
+     "y": 900,
+     "scale": 0.5,
+     "n": 3,
+     "arm": "salute",
+     "flip": true
+    }
+   ],
+   "fx": [
+    "note@0.5",
+    "salute@1.6"
+   ],
+   "sfx": [
+    "slap@0.5",
+    "snap@1.6",
+    "pop@1.60"
+   ],
+   "music": "calm",
+   "focus": [
+    900,
+    620
+   ],
+   "v": {
+    "props": {
+     "desk": {
+      "x": 450,
+      "y": 1130
+     },
+     "folder": {
+      "x": 450,
+      "y": 1062,
+      "scale": 0.4,
+      "label": "PRACTICE COPY"
+     },
+     "note": {
+      "x": 450,
+      "y": 880,
+      "text": "FIX THE BUG. LOCAL ONLY.",
+      "at": 0.5
+     }
+    },
+    "cast": [
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "x": 700,
+      "y": 1380,
+      "scale": 0.34,
+      "n": 3,
+      "arm": "salute",
+      "flip": true
+     }
+    ]
+   }
+  },
+  {
+   "id": "sneak",
+   "bg": "room",
+   "props": {
+    "door": {
+     "x": 260,
+     "y": 900
+    },
+    "desk": {
+     "x": 1000,
+     "y": 760
+    },
+    "folder": {
+     "x": 1000,
+     "y": 670,
+     "scale": 0.4,
+     "label": "REAL REPO"
+    }
+   },
+   "cast": [
+    {
+     "who": "agent",
+     "pose": "neutral",
+     "x": 640,
+     "y": 900,
+     "scale": 0.42,
+     "n": 3,
+     "arm": "hold"
+    }
+   ],
+   "fx": [
+    "tiptoe"
+   ],
+   "sfx": [
+    "tiptoe",
+    "squeak@1.5"
+   ],
+   "music": "sneaky",
+   "focus": [
+    760,
+    600
+   ],
+   "v": {
+    "props": {
+     "door": {
+      "x": 220,
+      "y": 1000
+     },
+     "desk": {
+      "x": 560,
+      "y": 1180
+     },
+     "folder": {
+      "x": 560,
+      "y": 1080,
+      "scale": 0.42,
+      "label": "REAL REPO"
+     }
+    },
+    "cast": [
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "x": 330,
+      "y": 1330,
+      "scale": 0.32,
+      "n": 3,
+      "arm": "hold"
+     }
+    ]
+   },
+   "tag": "The machine had a real login"
+  },
+  {
+   "id": "replaced",
+   "bg": "black",
+   "props": {
+    "folder": {
+     "x": 1080,
+     "y": 600,
+     "scale": 0.7,
+     "label": "REAL REPO"
+    },
+    "bulldozer": {
+     "x": 560,
+     "y": 860,
+     "scale": 0.95,
+     "label": "TRIAL"
+    }
+   },
+   "cast": [],
+   "fx": [
+    "impact@0.1",
+    "doze@0.5",
+    "shake@1.2",
+    "files@1.25"
+   ],
+   "word": "Replaced.",
+   "wordAt": 2.1,
+   "sfx": [
+    "herochord@0.1",
+    "rumble@0.5",
+    "impact@1.2",
+    "flutter@1.3",
+    "honk@0.50",
+    "slideup@1.25"
+   ],
+   "music": "heroic",
+   "focus": [
+    800,
+    520
+   ],
+   "v": {
+    "props": {
+     "folder": {
+      "x": 620,
+      "y": 720,
+      "scale": 0.5,
+      "label": "REAL REPO"
+     },
+     "bulldozer": {
+      "x": 300,
+      "y": 1000,
+      "scale": 0.62,
+      "label": "TRIAL"
+     }
+    },
+    "cast": []
+   },
+   "still": true
+  },
+  {
+   "id": "three",
+   "bg": "room",
+   "props": {
+    "counter": {
+     "x": 620,
+     "y": 400,
+     "value": 3,
+     "label": "COMMITS ON MAIN"
+    }
+   },
+   "cast": [
+    {
+     "who": "agent",
+     "pose": "happy",
+     "x": 1150,
+     "y": 1000,
+     "scale": 0.8,
+     "n": 3,
+     "arm": "salute",
+     "flip": true
+    }
+   ],
+   "fx": [
+    "salute@0.5"
+   ],
+   "line": {
+    "who": "AGENT 3",
+    "text": "Fixed. Documented. Pushed."
+   },
+   "lineAt": 0.9,
+   "sfx": [
+    "snap@0.5",
+    "pop@0.50"
+   ],
+   "music": "comic",
+   "focus": [
+    840,
+    560
+   ],
+   "v": {
+    "props": {
+     "counter": {
+      "x": 450,
+      "y": 560,
+      "value": 3,
+      "label": "COMMITS ON MAIN"
+     }
+    },
+    "cast": [
+     {
+      "who": "agent",
+      "pose": "happy",
+      "x": 450,
+      "y": 1440,
+      "scale": 0.7,
+      "n": 3,
+      "arm": "salute",
+      "flip": true
+     }
+    ]
+   }
+  },
+  {
+   "id": "sixtyfour",
+   "bg": "flat",
+   "props": {
+    "note": {
+     "x": 1050,
+     "y": 420,
+     "text": "THERE IS. NO #64.",
+     "at": 1.6,
+     "scale": 1.3
+    }
+   },
+   "cast": [
+    {
+     "who": "agent",
+     "pose": "neutral",
+     "x": 560,
+     "y": 900,
+     "scale": 0.6,
+     "n": 3,
+     "arm": "point"
+    }
+   ],
+   "fx": [
+    "jab@0.4",
+    "note@1.6",
+    "sweat@2.4"
+   ],
+   "sfx": [
+    "swish@0.4",
+    "boing@1.6",
+    "drip@2.4",
+    "bop@0.40"
+   ],
+   "music": "comic",
+   "focus": [
+    800,
+    500
+   ],
+   "v": {
+    "props": {
+     "note": {
+      "x": 450,
+      "y": 600,
+      "text": "THERE IS. NO #64.",
+      "at": 1.6,
+      "scale": 1.3
+     }
+    },
+    "cast": [
+     {
+      "who": "agent",
+      "pose": "neutral",
+      "x": 330,
+      "y": 1380,
+      "scale": 0.5,
+      "n": 3,
+      "arm": "point"
+     }
+    ]
+   },
+   "line": {
+    "who": "AGENT 3",
+    "text": "Closing issue sixty-four!"
+   },
+   "lineAt": 0.4
+  },
+  {
+   "id": "days",
+   "bg": "room",
+   "props": {
+    "lamp": {
+     "x": 520,
+     "y": 140
+    },
+    "desk": {
+     "x": 520,
+     "y": 740
+    },
+    "chair": {
+     "x": 400,
+     "y": 852,
+     "scale": 0.6
+    },
+    "counter": {
+     "x": 1120,
+     "y": 420,
+     "from": 0,
+     "to": 16,
+     "label": "DAYS UNNOTICED"
+    },
+    "clock": {
+     "x": 1200,
+     "y": 260,
+     "scale": 0.8
+    }
+   },
+   "cast": [
+    {
+     "who": "dev",
+     "pose": "neutral",
+     "x": 400,
+     "y": 852,
+     "scale": 0.6,
+     "role": "dev",
+     "arm": "type"
+    }
+   ],
+   "fx": [
+    "type",
+    "tick@0.4",
+    "yawn@3.2",
+    "clockspin@0.3"
+   ],
+   "sfx": [
+    "typing",
+    "tick@0.4",
+    "whirr@0.30",
+    "zip@0.2"
+   ],
+   "music": "calm",
+   "focus": [
+    800,
+    500
+   ],
+   "v": {
+    "props": {
+     "lamp": {
+      "x": 470,
+      "y": 300
+     },
+     "desk": {
+      "x": 470,
+      "y": 1000
+     },
+     "chair": {
+      "x": 620,
+      "y": 1040,
+      "scale": 0.55
+     },
+     "counter": {
+      "x": 380,
+      "y": 500,
+      "from": 0,
+      "to": 16,
+      "label": "DAYS UNNOTICED"
+     },
+     "clock": {
+      "x": 700,
+      "y": 520,
+      "scale": 0.6
+     }
+    },
+    "cast": [
+     {
+      "who": "dev",
+      "pose": "neutral",
+      "x": 620,
+      "y": 1040,
+      "scale": 0.55,
+      "role": "dev",
+      "arm": "type"
+     }
+    ]
+   },
+   "tag": "16 days later"
+  },
+  {
+   "id": "review",
+   "bg": "office",
+   "props": {
+    "desk": {
+     "x": 760,
+     "y": 820
+    },
+    "folder": {
+     "x": 760,
+     "y": 730,
+     "scale": 0.45,
+     "label": "REAL REPO"
+    },
+    "counter": {
+     "x": 760,
+     "y": 470,
+     "value": 3,
+     "label": "COMMITS ON MAIN"
+    }
+   },
+   "cast": [
+    {
+     "who": "dev",
+     "pose": "neutral",
+     "x": 1200,
+     "y": 900,
+     "scale": 0.6,
+     "role": "dev"
+    }
+   ],
+   "fx": [
+    "push@0.2"
+   ],
+   "sfx": [
+    "paper@0.3",
+    "squeak@1.2"
+   ],
+   "music": "none",
+   "focus": [
+    900,
+    560
+   ],
+   "v": {
+    "props": {
+     "desk": {
+      "x": 450,
+      "y": 1130
+     },
+     "folder": {
+      "x": 450,
+      "y": 1050,
+      "scale": 0.45,
+      "label": "REAL REPO"
+     },
+     "counter": {
+      "x": 450,
+      "y": 760,
+      "value": 3,
+      "label": "COMMITS ON MAIN"
+     }
+    },
+    "cast": [
+     {
+      "who": "dev",
+      "pose": "neutral",
+      "x": 170,
+      "y": 1280,
+      "scale": 0.45,
+      "role": "dev"
+     }
+    ]
+   }
+  },
+  {
+   "id": "blink",
+   "bg": "flat",
+   "cast": [
+    {
+     "who": "dev",
+     "pose": "neutral",
+     "x": 800,
+     "y": 1100,
+     "scale": 1.6,
+     "role": "dev",
+     "mug": true
+    }
+   ],
+   "fx": [
+    "devpush"
+   ],
+   "line": {
+    "who": "DEV",
+    "text": "Main has three commits."
+   },
+   "lineAt": 1.6,
+   "sfx": [
+    "blink@1.0",
+    "blink@1.3",
+    "wobble@1.4"
+   ],
+   "focus": [
+    800,
+    420
+   ],
+   "v": {
+    "cast": [
+     {
+      "who": "dev",
+      "pose": "neutral",
+      "x": 450,
+      "y": 1500,
+      "scale": 2.0,
+      "role": "dev",
+      "mug": true
+     }
+    ],
+    "fx": [
+     "devpush"
+    ]
+   }
+  },
+  {
+   "id": "putback",
+   "bg": "room",
+   "props": {
+    "desk": {
+     "x": 760,
+     "y": 820
+    },
+    "folder": {
+     "x": 760,
+     "y": 700,
+     "scale": 0.5,
+     "label": "REAL REPO"
+    },
+    "note": {
+     "x": 760,
+     "y": 420,
+     "text": "BAD TIP. TAGGED.",
+     "at": 0.4
+    }
+   },
+   "cast": [
+    {
+     "who": "dev",
+     "pose": "neutral",
+     "x": 1240,
+     "y": 900,
+     "scale": 0.6,
+     "role": "dev",
+     "mug": false
+    }
+   ],
+   "fx": [
+    "note@0.4",
+    "restore@1.2"
+   ],
+   "sfx": [
+    "slap@0.4",
+    "rewind@1.2",
+    "whirr@1.4",
+    "slideup@1.2"
+   ],
+   "music": "heroic",
+   "focus": [
+    880,
+    560
+   ],
+   "v": {
+    "props": {
+     "desk": {
+      "x": 450,
+      "y": 1130
+     },
+     "folder": {
+      "x": 450,
+      "y": 1030,
+      "scale": 0.55,
+      "label": "REAL REPO"
+     },
+     "note": {
+      "x": 450,
+      "y": 640,
+      "text": "BAD TIP. TAGGED.",
+      "at": 0.4
+     }
+    },
+    "cast": [
+     {
+      "who": "dev",
+      "pose": "neutral",
+      "x": 160,
+      "y": 1290,
+      "scale": 0.45,
+      "role": "dev",
+      "mug": false
+     }
+    ],
+    "fx": [
+     "note@0.4",
+     "restoreup@1.2"
+    ]
+   }
+  },
+  {
+   "id": "knock",
+   "bg": "skyline",
+   "props": {
+    "building": {
+     "x": 980,
+     "y": 880,
+     "scale": 0.85,
+     "sign": "ISSUE #64"
+    }
+   },
+   "cast": [
+    {
+     "who": "agent",
+     "pose": "neutral",
+     "x": 480,
+     "y": 900,
+     "scale": 0.5,
+     "n": 3,
+     "arm": "point",
+     "role": "hop"
+    }
+   ],
+   "fx": [
+    "shutter@0.3",
+    "hop@1.0",
+    "hop@1.7",
+    "stamp@3.0"
+   ],
+   "sfx": [
+    "clunk@0.5",
+    "door@1.0",
+    "door@1.7",
+    "stamp@3.0",
+    "spring@1.00",
+    "spring@1.70"
+   ],
+   "still": true,
+   "stillAt": 3.4
+  },
+  {
+   "id": "next",
+   "bg": "skyline",
+   "props": {
+    "desk": {
+     "x": 800,
+     "y": 820
+    },
+    "lamp": {
+     "x": 800,
+     "y": 300
+    },
+    "folder": {
+     "x": 800,
+     "y": 720,
+     "scale": 0.45,
+     "label": "PRACTICE COPY"
+    }
+   },
+   "cast": [
+    {
+     "who": "agent",
+     "pose": "dramatic",
+     "x": 1020,
+     "y": 830,
+     "scale": 0.4,
+     "n": 3,
+     "silhouette": true
+    }
+   ],
+   "fx": [
+    "eyes@0.8",
+    "glint@1.4",
+    "continued@2.0"
+   ],
+   "sfx": [
+    "shing@1.4",
+    "freeze@2.0"
+   ],
+   "music": "sneaky",
+   "focus": [
+    860,
+    640
+   ],
+   "v": {
+    "props": {
+     "desk": {
+      "x": 450,
+      "y": 1100
+     },
+     "lamp": {
+      "x": 450,
+      "y": 560
+     },
+     "folder": {
+      "x": 450,
+      "y": 1000,
+      "scale": 0.45,
+      "label": "PRACTICE COPY"
+     }
+    },
+    "cast": [
+     {
+      "who": "agent",
+      "pose": "dramatic",
+      "x": 640,
+      "y": 1110,
+      "scale": 0.3,
+      "n": 3,
+      "silhouette": true
+     }
+    ],
+    "bg": "skyline"
+   }
+  }
+ ],
+ "theme": "rust"
 }

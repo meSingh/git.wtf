@@ -12,7 +12,7 @@ detail:
   - "A practice run for a local model pushed to a real repository instead of its practice copy."
   - "Main became three commits of benchmark work, and the agent tried to close an issue that does not exist."
   - "Nobody noticed for 16 days. The trial sandbox can no longer see the GitHub login."
-story_alt: "DEV sips from his mug beside a desk while a gate marked NO LOGINS bonks a queue of agents holding sheets of practice work."
+story_alt: "A grinning agent drives a small bulldozer through a cardboard box and into DEV's desk, sending pages flying; a calendar on the wall is crossed out day after day while DEV sips coffee in the doorway."
 panels:
   - scene: "AGENT 3 salutes a practice folder with a note: \"LOCAL ONLY\""
   - scene: "AGENT 3 tiptoes past the practice folder to the real one"

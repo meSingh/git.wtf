@@ -54,6 +54,8 @@ function readAll() {
     // GITWTF_HIDE_INCIDENTS=id,id or GITWTF_ONLY_INCIDENTS=id,id: preview a launch set without editing front matter
     const hide = new Set((process.env.GITWTF_HIDE_INCIDENTS || '').split(',').map((x) => x.trim()).filter(Boolean));
     const only = new Set((process.env.GITWTF_ONLY_INCIDENTS || '').split(',').map((x) => x.trim()).filter(Boolean));
+    // GITWTF_SHOW_INCIDENTS=id,id (the dev preview only): lift `published: false` on these, to review drafts in place
+    const show = new Set((process.env.GITWTF_SHOW_INCIDENTS || '').split(',').map((x) => x.trim()).filter(Boolean));
     const out = [];
     for (const f of files) {
         const id = f.replace(/\.md$/, '');
@@ -63,7 +65,7 @@ function readAll() {
         } catch {
             /* a file that does not parse is the build's problem, not the filter's */
         }
-        out.push({ id, data, hidden: hide.has(id) || (only.size > 0 && !only.has(id)) || isHiddenData(data) });
+        out.push({ id, data, hidden: hide.has(id) || (only.size > 0 && !only.has(id)) || (isHiddenData(data) && !show.has(id)) });
     }
     return out;
 }

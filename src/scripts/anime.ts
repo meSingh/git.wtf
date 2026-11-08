@@ -262,6 +262,8 @@ const nth = (tl: object, k: string) => { const m = calls.get(tl) ?? {}; const v 
 const fxCount = (g: Element, name: string) => (JSON.parse((g as HTMLElement).dataset.fx || '[]') as string[]).filter((f) => f.split('@')[0] === name).length;
 const dev = (g: Element) => q(g, '.fig[data-who="dev"]');
 const agentN = (g: Element, n: number) => q(g, `.fig[data-who="agent"][data-n="${n}"]`);
+/** The agent an effect acts on: the one with that role, else the July episode's number, else the first that has the part. */
+const pick = (g: Element, r: string, n: number, part?: string) => role(g, r) ?? agentN(g, n) ?? (part ? agentsOnly(g).find((f) => f.querySelector(part)) : agentsOnly(g)[0]) ?? null;
 const swap = (tl: gsap.core.Timeline, f: Element | null, t: number) => {
     if (!f) return;
     // display, not visibility: an effect may have set a child visible, and that would show through a hidden group
@@ -429,24 +431,24 @@ Object.assign(FX, {
         tl.to(f, { keyframes: [{ rotation: -4 }, { rotation: 4 }, { rotation: -2 }, { rotation: 0 }], transformOrigin: '50% 100%', duration: 0.5, ease: 'none' }, t + 0.7);
     },
     scribble({ tl, g }: Ctx, t: number) {
-        const a = agentN(g, 2);
+        const a = pick(g, 'writer', 2, '.held .lines');
         const l = a && q(a, '.held .lines');
         if (l) tl.fromTo(l, { scaleX: 0, transformOrigin: '0% 50%' }, { scaleX: 1, duration: 0.45, ease: 'none' }, t);
         if (a) tl.to(a, { keyframes: [{ x: -6 }, { x: 6 }, { x: -6 }, { x: 0 }], duration: 0.45, ease: 'none' }, t);
     },
     erase({ tl, g }: Ctx, t: number) {
-        const a = agentN(g, 2), e = agentN(g, 9);
+        const a = pick(g, 'writer', 2, '.held .lines'), e = pick(g, 'eraser', 9);
         const l = a && q(a, '.held .lines');
         if (e) tl.to(e, { keyframes: [{ x: -14 }, { x: 14 }, { x: -14 }, { x: 14 }, { x: 0 }], duration: 0.36, ease: 'none' }, t);
         if (l) tl.to(l, { scaleX: 0, transformOrigin: '100% 50%', duration: 0.3, ease: 'power1.in' }, t + 0.05);
     },
     file({ tl, g }: Ctx, t: number) {
-        const a = agentN(g, 4);
+        const a = pick(g, 'filer', 4, '.held');
         const h = a && q(a, '.held');
         if (h) tl.to(h, { y: 160, autoAlpha: 0, duration: 0.2, ease: 'power2.in' }, t);
     },
     unfile({ tl, g }: Ctx, t: number) {
-        const a = agentN(g, 4), b = agentN(g, 8);
+        const a = pick(g, 'filer', 4, '.held'), b = pick(g, 'helper', 8);
         const h = a && q(a, '.held');
         if (b) tl.to(b, { keyframes: [{ x: 30 }, { x: 0 }], duration: 0.2 }, t);
         if (h) tl.to(h, { y: 0, autoAlpha: 1, duration: 0.16, ease: 'back.out(3)' }, t + 0.05);
@@ -468,7 +470,7 @@ Object.assign(FX, {
             }
             return;
         }
-        const e = agentN(g, 9) ?? agentsOnly(g)[0];
+        const e = pick(g, 'bonked', 9);
         if (!e) return;
         const p = placeOf(e);
         tl.to(e, { keyframes: [{ y: 30, duration: 0.05 }, { y: 0, duration: 0.15, ease: 'back.out(3)' }] }, t);
@@ -633,12 +635,76 @@ Object.assign(FX, {
         marks.forEach((m, k) => tl.set(m, { visibility: 'visible' }, t + Math.pow(k / marks.length, 0.55) * 1.9));
     },
     glance({ tl, g }: Ctx, t: number) {
-        const a = agentN(g, 7);
+        const a = pick(g, 'glancer', 7, '.monitor');
         if (a) tl.to(q(a, '.monitor'), { rotation: -14, transformOrigin: '50% 100%', duration: 0.3, ease: 'power2.out' }, t);
         if (!vertical(g)) {
             const w = at(q(g, '.farwindow'));
             tl.to(q(g, '.cam'), { scale: 1.12, svgOrigin: `${w.x} ${w.y}`, duration: 0.8, ease: 'power2.inOut' }, t);
         }
+    },
+});
+// ---------- the v3 kit (8 Nov 2026): the hook, and the new props' moves ----------
+Object.assign(FX, {
+    doze({ tl, g }: Ctx, t: number) {
+        // the bulldozer drives in from the left and shoves; the folder in front of it squashes
+        const b = q(g, '.bulldozer .bz-in');
+        if (!b) return;
+        tl.fromTo(b, { x: -1400 }, { x: 0, duration: 0.7, ease: 'power2.in' }, t);
+        tl.to(b, { keyframes: [{ x: 40 }, { x: 0 }], duration: 0.25, ease: 'power1.out' }, t + 0.7);
+        tl.to(q(g, '.cam'), { keyframes: [{ x: -16, y: 6 }, { x: 12, y: -6 }, { x: 0, y: 0 }], duration: 0.28, ease: 'none' }, t + 0.7);
+        const f = q(g, '.folder .f-in');
+        if (f) tl.to(f, { scaleX: 0.55, scaleY: 1.15, x: 60, transformOrigin: '100% 100%', duration: 0.18, ease: 'power3.in' }, t + 0.62);
+    },
+    ship({ tl, g }: Ctx, t: number) {
+        const p = q(g, '.parcel .pc-in');
+        if (!p) return;
+        tl.to(p, { keyframes: [{ y: 20, scaleY: 0.85, duration: 0.12 }, { y: -1400, x: 500, rotation: 40, scaleY: 1, duration: 0.6, ease: 'power3.in' }], transformOrigin: '50% 100%' }, t);
+    },
+    flip({ tl, g }: Ctx, t: number) {
+        const leaf = q(g, '.logbook .leafp');
+        if (!leaf) return;
+        for (let k = 0; k < 4; k++) tl.fromTo(leaf, { visibility: 'visible', scaleX: 1, transformOrigin: '0% 50%' }, { scaleX: -1, duration: 0.22, ease: 'power1.inOut', immediateRender: false }, t + k * 0.26);
+        tl.set(leaf, { visibility: 'hidden' }, t + 4 * 0.26);
+    },
+    shutter({ tl, g }: Ctx, t: number) {
+        const sh = q(g, '.building .shutter');
+        if (!sh) return;
+        tl.fromTo(sh, { scaleY: 0, transformOrigin: '50% 0%' }, { scaleY: 1, duration: 0.5, ease: 'bounce.out' }, t);
+    },
+    clockspin({ tl, g }: Ctx, t: number) {
+        const mh = q(g, '.clock .mh'), hh = q(g, '.clock .hh');
+        if (mh) tl.fromTo(mh, { rotation: 0, svgOrigin: '0 0' }, { rotation: 360 * 6, duration: 2.2, ease: 'power1.inOut' }, t);
+        if (hh) tl.fromTo(hh, { rotation: 0, svgOrigin: '0 0' }, { rotation: 180, duration: 2.2, ease: 'power1.inOut' }, t);
+    },
+    typeon({ tl, g, loops }: Ctx, t: number) {
+        // the command types out row by row; the cursor blinks after
+        const rows = qa(g, '.terminal .tline');
+        let at = t;
+        rows.forEach((r) => {
+            const full = r.getAttribute('data-full') || '';
+            const o = { n: 0 };
+            tl.set(r, { textContent: '' }, 0);
+            tl.to(o, { n: full.length, duration: full.length * 0.045, ease: 'none', onUpdate: () => { r.textContent = full.slice(0, Math.round(o.n)); } }, at);
+            at += full.length * 0.045 + 0.05;
+        });
+        const c = q(g, '.terminal .cursor');
+        if (c) loops.push(gsap.to(c, { opacity: 0, duration: 0.4, repeat: -1, yoyo: true, ease: 'steps(1)', paused: true }));
+    },
+    wilt({ tl, g }: Ctx, t: number) {
+        const l = q(g, '.plant .leaves');
+        if (l) tl.to(l, { rotation: 28, scaleY: 0.8, svgOrigin: '0 -90', duration: 1.2, ease: 'power2.in' }, t);
+    },
+    nod({ tl, g }: Ctx, t: number) {
+        // a little "mm-hm": every agent bobs once (the Mr. Bean beat, no words)
+        tl.to(agentsOnly(g), { keyframes: [{ y: 18, duration: 0.1 }, { y: 0, duration: 0.18, ease: 'back.out(3)' }], stagger: 0.05 }, t);
+    },
+    shrug({ tl, g }: Ctx, t: number) {
+        const f = role(g, 'shrug') ?? agentsOnly(g)[0];
+        if (f) tl.to(f, { keyframes: [{ scaleY: 1.06, y: -14, duration: 0.14 }, { scaleY: 1, y: 0, duration: 0.3, ease: 'bounce.out' }], transformOrigin: '50% 100%' }, t);
+    },
+    hop({ tl, g }: Ctx, t: number) {
+        const f = role(g, 'hop') ?? agentsOnly(g)[0];
+        if (f) tl.to(f, { keyframes: [{ y: -90, duration: 0.18, ease: 'power2.out' }, { y: 0, duration: 0.22, ease: 'bounce.out' }] }, t);
     },
 });
 const FXglint = FX.glint;
@@ -722,6 +788,12 @@ function common({ tl, g, loops }: Ctx) {
         const to = Number(counter.getAttribute('data-to') || 0);
         tl.fromTo(counter, { textContent: 0 }, { textContent: to, duration: 2.2, ease: 'power2.in', modifiers: { textContent: (v: number) => Math.round(v).toLocaleString('en-GB') }, immediateRender: false }, 0.1);
     }
+    // the hook is there from the first frame, row by row; the tag slaps on just after
+    qa(g, '.hook .hrow').forEach((r, k) => tl.fromTo(r, { autoAlpha: 0, scale: 1.25, transformOrigin: '50% 50%' }, { autoAlpha: 1, scale: 1, duration: 0.16, ease: 'back.out(2.5)' }, 0.02 + k * 0.12));
+    const tag = q(g, '.tag');
+    if (tag) tl.fromTo(tag, { autoAlpha: 0, x: -200 }, { autoAlpha: 1, x: 0, duration: 0.2, ease: 'power3.out' }, 0.1);
+    const leds = qa(g, '.g-servers .led');
+    if (leds.length) loops.push(gsap.to(leds, { opacity: 0.25, duration: 0.3, repeat: -1, yoyo: true, ease: 'steps(1)', stagger: { each: 0.07, from: 'random' }, paused: true }));
     const steam = qa(g, '.steam');
     if (steam.length) loops.push(gsap.fromTo(steam, { y: 0, opacity: 0.9 }, { y: -24, opacity: 0, duration: 1.4, repeat: -1, ease: 'sine.out', paused: true }));
 }
@@ -747,12 +819,29 @@ function build(g: El, svg: SVGSVGElement, shot: Shot, flash: boolean): Ctx {
 }
 
 /** What a scrolled cut hands the page: its length, a seek, and its sound. */
+/** The speaker shows what the viewer actually hears: "on" only while the audio is running, not just remembered. */
+function paintBtn(btn: HTMLButtonElement | null, audio: CutAudio | null) {
+    if (!btn || !audio) return;
+    const audible = audio.on && audio.live;
+    btn.textContent = audible ? 'Sound on' : 'Sound off';
+    btn.setAttribute('aria-label', audible ? 'Sound is on. Turn it off' : 'Sound is off. Turn it on');
+    btn.setAttribute('aria-pressed', String(audible));
+}
+/** Once, on the viewer's first click, tap or key anywhere on the page. */
+function firstGesture(fn: () => void) {
+    // the speaker's own click is handled by the speaker (it would otherwise unlock and then toggle straight back off)
+    const go = (e: Event) => { if ((e.target as Element | null)?.closest?.('[data-sound]')) return; removeEventListener('pointerdown', go, true); removeEventListener('keydown', go, true); fn(); };
+    addEventListener('pointerdown', go, true);
+    addEventListener('keydown', go, true);
+}
+
 export interface CutHandle { total: number; n: number; plan: { id: string; start: number; length: number }[]; frameAt: (t: number) => number; play: (k: number) => void; busy: () => boolean; at: () => number; audio: CutAudio | null }
 
-export function mountCutscene(wrap: HTMLElement, opts: { mode?: 'scroll'; soundDefault?: boolean } = {}): CutHandle | undefined {
-    // the frame: ?frame=9:16 or 16:9, else the screen's shape (phones and anything tall get the staged vertical one)
+export function mountCutscene(wrap: HTMLElement, opts: { mode?: 'scroll' | 'embed'; soundDefault?: boolean } = {}): CutHandle | undefined {
+    // the frame: ?frame=9:16 or 16:9, else the screen's shape (a phone held upright gets the staged vertical one).
+    // The screen, not the box: the box is sized to the frame (cut.css), so it can't decide it.
     const want = new URLSearchParams(location.search).get('frame');
-    const vertical = want ? want === '9:16' : wrap.clientWidth / Math.max(1, wrap.clientHeight) < 0.8;
+    const vertical = want ? want === '9:16' : innerWidth / Math.max(1, innerHeight) < 0.8;
     const tpl = wrap.querySelector<HTMLTemplateElement>('template[data-frame="9:16"]');
     const tall = tpl?.content.querySelector('svg.cutscene');
     let other: SVGSVGElement | null = null;
@@ -781,53 +870,16 @@ export function mountCutscene(wrap: HTMLElement, opts: { mode?: 'scroll'; soundD
     const scrolled = opts.mode === 'scroll' && !auto;
     const base = (wrap.dataset.base || '').replace(/\/$/, '');
     const soundBtn = wrap.querySelector<HTMLButtonElement>('[data-sound]');
+    // the speaker shows from the start, so a viewer can see the sound is off and turn it on (browsers need that click)
+    if (soundBtn && !/[?&](play=auto|render)\b/.test(location.search)) soundBtn.hidden = false;
     let audio: CutAudio | null = null;
     let starts: number[] = [];
 
-    // a phone keeps the shot's focus in the middle and puts words above and lines below the picture
+    // The whole frame is always shown (Mandeep, 8 Nov 2026: no cropping, words and lines never fall off the edge);
+    // the box around it is sized to the frame's shape in cut.css and the svg letterboxes inside it.
     const fit = () => {
         if (frame === '9:16') { svg.setAttribute('viewBox', '0 0 900 1600'); return; }
-        const w = wrap.clientWidth, h = wrap.clientHeight;
-        const aspect = w / Math.max(1, h);
-        const g = shots[Math.max(0, i)];
-        const [fx, fy] = (g?.getAttribute('data-focus') || '800 450').split(' ').map(Number);
-        const words = qa(svg, '.word'), lines = qa(svg, '.line');
-        // the arrow that stands alone (shot 'continued') keeps its centred place; the end card's arrow moves with the crop
-        const fits = Array.from(svg.querySelectorAll<SVGGElement>('.stampfit')), arrows = Array.from(svg.querySelectorAll<SVGGElement>('.tbc:not(.alone)'));
-        if (aspect >= 1.4) {
-            svg.setAttribute('viewBox', '0 0 1600 900');
-            [...words, ...lines, ...fits].forEach((el) => el.removeAttribute('transform'));
-            svg.querySelectorAll('.stampspot').forEach((el) => el.setAttribute('transform', 'translate(800 650) rotate(-5)'));
-            svg.querySelectorAll('.wordfit, .ttlfit').forEach((el) => el.removeAttribute('transform'));
-            arrows.forEach((el) => el.setAttribute('transform', 'translate(120 840)'));
-            return;
-        }
-        // a tall screen: 900 of the frame's width around the focus, as tall as the screen is
-        const vw = Math.min(1600, Math.max(900, 900 * aspect));
-        const vh = vw / aspect;
-        const vx = Math.min(1600 - vw, Math.max(0, fx - vw / 2));
-        const vy = fy - vh / 2;
-        svg.setAttribute('viewBox', `${vx} ${vy} ${vw} ${vh}`);
-        const dx = vx + vw / 2 - 800;
-        words.forEach((el) => el.setAttribute("transform", `translate(${dx} ${vy + 270 - 200})`));
-        // a line shrinks to the width seen (Geist 600 at 46 px: about 24 units a character)
-        lines.forEach((el) => {
-            const k = Math.min(1, (vw - 50) / (Number(el.dataset.len || 20) * 24));
-            el.setAttribute('transform', `translate(${dx + 800} ${vy + vh - 150}) scale(${k.toFixed(3)}) translate(-800 -830)`);
-        });
-        // the end card's stamp keeps to the middle of what is seen
-        svg.querySelectorAll('.stampspot').forEach((el) => el.setAttribute('transform', `translate(${vx + vw / 2} 650) rotate(-5)`));
-        fits.forEach((el) => el.setAttribute('transform', `scale(${Math.min(1, (vw - 40) / 980).toFixed(3)})`));
-        // long words and the episode title shrink to the width seen (Big Shoulders 900: about 0.5 em a letter)
-        svg.querySelectorAll<SVGGElement>('.word').forEach((wd) => {
-            const k = Math.min(1, (vw - 60) / (Number(wd.dataset.len || 8) * 98));
-            wd.querySelector('.wordfit')?.setAttribute('transform', `translate(800 200) scale(${k.toFixed(3)}) translate(-800 -200)`);
-        });
-        svg.querySelectorAll('.ttlfit').forEach((el) => {
-            const k = Math.min(1, (vw - 60) / (list.title.length * 62));
-            el.setAttribute('transform', `translate(800 490) scale(${k.toFixed(3)}) translate(-800 -490)`);
-        });
-        arrows.forEach((el) => el.setAttribute('transform', `translate(${vx + 30} ${vy + vh - 260}) scale(${Math.min(1, (vw - 60) / 500).toFixed(3)})`));
+        svg.setAttribute('viewBox', '0 0 1600 900');
     };
 
     const show = (n: number, instant = false) => {
@@ -889,13 +941,15 @@ export function mountCutscene(wrap: HTMLElement, opts: { mode?: 'scroll'; soundD
         const lineEnd = s.line ? (s.lineAt ?? 0.9) + read(`${s.line.text}`) : 0;
         const sayEnd = s.say ? (s.say.at ?? 0) + read(s.say.text) : 0;
         const wordEnd = s.word ? (s.wordAt ?? 0.75) + 1.2 : 0;
+        // a hook has to be read before the cut: about 0.3 s a word, at least 1.6 s
+        const hookEnd = s.hook ? Math.max(1.6, 0.3 * words(s.hook.replace(/[*\n]/g, ' '))) + 0.2 : 0;
         const fxAt = (name: string, d: number) => { const f = (s.fx ?? []).find((x) => x.split('@')[0] === name); return f ? Number(f.split('@')[1] || d) : null; };
         const end = fxAt('endcard', 1.6), st = fxAt('stamp', 1), co = fxAt('continued', 1);
         // the stamp lands 0.25 s after its slam starts (0.8 s in on the end card); the card then holds to be read
         const stamp = end !== null ? end + 0.8 + 0.25 : st !== null ? st + 0.25 : co !== null ? co + 0.4 : null;
         const hold = end !== null || co !== null ? 3 : 2.5;
         stampAt.push(stamp);
-        lens.push(Math.max(Math.max(anim, lineEnd, sayEnd, wordEnd) + 0.5, stamp !== null ? stamp + hold : 0));
+        lens.push(Math.max(Math.max(anim, lineEnd, sayEnd, wordEnd, hookEnd) + 0.5, stamp !== null ? stamp + hold : 0));
     }
     i = -1;
     starts = lens.map((_, k) => lens.slice(0, k).reduce((x, y) => x + y, 0));
@@ -904,12 +958,11 @@ export function mountCutscene(wrap: HTMLElement, opts: { mode?: 'scroll'; soundD
     // The sound plan, shared with the recorder. A shot list that names music states gets a music cue wherever the
     // state changes; an older one keeps the single bed from start to end. A shot with sfx plays those, and its fx
     // stay silent so nothing doubles.
-    const states = list.shots.some((s) => s.music);
-    const cues: Cue[] = states ? [] : [{ t: 0, kind: 'music', name: 'start', shot: list.shots[0].id }];
-    let state: string | undefined;
+    // One quiet bed under the whole episode (Mandeep, 8 Nov 2026): no mood changes from shot to shot. The list may
+    // name it (bed); the shots' own music states are kept in the file but no longer switch it.
+    const cues: Cue[] = [{ t: 0, kind: 'music', name: list.bed ?? 'comic', shot: list.shots[0].id }];
     list.shots.forEach((s, k) => {
         const t0 = starts[k];
-        if (states && s.music && s.music !== state) { state = s.music; cues.push({ t: t0, kind: 'music', name: s.music, shot: s.id }); }
         if (k > 0) cues.push({ t: t0, kind: 'cut', name: 'cut', shot: s.id });
         (s.sfx ?? []).forEach((f) => { const [name, at] = f.split('@'); cues.push({ t: t0 + Number(at || 0), kind: 'sfx', name, shot: s.id }); });
         // a shot with its own sfx plays no fx sound and no event sound (cut, word, stamp, tbc), so nothing doubles
@@ -922,11 +975,13 @@ export function mountCutscene(wrap: HTMLElement, opts: { mode?: 'scroll'; soundD
             else if (name !== 'stamp') cues.push({ t: t0 + (name === 'titlecard' ? 0.3 : Number(at || 0)), kind: 'fx', name, shot: s.id });
         });
         if (s.word && !quiet) cues.push({ t: t0 + (s.wordAt ?? 0.75), kind: 'word', name: s.id, shot: s.id });
-        if (s.line) cues.push({ t: t0 + (s.lineAt ?? 0.9), kind: 'line', name: s.id, shot: s.id });
-        else if (s.say) cues.push({ t: t0 + (s.say.at ?? 0), kind: 'say', name: s.id, shot: s.id });
+        // voice only where the shot list asks for it (s.voice); every other line is drawn, not heard
+        if (s.voice && s.line) cues.push({ t: t0 + (s.lineAt ?? 0.9), kind: 'line', name: s.id, shot: s.id });
+        else if (s.voice && s.say) cues.push({ t: t0 + (s.say.at ?? 0), kind: 'say', name: s.id, shot: s.id });
         if (stampAt[k] !== null && !quiet && !(s.fx ?? []).some((f) => f.startsWith('continued'))) cues.push({ t: t0 + stampAt[k]!, kind: 'stamp', name: 'stamp', shot: s.id });
     });
-    if (!states) cues.push({ t: total, kind: 'music', name: 'end', shot: list.shots[list.shots.length - 1].id });
+    // the bed lets the end card ring out, then stops
+    cues.push({ t: total + 2, kind: 'music', name: 'none', shot: list.shots[list.shots.length - 1].id });
     cues.forEach((c) => { c.t = +c.t.toFixed(3); });
     cues.sort((x, y) => x.t - y.t);
     // sound is off until the viewer turns it on, on the homepage and the full-screen cut alike (a choice is remembered)
@@ -959,9 +1014,12 @@ export function mountCutscene(wrap: HTMLElement, opts: { mode?: 'scroll'; soundD
         hint?.remove();
         wrap.querySelector('[data-skip]')?.remove();
         // the sound button shows at once; the first press is the gesture audio needs, and turns it on
-        const paint = () => { if (soundBtn && audio) { soundBtn.textContent = audio.on ? 'Sound: on' : 'Sound: off'; soundBtn.setAttribute('aria-pressed', String(audio.on)); } };
+        const paint = () => paintBtn(soundBtn, audio);
         if (soundBtn) { soundBtn.hidden = false; paint(); }
-        soundBtn?.addEventListener('click', (e) => { e.stopPropagation(); audio?.start().then((ok) => { if (!ok && soundBtn) soundBtn.hidden = true; }); audio?.toggle(); paint(); });
+        if (audio) audio.onState = paint;
+        // a remembered "on" only plays once the viewer has clicked or pressed something (the browser's rule)
+        firstGesture(() => audio?.unlock().then(paint));
+        soundBtn?.addEventListener('click', (e) => { e.stopPropagation(); if (!audio) return; if (audio.on && !audio.live) audio.unlock().then(paint); else { audio.toggle(); audio.unlock().then(paint); } paint(); });
         let last = 0;
         const seek = (t: number) => {
             // at rest at the top the title has already landed, so the stage never shows an empty frame
@@ -981,10 +1039,12 @@ export function mountCutscene(wrap: HTMLElement, opts: { mode?: 'scroll'; soundD
 
     // sound: off until turned on. The files are fetched only when it is on: on the Sound press, or on the first
     // click, tap or Enter/Space/arrow of a viewer who turned it on before (a gesture the browser lets audio start from)
-    const startSound = () => { if (!audio?.on) return; audio.start().then((ok) => { if (soundBtn) soundBtn.hidden = !ok; if (ok) audio!.shot(Math.max(0, i), starts[Math.max(0, i)]); }); };
-    const paintSound = () => { if (soundBtn && audio) { soundBtn.textContent = audio.on ? 'Sound: on' : 'Sound: off'; soundBtn.setAttribute('aria-pressed', String(audio.on)); } };
+    const startSound = () => { if (!audio?.on) return; audio.start().then((ok) => { if (ok) audio!.shot(Math.max(0, i), starts[Math.max(0, i)]); }); };
+    const paintSound = () => paintBtn(soundBtn, audio);
     paintSound();
-    soundBtn?.addEventListener('click', (e) => { e.stopPropagation(); audio?.toggle(); startSound(); paintSound(); });
+    if (audio) audio.onState = paintSound;
+    firstGesture(() => { audio?.unlock().then(() => { startSound(); paintSound(); }); });
+    soundBtn?.addEventListener('click', (e) => { e.stopPropagation(); if (!audio) return; if (!(audio.on && !audio.live)) audio.toggle(); audio.unlock().then(() => { startSound(); paintSound(); }); paintSound(); });
     wrap.addEventListener('pointerdown', startSound, { once: true });
     const keyStart = (e: KeyboardEvent) => { if ([' ', 'Enter', 'ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp'].includes(e.key)) { removeEventListener('keydown', keyStart); startSound(); } };
     addEventListener('keydown', keyStart);
@@ -1000,13 +1060,24 @@ export function mountCutscene(wrap: HTMLElement, opts: { mode?: 'scroll'; soundD
 
     // input: click or tap, space and the arrows, and the wheel (one shot per gesture)
     wrap.addEventListener('click', (e) => { if ((e.target as HTMLElement).closest('a, button')) return; next(); });
-    addEventListener('keydown', (e) => {
+    // embedded on a page (an incident's page): the page keeps its scroll and its keys; the player pauses out of view
+    const embed = opts.mode === 'embed';
+    if (embed) {
+        wrap.tabIndex = 0;
+        let away = false;
+        new IntersectionObserver(([e]) => {
+            if (e.intersectionRatio < 0.2) { if (!away) { away = true; clearTimeout(autoTimer); audio?.pause(); } }
+            else if (away && e.intersectionRatio >= 0.4) { away = false; onShown?.(); }
+        }, { threshold: [0, 0.2, 0.4, 1] }).observe(wrap);
+    }
+    (embed ? wrap : window).addEventListener('keydown', (ev) => {
+        const e = ev as KeyboardEvent;
         if (e.target instanceof HTMLElement && e.target.closest('input, textarea, a, button')) return;
         if ([' ', 'Enter', 'ArrowRight', 'ArrowDown', 'PageDown'].includes(e.key)) { if (i < shots.length - 1) { e.preventDefault(); next(); } }
         else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { if (i > 0 && scrollY < 10) { e.preventDefault(); prev(); } }
     });
     let lastWheel = 0;
-    wrap.addEventListener('wheel', (e) => {
+    if (!embed) wrap.addEventListener('wheel', (e) => {
         if (i >= shots.length - 1 && e.deltaY > 0) return; // at the end the page scrolls on to the links
         e.preventDefault();
         const now = performance.now();
