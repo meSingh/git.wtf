@@ -60,7 +60,7 @@ export async function llmsTxt(): Promise<string> {
     out.push(`- [Full text for language models](${abs('/llms-full.txt')}): every incident and archive answer as plain text`);
     out.push('');
     out.push('## Incidents', '');
-    for (const i of incidents) out.push(`- [${oneLine(i.data.title)}](${abs(incidentPath(i))}): ${i.data.source_date}. Status: ${oneLine(i.data.status)}`);
+    for (const i of incidents) out.push(`- [${oneLine(i.data.title)}](${abs(incidentPath(i))}): ${i.data.source_date}. ${i.data.summary ? oneLine(i.data.summary) + ' ' : ''}Status: ${oneLine(i.data.status)}`);
     out.push('');
     out.push('## Archive: Git answers', '');
     for (const p of posts) {

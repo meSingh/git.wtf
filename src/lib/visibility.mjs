@@ -22,6 +22,12 @@ export function publishedIncidentIds() {
     return new Set(readAll().filter((x) => !x.hidden).map((x) => x.id));
 }
 
+/** Hidden incidents the dev preview opens for review (GITWTF_SHOW_INCIDENTS): their pages work, but the homepage
+ *  leaves them out, so it always shows what the live site would. */
+export function previewIncidentIds() {
+    return new Set(readAll().filter((x) => x.preview).map((x) => x.id));
+}
+
 export function hiddenIncidentIds() {
     return new Set(readAll().filter((x) => x.hidden).map((x) => x.id));
 }
@@ -65,7 +71,7 @@ function readAll() {
         } catch {
             /* a file that does not parse is the build's problem, not the filter's */
         }
-        out.push({ id, data, hidden: hide.has(id) || (only.size > 0 && !only.has(id)) || (isHiddenData(data) && !show.has(id)) });
+        out.push({ id, data, hidden: hide.has(id) || (only.size > 0 && !only.has(id)) || (isHiddenData(data) && !show.has(id)), preview: isHiddenData(data) && show.has(id) });
     }
     return out;
 }

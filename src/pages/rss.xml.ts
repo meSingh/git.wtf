@@ -13,7 +13,7 @@ export const GET: APIRoute = async (context) => {
             title: i.data.title,
             link: incidentPath(i),
             pubDate: new Date(`${i.data.date}T09:00:00+05:30`),
-            description: `${i.body ?? ''}\n\nStatus: ${i.data.status}\nSource: ${i.data.source_url}`,
+            description: `${i.data.summary ? i.data.summary + '\n\n' : ''}${i.body ?? ''}\n\nStatus: ${i.data.status}\nSource: ${i.data.source_url}`,
             categories: [i.data.category],
         })),
     });

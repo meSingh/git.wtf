@@ -1,0 +1,1024 @@
+{
+    "incident": "2026-11-03-four-hundred-worktrees",
+    "episode": "Episode 87",
+    "title": "Four Hundred Desks!",
+    "theme": "rust",
+    "bed": "comic",
+    "shots": [
+        {
+            "id": "hook",
+            "bg": "halftone",
+            "hook": "It cleared *400 spare desks*.\nOne was *still in use*.",
+            "props": {
+                "desk": {
+                    "x": 1000,
+                    "y": 760
+                },
+                "folder": {
+                    "x": 1140,
+                    "y": 650,
+                    "scale": 0.54,
+                    "label": "REPORTS"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "shocked",
+                    "x": 900,
+                    "y": 750,
+                    "scale": 0.42,
+                    "n": 5,
+                    "arm": "type"
+                },
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 430,
+                    "y": 900,
+                    "scale": 0.66,
+                    "n": 9,
+                    "arm": "broom",
+                    "role": "sweeper"
+                }
+            ],
+            "fx": [
+                "sweep@0.5",
+                "shake@0.5",
+                "files@0.6",
+                "sweat@1.2"
+            ],
+            "sfx": [
+                "broom@0.5",
+                "impact@0.55",
+                "flutter@0.7",
+                "honk@1.1",
+                "drip@1.3"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 560,
+                        "y": 1150
+                    },
+                    "folder": {
+                        "x": 670,
+                        "y": 1062,
+                        "scale": 0.36,
+                        "label": "REPORTS"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "shocked",
+                        "x": 480,
+                        "y": 1140,
+                        "scale": 0.34,
+                        "n": 5,
+                        "arm": "type"
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 230,
+                        "y": 1470,
+                        "scale": 0.55,
+                        "n": 9,
+                        "arm": "broom",
+                        "role": "sweeper"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "desks",
+            "bg": "office",
+            "tag": "3 Nov",
+            "props": {
+                "desk": {
+                    "x": 620,
+                    "y": 760
+                },
+                "folder": {
+                    "x": 770,
+                    "y": 670,
+                    "scale": 0.4,
+                    "label": "IGNORED REPORTS"
+                },
+                "clock": {
+                    "x": 300,
+                    "y": 260,
+                    "scale": 0.6
+                },
+                "logbook": {
+                    "x": 1080,
+                    "y": 829,
+                    "scale": 0.42,
+                    "text": "LOG"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 510,
+                    "y": 750,
+                    "scale": 0.42,
+                    "n": 5,
+                    "arm": "type"
+                },
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 1330,
+                    "y": 896,
+                    "scale": 0.38,
+                    "extra": true,
+                    "role": "writer",
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "slowpush",
+                "scribble@0.6",
+                "scribble@1.6"
+            ],
+            "sfx": [
+                "typing",
+                "plink@0.3",
+                "scribble@0.6",
+                "scribble@1.6"
+            ],
+            "focus": [
+                820,
+                560
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 360,
+                        "y": 1080
+                    },
+                    "folder": {
+                        "x": 480,
+                        "y": 992,
+                        "scale": 0.36,
+                        "label": "IGNORED REPORTS"
+                    },
+                    "clock": {
+                        "x": 160,
+                        "y": 560,
+                        "scale": 0.5
+                    },
+                    "logbook": {
+                        "x": 520,
+                        "y": 1400,
+                        "scale": 0.34,
+                        "text": "LOG"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 280,
+                        "y": 1070,
+                        "scale": 0.32,
+                        "n": 5,
+                        "arm": "type"
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 720,
+                        "y": 1470,
+                        "scale": 0.32,
+                        "extra": true,
+                        "role": "writer",
+                        "arm": "hold"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "command",
+            "bg": "servers",
+            "tag": "A live run",
+            "props": {
+                "terminal": {
+                    "x": 1060,
+                    "y": 380,
+                    "scale": 0.8,
+                    "text": "DRY_RUN=0 scripts/wt-sweep.sh"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 400,
+                    "y": 890,
+                    "scale": 0.55,
+                    "n": 9,
+                    "arm": "broom",
+                    "role": "hop"
+                }
+            ],
+            "fx": [
+                "dash@0.3",
+                "hop@1.1"
+            ],
+            "word": "Not a drill.",
+            "wordAt": 1.7,
+            "sfx": [
+                "click@0.1",
+                "slideup@0.3",
+                "pop@0.6",
+                "spring@1.1",
+                "boing@1.7"
+            ],
+            "focus": [
+                800,
+                500
+            ],
+            "v": {
+                "props": {
+                    "terminal": {
+                        "x": 450,
+                        "y": 450,
+                        "scale": 0.75,
+                        "text": "DRY_RUN=0 scripts/wt-sweep.sh"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 450,
+                        "y": 1460,
+                        "scale": 0.55,
+                        "n": 9,
+                        "arm": "broom",
+                        "role": "hop"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "rule",
+            "bg": "blueprint",
+            "props": {
+                "whiteboard": {
+                    "x": 980,
+                    "y": 360,
+                    "scale": 0.85,
+                    "text": "SPARE A DESK IF:\nUSED IN 2 HOURS\nOR SOMEONE'S IN IT"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 380,
+                    "y": 890,
+                    "scale": 0.55,
+                    "n": 9,
+                    "arm": "broom"
+                }
+            ],
+            "fx": [
+                "nod@0.9",
+                "nod@1.6",
+                "nod@2.8"
+            ],
+            "sfx": [
+                "pop@0.2",
+                "bop@0.9",
+                "bop@1.6",
+                "bop@2.8"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 560,
+                        "scale": 0.92,
+                        "text": "SPARE A DESK IF:\nUSED IN 2 HOURS\nOR SOMEONE'S IN IT"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 450,
+                        "y": 1460,
+                        "scale": 0.5,
+                        "n": 9,
+                        "arm": "broom"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "idle",
+            "bg": "room",
+            "tag": "A session, sitting idle",
+            "props": {
+                "desk": {
+                    "x": 720,
+                    "y": 740
+                },
+                "clock": {
+                    "x": 1180,
+                    "y": 230,
+                    "scale": 0.6
+                },
+                "note": {
+                    "x": 720,
+                    "y": 330,
+                    "text": "NOBODY. HERE.",
+                    "at": 2.4
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 720,
+                    "y": 730,
+                    "scale": 0.42,
+                    "n": 5
+                },
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 1300,
+                    "y": 900,
+                    "scale": 0.5,
+                    "n": 9,
+                    "arm": "broom",
+                    "flip": true
+                },
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 150,
+                    "y": 900,
+                    "scale": 0.3,
+                    "extra": true,
+                    "role": "writer",
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "slowpush@0.1",
+                "clockspin@0.2",
+                "scribble@0.9",
+                "note@2.4"
+            ],
+            "sfx": [
+                "whirr@0.2",
+                "tick@0.5",
+                "scribble@0.9",
+                "slap@2.4"
+            ],
+            "focus": [
+                760,
+                520
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 1060
+                    },
+                    "clock": {
+                        "x": 700,
+                        "y": 360,
+                        "scale": 0.45
+                    },
+                    "note": {
+                        "x": 420,
+                        "y": 620,
+                        "text": "NOBODY. HERE.",
+                        "at": 2.4
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 450,
+                        "y": 1050,
+                        "scale": 0.36,
+                        "n": 5
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 700,
+                        "y": 1470,
+                        "scale": 0.4,
+                        "n": 9,
+                        "arm": "broom",
+                        "flip": true
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 160,
+                        "y": 1470,
+                        "scale": 0.26,
+                        "extra": true,
+                        "role": "writer",
+                        "arm": "hold"
+                    }
+                ]
+            },
+            "still": true,
+            "stillAt": 3.0
+        },
+        {
+            "id": "clean",
+            "bg": "halftone",
+            "props": {
+                "terminal": {
+                    "x": 1080,
+                    "y": 360,
+                    "scale": 0.75,
+                    "text": "git status: clean"
+                },
+                "folder": {
+                    "x": 1080,
+                    "y": 760,
+                    "scale": 0.55,
+                    "label": "IGNORED REPORTS"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 380,
+                    "y": 890,
+                    "scale": 0.6,
+                    "n": 9,
+                    "arm": "point"
+                }
+            ],
+            "fx": [
+                "zoom",
+                "jab@0.8"
+            ],
+            "word": "Clean.",
+            "wordAt": 1.8,
+            "sfx": [
+                "click@0.2",
+                "bop@0.8",
+                "plink@1.0",
+                "boing@1.8"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "terminal": {
+                        "x": 450,
+                        "y": 380,
+                        "scale": 0.85,
+                        "text": "git status: clean"
+                    },
+                    "folder": {
+                        "x": 560,
+                        "y": 1150,
+                        "scale": 0.42,
+                        "label": "IGNORED REPORTS"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 190,
+                        "y": 1470,
+                        "scale": 0.42,
+                        "n": 9,
+                        "arm": "point"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "swept",
+            "bg": "speedlines",
+            "props": {
+                "folder": {
+                    "x": 640,
+                    "y": 600,
+                    "scale": 0.75,
+                    "label": "IGNORED REPORTS"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "shocked",
+                    "x": 260,
+                    "y": 900,
+                    "scale": 0.36,
+                    "n": 5,
+                    "arm": "type"
+                },
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 1200,
+                    "y": 980,
+                    "scale": 0.85,
+                    "n": 9,
+                    "arm": "broom",
+                    "flip": true,
+                    "role": "sweeper"
+                }
+            ],
+            "fx": [
+                "impact@0.1",
+                "sweep@1.0",
+                "shake@1.0",
+                "files@1.1"
+            ],
+            "word": "Desk and all.",
+            "wordAt": 2.0,
+            "sfx": [
+                "herochord@0.1",
+                "broom@1.0",
+                "impact@1.1",
+                "flutter@1.2",
+                "whistle-fall@2.0"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "folder": {
+                        "x": 450,
+                        "y": 440,
+                        "scale": 0.6,
+                        "label": "IGNORED REPORTS"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "shocked",
+                        "x": 170,
+                        "y": 1470,
+                        "scale": 0.3,
+                        "n": 5,
+                        "arm": "type"
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 600,
+                        "y": 1440,
+                        "scale": 0.7,
+                        "n": 9,
+                        "arm": "broom",
+                        "flip": true,
+                        "role": "sweeper"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "tally",
+            "bg": "skyline",
+            "tag": "Across 65 projects",
+            "props": {
+                "counter": {
+                    "x": 800,
+                    "y": 430,
+                    "from": 0,
+                    "to": 400,
+                    "label": "SPARE DESKS CLEARED"
+                },
+                "bin": {
+                    "x": 380,
+                    "y": 900,
+                    "scale": 0.9
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 1220,
+                    "y": 900,
+                    "scale": 0.5,
+                    "n": 9,
+                    "arm": "broom",
+                    "flip": true,
+                    "role": "hop"
+                }
+            ],
+            "fx": [
+                "tick@0.3",
+                "hop@2.9"
+            ],
+            "sfx": [
+                "tick@0.3",
+                "whirr@0.4",
+                "chord@2.7",
+                "spring@2.9"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "counter": {
+                        "x": 450,
+                        "y": 640,
+                        "from": 0,
+                        "to": 400,
+                        "label": "DESKS CLEARED"
+                    },
+                    "bin": {
+                        "x": 230,
+                        "y": 1450,
+                        "scale": 0.8
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 640,
+                        "y": 1470,
+                        "scale": 0.42,
+                        "n": 9,
+                        "arm": "broom",
+                        "flip": true,
+                        "role": "hop"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "where",
+            "bg": "room",
+            "tag": "Mid-task",
+            "props": {
+                "chair": {
+                    "x": 1180,
+                    "y": 880,
+                    "scale": 0.72
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "shocked",
+                    "x": 400,
+                    "y": 890,
+                    "scale": 0.62,
+                    "n": 5,
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "shake@0.4",
+                "sweat@0.6"
+            ],
+            "line": {
+                "who": "AGENT 5, THE SESSION",
+                "text": "Where did my desk go?"
+            },
+            "lineAt": 1.2,
+            "sfx": [
+                "honk@0.3",
+                "wobble@0.5",
+                "drip@0.7",
+                "pop@1.2"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "props": {
+                    "chair": {
+                        "x": 660,
+                        "y": 1450,
+                        "scale": 0.62
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "shocked",
+                        "x": 290,
+                        "y": 1470,
+                        "scale": 0.55,
+                        "n": 5,
+                        "arm": "type"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "replay",
+            "bg": "sunburst",
+            "tag": "Replaying the session logs",
+            "props": {
+                "logbook": {
+                    "x": 760,
+                    "y": 780,
+                    "scale": 0.55,
+                    "text": "LOG"
+                },
+                "folder": {
+                    "x": 1200,
+                    "y": 760,
+                    "scale": 0.5,
+                    "label": "REBUILT REPORTS"
+                },
+                "counter": {
+                    "x": 1200,
+                    "y": 420,
+                    "from": 0,
+                    "to": 126,
+                    "label": "FILES REBUILT"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 400,
+                    "y": 896,
+                    "scale": 0.52,
+                    "extra": true,
+                    "role": "extra",
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "extralines@0.2",
+                "flip@0.4",
+                "restore@0.6",
+                "tick@0.6"
+            ],
+            "sfx": [
+                "slideup@0.2",
+                "chord@0.3",
+                "paper@0.4",
+                "rewind@0.6",
+                "tick@0.7"
+            ],
+            "focus": [
+                800,
+                540
+            ],
+            "v": {
+                "props": {
+                    "logbook": {
+                        "x": 600,
+                        "y": 1380,
+                        "scale": 0.4,
+                        "text": "LOG"
+                    },
+                    "folder": {
+                        "x": 450,
+                        "y": 1040,
+                        "scale": 0.48,
+                        "label": "REBUILT REPORTS"
+                    },
+                    "counter": {
+                        "x": 450,
+                        "y": 640,
+                        "from": 0,
+                        "to": 126,
+                        "label": "FILES REBUILT"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 210,
+                        "y": 1470,
+                        "scale": 0.42,
+                        "extra": true,
+                        "role": "extra",
+                        "arm": "hold"
+                    }
+                ],
+                "fx": [
+                    "extralines@0.2",
+                    "flip@0.4",
+                    "restoreup@0.6",
+                    "tick@0.6"
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "fix",
+            "bg": "office",
+            "tag": "4 Nov, the fix",
+            "props": {
+                "desk": {
+                    "x": 700,
+                    "y": 760
+                },
+                "folder": {
+                    "x": 840,
+                    "y": 672,
+                    "scale": 0.38,
+                    "label": "IGNORED REPORTS"
+                },
+                "copier": {
+                    "x": 1130,
+                    "y": 900,
+                    "scale": 1.1
+                },
+                "note": {
+                    "x": 330,
+                    "y": 330,
+                    "text": "COPY OUT. FIRST.",
+                    "at": 0.6
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 600,
+                    "y": 750,
+                    "scale": 0.4,
+                    "n": 5,
+                    "arm": "type"
+                },
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 1400,
+                    "y": 900,
+                    "scale": 0.45,
+                    "n": 9,
+                    "arm": "broom",
+                    "flip": true
+                }
+            ],
+            "fx": [
+                "copier",
+                "note@0.6",
+                "nod@1.4",
+                "stamp@2.6"
+            ],
+            "sfx": [
+                "copierhum@0.2",
+                "slap@0.6",
+                "bop@1.4",
+                "stamp@2.6"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 400,
+                        "y": 1120
+                    },
+                    "folder": {
+                        "x": 520,
+                        "y": 1034,
+                        "scale": 0.34,
+                        "label": "IGNORED REPORTS"
+                    },
+                    "copier": {
+                        "x": 740,
+                        "y": 1240,
+                        "scale": 0.9
+                    },
+                    "note": {
+                        "x": 450,
+                        "y": 430,
+                        "text": "COPY OUT. FIRST.",
+                        "at": 0.6
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 310,
+                        "y": 1110,
+                        "scale": 0.32,
+                        "n": 5,
+                        "arm": "type"
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 640,
+                        "y": 1480,
+                        "scale": 0.36,
+                        "n": 9,
+                        "arm": "broom",
+                        "flip": true
+                    }
+                ]
+            },
+            "still": true,
+            "stillAt": 3.0
+        },
+        {
+            "id": "next",
+            "bg": "servers",
+            "tag": "Next bug: it keeps too much",
+            "props": {
+                "stack": {
+                    "x": 1020,
+                    "y": 900,
+                    "grow": [
+                        120,
+                        600
+                    ]
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 560,
+                    "y": 880,
+                    "scale": 0.5,
+                    "n": 9,
+                    "arm": "broom",
+                    "role": "shrug"
+                }
+            ],
+            "fx": [
+                "grow@0.3",
+                "shrug@2.0",
+                "continued@2.6"
+            ],
+            "sfx": [
+                "shuffle@0.3",
+                "squeak@2.0",
+                "freeze@2.6"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "stack": {
+                        "x": 620,
+                        "y": 1440,
+                        "grow": [
+                            120,
+                            760
+                        ]
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 250,
+                        "y": 1460,
+                        "scale": 0.42,
+                        "n": 9,
+                        "arm": "broom",
+                        "role": "shrug"
+                    }
+                ]
+            }
+        }
+    ]
+}

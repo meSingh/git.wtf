@@ -3,11 +3,13 @@
 // Usage: node scripts/render-cut.mjs <incident id> [--base http://127.0.0.1:8787]
 // Needs the site served (npm run build && npm run preview) and Playwright (npm i --no-save playwright).
 // Writes incidents/<id>/cut/still-NN-<shot id>.webp (1280 wide), poster.webp and poster-tall.webp (the opening hook in
-// each frame, for the homepage's play button) and incidents/<id>/share.png (1200 x 630).
+// each frame, for the homepage's play button) and incidents/<id>/share.png (1200 x 630). Every image gets the
+// git.wtf wordmark (scripts/wordmark.mjs).
 // Key shots: those marked "still": true in the shot list, else every shot with a line or an impact word, and the end.
 import { existsSync, mkdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import sharp from 'sharp';
+import { withWordmark } from './wordmark.mjs';
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const id = process.argv[2];
@@ -45,18 +47,18 @@ const shoot = async (w, h, ks, save) => {
 };
 await shoot(1600, 900, keys, async (k, png) => {
     const name = `still-${String(k + 1).padStart(2, '0')}-${list.shots[k].id}.webp`;
-    await sharp(png).resize({ width: 1280 }).webp({ quality: 82 }).toFile(path.join(out, name));
+    await (await withWordmark(png, 1280, 720)).webp({ quality: 82 }).toFile(path.join(out, name));
     console.log('still', name);
 });
 // the posters: the opening (the hook), in each frame
-await shoot(1600, 900, [0], async (_, png) => { await sharp(png).resize({ width: 1280 }).webp({ quality: 82 }).toFile(path.join(out, 'poster.webp')); console.log('poster'); });
-await shoot(900, 1600, [0], async (_, png) => { await sharp(png).resize({ width: 720 }).webp({ quality: 82 }).toFile(path.join(out, 'poster-tall.webp')); console.log('poster-tall'); });
+await shoot(1600, 900, [0], async (_, png) => { await (await withWordmark(png, 1280, 720)).webp({ quality: 82 }).toFile(path.join(out, 'poster.webp')); console.log('poster'); });
+await shoot(900, 1600, [0], async (_, png) => { await (await withWordmark(png, 720, 1280)).webp({ quality: 82 }).toFile(path.join(out, 'poster-tall.webp')); console.log('poster-tall'); });
 // the share image: Video's story image when the cut has one (cut/story.webp, placed as share.png by hand), else the
 // shot with the stamp (or the last), stamp down, framed for 1200 x 630
 if (existsSync(path.join(out, 'story.webp'))) { console.log('share: kept (the story image is the share image)'); await browser.close(); process.exit(0); }
 const stampShot = list.shots.findLastIndex((s) => (s.fx ?? []).some((f) => /^(stamp|endcard)(@|$)/.test(f)));
 await shoot(1200, 630, [stampShot >= 0 ? stampShot : list.shots.length - 1], async (_, png) => {
-    await sharp(png).resize(1200, 630, { fit: 'cover' }).png().toFile(path.join(root, 'incidents', id, 'share.png'));
+    await (await withWordmark(png, 1200, 630)).png().toFile(path.join(root, 'incidents', id, 'share.png'));
     console.log('share incidents/' + id + '/share.png');
 });
 await browser.close();

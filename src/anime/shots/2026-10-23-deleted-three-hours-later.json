@@ -1,0 +1,850 @@
+{
+    "incident": "2026-10-23-deleted-three-hours-later",
+    "episode": "Episode 83",
+    "title": "Gone in Three Hours!",
+    "theme": "midnight",
+    "bed": "comic",
+    "shots": [
+        {
+            "id": "hook",
+            "bg": "halftone",
+            "hook": "Deleted after *three hours*.\nStill in Git *in October*.",
+            "props": {
+                "desk": {
+                    "x": 1060,
+                    "y": 720
+                },
+                "logbook": {
+                    "x": 1060,
+                    "y": 554,
+                    "scale": 0.8,
+                    "text": "MAY 27"
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "shocked",
+                    "x": 420,
+                    "y": 960,
+                    "scale": 0.72,
+                    "role": "dev",
+                    "mug": false
+                }
+            ],
+            "fx": [
+                "impact@0.3",
+                "shake@0.6",
+                "sweat@1.0"
+            ],
+            "sfx": [
+                "honk@0.3",
+                "impact@0.35",
+                "wobble@0.7",
+                "drip@1.1"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 900
+                    },
+                    "logbook": {
+                        "x": 450,
+                        "y": 717,
+                        "scale": 0.9,
+                        "text": "MAY 27"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "shocked",
+                        "x": 450,
+                        "y": 1520,
+                        "scale": 0.6,
+                        "role": "dev",
+                        "mug": false
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "commit",
+            "bg": "office",
+            "tag": "27 May, to a public repo",
+            "props": {
+                "desk": {
+                    "x": 700,
+                    "y": 760
+                },
+                "chair": {
+                    "x": 600,
+                    "y": 872,
+                    "scale": 0.6
+                },
+                "parcel": {
+                    "x": 860,
+                    "y": 730,
+                    "scale": 0.55,
+                    "label": "CONFIG"
+                },
+                "note": {
+                    "x": 1360,
+                    "y": 560,
+                    "text": "KEY. INSIDE.",
+                    "at": 1.0
+                },
+                "plant": {
+                    "x": 140,
+                    "y": 900,
+                    "scale": 0.7
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 600,
+                    "y": 872,
+                    "scale": 0.6,
+                    "role": "dev",
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "type",
+                "note@1.0",
+                "ship@2.2"
+            ],
+            "sfx": [
+                "typing",
+                "slap@1.0",
+                "zip@2.2",
+                "whoosh@2.3"
+            ],
+            "focus": [
+                860,
+                560
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 470,
+                        "y": 1060
+                    },
+                    "chair": {
+                        "x": 380,
+                        "y": 1172,
+                        "scale": 0.55
+                    },
+                    "parcel": {
+                        "x": 620,
+                        "y": 1030,
+                        "scale": 0.5,
+                        "label": "CONFIG"
+                    },
+                    "note": {
+                        "x": 260,
+                        "y": 600,
+                        "text": "KEY. INSIDE.",
+                        "at": 1.0
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 380,
+                        "y": 1172,
+                        "scale": 0.55,
+                        "role": "dev",
+                        "arm": "type"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "delete",
+            "bg": "room",
+            "tag": "Three hours later",
+            "props": {
+                "lamp": {
+                    "x": 640,
+                    "y": 140
+                },
+                "desk": {
+                    "x": 640,
+                    "y": 780
+                },
+                "bin": {
+                    "x": 1060,
+                    "y": 924,
+                    "scale": 0.9
+                },
+                "clock": {
+                    "x": 1300,
+                    "y": 260,
+                    "scale": 0.7
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "relieved",
+                    "x": 520,
+                    "y": 900,
+                    "scale": 0.6,
+                    "role": "dev"
+                }
+            ],
+            "fx": [
+                "sip@0.3"
+            ],
+            "word": "Deleted.",
+            "wordAt": 1.2,
+            "sfx": [
+                "fwip@0.1",
+                "sip@0.3",
+                "pop@1.2"
+            ],
+            "focus": [
+                800,
+                540
+            ],
+            "v": {
+                "props": {
+                    "lamp": {
+                        "x": 450,
+                        "y": 300
+                    },
+                    "desk": {
+                        "x": 420,
+                        "y": 1080
+                    },
+                    "bin": {
+                        "x": 720,
+                        "y": 1224,
+                        "scale": 0.75
+                    },
+                    "clock": {
+                        "x": 680,
+                        "y": 470,
+                        "scale": 0.55
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "relieved",
+                        "x": 330,
+                        "y": 1200,
+                        "scale": 0.55,
+                        "role": "dev"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "remembers",
+            "bg": "blueprint",
+            "tag": "In Git",
+            "props": {
+                "whiteboard": {
+                    "x": 480,
+                    "y": 330,
+                    "scale": 0.75,
+                    "text": "A DELETE IS\nA NEW PAGE.\nMAY 27 STAYS."
+                },
+                "desk": {
+                    "x": 1150,
+                    "y": 740
+                },
+                "logbook": {
+                    "x": 1150,
+                    "y": 574,
+                    "scale": 0.8,
+                    "text": "MAY 27"
+                }
+            },
+            "fx": [
+                "flip@0.6",
+                "slowpush"
+            ],
+            "sfx": [
+                "paper@0.6",
+                "shuffle@0.65",
+                "plink@1.9"
+            ],
+            "focus": [
+                820,
+                500
+            ],
+            "v": {
+                "props": {
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 520,
+                        "scale": 0.85,
+                        "text": "A DELETE IS\nA NEW PAGE.\nMAY 27 STAYS."
+                    },
+                    "desk": {
+                        "x": 450,
+                        "y": 1240
+                    },
+                    "logbook": {
+                        "x": 450,
+                        "y": 1074,
+                        "scale": 0.8,
+                        "text": "MAY 27"
+                    }
+                },
+                "fx": [
+                    "flip@0.6"
+                ]
+            }
+        },
+        {
+            "id": "months",
+            "bg": "office",
+            "tag": "Months go by",
+            "props": {
+                "note": {
+                    "x": 420,
+                    "y": 380,
+                    "text": "REVOKE. THE KEY.",
+                    "at": 0.3
+                },
+                "clock": {
+                    "x": 780,
+                    "y": 260,
+                    "scale": 0.8
+                },
+                "desk": {
+                    "x": 760,
+                    "y": 760
+                },
+                "chair": {
+                    "x": 660,
+                    "y": 872,
+                    "scale": 0.6
+                },
+                "plant": {
+                    "x": 1420,
+                    "y": 900,
+                    "scale": 0.8
+                }
+            },
+            "fx": [
+                "note@0.3",
+                "clockspin@0.9",
+                "wilt@1.2"
+            ],
+            "sfx": [
+                "slap@0.3",
+                "whirr@0.9",
+                "tick@1.0",
+                "wobble@1.6"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "note": {
+                        "x": 450,
+                        "y": 560,
+                        "text": "REVOKE. THE KEY.",
+                        "at": 0.3
+                    },
+                    "clock": {
+                        "x": 650,
+                        "y": 830,
+                        "scale": 0.55
+                    },
+                    "desk": {
+                        "x": 380,
+                        "y": 1180
+                    },
+                    "chair": {
+                        "x": 300,
+                        "y": 1292,
+                        "scale": 0.5
+                    },
+                    "plant": {
+                        "x": 720,
+                        "y": 1300,
+                        "scale": 0.7
+                    }
+                }
+            }
+        },
+        {
+            "id": "found",
+            "bg": "night",
+            "tag": "10 Oct",
+            "props": {
+                "door": {
+                    "x": 1380,
+                    "y": 880,
+                    "scale": 0.85
+                },
+                "footprints": {
+                    "from": [
+                        1260,
+                        880
+                    ],
+                    "to": [
+                        880,
+                        880
+                    ]
+                },
+                "desk": {
+                    "x": 640,
+                    "y": 736
+                },
+                "logbook": {
+                    "x": 640,
+                    "y": 587,
+                    "scale": 0.7,
+                    "text": "MAY 27"
+                }
+            },
+            "fx": [
+                "slowpush"
+            ],
+            "word": "Still worked.",
+            "wordAt": 1.6,
+            "sfx": [
+                "creak@0.1",
+                "tiptoe@0.4",
+                "sting@1.6"
+            ],
+            "focus": [
+                900,
+                560
+            ],
+            "v": {
+                "props": {
+                    "door": {
+                        "x": 640,
+                        "y": 1180,
+                        "scale": 0.6
+                    },
+                    "footprints": {
+                        "from": [
+                            600,
+                            1230
+                        ],
+                        "to": [
+                            380,
+                            1260
+                        ]
+                    },
+                    "desk": {
+                        "x": 330,
+                        "y": 1100
+                    },
+                    "logbook": {
+                        "x": 330,
+                        "y": 976,
+                        "scale": 0.55,
+                        "text": "MAY 27"
+                    }
+                },
+                "fx": []
+            },
+            "still": true
+        },
+        {
+            "id": "release",
+            "bg": "servers",
+            "tag": "21 Oct, 11:39 UTC",
+            "props": {
+                "parcel": {
+                    "x": 800,
+                    "y": 840,
+                    "scale": 0.9,
+                    "label": "1.107.0"
+                }
+            },
+            "fx": [
+                "ship@1.2"
+            ],
+            "word": "Poisoned.",
+            "wordAt": 2.0,
+            "sfx": [
+                "rumble@0.1",
+                "zip@1.2",
+                "whoosh@1.3",
+                "honk@2.0"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "parcel": {
+                        "x": 450,
+                        "y": 1240,
+                        "scale": 0.85,
+                        "label": "1.107.0"
+                    }
+                }
+            }
+        },
+        {
+            "id": "spotted",
+            "bg": "sunburst",
+            "tag": "12:06, a researcher's issue",
+            "props": {
+                "note": {
+                    "x": 1220,
+                    "y": 400,
+                    "text": "BAD. RELEASE.",
+                    "at": 0.9
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "shocked",
+                    "x": 560,
+                    "y": 1000,
+                    "scale": 0.85,
+                    "role": "dev",
+                    "mug": false
+                }
+            ],
+            "fx": [
+                "zoom",
+                "note@0.9",
+                "shake@1.0",
+                "sweat@1.6"
+            ],
+            "sfx": [
+                "honk@0.2",
+                "slap@0.9",
+                "wobble@1.0",
+                "drip@1.7"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "props": {
+                    "note": {
+                        "x": 450,
+                        "y": 600,
+                        "text": "BAD. RELEASE.",
+                        "at": 0.9
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "shocked",
+                        "x": 450,
+                        "y": 1520,
+                        "scale": 0.72,
+                        "role": "dev",
+                        "mug": false
+                    }
+                ]
+            }
+        },
+        {
+            "id": "cover",
+            "bg": "black",
+            "tag": "12:24",
+            "props": {
+                "bulldozer": {
+                    "x": 520,
+                    "y": 860,
+                    "scale": 0.75,
+                    "label": "FORCE PUSH"
+                },
+                "folder": {
+                    "x": 900,
+                    "y": 840,
+                    "scale": 0.42,
+                    "label": "MAIN"
+                },
+                "desk": {
+                    "x": 1340,
+                    "y": 736,
+                    "scale": 0.7
+                },
+                "logbook": {
+                    "x": 1340,
+                    "y": 596,
+                    "scale": 0.55,
+                    "text": "12:24"
+                }
+            },
+            "fx": [
+                "doze@0.1"
+            ],
+            "word": "Logged anyway.",
+            "wordAt": 1.9,
+            "sfx": [
+                "rumble@0.1",
+                "impact@0.8",
+                "flutter@0.9",
+                "scribble@1.4",
+                "plink@1.9"
+            ],
+            "focus": [
+                880,
+                560
+            ],
+            "v": {
+                "props": {
+                    "bulldozer": {
+                        "x": 330,
+                        "y": 1570,
+                        "scale": 0.7,
+                        "label": "FORCE PUSH"
+                    },
+                    "folder": {
+                        "x": 680,
+                        "y": 1560,
+                        "scale": 0.38,
+                        "label": "MAIN"
+                    },
+                    "desk": {
+                        "x": 450,
+                        "y": 1000,
+                        "scale": 0.6
+                    },
+                    "logbook": {
+                        "x": 450,
+                        "y": 880,
+                        "scale": 0.5,
+                        "text": "12:24"
+                    }
+                }
+            },
+            "still": true
+        },
+        {
+            "id": "pulled",
+            "bg": "skyline",
+            "tag": "13:23 UTC, pulled",
+            "props": {
+                "building": {
+                    "x": 1140,
+                    "y": 880,
+                    "scale": 0.8,
+                    "sign": "PACKAGES",
+                    "shut": true
+                },
+                "counter": {
+                    "x": 520,
+                    "y": 420,
+                    "from": 0,
+                    "to": 2,
+                    "label": "HOURS LIVE"
+                }
+            },
+            "fx": [
+                "tick@0.2",
+                "shutter@2.7",
+                "shake@3.1"
+            ],
+            "sfx": [
+                "tick@0.2",
+                "clunk@2.7",
+                "wobble@3.1"
+            ],
+            "focus": [
+                820,
+                540
+            ],
+            "v": {
+                "props": {
+                    "building": {
+                        "x": 450,
+                        "y": 1250,
+                        "scale": 0.75,
+                        "sign": "PACKAGES",
+                        "shut": true
+                    },
+                    "counter": {
+                        "x": 450,
+                        "y": 600,
+                        "from": 0,
+                        "to": 2,
+                        "label": "HOURS LIVE"
+                    }
+                }
+            }
+        },
+        {
+            "id": "revoke",
+            "bg": "office",
+            "props": {
+                "desk": {
+                    "x": 700,
+                    "y": 780
+                },
+                "chair": {
+                    "x": 600,
+                    "y": 892,
+                    "scale": 0.6
+                },
+                "logbook": {
+                    "x": 880,
+                    "y": 665,
+                    "scale": 0.5,
+                    "text": "MAY 27"
+                },
+                "whiteboard": {
+                    "x": 1180,
+                    "y": 330,
+                    "scale": 0.7,
+                    "text": "REVOKE EVERY\nKEY AND TOKEN."
+                },
+                "plant": {
+                    "x": 140,
+                    "y": 920,
+                    "scale": 0.7
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 600,
+                    "y": 892,
+                    "scale": 0.6,
+                    "role": "dev",
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "type",
+                "stamp@2.4"
+            ],
+            "sfx": [
+                "typing",
+                "scribble@0.4",
+                "stamp@2.4"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 470,
+                        "y": 1080
+                    },
+                    "chair": {
+                        "x": 380,
+                        "y": 1192,
+                        "scale": 0.55
+                    },
+                    "logbook": {
+                        "x": 600,
+                        "y": 974,
+                        "scale": 0.45,
+                        "text": "MAY 27"
+                    },
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 420,
+                        "scale": 0.8,
+                        "text": "REVOKE EVERY\nKEY AND TOKEN."
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 380,
+                        "y": 1192,
+                        "scale": 0.55,
+                        "role": "dev",
+                        "arm": "type"
+                    }
+                ]
+            },
+            "still": true,
+            "stillAt": 3
+        },
+        {
+            "id": "next",
+            "bg": "night",
+            "tag": "Somewhere, a new commit",
+            "props": {
+                "lamp": {
+                    "x": 800,
+                    "y": 120
+                },
+                "desk": {
+                    "x": 800,
+                    "y": 760
+                },
+                "parcel": {
+                    "x": 680,
+                    "y": 730,
+                    "scale": 0.5,
+                    "label": "CONFIG"
+                },
+                "logbook": {
+                    "x": 950,
+                    "y": 645,
+                    "scale": 0.5
+                }
+            },
+            "fx": [
+                "flip@0.6",
+                "continued@2.4"
+            ],
+            "sfx": [
+                "paper@0.6",
+                "shuffle@0.7",
+                "tick@1.8",
+                "freeze@2.4"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "lamp": {
+                        "x": 450,
+                        "y": 420
+                    },
+                    "desk": {
+                        "x": 450,
+                        "y": 1180
+                    },
+                    "parcel": {
+                        "x": 340,
+                        "y": 1150,
+                        "scale": 0.45,
+                        "label": "CONFIG"
+                    },
+                    "logbook": {
+                        "x": 580,
+                        "y": 1074,
+                        "scale": 0.45
+                    }
+                }
+            }
+        }
+    ]
+}

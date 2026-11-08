@@ -1,0 +1,797 @@
+{
+    "incident": "2026-10-31-the-lease-that-always-passed",
+    "episode": "Episode 85",
+    "title": "The Lease Always Passes!",
+    "theme": "cobalt",
+    "bed": "comic",
+    "shots": [
+        {
+            "id": "hook",
+            "bg": "sunburst",
+            "hook": "The *safe* force push.\nIt passed *every time*.",
+            "props": {
+                "bulldozer": {
+                    "x": 600,
+                    "y": 900,
+                    "scale": 0.85,
+                    "label": "LEASE"
+                },
+                "folder": {
+                    "x": 1160,
+                    "y": 880,
+                    "scale": 0.7,
+                    "label": "TEAMMATE'S WORK"
+                }
+            },
+            "fx": [
+                "doze@0.4",
+                "shake@1.9"
+            ],
+            "sfx": [
+                "rumble@0.2",
+                "impact@1.1",
+                "flutter@1.15",
+                "honk@1.9",
+                "wobble@2.0"
+            ],
+            "focus": [
+                880,
+                600
+            ],
+            "v": {
+                "props": {
+                    "bulldozer": {
+                        "x": 300,
+                        "y": 1570,
+                        "scale": 0.9,
+                        "label": "LEASE"
+                    },
+                    "folder": {
+                        "x": 700,
+                        "y": 1560,
+                        "scale": 0.45,
+                        "label": "TEAMMATE'S WORK"
+                    }
+                }
+            },
+            "still": true
+        },
+        {
+            "id": "recipe",
+            "bg": "office",
+            "tag": "An agent's git recipe",
+            "props": {
+                "whiteboard": {
+                    "x": 1060,
+                    "y": 330,
+                    "scale": 0.8,
+                    "text": "1. FETCH\n2. REBASE\n3. PUSH, SAFELY"
+                },
+                "plant": {
+                    "x": 1460,
+                    "y": 900,
+                    "scale": 0.75
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 420,
+                    "y": 920,
+                    "scale": 0.55,
+                    "n": 2,
+                    "arm": "salute"
+                }
+            ],
+            "fx": [
+                "salute@0.8",
+                "nod@2.0",
+                "hop@3.0"
+            ],
+            "sfx": [
+                "scribble@0.1",
+                "snap@0.8",
+                "bop@2.0",
+                "spring@3.0"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 520,
+                        "scale": 0.85,
+                        "text": "1. FETCH\n2. REBASE\n3. PUSH, SAFELY"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 450,
+                        "y": 1440,
+                        "scale": 0.5,
+                        "n": 2,
+                        "arm": "salute"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "teammate",
+            "bg": "room",
+            "tag": "Test repo: a teammate pushes",
+            "props": {
+                "lamp": {
+                    "x": 640,
+                    "y": 140
+                },
+                "desk": {
+                    "x": 640,
+                    "y": 780
+                },
+                "folder": {
+                    "x": 840,
+                    "y": 710,
+                    "scale": 0.36,
+                    "label": "TEAMMATE'S WORK"
+                },
+                "parcel": {
+                    "x": 1000,
+                    "y": 760,
+                    "scale": 0.5,
+                    "label": "PUSH"
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 540,
+                    "y": 892,
+                    "scale": 0.6,
+                    "role": "dev",
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "type",
+                "ship@2.7"
+            ],
+            "sfx": [
+                "typing",
+                "zip@2.7",
+                "whoosh@2.8"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "lamp": {
+                        "x": 470,
+                        "y": 300
+                    },
+                    "desk": {
+                        "x": 450,
+                        "y": 1080
+                    },
+                    "folder": {
+                        "x": 600,
+                        "y": 1010,
+                        "scale": 0.32,
+                        "label": "TEAMMATE'S WORK"
+                    },
+                    "parcel": {
+                        "x": 700,
+                        "y": 1240,
+                        "scale": 0.45,
+                        "label": "PUSH"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 340,
+                        "y": 1192,
+                        "scale": 0.55,
+                        "role": "dev",
+                        "arm": "type"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "fetch",
+            "bg": "servers",
+            "props": {
+                "terminal": {
+                    "x": 1080,
+                    "y": 380,
+                    "scale": 0.75,
+                    "text": "git fetch origin"
+                },
+                "note": {
+                    "x": 1080,
+                    "y": 760,
+                    "text": "LAST LOOK. JUST NOW.",
+                    "at": 1.8
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 420,
+                    "y": 960,
+                    "scale": 0.7,
+                    "n": 2,
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "zoom",
+                "note@1.8",
+                "nod@3.0"
+            ],
+            "sfx": [
+                "typing",
+                "slap@1.8",
+                "bop@3.0"
+            ],
+            "focus": [
+                800,
+                500
+            ],
+            "v": {
+                "props": {
+                    "terminal": {
+                        "x": 450,
+                        "y": 520,
+                        "scale": 0.9,
+                        "text": "git fetch origin"
+                    },
+                    "note": {
+                        "x": 560,
+                        "y": 920,
+                        "text": "LAST LOOK. JUST NOW.",
+                        "at": 1.8
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 260,
+                        "y": 1460,
+                        "scale": 0.5,
+                        "n": 2,
+                        "arm": "type"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "lease",
+            "bg": "halftone",
+            "props": {
+                "gate": {
+                    "x": 380,
+                    "y": 700,
+                    "scale": 0.8,
+                    "sign": "LEASE",
+                    "at": 0.2
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 1300,
+                    "y": 900,
+                    "scale": 0.5,
+                    "n": 2,
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "gatedrop@0.2",
+                "nod@2.6"
+            ],
+            "line": {
+                "who": "THE LEASE",
+                "text": "Matches your last look.\nGo ahead."
+            },
+            "lineAt": 1.2,
+            "sfx": [
+                "whistle-gate@0.2",
+                "clunk@0.42",
+                "pop@1.2",
+                "chord@2.6"
+            ],
+            "focus": [
+                880,
+                520
+            ],
+            "v": {
+                "props": {
+                    "gate": {
+                        "x": 450,
+                        "y": 700,
+                        "scale": 0.85,
+                        "sign": "LEASE",
+                        "at": 0.2
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 450,
+                        "y": 1440,
+                        "scale": 0.48,
+                        "n": 2,
+                        "arm": "hold"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "push",
+            "bg": "speedlines",
+            "props": {
+                "bulldozer": {
+                    "x": 560,
+                    "y": 880,
+                    "scale": 0.8,
+                    "label": "LEASE"
+                },
+                "folder": {
+                    "x": 1080,
+                    "y": 860,
+                    "scale": 0.6,
+                    "label": "TEAMMATE'S WORK"
+                }
+            },
+            "fx": [
+                "speedlines@0.0",
+                "doze@0.2",
+                "impact@0.9"
+            ],
+            "word": "Pushed.",
+            "wordAt": 1.8,
+            "sfx": [
+                "herochord@0.0",
+                "rumble@0.2",
+                "impact@0.95",
+                "flutter@1.0",
+                "whistle-fall@1.8"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "bulldozer": {
+                        "x": 300,
+                        "y": 1570,
+                        "scale": 0.9,
+                        "label": "LEASE"
+                    },
+                    "folder": {
+                        "x": 700,
+                        "y": 1560,
+                        "scale": 0.45,
+                        "label": "TEAMMATE'S WORK"
+                    }
+                },
+                "fx": [
+                    "speedlines@0.0",
+                    "doze@0.2",
+                    "impact@0.9"
+                ]
+            }
+        },
+        {
+            "id": "gone",
+            "bg": "office",
+            "tag": "Push: success",
+            "props": {
+                "desk": {
+                    "x": 900,
+                    "y": 820
+                },
+                "folder": {
+                    "x": 900,
+                    "y": 730,
+                    "scale": 0.42,
+                    "label": "TEAMMATE'S WORK",
+                    "empty": true
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "shocked",
+                    "x": 420,
+                    "y": 932,
+                    "scale": 0.62,
+                    "role": "dev",
+                    "mug": false
+                }
+            ],
+            "fx": [
+                "sweat@1.4",
+                "shake@2.8"
+            ],
+            "sfx": [
+                "honk@0.4",
+                "drip@1.5",
+                "sadtrombone@2.8"
+            ],
+            "focus": [
+                700,
+                540
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 500,
+                        "y": 1000
+                    },
+                    "folder": {
+                        "x": 500,
+                        "y": 910,
+                        "scale": 0.4,
+                        "label": "TEAMMATE'S WORK",
+                        "empty": true
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "shocked",
+                        "x": 360,
+                        "y": 1520,
+                        "scale": 0.58,
+                        "role": "dev",
+                        "mug": false
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "why",
+            "bg": "blueprint",
+            "tag": "Why it passed",
+            "props": {
+                "whiteboard": {
+                    "x": 800,
+                    "y": 330,
+                    "scale": 0.85,
+                    "text": "REMOTE = REMOTE?\nYES.\nEVERY TIME."
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 800,
+                    "y": 920,
+                    "scale": 0.5,
+                    "n": 2,
+                    "arm": "hold",
+                    "role": "shrug"
+                }
+            ],
+            "fx": [
+                "shrug@2.2",
+                "nod@3.2"
+            ],
+            "sfx": [
+                "scribble@0.2",
+                "squeak@2.2",
+                "boing@3.2"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "props": {
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 520,
+                        "scale": 0.9,
+                        "text": "REMOTE = REMOTE?\nYES.\nEVERY TIME."
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 450,
+                        "y": 1440,
+                        "scale": 0.45,
+                        "n": 2,
+                        "arm": "hold",
+                        "role": "shrug"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "copied",
+            "bg": "paper",
+            "tag": "Same night: a Rust port",
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 300,
+                    "y": 900,
+                    "scale": 0.55,
+                    "n": 2,
+                    "arm": "hold"
+                },
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 1300,
+                    "y": 900,
+                    "scale": 0.55,
+                    "n": 4,
+                    "arm": "hold",
+                    "flip": true
+                }
+            ],
+            "fx": [
+                "dash@0.1",
+                "nod@1.0",
+                "nod@2.8"
+            ],
+            "line": {
+                "who": "AGENT 4, THE RUST PORT",
+                "text": "Copied faithfully."
+            },
+            "lineAt": 1.4,
+            "sfx": [
+                "slideup@0.1",
+                "bop@1.0",
+                "pop@1.4",
+                "bop@2.8"
+            ],
+            "focus": [
+                800,
+                460
+            ],
+            "v": {
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 260,
+                        "y": 1460,
+                        "scale": 0.42,
+                        "n": 2,
+                        "arm": "hold"
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 640,
+                        "y": 1460,
+                        "scale": 0.42,
+                        "n": 4,
+                        "arm": "hold",
+                        "flip": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": "report",
+            "bg": "halftone",
+            "tag": "31 Oct, reported",
+            "props": {
+                "whiteboard": {
+                    "x": 1060,
+                    "y": 330,
+                    "scale": 0.8,
+                    "text": "FOLLOW-UP: OK\nREBASE PUSH:\nMISSED."
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "defeated",
+                    "x": 420,
+                    "y": 940,
+                    "scale": 0.6,
+                    "n": 2,
+                    "arm": "hold",
+                    "role": "writer"
+                }
+            ],
+            "fx": [
+                "scribble@0.3",
+                "scribble@1.2",
+                "shrug@2.6"
+            ],
+            "sfx": [
+                "scribble@0.3",
+                "scribble@1.2",
+                "squeak@2.6"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "props": {
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 520,
+                        "scale": 0.85,
+                        "text": "FOLLOW-UP: OK\nREBASE PUSH:\nMISSED."
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "defeated",
+                        "x": 450,
+                        "y": 1440,
+                        "scale": 0.5,
+                        "n": 2,
+                        "arm": "hold",
+                        "role": "writer"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "fixed",
+            "bg": "room",
+            "tag": "Fixed the same day",
+            "props": {
+                "bulldozer": {
+                    "x": 520,
+                    "y": 840,
+                    "scale": 0.65,
+                    "label": "LEASE"
+                },
+                "folder": {
+                    "x": 1100,
+                    "y": 840,
+                    "scale": 0.5,
+                    "label": "TEAMMATE'S WORK"
+                },
+                "note": {
+                    "x": 820,
+                    "y": 360,
+                    "text": "DECLINED. MERGE FIRST.",
+                    "at": 0.6
+                }
+            },
+            "fx": [
+                "note@0.6",
+                "shake@0.7",
+                "stamp@2.8"
+            ],
+            "sfx": [
+                "clunk@0.1",
+                "slap@0.6",
+                "chord@1.2",
+                "stamp@2.8"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "bulldozer": {
+                        "x": 300,
+                        "y": 1540,
+                        "scale": 0.5,
+                        "label": "LEASE"
+                    },
+                    "folder": {
+                        "x": 660,
+                        "y": 1540,
+                        "scale": 0.4,
+                        "label": "TEAMMATE'S WORK"
+                    },
+                    "note": {
+                        "x": 450,
+                        "y": 560,
+                        "text": "DECLINED. MERGE FIRST.",
+                        "at": 0.5
+                    }
+                }
+            },
+            "still": true,
+            "stillAt": 3
+        },
+        {
+            "id": "next",
+            "bg": "servers",
+            "tag": "The same three lines, elsewhere",
+            "props": {
+                "terminal": {
+                    "x": 1060,
+                    "y": 380,
+                    "scale": 0.75,
+                    "text": "git push --force-with-lease"
+                },
+                "clock": {
+                    "x": 300,
+                    "y": 230,
+                    "scale": 0.6
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 460,
+                    "y": 920,
+                    "scale": 0.58,
+                    "n": 6,
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "tiptoe",
+                "clockspin@0.8",
+                "continued@2.6"
+            ],
+            "sfx": [
+                "tiptoe",
+                "whirr@0.8",
+                "typing@1.6",
+                "freeze@2.6"
+            ],
+            "focus": [
+                800,
+                500
+            ],
+            "v": {
+                "props": {
+                    "terminal": {
+                        "x": 450,
+                        "y": 560,
+                        "scale": 0.9,
+                        "text": "git push --force-with-lease"
+                    },
+                    "clock": {
+                        "x": 680,
+                        "y": 1000,
+                        "scale": 0.5
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 330,
+                        "y": 1460,
+                        "scale": 0.5,
+                        "n": 6,
+                        "arm": "type"
+                    }
+                ]
+            }
+        }
+    ]
+}

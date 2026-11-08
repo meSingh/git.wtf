@@ -7,8 +7,8 @@ import Odo from './Odo.astro';
 import { getCollection } from 'astro:content';
 import { daysBetween, formatDay, happened, href, incidentPath, inlineCode, sentences, sortIncidents, type Incident } from '../lib/site';
 import { cutAssets } from '../lib/cuts';
-// the card's picture: the episode's story image, else its title card, else the strip's last panel
-const pic = (i: Incident) => { const c = cutAssets(i.id); if (PREVIEW && !c.story && stand && standId) return { src: href(`/cuts/${standId}/${stand.story}`), w: 1200, h: 630 }; return c.story ? { src: href(`/cuts/${i.id}/${c.story}`), w: 1200, h: 630 } : c.poster ? { src: href(`/cuts/${i.id}/${c.poster}`), w: 1280, h: 720 } : { src: href(`/strips/${i.id}/p4-480.webp`), w: 480, h: 268 }; };
+// the card's picture: the episode's story image, else its poster, else the incident's share image
+const pic = (i: Incident) => { const c = cutAssets(i.id); if (PREVIEW && !c.story && stand && standId) return { src: href(`/cuts/${standId}/${stand.story}`), w: 1200, h: 630 }; return c.story ? { src: href(`/cuts/${i.id}/${c.story}`), w: 1200, h: 630 } : c.poster ? { src: href(`/cuts/${i.id}/${c.poster}`), w: 1280, h: 720 } : { src: href(`${incidentPath(i)}share.png`), w: 1200, h: 630 }; };
 
 interface Props { incidents: Incident[] }
 const { incidents: shown } = Astro.props;
@@ -26,7 +26,8 @@ let x = PAD;
 asc.forEach((i, n) => {
     const gap = n === 0 ? 0 : daysBetween(happened(i), happened(asc[n - 1]));
     if (n > 0) x += Math.max(CARD + MIN, gap * PPD);
-    const first = sentences(i.body ?? '')[0] ?? '';
+    // the card's line: the incident's own one-line summary, else the write-up's first sentence
+    const first = i.data.summary ?? sentences(i.body ?? '')[0] ?? '';
     placed.push({ i, x, gap, first: first.length > 150 ? first.slice(0, 147).trimEnd() + '...' : first });
 });
 const width = (placed.at(-1)?.x ?? 0) + CARD + PAD + 300;

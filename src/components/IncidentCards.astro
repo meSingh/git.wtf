@@ -19,6 +19,7 @@ const pic = (i: Incident) => {
                 <span class="ic-text">
                     <span class="ic-meta"><time datetime={happened(i)}>{formatDay(happened(i))}</time>{category && <span>{categoryLabel(i.data.category)}</span>}</span>
                     <span class="ic-title">{i.data.title}</span>
+                    {i.data.summary && <span class="ic-sum" set:html={inlineCode(i.data.summary)} />}
                     <span class="ic-status" set:html={`Status: ${inlineCode(i.data.status)}`} />
                     <span class="ic-go">{cutAssets(i.id).stills.length ? 'Watch it' : 'Read it'} <span aria-hidden="true">&rarr;</span></span>
                 </span>

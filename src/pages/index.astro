@@ -6,7 +6,6 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Odo from '../components/Odo.astro';
-import Strip from '../components/Strip.astro';
 import Record from '../components/Record.astro';
 import Score from '../components/Score.astro';
 import Streak from '../components/Streak.astro';
@@ -14,10 +13,11 @@ import Confess from '../components/Confess.astro';
 import ShareCut from '../components/ShareCut.astro';
 import Story from '../components/Story.astro';
 import { heroData } from '../lib/hero';
-import { SITE, href, incidentPath, sentences, sortIncidents } from '../lib/site';
+import { SITE, href, incidentPath, isLive, sentences, sortIncidents } from '../lib/site';
 import { cutAssets, shotList } from '../lib/cuts';
 
-const incidents = sortIncidents(await getCollection('incidents'));
+// published incidents only: drafts opened for review in the dev preview stay off the homepage (Mandeep, 8 Nov 2026)
+const incidents = sortIncidents(await getCollection('incidents')).filter(isLive);
 const latest = incidents[0] ?? null;
 const d = await heroData();
 const image = latest ? `${incidentPath(latest)}share.png` : '/share.png';
@@ -27,6 +27,8 @@ const cut = latest && list ? cutAssets(latest.id) : null;
 const posterOf = (f: string | null) => (latest && f ? href(`/cuts/${latest.id}/${f}`) : null);
 const poster = posterOf(cut?.poster ?? null), posterTall = posterOf(cut?.posterTall ?? null);
 const hasCut = !!(cut && poster && list);
+// an incident without an episode leads with its story image (the share image when it has none)
+const latestStory = latest ? (cutAssets(latest.id).story ? href(`/cuts/${latest.id}/${cutAssets(latest.id).story}`) : href(`${incidentPath(latest)}share.png`)) : '';
 // the lines under "What actually happened" come with the incident (its detail), else its retelling's first sentences
 const detailLines = latest ? latest.data.detail ?? sentences(latest.body ?? '').slice(0, 3) : [];
 const jsonld = {
@@ -103,7 +105,7 @@ const jsonld = {
                 <p class="today-kicker">The latest fuck-up</p>
                 <h2 class="today-title" id="today-h"><a href={href(incidentPath(latest))}>{latest.data.title}</a></h2>
             </div>
-            <Strip incident={latest} class="col today-strip" />
+            <figure class="col today-pic"><img src={latestStory} alt={latest.data.story_alt ?? ''} width="1200" height="630" decoding="async" /></figure>
             <p class="col today-more"><a href={href(incidentPath(latest))}>Read the full fuck-up <span aria-hidden="true">&rarr;</span></a></p>
         </section>
     ) : (

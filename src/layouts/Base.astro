@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 import Logo from '../components/Logo.astro';
 import Odo from '../components/Odo.astro';
 import Footer from '../components/Footer.astro';
-import { SITE, daysSince, happened, href, sortIncidents } from '../lib/site';
+import { SITE, daysSince, happened, href, sortIncidents, isLive } from '../lib/site';
 
 interface Props {
     title: string;
@@ -23,7 +23,8 @@ const { title, description = SITE.description, image = '/share.png', canonical, 
 const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
 const url = canonical ?? new URL(Astro.url.pathname, SITE.url).toString();
 const img = new URL(image.startsWith('/') ? base + image : image, SITE.url).toString();
-const incidents = sortIncidents(await getCollection('incidents'));
+// the counter in the header: published incidents only, never drafts opened for review in the dev preview
+const incidents = sortIncidents(await getCollection('incidents')).filter(isLive);
 const latest = incidents[0] ?? null;
 const days = daysSince(incidents);
 // The display face as three static weights (14 kB each) rather than the 35 kB variable file: the opening only

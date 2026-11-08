@@ -1,5 +1,5 @@
 import type { CollectionEntry } from 'astro:content';
-import { hiddenIncidentIds } from './visibility.mjs';
+import { hiddenIncidentIds, previewIncidentIds } from './visibility.mjs';
 
 // Launch rule (Mandeep, 7 Nov): one incident is published, the rest stay hidden (`published: false`, `draft: true`
 // or `hidden: true` in the front matter, or the GITWTF_ONLY_INCIDENTS / GITWTF_HIDE_INCIDENTS preview). Read once.
@@ -7,6 +7,11 @@ const HIDDEN = hiddenIncidentIds();
 /** Whether an incident is published (not hidden by its front matter or the preview variables). */
 export function isPublished(i: Incident): boolean {
     return !HIDDEN.has(i.id);
+}
+const PREVIEW = previewIncidentIds();
+/** Whether an incident is really published, not just opened for review in the dev preview (homepage lists use this). */
+export function isLive(i: Incident): boolean {
+    return isPublished(i) && !PREVIEW.has(i.id);
 }
 /** The incidents the site shows: the published ones. */
 export function published(list: Incident[]): Incident[] {

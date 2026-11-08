@@ -1,0 +1,964 @@
+{
+    "incident": "2026-09-16-wrong-directory-right-command",
+    "episode": "Episode 75",
+    "title": "Right Command, Wrong Folder!",
+    "theme": "mint",
+    "bed": "comic",
+    "shots": [
+        {
+            "id": "hook",
+            "bg": "speedlines",
+            "hook": "Right command.\n*Wrong folder*.",
+            "props": {
+                "farwindow": {
+                    "x": 1290,
+                    "y": 420,
+                    "scale": 0.62,
+                    "folder": "SPARE    COPY  "
+                },
+                "desk": {
+                    "x": 700,
+                    "y": 760
+                },
+                "folder": {
+                    "x": 700,
+                    "y": 690,
+                    "scale": 0.42,
+                    "label": "UNSAVED WORK"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "n": 2,
+                    "pose": "dramatic",
+                    "x": 300,
+                    "y": 930,
+                    "scale": 0.6,
+                    "arm": "broom",
+                    "role": "sweeper"
+                }
+            ],
+            "fx": [
+                "speedlines@0",
+                "sweep@0.3",
+                "files@0.4",
+                "impact@0.4",
+                "shake@0.9"
+            ],
+            "sfx": [
+                "broom@0.3",
+                "impact@0.4",
+                "flutter@0.5",
+                "whoosh@0.9"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "farwindow": {
+                        "x": 560,
+                        "y": 640,
+                        "scale": 0.5,
+                        "folder": "SPARE    COPY  "
+                    },
+                    "desk": {
+                        "x": 500,
+                        "y": 1150
+                    },
+                    "folder": {
+                        "x": 500,
+                        "y": 1080,
+                        "scale": 0.42,
+                        "label": "UNSAVED WORK"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "n": 2,
+                        "pose": "dramatic",
+                        "x": 170,
+                        "y": 1300,
+                        "scale": 0.48,
+                        "arm": "broom",
+                        "role": "sweeper"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "work",
+            "bg": "office",
+            "tag": "16 Sep",
+            "props": {
+                "desk": {
+                    "x": 760,
+                    "y": 760
+                },
+                "chair": {
+                    "x": 640,
+                    "y": 872,
+                    "scale": 0.6
+                },
+                "folder": {
+                    "x": 900,
+                    "y": 690,
+                    "scale": 0.36,
+                    "label": "UNSAVED WORK"
+                },
+                "counter": {
+                    "x": 330,
+                    "y": 380,
+                    "from": 0,
+                    "to": 22,
+                    "label": "CHANGED FILES"
+                },
+                "plant": {
+                    "x": 1480,
+                    "y": 900,
+                    "scale": 0.75
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "role": "dev",
+                    "pose": "neutral",
+                    "x": 640,
+                    "y": 872,
+                    "scale": 0.6,
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "type",
+                "tick@0.5"
+            ],
+            "sfx": [
+                "typing",
+                "tick@0.5",
+                "plink@2.9"
+            ],
+            "focus": [
+                760,
+                560
+            ],
+            "v": {
+                "bg": "room",
+                "props": {
+                    "desk": {
+                        "x": 470,
+                        "y": 1060
+                    },
+                    "chair": {
+                        "x": 380,
+                        "y": 1172,
+                        "scale": 0.55
+                    },
+                    "folder": {
+                        "x": 600,
+                        "y": 990,
+                        "scale": 0.34,
+                        "label": "UNSAVED WORK"
+                    },
+                    "counter": {
+                        "x": 450,
+                        "y": 600,
+                        "from": 0,
+                        "to": 22,
+                        "label": "CHANGED FILES"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "role": "dev",
+                        "pose": "neutral",
+                        "x": 380,
+                        "y": 1172,
+                        "scale": 0.55,
+                        "arm": "type"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "staged",
+            "bg": "room",
+            "tag": "Earlier: staged",
+            "props": {
+                "copier": {
+                    "x": 560,
+                    "y": 860,
+                    "scale": 2
+                },
+                "stack": {
+                    "x": 1160,
+                    "y": 860,
+                    "scale": 1.3,
+                    "grow": [
+                        44,
+                        132
+                    ]
+                },
+                "note": {
+                    "x": 1300,
+                    "y": 330,
+                    "text": "COPIES. KEPT.",
+                    "at": 1.6
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "extra": true,
+                    "pose": "neutral",
+                    "x": 880,
+                    "y": 880,
+                    "scale": 0.6,
+                    "arm": "hold",
+                    "role": "extra"
+                }
+            ],
+            "fx": [
+                "copier",
+                "grow@0.3",
+                "note@1.6"
+            ],
+            "sfx": [
+                "copierhum",
+                "paper@0.6",
+                "paper@1.2",
+                "slap@1.6"
+            ],
+            "focus": [
+                900,
+                560
+            ],
+            "v": {
+                "props": {
+                    "copier": {
+                        "x": 220,
+                        "y": 1300,
+                        "scale": 1.6
+                    },
+                    "stack": {
+                        "x": 700,
+                        "y": 1300,
+                        "scale": 1.1,
+                        "grow": [
+                            44,
+                            132
+                        ]
+                    },
+                    "note": {
+                        "x": 450,
+                        "y": 600,
+                        "text": "COPIES. KEPT.",
+                        "at": 1.6
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "extra": true,
+                        "pose": "neutral",
+                        "x": 470,
+                        "y": 1310,
+                        "scale": 0.5,
+                        "arm": "hold",
+                        "role": "extra"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "job",
+            "bg": "night",
+            "props": {
+                "farwindow": {
+                    "x": 1100,
+                    "y": 400,
+                    "scale": 0.95,
+                    "folder": "SPARE    COPY  "
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "n": 2,
+                    "pose": "happy",
+                    "x": 420,
+                    "y": 900,
+                    "scale": 0.55,
+                    "arm": "point"
+                }
+            ],
+            "fx": [
+                "jab@0.5",
+                "slowpush@0.2"
+            ],
+            "line": {
+                "who": "AGENT 2",
+                "text": "Reset the spare copy. Easy."
+            },
+            "lineAt": 1.2,
+            "sfx": [
+                "bop@0.5",
+                "plink@0.8",
+                "pop@1.2"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "props": {
+                    "farwindow": {
+                        "x": 450,
+                        "y": 560,
+                        "scale": 0.75,
+                        "folder": "SPARE    COPY  "
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "n": 2,
+                        "pose": "happy",
+                        "x": 300,
+                        "y": 1460,
+                        "scale": 0.5,
+                        "arm": "point"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "wrong",
+            "bg": "room",
+            "tag": "It never left this room",
+            "props": {
+                "desk": {
+                    "x": 560,
+                    "y": 760
+                },
+                "folder": {
+                    "x": 560,
+                    "y": 690,
+                    "scale": 0.4,
+                    "label": "UNSAVED WORK"
+                },
+                "farwindow": {
+                    "x": 1250,
+                    "y": 330,
+                    "scale": 0.6,
+                    "folder": "SPARE    COPY  "
+                },
+                "plant": {
+                    "x": 130,
+                    "y": 900,
+                    "scale": 0.7
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "n": 2,
+                    "pose": "happy",
+                    "x": 900,
+                    "y": 900,
+                    "scale": 0.55,
+                    "arm": "broom"
+                }
+            ],
+            "fx": [
+                "tiptoe",
+                "nod@1.2",
+                "shrug@2.3"
+            ],
+            "sfx": [
+                "tiptoe",
+                "bop@1.2",
+                "squeak@2.3"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 400,
+                        "y": 1060
+                    },
+                    "folder": {
+                        "x": 400,
+                        "y": 990,
+                        "scale": 0.38,
+                        "label": "UNSAVED WORK"
+                    },
+                    "farwindow": {
+                        "x": 560,
+                        "y": 560,
+                        "scale": 0.5,
+                        "folder": "SPARE    COPY  "
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "n": 2,
+                        "pose": "happy",
+                        "x": 700,
+                        "y": 1220,
+                        "scale": 0.42,
+                        "arm": "broom"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "command",
+            "bg": "halftone",
+            "props": {
+                "terminal": {
+                    "x": 1060,
+                    "y": 380,
+                    "scale": 0.75,
+                    "text": "git checkout -- ."
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "n": 2,
+                    "pose": "dramatic",
+                    "x": 420,
+                    "y": 960,
+                    "scale": 0.7,
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "zoom"
+            ],
+            "line": {
+                "who": "AGENT 2",
+                "text": "Resetting the spare copy!"
+            },
+            "lineAt": 0.8,
+            "sfx": [
+                "typing",
+                "shing@0.3",
+                "pop@0.8"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "props": {
+                    "terminal": {
+                        "x": 450,
+                        "y": 520,
+                        "scale": 0.9,
+                        "text": "git checkout -- ."
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "n": 2,
+                        "pose": "dramatic",
+                        "x": 450,
+                        "y": 1460,
+                        "scale": 0.55,
+                        "arm": "type"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "swept",
+            "bg": "black",
+            "props": {
+                "folder": {
+                    "x": 960,
+                    "y": 700,
+                    "scale": 0.6,
+                    "label": "UNSAVED WORK"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "n": 2,
+                    "pose": "dramatic",
+                    "x": 420,
+                    "y": 940,
+                    "scale": 0.6,
+                    "arm": "broom",
+                    "role": "sweeper"
+                }
+            ],
+            "fx": [
+                "sweep@0.2",
+                "impact@0.3",
+                "files@0.3",
+                "shake@0.7"
+            ],
+            "word": "No warning.",
+            "wordAt": 1.5,
+            "sfx": [
+                "broom@0.2",
+                "impact@0.3",
+                "flutter@0.4",
+                "whistle-fall@1.0"
+            ],
+            "focus": [
+                800,
+                500
+            ],
+            "v": {
+                "props": {
+                    "folder": {
+                        "x": 560,
+                        "y": 1150,
+                        "scale": 0.55,
+                        "label": "UNSAVED WORK"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "n": 2,
+                        "pose": "dramatic",
+                        "x": 200,
+                        "y": 1300,
+                        "scale": 0.45,
+                        "arm": "broom",
+                        "role": "sweeper"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "found",
+            "bg": "room",
+            "props": {
+                "door": {
+                    "x": 1380,
+                    "y": 860,
+                    "scale": 0.85
+                },
+                "desk": {
+                    "x": 640,
+                    "y": 716
+                },
+                "folder": {
+                    "x": 700,
+                    "y": 642,
+                    "scale": 0.36,
+                    "label": "UNSAVED WORK",
+                    "empty": true
+                },
+                "counter": {
+                    "x": 330,
+                    "y": 360,
+                    "from": 22,
+                    "to": 0,
+                    "label": "CHANGED FILES"
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "role": "dev",
+                    "pose": "shocked",
+                    "x": 1060,
+                    "y": 860,
+                    "scale": 0.6
+                }
+            ],
+            "fx": [
+                "door@0",
+                "enter@0.1",
+                "tick@0.8",
+                "sweat@3.2"
+            ],
+            "sfx": [
+                "door@0.0",
+                "tiptoe@0.2",
+                "tick@0.8",
+                "honk@3.2",
+                "drip@3.4"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "door": {
+                        "x": 720,
+                        "y": 1240,
+                        "scale": 0.6
+                    },
+                    "desk": {
+                        "x": 330,
+                        "y": 1096
+                    },
+                    "folder": {
+                        "x": 360,
+                        "y": 1024,
+                        "scale": 0.32,
+                        "label": "UNSAVED WORK",
+                        "empty": true
+                    },
+                    "counter": {
+                        "x": 450,
+                        "y": 600,
+                        "from": 22,
+                        "to": 0,
+                        "label": "CHANGED FILES"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "role": "dev",
+                        "pose": "shocked",
+                        "x": 560,
+                        "y": 1240,
+                        "scale": 0.5
+                    }
+                ]
+            }
+        },
+        {
+            "id": "blobs",
+            "bg": "sunburst",
+            "props": {
+                "copier": {
+                    "x": 380,
+                    "y": 900,
+                    "scale": 1.9
+                },
+                "stack": {
+                    "x": 1060,
+                    "y": 900,
+                    "scale": 1.3,
+                    "grow": [
+                        132,
+                        220
+                    ]
+                },
+                "note": {
+                    "x": 1320,
+                    "y": 330,
+                    "text": "NO NAMES. ALL THERE.",
+                    "at": 1.4
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "extra": true,
+                    "pose": "happy",
+                    "x": 740,
+                    "y": 900,
+                    "scale": 0.68,
+                    "arm": "up",
+                    "role": "extra"
+                }
+            ],
+            "fx": [
+                "extralines@0.1",
+                "grow@0.3",
+                "note@1.4"
+            ],
+            "sfx": [
+                "shing@0.1",
+                "shuffle@0.3",
+                "slap@1.4",
+                "chord@1.8"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "copier": {
+                        "x": 180,
+                        "y": 1300,
+                        "scale": 1.1
+                    },
+                    "stack": {
+                        "x": 680,
+                        "y": 1300,
+                        "grow": [
+                            132,
+                            220
+                        ]
+                    },
+                    "note": {
+                        "x": 450,
+                        "y": 560,
+                        "text": "NO NAMES. ALL THERE.",
+                        "at": 1.4
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "extra": true,
+                        "pose": "happy",
+                        "x": 440,
+                        "y": 1320,
+                        "scale": 0.5,
+                        "arm": "up",
+                        "role": "extra"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "back",
+            "bg": "blueprint",
+            "props": {
+                "desk": {
+                    "x": 860,
+                    "y": 780
+                },
+                "folder": {
+                    "x": 860,
+                    "y": 705,
+                    "scale": 0.42,
+                    "label": "UNSAVED WORK"
+                },
+                "counter": {
+                    "x": 1280,
+                    "y": 340,
+                    "from": 0,
+                    "to": 22,
+                    "label": "FILES BACK"
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "role": "dev",
+                    "pose": "relieved",
+                    "x": 380,
+                    "y": 924,
+                    "scale": 0.6
+                }
+            ],
+            "fx": [
+                "restore@0.2",
+                "tick@0.4"
+            ],
+            "sfx": [
+                "rewind@0.2",
+                "tick@0.4",
+                "chord@2.8"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 520,
+                        "y": 1150
+                    },
+                    "folder": {
+                        "x": 540,
+                        "y": 1076,
+                        "scale": 0.4,
+                        "label": "UNSAVED WORK"
+                    },
+                    "counter": {
+                        "x": 450,
+                        "y": 600,
+                        "from": 0,
+                        "to": 22,
+                        "label": "FILES BACK"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "role": "dev",
+                        "pose": "relieved",
+                        "x": 170,
+                        "y": 1294,
+                        "scale": 0.48
+                    }
+                ]
+            }
+        },
+        {
+            "id": "guard",
+            "bg": "servers",
+            "tag": "17 Sep: a guard",
+            "props": {
+                "terminal": {
+                    "x": 1040,
+                    "y": 340,
+                    "scale": 0.8,
+                    "text": "safe_checkout: refusing checkout with 22 dirty files",
+                    "prompt": "!",
+                    "red": true
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "n": 2,
+                    "pose": "neutral",
+                    "x": 360,
+                    "y": 940,
+                    "scale": 0.6,
+                    "arm": "broom",
+                    "role": "shrug"
+                }
+            ],
+            "fx": [
+                "zoom",
+                "shrug@0.9",
+                "stamp@2.2"
+            ],
+            "sfx": [
+                "typing",
+                "honk@0.3",
+                "squeak@0.9",
+                "stamp@2.2"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "props": {
+                    "terminal": {
+                        "x": 450,
+                        "y": 470,
+                        "scale": 0.9,
+                        "text": "safe_checkout: refusing checkout with 22 dirty files",
+                        "prompt": "!",
+                        "red": true
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "n": 2,
+                        "pose": "neutral",
+                        "x": 450,
+                        "y": 1460,
+                        "scale": 0.55,
+                        "arm": "broom",
+                        "role": "shrug"
+                    }
+                ]
+            },
+            "still": true,
+            "stillAt": 2.8
+        },
+        {
+            "id": "next",
+            "bg": "night",
+            "tag": "Next reset: which folder?",
+            "props": {
+                "farwindow": {
+                    "x": 1340,
+                    "y": 300,
+                    "scale": 0.55,
+                    "folder": "SPARE    COPY  "
+                },
+                "desk": {
+                    "x": 640,
+                    "y": 760
+                },
+                "folder": {
+                    "x": 640,
+                    "y": 690,
+                    "scale": 0.38,
+                    "label": "UNSAVED WORK"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "n": 2,
+                    "pose": "happy",
+                    "x": 330,
+                    "y": 904,
+                    "scale": 0.55,
+                    "arm": "broom",
+                    "role": "hop"
+                }
+            ],
+            "fx": [
+                "slowpush",
+                "hop@1.0",
+                "hop@1.6",
+                "continued@2.4"
+            ],
+            "sfx": [
+                "tiptoe@0.2",
+                "spring@1.0",
+                "spring@1.6",
+                "freeze@2.4"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "farwindow": {
+                        "x": 450,
+                        "y": 470,
+                        "scale": 0.5,
+                        "folder": "SPARE    COPY  "
+                    },
+                    "desk": {
+                        "x": 520,
+                        "y": 1150
+                    },
+                    "folder": {
+                        "x": 520,
+                        "y": 1080,
+                        "scale": 0.38,
+                        "label": "UNSAVED WORK"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "n": 2,
+                        "pose": "happy",
+                        "x": 170,
+                        "y": 1294,
+                        "scale": 0.45,
+                        "arm": "broom",
+                        "role": "hop"
+                    }
+                ]
+            }
+        }
+    ]
+}

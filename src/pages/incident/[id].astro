@@ -5,7 +5,6 @@ import path from 'node:path';
 import Base from '../../layouts/Base.astro';
 import '../../styles/pages.css';
 import { render } from 'astro:content';
-import Strip from '../../components/Strip.astro';
 import ShareCut from '../../components/ShareCut.astro';
 import CutPlayer from '../../components/anime/CutPlayer.astro';
 import { cutAssets, shotList } from '../../lib/cuts';
@@ -36,7 +35,10 @@ const heroSrc = cut.story ? href(`/cuts/${incident.id}/${cut.story}`) : href(`${
 const heroSet = cut.story && cut.story2x ? `${heroSrc} 1200w, ${href(`/cuts/${incident.id}/${cut.story2x}`)} 2400w` : undefined;
 const heroAlt = `${d.title}: the picture that goes with it when it is shared`;
 // the summary search engines and AI answers get: the retelling's first two sentences, then the status
-const summary = `${sentences(incident.body ?? '').slice(0, 2).join(' ')} Status: ${d.status}`.trim();
+const summary = `${d.summary ?? sentences(incident.body ?? '').slice(0, 2).join(' ')} Status: ${d.status}`.trim();
+const facts = d.facts ?? {};
+// the body brings its own section headings; an older single-paragraph write-up still gets one for screen readers
+const sectioned = /^##\s/m.test(incident.body ?? '');
 const jsonld = incidentJsonLd(p, d, { image: `${p}share.png`, video: vid ? { url: vid, poster } : null, summary });
 ---
 <Base title={`${d.title} | git.wtf`} description={summary.length > 300 ? summary.slice(0, 297).trimEnd() + '...' : summary} image={`${p}share.png`} type="article" jsonld={jsonld}>
@@ -61,23 +63,33 @@ const jsonld = incidentJsonLd(p, d, { image: `${p}share.png`, video: vid ? { url
             <img src={heroSrc} srcset={heroSet} sizes="(min-width: 1200px) 72rem, 100vw" width="1200" height="630" alt={heroAlt} fetchpriority="high" decoding="sync" />
             {cutVideo && <figcaption><a href={cutVideo}>Or the video</a></figcaption>}
         </figure>}
-        <article class="prose inc-body" id="retelling">
-            <h2 class="visually-hidden">What happened</h2>
-            <Content />
-            <p class="inc-source">Source: <a href={d.source_url} rel="noopener nofollow">{sourceHost(d.source_url)}</a>, {formatDate(d.source_date)}.</p>
-            {video && (
-                <p class="video"><video src={video} poster={poster} controls muted playsinline preload="none" width="1080" height="1920">Your browser does not play this video. <a href={video}>Download it.</a></video></p>
-            )}
-        </article>
-        {cut.stills.length > 0 ? (
+        <div class="inc-read" id="retelling">
+            <aside class="inc-facts" aria-label="The facts">
+                <dl>
+                    <div><dt>When</dt><dd>{formatDate(happened(incident))}</dd></div>
+                    {facts.who && <div><dt>Who</dt><dd set:html={inlineCode(facts.who)} /></div>}
+                    {facts.broke && <div><dt>What broke</dt><dd set:html={inlineCode(facts.broke)} /></div>}
+                    {facts.saved && <div><dt>What was saved</dt><dd set:html={inlineCode(facts.saved)} /></div>}
+                    {facts.fix && <div><dt>The fix</dt><dd set:html={inlineCode(facts.fix)} /></div>}
+                    <div><dt>Source</dt><dd><a href={d.source_url} rel="noopener nofollow">{sourceHost(d.source_url)}</a>, {formatDate(d.source_date)}</dd></div>
+                </dl>
+            </aside>
+            <article class="prose inc-body">
+                {!sectioned && <h2 class="visually-hidden">What happened</h2>}
+                <Content />
+                {d.invented && <p class="inc-made"><span>Made up for the episode</span> {d.invented}</p>}
+                {video && (
+                    <p class="video"><video src={video} poster={poster} controls muted playsinline preload="none" width="1080" height="1920">Your browser does not play this video. <a href={video}>Download it.</a></video></p>
+                )}
+            </article>
+        </div>
+        {cut.stills.length > 0 && (
             <section class="inc-stills" aria-labelledby="stills-h">
                 <h2 id="stills-h" class="inc-sub">From the cut</h2>
                 <div class="stills">
                     {cut.stills.map((s) => <a href={href(`${p}cut/`)}><img src={href(`/cuts/${incident.id}/${s.file}`)} alt={`From the cut: ${list?.shots.find((x) => x.id === s.shot)?.line?.text ?? list?.shots.find((x) => x.id === s.shot)?.word ?? d.title}`} width="1280" height="720" loading="lazy" decoding="async" /></a>)}
                 </div>
             </section>
-        ) : (
-            <Strip incident={incident} class="inc-strip" />
         )}
         <ShareCut title={d.title} status={d.status} url={new URL(p, SITE.url).toString()} image={href(`${p}share.png`)} video={cutVideo} slug={incident.id} picture={false} />
         {older && (

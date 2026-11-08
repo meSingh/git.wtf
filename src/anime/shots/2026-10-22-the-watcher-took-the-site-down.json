@@ -1,6 +1,6 @@
 {
     "incident": "2026-10-22-the-watcher-took-the-site-down",
-    "episode": "Episode 79",
+    "episode": "Episode 82",
     "title": "The Watcher!",
     "theme": "plum",
     "bed": "comic",
@@ -659,7 +659,7 @@
                 },
                 "counter": {
                     "x": 400,
-                    "y": 380,
+                    "y": 300,
                     "from": 0,
                     "to": 41,
                     "label": "MINUTES OF 502"

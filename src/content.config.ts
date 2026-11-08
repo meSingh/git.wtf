@@ -47,15 +47,12 @@ const incidents = defineCollection({
         // Who caused it (the scoreboard) and with what (the tally by tool). Content sets both (VOICE.md).
         actor: z.enum(ACTORS),
         tool: z.enum(TOOLS).optional(),
-        // The comic strip's script (VOICE.md, the panels block): four panels, each a scene and optionally who says what.
-        panels: z
-            .array(
-                z
-                    .object({ scene: z.string().min(1), who: z.enum(PANEL_WHO).optional(), bubble: z.string().min(1).optional() })
-                    .refine((p) => !p.who === !p.bubble, 'who and bubble go together'),
-            )
-            .length(4)
-            .optional(),
+        // The write-up's frame (Mandeep, 8 Nov 2026): one line for cards, lists and search snippets; the facts panel
+        // beside the write-up; and what the episode made up for the joke. The body itself is three parts under
+        // "## What happened", "## Why it happened" and "## How it ended".
+        summary: z.string().min(1).max(170).optional(),
+        facts: z.object({ who: z.string().min(1), broke: z.string().min(1), saved: z.string().min(1), fix: z.string().min(1) }).partial().optional(),
+        invented: z.string().min(1).optional(),
         // Set by scripts/render-video.mjs once the video is uploaded (phase 2). Absent until then.
         video: z.string().url().optional(),
         poster: z.string().url().optional(),

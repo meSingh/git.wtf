@@ -244,6 +244,7 @@
     .cutscene .building .roof { fill: #8a3b2e; stroke: #0a0a0a; stroke-width: 8; stroke-linejoin: round; }
     .cutscene .building .wallb { fill: #d9d2c3; stroke: #0a0a0a; stroke-width: 8; }
     .cutscene .building .col { fill: #f2f0ea; stroke: #0a0a0a; stroke-width: 5; width: 44px; } /* the page's own .col (global.css) would stretch these */
+    .cutscene .bulldozer .track { height: 74px; } /* the record's .track (global.css, 40rem) would stretch the treads */
     .cutscene .building .signb { fill: #0a0a0a; }
     .cutscene .building text { fill: #ffd400; font-family: var(--display); font-weight: 900; font-size: 52px; text-anchor: middle; }
     .cutscene .building .opening { fill: #0a0a0a; }

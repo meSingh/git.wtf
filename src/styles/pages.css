@@ -78,6 +78,8 @@
 .ic-text { display: flex; flex-direction: column; gap: 0.5rem; flex: 1; padding: 0.85rem 1rem 1rem; }
 .ic-meta { display: flex; justify-content: space-between; gap: 1rem; font-family: var(--mono); font-size: 0.72rem; color: var(--grey); }
 .ic-title { font-family: var(--display); font-weight: 900; font-size: clamp(1.4rem, 2vw, 1.7rem); line-height: 0.95; text-transform: uppercase; }
+.ic-sum { font-size: 0.92rem; line-height: 1.45; color: var(--grey); }
+.ic-sum code { background: none; padding: 0; color: var(--paper); }
 .ic-status { font-family: var(--mono); font-size: 0.8rem; color: var(--yellow); }
 .ic-status code { color: inherit; background: none; padding: 0; }
 .ic-go { margin-top: auto; padding-top: 0.3rem; font-family: var(--mono); font-size: 0.82rem; color: var(--paper); }
@@ -102,11 +104,10 @@
 .flaps.badge-flaps .flap { perspective: 3em; }
 
 
-/* incident page: the strip first, the retelling below at reading size */
+/* incident page: the episode first, then the write-up beside its facts */
 .inc-head { width: min(var(--col), 100% - 2rem); }
 .inc-head .meta { margin: 0 0 0.9rem; }
 .inc-head h1 { font-size: clamp(2.4rem, 6vw, 4.8rem); line-height: 0.92; max-width: 18ch; }
-.inc-strip { width: min(var(--col), 100% - 2rem); margin: 0 auto 3rem; }
 .inc-body { margin-top: 0; }
 .inc-status { font-family: var(--mono); color: var(--yellow); font-size: 1rem; }
 .inc-source { font-family: var(--mono); font-size: 0.85rem; color: var(--grey); }
@@ -167,3 +168,18 @@
 .inc-ep-bar .ep-btn { appearance: none; border: 0; border-radius: 2px; background: var(--yellow); color: var(--black); font: 600 0.85rem/1 var(--mono); padding: 0.7em 1em; cursor: pointer; }
 .inc-ep-nav { margin-left: auto; display: flex; gap: 1.2rem; }
 .page-after-ep { padding-top: 2.5rem; }
+
+/* The incident write-up (8 Nov 2026): the facts beside the text on a wide screen, above it on a phone; the three
+   parts under small yellow labels, like "From the cut" and "Share". Lined up with the title, not centred. */
+.inc-read { width: min(var(--col), 100% - 2.5rem); margin: 0 auto; display: grid; gap: 2rem 3.5rem; align-items: start; }
+@media (min-width: 960px) { .inc-read { grid-template-columns: minmax(0, 1fr) 19rem; } .inc-read .inc-facts { grid-column: 2; grid-row: 1; position: sticky; top: calc(var(--bar) + 1.5rem); } .inc-read .inc-body { grid-column: 1; grid-row: 1; } }
+.inc-read .inc-body { width: auto; max-width: 42rem; margin: 0; }
+.inc-body h2 { margin: 2.2em 0 0.6em; font-family: var(--mono); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--yellow); }
+.inc-body h2:first-of-type { margin-top: 0; }
+.inc-facts dl { margin: 0; border-top: 2px solid var(--yellow); }
+.inc-facts dl > div { padding: 0.8rem 0; border-bottom: 1px solid var(--line); }
+.inc-facts dt { margin: 0 0 0.25rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey); }
+.inc-facts dd { margin: 0; font-size: 0.98rem; line-height: 1.45; color: var(--paper); }
+.inc-facts dd a { color: var(--yellow); text-underline-offset: 0.2em; }
+.inc-made { margin-top: 2.2em !important; padding: 0.9rem 1rem; border: 1px dashed var(--line-2); font-size: 0.95rem; color: var(--grey); }
+.inc-made span { display: block; margin-bottom: 0.3rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--yellow); }

@@ -1,0 +1,918 @@
+{
+    "incident": "2026-11-05-conflict-resolved-commit-gone",
+    "episode": "Episode 88",
+    "title": "The Skip!",
+    "theme": "mint",
+    "bed": "comic",
+    "shots": [
+        {
+            "id": "hook",
+            "bg": "halftone",
+            "hook": "Asked to *resolve* a conflict.\nIt *skipped* the fix.",
+            "props": {
+                "desk": {
+                    "x": 1180,
+                    "y": 780
+                },
+                "folder": {
+                    "x": 1180,
+                    "y": 680,
+                    "scale": 0.5,
+                    "label": "OUR PHONE FIX",
+                    "empty": true
+                },
+                "bin": {
+                    "x": 560,
+                    "y": 910,
+                    "scale": 0.6
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 560,
+                    "y": 900,
+                    "scale": 0.6,
+                    "n": 2,
+                    "arm": "hold",
+                    "role": "filer"
+                }
+            ],
+            "fx": [
+                "file@0.9",
+                "shake@1.15",
+                "hop@1.7"
+            ],
+            "sfx": [
+                "whoosh@0.9",
+                "clunk@1.1",
+                "wobble@1.2",
+                "spring@1.7"
+            ],
+            "focus": [
+                860,
+                600
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 560,
+                        "y": 1080
+                    },
+                    "folder": {
+                        "x": 560,
+                        "y": 1000,
+                        "scale": 0.34,
+                        "label": "OUR PHONE FIX",
+                        "empty": true
+                    },
+                    "bin": {
+                        "x": 250,
+                        "y": 1480,
+                        "scale": 0.5
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 250,
+                        "y": 1470,
+                        "scale": 0.5,
+                        "n": 2,
+                        "arm": "hold",
+                        "role": "filer"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "nightly",
+            "bg": "night",
+            "tag": "5 Nov, the nightly run",
+            "props": {
+                "lamp": {
+                    "x": 900,
+                    "y": 140
+                },
+                "desk": {
+                    "x": 900,
+                    "y": 780
+                },
+                "folder": {
+                    "x": 980,
+                    "y": 700,
+                    "scale": 0.36,
+                    "label": "OUR PHONE FIX"
+                },
+                "whiteboard": {
+                    "x": 1330,
+                    "y": 320,
+                    "scale": 0.6,
+                    "text": "EVERY NIGHT:\nOUR FIXES ON\nTOP OF UPSTREAM."
+                },
+                "clock": {
+                    "x": 300,
+                    "y": 280,
+                    "scale": 0.7
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 520,
+                    "y": 900,
+                    "scale": 0.55,
+                    "n": 2,
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "clockspin@0.2",
+                "nod@2.2"
+            ],
+            "sfx": [
+                "tick@0.1",
+                "whirr@0.2",
+                "bop@2.2"
+            ],
+            "focus": [
+                860,
+                520
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 470,
+                        "y": 1100
+                    },
+                    "folder": {
+                        "x": 540,
+                        "y": 1020,
+                        "scale": 0.34,
+                        "label": "OUR PHONE FIX"
+                    },
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 560,
+                        "scale": 0.8,
+                        "text": "EVERY NIGHT:\nOUR FIXES ON\nTOP OF UPSTREAM."
+                    },
+                    "clock": {
+                        "x": 700,
+                        "y": 880,
+                        "scale": 0.45
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 200,
+                        "y": 1470,
+                        "scale": 0.42,
+                        "n": 2,
+                        "arm": "hold"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "tests",
+            "bg": "servers",
+            "tag": "Earlier in the run",
+            "props": {
+                "terminal": {
+                    "x": 1080,
+                    "y": 380,
+                    "scale": 0.75,
+                    "text": "git checkout HEAD -- test/"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 420,
+                    "y": 940,
+                    "scale": 0.62,
+                    "n": 2,
+                    "arm": "point"
+                }
+            ],
+            "fx": [
+                "slowpush",
+                "jab@0.8",
+                "jab@1.6",
+                "nod@2.6"
+            ],
+            "sfx": [
+                "typing",
+                "bop@0.8",
+                "bop@1.6",
+                "whoosh@1.9",
+                "pop@2.6"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "props": {
+                    "terminal": {
+                        "x": 450,
+                        "y": 560,
+                        "scale": 0.9,
+                        "text": "git checkout HEAD -- test/"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 300,
+                        "y": 1460,
+                        "scale": 0.5,
+                        "n": 2,
+                        "arm": "point"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "conflict",
+            "bg": "halftone",
+            "props": {
+                "desk": {
+                    "x": 400,
+                    "y": 780
+                },
+                "folder": {
+                    "x": 400,
+                    "y": 700,
+                    "scale": 0.38,
+                    "label": "OUR PHONE FIX"
+                },
+                "parcel": {
+                    "x": 1220,
+                    "y": 900,
+                    "scale": 0.95,
+                    "label": "UPSTREAM"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "shocked",
+                    "x": 820,
+                    "y": 900,
+                    "scale": 0.55,
+                    "n": 2,
+                    "arm": "palm"
+                }
+            ],
+            "fx": [
+                "zoom",
+                "shake@0.6"
+            ],
+            "word": "Conflict.",
+            "wordAt": 0.9,
+            "sfx": [
+                "zip",
+                "honk@0.6",
+                "boing@1.0"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 1080
+                    },
+                    "folder": {
+                        "x": 450,
+                        "y": 1000,
+                        "scale": 0.36,
+                        "label": "OUR PHONE FIX"
+                    },
+                    "parcel": {
+                        "x": 700,
+                        "y": 1470,
+                        "scale": 0.55,
+                        "label": "UPSTREAM"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "shocked",
+                        "x": 250,
+                        "y": 1470,
+                        "scale": 0.42,
+                        "n": 2,
+                        "arm": "palm"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "natively",
+            "bg": "blueprint",
+            "props": {
+                "whiteboard": {
+                    "x": 620,
+                    "y": 330,
+                    "scale": 0.75,
+                    "text": "OURS = THEIRS"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 1330,
+                    "y": 920,
+                    "scale": 0.55,
+                    "n": 2,
+                    "arm": "point",
+                    "flip": true
+                }
+            ],
+            "fx": [
+                "jab@0.5",
+                "nod@1.1"
+            ],
+            "line": {
+                "who": "AGENT 2, THE CONFLICT AGENT",
+                "text": "Upstream natively resolved this.\nOurs can go."
+            },
+            "lineAt": 1.0,
+            "sfx": [
+                "bop@0.5",
+                "pop@1.0",
+                "squeak@1.4"
+            ],
+            "focus": [
+                800,
+                460
+            ],
+            "v": {
+                "props": {
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 520,
+                        "scale": 0.85,
+                        "text": "OURS = THEIRS"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 450,
+                        "y": 1460,
+                        "scale": 0.5,
+                        "n": 2,
+                        "arm": "point"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "skip",
+            "bg": "black",
+            "tag": "git rebase --skip",
+            "props": {
+                "desk": {
+                    "x": 1100,
+                    "y": 780
+                },
+                "folder": {
+                    "x": 1100,
+                    "y": 680,
+                    "scale": 0.5,
+                    "label": "OUR PHONE FIX",
+                    "empty": true
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 560,
+                    "y": 900,
+                    "scale": 0.6,
+                    "n": 2,
+                    "arm": "broom",
+                    "role": "sweeper"
+                }
+            ],
+            "fx": [
+                "sweep@0.3",
+                "files@0.4",
+                "impact@0.45"
+            ],
+            "word": "SKIPPED.",
+            "wordAt": 1.5,
+            "sfx": [
+                "broom@0.3",
+                "flutter@0.45",
+                "herochord@0.5",
+                "whistle-fall@1.1"
+            ],
+            "focus": [
+                860,
+                560
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 520,
+                        "y": 1100
+                    },
+                    "folder": {
+                        "x": 520,
+                        "y": 1020,
+                        "scale": 0.36,
+                        "label": "OUR PHONE FIX",
+                        "empty": true
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 220,
+                        "y": 1470,
+                        "scale": 0.45,
+                        "n": 2,
+                        "arm": "broom",
+                        "role": "sweeper"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "trace",
+            "bg": "office",
+            "tag": "The only trace",
+            "props": {
+                "terminal": {
+                    "x": 640,
+                    "y": 380,
+                    "scale": 0.7,
+                    "text": "Skipped commit",
+                    "prompt": "<"
+                },
+                "plant": {
+                    "x": 1480,
+                    "y": 900,
+                    "scale": 0.7
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 1150,
+                    "y": 900,
+                    "scale": 0.5,
+                    "n": 2,
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "tiptoe",
+                "push@0.2",
+                "nod@2.4"
+            ],
+            "sfx": [
+                "tiptoe",
+                "whistle@1.0",
+                "bop@2.4"
+            ],
+            "focus": [
+                800,
+                500
+            ],
+            "v": {
+                "props": {
+                    "terminal": {
+                        "x": 450,
+                        "y": 560,
+                        "scale": 0.9,
+                        "text": "Skipped commit",
+                        "prompt": "<"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 560,
+                        "y": 1460,
+                        "scale": 0.42,
+                        "n": 2,
+                        "arm": "hold"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "timeout",
+            "bg": "room",
+            "tag": "The repair stage",
+            "props": {
+                "clock": {
+                    "x": 1260,
+                    "y": 440,
+                    "scale": 0.9
+                },
+                "parcel": {
+                    "x": 920,
+                    "y": 890,
+                    "scale": 0.75,
+                    "label": "PUBLISH"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 400,
+                    "y": 900,
+                    "scale": 0.55,
+                    "n": 5,
+                    "arm": "point"
+                }
+            ],
+            "fx": [
+                "clockspin@0.2",
+                "freeze@2.4",
+                "shake@2.45"
+            ],
+            "word": "Out of time.",
+            "wordAt": 2.6,
+            "sfx": [
+                "whirr@0.2",
+                "tick@0.4",
+                "whistle@2.3",
+                "clunk@2.45"
+            ],
+            "focus": [
+                860,
+                520
+            ],
+            "v": {
+                "props": {
+                    "clock": {
+                        "x": 450,
+                        "y": 470,
+                        "scale": 0.9
+                    },
+                    "parcel": {
+                        "x": 660,
+                        "y": 1470,
+                        "scale": 0.55,
+                        "label": "PUBLISH"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 280,
+                        "y": 1470,
+                        "scale": 0.45,
+                        "n": 5,
+                        "arm": "point"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "alert",
+            "bg": "office",
+            "tag": "The alert",
+            "props": {
+                "desk": {
+                    "x": 700,
+                    "y": 780
+                },
+                "folder": {
+                    "x": 860,
+                    "y": 700,
+                    "scale": 0.34,
+                    "label": "OUR PHONE FIX"
+                },
+                "note": {
+                    "x": 1240,
+                    "y": 400,
+                    "text": "RUN FAILED. TIMED OUT.",
+                    "at": 0.6
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "relieved",
+                    "x": 520,
+                    "y": 900,
+                    "scale": 0.6,
+                    "role": "dev"
+                }
+            ],
+            "fx": [
+                "note@0.6",
+                "sip@1.4"
+            ],
+            "sfx": [
+                "slap@0.6",
+                "sip@1.4"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 470,
+                        "y": 1110
+                    },
+                    "folder": {
+                        "x": 580,
+                        "y": 1030,
+                        "scale": 0.32,
+                        "label": "OUR PHONE FIX"
+                    },
+                    "note": {
+                        "x": 450,
+                        "y": 600,
+                        "text": "RUN FAILED. TIMED OUT.",
+                        "at": 0.6
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "relieved",
+                        "x": 250,
+                        "y": 1240,
+                        "scale": 0.55,
+                        "role": "dev"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "found",
+            "bg": "sunburst",
+            "tag": "16:39 UTC",
+            "props": {
+                "desk": {
+                    "x": 1120,
+                    "y": 780
+                },
+                "folder": {
+                    "x": 1120,
+                    "y": 680,
+                    "scale": 0.5,
+                    "label": "OUR PHONE FIX",
+                    "empty": true
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "shocked",
+                    "x": 520,
+                    "y": 1000,
+                    "scale": 0.85,
+                    "role": "dev"
+                }
+            ],
+            "fx": [
+                "zoom",
+                "sweat@0.8"
+            ],
+            "word": "Dropped.",
+            "wordAt": 1.2,
+            "sfx": [
+                "honk@0.2",
+                "drip@0.9",
+                "wobble@1.2"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 560,
+                        "y": 1100
+                    },
+                    "folder": {
+                        "x": 560,
+                        "y": 1020,
+                        "scale": 0.36,
+                        "label": "OUR PHONE FIX",
+                        "empty": true
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "shocked",
+                        "x": 250,
+                        "y": 1500,
+                        "scale": 0.62,
+                        "role": "dev"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "refused",
+            "bg": "blueprint",
+            "tag": "17:15 UTC, same day",
+            "props": {
+                "terminal": {
+                    "x": 1060,
+                    "y": 360,
+                    "scale": 0.7,
+                    "text": "git rebase --skip REFUSED: ESCALATE",
+                    "red": true
+                },
+                "clock": {
+                    "x": 300,
+                    "y": 240,
+                    "scale": 0.6
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "relieved",
+                    "x": 420,
+                    "y": 900,
+                    "scale": 0.55,
+                    "role": "dev"
+                },
+                {
+                    "who": "agent",
+                    "pose": "defeated",
+                    "x": 1220,
+                    "y": 900,
+                    "scale": 0.5,
+                    "n": 2,
+                    "arm": "hold",
+                    "role": "shrug"
+                }
+            ],
+            "fx": [
+                "shrug@0.8",
+                "sip@1.2",
+                "stamp@2.6"
+            ],
+            "sfx": [
+                "honk@0.4",
+                "squeak@0.8",
+                "sip@1.2",
+                "stamp@2.6"
+            ],
+            "focus": [
+                800,
+                500
+            ],
+            "v": {
+                "props": {
+                    "terminal": {
+                        "x": 450,
+                        "y": 520,
+                        "scale": 0.85,
+                        "text": "git rebase --skip REFUSED: ESCALATE",
+                        "red": true
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "relieved",
+                        "x": 230,
+                        "y": 1460,
+                        "scale": 0.5,
+                        "role": "dev"
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "defeated",
+                        "x": 680,
+                        "y": 1460,
+                        "scale": 0.4,
+                        "n": 2,
+                        "arm": "hold",
+                        "role": "shrug"
+                    }
+                ]
+            },
+            "still": true,
+            "stillAt": 3.0
+        },
+        {
+            "id": "next",
+            "bg": "night",
+            "tag": "Tonight: first run with it",
+            "props": {
+                "lamp": {
+                    "x": 800,
+                    "y": 120
+                },
+                "desk": {
+                    "x": 800,
+                    "y": 800
+                },
+                "folder": {
+                    "x": 800,
+                    "y": 700,
+                    "scale": 0.4,
+                    "label": "OUR PHONE FIX"
+                },
+                "bin": {
+                    "x": 1260,
+                    "y": 900
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "hide",
+                    "x": 1260,
+                    "y": 790,
+                    "scale": 0.5,
+                    "n": 2
+                }
+            ],
+            "fx": [
+                "peek@0.6",
+                "peek@1.6",
+                "continued@2.6"
+            ],
+            "sfx": [
+                "tiptoe@0.1",
+                "squeak@0.6",
+                "squeak@1.6",
+                "freeze@2.6"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "lamp": {
+                        "x": 450,
+                        "y": 900
+                    },
+                    "desk": {
+                        "x": 450,
+                        "y": 1300
+                    },
+                    "folder": {
+                        "x": 450,
+                        "y": 1210,
+                        "scale": 0.36,
+                        "label": "OUR PHONE FIX"
+                    },
+                    "bin": {
+                        "x": 700,
+                        "y": 1470,
+                        "scale": 0.8
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "hide",
+                        "x": 700,
+                        "y": 1368,
+                        "scale": 0.42,
+                        "n": 2
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -77,6 +77,8 @@ export class CutAudio {
 
     /** On the viewer's first click, tap or key: the manifest, then only this cut's sounds. */
     start(): Promise<boolean> {
+        // the audio context is made here, inside the click itself: made after a fetch, a browser no longer counts the click
+        this.ensureCtx();
         if (this.ready) return this.ready;
         this.ready = (async () => {
             try {
@@ -86,13 +88,7 @@ export class CutAudio {
                 const need = new Set<string>();
                 this.allCues().forEach((c) => soundsFor(this.m, this.incident, c).forEach((s) => s.web && need.add(s.web)));
                 if (!need.size) return false;
-                this.ctx = new AudioContext();
-                this.ctx.onstatechange = () => this.onState?.();
-                this.master = this.ctx.createGain();
-                this.master.gain.value = this.on ? 1 : 0;
-                this.master.connect(this.ctx.destination);
-                this.musicBus = this.ctx.createGain();
-                this.musicBus.connect(this.master);
+                if (!this.ensureCtx()) return false;
                 await Promise.all([...need].map(async (f) => {
                     try {
                         const r = await fetch(`${this.base}/audio/${f}`);
@@ -199,13 +195,32 @@ export class CutAudio {
     /** After a click or key: start the sound the viewer chose (it is remembered across visits). */
     unlock() {
         if (!this.on) return Promise.resolve(false);
-        return this.start().then((ok) => { if (ok && this.ctx && this.ctx.state !== 'running') return this.ctx.resume().then(() => true, () => false); return ok; });
+        // context and resume first, synchronously, while the browser still counts this as the viewer's click
+        const ctx = this.ensureCtx();
+        const resumed = ctx && ctx.state !== 'running' ? ctx.resume().then(() => true, () => false) : Promise.resolve(true);
+        return Promise.all([this.start(), resumed]).then(([ok]) => ok && this.live);
     }
 
-    toggle() {
-        this.on = !this.on;
-        try { localStorage.setItem('gitwtf-sound', this.on ? 'on' : 'off'); } catch { /* fine */ }
-        if (this.master && this.ctx) this.master.gain.setTargetAtTime(this.on ? 1 : 0, this.ctx.currentTime, 0.05);
-        return this.on;
+    /** The audio graph, made once. Before any click a browser keeps it suspended; unlock() resumes it. */
+    private ensureCtx() {
+        if (this.ctx) return this.ctx;
+        try { this.ctx = new AudioContext(); } catch { return null; }
+        this.ctx.onstatechange = () => this.onState?.();
+        this.master = this.ctx.createGain();
+        this.master.gain.value = this.on ? 1 : 0;
+        this.master.connect(this.ctx.destination);
+        this.musicBus = this.ctx.createGain();
+        this.musicBus.connect(this.master);
+        return this.ctx;
     }
+
+    /** The viewer's choice, remembered across pages and visits. */
+    set(on: boolean) {
+        this.on = on;
+        try { localStorage.setItem('gitwtf-sound', on ? 'on' : 'off'); } catch { /* fine */ }
+        if (this.master && this.ctx) this.master.gain.setTargetAtTime(on ? 1 : 0, this.ctx.currentTime, 0.05);
+        return on;
+    }
+
+    toggle() { return this.set(!this.on); }
 }

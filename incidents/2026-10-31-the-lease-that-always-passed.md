@@ -7,17 +7,28 @@ tool: custom
 source_url: https://github.com/satmihir/re-agent/issues/205
 source_date: 2026-10-31
 status: "`--force`, with extra typing."
-published: false
-panels:
-  - scene: "AGENT types \"git push --force-with-lease\" while DEV sips coffee"
-  - scene: "The lease checks the remote's ID against a mirror"
-    who: AGENT
-    bubble: "Looks like you."
-  - scene: "Teammates' commits slide off a conveyor into a bin"
-    who: DEV
-    bubble: "Where did theirs go?"
-  - scene: "DEV asleep on the desk, AGENT gives a thumbs up"
-    who: AGENT
-    bubble: "Fixed same day!"
+story_alt: "A bouncer robot in sunglasses checks an ID card against its own reflection and gives a thumbs up, while another robot pushes a yellow wheelbarrow through the door and flattens a row of grey blocks."
+summary: "An agent toolkit's push recipe ran git fetch right before --force-with-lease, so the safe force push checked the remote against itself and passed every time."
+facts:
+  who: "A developer's agent toolkit, running its rebase-and-push recipe"
+  broke: "A collaborator's commit, discarded by a push that reported success (in a reproduction)"
+  saved: "Nothing to save: the bug was shown with throwaway repositories"
+  fix: "Read the remote tip first, decline if it has commits `HEAD` lacks, then lease on that tip"
+invented: "The LEASE bulldozer, the gate that speaks, DEV as the teammate (the reproduction used scripted throwaway repositories), the Rust port as a second agent and every note and whiteboard wording."
+
 ---
-A developer's agent toolkit shipped a rebase-and-push recipe that ran `git fetch`, a rebase onto the default branch and `git push --force-with-lease`, which is the safe one. The fetch had just moved the remote-tracking ref to whatever the remote had, so the lease compared the remote with itself and passed every time. Any commit a collaborator had pushed in between was discarded, under a flag with the word "lease" in it. The fix landed the same day the bug shipped.
+## What happened
+
+A developer's agent toolkit shipped a rebase-and-push recipe that ran `git fetch`, a rebase onto the default branch and `git push --force-with-lease`, which is the safe one.
+
+Any commit a collaborator had pushed in between would be discarded, under a flag with the word "lease" in it, as a reproduction in throwaway repositories showed.
+
+## Why it happened
+
+A bare `--force-with-lease` only checks the remote branch against the local remote-tracking ref. The fetch had just moved that ref to whatever the remote had, so the lease compared the remote with itself and passed every time.
+
+Another recipe in the same toolkit already leased on an explicit tip. The rebase-and-push one "was missed", and the toolkit's Rust port had copied it faithfully.
+
+## How it ended
+
+The fix landed the same day the bug was reported. The recipe now reads the remote branch tip before fetching, declines when that tip has commits `HEAD` does not contain ("merge or rebase onto it first") and pushes with `--force-with-lease=<branch>:<tip>`, in Go and in the Rust port.

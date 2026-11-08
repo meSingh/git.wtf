@@ -819,13 +819,38 @@ function build(g: El, svg: SVGSVGElement, shot: Shot, flash: boolean): Ctx {
 }
 
 /** What a scrolled cut hands the page: its length, a seek, and its sound. */
-/** The speaker shows what the viewer actually hears: "on" only while the audio is running, not just remembered. */
-function paintBtn(btn: HTMLButtonElement | null, audio: CutAudio | null) {
+/**
+ * The sound button. One rule: the button shows what the viewer hears ("Sound on" only while sound is actually playing),
+ * and a tap does the opposite of what the button showed when it was pressed. One tap on, one tap off.
+ * Why the press, not the click: a browser holds a page's audio until the viewer's first press, then lets it start.
+ * That start lands between the press and the click, so judging the click by the audio's state at that moment read
+ * "already playing" and turned the sound off (the bug of 8 Nov). The choice is remembered across pages; a remembered
+ * "on" starts at once where the browser allows it, else at the first click, tap or key anywhere on the page.
+ */
+function wireSound(btn: HTMLButtonElement | null, audio: CutAudio | null, onAudible: () => void = () => {}) {
     if (!btn || !audio) return;
-    const audible = audio.on && audio.live;
-    btn.textContent = audible ? 'Sound on' : 'Sound off';
-    btn.setAttribute('aria-label', audible ? 'Sound is on. Turn it off' : 'Sound is off. Turn it on');
-    btn.setAttribute('aria-pressed', String(audible));
+    const audible = () => audio.on && audio.live;
+    const paint = () => {
+        const a = audible();
+        btn.textContent = a ? 'Sound on' : 'Sound off';
+        btn.setAttribute('aria-label', a ? 'Sound is on. Turn it off' : 'Sound is off. Turn it on');
+        btn.setAttribute('aria-pressed', String(a));
+    };
+    const play = () => audio.unlock().then((ok) => { if (ok) onAudible(); paint(); });
+    audio.onState = paint;
+    let pressedOff: boolean | null = null;
+    btn.addEventListener('pointerdown', () => { pressedOff = !audible(); });
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const turnOn = pressedOff ?? !audible(); // a keyboard press has no pointerdown: judge it now
+        pressedOff = null;
+        audio.set(turnOn);
+        if (turnOn) play();
+        paint();
+    });
+    firstGesture(() => { if (audio.on) play(); });
+    if (audio.on) play();
+    paint();
 }
 /** Once, on the viewer's first click, tap or key anywhere on the page. */
 function firstGesture(fn: () => void) {
@@ -1013,13 +1038,9 @@ export function mountCutscene(wrap: HTMLElement, opts: { mode?: 'scroll' | 'embe
         wrap.classList.add('scrolled');
         hint?.remove();
         wrap.querySelector('[data-skip]')?.remove();
-        // the sound button shows at once; the first press is the gesture audio needs, and turns it on
-        const paint = () => paintBtn(soundBtn, audio);
-        if (soundBtn) { soundBtn.hidden = false; paint(); }
-        if (audio) audio.onState = paint;
-        // a remembered "on" only plays once the viewer has clicked or pressed something (the browser's rule)
-        firstGesture(() => audio?.unlock().then(paint));
-        soundBtn?.addEventListener('click', (e) => { e.stopPropagation(); if (!audio) return; if (audio.on && !audio.live) audio.unlock().then(paint); else { audio.toggle(); audio.unlock().then(paint); } paint(); });
+        // the sound button shows at once; see wireSound for how a tap works
+        if (soundBtn) soundBtn.hidden = false;
+        wireSound(soundBtn, audio);
         let last = 0;
         const seek = (t: number) => {
             // at rest at the top the title has already landed, so the stage never shows an empty frame
@@ -1037,17 +1058,9 @@ export function mountCutscene(wrap: HTMLElement, opts: { mode?: 'scroll' | 'embe
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || location.search.includes('reduce');
     if (reduce) { show(shots.length - 1, true); wrap.classList.add('still'); return; }
 
-    // sound: off until turned on. The files are fetched only when it is on: on the Sound press, or on the first
-    // click, tap or Enter/Space/arrow of a viewer who turned it on before (a gesture the browser lets audio start from)
+    // sound: off until turned on (wireSound). The files are fetched only once it is on
     const startSound = () => { if (!audio?.on) return; audio.start().then((ok) => { if (ok) audio!.shot(Math.max(0, i), starts[Math.max(0, i)]); }); };
-    const paintSound = () => paintBtn(soundBtn, audio);
-    paintSound();
-    if (audio) audio.onState = paintSound;
-    firstGesture(() => { audio?.unlock().then(() => { startSound(); paintSound(); }); });
-    soundBtn?.addEventListener('click', (e) => { e.stopPropagation(); if (!audio) return; if (!(audio.on && !audio.live)) audio.toggle(); audio.unlock().then(() => { startSound(); paintSound(); }); paintSound(); });
-    wrap.addEventListener('pointerdown', startSound, { once: true });
-    const keyStart = (e: KeyboardEvent) => { if ([' ', 'Enter', 'ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp'].includes(e.key)) { removeEventListener('keydown', keyStart); startSound(); } };
-    addEventListener('keydown', keyStart);
+    wireSound(soundBtn, audio, startSound);
     addEventListener('pagehide', () => audio?.pause());
     document.addEventListener('visibilitychange', () => { if (document.hidden) audio?.pause(); });
 

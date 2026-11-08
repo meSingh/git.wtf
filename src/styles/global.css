@@ -112,7 +112,7 @@ html.js-anim .hh-words .w, html.js-anim .hh-today { opacity: 0; visibility: hidd
 .beat-head h2 { font-size: clamp(2rem, 5.5vw, 4rem); }
 .beat-head .count { font-family: var(--mono); font-size: 0.82rem; color: var(--grey); white-space: nowrap; }
 
-/* beat 2 (fallback, when today's incident has no cut): the strip */
+/* beat 2 (fallback, when today's incident has no cut): its story image */
 .beat-today { position: relative; z-index: 2; background: var(--black); padding: calc(var(--bar) + 2rem) 0 4rem; overflow-x: clip; }
 .today-kicker { margin: 0 0 0.6rem; font-family: var(--mono); font-size: 0.82rem; color: var(--yellow); letter-spacing: 0.04em; text-transform: uppercase; }
 .today-title { font-size: clamp(2.4rem, 6.4vw, 5.4rem); line-height: 0.92; max-width: 16ch; margin-bottom: 1.6rem; }
@@ -120,9 +120,8 @@ html.js-anim .hh-words .w, html.js-anim .hh-today { opacity: 0; visibility: hidd
 .today-title a:hover { color: var(--yellow); text-decoration: none; }
 .today-more { margin-top: 1.4rem; font-family: var(--mono); font-size: 1rem; }
 .today-more a { color: var(--yellow); text-decoration: underline; text-decoration-color: rgba(255, 212, 0, 0.45); text-underline-offset: 0.25em; }
-.strip { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(0.4rem, 1vw, 0.8rem); }
-.strip .panel { display: block; width: 100%; height: auto; aspect-ratio: 1376 / 768; background: var(--tile); border-radius: 4px; }
-@media (max-width: 639px) { .strip { grid-template-columns: 1fr; } }
+.today-pic { margin: 0; }
+.today-pic img { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 630; border-radius: 4px; background: var(--tile); }
 html:not(.js) img[data-src] { display: none; }
 
 /* the hero's hint: shown when the words have landed, then the page drifts down to the cut */

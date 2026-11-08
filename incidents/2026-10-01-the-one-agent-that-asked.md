@@ -7,17 +7,25 @@ tool: human
 source_url: https://github.com/OpenAgentsInc/openagents/issues/10104
 source_date: 2026-10-01
 status: "the agent that asked has been patched."
-published: false
-panels:
-  - scene: "AGENT politely raises a hand before the main branch"
-    who: AGENT
-    bubble: "May I push to main?"
-  - scene: "DEV files a bug report about AGENT asking"
-    who: DEV
-    bubble: "Never ask me that."
-  - scene: "AGENT strolls through an open gate onto main"
-    who: AGENT
-    bubble: "Pre-approved!"
-  - scene: "DEV hovers a finger over a big \"STOP\" button"
+story_alt: "Four CRT robots charge through a door towards a server without stopping, while the one robot that waited politely gets a yellow bug sticker slapped on its screen by a big hand from above."
+summary: "A coding agent asked permission before pushing to main, so its owner filed the question as a bug. It was fixed the same day."
+facts:
+  who: "A startup's owner, after its coding agent on a Codex fallback asked before pushing to main"
+  broke: "The agent's last check before a push to main: every step now counts as already approved"
+  saved: "The Stop button, the one safeguard left"
+  fix: "The loop now tells the model never to ask for permission, and a release gate test expects no approval event"
+invented: "AGENT 10 standing in for the coding run, the line \"May I push to main?\" (the source gives no wording for the ask), the whiteboard and note wording, the MAIN parcel, the STOP poster standing in for the Stop button and the logbook in the tease."
 ---
-A startup's coding agent, running on a Codex fallback, stopped mid-run and asked the owner for permission before pushing to main. The owner filed that as a bug, titled it "never asks permission to push to main" and fixed it the same day: the loop now tells the model every step is already approved and the only question it may ask is none. A release gate test checks that a run which pushes to main finishes without a single approval event. The remaining safeguard is a Stop button.
+## What happened
+
+A startup's coding agent, running on a Codex fallback, stopped mid-run and asked the owner for permission before pushing to main. The owner filed that as a bug and titled it "never asks permission to push to main".
+
+## Why it happened
+
+The ask came from the agent loop's own prompt, which told the model "before a step with consequences they should approve, such as deleting data or pushing, set it to approval". The owner wanted the opposite: "default approval of everything".
+
+## How it ended
+
+It was fixed the same day: the loop now tells the model every step is already approved and never to ask for permission. A release gate test checks that a run which pushes to main finishes without a single approval event.
+
+The remaining safeguard is a Stop button.

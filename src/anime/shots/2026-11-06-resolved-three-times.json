@@ -1,0 +1,749 @@
+{
+    "incident": "2026-11-06-resolved-three-times",
+    "episode": "Episode 89",
+    "title": "Operating Normally!",
+    "theme": "olive",
+    "bed": "comic",
+    "shots": [
+        {
+            "id": "hook",
+            "bg": "sunburst",
+            "hook": "GitHub broke *three days running*.\nEach time: *resolved*.",
+            "props": {
+                "whiteboard": {
+                    "x": 1080,
+                    "y": 470,
+                    "scale": 0.8,
+                    "text": "RESOLVED.\nRESOLVED.\nRESOLVED."
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "shocked",
+                    "x": 440,
+                    "y": 980,
+                    "scale": 0.75,
+                    "role": "dev"
+                }
+            ],
+            "fx": [
+                "zoom",
+                "shake@0.5",
+                "shake@1.0",
+                "shake@1.5",
+                "sweat@1.8"
+            ],
+            "sfx": [
+                "stamp@0.5",
+                "stamp@1.0",
+                "stamp@1.5",
+                "drip@1.9"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 660,
+                        "scale": 0.85,
+                        "text": "RESOLVED.\nRESOLVED.\nRESOLVED."
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "shocked",
+                        "x": 450,
+                        "y": 1500,
+                        "scale": 0.65,
+                        "role": "dev"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "push",
+            "bg": "room",
+            "tag": "3 Nov, 15:00 UTC",
+            "props": {
+                "lamp": {
+                    "x": 700,
+                    "y": 140
+                },
+                "desk": {
+                    "x": 700,
+                    "y": 780,
+                    "laptop": {
+                        "x": -60
+                    }
+                },
+                "parcel": {
+                    "x": 860,
+                    "y": 750,
+                    "scale": 0.45,
+                    "label": "PUSH"
+                },
+                "plant": {
+                    "x": 1380,
+                    "y": 900,
+                    "scale": 0.75
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 620,
+                    "y": 892,
+                    "scale": 0.6,
+                    "role": "dev",
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "type",
+                "ship@1.8"
+            ],
+            "sfx": [
+                "typing",
+                "zip@1.8",
+                "whoosh@1.9"
+            ],
+            "focus": [
+                760,
+                560
+            ],
+            "v": {
+                "props": {
+                    "lamp": {
+                        "x": 450,
+                        "y": 420
+                    },
+                    "desk": {
+                        "x": 450,
+                        "y": 1100,
+                        "laptop": {
+                            "x": -60
+                        }
+                    },
+                    "parcel": {
+                        "x": 610,
+                        "y": 1070,
+                        "scale": 0.42,
+                        "label": "PUSH"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 370,
+                        "y": 1212,
+                        "scale": 0.55,
+                        "role": "dev",
+                        "arm": "type"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "slow",
+            "bg": "servers",
+            "tag": "Half of Git over HTTPS",
+            "props": {
+                "stack": {
+                    "x": 420,
+                    "y": 900,
+                    "grow": [
+                        44,
+                        460
+                    ]
+                },
+                "counter": {
+                    "x": 1100,
+                    "y": 560,
+                    "from": 100,
+                    "to": 5000,
+                    "label": "MILLISECONDS TO ANSWER"
+                }
+            },
+            "fx": [
+                "grow@0.2",
+                "tick@0.4"
+            ],
+            "sfx": [
+                "shuffle@0.2",
+                "tick@0.4",
+                "wobble@2.8"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "stack": {
+                        "x": 450,
+                        "y": 1480,
+                        "grow": [
+                            44,
+                            400
+                        ]
+                    },
+                    "counter": {
+                        "x": 450,
+                        "y": 760,
+                        "from": 100,
+                        "to": 5000,
+                        "label": "MILLISECONDS TO ANSWER"
+                    }
+                }
+            },
+            "still": true
+        },
+        {
+            "id": "posted",
+            "bg": "office",
+            "tag": "20:57, almost 6 hours in",
+            "props": {
+                "clock": {
+                    "x": 300,
+                    "y": 260,
+                    "scale": 0.75
+                },
+                "whiteboard": {
+                    "x": 700,
+                    "y": 320,
+                    "scale": 0.65,
+                    "text": "STATUS PAGE:\nINVESTIGATING."
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 1180,
+                    "y": 912,
+                    "scale": 0.6,
+                    "role": "dev"
+                }
+            ],
+            "fx": [
+                "clockspin@0.2",
+                "sweat@2.5"
+            ],
+            "sfx": [
+                "whirr@0.2",
+                "tick@2.4",
+                "pop@2.5",
+                "drip@2.6"
+            ],
+            "focus": [
+                800,
+                500
+            ],
+            "v": {
+                "props": {
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 870,
+                        "scale": 0.7,
+                        "text": "STATUS PAGE:\nINVESTIGATING."
+                    },
+                    "clock": {
+                        "x": 190,
+                        "y": 520,
+                        "scale": 0.5
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 450,
+                        "y": 1490,
+                        "scale": 0.55,
+                        "role": "dev"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "back",
+            "bg": "skyline",
+            "tag": "22:41 UTC: resolved",
+            "props": {
+                "parcel": {
+                    "x": 1000,
+                    "y": 900,
+                    "scale": 0.7,
+                    "label": "PUSH"
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "relieved",
+                    "x": 560,
+                    "y": 920,
+                    "scale": 0.62,
+                    "role": "dev"
+                }
+            ],
+            "fx": [
+                "ship@1.0",
+                "sip@1.6"
+            ],
+            "sfx": [
+                "chord@0.2",
+                "zip@1.0",
+                "whoosh@1.1",
+                "sip@1.6"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "parcel": {
+                        "x": 640,
+                        "y": 1470,
+                        "scale": 0.55,
+                        "label": "PUSH"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "relieved",
+                        "x": 320,
+                        "y": 1480,
+                        "scale": 0.6,
+                        "role": "dev"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "again",
+            "bg": "halftone",
+            "tag": "4 Nov, 09:49 UTC",
+            "props": {
+                "whiteboard": {
+                    "x": 1080,
+                    "y": 340,
+                    "scale": 0.75,
+                    "text": "GIT, ISSUES AND\nPULL REQUESTS:\nDEGRADED."
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 460,
+                    "y": 980,
+                    "scale": 0.75,
+                    "role": "dev"
+                }
+            ],
+            "fx": [
+                "push",
+                "angry@0.7",
+                "steam@0.8"
+            ],
+            "sfx": [
+                "honk@0.4",
+                "hiss@0.8",
+                "boing@1.4"
+            ],
+            "focus": [
+                800,
+                500
+            ],
+            "v": {
+                "props": {
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 560,
+                        "scale": 0.85,
+                        "text": "GIT, ISSUES AND\nPULL REQUESTS:\nDEGRADED."
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 450,
+                        "y": 1500,
+                        "scale": 0.65,
+                        "role": "dev"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "loop",
+            "bg": "blueprint",
+            "tag": "Hacker News, 09:54 UTC",
+            "props": {
+                "terminal": {
+                    "x": 1040,
+                    "y": 380,
+                    "scale": 0.75,
+                    "text": "while ! git push; do sleep 5; done"
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 420,
+                    "y": 940,
+                    "scale": 0.65,
+                    "role": "dev",
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "type@0.3",
+                "slowpush"
+            ],
+            "sfx": [
+                "typing",
+                "click@2.2",
+                "plink@2.4"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "props": {
+                    "terminal": {
+                        "x": 450,
+                        "y": 560,
+                        "scale": 0.9,
+                        "text": "while ! git push; do sleep 5; done"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 450,
+                        "y": 1480,
+                        "scale": 0.6,
+                        "role": "dev",
+                        "arm": "type"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "sorry",
+            "bg": "paper",
+            "tag": "11:50 UTC: resolved",
+            "props": {
+                "note": {
+                    "x": 1120,
+                    "y": 400,
+                    "text": "THANK YOU. FOR YOUR. PATIENCE.",
+                    "at": 0.8
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 480,
+                    "y": 1060,
+                    "scale": 1.0,
+                    "role": "dev"
+                }
+            ],
+            "fx": [
+                "push",
+                "note@0.8"
+            ],
+            "sfx": [
+                "slap@0.8",
+                "pop@2.2"
+            ],
+            "focus": [
+                800,
+                460
+            ],
+            "v": {
+                "props": {
+                    "note": {
+                        "x": 450,
+                        "y": 620,
+                        "text": "THANK YOU. FOR YOUR. PATIENCE.",
+                        "at": 0.8
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 450,
+                        "y": 1580,
+                        "scale": 0.95,
+                        "role": "dev"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "third",
+            "bg": "servers",
+            "tag": "5 Nov, 23:36 UTC",
+            "props": {
+                "whiteboard": {
+                    "x": 800,
+                    "y": 330,
+                    "scale": 0.75,
+                    "text": "GIT, ISSUES,\nACTIONS AND API:\nDEGRADED."
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "shocked",
+                    "x": 800,
+                    "y": 980,
+                    "scale": 0.62,
+                    "role": "dev"
+                }
+            ],
+            "fx": [
+                "shake@0.4",
+                "sweat@0.8"
+            ],
+            "sfx": [
+                "herochord@0.2",
+                "honk@0.4",
+                "wobble@0.6",
+                "drip@0.9"
+            ],
+            "focus": [
+                800,
+                500
+            ],
+            "v": {
+                "props": {
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 560,
+                        "scale": 0.85,
+                        "text": "GIT, ISSUES,\nACTIONS AND API:\nDEGRADED."
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "shocked",
+                        "x": 450,
+                        "y": 1480,
+                        "scale": 0.6,
+                        "role": "dev"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "normally",
+            "bg": "office",
+            "tag": "6 Nov, 00:19 UTC",
+            "props": {
+                "whiteboard": {
+                    "x": 700,
+                    "y": 330,
+                    "scale": 0.75,
+                    "text": "INVESTIGATING:\nGIT OPERATIONS IS\nOPERATING\nNORMALLY."
+                },
+                "plant": {
+                    "x": 1460,
+                    "y": 900,
+                    "scale": 0.7
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 1200,
+                    "y": 920,
+                    "scale": 0.62,
+                    "role": "dev",
+                    "turn": "shocked"
+                }
+            ],
+            "fx": [
+                "turn@1.4",
+                "sweat@1.6"
+            ],
+            "sfx": [
+                "pop@0.3",
+                "boing@1.4",
+                "drip@1.7"
+            ],
+            "focus": [
+                900,
+                500
+            ],
+            "v": {
+                "props": {
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 870,
+                        "scale": 0.75,
+                        "text": "INVESTIGATING:\nGIT OPERATIONS IS\nOPERATING\nNORMALLY."
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 450,
+                        "y": 1500,
+                        "scale": 0.55,
+                        "role": "dev",
+                        "turn": "shocked"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "patience",
+            "bg": "room",
+            "tag": "00:20 UTC: resolved",
+            "props": {
+                "poster": {
+                    "x": 1180,
+                    "y": 250,
+                    "scale": 1.0,
+                    "text": "PATIENCE"
+                },
+                "lamp": {
+                    "x": 560,
+                    "y": 120
+                },
+                "chair": {
+                    "x": 560,
+                    "y": 900,
+                    "scale": 0.6
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "relieved",
+                    "x": 560,
+                    "y": 900,
+                    "scale": 0.6,
+                    "role": "dev"
+                }
+            ],
+            "fx": [
+                "sip@0.6",
+                "stamp@2.4"
+            ],
+            "sfx": [
+                "sip@0.6",
+                "chord@1.2",
+                "stamp@2.4"
+            ],
+            "focus": [
+                800,
+                500
+            ],
+            "v": {
+                "props": {
+                    "poster": {
+                        "x": 450,
+                        "y": 420,
+                        "scale": 0.7,
+                        "text": "PATIENCE"
+                    },
+                    "chair": {
+                        "x": 450,
+                        "y": 1480,
+                        "scale": 0.55
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "relieved",
+                        "x": 450,
+                        "y": 1480,
+                        "scale": 0.55,
+                        "role": "dev"
+                    }
+                ]
+            },
+            "still": true,
+            "stillAt": 2.9
+        },
+        {
+            "id": "next",
+            "bg": "night",
+            "tag": "Two write-ups still to come",
+            "props": {
+                "terminal": {
+                    "x": 420,
+                    "y": 240,
+                    "scale": 0.55,
+                    "text": "while ! git push; do sleep 5; done"
+                },
+                "counter": {
+                    "x": 1180,
+                    "y": 230,
+                    "from": 1,
+                    "to": 47,
+                    "label": "PUSH ATTEMPTS"
+                }
+            },
+            "fx": [
+                "tick@0.2",
+                "continued@2.8"
+            ],
+            "sfx": [
+                "typing",
+                "tick@0.2",
+                "freeze@2.8"
+            ],
+            "focus": [
+                800,
+                450
+            ],
+            "v": {
+                "props": {
+                    "terminal": {
+                        "x": 450,
+                        "y": 440,
+                        "scale": 0.72,
+                        "text": "while ! git push; do sleep 5; done"
+                    },
+                    "counter": {
+                        "x": 450,
+                        "y": 940,
+                        "from": 1,
+                        "to": 47,
+                        "label": "PUSH ATTEMPTS"
+                    }
+                }
+            }
+        }
+    ]
+}

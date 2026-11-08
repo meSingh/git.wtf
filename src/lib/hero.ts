@@ -1,9 +1,10 @@
 import { getCollection } from 'astro:content';
-import { daysBetween, happened, incidentPath, sortIncidents, todayIST } from './site';
+import { daysBetween, happened, incidentPath, isLive, sortIncidents, todayIST } from './site';
 
 /** What every hero shows: the live count, the day it counts from, the latest title, and the span since the first incident. */
 export async function heroData() {
-    const incidents = sortIncidents(await getCollection('incidents'));
+    // published incidents only, never drafts opened for review in the dev preview
+    const incidents = sortIncidents(await getCollection('incidents')).filter(isLive);
     const latest = incidents[0] ?? null;
     const first = incidents.at(-1) ?? null;
     const today = todayIST();
