@@ -34,7 +34,7 @@ const detailLines = latest ? latest.data.detail ?? sentences(latest.body ?? '').
 const jsonld = {
     '@context': 'https://schema.org',
     '@graph': [
-        { '@type': 'Organization', '@id': `${SITE.url}/#org`, name: SITE.name, url: `${SITE.url}/`, logo: `${SITE.url}/apple-touch-icon.png`, sameAs: [SITE.x, `https://github.com/${SITE.repo}`], founder: { '@type': 'Person', name: SITE.owner.name } },
+        { '@type': 'Organization', '@id': `${SITE.url}/#org`, name: SITE.name, url: `${SITE.url}/`, logo: `${SITE.url}/apple-touch-icon.png`, sameAs: [SITE.x, 'https://www.linkedin.com/showcase/gitwtf/', `https://github.com/${SITE.repo}`], founder: { '@type': 'Person', name: SITE.owner.name } },
         { '@type': 'WebSite', '@id': `${SITE.url}/#site`, name: SITE.name, alternateName: SITE.line, url: `${SITE.url}/`, description: SITE.description, inLanguage: 'en', publisher: { '@id': `${SITE.url}/#org` } },
     ],
 };

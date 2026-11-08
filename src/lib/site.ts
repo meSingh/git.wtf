@@ -28,12 +28,12 @@ export const SITE = {
     // The credit line, his exact words; the emphasised parts are marked by the footer.
     credit: { name: 'Mandeep Singh', before: 'an ', strong: 'AI Architect', after: " who reviews his agents' commits. ", last: '“Mostly.”' },
     // The project's own accounts, from this one list; all four show (Mandeep, v6). X is real. The other three are
-    // PLACEHOLDER URLs to confirm with Mandeep once he has the handles (Coordinator, 7 Nov 2026).
+    // X and LinkedIn (a showcase page) are live. Instagram and YouTube are PLACEHOLDER URLs until he creates them (social session, 8 Nov 2026).
     social: [
         { name: 'Instagram', url: 'https://www.instagram.com/gitwtf', placeholder: true },
         { name: 'YouTube Shorts', url: 'https://www.youtube.com/@gitwtf/shorts', placeholder: true },
         { name: 'X', url: 'https://x.com/gitwtf' },
-        { name: 'LinkedIn', url: 'https://www.linkedin.com/company/gitwtf', placeholder: true },
+        { name: 'LinkedIn', url: 'https://www.linkedin.com/showcase/gitwtf/' },
     ] as { name: string; url: string; placeholder?: boolean }[],
     // Google Analytics, through the Tag Manager container the Ghost site used (the same property, so the history
     // carries on). Loaded only on the real site, after the page has finished loading.
