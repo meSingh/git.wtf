@@ -1,40 +1,41 @@
-# Git.WTF !?!
+# git.wtf
 
-Git is fucking hard, no matter how good you get, there always comes a time when you get stuck & can't figure out a solution!
+One real Git fuck-up a day, retold deadpan, under a split-flap sign that counts the days since the last one.
 
-It's easy to get started, but remembering everything that it has to offer is just not practical. On top of that, git documentation is shit; you can't find anything there. If you think you can, you wouldn't be here looking for answers! 
+From 2016 to 2025 this domain was a blog about fixing Git. Those posts are still here, unchanged, at their old URLs, listed at [/archive/](https://git.wtf/archive/).
 
-Let's be real, the best place to find any solution for our git problems is StackOverflow, and honestly, it does have most of the answers, but we sure can do better, and that is what Git.WTF is trying to do with a curated list of several of these problems, frustrations, and tricks that can give you a solution in seconds.
+## How it works
 
-[Visit Website =>>](https://git.wtf)
+- `incidents/YYYY-MM-DD-slug.md`: one file per incident. Front matter: `date`, `title`, `category`, `source_url`, `source_date`, `status`. The body is the retelling, three or four sentences. The counter counts days since the latest `source_date`, in the browser, in IST, so it climbs without a deploy.
+- `archive/<slug>.md`: the old posts, with the post's html as the body. Built by `scripts/wayback-to-archive.mjs` from the Internet Archive's captures, and later by `scripts/ghost-to-archive.mjs` from a Ghost export.
+- `src/redirects.mjs`: every old tag, category, author, page, AMP and feed URL becomes a static redirect page (GitHub Pages has no server-side redirects). `tests/old-urls.txt` lists the old URLs and `scripts/check-urls.mjs` fails CI if one stops resolving.
+- Built with Astro, motion with GSAP and ScrollTrigger, served by GitHub Pages. Every push to `master` builds and deploys through `.github/workflows/pages.yml`; pull requests build, run the URL check and upload the built site as an artifact.
 
+## Working on it
 
-## Installation
-
-To install switch to the project directory and load the Composer dependencies.
-
-``` bash
-composer install
+```bash
+npm install
+npm run dev            # http://localhost:4321
+npm run build          # dist/
+npm run preview        # dist/ served the way GitHub Pages serves it, on http://127.0.0.1:8787
+npm run check-urls     # against the preview
+npm run build:fixture  # a smoke build from tests/fixtures/, never from the real folders
 ```
 
-Next you need to install dependencies using yarn/npm.
+`?debug` on the homepage exposes the motion runtime on `window.__gw`; `?reduce` previews the reduced-motion version.
 
-``` bash
-yarn install
+Publish a reviewed draft:
+
+```bash
+node scripts/publish-incident.mjs drafts/2026-11-07-slug.md
 ```
 
-And finally we need to run Laravel Mix in order to compile the assets.
+It validates the file, moves it into `incidents/`, builds, commits the file and pushes.
 
-``` bash
-yarn run dev
+Build the archive from a Ghost export:
+
+```bash
+node scripts/ghost-to-archive.mjs ~/path/to/ghost-export.json --images ~/path/to/ghost/content/images
 ```
 
-Now you should be able to visit the site and to see my blog. Of course you need to have a local environment setup already.
-
-## Good to know
-
-The blog articles get cached with the first request. So in order to see a change, you need to delete the cache:
-
-``` bash
-php artisan cache:clear
-```
+The Laravel version that ran here from 2016 to 2021 is tagged `laravel-2021`.

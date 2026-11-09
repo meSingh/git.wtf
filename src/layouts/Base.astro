@@ -1,0 +1,141 @@
+---
+import '../styles/global.css';
+import { getCollection } from 'astro:content';
+import Logo from '../components/Logo.astro';
+import Odo from '../components/Odo.astro';
+import Footer from '../components/Footer.astro';
+import { SITE, daysSince, happened, href, sortIncidents, isLive } from '../lib/site';
+
+interface Props {
+    title: string;
+    description?: string;
+    image?: string;
+    canonical?: string;
+    type?: 'website' | 'article';
+    noindex?: boolean;
+    jsonld?: Record<string, unknown>;
+    /** Show the live counter badge in the top bar from the start (every page but the homepage). */
+    badge?: boolean;
+    /** The homepage's opening runs from its first frame: set the motion flag before paint, with a fallback to the still. */
+    motionFlag?: boolean;
+}
+const { title, description = SITE.description, image = '/share.png', canonical, type = 'website', noindex = false, jsonld, badge = true, motionFlag = false } = Astro.props;
+const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+const url = canonical ?? new URL(Astro.url.pathname, SITE.url).toString();
+const img = new URL(image.startsWith('/') ? base + image : image, SITE.url).toString();
+// the counter in the header: published incidents only, never drafts opened for review in the dev preview
+const incidents = sortIncidents(await getCollection('incidents')).filter(isLive);
+const latest = incidents[0] ?? null;
+const days = daysSince(incidents);
+// The display face as three static weights (14 kB each) rather than the 35 kB variable file: the opening only
+// needs 900, which is preloaded; 800 and 700 load when a page uses them.
+const fonts = [
+    ['big-shoulders-display-latin-900-normal.woff2', 'Big Shoulders Display', '900'],
+    ['big-shoulders-display-latin-800-normal.woff2', 'Big Shoulders Display', '800'],
+    ['big-shoulders-display-latin-700-normal.woff2', 'Big Shoulders Display', '700'],
+    // JetBrains Mono likewise: 400 is nearly all of it; 500 and 700 only appear below the fold
+    ['jetbrains-mono-latin-400-normal.woff2', 'JetBrains Mono', '400'],
+    ['jetbrains-mono-latin-500-normal.woff2', 'JetBrains Mono', '500'],
+    ['jetbrains-mono-latin-700-normal.woff2', 'JetBrains Mono', '700'],
+    ['geist-latin-wght-normal.woff2', 'Geist', '100 900'],
+];
+const fontCss = fonts.map(([file, family, weight]) => `@font-face{font-family:'${family}';font-style:normal;font-weight:${weight};font-display:swap;src:url(${base}/fonts/${file}) format('woff2')}`).join('');
+---
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={url} />
+    {/* the temporary project address (a base path, before the custom domain) is never indexed: its canonicals would point nowhere */}
+    {(noindex || base) && <meta name="robots" content="noindex" />}
+    <link rel="preload" as="font" type="font/woff2" crossorigin href={`${base}/fonts/${fonts[0][0]}`} />
+    <style set:html={fontCss} />
+    <link rel="icon" href={`${base}/favicon.svg`} type="image/svg+xml" />
+    <link rel="icon" href={`${base}/favicon-32.png`} sizes="32x32" type="image/png" />
+    <link rel="icon" href={`${base}/favicon-16.png`} sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href={`${base}/apple-touch-icon.png`} />
+    <link rel="manifest" href={`${base}/site.webmanifest`} />
+    <link rel="alternate" type="application/rss+xml" title={SITE.name} href={`${base}/rss.xml`} />
+    <link rel="sitemap" href={`${base}/sitemap-index.xml`} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+    <meta property="og:image" content={img} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title.replace(/ \| git\.wtf$/, '')} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={SITE.twitter} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={img} />
+    <meta name="theme-color" content="#0a0a0a" />
+    {jsonld && <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />}
+    <script is:inline>document.documentElement.classList.add('js')</script>
+    {motionFlag && (
+        <script is:inline>
+            // Before first paint: decide whether the opening runs. With reduced motion (or ?reduce) the page is the
+            // finished still; if the motion script has not started within 2.5 s, fall back to the still.
+            (function () {
+                var d = document.documentElement;
+                // the page always opens at its top: a reload must not keep the old scroll position (the opening and the
+                // auto-scroll start from the counter)
+                if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+                if (matchMedia('(prefers-reduced-motion: reduce)').matches || location.search.indexOf('reduce') > -1) return;
+                d.classList.add('js-anim');
+                setTimeout(function () { if (!window.__heroRan) d.classList.remove('js-anim'); }, 4000);
+            })();
+        </script>
+    )}
+    {SITE.gtm && import.meta.env.PROD && !base && (
+        <script is:inline define:vars={{ gtm: SITE.gtm }}>
+            // Google Tag Manager (Analytics), started after the load and a moment's idle so the first paint never waits for it
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+            addEventListener('load', function () {
+                setTimeout(function () {
+                    var s = document.createElement('script');
+                    s.async = true;
+                    s.src = 'https://www.googletagmanager.com/gtm.js?id=' + gtm;
+                    document.head.appendChild(s);
+                }, 1500);
+            });
+        </script>
+    )}
+</head>
+<body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="bar">
+        <a class="brand" href={href('/')} aria-label="git.wtf, home"><Logo height="1.75rem" title="" /></a>
+        <a class={`badge${badge ? ' on' : ''}`} id="badge" href={href('/')} aria-label={`${days ?? 'unknown'} ${SITE.line.replace(/^Days /, 'days ')}`}>
+            <Odo value={days ?? 0} min={2} class="badge-odo wheel" since={latest ? happened(latest) : null} label={`${days ?? 0}`} />
+            <span class="badge-label">{SITE.line.replace(/^Days /, 'days ')}</span>
+            <span class="badge-short" aria-hidden="true">days since<br />last fuck-up</span>
+        </a>
+        <nav aria-label="Site">
+            <a href={href('/incidents/')}>Incidents</a>
+            <a href={href('/archive/')}>Archive</a>
+            <a href={href('/rss.xml')}>RSS</a>
+        </nav>
+    </header>
+    <div id="main" tabindex="-1"><slot /></div>
+    <Footer />
+    <script>
+        import { syncOdos } from '../scripts/odometer';
+        import { lateImages } from '../scripts/late-images';
+        syncOdos();
+        lateImages();
+        // the footer's script loads only when the footer is within a screen of the viewport, so nothing of it runs at load
+        const foot = document.querySelector('[data-foot]');
+        if (foot && 'IntersectionObserver' in window) {
+            const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); import('../scripts/footer').then((m) => m.mountFooter()); } }, { rootMargin: '100% 0px' });
+            io.observe(foot);
+        }
+    </script>
+</body>
+</html>

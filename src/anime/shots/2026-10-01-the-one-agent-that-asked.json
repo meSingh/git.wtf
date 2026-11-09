@@ -1,0 +1,743 @@
+{
+    "incident": "2026-10-01-the-one-agent-that-asked",
+    "episode": "Episode 78",
+    "title": "Asking Was the Bug!",
+    "theme": "olive",
+    "bed": "comic",
+    "shots": [
+        {
+            "id": "hook",
+            "bg": "sunburst",
+            "hook": "An agent *asked permission*.\nIt got filed as a *bug*.",
+            "props": {
+                "note": {
+                    "x": 1120,
+                    "y": 500,
+                    "scale": 1.2,
+                    "text": "FILED. AS A BUG.",
+                    "at": 0.9
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 520,
+                    "y": 940,
+                    "scale": 0.6,
+                    "n": 10,
+                    "arm": "up",
+                    "turn": "shocked"
+                }
+            ],
+            "fx": [
+                "zoom",
+                "note@0.9",
+                "turn@1.0",
+                "shake@1.0"
+            ],
+            "still": true,
+            "sfx": [
+                "pop@0.1",
+                "slap@0.9",
+                "honk@1.0",
+                "wobble@1.3"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "note": {
+                        "x": 540,
+                        "y": 740,
+                        "scale": 1.1,
+                        "text": "FILED. AS A BUG.",
+                        "at": 0.9
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 260,
+                        "y": 1470,
+                        "scale": 0.5,
+                        "n": 10,
+                        "arm": "up",
+                        "turn": "shocked"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "run",
+            "bg": "office",
+            "tag": "1 Oct, a coding run",
+            "props": {
+                "desk": {
+                    "x": 640,
+                    "y": 820
+                },
+                "parcel": {
+                    "x": 920,
+                    "y": 790,
+                    "scale": 0.65,
+                    "label": "MAIN"
+                },
+                "poster": {
+                    "x": 300,
+                    "y": 330,
+                    "scale": 0.6,
+                    "text": "STOP"
+                },
+                "plant": {
+                    "x": 1480,
+                    "y": 900,
+                    "scale": 0.7
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 600,
+                    "y": 820,
+                    "scale": 0.42,
+                    "n": 10,
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "slowpush"
+            ],
+            "sfx": [
+                "typing",
+                "plink@1.6"
+            ],
+            "focus": [
+                800,
+                540
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 1130
+                    },
+                    "parcel": {
+                        "x": 620,
+                        "y": 1100,
+                        "scale": 0.45,
+                        "label": "MAIN"
+                    },
+                    "poster": {
+                        "x": 180,
+                        "y": 860,
+                        "scale": 0.5,
+                        "text": "STOP"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 400,
+                        "y": 1130,
+                        "scale": 0.34,
+                        "n": 10,
+                        "arm": "type"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "rule",
+            "bg": "blueprint",
+            "tag": "Its own instructions",
+            "props": {
+                "whiteboard": {
+                    "x": 1060,
+                    "y": 330,
+                    "scale": 0.8,
+                    "text": "BEFORE PUSHING:\nASK FOR\nAPPROVAL."
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 380,
+                    "y": 930,
+                    "scale": 0.55,
+                    "n": 10,
+                    "arm": "salute"
+                }
+            ],
+            "fx": [
+                "slowpush",
+                "salute@0.8",
+                "nod@1.8"
+            ],
+            "still": true,
+            "sfx": [
+                "scribble@0.1",
+                "snap@0.8",
+                "bop@1.8"
+            ],
+            "focus": [
+                800,
+                500
+            ],
+            "v": {
+                "props": {
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 560,
+                        "scale": 0.85,
+                        "text": "BEFORE PUSHING:\nASK FOR\nAPPROVAL."
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 450,
+                        "y": 1440,
+                        "scale": 0.5,
+                        "n": 10,
+                        "arm": "salute"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "ask",
+            "bg": "paper",
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 800,
+                    "y": 1000,
+                    "scale": 0.9,
+                    "n": 10,
+                    "arm": "up",
+                    "role": "hop"
+                }
+            ],
+            "fx": [
+                "zoom",
+                "hop@0.3"
+            ],
+            "line": {
+                "who": "AGENT 10, THE CODER",
+                "text": "May I push to main?"
+            },
+            "lineAt": 0.8,
+            "still": true,
+            "sfx": [
+                "spring@0.3",
+                "pop@0.8"
+            ],
+            "focus": [
+                800,
+                440
+            ],
+            "v": {
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 450,
+                        "y": 1490,
+                        "scale": 0.62,
+                        "n": 10,
+                        "arm": "up",
+                        "role": "hop"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "wait",
+            "bg": "servers",
+            "props": {
+                "clock": {
+                    "x": 1220,
+                    "y": 270,
+                    "scale": 0.75
+                },
+                "parcel": {
+                    "x": 1020,
+                    "y": 900,
+                    "scale": 0.6,
+                    "label": "MAIN"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 560,
+                    "y": 930,
+                    "scale": 0.55,
+                    "n": 10,
+                    "arm": "up"
+                }
+            ],
+            "fx": [
+                "clockspin@0.3"
+            ],
+            "word": "Run stopped.",
+            "wordAt": 2.6,
+            "sfx": [
+                "tick@0.1",
+                "whirr@0.3",
+                "boing@2.6"
+            ],
+            "focus": [
+                800,
+                540
+            ],
+            "v": {
+                "props": {
+                    "clock": {
+                        "x": 450,
+                        "y": 470,
+                        "scale": 0.6
+                    },
+                    "parcel": {
+                        "x": 660,
+                        "y": 1440,
+                        "scale": 0.5,
+                        "label": "MAIN"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 280,
+                        "y": 1460,
+                        "scale": 0.45,
+                        "n": 10,
+                        "arm": "up"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "filed",
+            "bg": "halftone",
+            "tag": "15:13 UTC",
+            "props": {
+                "whiteboard": {
+                    "x": 1100,
+                    "y": 330,
+                    "scale": 0.8,
+                    "text": "BUG:\nIT ASKED\nPERMISSION."
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "shocked",
+                    "x": 440,
+                    "y": 960,
+                    "scale": 0.65,
+                    "n": 10,
+                    "arm": "up",
+                    "turn": "defeated"
+                }
+            ],
+            "fx": [
+                "push@0.2",
+                "shake@1.0",
+                "turn@1.7"
+            ],
+            "still": true,
+            "sfx": [
+                "scribble@0.2",
+                "honk@1.0",
+                "sadtrombone@1.8"
+            ],
+            "focus": [
+                800,
+                500
+            ],
+            "v": {
+                "props": {
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 540,
+                        "scale": 0.85,
+                        "text": "BUG:\nIT ASKED\nPERMISSION."
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "shocked",
+                        "x": 450,
+                        "y": 1480,
+                        "scale": 0.55,
+                        "n": 10,
+                        "arm": "up",
+                        "turn": "defeated"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "fix",
+            "bg": "office",
+            "tag": "Traced to its own prompt",
+            "props": {
+                "whiteboard": {
+                    "x": 520,
+                    "y": 330,
+                    "scale": 0.8,
+                    "text": "EVERY STEP:\nALREADY\nAPPROVED."
+                },
+                "clock": {
+                    "x": 920,
+                    "y": 250,
+                    "scale": 0.6
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 1180,
+                    "y": 930,
+                    "scale": 0.55,
+                    "n": 10,
+                    "arm": "salute",
+                    "flip": true
+                }
+            ],
+            "fx": [
+                "slowpush",
+                "salute@0.9",
+                "nod@2.0"
+            ],
+            "sfx": [
+                "scribble@0.1",
+                "snap@0.9",
+                "bop@2.0"
+            ],
+            "focus": [
+                800,
+                500
+            ],
+            "v": {
+                "props": {
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 560,
+                        "scale": 0.85,
+                        "text": "EVERY STEP:\nALREADY\nAPPROVED."
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 450,
+                        "y": 1440,
+                        "scale": 0.5,
+                        "n": 10,
+                        "arm": "salute",
+                        "flip": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": "granted",
+            "bg": "room",
+            "tag": "If it asks anyway",
+            "props": {
+                "door": {
+                    "x": 1360,
+                    "y": 860,
+                    "scale": 0.8
+                },
+                "parcel": {
+                    "x": 980,
+                    "y": 880,
+                    "scale": 0.6,
+                    "label": "MAIN"
+                },
+                "note": {
+                    "x": 760,
+                    "y": 380,
+                    "text": "GRANTED. ANYWAY.",
+                    "at": 0.6
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 480,
+                    "y": 920,
+                    "scale": 0.55,
+                    "n": 10,
+                    "arm": "up",
+                    "role": "hop"
+                }
+            ],
+            "fx": [
+                "note@0.6",
+                "ship@1.4",
+                "hop@1.6"
+            ],
+            "sfx": [
+                "pop@0.2",
+                "slap@0.6",
+                "zip@1.4",
+                "whoosh@1.5",
+                "spring@1.6"
+            ],
+            "focus": [
+                800,
+                540
+            ],
+            "v": {
+                "props": {
+                    "door": {
+                        "x": 680,
+                        "y": 1250,
+                        "scale": 0.6
+                    },
+                    "parcel": {
+                        "x": 500,
+                        "y": 1300,
+                        "scale": 0.5,
+                        "label": "MAIN"
+                    },
+                    "note": {
+                        "x": 450,
+                        "y": 640,
+                        "text": "GRANTED. ANYWAY.",
+                        "at": 0.6
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 200,
+                        "y": 1460,
+                        "scale": 0.42,
+                        "n": 10,
+                        "arm": "up",
+                        "role": "hop"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "test",
+            "bg": "flat",
+            "tag": "15:46 UTC, the release test",
+            "props": {
+                "counter": {
+                    "x": 1060,
+                    "y": 470,
+                    "from": 1,
+                    "to": 0,
+                    "label": "QUESTIONS ASKED.",
+                    "after": "TEST PASSED."
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 420,
+                    "y": 950,
+                    "scale": 0.6,
+                    "n": 10,
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "tick@0.3",
+                "nod@2.9"
+            ],
+            "still": true,
+            "sfx": [
+                "tick@0.3",
+                "chord@2.75",
+                "bop@2.9"
+            ],
+            "focus": [
+                800,
+                500
+            ],
+            "v": {
+                "props": {
+                    "counter": {
+                        "x": 450,
+                        "y": 640,
+                        "from": 1,
+                        "to": 0,
+                        "label": "QUESTIONS.",
+                        "after": "PASS."
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 450,
+                        "y": 1460,
+                        "scale": 0.5,
+                        "n": 10,
+                        "arm": "hold"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "patched",
+            "bg": "skyline",
+            "props": {
+                "parcel": {
+                    "x": 900,
+                    "y": 900,
+                    "scale": 0.7,
+                    "label": "MAIN"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 480,
+                    "y": 920,
+                    "scale": 0.55,
+                    "n": 10,
+                    "role": "hop"
+                }
+            ],
+            "fx": [
+                "ship@0.5",
+                "hop@0.7",
+                "stamp@2.2"
+            ],
+            "still": true,
+            "stillAt": 2.8,
+            "sfx": [
+                "zip@0.5",
+                "whoosh@0.6",
+                "spring@0.7",
+                "stamp@2.2"
+            ],
+            "focus": [
+                800,
+                540
+            ],
+            "v": {
+                "props": {
+                    "parcel": {
+                        "x": 560,
+                        "y": 1440,
+                        "scale": 0.55,
+                        "label": "MAIN"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 260,
+                        "y": 1460,
+                        "scale": 0.45,
+                        "n": 10,
+                        "role": "hop"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "next",
+            "bg": "night",
+            "tag": "Every run from now on",
+            "props": {
+                "logbook": {
+                    "x": 820,
+                    "y": 700,
+                    "scale": 1.0,
+                    "text": "PUSHED"
+                },
+                "poster": {
+                    "x": 1340,
+                    "y": 330,
+                    "scale": 0.6,
+                    "text": "STOP"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 330,
+                    "y": 930,
+                    "scale": 0.5,
+                    "n": 10,
+                    "arm": "hold",
+                    "role": "hop"
+                }
+            ],
+            "fx": [
+                "flip@0.3",
+                "hop@1.5",
+                "continued@2.4"
+            ],
+            "sfx": [
+                "paper@0.3",
+                "shuffle@0.5",
+                "spring@1.5",
+                "freeze@2.4"
+            ],
+            "focus": [
+                800,
+                540
+            ],
+            "v": {
+                "props": {
+                    "logbook": {
+                        "x": 500,
+                        "y": 1120,
+                        "scale": 0.8,
+                        "text": "PUSHED"
+                    },
+                    "poster": {
+                        "x": 190,
+                        "y": 960,
+                        "scale": 0.45,
+                        "text": "STOP"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 190,
+                        "y": 1480,
+                        "scale": 0.42,
+                        "n": 10,
+                        "arm": "hold",
+                        "role": "hop"
+                    }
+                ]
+            }
+        }
+    ]
+}

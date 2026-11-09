@@ -1,0 +1,831 @@
+{
+    "incident": "2026-11-01-the-robots-agreed-the-code-was-bad",
+    "episode": "Episode 86",
+    "title": "The Robots Agreed!",
+    "theme": "plum",
+    "bed": "comic",
+    "shots": [
+        {
+            "id": "hook",
+            "bg": "sunburst",
+            "hook": "One bot *flattened the fix*.\nThe next bot *blamed the code*.",
+            "props": {
+                "bulldozer": {
+                    "x": 540,
+                    "y": 860,
+                    "scale": 0.85,
+                    "label": "REBASE"
+                },
+                "folder": {
+                    "x": 1010,
+                    "y": 740,
+                    "scale": 0.62,
+                    "label": "THE FIX"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 1340,
+                    "y": 900,
+                    "scale": 0.5,
+                    "n": 2,
+                    "arm": "point",
+                    "flip": true,
+                    "role": "judge"
+                }
+            ],
+            "fx": [
+                "doze@0.5",
+                "jab@1.6",
+                "nod@2.0"
+            ],
+            "sfx": [
+                "rumble@0.5",
+                "impact@1.2",
+                "squeak@1.25",
+                "bop@1.6",
+                "boing@2.0"
+            ],
+            "focus": [
+                900,
+                600
+            ],
+            "v": {
+                "props": {
+                    "bulldozer": {
+                        "x": 280,
+                        "y": 1290,
+                        "scale": 0.66,
+                        "label": "REBASE"
+                    },
+                    "folder": {
+                        "x": 650,
+                        "y": 1190,
+                        "scale": 0.5,
+                        "label": "THE FIX"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 760,
+                        "y": 1530,
+                        "scale": 0.34,
+                        "n": 2,
+                        "arm": "point",
+                        "flip": true,
+                        "role": "judge"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "arrive",
+            "bg": "skyline",
+            "tag": "1 Nov, 20:50",
+            "props": {
+                "building": {
+                    "x": 1000,
+                    "y": 880,
+                    "scale": 0.75,
+                    "sign": "LATEST COPY"
+                },
+                "parcel": {
+                    "x": 1000,
+                    "y": 880,
+                    "scale": 0.8,
+                    "label": "FIX"
+                },
+                "counter": {
+                    "x": 420,
+                    "y": 430,
+                    "from": 0,
+                    "to": 71,
+                    "label": "LINES OF FIX"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 1430,
+                    "y": 900,
+                    "scale": 0.42,
+                    "n": 2,
+                    "arm": "hold",
+                    "flip": true
+                }
+            ],
+            "fx": [
+                "tick@0.4",
+                "nod@2.9"
+            ],
+            "sfx": [
+                "pop@0.2",
+                "tick@0.4",
+                "chord@2.8",
+                "bop@2.9"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "building": {
+                        "x": 450,
+                        "y": 1180,
+                        "scale": 0.7,
+                        "sign": "LATEST COPY"
+                    },
+                    "parcel": {
+                        "x": 450,
+                        "y": 1180,
+                        "scale": 0.75,
+                        "label": "FIX"
+                    },
+                    "counter": {
+                        "x": 450,
+                        "y": 600,
+                        "from": 0,
+                        "to": 71,
+                        "label": "LINES OF FIX"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 740,
+                        "y": 1460,
+                        "scale": 0.34,
+                        "n": 2,
+                        "arm": "hold",
+                        "flip": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": "stale",
+            "bg": "night",
+            "tag": "21:50",
+            "props": {
+                "lamp": {
+                    "x": 760,
+                    "y": 110
+                },
+                "desk": {
+                    "x": 760,
+                    "y": 700
+                },
+                "folder": {
+                    "x": 910,
+                    "y": 596,
+                    "scale": 0.5,
+                    "label": "OLD COPY"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 620,
+                    "y": 690,
+                    "scale": 0.42,
+                    "n": 4,
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "nod@0.5"
+            ],
+            "line": {
+                "who": "AGENT 4, THE REBASE JOB",
+                "text": "No need to check.\nI have a copy."
+            },
+            "lineAt": 1.0,
+            "sfx": [
+                "typing",
+                "bop@0.5",
+                "pop@1.0"
+            ],
+            "focus": [
+                780,
+                520
+            ],
+            "v": {
+                "props": {
+                    "lamp": {
+                        "x": 450,
+                        "y": 520
+                    },
+                    "desk": {
+                        "x": 450,
+                        "y": 1240
+                    },
+                    "folder": {
+                        "x": 590,
+                        "y": 1136,
+                        "scale": 0.45,
+                        "label": "OLD COPY"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 330,
+                        "y": 1230,
+                        "scale": 0.34,
+                        "n": 4,
+                        "arm": "type"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "force",
+            "bg": "speedlines",
+            "props": {
+                "building": {
+                    "x": 1220,
+                    "y": 880,
+                    "scale": 0.7,
+                    "sign": "LATEST COPY"
+                },
+                "folder": {
+                    "x": 900,
+                    "y": 760,
+                    "scale": 0.6,
+                    "label": "THE FIX"
+                },
+                "bulldozer": {
+                    "x": 440,
+                    "y": 880,
+                    "scale": 0.8,
+                    "label": "REBASE"
+                }
+            },
+            "fx": [
+                "impact@0.1",
+                "speedlines@0.2",
+                "doze@0.5",
+                "files@1.2"
+            ],
+            "word": "Flattened.",
+            "wordAt": 2.0,
+            "sfx": [
+                "herochord@0.1",
+                "rumble@0.5",
+                "impact@1.2",
+                "flutter@1.3",
+                "whistle-fall@2.1"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "folder": {
+                        "x": 650,
+                        "y": 1200,
+                        "scale": 0.5,
+                        "label": "THE FIX"
+                    },
+                    "bulldozer": {
+                        "x": 280,
+                        "y": 1320,
+                        "scale": 0.62,
+                        "label": "REBASE"
+                    }
+                }
+            },
+            "still": true
+        },
+        {
+            "id": "review",
+            "bg": "office",
+            "tag": "22:00",
+            "props": {
+                "desk": {
+                    "x": 560,
+                    "y": 700
+                },
+                "terminal": {
+                    "x": 1130,
+                    "y": 350,
+                    "scale": 0.8,
+                    "text": "verdict: CHANGES on the old code",
+                    "prompt": "!",
+                    "red": true
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 560,
+                    "y": 690,
+                    "scale": 0.45,
+                    "n": 2,
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "zoom",
+                "nod@1.0"
+            ],
+            "line": {
+                "who": "AGENT 2, THE REVIEWER",
+                "text": "This code is bad."
+            },
+            "lineAt": 1.2,
+            "sfx": [
+                "click@0.2",
+                "honk@0.5",
+                "bop@1.0",
+                "pop@1.2"
+            ],
+            "focus": [
+                820,
+                480
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 1250
+                    },
+                    "terminal": {
+                        "x": 450,
+                        "y": 540,
+                        "scale": 0.85,
+                        "text": "verdict: CHANGES on the old code",
+                        "prompt": "!",
+                        "red": true
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 450,
+                        "y": 1240,
+                        "scale": 0.4,
+                        "n": 2,
+                        "arm": "type"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "limit",
+            "bg": "blueprint",
+            "props": {
+                "gate": {
+                    "x": 640,
+                    "y": 880,
+                    "sign": "FIX LIMIT",
+                    "at": 0.4
+                },
+                "counter": {
+                    "x": 1150,
+                    "y": 400,
+                    "value": 2,
+                    "label": "OF 2 FIX ROUNDS"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 1180,
+                    "y": 900,
+                    "scale": 0.42,
+                    "n": 2,
+                    "arm": "hold",
+                    "flip": true,
+                    "role": "shrug"
+                }
+            ],
+            "fx": [
+                "gatedrop@0.4",
+                "shake@0.62",
+                "shrug@1.8",
+                "nod@2.8"
+            ],
+            "sfx": [
+                "whistle-gate@0.4",
+                "clunk@0.62",
+                "squeak@1.8",
+                "sadtrombone@2.2",
+                "bop@2.8"
+            ],
+            "focus": [
+                860,
+                560
+            ],
+            "v": {
+                "props": {
+                    "gate": {
+                        "x": 450,
+                        "y": 1260,
+                        "scale": 0.8,
+                        "sign": "FIX LIMIT",
+                        "at": 0.4
+                    },
+                    "counter": {
+                        "x": 450,
+                        "y": 620,
+                        "value": 2,
+                        "label": "OF 2 FIX ROUNDS"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 680,
+                        "y": 1460,
+                        "scale": 0.34,
+                        "n": 2,
+                        "arm": "hold",
+                        "flip": true,
+                        "role": "shrug"
+                    }
+                ]
+            },
+            "tag": "No more fix rounds"
+        },
+        {
+            "id": "silence",
+            "bg": "servers",
+            "props": {
+                "desk": {
+                    "x": 800,
+                    "y": 760
+                },
+                "logbook": {
+                    "x": 800,
+                    "y": 628,
+                    "scale": 0.6,
+                    "blank": true
+                }
+            },
+            "fx": [
+                "slowpush",
+                "flip@0.4"
+            ],
+            "word": "None.",
+            "wordAt": 1.8,
+            "sfx": [
+                "paper@0.4",
+                "paper@0.66",
+                "paper@0.92",
+                "tick@1.4",
+                "drip@2.2"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "tag": "Reports of the lost fix",
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 1150
+                    },
+                    "logbook": {
+                        "x": 450,
+                        "y": 1018,
+                        "scale": 0.6,
+                        "blank": true
+                    }
+                }
+            }
+        },
+        {
+            "id": "found",
+            "bg": "room",
+            "props": {
+                "desk": {
+                    "x": 1060,
+                    "y": 700
+                },
+                "folder": {
+                    "x": 1060,
+                    "y": 589,
+                    "scale": 0.55,
+                    "label": "THE FIX",
+                    "empty": true
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "shocked",
+                    "x": 500,
+                    "y": 900,
+                    "scale": 0.6,
+                    "role": "dev"
+                }
+            ],
+            "fx": [
+                "push@0.1",
+                "sweat@0.8"
+            ],
+            "line": {
+                "who": "DEV",
+                "text": "Where's the fix?"
+            },
+            "lineAt": 1.6,
+            "sfx": [
+                "honk@0.3",
+                "drip@0.9",
+                "squeak@1.6"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 560,
+                        "y": 1240
+                    },
+                    "folder": {
+                        "x": 560,
+                        "y": 1130,
+                        "scale": 0.5,
+                        "label": "THE FIX",
+                        "empty": true
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "shocked",
+                        "x": 220,
+                        "y": 1500,
+                        "scale": 0.48,
+                        "role": "dev"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "putback",
+            "bg": "halftone",
+            "tag": "22:03",
+            "props": {
+                "folder": {
+                    "x": 760,
+                    "y": 620,
+                    "scale": 0.8,
+                    "label": "THE FIX"
+                },
+                "note": {
+                    "x": 330,
+                    "y": 400,
+                    "text": "PUT. BACK.",
+                    "at": 2.0
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "relieved",
+                    "x": 1240,
+                    "y": 960,
+                    "scale": 0.6,
+                    "role": "dev"
+                }
+            ],
+            "fx": [
+                "restore@0.3",
+                "note@2.0",
+                "sip@2.4"
+            ],
+            "sfx": [
+                "rewind@0.3",
+                "whirr@0.5",
+                "slap@2.0",
+                "chord@2.1",
+                "sip@2.4"
+            ],
+            "focus": [
+                800,
+                540
+            ],
+            "v": {
+                "props": {
+                    "folder": {
+                        "x": 450,
+                        "y": 820,
+                        "scale": 0.7,
+                        "label": "THE FIX"
+                    },
+                    "note": {
+                        "x": 450,
+                        "y": 440,
+                        "text": "PUT. BACK.",
+                        "at": 2.0
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "relieved",
+                        "x": 450,
+                        "y": 1500,
+                        "scale": 0.48,
+                        "role": "dev"
+                    }
+                ],
+                "fx": [
+                    "restoreup@0.3",
+                    "note@2.0",
+                    "sip@2.4"
+                ]
+            }
+        },
+        {
+            "id": "merged",
+            "bg": "servers",
+            "tag": "22:45, a fix for the rebase job",
+            "props": {
+                "terminal": {
+                    "x": 800,
+                    "y": 330,
+                    "scale": 0.7,
+                    "text": "rebase: fetch first, count every commit"
+                },
+                "note": {
+                    "x": 1330,
+                    "y": 330,
+                    "text": "MERGED. NOT LIVE.",
+                    "at": 0.7
+                },
+                "lamp": {
+                    "x": 800,
+                    "y": 560,
+                    "scale": 0.8
+                },
+                "chair": {
+                    "x": 800,
+                    "y": 900,
+                    "scale": 0.6
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 330,
+                    "y": 900,
+                    "scale": 0.45,
+                    "n": 4,
+                    "arm": "hold"
+                },
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 1270,
+                    "y": 900,
+                    "scale": 0.45,
+                    "n": 2,
+                    "arm": "hold",
+                    "flip": true
+                }
+            ],
+            "fx": [
+                "note@0.7",
+                "nod@1.4",
+                "stamp@2.6"
+            ],
+            "sfx": [
+                "slap@0.7",
+                "bop@1.4",
+                "stamp@2.6"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "terminal": {
+                        "x": 450,
+                        "y": 470,
+                        "scale": 0.8,
+                        "text": "rebase: fetch first, count every commit"
+                    },
+                    "note": {
+                        "x": 450,
+                        "y": 930,
+                        "text": "MERGED. NOT LIVE.",
+                        "at": 0.7
+                    },
+                    "chair": {
+                        "x": 450,
+                        "y": 1460,
+                        "scale": 0.5
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 170,
+                        "y": 1460,
+                        "scale": 0.32,
+                        "n": 4,
+                        "arm": "hold"
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 730,
+                        "y": 1460,
+                        "scale": 0.32,
+                        "n": 2,
+                        "arm": "hold",
+                        "flip": true
+                    }
+                ]
+            },
+            "still": true,
+            "stillAt": 3.0
+        },
+        {
+            "id": "next",
+            "bg": "skyline",
+            "tag": "23:05: the old copy, again",
+            "props": {
+                "building": {
+                    "x": 1180,
+                    "y": 880,
+                    "scale": 0.75,
+                    "sign": "LATEST COPY"
+                },
+                "parcel": {
+                    "x": 1180,
+                    "y": 880,
+                    "scale": 0.45,
+                    "label": "FIX"
+                },
+                "bulldozer": {
+                    "x": 560,
+                    "y": 880,
+                    "scale": 0.8,
+                    "label": "REBASE"
+                }
+            },
+            "fx": [
+                "doze@0.3",
+                "continued@1.6"
+            ],
+            "sfx": [
+                "rumble@0.3",
+                "clunk@1.0",
+                "freeze@1.6"
+            ],
+            "focus": [
+                860,
+                560
+            ],
+            "v": {
+                "props": {
+                    "building": {
+                        "x": 520,
+                        "y": 1180,
+                        "scale": 0.7,
+                        "sign": "LATEST COPY"
+                    },
+                    "parcel": {
+                        "x": 520,
+                        "y": 1180,
+                        "scale": 0.4,
+                        "label": "FIX"
+                    },
+                    "bulldozer": {
+                        "x": 230,
+                        "y": 1450,
+                        "scale": 0.5,
+                        "label": "REBASE"
+                    }
+                }
+            }
+        }
+    ]
+}

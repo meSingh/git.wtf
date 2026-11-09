@@ -1,0 +1,105 @@
+---
+import { getCollection } from 'astro:content';
+import { existsSync } from 'node:fs';
+import path from 'node:path';
+import Base from '../../layouts/Base.astro';
+import '../../styles/pages.css';
+import { render } from 'astro:content';
+import ShareCut from '../../components/ShareCut.astro';
+import CutPlayer from '../../components/anime/CutPlayer.astro';
+import { cutAssets, shotList } from '../../lib/cuts';
+import { incidentJsonLd } from '../../lib/jsonld';
+import { SITE, sentences, categoryLabel, formatDate, formatDay, happened, href, incidentPath, inlineCode, sortIncidents, sourceHost, toolLabel, type Incident } from '../../lib/site';
+
+export async function getStaticPaths() {
+    const all = sortIncidents(await getCollection('incidents'));
+    return all.map((incident, i) => ({ params: { id: incident.id }, props: { incident, newer: all[i - 1] ?? null, older: all[i + 1] ?? null } }));
+}
+interface Props { incident: Incident; newer: Incident | null; older: Incident | null }
+const { incident, newer, older } = Astro.props;
+const d = incident.data;
+const { Content } = await render(incident);
+const tool = toolLabel(d.tool);
+// a cutscene, and what was rendered from it: its key shots stand in for the strip, its end card is the share image
+const list = shotList(incident.id);
+const cut = cutAssets(incident.id);
+const cutVideo = cut.video ? href(`/cuts/${incident.id}/${cut.video}`) : null;
+const olderCut = older ? cutAssets(older.id) : null;
+const p = incidentPath(incident);
+const localVideo = existsSync(path.join(process.cwd(), 'public/incident', incident.id, 'video.mp4'));
+const video = d.video ?? (localVideo ? href(`${p}video.mp4`) : null);
+const poster = d.poster ?? (localVideo && existsSync(path.join(process.cwd(), 'public/incident', incident.id, 'poster.jpg')) ? href(`${p}poster.jpg`) : href(`${p}share.png`));
+const vid = video ?? cutVideo;
+// the hero is the share image itself: the story image when the episode has one (webp, with a 2x copy), else share.png
+const heroSrc = cut.story ? href(`/cuts/${incident.id}/${cut.story}`) : href(`${p}share.png`);
+const heroSet = cut.story && cut.story2x ? `${heroSrc} 1200w, ${href(`/cuts/${incident.id}/${cut.story2x}`)} 2400w` : undefined;
+const heroAlt = `${d.title}: the picture that goes with it when it is shared`;
+// the summary search engines and AI answers get: the retelling's first two sentences, then the status
+const summary = `${d.summary ?? sentences(incident.body ?? '').slice(0, 2).join(' ')} Status: ${d.status}`.trim();
+const facts = d.facts ?? {};
+// the body brings its own section headings; an older single-paragraph write-up still gets one for screen readers
+const sectioned = /^##\s/m.test(incident.body ?? '');
+const jsonld = incidentJsonLd(p, d, { image: `${p}share.png`, video: vid ? { url: vid, poster } : null, summary });
+---
+<Base title={`${d.title} | git.wtf`} description={summary.length > 300 ? summary.slice(0, 297).trimEnd() + '...' : summary} image={`${p}share.png`} type="article" jsonld={jsonld}>
+    {list && (
+        <section class="inc-ep" aria-label={`The episode: ${d.title}`}>
+            <CutPlayer list={list} status={d.status} title={d.title} embed />
+            <nav class="inc-ep-bar" aria-label="Episodes">
+                <button type="button" class="ep-btn" data-replay>Replay</button>
+                <a href={href(`${p}cut/`)}>Full screen</a>
+                <a href="#retelling">What actually happened <span aria-hidden="true">&darr;</span></a>
+                <span class="inc-ep-nav">{older && shotList(older.id) && <a href={href(incidentPath(older))}>&larr; Older episode</a>}{newer && shotList(newer.id) && <a href={href(incidentPath(newer))}>Newer episode &rarr;</a>}</span>
+            </nav>
+        </section>
+    )}
+    <main class={list ? 'page page-after-ep' : 'page'}>
+        <header class="page-head inc-head">
+            <p class="meta"><a href={href('/incidents/')}>Incidents</a> <span>{formatDay(happened(incident))}</span> <a class="chip" href={href(`/incidents/${d.category}/`)}>{categoryLabel(d.category)}</a>{tool && <span class="chip">{tool}</span>}</p>
+            <h1>{d.title}</h1>
+            <p class="inc-verdict" set:html={`Status: ${inlineCode(d.status)}`} />
+        </header>
+        {!list && <figure class="inc-hero">
+            <img src={heroSrc} srcset={heroSet} sizes="(min-width: 1200px) 72rem, 100vw" width="1200" height="630" alt={heroAlt} fetchpriority="high" decoding="sync" />
+            {cutVideo && <figcaption><a href={cutVideo}>Or the video</a></figcaption>}
+        </figure>}
+        <div class="inc-read" id="retelling">
+            <aside class="inc-facts" aria-label="The facts">
+                <dl>
+                    <div><dt>When</dt><dd>{formatDate(happened(incident))}</dd></div>
+                    {facts.who && <div><dt>Who</dt><dd set:html={inlineCode(facts.who)} /></div>}
+                    {facts.broke && <div><dt>What broke</dt><dd set:html={inlineCode(facts.broke)} /></div>}
+                    {facts.saved && <div><dt>What was saved</dt><dd set:html={inlineCode(facts.saved)} /></div>}
+                    {facts.fix && <div><dt>The fix</dt><dd set:html={inlineCode(facts.fix)} /></div>}
+                    <div><dt>Source</dt><dd><a href={d.source_url} rel="noopener nofollow">{sourceHost(d.source_url)}</a>, {formatDate(d.source_date)}</dd></div>
+                </dl>
+            </aside>
+            <article class="prose inc-body">
+                {!sectioned && <h2 class="visually-hidden">What happened</h2>}
+                <Content />
+                {video && (
+                    <p class="video"><video src={video} poster={poster} controls muted playsinline preload="none" width="1080" height="1920">Your browser does not play this video. <a href={video}>Download it.</a></video></p>
+                )}
+            </article>
+        </div>
+        {cut.stills.length > 0 && (
+            <section class="inc-stills" aria-labelledby="stills-h">
+                <h2 id="stills-h" class="inc-sub">From the cut</h2>
+                <div class="stills">
+                    {cut.stills.map((s) => <a href={href(`${p}cut/`)}><img src={href(`/cuts/${incident.id}/${s.file}`)} alt={`From the cut: ${list?.shots.find((x) => x.id === s.shot)?.line?.text ?? list?.shots.find((x) => x.id === s.shot)?.word ?? d.title}`} width="1280" height="720" loading="lazy" decoding="async" /></a>)}
+                </div>
+            </section>
+        )}
+        <ShareCut title={d.title} status={d.status} url={new URL(p, SITE.url).toString()} image={href(`${p}share.png`)} video={cutVideo} slug={incident.id} picture={false} />
+        {older && (
+            <a class="prev-day" href={href(incidentPath(older))}>
+                <span class="pd-label">The day before <span class="pd-date">{formatDay(happened(older))}</span></span>
+                <img src={href(`${incidentPath(older)}share.png`)} alt="" width="1200" height="630" loading="lazy" decoding="async" />
+                <span class="pd-title">{older.data.title}</span>
+                <span class="pd-status" set:html={`Status: ${inlineCode(older.data.status)}`} />
+                <span class="pd-go">{olderCut?.stills.length ? 'Watch it' : 'Read it'} <span aria-hidden="true">&rarr;</span></span>
+            </a>
+        )}
+        {newer && <p class="next-day"><a href={href(incidentPath(newer))}>The day after: {newer.data.title} &rarr;</a></p>}
+    </main>
+</Base>

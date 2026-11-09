@@ -1,0 +1,24 @@
+---
+import { confessionCount, confessIssueUrl, confessMailto } from '../lib/confessions';
+import { href } from '../lib/site';
+const n = await confessionCount();
+// the description is Content's (notes/content/homepage-v7-copy.md); the image is Video's (public/img/confess.webp, with a 2x copy)
+---
+<div class="confess col">
+    <div class="beat-head"><h2 id="confess-h" data-lock>Confess</h2>{n !== null && <span class="count">{n === 0 ? 'none yet, be the first' : `${n} received so far`}</span>}</div>
+    <div class="confess-in">
+        <div class="confess-text">
+            <p class="desc">Yours or your agent's. We count them all.</p>
+            <p class="desc desc-2">The good ones become episodes. Names left out, fuck-up left in.</p>
+            <p class="ask">Have a fuck-up? Confess it.</p>
+            <p class="ways">
+                <a class="big" href={confessIssueUrl} rel="noopener">Open a confession on GitHub</a>
+                {confessMailto && <a class="mail" href={confessMailto}>or send it to the daily search</a>}
+            </p>
+            <p class="how">What you ran, what happened, a link if there is one. It's public, so leave out keys and names.</p>
+        </div>
+        <figure class="confess-pic">
+            <img src={href('/img/confess.webp')} srcset={`${href('/img/confess.webp')} 1200w, ${href('/img/confess@2x.webp')} 2400w`} sizes="(min-width: 761px) min(32rem, 45vw), 100vw" width="1200" height="630" alt="DEV sits in a confession booth holding his mug and looking at the floor; on the other side of a glowing grille the small grey helper listens beside a stack of pages, and an agent with a broom waits nervously outside." loading="lazy" decoding="async" />
+        </figure>
+    </div>
+</div>

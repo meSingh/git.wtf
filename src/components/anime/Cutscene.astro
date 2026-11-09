@@ -1,0 +1,392 @@
+---
+// The anime cutscene: every shot of a shot list drawn in its own group, one shown at a time by
+// src/scripts/anime.ts. Two frames: 9:16 (900 x 1600, the phone, Reels, Shorts and TikTok first) and 16:9
+// (1600 x 900, the website and link posts). The tall frame is staged, not cropped: a shot's `v` block gives its own
+// cast, props, ground and camera moves; without one, a layout rule places the wide staging.
+// Tall safe box (Video, checked against Reels, Shorts and TikTok): everything to be read inside x 54 to 740,
+// y 240 to 1040. Impact words, the title and the stamp sit in y 400 to 900; spoken lines in two rows in y 860 to 1030.
+import type { CastIn, Props as Kit, Shot, ShotList } from '../../anime/types';
+import Agent from './Agent.astro';
+import Mascot, { type MascotPose } from './Mascot.astro';
+interface Props { list: ShotList; status: string; frame?: '16:9' | '9:16' }
+const { list, status, frame = '16:9' } = Astro.props;
+const V = frame === '9:16';
+const W = V ? 900 : 1600, H = V ? 1600 : 900;
+const CX = W / 2, CY = H / 2;
+// the column words may use in the tall frame (the buttons sit right of 780)
+const TX0 = 50, TX1 = 780, TW = TX1 - TX0, TXC = (TX0 + TX1) / 2;
+
+// the stamp: two rows at the first full stop or comma
+const st = status.replace(/`/g, '');
+const brk = st.search(/[.,] /);
+const stamp = brk > 0 && st.length > 20 ? [st.slice(0, brk + 1), st.slice(brk + 2).trim()] : [st];
+
+// the layout rule for shots with no tall staging of their own
+const mx = (x: number) => (V ? Math.round(450 + (x - 800) * 0.55) : x);
+const DY = 220;
+const my = (y: number) => (V ? y + DY : y);
+const ms = (s = 1) => (V ? +(s * 0.82).toFixed(3) : s);
+const castOf = (s: Shot): CastIn[] => (V && s.v?.cast ? s.v.cast : (s.cast ?? []).map((c) => (V ? { ...c, x: mx(c.x), y: my(c.y), scale: ms(c.scale) } : c)));
+const propsOf = (s: Shot): Kit => {
+    if (!V) return s.props ?? {};
+    if (s.v?.props) return s.v.props;
+    const out: Record<string, unknown> = {};
+    Object.entries(s.props ?? {}).forEach(([k, v]) => {
+        const o = v as { x?: number; y?: number; scale?: number };
+        out[k] = o && typeof o === 'object' && typeof o.x === 'number' ? { ...o, x: mx(o.x), y: my(o.y!), scale: ms(o.scale) } : v;
+    });
+    return out as Kit;
+};
+const fxOf = (s: Shot) => (V && s.v?.fx ? s.v.fx : s.fx ?? []);
+const bgOf = (s: Shot) => { const b = (V && s.v?.bg) || s.bg || 'black'; return b === 'stack3' ? 'split' : b; };
+const has = (fx: string[], ...names: string[]) => fx.some((f) => names.includes(f.split('@')[0]));
+
+// DEV is the mascot: the shot list's poses and arms, in the mascot's poses
+const mp = (pose?: string, arm?: string): MascotPose =>
+    pose === 'terror' ? 'terror' : pose === 'angry' ? 'angry' : pose === 'relieved' ? 'relieved' : pose === 'asleep' ? 'asleep' : pose === 'walk' ? 'walk' : pose === 'enter' ? 'enter' : pose === 'shocked' ? 'shock' : pose === 'defeated' ? 'relief' : arm === 'type' ? 'type' : 'neutral';
+
+// concentration lines: thin wedges from the frame's middle out
+const wedges = Array.from({ length: 72 }, (_, i) => {
+    const a = (i / 72) * Math.PI * 2 + (i % 3) * 0.01;
+    const w = 0.012 + (i % 5) * 0.004;
+    const r0 = 260 + (i % 4) * 60, r1 = 2000;
+    const p = (r: number, d: number) => `${(CX + Math.cos(a + d) * r).toFixed(0)} ${(CY + Math.sin(a + d) * r).toFixed(0)}`;
+    return `M${p(r0, 0)} L${p(r1, -w)} L${p(r1, w)}Z`;
+});
+// falling streaks, for a drop down the tall frame
+const streaks = Array.from({ length: 40 }, (_, i) => `M${(i * 173) % 1000 - 50} ${(i * 397) % 1900 - 300} l0 ${160 + (i % 4) * 80}`);
+const rainLines = Array.from({ length: 110 }, (_, i) => { const x = (i * 211) % 2400 - 400, y = (i * 137) % 2000 - 300; return `M${x} ${y} l-14 70`; });
+const files = Array.from({ length: 40 }, (_, i) => i);
+// three panels: bands across the wide frame, stacked down the tall one
+const panels = V
+    ? { paths: ['M-400 -400 L1400 -400 L1400 360 L-400 500Z', 'M-400 540 L1400 400 L1400 1080 L-400 1220Z', 'M-400 1260 L1400 1120 L1400 2200 L-400 2200Z'], centre: [[450, 250], [450, 700], [450, 1400]], gutters: 'M-400 520 L1400 380 M-400 1240 L1400 1100' }
+    : { paths: ['M-400 -200 L2000 -200 L2000 170 L-400 330Z', 'M-400 350 L2000 190 L2000 520 L-400 680Z', 'M-400 700 L2000 540 L2000 1100 L-400 1100Z'], centre: [[560, 120], [1040, 440], [1240, 770]], gutters: 'M-400 340 L2000 180 M-400 690 L2000 530' };
+// scattered pages inside the folder, and soaked ones in puddles, placed the same every time
+const scatter = Array.from({ length: 14 }, (_, k) => ({ x: Math.round(80 + (((k + 1) * 0.7548776) % 1) * (W - 160)), y: Math.round(100 + (((k + 1) * 0.5698403) % 1) * (H - 200)), r: ((k * 47) % 70) - 35 }));
+const puddles = Array.from({ length: 5 }, (_, k) => V ? { x: 120 + k * 170, y: 1330 + (k % 2) * 90 } : { x: 160 + k * 320, y: 830 + (k % 2) * 40 });
+
+// text: where words, lines, cards and the stamp sit in each frame
+const fit = (len: number, per: number, room: number) => Math.min(1, room / (len * per));
+const word = V ? { x: TXC, y: 690, rot: -6, room: TW - 40 } : { x: 800, y: 210, rot: -7, room: 1500 };
+// tall lines are set large (68 px, two rows of up to 22 characters filling the column) and sit inside Video's safe
+// box (x 54 to 740, y 240 to 1040): the bottom band below is where Reels, Shorts and TikTok draw captions; wide at 46 px
+const line = V ? { x: TXC, who: 862, rows: [944, 1014], one: 980, whoOne: 898, per: 37, room: TW - 20 } : { x: 800, who: 742, rows: [800, 858], one: 864, whoOne: 806, per: 25, room: 1500 };
+const tbc = V ? { x: 60, y: 500, k: 0.9 } : { x: 120, y: 840, k: 1 };
+const stampAt = V ? { x: TXC, y: 690, k: Math.min(1, (TW - 60) / 980) } : { x: 800, y: 600, k: 1 };
+// the title: one row and a band on the wide card, three stacked rows on the tall one
+const tw = list.title.toUpperCase().split(' ');
+const titleRows = [list.episode.toUpperCase(), tw.slice(0, -1).join(' '), tw.at(-1)!].filter(Boolean);
+// v3 (Mandeep, 8 Nov 2026): each episode has its own palette, so the rooms differ from one to the next
+const THEMES: Record<string, Record<string, string>> = {
+    midnight: { wall: '#1b1d24', floor: '#121318', desk: '#3a3936', sky: '#2b3140', sky2: '#0c0d12', paper: '#e6cf7a', accent: '#ffd400', leaf: '#3f8f5a' },
+    teal: { wall: '#143a36', floor: '#0c2422', desk: '#6b4a2f', sky: '#2a7f75', sky2: '#f2b36b', paper: '#f3dfa6', accent: '#ff8a3d', leaf: '#59b36b' },
+    plum: { wall: '#2c1a35', floor: '#1a0f20', desk: '#4e3a57', sky: '#5a3a7a', sky2: '#ff8fa3', paper: '#f6cbd8', accent: '#ff5c8a', leaf: '#6fbf73' },
+    rust: { wall: '#3b2116', floor: '#24130c', desk: '#6a4632', sky: '#d0632f', sky2: '#ffd18a', paper: '#f4d58d', accent: '#ffb000', leaf: '#7aa84a' },
+    mint: { wall: '#24423a', floor: '#162a24', desk: '#7a5c40', sky: '#8fd3c1', sky2: '#fff1b8', paper: '#fff3c4', accent: '#3ee0a0', leaf: '#2fa36b' },
+    cobalt: { wall: '#14244f', floor: '#0b1633', desk: '#34446b', sky: '#3767d6', sky2: '#9fd0ff', paper: '#e9e1c8', accent: '#5fb8ff', leaf: '#4caf6e' },
+    olive: { wall: '#2f3220', floor: '#1d1f13', desk: '#5d5536', sky: '#8a9a3a', sky2: '#f0e08a', paper: '#efe3b0', accent: '#c8e04a', leaf: '#5f9e3a' },
+};
+const theme = THEMES[list.theme ?? 'midnight'] ?? THEMES.midnight;
+const themeStyle = Object.entries(theme).map(([k, v]) => `--a-${k}:${v}`).join(';');
+// the hook: shorts-style caption rows at the top, *starred* words in yellow
+const hookAt = V ? { x: TXC, y: 300, gap: 92, size: 74, per: 40, room: TW - 10 } : { x: 800, y: 120, gap: 82, size: 66, per: 36, room: 1400 };
+const hookRows = (t: string) => t.split('\n').map((r) => r.split(/(\*[^*]+\*)/).filter(Boolean).map((p) => ({ t: p.replace(/\*/g, ''), hi: p.startsWith('*') })));
+const tagAt = V ? { x: 70, y: 260 } : { x: 60, y: 140 };
+// a command on a monitor, in rows of up to 22 characters
+const termRows = (t: string) => t.split(' ').reduce<string[]>((rows, w) => { const last = rows.at(-1); if (last !== undefined && (last + ' ' + w).length <= 22) rows[rows.length - 1] = last + ' ' + w; else rows.push(w); return rows; }, []);
+// servers: racks across the back wall, each with a column of lights
+const racks = V ? [120, 330, 570, 780].map((x) => ({ x, y: 420, h: 720 })) : [110, 330, 550, 1050, 1270, 1490].map((x) => ({ x, y: 120, h: 600 }));
+// the skyline: blocks of building along the bottom of the sky, a few windows lit
+const blocks = Array.from({ length: V ? 9 : 14 }, (_, k) => { const w = 90 + ((k * 53) % 70); const x = -40 + k * (V ? 110 : 125); const h = 200 + ((k * 137) % 260); return { x, w, h }; });
+const skyBase = V ? 1150 : 700;
+const lineRows = (t: string) => t.split('\n');
+const longest = (rows: string[]) => Math.max(...rows.map((r) => r.length));
+---
+<svg class="cutscene" style={themeStyle} data-theme={list.theme ?? 'midnight'} data-frame={frame} data-centre={`${CX} ${CY}`} viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet" role="img" aria-label={`${list.episode}: ${list.title}. An anime cutscene. Status: ${st}`} data-list={JSON.stringify(list)}>
+    <defs>
+        <pattern id="a-hazard" width="24" height="24" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="12" height="24" fill="#ffd400" /><rect x="12" width="12" height="24" fill="#0a0a0a" /></pattern>
+        <filter id="a-glow" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation="9" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+        <radialGradient id="a-pool" cx="50%" cy="0%" r="100%"><stop offset="0" stop-color="#ffd400" stop-opacity="0.32" /><stop offset="1" stop-color="#ffd400" stop-opacity="0" /></radialGradient>
+        {panels.paths.map((d, i) => <clipPath id={`a-panel-${i}`}><path d={d} /></clipPath>)}
+        <pattern id="a-grid" width="80" height="80" patternUnits="userSpaceOnUse"><path d="M80 0 L0 0 L0 80" fill="none" stroke="#9cc3ff" stroke-opacity="0.35" stroke-width="3" /><path d="M40 0 L40 80 M0 40 L80 40" fill="none" stroke="#9cc3ff" stroke-opacity="0.15" stroke-width="2" /></pattern>
+        <pattern id="a-dots" width="36" height="36" patternUnits="userSpaceOnUse" patternTransform="rotate(20)"><circle cx="18" cy="18" r="9" fill="#0a0a0a" fill-opacity="0.22" /></pattern>
+        <linearGradient id="a-dusk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--a-sky)" /><stop offset="1" stop-color="var(--a-sky2)" /></linearGradient>
+    </defs>
+    <rect class="ground" x="-2000" y="-2000" width="5600" height="6000" />
+    {list.shots.map((s, si) => {
+        const fx = fxOf(s), bg = bgOf(s), P = propsOf(s), cast = castOf(s);
+        const front = cast.some((c) => c.who === 'dev' && (c.arm === 'type' || c.pose === 'asleep'));
+        const focus = V ? [CX, CY] : s.focus ?? [800, 450];
+        const desk = P.desk && (
+            <g class="desk" transform={`translate(${P.desk.x} ${P.desk.y}) scale(${P.desk.scale ?? 1})`}>
+                {!P.desk.open && <rect class="front" x="-214" y="0" width="428" height="120" />}
+                <rect x="-230" y="-30" width="460" height="34" rx="4" /><rect x="-210" y="4" width="18" height="140" /><rect x="192" y="4" width="18" height="140" />
+                {P.desk.laptop && <g class="laptop" transform={`translate(${P.desk.laptop.x} -30)`}><path class="lid" d="M-70 -4 L-62 -96 L78 -96 L70 -4Z" /><rect class="screen" x="-56" y="-88" width="124" height="76" /><rect class="base" x="-90" y="-10" width="170" height="12" rx="3" /></g>}
+            </g>
+        );
+        const chair = P.chair && <g class="chair" transform={`translate(${P.chair.x} ${P.chair.y}) scale(${P.chair.scale ?? 1})`}><rect class="back" x="-120" y="-470" width="240" height="320" rx="18" /><rect class="post" x="-14" y="-160" width="28" height="160" /></g>;
+        const fromAt = P.box ? `${P.box.x} ${P.box.y}` : P.folder ? `${P.folder.x} ${P.folder.y - 60 * (P.folder.scale ?? 1)}` : `${CX} ${CY}`;
+        return (
+            <g class={`shot bg-${bg}`} data-shot={s.id} data-i={si} data-focus={focus.join(' ')} data-fx={JSON.stringify(fx)} style="display:none">
+                <rect class="bg" x="-2000" y="-2000" width="5600" height="6000" />
+                {(bg === 'speedlines' || has(fx, 'speedlines', 'extralines', 'speedlinesdown')) && bg !== 'split' && <g class="lines">{wedges.map((d) => <path d={d} />)}</g>}
+                {has(fx, 'speedlinesdown', 'fall') && <g class="streaks">{streaks.map((d) => <path d={d} />)}</g>}
+                <g class="cam">
+                    {bg === 'office' && (
+                        <g class="g-office">
+                            <rect class="wains" x="-2000" y={V ? 1060 : 560} width="5600" height="40" />
+                            <g class="blinds" transform={V ? 'translate(560 520)' : 'translate(1180 300)'}><rect class="pane" x="-200" y="-190" width="400" height="380" />{Array.from({ length: 11 }, (_, k) => <rect class="slat" x="-200" y={-190 + k * 34} width="400" height="20" />)}<path class="sill" d="M-220 196 L220 196" /><path class="cordl" d="M170 -190 L170 120" /></g>
+                        </g>
+                    )}
+                    {bg === 'servers' && (
+                        <g class="g-servers">
+                            {racks.map((r, k) => (
+                                <g class="rack" transform={`translate(${r.x} ${r.y})`}>
+                                    <rect class="body" x="-95" y="0" width="190" height={r.h} rx="6" />
+                                    {Array.from({ length: Math.floor(r.h / 60) }, (_, j) => <g transform={`translate(0 ${24 + j * 60})`}><rect class="unit" x="-80" y="0" width="160" height="44" rx="3" /><circle class={`led led-${(j + k) % 3}`} cx="54" cy="22" r="7" /><circle class={`led led-${(j + k + 1) % 3}`} cx="34" cy="22" r="7" /><path class="vent" d="M-66 14 h60 M-66 30 h60" /></g>)}
+                                </g>
+                            ))}
+                        </g>
+                    )}
+                    {bg === 'skyline' && (
+                        <g class="g-skyline">
+                            <rect x="-2000" y="-2000" width="5600" height={2000 + skyBase + 400} fill="url(#a-dusk)" />
+                            <circle class="moon" cx={V ? 680 : 1300} cy={V ? 420 : 180} r={V ? 70 : 60} />
+                            {blocks.map((b, k) => <g><rect class="bldg" x={b.x} y={skyBase - b.h} width={b.w} height={b.h + 600} />{Array.from({ length: 6 }, (_, j) => (j + k) % 3 === 0 && <rect class="win" x={b.x + 18 + (j % 2) * 34} y={skyBase - b.h + 30 + Math.floor(j / 2) * 52} width="20" height="28" />)}</g>)}
+                            <rect class="ledge" x="-2000" y={skyBase + 60} width="5600" height="2000" />
+                        </g>
+                    )}
+                    {bg === 'blueprint' && <rect x="-2000" y="-2000" width="5600" height="6000" fill="url(#a-grid)" />}
+                    {bg === 'halftone' && <rect x="-2000" y="-2000" width="5600" height="6000" fill="url(#a-dots)" />}
+                    {bg === 'sunburst' && <g class="g-burst">{Array.from({ length: 24 }, (_, k) => { const a0 = (k / 24) * Math.PI * 2, a1 = ((k + 0.5) / 24) * Math.PI * 2; return <path d={`M${CX} ${CY} L${(CX + Math.cos(a0) * 2600).toFixed(0)} ${(CY + Math.sin(a0) * 2600).toFixed(0)} L${(CX + Math.cos(a1) * 2600).toFixed(0)} ${(CY + Math.sin(a1) * 2600).toFixed(0)}Z`} />; })}</g>}
+                    {(bg === 'room' || bg === 'night' || bg === 'office' || bg === 'servers' || (bg === 'flat' && P.desk)) && <rect class="floor" x="-2000" y={P.door ? P.door.y : P.desk ? P.desk.y + 144 : H - 60} width="5600" height="3000" />}
+                    {bg === 'paper' && <g class="folds"><path d={V ? 'M-100 520 L1000 470 M-100 1120 L1000 1080' : 'M-100 300 L1700 260 M-100 640 L1700 610'} /></g>}
+                    {P.skylight && <g class="skylight" transform={`translate(${P.skylight.x} ${P.skylight.y})`}><path class="sky" d="M-170 -60 L170 -60 L220 60 L-220 60Z" /><path class="bars" d="M-170 -60 L170 -60 L220 60 L-220 60Z M0 -60 L0 60" /><circle class="star" cx="-80" cy="-20" r="5" /><circle class="star" cx="90" cy="10" r="4" /></g>}
+                    {P.farwindow && (
+                        <g class="farwindow" transform={`translate(${P.farwindow.x} ${P.farwindow.y}) scale(${P.farwindow.scale ?? 1})`}>
+                            <rect class="wall" x="-330" y="-260" width="660" height="520" />
+                            <rect class="lit" x="-220" y="-170" width="440" height="320" />
+                            <rect class="fdesk" x="-170" y="90" width="340" height="22" />
+                            <g class="ffolder" transform="translate(0 40)"><path class="tab" d="M-110 -70 L60 -70 L80 -52 L110 -52 L110 -40 L-110 -40Z" /><rect class="body" x="-110" y="-44" width="220" height="92" rx="8" /><text x="-2" y="18">{P.farwindow.folder ?? ''}</text></g>
+                            <path class="bars" d="M-220 -170 L220 -170 L220 150 L-220 150Z M0 -170 L0 150 M-220 -10 L220 -10" />
+                            <g class="spark" style="visibility:hidden" transform="translate(70 0)"><path d="M0 -70 L12 -12 L70 0 L12 12 L0 70 L-12 12 L-70 0 L-12 -12Z" /></g>
+                        </g>
+                    )}
+                    {P.window && <g class="window" transform={`translate(${P.window.x} ${P.window.y}) scale(${P.window.scale ?? 1})`}><rect class="sky" x="-150" y="-120" width="300" height="240" /><path class="bars" d="M-150 -120 L150 -120 L150 120 L-150 120Z M0 -120 L0 120 M-150 0 L150 0" /></g>}
+                    {P.clock && <g class="clock" transform={`translate(${P.clock.x} ${P.clock.y}) scale(${P.clock.scale ?? 1})`}><circle class="face" r="90" />{Array.from({ length: 12 }, (_, k) => <path class="tick" transform={`rotate(${k * 30})`} d="M0 -78 L0 -62" />)}<path class="hh" d="M0 8 L0 -44" /><path class="mh" d="M0 10 L0 -70" /><circle class="pin" r="9" /></g>}
+                    {P.poster && <g class="poster" transform={`translate(${P.poster.x} ${P.poster.y}) scale(${P.poster.scale ?? 1})`}><rect class="frame" x="-110" y="-150" width="220" height="300" /><rect class="art" x="-90" y="-130" width="180" height="260" /><text x="0" y="22" transform="rotate(-8)">{P.poster.text ?? 'SHIP IT'}</text></g>}
+                    {P.whiteboard && <g class="whiteboard" transform={`translate(${P.whiteboard.x} ${P.whiteboard.y}) scale(${P.whiteboard.scale ?? 1})`}><rect class="board" x="-300" y="-190" width="600" height="380" rx="8" /><rect class="tray" x="-220" y="190" width="440" height="16" />{(P.whiteboard.text ?? '').split('\n').map((t, k) => <text x="-260" y={-100 + k * 90}>{t}</text>)}</g>}
+                    {P.building && (
+                        <g class="building" transform={`translate(${P.building.x} ${P.building.y}) scale(${P.building.scale ?? 1})`} data-shut={P.building.shut ? 1 : 0}>
+                            <path class="roof" d="M-350 -420 L0 -560 L350 -420Z" />
+                            <rect class="wallb" x="-310" y="-420" width="620" height="420" />
+                            <rect class="col" x="-290" y="-400" width="44" height="400" /><rect class="col" x="246" y="-400" width="44" height="400" />
+                            <rect class="signb" x="-200" y="-400" width="400" height="84" rx="6" /><text x="0" y="-342">{P.building.sign ?? 'POST OFFICE'}</text>
+                            <rect class="opening" x="-170" y="-280" width="340" height="280" />
+                            <g class="shutter"><rect x="-170" y="-280" width="340" height="280" />{Array.from({ length: 9 }, (_, k) => <path d={`M-170 ${-280 + (k + 1) * 30} L170 ${-280 + (k + 1) * 30}`} />)}</g>
+                            <rect class="step" x="-220" y="0" width="440" height="24" />
+                        </g>
+                    )}
+                    {P.lamp && (
+                        <g class="lamp" transform={`translate(${P.lamp.x} ${P.lamp.y}) scale(${P.lamp.scale ?? 1})`}>
+                            <path class="cone" d={`M-60 30 L60 30 L${V ? 360 : 560} ${V ? 900 : 720} L${V ? -360 : -560} ${V ? 900 : 720}Z`} fill="url(#a-pool)" />
+                            <path class="cord" d="M0 -600 L0 -40" />
+                            <path class="shade" d="M-30 -50 L30 -50 L70 30 L-70 30Z" />
+                            <circle class="bulb" cx="0" cy="34" r="16" />
+                        </g>
+                    )}
+                    {P.door && (
+                        <g class="door" transform={`translate(${P.door.x} ${P.door.y}) scale(${P.door.scale ?? 1})`} data-start={has(fx, 'enter') ? 'closed' : 'open'}>
+                            <rect class="dark" x="-130" y="-480" width="260" height="480" />
+                            <rect class="leaf" x="-130" y="-480" width="260" height="480" />
+                            <circle class="knob" cx="90" cy="-240" r="12" />
+                            <path class="jamb" d="M-142 4 L-142 -492 L142 -492 L142 4" />
+                        </g>
+                    )}
+                    {P.footprints && (() => { const [x0, y0] = P.footprints.from, [x1, y1] = P.footprints.to; const n = 7; return (
+                        <g class="footprints">{Array.from({ length: n }, (_, k) => { const t = (k + 0.5) / n; const x = x0 + (x1 - x0) * t, y = y0 + (y1 - y0) * t; const a = (Math.atan2(y1 - y0, x1 - x0) * 180) / Math.PI; const side = k % 2 ? 14 : -14; return <ellipse data-k={k} cx={x} cy={y + side * 0.6} rx="22" ry="11" transform={`rotate(${a} ${x} ${y})`} />; })}</g>
+                    ); })()}
+                    {P.copier && <g class="copier" transform={`translate(${P.copier.x} ${P.copier.y}) scale(${P.copier.scale ?? 1})`}><rect class="box" x="-70" y="-150" width="140" height="150" rx="8" /><rect class="lid" x="-78" y="-168" width="156" height="22" rx="4" /><rect class="beam" x="-60" y="-140" width="120" height="10" /></g>}
+                    {P.pages?.scatter && <g class="scatter">{scatter.map((p) => <g transform={`translate(${p.x} ${p.y}) rotate(${p.r})`}><rect x="-60" y="-76" width="120" height="152" rx="5" /><path d="M-36 -44 h72 M-36 -20 h72 M-36 4 h50" /><circle class="ring" cx="20" cy="40" r="22" /></g>)}</g>}
+                    {P.pages?.puddles && <g class="puddles">{puddles.map((p, k) => <g transform={`translate(${p.x} ${p.y})`}><ellipse class="pool" rx="130" ry="26" /><g transform={`rotate(${(k % 2 ? 8 : -6)}) skewX(-30) scale(1 0.4)`}><rect class="soaked" x="-50" y="-70" width="100" height="130" rx="4" /><circle class="ring" cx="16" cy="30" r="20" /></g></g>)}</g>}
+                    {s.props?.rain && <g class="rain">{rainLines.map((d) => <path d={d} />)}</g>}
+                    {bg === 'split' && (s.panels ?? []).map((c, i) => (
+                        <g class="panel" clip-path={`url(#a-panel-${i})`}>
+                            <rect class="pbg" x="-400" y="-400" width="2400" height="2800" />
+                            <g class="plines" transform={`translate(${panels.centre[i][0] - CX} ${panels.centre[i][1] - CY})`}>{wedges.map((d) => <path d={d} />)}</g>
+                            <g transform={`translate(${panels.centre[i][0]} ${panels.centre[i][1] + 404}) scale(${i === 1 ? -1 : 1} 1)`}><Agent pose={c.pose} n={c.n} head /></g>
+                        </g>
+                    ))}
+                    {bg === 'split' && <path class="gutters" d={panels.gutters} />}
+                    {chair}
+                    {!front && desk}
+                    <g class={has(fx, 'ringspin') ? 'ring' : 'crowd'}>
+                        {cast.filter((c) => !(has(fx, 'ringspin') && c.who === 'dev')).map((c) => (
+                            <g class="place" transform={`translate(${c.x} ${c.y}) scale(${(c.flip ? -1 : 1) * (c.scale ?? 1)} ${c.scale ?? 1})`}>
+                                <g class="fig" data-who={c.who} data-role={c.role} data-n={c.n} data-x={c.x} data-y={c.y}>
+                                    {c.who === 'dev' ? (
+                                        <>
+                                            <g class="v-init"><Mascot pose={mp(c.pose, c.arm)} mug={c.mug !== false} /></g>
+                                            {c.turn && <g class="v-turn" style="display:none"><Mascot pose={mp(c.turn)} mug={c.mug !== false} /></g>}
+                                            {has(fx, 'angry') && <g class="v-angry" style="display:none"><Mascot pose="angry" mug={c.mug !== false} /></g>}
+                                        </>
+                                    ) : (
+                                        <Agent pose={c.pose} n={c.n} extra={c.extra} silhouette={c.silhouette} arm={c.arm} turn={c.turn} wet={c.wet} />
+                                    )}
+                                </g>
+                            </g>
+                        ))}
+                    </g>
+                    {has(fx, 'ringspin') && cast.filter((c) => c.who === 'dev').map((c) => <g class="place" transform={`translate(${c.x} ${c.y}) scale(${c.scale ?? 1})`}><g class="fig" data-who="dev" data-role={c.role}><g class="v-init"><Mascot pose={mp(c.pose, c.arm)} mug={c.mug !== false} /></g></g></g>)}
+                    {front && desk}
+                    {P.folder && (
+                        <g class={`folder${P.folder.empty ? ' empty' : ''}`} transform={`translate(${P.folder.x} ${P.folder.y}) scale(${P.folder.scale ?? 1})`}>
+                            <g class="f-in">
+                                <path class="tab" d="M-190 -170 L150 -170 L184 -118 L190 -118 L190 -96 L-190 -96Z" />
+                                <rect class="body" x="-200" y="-112" width="400" height="260" rx="16" />
+                                {P.folder.empty && <rect class="hollow" x="-170" y="-80" width="340" height="196" rx="10" />}
+                                {P.folder.label && <text class="label" x="-20" y="-124">{P.folder.label}</text>}
+                            </g>
+                        </g>
+                    )}
+                    {P.pages && !P.pages.scatter && !P.pages.puddles && P.pages.x !== undefined && (
+                        <g class="pile" transform={`translate(${P.pages.x} ${P.pages.y}) scale(${P.pages.scale ?? 1})`} data-grow={P.pages.grow ? 1 : 0}>
+                            {[0, 1, 2, 3, 4, 5].map((k) => <g class="sheet" data-k={k} transform={`translate(${(k % 2) * 6} ${-k * 18})`}><path d="M-90 0 L60 0 L96 -46 L-54 -46Z" /><ellipse class="ring" cx="8" cy="-24" rx="26" ry="11" /></g>)}
+                            <g class="pmug" transform="translate(40 -150)"><path class="cup" d="M-26 -30 L30 -30 L26 30 L-22 30Z" /><path class="handle" d="M30 -14 C52 -14 52 16 28 16" /></g>
+                        </g>
+                    )}
+                    {P.paper && <g class="paper1" transform={`translate(${P.paper.x} ${P.paper.y})`}><g class="p-in"><rect x="-30" y="-38" width="60" height="76" rx="4" /><path d="M-16 -18 h32 M-16 -4 h32 M-16 10 h22" />{P.paper.ring && <circle class="ring" cx="8" cy="18" r="13" />}</g></g>}
+                    {P.stack && (
+                        <g class="stack" transform={`translate(${P.stack.x} ${P.stack.y}) scale(${P.stack.scale ?? 1})`} data-to={P.stack.to?.join(' ')} data-grow={P.stack.grow?.join(' ')}>
+                            <g class="s-in">
+                                {Array.from({ length: Math.round((P.stack.grow?.[1] ?? 180) / 22) }, (_, k) => <rect class="slab" data-k={k} x={-90 + (k % 2) * 6} y={-24 - k * 22} width="180" height="22" rx="3" />)}
+                                {P.stack.ring && <g class="top" transform={`translate(0 ${-24 - (Math.round((P.stack.grow?.[1] ?? 180) / 22) - 1) * 22})`}><path d="M-90 0 L60 0 L96 -40 L-54 -40Z" /><ellipse class="ring" cx="6" cy="-20" rx="24" ry="10" /></g>}
+                            </g>
+                        </g>
+                    )}
+                    {P.box && (
+                        <g class="box" transform={`translate(${P.box.x} ${P.box.y}) scale(${P.box.scale ?? 1})`}><g class="b-in">
+                            <rect class="crate" x="-120" y="-90" width="240" height="180" rx="10" />
+                            <g class="buoy"><circle r="58" /><path class="bands" d="M-58 0 A58 58 0 0 1 0 -58 M58 0 A58 58 0 0 1 0 58" /><circle class="hole" r="26" /></g>
+                            <path class="pages" d="M-96 -90 L-80 -128 L80 -128 L96 -90" />
+                        </g></g>
+                    )}
+                    {P.mug && (
+                        <g class="pmugfall" transform={`translate(${P.mug.x} ${P.mug.y}) scale(${P.mug.scale ?? 1.6})`}>
+                            <g class="mg"><path class="cup" d="M-32 -38 L38 -38 L34 36 L-28 36Z" /><path class="handle" d="M38 -18 C64 -18 64 20 36 20" /><ellipse class="coffee" cx="3" cy="-38" rx="35" ry="8" /></g>
+                            <g class="shards" style="visibility:hidden">{[[-70, -20, -30], [60, -34, 40], [-20, -60, 10], [90, 6, 70], [-96, 10, -60]].map(([x, y, r]) => <path transform={`translate(${x} ${y}) rotate(${r})`} d="M-18 -10 L20 -14 L10 14Z" />)}<ellipse class="spill" cx="0" cy="20" rx="120" ry="20" /></g>
+                        </g>
+                    )}
+                    {P.gate && (
+                        <g class="gate" transform={`translate(${P.gate.x} ${P.gate.y}) scale(${P.gate.scale ?? 1})`} data-at={P.gate.at ?? ''}>
+                            <g class="g-in">
+                                <rect class="post" x="-200" y="-300" width="30" height="400" />
+                                <g class="arm"><rect class="bar" x="-200" y="-290" width={V ? 400 : 560} height="34" fill="url(#a-hazard)" />
+                                    <g class="sign" transform={`translate(${V ? 0 : 80} -238)`}><rect x="-170" y="0" width="340" height="96" rx="6" /><text x="0" y="66">{P.gate.sign}</text></g>
+                                </g>
+                                <circle class="hinge" cx="-185" cy="-273" r="18" />
+                                {P.gate.tally && <g class="tally" transform="translate(-196 -135)">{Array.from({ length: 20 }, (_, k) => { const gx = Math.floor(k / 5) * 40, j = k % 5; return j === 4 ? <path data-k={k} d={`M${gx - 10} ${-6} L${gx + 34} 46`} /> : <path data-k={k} d={`M${gx + j * 8} 0 L${gx + j * 8} 42`} />; })}</g>}
+                            </g>
+                        </g>
+                    )}
+                    {P.terminal && (
+                        <g class={`terminal${P.terminal.red ? ' red' : ''}`} transform={`translate(${P.terminal.x} ${P.terminal.y}) scale(${P.terminal.scale ?? 1})`}>
+                            <path class="stand" d="M-40 180 L-60 250 L60 250 L40 180Z" /><rect class="monitor" x="-330" y="-220" width="660" height="400" rx="20" /><rect class="screen" x="-300" y="-190" width="600" height="340" rx="6" />
+                            {termRows(P.terminal.text).slice(0, 4).map((t, k) => <text class="tline" x="-270" y={-120 + k * 66} data-full={(k === 0 ? (P.terminal!.prompt ?? '$') + ' ' : '') + t}>{(k === 0 ? (P.terminal!.prompt ?? '$') + ' ' : '') + t}</text>)}
+                            <rect class="cursor" x="-270" y={-150 + Math.min(3, termRows(P.terminal.text).length - 1) * 66 + 80} width="26" height="40" />
+                        </g>
+                    )}
+                    {P.plant && <g class="plant" transform={`translate(${P.plant.x} ${P.plant.y}) scale(${P.plant.scale ?? 1})`}><g class="leaves">{[[-40, -200, -30], [40, -210, 30], [0, -240, 0], [-70, -150, -55], [70, -150, 55]].map(([x, y, r]) => <ellipse cx={x} cy={y} rx="30" ry="80" transform={`rotate(${r} ${x} ${y})`} />)}<path class="stem" d="M0 -90 L0 -230" /></g><path class="pot" d="M-70 0 L-56 -100 L56 -100 L70 0Z" /><rect class="rim" x="-66" y="-112" width="132" height="22" rx="4" /></g>}
+                    {P.bin && <g class="bin" transform={`translate(${P.bin.x} ${P.bin.y}) scale(${P.bin.scale ?? 1})`}><path class="can" d="M-70 -160 L70 -160 L56 0 L-56 0Z" /><path class="ribs" d="M-36 -140 L-30 -20 M0 -140 L0 -20 M36 -140 L30 -20" /><rect class="lip" x="-78" y="-172" width="156" height="20" rx="6" /></g>}
+                    {P.logbook && (
+                        <g class="logbook" transform={`translate(${P.logbook.x} ${P.logbook.y}) scale(${P.logbook.scale ?? 1})`}>
+                            <path class="cover" d="M-262 -26 L262 -26 L262 170 L-262 170Z" />
+                            <path class="pg" d="M0 -10 Q-120 -44 -244 -12 L-244 150 Q-120 118 0 152Z" /><path class="pg" d="M0 -10 Q120 -44 244 -12 L244 150 Q120 118 0 152Z" />
+                            {!P.logbook.blank && <path class="ink" d="M-210 20 h160 M-210 52 h140 M-210 84 h170 M-210 116 h110 M40 20 h160 M40 52 h120" />}
+                            {P.logbook.text && <text x="122" y="104">{P.logbook.text}</text>}
+                            <path class="leafp" d="M0 -10 Q120 -44 244 -12 L244 150 Q120 118 0 152Z" style="visibility:hidden" />
+                            <path class="spine" d="M0 -12 L0 154" />
+                        </g>
+                    )}
+                    {P.parcel && <g class="parcel" transform={`translate(${P.parcel.x} ${P.parcel.y}) scale(${P.parcel.scale ?? 1})`}><g class="pc-in"><rect class="boxp" x="-110" y="-160" width="220" height="160" rx="6" /><rect class="tape" x="-18" y="-160" width="36" height="160" /><rect class="lbl" x="-96" y="-70" width="150" height="54" rx="4" />{P.parcel.label && <text x="-21" y="-30">{P.parcel.label}</text>}</g></g>}
+                    {P.bulldozer && (
+                        <g class="bulldozer" transform={`translate(${P.bulldozer.x} ${P.bulldozer.y}) scale(${P.bulldozer.scale ?? 1})`}><g class="bz-in">
+                            <rect class="pipe" x="-70" y="-270" width="20" height="90" />
+                            <path class="cab" d="M-180 -186 L-166 -330 L-36 -330 L-16 -186Z" /><rect class="glass" x="-152" y="-312" width="104" height="96" rx="6" />
+                            <rect class="body" x="-230" y="-196" width="330" height="128" rx="12" />
+                            {P.bulldozer.label && <text x="-64" y="-114">{P.bulldozer.label}</text>}
+                            <rect class="armb" x="90" y="-160" width="120" height="30" />
+                            <path class="blade" d="M200 -260 Q262 -140 200 -6 L250 -6 L250 -260Z" />
+                            <rect class="track" x="-250" y="-74" width="420" height="74" rx="37" />
+                            {[-205, -125, -45, 35, 115].map((x) => <circle class="wheel" cx={x} cy="-37" r="24" />)}
+                        </g></g>
+                    )}
+                    {s.props?.counter && (
+                        <g class="count">
+                            <text class="counter" x={P.counter!.x} y={P.counter!.y} data-from={P.counter!.from ?? 0} data-to={P.counter!.to ?? ''} data-value={P.counter!.value ?? ''}>{P.counter!.value ?? P.counter!.from ?? 0}</text>
+                            {P.counter!.label && <text class="counter-label" x={P.counter!.x} y={P.counter!.y + 70}>{P.counter!.label}{P.counter!.after && <tspan class="counter-after" style="visibility:hidden"> {P.counter!.after}</tspan>}</text>}
+                        </g>
+                    )}
+                    {P.note && (
+                        <g class="note" transform={`translate(${P.note.x} ${P.note.y}) scale(${P.note.scale ?? 1})`}><g class="n-in" style="visibility:hidden">
+                            <rect x="-130" y="-110" width="260" height="220" />
+                            {P.note.text.split(/(?<=\.) /).map((t, k, all) => <text x="0" y={-20 + k * 66 - (all.length - 2) * 33}>{t}</text>)}
+                        </g></g>
+                    )}
+                    {has(fx, 'files', 'filesup', 'restore', 'restoreup') && (
+                        <g class="files" data-from={fromAt}>
+                            {files.map(() => <g class="file" style="visibility:hidden"><rect x="-26" y="-34" width="52" height="68" rx="4" /><path d="M-14 -16 h28 M-14 -4 h28 M-14 8 h18" /><circle class="ring" cx="8" cy="18" r="10" /></g>)}
+                        </g>
+                    )}
+                </g>
+                {s.word && <g class="word" data-at={s.wordAt}><g transform={`translate(${word.x} ${word.y}) scale(${fit(s.word.length, 98, word.room).toFixed(3)}) translate(${-word.x} ${-word.y})`}><text x={word.x} y={word.y} transform={`rotate(${word.rot} ${word.x} ${word.y})`}>{s.word}</text></g></g>}
+                {s.line && (() => { const r = lineRows(s.line.text); const k = fit(longest(r), line.per, line.room); const two = r.length > 1; const oy = two ? line.rows[0] : line.one; return (
+                    <g class="line" data-at={s.lineAt}>
+                        <text class="wholine" x={line.x} y={two ? line.who : line.whoOne}><tspan class="who">{s.line.who}</tspan></text>
+                        <g transform={`translate(${line.x} ${oy}) scale(${k.toFixed(3)}) translate(${-line.x} ${-oy})`}>{r.map((t, k2) => <text x={line.x} y={two ? line.rows[k2] : line.one}>{t}</text>)}</g>
+                    </g>
+                ); })()}
+                {s.tag && <g class="tag" transform={`translate(${tagAt.x} ${tagAt.y}) rotate(-4)`}><rect x="0" y="-38" width={s.tag.length * 21 + 48} height="60" /><text x="24" y="4">{s.tag}</text></g>}
+                {s.hook && (() => { const rows = hookRows(s.hook); return (
+                    <g class="hook">{rows.map((parts, k) => { const len = parts.reduce((n, p) => n + p.t.length, 0); const kk = fit(len, hookAt.per, hookAt.room); const y = hookAt.y + k * hookAt.gap; const w = len * hookAt.per * kk + 56; return (
+                        <g class="hrow" data-k={k}><rect x={hookAt.x - w / 2} y={y - hookAt.size * 0.86} width={w} height={hookAt.size * 1.18} rx="10" /><text x={hookAt.x} y={y} style={`font-size:${(hookAt.size * kk).toFixed(1)}px`}>{parts.map((p) => <tspan class={p.hi ? 'hi' : undefined}>{p.t}</tspan>)}</text></g>
+                    ); })}</g>
+                ); })()}
+                {has(fx, 'titlecard') && (
+                    <g class="titlecard">
+                        <g class="lines tl">{wedges.map((d) => <path d={d} />)}</g>
+                        <rect class="band" x="-2000" y="330" width="5600" height="250" />
+                        <text class="ep" x="800" y="300">{list.episode}</text>
+                        <g transform={`translate(800 490) scale(${fit(list.title.length, 62, 1500).toFixed(3)}) translate(-800 -490)`}><text class="ttl" x="800" y="490">{list.title}</text></g>
+                    </g>
+                )}
+                {has(fx, 'titlerows') && (
+                    <g class="titlerows">
+                        <g class="lines tl">{wedges.map((d) => <path d={d} />)}</g>
+                        {titleRows.map((t, k) => { const y = 500 + k * 180; const kk = fit(t.length, 76, 700); return (
+                            <g class="trow" transform={`rotate(-4 450 ${y})`}><rect class="band" x="50" y={y - 72} width="800" height="144" /><g transform={`translate(450 ${y + 46}) scale(${kk.toFixed(3)}) translate(-450 ${-(y + 46)})`}><text class="ttl" x="450" y={y + 46}>{t}</text></g></g>
+                        ); })}
+                    </g>
+                )}
+                {has(fx, 'endcard', 'stamp', 'continued') && (
+                    <g class="endcard">
+                        {has(fx, 'endcard', 'continued') && (() => { const alone = has(fx, 'continued'); const k = alone ? (V ? 1.2 : 1.4) : tbc.k; const at = alone ? { x: (V ? TXC : 800) - 243 * k, y: V ? 690 : 450 } : tbc; return (
+                            <g class={`tbc${alone ? ' alone' : ''}`} transform={`translate(${at.x} ${at.y}) scale(${k})`}><g class="tbc-in">
+                                <path d="M0 -40 L420 -40 L420 -62 L486 0 L420 62 L420 40 L0 40Z" />
+                                <text x="200" y="14">To be continued</text>
+                            </g></g>
+                        ); })()}
+                        {has(fx, 'endcard', 'stamp') && <g class="stampspot" transform={`translate(${stampAt.x} ${stampAt.y}) rotate(-5)`}><g class="stampfit" transform={stampAt.k < 1 ? `scale(${stampAt.k.toFixed(3)})` : undefined}><g class="stampmark">
+                            <rect class="plate" x="-480" y="-110" width="960" height={stamp.length > 1 ? 220 : 140} rx="6" />
+                            <rect class="inner" x="-462" y="-94" width="924" height={stamp.length > 1 ? 188 : 108} rx="4" />
+                            <text class="slbl" x="-436" y="-54">STATUS</text>
+                            <text class="epl" x="0" y="-136">{list.episode} · {list.title}</text>
+                            {stamp.map((t, i) => <text class="stext" x="0" y={stamp.length > 1 ? 16 + i * 78 : 22}>{t}</text>)}
+                        </g></g></g>}
+                    </g>
+                )}
+            </g>
+        );
+    })}
+    <rect class="flash" x="-2000" y="-2000" width="5600" height="6000" style="visibility:hidden" />
+</svg>

@@ -1,0 +1,33 @@
+---
+// An incident's anime cutscene, for every incident that has a shot list (src/anime/shots/<id>.json).
+// ?play=auto runs it by itself for the video recorder.
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import CutPlayer from '../../../components/anime/CutPlayer.astro';
+import { shotList } from '../../../lib/cuts';
+import { href, incidentPath, published, sourceHost, type Incident } from '../../../lib/site';
+
+export async function getStaticPaths() {
+    const all = published(await getCollection('incidents'));
+    return all.filter((i) => shotList(i.id)).map((incident) => ({ params: { id: incident.id }, props: { incident } }));
+}
+interface Props { incident: Incident }
+const { incident } = Astro.props;
+const d = incident.data;
+const list = shotList(incident.id)!;
+const p = incidentPath(incident);
+---
+<Base title={`${d.title} | the cut | git.wtf`} description={`Status: ${d.status}`} image={`${p}share.png`} noindex>
+    <main class="cut-page">
+        <CutPlayer list={list} status={d.status} title={d.title} />
+        <div class="cut-after" data-after>
+            <p class="still-caption">{d.title}.</p>
+            <p class="cut-links">
+                <button type="button" class="replay" data-replay>Replay</button>
+                <a href={href(`${p}#share-h`)}>Share it</a>
+                <a href={href(`${p}#retelling`)}>What actually happened</a>
+                <a href={d.source_url} rel="noopener nofollow">Source: {sourceHost(d.source_url)}</a>
+            </p>
+        </div>
+    </main>
+</Base>

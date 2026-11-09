@@ -1,0 +1,15 @@
+// git.wtf on Cloudflare Workers: a static site, no Worker script. Workers Builds runs `npm run build` and then
+// `npx wrangler deploy`, which uploads dist/. public/_redirects and public/_headers ride along in dist/ and are
+// applied by Cloudflare; dist/404.html answers anything not found.
+{
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "name": "git-wtf",
+    "compatibility_date": "2026-11-01",
+    "assets": {
+        "directory": "./dist/",
+        "not_found_handling": "404-page",
+        "html_handling": "auto-trailing-slash"
+    },
+    "workers_dev": true,
+    "preview_urls": false
+}

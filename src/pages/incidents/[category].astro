@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import { CATEGORIES } from '../../content.config';
+import Base from '../../layouts/Base.astro';
+import '../../styles/pages.css';
+import IncidentCards from '../../components/IncidentCards.astro';
+import { categoryLabel, href, sortIncidents } from '../../lib/site';
+
+export async function getStaticPaths() {
+    const all = sortIncidents(await getCollection('incidents'));
+    // only categories with an incident in them get a page (Mandeep, 8 Nov): an empty one is a 404 until one lands
+    return CATEGORIES.map((category) => ({ params: { category }, props: { category, incidents: all.filter((i) => i.data.category === category) } })).filter((p) => p.props.incidents.length > 0);
+}
+const { category, incidents } = Astro.props;
+---
+<Base title={`${categoryLabel(category)} | git.wtf`} image={`/og/incidents-${category}.png`} description={`Git fuck-ups filed under ${categoryLabel(category)}.`} noindex={incidents.length === 0}>
+    <main class="page">
+        <div class="page-head inc-head">
+            <h1>{categoryLabel(category)}</h1>
+            <p class="meta"><a href={href('/incidents/')}>All the fuck-ups</a></p>
+        </div>
+        <div class="iwrap">
+            {incidents.length === 0 ? (
+                <p class="note">Nothing filed here yet. Give it time.</p>
+            ) : (
+                <IncidentCards incidents={incidents} category={false} />
+            )}
+        </div>
+    </main>
+</Base>

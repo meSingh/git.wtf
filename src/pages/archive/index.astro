@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import '../../styles/pages.css';
+import Story from '../../components/Story.astro';
+import { href } from '../../lib/site';
+
+const posts = (await getCollection('archive')).filter((p) => p.data.type === 'post').sort((a, b) => (a.data.published_at < b.data.published_at ? 1 : -1));
+---
+<Base title="The archive | git.wtf" image="/og/archive.png" description="Every post from the years git.wtf was a blog about fixing Git, at the same URLs.">
+    <main class="page">
+        <div class="page-head inc-head">
+            <h1>The archive</h1>
+        </div>
+        <Story toArchive={false} head={false} />
+        <div class="index">
+            <ol>
+                {posts.map((p) => (
+                    <li><a href={href(`/${p.id}/`)}><span>{p.data.title}</span><span class="go" aria-hidden="true">&rarr;</span></a></li>
+                ))}
+            </ol>
+        </div>
+    </main>
+</Base>

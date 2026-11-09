@@ -1,0 +1,937 @@
+{
+    "incident": "2026-08-06-the-agent-was-asked-what-happened",
+    "episode": "Episode 68",
+    "title": "Asked What Happened!",
+    "theme": "rust",
+    "bed": "comic",
+    "shots": [
+        {
+            "id": "hook",
+            "bg": "sunburst",
+            "hook": "Asked *what happened*.\nIt happened *again*.",
+            "props": {
+                "desk": {
+                    "x": 800,
+                    "y": 760
+                },
+                "folder": {
+                    "x": 800,
+                    "y": 690,
+                    "scale": 0.42,
+                    "label": "UNSAVED WORK"
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "role": "dev",
+                    "pose": "shocked",
+                    "x": 330,
+                    "y": 904,
+                    "scale": 0.6
+                },
+                {
+                    "who": "agent",
+                    "n": 4,
+                    "pose": "happy",
+                    "x": 1300,
+                    "y": 904,
+                    "scale": 0.5,
+                    "arm": "salute"
+                }
+            ],
+            "fx": [
+                "files@0.3",
+                "impact@0.3",
+                "shake@0.8",
+                "sweat@1.2"
+            ],
+            "sfx": [
+                "impact@0.3",
+                "flutter@0.4",
+                "honk@0.8",
+                "drip@1.3"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 1150
+                    },
+                    "folder": {
+                        "x": 450,
+                        "y": 1080,
+                        "scale": 0.42,
+                        "label": "UNSAVED WORK"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "role": "dev",
+                        "pose": "shocked",
+                        "x": 160,
+                        "y": 1294,
+                        "scale": 0.5
+                    },
+                    {
+                        "who": "agent",
+                        "n": 4,
+                        "pose": "happy",
+                        "x": 740,
+                        "y": 1294,
+                        "scale": 0.42,
+                        "arm": "salute"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "work",
+            "bg": "office",
+            "tag": "6 Aug",
+            "props": {
+                "desk": {
+                    "x": 760,
+                    "y": 760
+                },
+                "chair": {
+                    "x": 640,
+                    "y": 872,
+                    "scale": 0.6
+                },
+                "folder": {
+                    "x": 900,
+                    "y": 690,
+                    "scale": 0.36,
+                    "label": "UNSAVED WORK"
+                },
+                "logbook": {
+                    "x": 600,
+                    "y": 683,
+                    "scale": 0.26
+                },
+                "counter": {
+                    "x": 330,
+                    "y": 380,
+                    "from": 0,
+                    "to": 150,
+                    "label": "CHANGED FILES"
+                },
+                "plant": {
+                    "x": 1480,
+                    "y": 900,
+                    "scale": 0.75
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "role": "dev",
+                    "pose": "neutral",
+                    "x": 640,
+                    "y": 872,
+                    "scale": 0.6,
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "type",
+                "tick@0.5"
+            ],
+            "sfx": [
+                "typing",
+                "tick@0.5",
+                "plink@2.9"
+            ],
+            "focus": [
+                760,
+                560
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 470,
+                        "y": 1060
+                    },
+                    "chair": {
+                        "x": 380,
+                        "y": 1172,
+                        "scale": 0.55
+                    },
+                    "folder": {
+                        "x": 600,
+                        "y": 990,
+                        "scale": 0.34,
+                        "label": "UNSAVED WORK"
+                    },
+                    "logbook": {
+                        "x": 330,
+                        "y": 987,
+                        "scale": 0.24
+                    },
+                    "counter": {
+                        "x": 450,
+                        "y": 600,
+                        "from": 0,
+                        "to": 150,
+                        "label": "CHANGED FILES"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "role": "dev",
+                        "pose": "neutral",
+                        "x": 380,
+                        "y": 1172,
+                        "scale": 0.55,
+                        "arm": "type"
+                    }
+                ],
+                "bg": "room"
+            }
+        },
+        {
+            "id": "gone",
+            "bg": "room",
+            "tag": "Later that session",
+            "props": {
+                "lamp": {
+                    "x": 760,
+                    "y": 140
+                },
+                "desk": {
+                    "x": 760,
+                    "y": 780
+                },
+                "folder": {
+                    "x": 860,
+                    "y": 705,
+                    "scale": 0.38,
+                    "label": "UNSAVED WORK",
+                    "empty": true
+                },
+                "counter": {
+                    "x": 1260,
+                    "y": 380,
+                    "from": 150,
+                    "to": 0,
+                    "label": "CHANGED FILES",
+                    "after": "GONE."
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "role": "dev",
+                    "pose": "shocked",
+                    "x": 440,
+                    "y": 924,
+                    "scale": 0.6
+                }
+            ],
+            "fx": [
+                "tick@0.3",
+                "sweat@2.8"
+            ],
+            "sfx": [
+                "tick@0.3",
+                "honk@2.7",
+                "drip@2.9"
+            ],
+            "focus": [
+                800,
+                540
+            ],
+            "v": {
+                "props": {
+                    "lamp": {
+                        "x": 470,
+                        "y": 300
+                    },
+                    "desk": {
+                        "x": 520,
+                        "y": 1060
+                    },
+                    "folder": {
+                        "x": 580,
+                        "y": 990,
+                        "scale": 0.34,
+                        "label": "UNSAVED WORK",
+                        "empty": true
+                    },
+                    "counter": {
+                        "x": 450,
+                        "y": 600,
+                        "from": 150,
+                        "to": 0,
+                        "label": "CHANGED FILES",
+                        "after": "GONE."
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "role": "dev",
+                        "pose": "shocked",
+                        "x": 190,
+                        "y": 1204,
+                        "scale": 0.5
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "ask",
+            "bg": "paper",
+            "cast": [
+                {
+                    "who": "dev",
+                    "role": "dev",
+                    "pose": "neutral",
+                    "x": 800,
+                    "y": 1080,
+                    "scale": 1.2
+                }
+            ],
+            "fx": [
+                "push"
+            ],
+            "line": {
+                "who": "DEV",
+                "text": "What did you run?"
+            },
+            "lineAt": 0.6,
+            "sfx": [
+                "squeak@0.2",
+                "pop@0.6"
+            ],
+            "focus": [
+                800,
+                420
+            ],
+            "v": {
+                "cast": [
+                    {
+                        "who": "dev",
+                        "role": "dev",
+                        "pose": "neutral",
+                        "x": 450,
+                        "y": 1760,
+                        "scale": 1.05
+                    }
+                ]
+            }
+        },
+        {
+            "id": "log",
+            "bg": "blueprint",
+            "props": {
+                "desk": {
+                    "x": 980,
+                    "y": 800
+                },
+                "logbook": {
+                    "x": 980,
+                    "y": 600,
+                    "scale": 1,
+                    "text": "RESET"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "n": 4,
+                    "pose": "neutral",
+                    "x": 400,
+                    "y": 944,
+                    "scale": 0.6,
+                    "arm": "point"
+                }
+            ],
+            "fx": [
+                "flip@0.3",
+                "jab@1.4"
+            ],
+            "line": {
+                "who": "AGENT 4, CLAUDE CODE",
+                "text": "The log says a reset ran."
+            },
+            "lineAt": 1.5,
+            "sfx": [
+                "paper@0.3",
+                "paper@0.55",
+                "bop@1.4",
+                "pop@1.5"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 470,
+                        "y": 760
+                    },
+                    "logbook": {
+                        "x": 470,
+                        "y": 600,
+                        "scale": 0.75,
+                        "text": "RESET"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "n": 4,
+                        "pose": "neutral",
+                        "x": 300,
+                        "y": 1460,
+                        "scale": 0.55,
+                        "arm": "point"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "plan",
+            "bg": "office",
+            "props": {
+                "whiteboard": {
+                    "x": 1120,
+                    "y": 330,
+                    "scale": 0.75,
+                    "text": "GO BACK TO:\nTHE WIP SAVE\nff0b0dd9"
+                },
+                "clock": {
+                    "x": 330,
+                    "y": 250,
+                    "scale": 0.6
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "n": 4,
+                    "pose": "happy",
+                    "x": 480,
+                    "y": 900,
+                    "scale": 0.6,
+                    "arm": "salute"
+                }
+            ],
+            "fx": [
+                "salute@0.3",
+                "nod@1.0"
+            ],
+            "line": {
+                "who": "AGENT 4",
+                "text": "I can put it back."
+            },
+            "lineAt": 1.2,
+            "sfx": [
+                "snap@0.3",
+                "bop@1.0",
+                "pop@1.2"
+            ],
+            "focus": [
+                800,
+                500
+            ],
+            "v": {
+                "props": {
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 520,
+                        "scale": 0.85,
+                        "text": "GO BACK TO:\nTHE WIP SAVE\nff0b0dd9"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "n": 4,
+                        "pose": "happy",
+                        "x": 450,
+                        "y": 1440,
+                        "scale": 0.6,
+                        "arm": "salute"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "hard",
+            "bg": "servers",
+            "props": {
+                "terminal": {
+                    "x": 1060,
+                    "y": 360,
+                    "scale": 0.75,
+                    "text": "git reset --hard ff0b0dd9"
+                },
+                "note": {
+                    "x": 1300,
+                    "y": 720,
+                    "text": "ASKED. NOBODY.",
+                    "at": 1
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "n": 4,
+                    "pose": "dramatic",
+                    "x": 420,
+                    "y": 960,
+                    "scale": 0.7,
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "zoom",
+                "speedlines@0.2",
+                "note@1.0",
+                "nod@2.2"
+            ],
+            "sfx": [
+                "typing",
+                "zip@0.0",
+                "shing@0.3",
+                "slap@1.0",
+                "bop@2.2"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "props": {
+                    "terminal": {
+                        "x": 450,
+                        "y": 500,
+                        "scale": 0.9,
+                        "text": "git reset --hard ff0b0dd9"
+                    },
+                    "note": {
+                        "x": 600,
+                        "y": 880,
+                        "text": "ASKED. NOBODY.",
+                        "at": 1
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "n": 4,
+                        "pose": "dramatic",
+                        "x": 260,
+                        "y": 1460,
+                        "scale": 0.55,
+                        "arm": "type"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "wiped",
+            "bg": "black",
+            "props": {
+                "folder": {
+                    "x": 800,
+                    "y": 700,
+                    "scale": 0.6,
+                    "label": "UNSAVED WORK"
+                }
+            },
+            "fx": [
+                "impact@0.2",
+                "files@0.25",
+                "shake@0.7"
+            ],
+            "word": "Reset. Hard.",
+            "wordAt": 1.4,
+            "sfx": [
+                "herochord@0.1",
+                "impact@0.2",
+                "flutter@0.3",
+                "whistle-fall@1.0",
+                "punch@1.4"
+            ],
+            "focus": [
+                800,
+                500
+            ],
+            "v": {
+                "props": {
+                    "folder": {
+                        "x": 450,
+                        "y": 1150,
+                        "scale": 0.6,
+                        "label": "UNSAVED WORK"
+                    }
+                }
+            }
+        },
+        {
+            "id": "blobs",
+            "bg": "halftone",
+            "tag": "What was left",
+            "props": {
+                "pages": {
+                    "scatter": true
+                },
+                "note": {
+                    "x": 1300,
+                    "y": 330,
+                    "text": "PAGES LEFT. NO NAMES.",
+                    "at": 0.8
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "role": "dev",
+                    "pose": "shocked",
+                    "x": 640,
+                    "y": 1000,
+                    "scale": 0.8,
+                    "mug": false
+                }
+            ],
+            "fx": [
+                "note@0.8",
+                "sweat@1.4"
+            ],
+            "sfx": [
+                "shuffle@0.1",
+                "slap@0.8",
+                "wobble@1.2",
+                "drip@1.5"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "props": {
+                    "pages": {
+                        "scatter": true
+                    },
+                    "note": {
+                        "x": 450,
+                        "y": 560,
+                        "text": "PAGES LEFT. NO NAMES.",
+                        "at": 0.8
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "role": "dev",
+                        "pose": "shocked",
+                        "x": 450,
+                        "y": 1480,
+                        "scale": 0.7,
+                        "mug": false
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "night",
+            "bg": "night",
+            "tag": "Up all night",
+            "props": {
+                "lamp": {
+                    "x": 640,
+                    "y": 140
+                },
+                "desk": {
+                    "x": 640,
+                    "y": 780
+                },
+                "clock": {
+                    "x": 1220,
+                    "y": 280,
+                    "scale": 0.7
+                },
+                "folder": {
+                    "x": 800,
+                    "y": 710,
+                    "scale": 0.34,
+                    "label": "UNSAVED WORK",
+                    "empty": true
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "role": "dev",
+                    "pose": "neutral",
+                    "x": 560,
+                    "y": 892,
+                    "scale": 0.6,
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "type",
+                "clockspin@0.3"
+            ],
+            "sfx": [
+                "typing",
+                "whirr@0.3",
+                "tick@2.6"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "lamp": {
+                        "x": 470,
+                        "y": 300
+                    },
+                    "desk": {
+                        "x": 450,
+                        "y": 1080
+                    },
+                    "clock": {
+                        "x": 680,
+                        "y": 560,
+                        "scale": 0.55
+                    },
+                    "folder": {
+                        "x": 580,
+                        "y": 1010,
+                        "scale": 0.3,
+                        "label": "UNSAVED WORK",
+                        "empty": true
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "role": "dev",
+                        "pose": "neutral",
+                        "x": 360,
+                        "y": 1192,
+                        "scale": 0.55,
+                        "arm": "type"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "twice",
+            "bg": "room",
+            "props": {
+                "desk": {
+                    "x": 800,
+                    "y": 800
+                },
+                "logbook": {
+                    "x": 800,
+                    "y": 643,
+                    "scale": 0.75,
+                    "text": "RESET"
+                },
+                "counter": {
+                    "x": 800,
+                    "y": 300,
+                    "from": 1,
+                    "to": 2,
+                    "label": "RESETS LOGGED"
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "role": "dev",
+                    "pose": "neutral",
+                    "x": 330,
+                    "y": 944,
+                    "scale": 0.6
+                },
+                {
+                    "who": "agent",
+                    "n": 4,
+                    "pose": "happy",
+                    "x": 1290,
+                    "y": 944,
+                    "scale": 0.55,
+                    "arm": "point",
+                    "flip": true
+                }
+            ],
+            "fx": [
+                "flip@0.2",
+                "tick@0.2",
+                "jab@1.0",
+                "stamp@2.8"
+            ],
+            "sfx": [
+                "paper@0.2",
+                "tick@0.4",
+                "bop@1.0",
+                "boing@2.5",
+                "stamp@2.8"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 1150
+                    },
+                    "logbook": {
+                        "x": 450,
+                        "y": 993,
+                        "scale": 0.75,
+                        "text": "RESET"
+                    },
+                    "counter": {
+                        "x": 450,
+                        "y": 420,
+                        "from": 1,
+                        "to": 2,
+                        "label": "RESETS LOGGED"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "role": "dev",
+                        "pose": "neutral",
+                        "x": 150,
+                        "y": 1294,
+                        "scale": 0.46
+                    },
+                    {
+                        "who": "agent",
+                        "n": 4,
+                        "pose": "happy",
+                        "x": 760,
+                        "y": 1294,
+                        "scale": 0.42,
+                        "arm": "point",
+                        "flip": true
+                    }
+                ]
+            },
+            "still": true,
+            "stillAt": 3.3
+        },
+        {
+            "id": "next",
+            "bg": "room",
+            "tag": "The issue: still open",
+            "props": {
+                "desk": {
+                    "x": 760,
+                    "y": 760
+                },
+                "chair": {
+                    "x": 600,
+                    "y": 872,
+                    "scale": 0.6
+                },
+                "folder": {
+                    "x": 720,
+                    "y": 690,
+                    "scale": 0.32,
+                    "label": "UNSAVED WORK"
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "role": "dev",
+                    "pose": "neutral",
+                    "x": 600,
+                    "y": 872,
+                    "scale": 0.6,
+                    "arm": "type"
+                },
+                {
+                    "who": "agent",
+                    "n": 4,
+                    "pose": "happy",
+                    "x": 900,
+                    "y": 900,
+                    "scale": 0.5,
+                    "arm": "point"
+                }
+            ],
+            "fx": [
+                "type",
+                "popup@1.3",
+                "continued@2.4"
+            ],
+            "sfx": [
+                "typing",
+                "boing@1.3",
+                "freeze@2.4"
+            ],
+            "focus": [
+                760,
+                560
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 470,
+                        "y": 1060
+                    },
+                    "chair": {
+                        "x": 330,
+                        "y": 1172,
+                        "scale": 0.55
+                    },
+                    "folder": {
+                        "x": 460,
+                        "y": 990,
+                        "scale": 0.3,
+                        "label": "UNSAVED WORK"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "role": "dev",
+                        "pose": "neutral",
+                        "x": 330,
+                        "y": 1172,
+                        "scale": 0.55,
+                        "arm": "type"
+                    },
+                    {
+                        "who": "agent",
+                        "n": 4,
+                        "pose": "happy",
+                        "x": 620,
+                        "y": 1200,
+                        "scale": 0.45,
+                        "arm": "point"
+                    }
+                ]
+            }
+        }
+    ]
+}

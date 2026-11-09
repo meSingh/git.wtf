@@ -1,0 +1,183 @@
+/* The reading pages (incident, archive, lists, 404) and the lab's split-flaps: kept off the homepage, whose first
+   paint carries only what it shows. Imported by those pages after global.css. */
+
+/* ---------- reading pages (incident, archive) ---------- */
+.page { padding-top: calc(var(--bar) + 2.5rem); }
+.page-head { width: min(var(--read), 100% - 2.5rem); margin: 0 auto 1.5rem; }
+.page-head h1 { font-size: clamp(2.4rem, 6vw, 4.6rem); }
+.page-head .meta { margin-top: 0.8rem; font-family: var(--mono); font-size: 0.8rem; color: var(--grey); display: flex; flex-wrap: wrap; gap: 0.5rem 1.2rem; align-items: center; }
+.prose { width: min(var(--read), 100% - 2.5rem); margin-inline: auto; font-size: 1.08rem; line-height: 1.65; color: var(--paper); }
+.prose p { margin: 0 0 1.1em; }
+.prose h2, .prose h3 { font-family: var(--body); text-transform: none; font-weight: 600; line-height: 1.25; margin: 1.8em 0 0.5em; }
+.prose h2 { font-size: 1.5rem; } .prose h3 { font-size: 1.2rem; }
+.prose pre { background: rgba(242, 240, 234, 0.05); border: 1px solid var(--line); padding: 1rem 1.1rem; overflow-x: auto; font-size: 0.9rem; line-height: 1.6; }
+.prose .code { margin: 1.4em 0; border: 1px solid var(--line-2); border-radius: 4px; background: #121212; overflow: hidden; }
+.prose .code-bar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.35rem 0.5rem 0.35rem 1rem; border-bottom: 1px solid var(--line); background: rgba(242, 240, 234, 0.03); font-family: var(--mono); font-size: 0.75rem; }
+.prose .code-lang { color: var(--yellow); letter-spacing: 0.1em; text-transform: uppercase; }
+.prose .code-acts { display: flex; gap: 0.4rem; }
+.prose .code-acts[hidden] { display: none; }
+.prose .code-copy { appearance: none; min-height: 32px; padding: 0.3em 0.8em; border: 1px solid var(--line-2); border-radius: 2px; background: none; color: var(--paper); font: inherit; cursor: pointer; }
+.prose .code-copy:hover { border-color: var(--yellow); color: var(--yellow); }
+.prose .code-copy.done { border-color: var(--yellow); background: var(--yellow); color: var(--black); }
+.prose .code pre.shiki { margin: 0; border: 0; border-radius: 0; background: transparent !important; padding: 1rem 1.1rem; }
+.prose .code pre.shiki code { background: none; padding: 0; }
+.prose :not(pre) > code { background: rgba(242, 240, 234, 0.08); padding: 0.1em 0.35em; border-radius: 2px; }
+.prose img, .prose video, .prose iframe { max-width: 100%; height: auto; }
+.prose blockquote { border-left: 2px solid var(--yellow); margin: 1.2em 0; padding: 0.2em 1.2em; color: var(--grey); }
+.prose table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+.prose td, .prose th { border: 1px solid var(--line); padding: 0.45rem 0.6rem; text-align: left; }
+.prose figure { margin: 1.5rem 0; } .prose figcaption { color: var(--grey); font-size: 0.85rem; }
+.prose .kg-bookmark-card { border: 1px solid var(--line); padding: 0.8rem 1rem; }
+.prose .git-article-source { display: inline-block; margin-top: 1rem; font-family: var(--mono); font-size: 0.8rem; color: var(--grey); }
+.prose a { color: var(--yellow); text-decoration: underline; text-decoration-color: rgba(255, 212, 0, 0.4); text-underline-offset: 0.2em; }
+.pager { width: min(var(--read), 100% - 2.5rem); margin: 3rem auto 0; display: flex; justify-content: space-between; gap: 1.5rem; font-family: var(--mono); font-size: 0.82rem; border-top: 1px solid var(--line); padding-top: 1.2rem; }
+.pager a { color: var(--paper); }
+.pager a:hover { color: var(--yellow); }
+.pager .next { text-align: right; }
+.pager small { display: block; margin-bottom: 0.35rem; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey); }
+.tags { width: min(var(--read), 100% - 2.5rem); margin: 2rem auto 0; font-family: var(--mono); font-size: 0.78rem; color: var(--grey); }
+.share img { display: block; width: 100%; height: auto; border: 1px solid var(--line); }
+.video { margin: 2rem 0 0; }
+.video video { display: block; width: 100%; max-width: 22rem; aspect-ratio: 9 / 16; background: #000; border: 1px solid var(--line); }
+.note { padding: 0.8rem 1rem; border: 1px solid var(--line); color: var(--paper); font-size: 0.95rem; }
+
+/* archive index: one plain list, newest first, no dates */
+.index { width: min(var(--col), 100% - 2.5rem); margin: 2.5rem auto 0; }
+.index ol { list-style: none; margin: 0; padding: 0; }
+.index li { border-top: 1px solid var(--line); }
+.index li:last-child { border-bottom: 1px solid var(--line); }
+.index li a { position: relative; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; padding: 0.95rem 0; color: var(--paper); font-family: var(--display); font-weight: 700; font-size: clamp(1.25rem, 2.4vw, 1.8rem); text-transform: uppercase; line-height: 1.05; transition: color 0.2s ease, padding-left 0.2s ease; }
+.index li a::before { content: ''; position: absolute; left: 0; top: 0.95rem; bottom: 0.95rem; width: 4px; background: var(--yellow); transform: scaleY(0); transition: transform 0.2s ease; }
+.index li a .go { flex: none; font-family: var(--mono); font-size: 1rem; color: var(--grey); transition: color 0.2s ease, transform 0.2s ease; }
+.index li a:hover, .index li a:focus-visible { color: var(--yellow); text-decoration: none; padding-left: 1rem; }
+.index li a:hover::before, .index li a:focus-visible::before { transform: scaleY(1); }
+.index li a:hover .go, .index li a:focus-visible .go { color: var(--yellow); transform: translateX(4px); }
+@media (prefers-reduced-motion: reduce) { .index li a, .index li a::before, .index li a .go { transition: none; } }
+
+/* incident list */
+.ilist { width: min(var(--col), 100% - 2.5rem); margin-inline: auto; }
+.ilist ol { list-style: none; margin: 0; padding: 0; }
+.ilist li { border-top: 1px solid var(--line); }
+.ilist li:last-child { border-bottom: 1px solid var(--line); }
+.ilist li a { display: grid; grid-template-columns: 7rem 1fr auto; gap: 1rem; align-items: baseline; padding: 0.9rem 0; color: var(--paper); }
+.ilist li a:hover { text-decoration: none; color: var(--yellow); }
+.ilist .d { font-family: var(--mono); font-size: 0.76rem; color: var(--grey); }
+.ilist .t { font-family: var(--display); font-weight: 900; font-size: clamp(1.5rem, 3vw, 2.2rem); text-transform: uppercase; line-height: 0.95; }
+.ilist .s { font-family: var(--mono); font-size: 0.78rem; color: var(--grey); grid-column: 2; }
+.ilist .c { font-family: var(--mono); font-size: 0.75rem; color: var(--grey); }
+@media (max-width: 640px) { .ilist li a { grid-template-columns: 1fr; gap: 0.25rem; } .ilist .s { grid-column: auto; } }
+
+.page-head .lede { margin: 1rem 0 0; max-width: 40rem; font-size: 1.1rem; line-height: 1.55; color: var(--paper); }
+/* incident cards */
+.iwrap { width: min(var(--col), 100% - 2.5rem); margin-inline: auto; }
+.icards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr)); gap: 1rem; }
+.icards li { border: 0; }
+.icards a { display: flex; flex-direction: column; height: 100%; background: var(--black); border: 1px solid var(--line-2); border-radius: 4px; overflow: hidden; color: var(--paper); transition: border-color 0.2s ease, transform 0.2s ease; }
+.icards a:hover, .icards a:focus-visible { border-color: var(--yellow); transform: translateY(-4px); text-decoration: none; }
+.icards img { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 630; object-fit: cover; background: var(--tile); }
+.ic-text { display: flex; flex-direction: column; gap: 0.5rem; flex: 1; padding: 0.85rem 1rem 1rem; }
+.ic-meta { display: flex; justify-content: space-between; gap: 1rem; font-family: var(--mono); font-size: 0.72rem; color: var(--grey); }
+.ic-title { font-family: var(--display); font-weight: 900; font-size: clamp(1.4rem, 2vw, 1.7rem); line-height: 0.95; text-transform: uppercase; }
+.ic-sum { font-size: 0.92rem; line-height: 1.45; color: var(--grey); }
+.ic-sum code { background: none; padding: 0; color: var(--paper); }
+.ic-status { font-family: var(--mono); font-size: 0.8rem; color: var(--yellow); }
+.ic-status code { color: inherit; background: none; padding: 0; }
+.ic-go { margin-top: auto; padding-top: 0.3rem; font-family: var(--mono); font-size: 0.82rem; color: var(--paper); }
+.icards a:hover .ic-go { color: var(--yellow); }
+@media (prefers-reduced-motion: reduce) { .icards a { transition: none; } }
+
+/* ---------- split-flap ---------- */
+.flaps { display: inline-flex; gap: 0.08em; font-size: var(--flap-size, 6rem); line-height: 1; }
+.flap { position: relative; display: inline-block; width: 0.74em; height: 1.08em; perspective: 2.4em; font-family: var(--display); font-weight: 900; font-variant-numeric: tabular-nums; color: var(--yellow); }
+.flap-half, .flap-leaf { position: absolute; left: 0; right: 0; height: 50%; overflow: hidden; background: #171717; }
+.flap-top, .flap-leaf-top { top: 0; border-radius: 0.05em 0.05em 0 0; }
+.flap-bottom, .flap-leaf-bottom { bottom: 0; border-radius: 0 0 0.05em 0.05em; }
+.flap-top, .flap-leaf-top { background: linear-gradient(to bottom, #1d1d1d, #151515); }
+.flap-bottom, .flap-leaf-bottom { background: linear-gradient(to bottom, #131313, #0f0f0f); }
+.flap-digit { position: absolute; left: 0; right: 0; top: 0; height: 1.08em; line-height: 1.08em; text-align: center; font-size: 1em; }
+.flap-bottom .flap-digit, .flap-leaf-bottom .flap-digit { top: -0.54em; }
+.flap-leaf { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.flap-leaf-top { transform-origin: 50% 100%; }
+.flap-leaf-bottom { transform-origin: 50% 0%; transform: rotateX(90deg); }
+.flap::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 0.02em; margin-top: -0.01em; background: var(--black); z-index: 3; }
+.flap.dim { color: rgba(255, 212, 0, 0.3); }
+.flaps.badge-flaps .flap { perspective: 3em; }
+
+
+/* incident page: the episode first, then the write-up beside its facts */
+.inc-head { width: min(var(--col), 100% - 2rem); }
+.inc-head .meta { margin: 0 0 0.9rem; }
+.inc-head h1 { font-size: clamp(2.4rem, 6vw, 4.8rem); line-height: 0.92; max-width: 18ch; }
+.inc-body { margin-top: 0; }
+.inc-status { font-family: var(--mono); color: var(--yellow); font-size: 1rem; }
+.inc-source { font-family: var(--mono); font-size: 0.85rem; color: var(--grey); }
+
+/* incident page (v2): title and verdict, the share image as the hero, the retelling, the stills, share */
+.inc-verdict { margin: 1rem 0 0; font-family: var(--mono); font-size: clamp(1rem, 1.6vw, 1.2rem); color: var(--yellow); }
+.inc-verdict code { color: var(--yellow); background: none; padding: 0; }
+.inc-hero { width: min(var(--col), 100% - 2rem); margin: 0 auto 2.5rem; }
+.inc-hero img { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 630; border-radius: 4px; background: var(--tile); }
+.inc-hero-link { position: relative; display: block; border-radius: 4px; outline-offset: 4px; }
+.inc-play { position: absolute; left: clamp(0.8rem, 2vw, 1.4rem); bottom: clamp(0.8rem, 2vw, 1.4rem); display: inline-flex; align-items: center; gap: 0.6em; padding: 0.85em 1.3em; background: var(--yellow); color: var(--black); border: 2px solid var(--black); border-radius: 3px; box-shadow: 4px 4px 0 var(--black); font: 600 clamp(0.9rem, 1.4vw, 1.05rem)/1 var(--mono); transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.inc-play svg { width: 1.1em; height: 1.1em; fill: currentColor; }
+.inc-hero-link:hover .inc-play, .inc-hero-link:focus-visible .inc-play { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--black); }
+.inc-hero-link:hover { text-decoration: none; }
+.inc-hero figcaption { margin-top: 0.7rem; font-family: var(--mono); font-size: 0.85rem; }
+.inc-hero figcaption a { color: var(--paper); text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 0.25em; }
+.inc-sub { font-family: var(--mono); font-weight: 400; font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--yellow); margin: 0 0 1rem; }
+.inc-stills { width: min(var(--col), 100% - 2rem); margin: 3.5rem auto 0; }
+.inc-stills .stills { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.5rem; }
+.inc-stills .stills a { display: block; border-radius: 3px; overflow: hidden; }
+.inc-stills .stills img { display: block; width: 100%; height: auto; transition: transform 0.25s ease; }
+.inc-stills .stills a:hover img { transform: scale(1.04); }
+@media (max-width: 760px) { .inc-stills .stills { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .inc-play { padding: 0.55em 0.85em; font-size: 0.8rem; box-shadow: 3px 3px 0 var(--black); } }
+@media (prefers-reduced-motion: reduce) { .inc-play, .inc-stills .stills img { transition: none; } }
+
+/* incident page: stills from the cut in place of the strip */
+.cut-stills { width: min(var(--col), 100% - 2rem); margin: 0 auto 3rem; }
+.cut-stills .watch { margin: 0 0 1rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1.2rem; }
+.cut-stills .watch-btn { display: inline-block; background: var(--yellow); color: var(--black); font: 400 1.05rem/1 var(--mono); padding: 0.95em 1.3em; border-radius: 2px; }
+.cut-stills .watch-btn:hover { text-decoration: none; box-shadow: 0 0 0 3px var(--black), 0 0 0 5px var(--yellow); }
+.cut-stills .watch-alt { font-family: var(--mono); font-size: 0.9rem; color: var(--paper); text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 0.25em; }
+.cut-stills .stills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; }
+.cut-stills .stills img { display: block; width: 100%; height: auto; border-radius: 3px; background: #0a0a0a; }
+.cut-stills .stills img:first-child { grid-column: 1 / -1; }
+@media (max-width: 639px) { .cut-stills .stills { grid-template-columns: 1fr; } }
+
+/* the previous day, with weight */
+.prev-day { width: min(var(--col), 100% - 2rem); margin: 4rem auto 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); grid-template-areas: 'label pic' 'title pic' 'status pic' 'go pic'; align-content: start; gap: 0.6rem 2rem; padding: 1.6rem; border: 1px solid var(--line-2); border-radius: 4px; background: var(--tile); color: var(--paper); text-decoration: none; }
+.prev-day:hover { border-color: var(--yellow); text-decoration: none; }
+.prev-day .pd-label { grid-area: label; font-family: var(--mono); font-size: 0.85rem; color: var(--yellow); }
+.prev-day .pd-date { color: var(--grey); margin-left: 0.6rem; }
+.prev-day img { grid-area: pic; width: 100%; height: auto; border-radius: 3px; border: 1px solid var(--line); }
+.prev-day .pd-title { grid-area: title; font-family: var(--display); font-weight: 900; font-size: clamp(2rem, 4.6vw, 3.6rem); line-height: 0.92; text-transform: uppercase; }
+.prev-day .pd-status { grid-area: status; font-family: var(--mono); font-size: 0.9rem; color: var(--paper); }
+.prev-day .pd-go { grid-area: go; align-self: end; font-family: var(--mono); font-size: 1rem; color: var(--yellow); }
+@media (max-width: 760px) { .prev-day { grid-template-columns: 1fr; grid-template-areas: 'label' 'pic' 'title' 'status' 'go'; } }
+.next-day { width: min(var(--col), 100% - 2rem); margin: 1.4rem auto 0; font-family: var(--mono); font-size: 0.85rem; }
+.next-day a { color: var(--paper); }
+.next-day a:hover { color: var(--yellow); }
+
+/* an incident with an episode opens on it, playing (Mandeep, 8 Nov 2026); the write-up follows below */
+.inc-ep { padding-top: var(--bar); background: #0a0a0a; }
+.inc-ep .cut-wrap { margin: 0 auto; max-width: 100%; }
+.inc-ep-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1.4rem; width: min(var(--col), 100% - 2rem); margin: 0 auto; padding: 0.8rem 0 1rem; font-family: var(--mono); font-size: 0.85rem; }
+.inc-ep-bar a { color: var(--paper); text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 0.25em; }
+.inc-ep-bar a:hover { color: var(--yellow); }
+.inc-ep-bar .ep-btn { appearance: none; border: 0; border-radius: 2px; background: var(--yellow); color: var(--black); font: 600 0.85rem/1 var(--mono); padding: 0.7em 1em; cursor: pointer; }
+.inc-ep-nav { margin-left: auto; display: flex; gap: 1.2rem; }
+.page-after-ep { padding-top: 2.5rem; }
+
+/* The incident write-up (8 Nov 2026): the facts beside the text on a wide screen, above it on a phone; the three
+   parts under small yellow labels, like "From the cut" and "Share". Lined up with the title, not centred. */
+.inc-read { width: min(var(--col), 100% - 2.5rem); margin: 0 auto; display: grid; gap: 2rem 3.5rem; align-items: start; }
+@media (min-width: 960px) { .inc-read { grid-template-columns: minmax(0, 1fr) 19rem; } .inc-read .inc-facts { grid-column: 2; grid-row: 1; position: sticky; top: calc(var(--bar) + 1.5rem); } .inc-read .inc-body { grid-column: 1; grid-row: 1; } }
+.inc-read .inc-body { width: auto; max-width: 42rem; margin: 0; }
+.inc-body h2 { margin: 2.2em 0 0.6em; font-family: var(--mono); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--yellow); }
+.inc-body h2:first-of-type { margin-top: 0; }
+.inc-facts dl { margin: 0; border-top: 2px solid var(--yellow); }
+.inc-facts dl > div { padding: 0.8rem 0; border-bottom: 1px solid var(--line); }
+.inc-facts dt { margin: 0 0 0.25rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey); }
+.inc-facts dd { margin: 0; font-size: 0.98rem; line-height: 1.45; color: var(--paper); }
+.inc-facts dd a { color: var(--yellow); text-underline-offset: 0.2em; }

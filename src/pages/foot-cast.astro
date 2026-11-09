@@ -1,0 +1,26 @@
+---
+// The footer's cast, a partial the footer's script fetches as the footer approaches: the kit's styles inlined, the
+// cast along the bottom of the credits (a sweeper, a sleeper, one mid-bonk, THE EXTRA waving behind its stack, DEV
+// walking off) and the agent peeking over the end card's edge. The script puts the two drawings in place.
+export const partial = true;
+import Mascot from '../components/anime/Mascot.astro';
+import Agent from '../components/anime/Agent.astro';
+import css from '../styles/foot-cast.css?raw';
+const star = 'M0 -54 L14 -16 L54 -14 L22 10 L34 50 L0 26 L-34 50 L-22 10 L-54 -14 L-14 -16Z';
+---
+<style set:html={css}></style>
+<svg class="cutscene foot-cast" viewBox="0 0 1600 520" aria-hidden="true">
+    <defs>
+        <pattern id="a-hazard" width="24" height="24" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="12" height="24" fill="#ffd400" /><rect x="12" width="12" height="24" fill="#0a0a0a" /></pattern>
+        <filter id="a-glow" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation="9" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+    </defs>
+    <g class="c-sweep" transform="translate(170 500) scale(0.42)"><Agent pose="neutral" n={4} arm="broom" /></g>
+    <g transform="translate(540 500) rotate(-32) scale(0.36)"><Agent pose="defeated" n={9} /></g>
+    <text class="zz" x="600" y="330">z</text><text class="zz big" x="635" y="292">Z</text>
+    <g transform="translate(800 500) scale(0.44)"><Agent pose="shocked" n={7} arm="broom" /></g>
+    <g transform="translate(800 230)"><path d={star} class="st" /><g transform="translate(70 -30) scale(0.45)"><path d={star} class="st small" /></g><g transform="translate(-70 -24) scale(0.4)"><path d={star} class="st small" /></g></g>
+    <g transform="translate(1090 500)">{[0, 1, 2, 3, 4, 5, 6, 7].map((k) => <rect x={-60 + (k % 2) * 4} y={-16 - k * 16} width="120" height="16" rx="3" fill="#f2f0ea" stroke="#0a0a0a" stroke-width="3" />)}</g>
+    <g class="c-wave" transform="translate(1180 500) scale(0.34)"><Agent pose="happy" extra arm="up" /></g>
+    <g transform="translate(1420 500) scale(0.52)"><Mascot pose="walk" /></g>
+</svg>
+<svg class="cutscene foot-peek" viewBox="-110 -300 220 100" aria-hidden="true"><g transform="scale(0.5)"><g class="c-peek"><Agent pose="shocked" n={12} head /></g></g></svg>

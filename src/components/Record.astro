@@ -1,0 +1,116 @@
+---
+// Beat 3: the record. A horizontal track, newest first on the left and going back in time to the right, where the
+// distance between incidents is their real gap in days, a ruler of day ticks and month labels underneath, the year
+// behind. It scrolls sideways on its own (a trackpad swipe, a drag, the arrows, the scrollbar); the page's up and
+// down scroll passes it by. Phones get the same cards stacked, newest first.
+import Odo from './Odo.astro';
+import { getCollection } from 'astro:content';
+import { daysBetween, formatDay, happened, href, incidentPath, inlineCode, sentences, sortIncidents, type Incident } from '../lib/site';
+import { cutAssets } from '../lib/cuts';
+// the card's picture: the episode's story image, else its poster, else the incident's share image
+const pic = (i: Incident) => { const c = cutAssets(i.id); if (PREVIEW && !c.story && stand && standId) return { src: href(`/cuts/${standId}/${stand.story}`), w: 1200, h: 630 }; return c.story ? { src: href(`/cuts/${i.id}/${c.story}`), w: 1200, h: 630 } : c.poster ? { src: href(`/cuts/${i.id}/${c.poster}`), w: 1280, h: 720 } : { src: href(`${incidentPath(i)}share.png`), w: 1200, h: 630 }; };
+
+interface Props { incidents: Incident[] }
+const { incidents: shown } = Astro.props;
+// RECORD_PREVIEW=1 (a review build only): every incident, hidden ones included, all with the published episode's
+// image, so the scroll can be felt before the others are published. The launch build shows the published ones.
+const PREVIEW = process.env.RECORD_PREVIEW === '1';
+const incidents = PREVIEW ? sortIncidents(await getCollection('incidents'), true) : shown;
+const stand = PREVIEW ? shown.map((i) => cutAssets(i.id)).find((c) => c.story) ?? null : null;
+const standId = PREVIEW ? shown.find((i) => cutAssets(i.id).story)?.id ?? null : null;
+const asc = incidents; // newest first, left to right, back in time
+const CARD = 400, MIN = 56, PPD = 50, QUIET = 21, PAD = 72;
+type Placed = { i: Incident; x: number; gap: number; first: string };
+const placed: Placed[] = [];
+let x = PAD;
+asc.forEach((i, n) => {
+    const gap = n === 0 ? 0 : daysBetween(happened(i), happened(asc[n - 1]));
+    if (n > 0) x += Math.max(CARD + MIN, gap * PPD);
+    // the card's line: the incident's own one-line summary, else the write-up's first sentence
+    const first = i.data.summary ?? sentences(i.body ?? '')[0] ?? '';
+    placed.push({ i, x, gap, first: first.length > 150 ? first.slice(0, 147).trimEnd() + '...' : first });
+});
+const width = (placed.at(-1)?.x ?? 0) + CARD + PAD + 300;
+const newest = happened(asc[0]);
+const oldest = happened(asc.at(-1)!);
+/** x of a date on the ruler: between two incidents the track is linear in days, running back in time. */
+const dayX = (iso: string) => {
+    for (let n = 1; n < placed.length; n++) {
+        const a = happened(asc[n - 1]), b = happened(asc[n]); // a newer, b older
+        if (iso <= a && iso >= b) {
+            const span = daysBetween(b, a) || 1;
+            return placed[n - 1].x + CARD / 2 + (placed[n].x - placed[n - 1].x) * (daysBetween(iso, a) / span);
+        }
+    }
+    return iso > newest ? PAD + CARD / 2 - 48 * daysBetween(newest, iso) : (placed.at(-1)?.x ?? 0) + CARD / 2 + 48 * daysBetween(iso, oldest);
+};
+const addDays = (iso: string, d: number) => new Date(Date.UTC(+iso.slice(0, 4), +iso.slice(5, 7) - 1, +iso.slice(8, 10) + d)).toISOString().slice(0, 10);
+const ticks: { iso: string; x: number; month: string | null; day: number }[] = [];
+for (let d = -4; d <= daysBetween(oldest, newest) + 3; d++) {
+    const iso = addDays(oldest, d);
+    const day = +iso.slice(8, 10);
+    ticks.push({ iso, x: dayX(iso), day, month: day === 1 ? new Intl.DateTimeFormat('en-GB', { month: 'long', timeZone: 'UTC' }).format(Date.UTC(+iso.slice(0, 4), +iso.slice(5, 7) - 1, 1)) : null });
+}
+const year = newest.slice(0, 4);
+const gapWords = (g: number) => (g >= QUIET ? 'quiet days' : g === 1 ? 'day' : 'days');
+// the gap's wheels start a little higher and roll down to it on entry; single digits start at 9 so the width never changes
+const gapFrom = (g: number) => (g < 10 ? 9 : Math.min(99, g + 30));
+---
+<div class="track-wrap" id="track-wrap">
+    <div class="track-head">
+        <div class="col beat-head">
+            <h2 id="record-h" data-lock>The record</h2>
+            <span class="count">{incidents.length === 1 ? "1 incident so far. It won't be lonely for long." : `${incidents.length} incidents, newest first, going back in time.`}</span>
+        </div>
+        {incidents.length > 1 && (
+            <div class="col track-nav" hidden data-track-nav>
+                <button type="button" data-track-go="-1" aria-label="Newer incidents" disabled><span aria-hidden="true">&larr;</span> Newer</button>
+                <button type="button" data-track-go="1" aria-label="Older incidents">Older <span aria-hidden="true">&rarr;</span></button>
+            </div>
+        )}
+    </div>
+    <div class="track-scroll" id="track-scroll" tabindex="0" aria-label="The record, newest first; scroll sideways for older incidents">
+    <div class="track" id="track" style={`width:${width}px`}>
+        <span class="year" aria-hidden="true">{year}</span>
+        <div class="ruler" aria-hidden="true">
+            {ticks.filter((t) => t.month || t.day % 7 === 1).map((t) => (
+                <span class={`tick${t.month ? ' month' : ' week'}`} style={`left:${t.x}px`}>{t.month && <b>{t.month}</b>}</span>
+            ))}
+        </div>
+        {placed.map((p, n) => (
+            <>
+                {n > 0 && (
+                    <span class={`gap${p.gap >= QUIET ? ' quiet' : ''}`} style={`left:${(placed[n - 1].x + CARD + p.x) / 2}px`}>
+                        {p.gap === 0 ? 'same day' : <><Odo value={p.gap} from={gapFrom(p.gap)} dimLead={false} class="gap-odo" label={`${p.gap}`} /> {gapWords(p.gap)} earlier</>}
+                    </span>
+                )}
+                <span class="stem" style={`left:${p.x + CARD / 2}px`} aria-hidden="true"></span>
+                <a class="tcard" href={href(incidentPath(p.i))} style={`left:${p.x}px`}>
+                    <span class="d"><time datetime={happened(p.i)}>{formatDay(happened(p.i))}</time><span>{p.i.data.category}</span></span>
+                    <img class="pic" data-src={pic(p.i).src} width={pic(p.i).w} height={pic(p.i).h} alt="" decoding="async" /><noscript><img class="pic" src={pic(p.i).src} width={pic(p.i).w} height={pic(p.i).h} alt="" loading="lazy" /></noscript>
+                    <span class="t">{p.i.data.title}</span>
+                    <span class="s" set:html={`Status: ${inlineCode(p.i.data.status)}`} />
+                </a>
+            </>
+        ))}
+        <span class="track-end" style={`left:${(placed.at(-1)?.x ?? 0) + CARD + 56}px`}>{incidents.length === 1 ? 'the first on record' : 'the first on record'}, <a href={href('/incidents/')}>every incident</a></span>
+    </div>
+    </div>
+</div>
+<div class="record-stack col" aria-label="Earlier incidents">
+    {placed.map((p, n, arr) => (
+        <>
+            <a class="tcard" href={href(incidentPath(p.i))}>
+                <span class="d"><time datetime={happened(p.i)}>{formatDay(happened(p.i))}</time><span>{p.i.data.category}</span></span>
+                <img class="pic" data-src={pic(p.i).src} width={pic(p.i).w} height={pic(p.i).h} alt="" decoding="async" /><noscript><img class="pic" src={pic(p.i).src} width={pic(p.i).w} height={pic(p.i).h} alt="" loading="lazy" /></noscript>
+                <span class="t">{p.i.data.title}</span>
+                <span class="s" set:html={`Status: ${inlineCode(p.i.data.status)}`} />
+            </a>
+            {n < arr.length - 1 && (
+                <span class={`vgap${arr[n + 1].gap >= QUIET ? ' quiet' : ''}`} style={`--h:${Math.min(160, Math.max(20, arr[n + 1].gap * 4))}px`}>
+                    {arr[n + 1].gap === 0 ? 'same day' : <><Odo value={arr[n + 1].gap} from={gapFrom(arr[n + 1].gap)} dimLead={false} class="gap-odo" label={`${arr[n + 1].gap}`} /> {gapWords(arr[n + 1].gap)} earlier</>}
+                </span>
+            )}
+        </>
+    ))}
+</div>

@@ -1,0 +1,762 @@
+{
+    "incident": "2026-09-06-the-whole-restaurant-heard",
+    "episode": "Episode 73",
+    "title": "The Whole Restaurant Heard!",
+    "theme": "rust",
+    "bed": "comic",
+    "shots": [
+        {
+            "id": "hook",
+            "bg": "halftone",
+            "hook": "Asked for a *passing* check.\nThe restaurant *heard it fail*.",
+            "props": {
+                "terminal": {
+                    "x": 1080,
+                    "y": 560,
+                    "scale": 0.7,
+                    "text": "DIAGNOSTIC: 3 FAILED",
+                    "prompt": "!",
+                    "red": true
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "shocked",
+                    "x": 440,
+                    "y": 960,
+                    "scale": 0.7,
+                    "n": 7,
+                    "arm": "palm"
+                }
+            ],
+            "fx": [
+                "impact@0.3",
+                "shake@0.6",
+                "sweat@1.0"
+            ],
+            "sfx": [
+                "honk@0.3",
+                "impact@0.35",
+                "wobble@0.7",
+                "drip@1.1"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "terminal": {
+                        "x": 450,
+                        "y": 760,
+                        "scale": 0.85,
+                        "text": "DIAGNOSTIC: 3 FAILED",
+                        "prompt": "!",
+                        "red": true
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "shocked",
+                        "x": 450,
+                        "y": 1480,
+                        "scale": 0.6,
+                        "n": 7,
+                        "arm": "palm"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "service",
+            "bg": "room",
+            "tag": "6 Sep, dinner service",
+            "props": {
+                "lamp": {
+                    "x": 640,
+                    "y": 140
+                },
+                "desk": {
+                    "x": 640,
+                    "y": 780
+                },
+                "folder": {
+                    "x": 820,
+                    "y": 700,
+                    "scale": 0.36,
+                    "label": "KITCHEN ORDERS"
+                },
+                "poster": {
+                    "x": 1120,
+                    "y": 300,
+                    "scale": 0.6,
+                    "text": "MENU"
+                },
+                "note": {
+                    "x": 1360,
+                    "y": 560,
+                    "text": "ORDERS. MISSING.",
+                    "at": 1.6
+                },
+                "plant": {
+                    "x": 130,
+                    "y": 900,
+                    "scale": 0.7
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 560,
+                    "y": 892,
+                    "scale": 0.6,
+                    "role": "dev",
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "type",
+                "note@1.6"
+            ],
+            "sfx": [
+                "typing",
+                "slap@1.6",
+                "plink@0.4"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "lamp": {
+                        "x": 470,
+                        "y": 300
+                    },
+                    "desk": {
+                        "x": 450,
+                        "y": 1080
+                    },
+                    "folder": {
+                        "x": 600,
+                        "y": 1000,
+                        "scale": 0.34,
+                        "label": "KITCHEN ORDERS"
+                    },
+                    "note": {
+                        "x": 450,
+                        "y": 640,
+                        "text": "ORDERS. MISSING.",
+                        "at": 1.6
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 360,
+                        "y": 1192,
+                        "scale": 0.55,
+                        "role": "dev",
+                        "arm": "type"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "legacy",
+            "bg": "skyline",
+            "props": {
+                "building": {
+                    "x": 1040,
+                    "y": 880,
+                    "scale": 0.8,
+                    "sign": "RETIRED PC"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 560,
+                    "y": 900,
+                    "scale": 0.5,
+                    "n": 7,
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "tiptoe"
+            ],
+            "line": {
+                "who": "AGENT 7, CODEX",
+                "text": "Shortcut through the old machine."
+            },
+            "lineAt": 0.9,
+            "sfx": [
+                "tiptoe",
+                "squeak@0.9"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "building": {
+                        "x": 500,
+                        "y": 1420,
+                        "scale": 0.6,
+                        "sign": "RETIRED PC"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 200,
+                        "y": 1460,
+                        "scale": 0.4,
+                        "n": 7,
+                        "arm": "hold"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "order",
+            "bg": "office",
+            "props": {
+                "desk": {
+                    "x": 900,
+                    "y": 820
+                },
+                "folder": {
+                    "x": 900,
+                    "y": 730,
+                    "scale": 0.42,
+                    "label": "LIVE ORDER"
+                },
+                "note": {
+                    "x": 1300,
+                    "y": 380,
+                    "text": "BACK TO. \"ORDERED\".",
+                    "at": 0.8
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 380,
+                    "y": 920,
+                    "scale": 0.55,
+                    "n": 7,
+                    "arm": "point"
+                }
+            ],
+            "fx": [
+                "jab@0.6",
+                "note@0.8",
+                "jab@1.6",
+                "squeeze@1.7"
+            ],
+            "word": "Twice.",
+            "wordAt": 2.2,
+            "sfx": [
+                "bop@0.6",
+                "slap@0.8",
+                "bop@1.6",
+                "squeak@1.7",
+                "boing@2.2"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 560,
+                        "y": 1130
+                    },
+                    "folder": {
+                        "x": 560,
+                        "y": 1040,
+                        "scale": 0.42,
+                        "label": "LIVE ORDER"
+                    },
+                    "note": {
+                        "x": 560,
+                        "y": 420,
+                        "text": "BACK TO. \"ORDERED\".",
+                        "at": 0.8
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 180,
+                        "y": 1460,
+                        "scale": 0.4,
+                        "n": 7,
+                        "arm": "point"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "demand",
+            "bg": "paper",
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 800,
+                    "y": 1080,
+                    "scale": 1.2,
+                    "role": "dev",
+                    "mug": false
+                }
+            ],
+            "fx": [
+                "angry@0.3",
+                "steam@0.4"
+            ],
+            "line": {
+                "who": "DEV",
+                "text": "Customers are waiting.\nGet me a passing check."
+            },
+            "lineAt": 0.6,
+            "sfx": [
+                "hiss@0.4",
+                "pop@0.6"
+            ],
+            "focus": [
+                800,
+                420
+            ],
+            "v": {
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 450,
+                        "y": 1580,
+                        "scale": 1,
+                        "role": "dev",
+                        "mug": false
+                    }
+                ]
+            }
+        },
+        {
+            "id": "run",
+            "bg": "servers",
+            "props": {
+                "terminal": {
+                    "x": 1080,
+                    "y": 380,
+                    "scale": 0.75,
+                    "text": "run production diagnostic"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "dramatic",
+                    "x": 420,
+                    "y": 960,
+                    "scale": 0.7,
+                    "n": 7,
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "zoom",
+                "speedlines@0.2"
+            ],
+            "line": {
+                "who": "AGENT 7",
+                "text": "One diagnostic, coming up."
+            },
+            "lineAt": 0.8,
+            "sfx": [
+                "typing",
+                "zip@0.0",
+                "shing@0.3"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "props": {
+                    "terminal": {
+                        "x": 450,
+                        "y": 560,
+                        "scale": 0.9,
+                        "text": "run production diagnostic"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "dramatic",
+                        "x": 450,
+                        "y": 1460,
+                        "scale": 0.6,
+                        "n": 7,
+                        "arm": "type"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "announce",
+            "bg": "sunburst",
+            "props": {
+                "building": {
+                    "x": 800,
+                    "y": 880,
+                    "scale": 0.85,
+                    "sign": "RESTAURANT"
+                }
+            },
+            "fx": [
+                "impact@0.1",
+                "shake@0.8",
+                "shake@1.6",
+                "shake@2.4"
+            ],
+            "word": "FAULT! FAULT! FAULT!",
+            "wordAt": 0.8,
+            "sfx": [
+                "herochord@0.1",
+                "honk@0.8",
+                "honk@1.6",
+                "honk@2.4",
+                "wobble@2.6"
+            ],
+            "focus": [
+                800,
+                500
+            ],
+            "tag": "Over the restaurant speakers",
+            "v": {
+                "props": {
+                    "building": {
+                        "x": 450,
+                        "y": 1250,
+                        "scale": 0.8,
+                        "sign": "RESTAURANT"
+                    }
+                }
+            },
+            "still": true
+        },
+        {
+            "id": "left",
+            "bg": "room",
+            "props": {
+                "desk": {
+                    "x": 520,
+                    "y": 700
+                },
+                "chair": {
+                    "x": 640,
+                    "y": 830,
+                    "scale": 0.6
+                },
+                "door": {
+                    "x": 1300,
+                    "y": 830,
+                    "scale": 0.85
+                },
+                "footprints": {
+                    "from": [
+                        700,
+                        870
+                    ],
+                    "to": [
+                        1240,
+                        850
+                    ]
+                },
+                "poster": {
+                    "x": 300,
+                    "y": 300,
+                    "scale": 0.6,
+                    "text": "MENU"
+                }
+            },
+            "fx": [
+                "door@1.4",
+                "slowpush"
+            ],
+            "sfx": [
+                "tiptoe@0.2",
+                "door@1.4",
+                "sadtrombone@2.0"
+            ],
+            "focus": [
+                900,
+                560
+            ],
+            "tag": "One customer, gone",
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 350,
+                        "y": 1130
+                    },
+                    "chair": {
+                        "x": 420,
+                        "y": 1240,
+                        "scale": 0.55
+                    },
+                    "door": {
+                        "x": 680,
+                        "y": 1240,
+                        "scale": 0.6
+                    },
+                    "footprints": {
+                        "from": [
+                            460,
+                            1300
+                        ],
+                        "to": [
+                            660,
+                            1270
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "id": "report",
+            "bg": "blueprint",
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "defeated",
+                    "x": 800,
+                    "y": 980,
+                    "scale": 0.85,
+                    "n": 7,
+                    "arm": "hold",
+                    "role": "writer"
+                }
+            ],
+            "fx": [
+                "scribble@0.3",
+                "scribble@1.2"
+            ],
+            "line": {
+                "who": "AGENT 7, THE BUG REPORT",
+                "text": "Submitted by the same session\nwhose actions caused it."
+            },
+            "lineAt": 0.8,
+            "sfx": [
+                "scribble@0.3",
+                "scribble@1.2",
+                "paper@2.0"
+            ],
+            "focus": [
+                800,
+                460
+            ],
+            "v": {
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "defeated",
+                        "x": 450,
+                        "y": 1440,
+                        "scale": 0.75,
+                        "n": 7,
+                        "arm": "hold",
+                        "role": "writer"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "stop",
+            "bg": "office",
+            "props": {
+                "desk": {
+                    "x": 700,
+                    "y": 820
+                },
+                "folder": {
+                    "x": 860,
+                    "y": 730,
+                    "scale": 0.36,
+                    "label": "KITCHEN ORDERS"
+                },
+                "note": {
+                    "x": 1240,
+                    "y": 380,
+                    "text": "STOP. NOW.",
+                    "at": 0.4
+                }
+            },
+            "cast": [
+                {
+                    "who": "dev",
+                    "pose": "neutral",
+                    "x": 520,
+                    "y": 932,
+                    "scale": 0.6,
+                    "role": "dev",
+                    "mug": false
+                },
+                {
+                    "who": "agent",
+                    "pose": "defeated",
+                    "x": 1300,
+                    "y": 900,
+                    "scale": 0.45,
+                    "n": 7,
+                    "arm": "hold",
+                    "role": "shrug"
+                }
+            ],
+            "fx": [
+                "note@0.4",
+                "shrug@1.0",
+                "stamp@2.2"
+            ],
+            "sfx": [
+                "slap@0.4",
+                "squeak@1.0",
+                "stamp@2.2"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 450,
+                        "y": 1130
+                    },
+                    "folder": {
+                        "x": 560,
+                        "y": 1050,
+                        "scale": 0.34,
+                        "label": "KITCHEN ORDERS"
+                    },
+                    "note": {
+                        "x": 450,
+                        "y": 620,
+                        "text": "STOP. NOW.",
+                        "at": 0.4
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "dev",
+                        "pose": "neutral",
+                        "x": 300,
+                        "y": 1242,
+                        "scale": 0.55,
+                        "role": "dev",
+                        "mug": false
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "defeated",
+                        "x": 720,
+                        "y": 1460,
+                        "scale": 0.36,
+                        "n": 7,
+                        "arm": "hold",
+                        "role": "shrug"
+                    }
+                ]
+            },
+            "still": true,
+            "stillAt": 2.7
+        },
+        {
+            "id": "next",
+            "bg": "skyline",
+            "tag": "The POS: still unresolved",
+            "props": {
+                "building": {
+                    "x": 1000,
+                    "y": 880,
+                    "scale": 0.85,
+                    "sign": "RESTAURANT"
+                },
+                "clock": {
+                    "x": 380,
+                    "y": 260,
+                    "scale": 0.7
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 420,
+                    "y": 900,
+                    "scale": 0.5,
+                    "n": 7,
+                    "arm": "type",
+                    "role": "hop"
+                }
+            ],
+            "fx": [
+                "clockspin@0.2",
+                "hop@1.2",
+                "continued@2.2"
+            ],
+            "sfx": [
+                "whirr@0.2",
+                "spring@1.2",
+                "freeze@2.2"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "building": {
+                        "x": 500,
+                        "y": 1180,
+                        "scale": 0.75,
+                        "sign": "RESTAURANT"
+                    },
+                    "clock": {
+                        "x": 680,
+                        "y": 400,
+                        "scale": 0.55
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 180,
+                        "y": 1460,
+                        "scale": 0.4,
+                        "n": 7,
+                        "arm": "type",
+                        "role": "hop"
+                    }
+                ]
+            }
+        }
+    ]
+}

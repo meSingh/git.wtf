@@ -1,0 +1,1107 @@
+{
+ "about": "Copied from video/audio by scripts/sync-audio.mjs; edit the library there.",
+ "fx": {
+  "titlecard": "sfx-title-hit",
+  "push": null,
+  "slowpush": null,
+  "devpush": "sfx-riser",
+  "zoom": "sfx-whoosh",
+  "shake": "sfx-rumble",
+  "whip": "sfx-whoosh",
+  "spin": "sfx-whoosh-big",
+  "rise": "sfx-riser",
+  "wind": "sfx-wind",
+  "copier": "sfx-copier",
+  "dash": "sfx-whoosh",
+  "blink": "sfx-blink",
+  "behind": "sfx-blink",
+  "impact": "sfx-impact",
+  "speedlines": "sfx-whoosh-big",
+  "extralines": "sfx-whoosh-big",
+  "glint": "sfx-glint",
+  "files": "sfx-paper-blizzard",
+  "catch": "sfx-pop",
+  "rain": "amb-rain",
+  "drift": "sfx-paper-flutter",
+  "tear": "sfx-drop",
+  "sweat": "sfx-drop",
+  "snap": "sfx-branch-snap",
+  "door": "sfx-door",
+  "sip": "sfx-sip",
+  "turn": "sfx-swish",
+  "slide": "sfx-whoosh",
+  "charge": "sfx-riser",
+  "bounce": "sfx-boing",
+  "endcard": null,
+  "titlerows": "sfx-title-hit",
+  "tiltdown": null,
+  "type": "amb-typing",
+  "ring": "sfx-whoosh-big",
+  "tick": "sfx-tick",
+  "yawn": null,
+  "note": "sfx-slap",
+  "popup": "sfx-pop",
+  "salute": "sfx-snap",
+  "exit": "sfx-door",
+  "exitdown": "sfx-door",
+  "glintdown": "sfx-shing",
+  "speedlinesdown": "sfx-whoosh-big",
+  "fall": "sfx-fall-whistle",
+  "dive": "sfx-whoosh",
+  "squeeze": "sfx-squeak",
+  "scribble": "sfx-scribble",
+  "erase": "sfx-squeak",
+  "file": "sfx-paper-flutter",
+  "unfile": "sfx-shuffle",
+  "bonk": "sfx-bonk",
+  "sweep": "sfx-broom",
+  "sweepup": "sfx-broom",
+  "filesup": "sfx-paper-blizzard",
+  "restore": "sfx-rewind",
+  "restoreup": "sfx-rewind",
+  "lift": "sfx-whoosh",
+  "limp": null,
+  "enter": "sfx-door",
+  "climb": null,
+  "freeze": "sfx-freeze",
+  "terror": "amb-heartbeat",
+  "drop": null,
+  "followdown": null,
+  "cutup": null,
+  "shatter": "sfx-shatter",
+  "jab": "sfx-punch",
+  "ringspin": "sfx-whoosh-big",
+  "cough": "sfx-cough",
+  "grow": null,
+  "tiltup": null,
+  "gatedrop": "sfx-clunk",
+  "tiptoe": "amb-tiptoe",
+  "tally": null,
+  "glance": null,
+  "swap": "sfx-swish",
+  "stamp": [
+   "sfx-stamp",
+   "sting-stamp"
+  ],
+  "continued": "sfx-tbc",
+  "angry": "sfx-hiss",
+  "steam": "sfx-hiss",
+  "peek": null,
+  "eyes": "sfx-glint"
+ },
+ "sfx": {
+  "sting": "sfx-title-hit",
+  "typing": "amb-typing",
+  "clink": "sfx-clink",
+  "tick": "sfx-tick",
+  "copierhum": "amb-copier",
+  "slap": "sfx-slap",
+  "snap": "sfx-snap",
+  "click": "sfx-click",
+  "shing": "sfx-shing",
+  "whoosh": "sfx-whoosh",
+  "creak": "sfx-creak",
+  "scribble": "sfx-scribble",
+  "squeak": "sfx-squeak",
+  "bonk": "sfx-bonk",
+  "herochord": "sfx-herochord",
+  "fwip": "sfx-whoosh",
+  "broom": "sfx-broom",
+  "impact": "sfx-impact",
+  "flutter": "sfx-paper-flutter",
+  "rain": "amb-rain",
+  "plink": "sfx-plink",
+  "drip": "sfx-drip",
+  "heartbeat": "amb-heartbeat",
+  "whistle": "sfx-fall-whistle",
+  "shatter": "sfx-shatter",
+  "comicsting": "sfx-comicsting",
+  "cough": "sfx-cough",
+  "shuffle": "sfx-shuffle",
+  "chord": "sfx-chord",
+  "rewind": "sfx-rewind",
+  "whirr": "sfx-whirr",
+  "clunk": "sfx-clunk",
+  "tiptoe": "amb-tiptoe",
+  "freeze": "sfx-freeze",
+  "stamp": [
+   "sfx-stamp",
+   "sting-stamp"
+  ],
+  "punch": "sfx-punch",
+  "boing": "sfx-boing",
+  "blink": "sfx-blink",
+  "glint": "sfx-glint",
+  "rumble": "sfx-rumble",
+  "riser": "sfx-riser",
+  "wind": "sfx-wind",
+  "door": "sfx-door",
+  "sip": "sfx-sip",
+  "pop": "sfx-pop",
+  "swish": "sfx-swish",
+  "snapbranch": "sfx-branch-snap",
+  "paper": "sfx-paper-blizzard",
+  "drop": "sfx-drop",
+  "tbc": "sfx-tbc",
+  "whistle-fall": "sfx-fall-whistle",
+  "whistle-gate": "sfx-ref-whistle",
+  "hiss": "sfx-hiss",
+  "slideup": "sfx-toon-slideup",
+  "spring": "sfx-toon-spring",
+  "zip": "sfx-toon-zip",
+  "honk": "sfx-toon-honk",
+  "wobble": "sfx-toon-wobble",
+  "sadtrombone": "sfx-toon-sadtrombone",
+  "bop": "sfx-toon-bop"
+ },
+ "music": {
+  "theme": "bed-heroic",
+  "heroic": "bed-heroic",
+  "calm": "bed-calm",
+  "sad": "bed-sad",
+  "comic": "bed-comic",
+  "soft": "bed-soft",
+  "sneaky": "bed-sneaky",
+  "action": "bed-action",
+  "suspense": "bed-suspense",
+  "melancholy": "bed-melancholy",
+  "none": null
+ },
+ "events": {
+  "cut": null,
+  "word": "sfx-punch",
+  "line": null,
+  "stamp": [
+   "sfx-stamp",
+   "sting-stamp"
+  ],
+  "tbc": "sfx-tbc",
+  "music": "bed-action",
+  "musicSad": "bed-melancholy",
+  "musicSuspense": "bed-suspense",
+  "musicComic": "bed-comic"
+ },
+ "voices": {
+  "2026-07-31-twelve-agents-one-working-directory": {
+   "title": "voice-2026-07-31-title",
+   "job": "voice-2026-07-31-job",
+   "rivals": "voice-2026-07-31-rivals",
+   "inside": "voice-2026-07-31-inside",
+   "cleaned": "voice-2026-07-31-cleaned",
+   "funeral": "voice-2026-07-31-funeral",
+   "terror": "voice-2026-07-31-terror",
+   "copy": "voice-2026-07-31-copy",
+   "again": "voice-2026-07-31-again",
+   "blame": "voice-2026-07-31-blame",
+   "next": "voice-2026-07-31-next"
+  }
+ },
+ "mix": {
+  "music": -16,
+  "sfx": -4,
+  "voice": 0,
+  "duckUnderVoice": -8,
+  "note": "dB applied to each layer at mix time; music ducks under voice lines"
+ },
+ "sounds": [
+  {
+   "id": "bed-action",
+   "web": "web/bed-action.mp3",
+   "kind": "music",
+   "tags": [
+    "bed",
+    "action",
+    "tension",
+    "drone",
+    "loop"
+   ],
+   "duration": 29.143
+  },
+  {
+   "id": "bed-calm",
+   "web": "web/bed-calm.mp3",
+   "kind": "music",
+   "tags": [
+    "bed",
+    "calm",
+    "lofi",
+    "loop"
+   ],
+   "duration": 20
+  },
+  {
+   "id": "bed-comic",
+   "web": "web/bed-comic.mp3",
+   "kind": "music",
+   "tags": [
+    "bed",
+    "comedy",
+    "light",
+    "loop"
+   ],
+   "duration": 51.206
+  },
+  {
+   "id": "bed-heroic",
+   "web": "web/bed-heroic.mp3",
+   "kind": "music",
+   "tags": [
+    "bed",
+    "heroic",
+    "theme",
+    "epic",
+    "loop"
+   ],
+   "duration": 42.466
+  },
+  {
+   "id": "bed-melancholy",
+   "web": "web/bed-melancholy.mp3",
+   "kind": "music",
+   "tags": [
+    "bed",
+    "sad",
+    "piano",
+    "funeral",
+    "loop"
+   ],
+   "duration": 16
+  },
+  {
+   "id": "bed-sad",
+   "web": "web/bed-sad.mp3",
+   "kind": "music",
+   "tags": [
+    "bed",
+    "sad",
+    "strings",
+    "funeral",
+    "loop"
+   ],
+   "duration": 81.179
+  },
+  {
+   "id": "bed-sneaky",
+   "web": "web/bed-sneaky.mp3",
+   "kind": "music",
+   "tags": [
+    "bed",
+    "sneaky",
+    "pizzicato",
+    "loop"
+   ],
+   "duration": 56.296
+  },
+  {
+   "id": "bed-soft",
+   "web": "web/bed-soft.mp3",
+   "kind": "music",
+   "tags": [
+    "bed",
+    "soft",
+    "music-box",
+    "loop"
+   ],
+   "duration": 75.452
+  },
+  {
+   "id": "bed-suspense",
+   "web": "web/bed-suspense.mp3",
+   "kind": "music",
+   "tags": [
+    "bed",
+    "suspense",
+    "mystery",
+    "loop"
+   ],
+   "duration": 20.875
+  },
+  {
+   "id": "sting-stamp",
+   "web": "web/sting-stamp.mp3",
+   "kind": "music",
+   "tags": [
+    "sting",
+    "stamp",
+    "horns",
+    "hit"
+   ],
+   "duration": 4.366
+  },
+  {
+   "id": "amb-copier",
+   "web": "web/amb-copier.mp3",
+   "kind": "sfx",
+   "tags": [
+    "copier",
+    "hum",
+    "machine",
+    "loop"
+   ],
+   "duration": 5.306
+  },
+  {
+   "id": "amb-heartbeat",
+   "web": "web/amb-heartbeat.mp3",
+   "kind": "sfx",
+   "tags": [
+    "heartbeat",
+    "tension",
+    "loop"
+   ],
+   "duration": 5.147
+  },
+  {
+   "id": "amb-rain",
+   "web": "web/amb-rain.mp3",
+   "kind": "sfx",
+   "tags": [
+    "rain",
+    "ambience",
+    "loop"
+   ],
+   "duration": 48.014
+  },
+  {
+   "id": "amb-tiptoe",
+   "web": "web/amb-tiptoe.mp3",
+   "kind": "sfx",
+   "tags": [
+    "tiptoe",
+    "footsteps",
+    "sneak",
+    "loop"
+   ],
+   "duration": 2.718
+  },
+  {
+   "id": "amb-typing",
+   "web": "web/amb-typing.mp3",
+   "kind": "sfx",
+   "tags": [
+    "typing",
+    "keyboard",
+    "loop"
+   ],
+   "duration": 7.056
+  },
+  {
+   "id": "sfx-blink",
+   "web": "web/sfx-blink.mp3",
+   "kind": "sfx",
+   "tags": [
+    "blink",
+    "teleport"
+   ],
+   "duration": 1.08
+  },
+  {
+   "id": "sfx-boing",
+   "web": "web/sfx-boing.mp3",
+   "kind": "sfx",
+   "tags": [
+    "boing",
+    "bounce",
+    "cartoon"
+   ],
+   "duration": 2.173
+  },
+  {
+   "id": "sfx-bonk",
+   "web": "web/sfx-bonk.mp3",
+   "kind": "sfx",
+   "tags": [
+    "bonk",
+    "cartoon",
+    "hit"
+   ],
+   "duration": 0.363
+  },
+  {
+   "id": "sfx-branch-snap",
+   "web": "web/sfx-branch-snap.mp3",
+   "kind": "sfx",
+   "tags": [
+    "branch",
+    "snap"
+   ],
+   "duration": 0.567
+  },
+  {
+   "id": "sfx-broom",
+   "web": "web/sfx-broom.mp3",
+   "kind": "sfx",
+   "tags": [
+    "broom",
+    "sweep"
+   ],
+   "duration": 1.3
+  },
+  {
+   "id": "sfx-chord",
+   "web": "web/sfx-chord.mp3",
+   "kind": "sfx",
+   "tags": [
+    "piano",
+    "chord",
+    "soft"
+   ],
+   "duration": 2.992
+  },
+  {
+   "id": "sfx-click",
+   "web": "web/sfx-click.mp3",
+   "kind": "sfx",
+   "tags": [
+    "door",
+    "click"
+   ],
+   "duration": 1.116
+  },
+  {
+   "id": "sfx-clink",
+   "web": "web/sfx-clink.mp3",
+   "kind": "sfx",
+   "tags": [
+    "mug",
+    "clink"
+   ],
+   "duration": 0.904
+  },
+  {
+   "id": "sfx-clunk",
+   "web": "web/sfx-clunk.mp3",
+   "kind": "sfx",
+   "tags": [
+    "clunk",
+    "metal",
+    "gate"
+   ],
+   "duration": 0.267
+  },
+  {
+   "id": "sfx-comicsting",
+   "web": "web/sfx-comicsting.mp3",
+   "kind": "sfx",
+   "tags": [
+    "comic",
+    "sting",
+    "rimshot"
+   ],
+   "duration": 4.732
+  },
+  {
+   "id": "sfx-copier",
+   "web": "web/sfx-copier.mp3",
+   "kind": "sfx",
+   "tags": [
+    "copier",
+    "printer",
+    "machine"
+   ],
+   "duration": 3
+  },
+  {
+   "id": "sfx-cough",
+   "web": "web/sfx-cough.mp3",
+   "kind": "sfx",
+   "tags": [
+    "cough"
+   ],
+   "duration": 0.797
+  },
+  {
+   "id": "sfx-creak",
+   "web": "web/sfx-creak.mp3",
+   "kind": "sfx",
+   "tags": [
+    "creak",
+    "wood",
+    "door",
+    "cardboard"
+   ],
+   "duration": 0.793
+  },
+  {
+   "id": "sfx-door",
+   "web": "web/sfx-door.mp3",
+   "kind": "sfx",
+   "tags": [
+    "door"
+   ],
+   "duration": 1.789
+  },
+  {
+   "id": "sfx-drip",
+   "web": "web/sfx-drip.mp3",
+   "kind": "sfx",
+   "tags": [
+    "drip",
+    "water"
+   ],
+   "duration": 0.201
+  },
+  {
+   "id": "sfx-drop",
+   "web": "web/sfx-drop.mp3",
+   "kind": "sfx",
+   "tags": [
+    "drop",
+    "tear",
+    "sweat"
+   ],
+   "duration": 0.356
+  },
+  {
+   "id": "sfx-fall-whistle",
+   "web": "web/sfx-fall-whistle.mp3",
+   "kind": "sfx",
+   "tags": [
+    "whistle",
+    "fall",
+    "cartoon"
+   ],
+   "duration": 2.011
+  },
+  {
+   "id": "sfx-freeze",
+   "web": "web/sfx-freeze.mp3",
+   "kind": "sfx",
+   "tags": [
+    "freeze",
+    "hit"
+   ],
+   "duration": 0.495
+  },
+  {
+   "id": "sfx-glint",
+   "web": "web/sfx-glint.mp3",
+   "kind": "sfx",
+   "tags": [
+    "glint",
+    "sparkle"
+   ],
+   "duration": 0.936
+  },
+  {
+   "id": "sfx-herochord",
+   "web": "web/sfx-herochord.mp3",
+   "kind": "sfx",
+   "tags": [
+    "hero",
+    "chord",
+    "fanfare",
+    "brass"
+   ],
+   "duration": 2.6
+  },
+  {
+   "id": "sfx-hiss",
+   "web": "web/sfx-hiss.mp3",
+   "kind": "sfx",
+   "tags": [
+    "steam",
+    "hiss",
+    "anger"
+   ],
+   "duration": 1.411
+  },
+  {
+   "id": "sfx-impact",
+   "web": "web/sfx-impact.mp3",
+   "kind": "sfx",
+   "tags": [
+    "impact",
+    "hit",
+    "boom"
+   ],
+   "duration": 0.635
+  },
+  {
+   "id": "sfx-paper-blizzard",
+   "web": "web/sfx-paper-blizzard.mp3",
+   "kind": "sfx",
+   "tags": [
+    "paper",
+    "files",
+    "blizzard"
+   ],
+   "duration": 3.408
+  },
+  {
+   "id": "sfx-paper-flutter",
+   "web": "web/sfx-paper-flutter.mp3",
+   "kind": "sfx",
+   "tags": [
+    "paper",
+    "drift"
+   ],
+   "duration": 1.81
+  },
+  {
+   "id": "sfx-plink",
+   "web": "web/sfx-plink.mp3",
+   "kind": "sfx",
+   "tags": [
+    "plink",
+    "tear",
+    "drop"
+   ],
+   "duration": 0.702
+  },
+  {
+   "id": "sfx-pop",
+   "web": "web/sfx-pop.mp3",
+   "kind": "sfx",
+   "tags": [
+    "pop",
+    "line",
+    "catch"
+   ],
+   "duration": 0.24
+  },
+  {
+   "id": "sfx-punch",
+   "web": "web/sfx-punch.mp3",
+   "kind": "sfx",
+   "tags": [
+    "impact",
+    "light",
+    "word"
+   ],
+   "duration": 0.267
+  },
+  {
+   "id": "sfx-ref-whistle",
+   "web": "web/sfx-ref-whistle.mp3",
+   "kind": "sfx",
+   "tags": [
+    "whistle",
+    "referee",
+    "gate"
+   ],
+   "duration": 0.511
+  },
+  {
+   "id": "sfx-rewind",
+   "web": "web/sfx-rewind.mp3",
+   "kind": "sfx",
+   "tags": [
+    "rewind",
+    "tape"
+   ],
+   "duration": 2.174
+  },
+  {
+   "id": "sfx-riser",
+   "web": "web/sfx-riser.mp3",
+   "kind": "sfx",
+   "tags": [
+    "riser",
+    "rise",
+    "charge"
+   ],
+   "duration": 2.574
+  },
+  {
+   "id": "sfx-rumble",
+   "web": "web/sfx-rumble.mp3",
+   "kind": "sfx",
+   "tags": [
+    "shake",
+    "rumble"
+   ],
+   "duration": 2.2
+  },
+  {
+   "id": "sfx-scribble",
+   "web": "web/sfx-scribble.mp3",
+   "kind": "sfx",
+   "tags": [
+    "scribble",
+    "pencil"
+   ],
+   "duration": 1.14
+  },
+  {
+   "id": "sfx-shatter",
+   "web": "web/sfx-shatter.mp3",
+   "kind": "sfx",
+   "tags": [
+    "mug",
+    "shatter",
+    "break"
+   ],
+   "duration": 2.714
+  },
+  {
+   "id": "sfx-shing",
+   "web": "web/sfx-shing.mp3",
+   "kind": "sfx",
+   "tags": [
+    "shing",
+    "glint",
+    "blade"
+   ],
+   "duration": 0.791
+  },
+  {
+   "id": "sfx-shuffle",
+   "web": "web/sfx-shuffle.mp3",
+   "kind": "sfx",
+   "tags": [
+    "paper",
+    "shuffle"
+   ],
+   "duration": 3.248
+  },
+  {
+   "id": "sfx-sip",
+   "web": "web/sfx-sip.mp3",
+   "kind": "sfx",
+   "tags": [
+    "mug",
+    "sip",
+    "coffee"
+   ],
+   "duration": 1.22
+  },
+  {
+   "id": "sfx-slap",
+   "web": "web/sfx-slap.mp3",
+   "kind": "sfx",
+   "tags": [
+    "slap",
+    "paper",
+    "note"
+   ],
+   "duration": 0.447
+  },
+  {
+   "id": "sfx-snap",
+   "web": "web/sfx-snap.mp3",
+   "kind": "sfx",
+   "tags": [
+    "snap",
+    "salute"
+   ],
+   "duration": 0.199
+  },
+  {
+   "id": "sfx-squeak",
+   "web": "web/sfx-squeak.mp3",
+   "kind": "sfx",
+   "tags": [
+    "squeak",
+    "eraser",
+    "rubber"
+   ],
+   "duration": 0.337
+  },
+  {
+   "id": "sfx-stamp",
+   "web": "web/sfx-stamp.mp3",
+   "kind": "sfx",
+   "tags": [
+    "stamp",
+    "slam"
+   ],
+   "duration": 0.524
+  },
+  {
+   "id": "sfx-swish",
+   "web": "web/sfx-swish.mp3",
+   "kind": "sfx",
+   "tags": [
+    "swish",
+    "turn",
+    "cut"
+   ],
+   "duration": 0.435
+  },
+  {
+   "id": "sfx-tbc",
+   "web": "web/sfx-tbc.mp3",
+   "kind": "sfx",
+   "tags": [
+    "to-be-continued",
+    "sting",
+    "endcard"
+   ],
+   "duration": 4.4
+  },
+  {
+   "id": "sfx-tick",
+   "web": "web/sfx-tick.mp3",
+   "kind": "sfx",
+   "tags": [
+    "tick",
+    "counter",
+    "clock"
+   ],
+   "duration": 0.145
+  },
+  {
+   "id": "sfx-title-hit",
+   "web": "web/sfx-title-hit.mp3",
+   "kind": "sfx",
+   "tags": [
+    "riser",
+    "hit",
+    "title"
+   ],
+   "duration": 2.668
+  },
+  {
+   "id": "sfx-whirr",
+   "web": "web/sfx-whirr.mp3",
+   "kind": "sfx",
+   "tags": [
+    "whirr",
+    "machine",
+    "counter"
+   ],
+   "duration": 2.359
+  },
+  {
+   "id": "sfx-whoosh",
+   "web": "web/sfx-whoosh.mp3",
+   "kind": "sfx",
+   "tags": [
+    "whoosh",
+    "dash",
+    "whip",
+    "slide"
+   ],
+   "duration": 0.233
+  },
+  {
+   "id": "sfx-whoosh-big",
+   "web": "web/sfx-whoosh-big.mp3",
+   "kind": "sfx",
+   "tags": [
+    "whoosh",
+    "speedlines",
+    "spin"
+   ],
+   "duration": 2.96
+  },
+  {
+   "id": "sfx-wind",
+   "web": "web/sfx-wind.mp3",
+   "kind": "sfx",
+   "tags": [
+    "wind",
+    "gust"
+   ],
+   "duration": 1.603
+  },
+  {
+   "id": "voice-2026-07-31-again",
+   "web": "web/voice-2026-07-31-again.mp3",
+   "kind": "voice",
+   "tags": [
+    "2026-07-31-twelve-agents-one-working-directory",
+    "again",
+    "narrator"
+   ],
+   "duration": 2.679
+  },
+  {
+   "id": "voice-2026-07-31-blame",
+   "web": "web/voice-2026-07-31-blame.mp3",
+   "kind": "voice",
+   "tags": [
+    "2026-07-31-twelve-agents-one-working-directory",
+    "blame",
+    "agent",
+    "n7",
+    "n3",
+    "n12",
+    "n5",
+    "group"
+   ],
+   "duration": 1.746
+  },
+  {
+   "id": "voice-2026-07-31-cleaned",
+   "web": "web/voice-2026-07-31-cleaned.mp3",
+   "kind": "voice",
+   "tags": [
+    "2026-07-31-twelve-agents-one-working-directory",
+    "cleaned",
+    "agent",
+    "n6"
+   ],
+   "duration": 0.881
+  },
+  {
+   "id": "voice-2026-07-31-copy",
+   "web": "web/voice-2026-07-31-copy.mp3",
+   "kind": "voice",
+   "tags": [
+    "2026-07-31-twelve-agents-one-working-directory",
+    "copy",
+    "extra"
+   ],
+   "duration": 3.237
+  },
+  {
+   "id": "voice-2026-07-31-funeral",
+   "web": "web/voice-2026-07-31-funeral.mp3",
+   "kind": "voice",
+   "tags": [
+    "2026-07-31-twelve-agents-one-working-directory",
+    "funeral",
+    "agent",
+    "n1"
+   ],
+   "duration": 4.631
+  },
+  {
+   "id": "voice-2026-07-31-inside",
+   "web": "web/voice-2026-07-31-inside.mp3",
+   "kind": "voice",
+   "tags": [
+    "2026-07-31-twelve-agents-one-working-directory",
+    "inside",
+    "agent",
+    "n9"
+   ],
+   "duration": 2.313
+  },
+  {
+   "id": "voice-2026-07-31-job",
+   "web": "web/voice-2026-07-31-job.mp3",
+   "kind": "voice",
+   "tags": [
+    "2026-07-31-twelve-agents-one-working-directory",
+    "job",
+    "dev"
+   ],
+   "duration": 2.472
+  },
+  {
+   "id": "voice-2026-07-31-next",
+   "web": "web/voice-2026-07-31-next.mp3",
+   "kind": "voice",
+   "tags": [
+    "2026-07-31-twelve-agents-one-working-directory",
+    "next",
+    "narrator"
+   ],
+   "duration": 2.679
+  },
+  {
+   "id": "voice-2026-07-31-rivals",
+   "web": "web/voice-2026-07-31-rivals.mp3",
+   "kind": "voice",
+   "tags": [
+    "2026-07-31-twelve-agents-one-working-directory",
+    "rivals",
+    "agent",
+    "n7"
+   ],
+   "duration": 2.211
+  },
+  {
+   "id": "voice-2026-07-31-terror",
+   "web": "web/voice-2026-07-31-terror.mp3",
+   "kind": "voice",
+   "tags": [
+    "2026-07-31-twelve-agents-one-working-directory",
+    "terror",
+    "dev"
+   ],
+   "duration": 3.932
+  },
+  {
+   "id": "voice-2026-07-31-title",
+   "web": "web/voice-2026-07-31-title.mp3",
+   "kind": "voice",
+   "tags": [
+    "2026-07-31-twelve-agents-one-working-directory",
+    "title",
+    "narrator"
+   ],
+   "duration": 5.028
+  },
+  {
+   "id": "sfx-toon-slideup",
+   "web": "web/sfx-toon-slideup.mp3",
+   "kind": "sfx",
+   "tags": [
+    "toon",
+    "slideup",
+    "slide whistle up"
+   ],
+   "duration": 0.6
+  },
+  {
+   "id": "sfx-toon-spring",
+   "web": "web/sfx-toon-spring.mp3",
+   "kind": "sfx",
+   "tags": [
+    "toon",
+    "spring",
+    "spring boing"
+   ],
+   "duration": 0.95
+  },
+  {
+   "id": "sfx-toon-zip",
+   "web": "web/sfx-toon-zip.mp3",
+   "kind": "sfx",
+   "tags": [
+    "toon",
+    "zip",
+    "zip, running off"
+   ],
+   "duration": 0.22
+  },
+  {
+   "id": "sfx-toon-honk",
+   "web": "web/sfx-toon-honk.mp3",
+   "kind": "sfx",
+   "tags": [
+    "toon",
+    "honk",
+    "bike horn honk-honk"
+   ],
+   "duration": 0.46
+  },
+  {
+   "id": "sfx-toon-wobble",
+   "web": "web/sfx-toon-wobble.mp3",
+   "kind": "sfx",
+   "tags": [
+    "toon",
+    "wobble",
+    "dazed wobble"
+   ],
+   "duration": 0.8
+  },
+  {
+   "id": "sfx-toon-sadtrombone",
+   "web": "web/sfx-toon-sadtrombone.mp3",
+   "kind": "sfx",
+   "tags": [
+    "toon",
+    "sadtrombone",
+    "sad trombone, wah wah wah waaah"
+   ],
+   "duration": 2.18
+  },
+  {
+   "id": "sfx-toon-bop",
+   "web": "web/sfx-toon-bop.mp3",
+   "kind": "sfx",
+   "tags": [
+    "toon",
+    "bop",
+    "cartoon bop on the head"
+   ],
+   "duration": 0.18
+  }
+ ]
+}

@@ -1,0 +1,25 @@
+---
+// The revenge section: humans against AI. No count per tool (Mandeep, 7 Nov: we don't keep track of each AI's mistakes).
+import Odo from './Odo.astro';
+import { SITE, type Incident } from '../lib/site';
+interface Props { incidents: Incident[] }
+const { incidents } = Astro.props;
+const by = (actor: string) => incidents.filter((i) => i.data.actor === actor).length;
+const humans = by('human');
+const ai = by('ai');
+---
+<div class="score col">
+    <div class="beat-head"><h2 id="score-h" data-lock>The score</h2><span class="count">{incidents.length} on record</span></div>
+    <div class="board">
+        <div class="side">
+            <p class="who">Humans</p>
+            <Odo value={humans} from={0} min={2} class="score-odo wheel" label={`${humans} caused by humans`} />
+        </div>
+        <p class="vs" aria-hidden="true"><span class="vs-mark"><span class="vs-v">V</span><span class="vs-s">S</span></span></p>
+        <div class="side ai">
+            <p class="who">AI</p>
+            <Odo value={ai} from={0} min={2} class="score-odo wheel" label={`${ai} caused by AI`} />
+        </div>
+    </div>
+    <p class="tagline">{SITE.tagline}</p>
+</div>

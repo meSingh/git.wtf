@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import '../styles/pages.css';
+import { href } from '../lib/site';
+import { archiveJsonLd } from '../lib/jsonld';
+import { highlightHtml } from '../lib/highlight';
+
+export async function getStaticPaths() {
+    const all = (await getCollection('archive')).sort((a, b) => (a.data.published_at < b.data.published_at ? 1 : -1));
+    const posts = all.filter((p) => p.data.type === 'post');
+    return all.map((entry) => {
+        const i = posts.indexOf(entry);
+        return { params: { slug: entry.id }, props: { entry, newer: i > 0 ? posts[i - 1] : null, older: i >= 0 ? posts[i + 1] ?? null : null } };
+    });
+}
+const { entry, newer, older } = Astro.props;
+const d = entry.data;
+const isPost = d.type === 'post';
+const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+const html = await highlightHtml(base ? d.html.replace(/(src|href)="\/(content\/images\/)/g, `$1="${base}/$2`) : d.html);
+const hasCode = html.includes('class="code"');
+const jsonld = archiveJsonLd(entry.id, d);
+---
+<Base title={d.meta_title ?? `${d.title} | git.wtf`} description={d.meta_description ?? d.excerpt} image={`/og/${entry.id}.png`} canonical={d.canonical_url ?? undefined} type={isPost ? 'article' : 'website'} jsonld={jsonld}>
+    <main class="page">
+        <article>
+            <header class="page-head">
+                <h1>{d.title}</h1>
+                {isPost && (
+                    <p class="meta">
+                        {d.authors.length > 0 && <span>{d.authors.join(', ')}</span>}
+                        <a href={href('/archive/')}>from the archive</a>
+                    </p>
+                )}
+            </header>
+            {d.feature_image && <div class="prose"><img src={href(d.feature_image)} alt="" loading="lazy" /></div>}
+            <div class="prose" set:html={html} />
+            {d.tags.length > 0 && <p class="tags">Tagged {d.tags.join(', ')}</p>}
+            {isPost && (
+                <nav class="pager" aria-label="Other posts">
+                    <span>{older && <a href={href(`/${older.id}/`)}><small>Older post</small>&larr; {older.data.title}</a>}</span>
+                    <span class="next">{newer && <a href={href(`/${newer.id}/`)}><small>Newer post</small>{newer.data.title} &rarr;</a>}</span>
+                </nav>
+            )}
+        </article>
+    </main>
+    {hasCode && <script>import '../scripts/code-copy';</script>}
+</Base>

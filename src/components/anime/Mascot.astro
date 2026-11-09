@@ -1,0 +1,152 @@
+---
+// The git.wtf developer, from format D: a big round off-white head, half-lidded eyes with small pupils looking
+// down, a flat little mouth; a black hoodie drawn in grey ink, with shoulders, a hood, drawstrings and a kangaroo
+// pocket; sleeves that bend at the elbow; black trousers; a white mug. Full figure, origin at his feet.
+// Poses: neutral (the deadpan stare), sip, shock (his work is gone), relief, stack (holding the saved stack),
+// type (both hands forward on a keyboard), walk (mid-stride, mug in hand), enter (a fresh mug, steaming), terror (the
+// close-up: eyes wide, pupils as dots, sweat), asleep (head down on folded arms). `mug={false}` empties his hands.
+// Drawn to read at phone size: heavy ink, few small details.
+export type MascotPose = 'neutral' | 'sip' | 'shock' | 'relief' | 'stack' | 'type' | 'walk' | 'enter' | 'terror' | 'asleep' | 'angry' | 'relieved';
+interface Props { pose?: MascotPose; shadow?: boolean; mug?: boolean }
+const { pose = 'neutral', shadow = true, mug: hasMug = true } = Astro.props;
+const EX = 58, EY = -566;
+// a sleeve: shoulder, elbow, wrist, as one bent stroke (grey ink under black cloth)
+const sleeve = (pts: [number, number][]) => 'M' + pts.map(([x, y]) => `${x} ${y}`).join(' L');
+// shoulders drop a little when he breathes out
+const sh = pose === 'relief' ? 14 : 0;
+const L = { s: [-112, -380 + sh] as [number, number] }, R = { s: [112, -380 + sh] as [number, number] };
+const arms: Record<MascotPose, { l: [number, number][]; r: [number, number][]; front?: boolean }> = {
+    neutral: { l: [L.s, [-156, -290], [-70, -262]], r: [R.s, [150, -282], [134, -200]] },
+    sip: { l: [L.s, [-150, -286], [-46, -404]], r: [R.s, [150, -282], [134, -200]], front: true },
+    shock: { l: [L.s, [-206, -430], [-190, -560]], r: [R.s, [206, -430], [190, -560]] },
+    relief: { l: [L.s, [-154, -278], [-70, -248]], r: [R.s, [148, -268], [134, -186]] },
+    stack: { l: [L.s, [-160, -290], [-104, -214]], r: [R.s, [160, -290], [104, -214]] },
+    type: { l: [L.s, [-170, -282], [-56, -236]], r: [R.s, [170, -282], [56, -236]] },
+    walk: { l: [L.s, [-176, -300], [-168, -212]], r: [R.s, [128, -284], [176, -210]] },
+    enter: { l: [L.s, [-156, -290], [-70, -262]], r: [R.s, [150, -282], [134, -200]] },
+    terror: { l: [L.s, [-160, -290], [-120, -214]], r: [R.s, [160, -290], [120, -214]] },
+    asleep: { l: [L.s, [-176, -246], [44, -250]], r: [R.s, [176, -246], [-44, -250]] },
+    angry: { l: [L.s, [-170, -300], [-150, -200]], r: [R.s, [170, -300], [150, -200]] },
+    relieved: { l: [L.s, [-150, -286], [-46, -404]], r: [R.s, [150, -282], [134, -200]], front: true },
+};
+// the head drops onto the folded arms when he sleeps
+const hy = pose === 'asleep' ? 150 : sh;
+const hx = pose === 'asleep' ? 40 : 0;
+const a = arms[pose];
+const mug = (x: number, y: number, rot = 0) => ({ x, y, rot });
+const mugAt = !hasMug ? null : pose === 'neutral' || pose === 'enter' ? mug(-30, -296) : pose === 'relief' ? mug(-30, -282) : pose === 'sip' || pose === 'relieved' ? mug(-14, -458, -24) : pose === 'walk' ? mug(-176, -200, 8) : null;
+---
+<g class={`mascot m-${pose}`}>
+    {shadow && <ellipse class="m-shadow" cx="0" cy="4" rx="150" ry="22" />}
+    <g class="m-body" transform={pose === 'shock' ? 'rotate(-4 0 0)' : undefined}>
+        <!-- trousers and shoes -->
+        {pose === 'walk' ? (
+            <>
+                <path class="m-pants" d="M-80 -176 L-150 -20 L-96 -6 L-20 -150 L20 -150 L70 -10 L126 -22 L80 -176Z" />
+                <path class="m-shoe" d="M-160 -26 C-170 -10 -150 0 -126 0 L-86 0 C-84 -12 -96 -20 -110 -20Z" />
+                <path class="m-shoe" d="M136 -28 C150 -14 140 0 116 0 L62 0 C58 -10 70 -20 84 -22Z" />
+            </>
+        ) : (
+            <>
+                <path class="m-pants" d="M-80 -176 L-76 -16 L-14 -16 L-8 -148 L8 -148 L14 -16 L76 -16 L80 -176Z" />
+                <path class="m-shoe" d="M-86 -20 C-86 -6 -68 0 -46 0 L-10 0 C-6 -10 -12 -20 -24 -22Z" />
+                <path class="m-shoe" d="M86 -20 C86 -6 68 0 46 0 L10 0 C6 -10 12 -20 24 -22Z" />
+            </>
+        )}
+        <!-- the hoodie: hood behind the neck, shoulders, a hem, the kangaroo pocket, the drawstrings -->
+        <path class="m-hood" d={`M-104 ${-386 + sh} C-122 -440 -70 -474 0 -474 C70 -474 122 -440 104 ${-386 + sh}`} />
+        <path class="m-hoodie" d={`M-116 ${-390 + sh} C-140 ${-380 + sh} -150 ${-350 + sh} -148 -300 L-140 -186 C-138 -170 -124 -162 -108 -162 L108 -162 C124 -162 138 -170 140 -186 L148 -300 C150 ${-350 + sh} 140 ${-380 + sh} 116 ${-390 + sh} C84 ${-408 + sh} -84 ${-408 + sh} -116 ${-390 + sh}Z`} />
+        <path class="m-hem" d="M-138 -184 L138 -184" />
+        <path class="m-pocket" d="M-74 -270 L74 -270 L96 -192 M-74 -270 L-96 -192 M-96 -192 L96 -192" />
+        <path class="m-neck" d={`M-30 ${-402 + sh} L0 ${-374 + sh} L30 ${-402 + sh}Z`} />
+        <path class="m-string" d={`M-22 ${-390 + sh} L-28 ${-318 + sh} M22 ${-390 + sh} L28 ${-318 + sh}`} />
+        <circle class="m-tip" cx="-28" cy={-312 + sh} r="6" /><circle class="m-tip" cx="28" cy={-312 + sh} r="6" />
+
+        {pose === 'stack' && (
+            <g class="m-stack">{[0, 1, 2, 3, 4, 5].map((k) => <path class="m-sheet" d={`M${-100 + (k % 2) * 8} ${-210 - k * 28} L${100 + (k % 2) * 8} ${-210 - k * 28} L${106 + (k % 2) * 8} ${-186 - k * 28} L${-94 + (k % 2) * 8} ${-186 - k * 28}Z`} />)}</g>
+        )}
+
+        <!-- sleeves: the right one, and the left one unless it is in front of the face -->
+        <path class="m-sleeve-o" d={sleeve(a.r)} /><path class="m-sleeve" d={sleeve(a.r)} />
+        <circle class="m-hand" cx={a.r[2][0]} cy={a.r[2][1]} r="22" />
+        {!a.front && <><path class="m-sleeve-o" d={sleeve(a.l)} /><path class="m-sleeve" d={sleeve(a.l)} /></>}
+        {mugAt && !a.front && (
+            <g class="m-mug" transform={`translate(${mugAt.x} ${mugAt.y}) rotate(${mugAt.rot})`}><path class="m-cup" d="M-32 -38 L38 -38 L34 36 L-28 36Z" /><path class="m-handle" d="M38 -18 C64 -18 64 20 36 20" /><ellipse class="m-coffee" cx="3" cy="-38" rx="35" ry="8" />{pose === 'enter' && <path class="m-steam steam" d="M-10 -54 c-12 -18 12 -28 0 -48 M22 -58 c-12 -18 12 -28 0 -48" />}</g>
+        )}
+        {!a.front && pose !== 'shock' && <circle class="m-hand" cx={a.l[2][0]} cy={a.l[2][1]} r="22" />}
+        {pose === 'shock' && <circle class="m-hand" cx={a.l[2][0]} cy={a.l[2][1]} r="22" />}
+        {pose === 'shock' && hasMug && (
+            <>
+                <g class="m-mug" transform="translate(-150 -112) rotate(-118)"><path class="m-cup" d="M-32 -38 L38 -38 L34 36 L-28 36Z" /><path class="m-handle" d="M38 -18 C64 -18 64 20 36 20" /></g>
+                <path class="m-spill" d="M-196 -58 C-238 -38 -256 -8 -214 0 C-182 6 -150 -8 -160 -34Z" />
+            </>
+        )}
+
+        <!-- the head -->
+        <circle class="m-head" cx={hx} cy={-560 + hy} r="152" />
+        <g transform={hy || hx ? `translate(${hx} ${hy})` : undefined}>
+            {(pose === 'neutral' || pose === 'stack' || pose === 'type' || pose === 'walk' || pose === 'enter') && (
+                <>
+                    {[-EX, EX].map((x) => <g class="m-eye"><circle class="m-white" cx={x} cy={EY} r="32" /><path class="m-pupil" d={`M${x - 10} ${EY - 4} a13 13 0 0 0 26 0Z`} /><path class="m-lid" d={`M${x - 32} ${EY - 4} L${x + 32} ${EY - 4}`} /></g>)}
+                    <path class="m-mouth" d="M-16 -486 L12 -486" />
+                    <ellipse class="m-yawn" cx="-2" cy="-474" rx="24" ry="34" style="visibility:hidden" />
+                </>
+            )}
+            {pose === 'terror' && (
+                <>
+                    {[-EX, EX].map((x) => <g class="m-eye"><circle class="m-white" cx={x} cy={EY - 6} r="50" /><circle class="m-pupil" cx={x} cy={EY - 6} r="6" /></g>)}
+                    <path class="m-brow thin" d={`M${-EX - 44} ${EY - 82} Q${-EX} ${EY - 104} ${-EX + 40} ${EY - 82} M${EX + 44} ${EY - 82} Q${EX} ${EY - 104} ${EX - 40} ${EY - 82}`} />
+                    <path class="m-mouth" d="M-30 -472 q7.5 -10 15 0 q7.5 10 15 0 q7.5 -10 15 0 q7.5 10 15 0" />
+                    <path class="m-shake" d="M-200 -640 l-30 -12 M-206 -594 l-34 0 M200 -640 l30 -12 M206 -594 l34 0" />
+                    <path class="m-drop sweat" style="visibility:hidden" d="M140 -660 C122 -632 124 -604 142 -600 C160 -604 162 -632 140 -660Z" />
+                </>
+            )}
+            {pose === 'asleep' && (
+                <>
+                    {[-EX, EX].map((x) => <path class="m-closed" d={`M${x - 28} ${EY + 4} q28 14 56 0`} />)}
+                    <ellipse class="m-scream" cx="10" cy="-478" rx="11" ry="13" />
+                    <g class="m-zzz"><text x="150" y="-700">z</text><text x="196" y="-760" class="big">Z</text></g>
+                </>
+            )}
+            {(pose === 'sip' || pose === 'relieved') && (
+                <>
+                    {[-EX, EX].map((x) => <path class="m-closed" d={`M${x - 28} ${EY + 2} q28 16 56 0`} />)}
+                    {pose === 'relieved' && <path class="m-mouth" d="M-18 -486 q18 12 36 0" />}
+                </>
+            )}
+            {pose === 'angry' && (
+                <>
+                    {[-EX, EX].map((x) => <g class="m-eye"><circle class="m-white" cx={x} cy={EY} r="32" /><circle class="m-pupil" cx={x + Math.sign(x) * 2} cy={EY - 2} r="11" /><path class="m-lid" d={`M${x - 34} ${EY - 14 + Math.sign(x) * 4} L${x + 34} ${EY - 14 - Math.sign(x) * 4}`} /></g>)}
+                    <path class="m-brow" d={`M${-EX - 44} ${EY - 62} L${-EX + 34} ${EY - 36} M${EX + 44} ${EY - 62} L${EX - 34} ${EY - 36}`} />
+                    <path class="m-mouth" d="M-26 -478 L26 -478" />
+                    <path class="m-teeth" d="M-26 -478 L26 -478 M-18 -488 L-18 -468 M-6 -488 L-6 -468 M6 -488 L6 -468 M18 -488 L18 -468" />
+                    <g class="m-steam-head" style="visibility:hidden"><path d="M-70 -720 c-14 -22 14 -34 0 -62" /><path d="M0 -736 c-14 -22 14 -34 0 -62" /><path d="M70 -720 c-14 -22 14 -34 0 -62" /></g>
+                </>
+            )}
+            {pose === 'shock' && (
+                <>
+                    {[-EX, EX].map((x) => <g class="m-eye"><circle class="m-white" cx={x} cy={EY - 8} r="46" /><circle class="m-pupil" cx={x} cy={EY - 8} r="9" /></g>)}
+                    <path class="m-brow" d={`M${-EX - 40} ${EY - 80} L${-EX + 28} ${EY - 70} M${EX + 40} ${EY - 80} L${EX - 28} ${EY - 70}`} />
+                    <ellipse class="m-scream" cx="0" cy="-462" rx="32" ry="42" />
+                    <path class="m-drop" d="M132 -654 C114 -626 116 -598 134 -594 C152 -598 154 -626 132 -654Z" />
+                    <path class="m-shake" d="M-200 -640 l-30 -12 M-206 -594 l-34 0 M200 -640 l30 -12 M206 -594 l34 0" />
+                </>
+            )}
+            {pose === 'relief' && (
+                <>
+                    {[-EX, EX].map((x) => <path class="m-closed" d={`M${x - 28} ${EY + 6} q28 -14 56 0`} />)}
+                    <path class="m-mouth" d="M-14 -484 q8 8 16 0" />
+                    <path class="m-exhale-o" d="M150 -500 l52 8 M154 -474 l56 16 M146 -448 l46 24" /><path class="m-exhale" d="M150 -500 l52 8 M154 -474 l56 16 M146 -448 l46 24" />
+                </>
+            )}
+        </g>
+        {a.front && (
+            <>
+                <path class="m-sleeve-o front" d={sleeve(a.l)} /><path class="m-sleeve" d={sleeve(a.l)} />
+                <g class="m-mug" transform={`translate(${mugAt!.x} ${mugAt!.y}) rotate(${mugAt!.rot})`}><path class="m-cup" d="M-32 -38 L38 -38 L34 36 L-28 36Z" /><path class="m-handle" d="M38 -18 C64 -18 64 20 36 20" /></g>
+                <circle class="m-hand" cx={a.l[2][0]} cy={a.l[2][1]} r="22" />
+                <path class="m-steam" d="M2 -526 c-12 -18 12 -28 0 -48 M34 -534 c-12 -18 12 -28 0 -48" />
+            </>
+        )}
+    </g>
+</g>

@@ -1,0 +1,794 @@
+{
+    "incident": "2026-10-22-the-watcher-took-the-site-down",
+    "episode": "Episode 82",
+    "title": "The Watcher!",
+    "theme": "plum",
+    "bed": "comic",
+    "shots": [
+        {
+            "id": "hook",
+            "bg": "skyline",
+            "hook": "Its only job was to *watch*.\nIt took the *site down*.",
+            "props": {
+                "building": {
+                    "x": 1040,
+                    "y": 880,
+                    "scale": 0.85,
+                    "sign": "LOCAL NEWS",
+                    "shut": true
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 440,
+                    "y": 920,
+                    "scale": 0.6,
+                    "n": 1,
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "shutter@0.6",
+                "shake@1.1",
+                "nod@1.6"
+            ],
+            "sfx": [
+                "clunk@0.6",
+                "wobble@1.15",
+                "bop@1.6"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "v": {
+                "props": {
+                    "building": {
+                        "x": 500,
+                        "y": 1150,
+                        "scale": 0.75,
+                        "sign": "LOCAL NEWS",
+                        "shut": true
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 180,
+                        "y": 1460,
+                        "scale": 0.42,
+                        "n": 1,
+                        "arm": "hold"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "setup",
+            "bg": "office",
+            "tag": "22 Oct, 1:00 PM",
+            "props": {
+                "desk": {
+                    "x": 560,
+                    "y": 820
+                },
+                "whiteboard": {
+                    "x": 1180,
+                    "y": 320,
+                    "scale": 0.65,
+                    "text": "THIS PC SERVES\nTHE LIVE PAPER.\nONE HEAVY JOB."
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 560,
+                    "y": 820,
+                    "scale": 0.42,
+                    "n": 5,
+                    "arm": "type"
+                },
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 1180,
+                    "y": 920,
+                    "scale": 0.45,
+                    "n": 1,
+                    "arm": "hold",
+                    "flip": true
+                }
+            ],
+            "fx": [
+                "slowpush"
+            ],
+            "sfx": [
+                "typing",
+                "plink@1.2"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "desk": {
+                        "x": 300,
+                        "y": 1130
+                    },
+                    "whiteboard": {
+                        "x": 450,
+                        "y": 520,
+                        "scale": 0.85,
+                        "text": "THIS PC SERVES\nTHE LIVE PAPER.\nONE HEAVY JOB."
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 300,
+                        "y": 1130,
+                        "scale": 0.34,
+                        "n": 5,
+                        "arm": "type"
+                    },
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 700,
+                        "y": 1460,
+                        "scale": 0.36,
+                        "n": 1,
+                        "arm": "hold",
+                        "flip": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": "readonly",
+            "bg": "room",
+            "props": {
+                "note": {
+                    "x": 1120,
+                    "y": 360,
+                    "text": "READ. ONLY.",
+                    "at": 0.4,
+                    "scale": 1.2
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 600,
+                    "y": 940,
+                    "scale": 0.65,
+                    "n": 1,
+                    "arm": "salute"
+                }
+            ],
+            "fx": [
+                "note@0.4",
+                "salute@1.2"
+            ],
+            "line": {
+                "who": "AGENT 1, THE WATCHER",
+                "text": "Just watching."
+            },
+            "lineAt": 1.4,
+            "sfx": [
+                "slap@0.4",
+                "snap@1.2",
+                "pop@1.4"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "props": {
+                    "note": {
+                        "x": 450,
+                        "y": 600,
+                        "text": "READ. ONLY.",
+                        "at": 0.4,
+                        "scale": 1.2
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 450,
+                        "y": 1440,
+                        "scale": 0.55,
+                        "n": 1,
+                        "arm": "salute"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "claim",
+            "bg": "blueprint",
+            "props": {
+                "counter": {
+                    "x": 1080,
+                    "y": 420,
+                    "value": 555,
+                    "label": "MB, ALREADY SHOWN"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 440,
+                    "y": 940,
+                    "scale": 0.6,
+                    "n": 5,
+                    "arm": "point"
+                }
+            ],
+            "fx": [
+                "jab@0.5"
+            ],
+            "line": {
+                "who": "AGENT 5, THE CODER",
+                "text": "Backup folder: 555 MB."
+            },
+            "lineAt": 0.6,
+            "sfx": [
+                "bop@0.5",
+                "pop@0.6"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "props": {
+                    "counter": {
+                        "x": 450,
+                        "y": 600,
+                        "value": 555,
+                        "label": "MB, SHOWN"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 450,
+                        "y": 1440,
+                        "scale": 0.55,
+                        "n": 5,
+                        "arm": "point"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "check",
+            "bg": "servers",
+            "props": {
+                "terminal": {
+                    "x": 1080,
+                    "y": 380,
+                    "scale": 0.75,
+                    "text": "du -sm (hundreds of thousands of files)"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "neutral",
+                    "x": 420,
+                    "y": 940,
+                    "scale": 0.65,
+                    "n": 1,
+                    "arm": "type"
+                }
+            ],
+            "fx": [
+                "zoom"
+            ],
+            "line": {
+                "who": "AGENT 1",
+                "text": "Let me double-check that."
+            },
+            "lineAt": 0.7,
+            "sfx": [
+                "typing",
+                "zip@0.0"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "tag": "1:04 PM, on the live box",
+            "v": {
+                "props": {
+                    "terminal": {
+                        "x": 450,
+                        "y": 560,
+                        "scale": 0.9,
+                        "text": "du -sm (hundreds of thousands of files)"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "neutral",
+                        "x": 450,
+                        "y": 1440,
+                        "scale": 0.55,
+                        "n": 1,
+                        "arm": "type"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "background",
+            "bg": "office",
+            "tag": "120 seconds later",
+            "props": {
+                "clock": {
+                    "x": 380,
+                    "y": 270,
+                    "scale": 0.8
+                },
+                "note": {
+                    "x": 1160,
+                    "y": 380,
+                    "text": "TIMED OUT. RUNNING ON.",
+                    "at": 1.6
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 760,
+                    "y": 920,
+                    "scale": 0.5,
+                    "n": 1,
+                    "arm": "hold",
+                    "role": "shrug"
+                }
+            ],
+            "fx": [
+                "clockspin@0.2",
+                "note@1.6",
+                "shrug@2.2"
+            ],
+            "sfx": [
+                "whirr@0.2",
+                "slap@1.6",
+                "squeak@2.2"
+            ],
+            "focus": [
+                800,
+                500
+            ],
+            "v": {
+                "props": {
+                    "clock": {
+                        "x": 450,
+                        "y": 420,
+                        "scale": 0.7
+                    },
+                    "note": {
+                        "x": 450,
+                        "y": 820,
+                        "text": "TIMED OUT. RUNNING ON.",
+                        "at": 1.6
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 450,
+                        "y": 1440,
+                        "scale": 0.45,
+                        "n": 1,
+                        "arm": "hold",
+                        "role": "shrug"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "down",
+            "bg": "black",
+            "props": {
+                "building": {
+                    "x": 800,
+                    "y": 880,
+                    "scale": 0.9,
+                    "sign": "LOCAL NEWS",
+                    "shut": true
+                }
+            },
+            "fx": [
+                "impact@0.1",
+                "shutter@0.5",
+                "shake@0.9"
+            ],
+            "word": "502",
+            "wordAt": 1.1,
+            "sfx": [
+                "herochord@0.1",
+                "clunk@0.5",
+                "impact@0.9",
+                "sadtrombone@1.3"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "tag": "1:25 PM",
+            "v": {
+                "props": {
+                    "building": {
+                        "x": 450,
+                        "y": 1250,
+                        "scale": 0.8,
+                        "sign": "LOCAL NEWS",
+                        "shut": true
+                    }
+                }
+            },
+            "still": true
+        },
+        {
+            "id": "stopped",
+            "bg": "servers",
+            "tag": "1:34 PM",
+            "props": {
+                "terminal": {
+                    "x": 1100,
+                    "y": 380,
+                    "scale": 0.65,
+                    "text": "TaskStop: success (only the shell)"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 420,
+                    "y": 940,
+                    "scale": 0.6,
+                    "n": 1,
+                    "arm": "salute"
+                }
+            ],
+            "fx": [
+                "salute@0.4"
+            ],
+            "line": {
+                "who": "AGENT 1",
+                "text": "After I stopped the du,\nC: dropped to queue 3."
+            },
+            "lineAt": 0.8,
+            "sfx": [
+                "click@0.3",
+                "snap@0.4",
+                "chord@0.8"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "props": {
+                    "terminal": {
+                        "x": 450,
+                        "y": 560,
+                        "scale": 0.85,
+                        "text": "TaskStop: success (only the shell)"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 450,
+                        "y": 1440,
+                        "scale": 0.55,
+                        "n": 1,
+                        "arm": "salute"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "notstopped",
+            "bg": "halftone",
+            "props": {
+                "stack": {
+                    "x": 1120,
+                    "y": 940,
+                    "grow": [
+                        120,
+                        520
+                    ]
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "extra": true,
+                    "pose": "happy",
+                    "x": 760,
+                    "y": 940,
+                    "scale": 0.55,
+                    "role": "extra",
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "tiptoe",
+                "grow@0.4"
+            ],
+            "word": "It had not stopped.",
+            "wordAt": 1.6,
+            "sfx": [
+                "tiptoe",
+                "shuffle@0.4",
+                "honk@1.6"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "tag": "du.exe, still counting",
+            "v": {
+                "props": {
+                    "stack": {
+                        "x": 640,
+                        "y": 1440,
+                        "grow": [
+                            120,
+                            700
+                        ]
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "extra": true,
+                        "pose": "happy",
+                        "x": 300,
+                        "y": 1460,
+                        "scale": 0.45,
+                        "role": "extra",
+                        "arm": "hold"
+                    }
+                ]
+            },
+            "still": true
+        },
+        {
+            "id": "mine",
+            "bg": "room",
+            "tag": "2:11 PM",
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "shocked",
+                    "x": 440,
+                    "y": 940,
+                    "scale": 0.6,
+                    "n": 1,
+                    "arm": "point"
+                },
+                {
+                    "who": "agent",
+                    "extra": true,
+                    "pose": "happy",
+                    "x": 1140,
+                    "y": 940,
+                    "scale": 0.5,
+                    "role": "extra",
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "jab@0.4",
+                "shake@0.5"
+            ],
+            "line": {
+                "who": "AGENT 1",
+                "text": "The disk hog is my own du.exe."
+            },
+            "lineAt": 0.7,
+            "sfx": [
+                "bop@0.4",
+                "boing@0.5",
+                "squeak@1.6"
+            ],
+            "focus": [
+                800,
+                480
+            ],
+            "v": {
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "shocked",
+                        "x": 250,
+                        "y": 1460,
+                        "scale": 0.45,
+                        "n": 1,
+                        "arm": "point"
+                    },
+                    {
+                        "who": "agent",
+                        "extra": true,
+                        "pose": "happy",
+                        "x": 680,
+                        "y": 1460,
+                        "scale": 0.4,
+                        "role": "extra",
+                        "arm": "hold"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "back",
+            "bg": "skyline",
+            "props": {
+                "building": {
+                    "x": 1040,
+                    "y": 880,
+                    "scale": 0.85,
+                    "sign": "LOCAL NEWS"
+                },
+                "counter": {
+                    "x": 400,
+                    "y": 300,
+                    "from": 0,
+                    "to": 41,
+                    "label": "MINUTES OF 502"
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "defeated",
+                    "x": 400,
+                    "y": 920,
+                    "scale": 0.45,
+                    "n": 1,
+                    "arm": "hold"
+                }
+            ],
+            "fx": [
+                "tick@0.2",
+                "stamp@2.9"
+            ],
+            "sfx": [
+                "tick@0.2",
+                "chord@2.6",
+                "stamp@2.9"
+            ],
+            "focus": [
+                800,
+                560
+            ],
+            "tag": "2:12 PM, back up",
+            "v": {
+                "props": {
+                    "building": {
+                        "x": 500,
+                        "y": 1150,
+                        "scale": 0.75,
+                        "sign": "LOCAL NEWS"
+                    },
+                    "counter": {
+                        "x": 450,
+                        "y": 560,
+                        "from": 0,
+                        "to": 41,
+                        "label": "MINUTES OF 502"
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "defeated",
+                        "x": 180,
+                        "y": 1460,
+                        "scale": 0.4,
+                        "n": 1,
+                        "arm": "hold"
+                    }
+                ]
+            },
+            "still": true,
+            "stillAt": 3.4
+        },
+        {
+            "id": "next",
+            "bg": "office",
+            "tag": "Next check: in 30 minutes",
+            "props": {
+                "clock": {
+                    "x": 800,
+                    "y": 300,
+                    "scale": 1
+                },
+                "plant": {
+                    "x": 1360,
+                    "y": 900,
+                    "scale": 0.8
+                }
+            },
+            "cast": [
+                {
+                    "who": "agent",
+                    "pose": "happy",
+                    "x": 460,
+                    "y": 920,
+                    "scale": 0.55,
+                    "n": 1,
+                    "arm": "hold",
+                    "role": "hop"
+                }
+            ],
+            "fx": [
+                "clockspin@0.2",
+                "hop@1.4",
+                "continued@2.3"
+            ],
+            "sfx": [
+                "whirr@0.2",
+                "spring@1.4",
+                "freeze@2.3"
+            ],
+            "focus": [
+                800,
+                520
+            ],
+            "v": {
+                "props": {
+                    "clock": {
+                        "x": 450,
+                        "y": 480,
+                        "scale": 0.9
+                    },
+                    "plant": {
+                        "x": 740,
+                        "y": 1300,
+                        "scale": 0.7
+                    }
+                },
+                "cast": [
+                    {
+                        "who": "agent",
+                        "pose": "happy",
+                        "x": 300,
+                        "y": 1460,
+                        "scale": 0.45,
+                        "n": 1,
+                        "arm": "hold",
+                        "role": "hop"
+                    }
+                ]
+            }
+        }
+    ]
+}

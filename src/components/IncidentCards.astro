@@ -1,0 +1,29 @@
+---
+// The incident lists (every incident, and each category): cards with the picture that goes with the incident when
+// it is shared, newest first, all the same size in a compact grid (there will be many).
+import { cutAssets } from '../lib/cuts';
+import { categoryLabel, formatDay, happened, href, incidentPath, inlineCode, type Incident } from '../lib/site';
+interface Props { incidents: Incident[]; category?: boolean }
+const { incidents, category = true } = Astro.props;
+const pic = (i: Incident) => {
+    const c = cutAssets(i.id);
+    if (c.story) return { src: href(`/cuts/${i.id}/${c.story}`), set: c.story2x ? `${href(`/cuts/${i.id}/${c.story}`)} 1200w, ${href(`/cuts/${i.id}/${c.story2x}`)} 2400w` : undefined };
+    return { src: href(`${incidentPath(i)}share.png`), set: undefined };
+};
+---
+<ol class="icards">
+    {incidents.map((i, n) => (
+        <li>
+            <a href={href(incidentPath(i))}>
+                <img src={pic(i).src} srcset={pic(i).set} sizes="(min-width: 900px) 24rem, 100vw" width="1200" height="630" alt="" loading={n < 2 ? 'eager' : 'lazy'} decoding="async" />
+                <span class="ic-text">
+                    <span class="ic-meta"><time datetime={happened(i)}>{formatDay(happened(i))}</time>{category && <span>{categoryLabel(i.data.category)}</span>}</span>
+                    <span class="ic-title">{i.data.title}</span>
+                    {i.data.summary && <span class="ic-sum" set:html={inlineCode(i.data.summary)} />}
+                    <span class="ic-status" set:html={`Status: ${inlineCode(i.data.status)}`} />
+                    <span class="ic-go">{cutAssets(i.id).stills.length ? 'Watch it' : 'Read it'} <span aria-hidden="true">&rarr;</span></span>
+                </span>
+            </a>
+        </li>
+    ))}
+</ol>
