@@ -94,7 +94,10 @@ const fontCss = fonts.map(([file, family, weight]) => `@font-face{font-family:'$
     )}
     {SITE.gtm && import.meta.env.PROD && !base && (
         <script is:inline define:vars={{ gtm: SITE.gtm }}>
-            // Google Tag Manager (Analytics), started after the load and a moment's idle so the first paint never waits for it
+            (function () {
+            // Google Tag Manager (Analytics), started after the load and a moment's idle so the first paint never waits for it.
+            // Only on git.wtf itself: previews (workers.dev, localhost, test runs) must never count as visits.
+            if (location.hostname !== 'git.wtf' && location.hostname !== 'www.git.wtf') return;
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
             addEventListener('load', function () {
@@ -105,6 +108,7 @@ const fontCss = fonts.map(([file, family, weight]) => `@font-face{font-family:'$
                     document.head.appendChild(s);
                 }, 1500);
             });
+            })();
         </script>
     )}
 </head>
