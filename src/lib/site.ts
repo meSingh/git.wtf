@@ -27,10 +27,11 @@ export const SITE = {
     lineWords: ['DAYS', 'SINCE', 'THE', 'LAST', 'GIT & AI', 'FUCK-UP'],
     // The credit line, his exact words; the emphasised parts are marked by the footer.
     credit: { name: 'Mandeep Singh', before: 'an ', strong: 'AI Architect', after: " who reviews his agents' commits. ", last: '“Mostly.”' },
-    // The project's own accounts, from this one list; all four show (Mandeep, v6). X is real. The other three are
-    // X, LinkedIn (a showcase page) and YouTube (handle @gitwtf) are live. Instagram is a PLACEHOLDER URL: @gitwtf there is taken, so it changes once he picks a handle (social session, 8 Nov 2026).
+    // The project's own accounts, from this one list; all four show (Mandeep, v6). All four are live (9 Nov 2026):
+    // Instagram is @git.wtf (@gitwtf belongs to someone else), LinkedIn is a showcase page, YouTube is @gitwtf.
+    // An entry marked `placeholder` is hidden from the footer until its account exists.
     social: [
-        { name: 'Instagram', url: 'https://www.instagram.com/gitwtf', placeholder: true },
+        { name: 'Instagram', url: 'https://www.instagram.com/git.wtf/' },
         { name: 'YouTube Shorts', url: 'https://www.youtube.com/@gitwtf/shorts' },
         { name: 'X', url: 'https://x.com/gitwtf' },
         { name: 'LinkedIn', url: 'https://www.linkedin.com/showcase/gitwtf/' },
