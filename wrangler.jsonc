@@ -11,5 +11,7 @@
         "html_handling": "auto-trailing-slash"
     },
     "workers_dev": true,
-    "preview_urls": false
+    "preview_urls": false,
+    // Workers Builds runs `npx wrangler preview` for pull request branches, which needs this block (it can stay empty)
+    "previews": {}
 }
