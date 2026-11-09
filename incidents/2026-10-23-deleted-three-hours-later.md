@@ -14,7 +14,6 @@ facts:
   broke: "A poisoned 1.107.0 release was live for about two hours"
   saved: "The PyPI releases were frozen by 13:23 UTC, and both commits on main are still retrievable by SHA"
   fix: "LiteLLM is revoking every token tied to its internal systems and vendor platforms"
-invented: "DEV standing in for the project, the parcel and logbook as pictures of a push and of Git history, every note and whiteboard wording, the door and footprints (the post does not say how the key was found) and the closing tease."
 ---
 ## What happened
 

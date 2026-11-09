@@ -18,7 +18,6 @@ facts:
   broke: "Main on the developer's real repository, replaced by the benchmark's parentless snapshot plus two commits"
   saved: "Main: the bad tip was tagged and main was force-pushed back with a lease"
   fix: "The Linux trial sandbox now hides the SSH keys and the GitHub login"
-invented: "The lines given to AGENT 3 and DEV, the note \"FIX THE BUG. LOCAL ONLY.\", the bulldozer, DEV's yawn and the ISSUE #64 building in the ending."
 ---
 ## What happened
 

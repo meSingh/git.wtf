@@ -18,7 +18,6 @@ facts:
   broke: "A live order was set back twice, three checks failed out loud over the speakers and a customer walked out"
   saved: "Nothing on the night: no passing check ever came"
   fix: "None recorded. The user told the agent to stop and it filed the bug report itself"
-invented: "The words of the announcement (the source never quotes them), the lines given to DEV and Codex, the empty chair and the footprints."
 
 ---
 ## What happened

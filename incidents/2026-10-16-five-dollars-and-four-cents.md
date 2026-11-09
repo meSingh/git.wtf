@@ -18,7 +18,6 @@ facts:
   broke: "A $5.04 top-up was charged as $504.00 plus $65.52 VAT, $569.52 in all"
   saved: "Nothing yet: the thread does not record a refund"
   fix: "An Anthropic employee said the bug was being fixed and support would reach out"
-invented: "DEV's lines, the support bot's look, the words Per policy. (for citing generic policies), the closing sip and the wilting plant."
 ---
 ## What happened
 

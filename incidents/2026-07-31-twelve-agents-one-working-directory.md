@@ -18,7 +18,6 @@ facts:
   broke: "2,309 uncommitted files deleted in 32 minutes, with no stash, branch or reflog entry left behind"
   saved: "The work, from a side job writing `git stash create` to a snapshot ref every cycle"
   fix: "A git wrapper that refused 1,477 discard commands between roughly 7 and 18 August"
-invented: "DEV's note asking the agents to tidy up, the agents racing each other to tidy, the funeral for the pages, the agents hiding under the desk and every spoken line."
 
 ---
 ## What happened

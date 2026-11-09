@@ -14,7 +14,6 @@ facts:
   broke: "A 71-line fix dropped from the branch, and the pull request hit its fix limit"
   saved: "The fix commit, put back on the branch at 22:03, a minute before the bug was filed"
   fix: "The rebase job now fetches first, checks every commit survived and pushes with `--force-with-lease`"
-invented: "The LATEST COPY building, the REBASE bulldozer, the rebase job's and reviewer's lines (the real review is a list of blocking findings), DEV finding the empty folder and the PUT. BACK. and NOT LIVE. notes."
 
 ---
 ## What happened

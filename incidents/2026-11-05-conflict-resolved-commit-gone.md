@@ -14,7 +14,6 @@ facts:
   broke: "A fork commit that keeps Android pushes flowing, dropped with `git rebase --skip`"
   saved: "Nothing lost downstream: the repair stage ran out of time, so nothing was published"
   fix: "Same day: the agent is refused `git rebase --skip` and directory-wide checkouts and told to escalate"
-invented: "The OUR PHONE FIX folder, the whiteboards, the conflict agent's line (only \"natively resolved\" is from the source), the alert note, the refusal wording and DEV standing in for the team."
 
 ---
 ## What happened

@@ -18,7 +18,6 @@ facts:
   broke: "The whole ignored `data/` folder, a local SQLite database included, deleted past the Recycle Bin"
   saved: "All of it, from a Windows snapshot taken about 26 minutes earlier, matching byte for byte"
   fix: "None recorded. The issue is still open"
-invented: "The lines \"Fine. I'll use Git.\" and \"I copied it. Twenty-six minutes ago.\", the file name on the monitor (the real target was a .pyc file), the notes and the next-morning DRY RUN. FIRST. rule."
 
 ---
 ## What happened

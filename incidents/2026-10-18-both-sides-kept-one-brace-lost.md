@@ -14,7 +14,6 @@ facts:
   broke: "Accept Both left the first function open and came out right in 6 of 81 merges"
   saved: "Nothing needed saving: the bad results came from replaying old merges"
   fix: "Pull request #1859 merged the next day"
-invented: "DEV as the developer, the two branches drawn as AGENT 11 and AGENT 12, DEV's line about the brace, the whiteboard wording, the stack of pages and the tease about the next PR."
 ---
 ## What happened
 

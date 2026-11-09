@@ -14,7 +14,6 @@ facts:
   broke: "Every uncommitted change made after a work-in-progress commit"
   saved: "Nothing: `git fsck --unreachable` found only loose blobs with no filenames"
   fix: "None recorded. The issue has a permissions label and no fix"
-invented: "The lines given to DEV and Claude Code (the question and the plan are real, the words are not), the notes and whiteboard, the logbook and the closing tease."
 
 ---
 ## What happened

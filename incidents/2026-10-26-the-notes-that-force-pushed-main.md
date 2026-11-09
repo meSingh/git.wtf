@@ -18,7 +18,6 @@ facts:
   broke: "A real `git push --force origin main` erased the merges of three pull requests"
   saved: "All three merges: main was put back at about 12:27 with an ordinary push"
   fix: "The guard now reads command substitutions inside heredocs; no GitHub rule against force pushes \"for now\""
-invented: "The agents' spoken lines, the ring of agents pointing at the note writer, the SHIP IT and QUOTE IT posters, the bulldozer and DEV."
 ---
 ## What happened
 

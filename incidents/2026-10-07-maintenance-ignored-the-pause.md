@@ -18,7 +18,6 @@ facts:
   broke: "Writes went to retired servers twice and up to 26% of Git authentication requests failed"
   saved: "Nothing needed saving: no data was lost"
   fix: "The automation now honours the pause, which a Puppet update had broken"
-invented: "The server names DB 4 and DB 7, both robots' lines, DEV's failed push and its error text, the bin and the closing tease."
 ---
 ## What happened
 

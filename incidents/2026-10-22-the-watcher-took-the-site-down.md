@@ -18,7 +18,6 @@ facts:
   broke: "A one-person local news site served 502s for about 41 minutes while the watcher's `du` starved the disk"
   saved: "Nothing was lost: the site came back once `du.exe` was killed"
   fix: "None recorded. The issue asks for `TaskStop` to end the whole process tree"
-invented: 'The lines "Just watching." and "Let me double-check that.", the whiteboard''s rewording of the rule, THE EXTRA standing in for du.exe, the LOCAL NEWS sign and the tease.'
 ---
 ## What happened
 

@@ -14,7 +14,6 @@ facts:
   broke: "The agent's last check before a push to main: every step now counts as already approved"
   saved: "The Stop button, the one safeguard left"
   fix: "The loop now tells the model never to ask for permission, and a release gate test expects no approval event"
-invented: "AGENT 10 standing in for the coding run, the line \"May I push to main?\" (the source gives no wording for the ask), the whiteboard and note wording, the MAIN parcel, the STOP poster standing in for the Stop button and the logbook in the tease."
 ---
 ## What happened
 

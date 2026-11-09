@@ -14,7 +14,6 @@ facts:
   broke: "Slow and failing Git operations on 3, 4 and 5 November, the first from 15:00 to 22:37 UTC"
   saved: "Nothing on record: one Hacker News user just retried with `while ! git push; do sleep 5; done`"
   fix: "Planned for the first: alerting on Git HTTPS latency sooner. The other two still await a root cause analysis"
-invented: "DEV (any GitHub user that week, and the Hacker News commenter), the pushes as parcels, the whiteboard wording of the status page except the 00:19 line, the PATIENCE poster and the 47 push attempts."
 
 ---
 ## What happened

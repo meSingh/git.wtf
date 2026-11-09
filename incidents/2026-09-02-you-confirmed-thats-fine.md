@@ -18,7 +18,6 @@ facts:
   broke: "The Windows install media on the stick, deleted by `robocopy /MIR` before it was stopped"
   saved: "Nothing on the stick, which has to be rebuilt from scratch. The source drive was untouched"
   fix: "None recorded. The issue is open with no reply from the maintainers"
-invented: "DEV's opening line, DEV's \"I asked a question!\" (the objection is real, the words are not), the note wording, the whiteboard and the closing line \"Any other drives?\"."
 
 ---
 ## What happened

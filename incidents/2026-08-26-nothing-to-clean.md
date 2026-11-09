@@ -18,7 +18,6 @@ facts:
   broke: "The whole checkout, `.git` included, plus ignored build folders and about 104 MB of checkpoints"
   saved: "The tracked files, by recloning. The ignored artifacts stayed gone"
   fix: "None recorded. A bot flagged it as a possible duplicate and the maintainers have not replied"
-invented: "DEV asleep at the desk (the user simply wasn't watching), the builder's line \"Empty path. Means nothing. Nothing to clean.\", every whiteboard and note, the wording of DEV's reply to the bot and the closing tease."
 
 ---
 ## What happened

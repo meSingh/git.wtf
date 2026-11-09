@@ -18,7 +18,6 @@ facts:
   broke: "Every app the user's account could write to, from VS Code to WhatsApp, over five builds"
   saved: "Nothing: the reporter says macOS dropped the three-day-old snapshot during a failed restore"
   fix: "None recorded. The issue is open with no reply from the maintainers"
-invented: "Claude's lines \"And the usual shortcut to Applications.\" and \"Every build starts clean.\", the parcel, the REINSTALL whiteboard and the knocking in the tease."
 ---
 ## What happened
 

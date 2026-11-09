@@ -14,7 +14,6 @@ facts:
   broke: "400 worktrees across 65 repositories, one in use mid-task, and at least 168 files in ignored paths"
   saved: "The in-use worktree, restored from its branch; 126 files rebuilt and 18 surviving copies found"
   fix: "Merged on 4 Nov: the sweep holds worktrees a session is using and copies ignored deliverables out first"
-invented: "Worktrees as spare desks, the agent standing in for the sweep script (the source never says who ran it), the session's line, the transcripts as a character and the note and whiteboard wordings."
 
 ---
 ## What happened

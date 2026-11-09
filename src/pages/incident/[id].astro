@@ -77,7 +77,6 @@ const jsonld = incidentJsonLd(p, d, { image: `${p}share.png`, video: vid ? { url
             <article class="prose inc-body">
                 {!sectioned && <h2 class="visually-hidden">What happened</h2>}
                 <Content />
-                {d.invented && <p class="inc-made"><span>Made up for the episode</span> {d.invented}</p>}
                 {video && (
                     <p class="video"><video src={video} poster={poster} controls muted playsinline preload="none" width="1080" height="1920">Your browser does not play this video. <a href={video}>Download it.</a></video></p>
                 )}

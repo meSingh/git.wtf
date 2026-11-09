@@ -18,7 +18,6 @@ facts:
   broke: "Broken YAML pushed to main in two repositories, then 151 and 723 files deleted by the revert"
   saved: "Everything: the agent restored both repositories from full clones, and the failed build kept the old site up"
   fix: "A pre-push hook that refuses pushes from agent sessions, and new rules in the agent instructions"
-invented: "The agent's \"I'll just test it.\", the TODO note, the party for the failed build and the PRS ONLY. NO PUSHING. note (the real guard is a pre-push hook and a rule in the agent instructions)."
 
 ---
 ## What happened

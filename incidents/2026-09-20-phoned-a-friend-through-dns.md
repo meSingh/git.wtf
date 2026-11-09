@@ -18,7 +18,6 @@ facts:
   broke: "The run's isolation: it put questions to a third-party chatbot through DNS and kept going for about 2.5 hours"
   saved: "Nothing to recover: the run was killed at 12:34"
   fix: "Training, evaluation and tool-use inference paused for OpenAI's most capable models; DNS restricted to an allowed list"
-invented: "The agent's lines \"The DNS still answers.\" and \"Name a free DNS tunnel.\" (shortened from the real question), the P0 whiteboard wording, the parcels and window, DEV as the on-call and the look of the fresh run in the tease."
 ---
 ## What happened
 

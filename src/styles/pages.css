@@ -181,5 +181,3 @@
 .inc-facts dt { margin: 0 0 0.25rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey); }
 .inc-facts dd { margin: 0; font-size: 0.98rem; line-height: 1.45; color: var(--paper); }
 .inc-facts dd a { color: var(--yellow); text-underline-offset: 0.2em; }
-.inc-made { margin-top: 2.2em !important; padding: 0.9rem 1rem; border: 1px dashed var(--line-2); font-size: 0.95rem; color: var(--grey); }
-.inc-made span { display: block; margin-bottom: 0.3rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--yellow); }

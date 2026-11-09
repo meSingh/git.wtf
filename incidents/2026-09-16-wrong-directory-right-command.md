@@ -14,7 +14,6 @@ facts:
   broke: "22 modified files from the previous session, discarded by `git checkout -- .` with no prompt"
   saved: "The files, from nameless blobs that an earlier staging had left in the object database"
   fix: "A helper that refuses to restore over uncommitted changes without a backup, plus one line in the agent instructions"
-invented: "DEV as the one who finds the work gone, the SPARE COPY window, the agent's lines \"Reset the spare copy. Easy.\" and \"Resetting the spare copy!\", the shortened refusal on the monitor and the copier with THE EXTRA standing in for the staged blobs."
 ---
 ## What happened
 

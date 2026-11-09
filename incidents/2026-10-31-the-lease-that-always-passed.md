@@ -14,7 +14,6 @@ facts:
   broke: "A collaborator's commit, discarded by a push that reported success (in a reproduction)"
   saved: "Nothing to save: the bug was shown with throwaway repositories"
   fix: "Read the remote tip first, decline if it has commits `HEAD` lacks, then lease on that tip"
-invented: "The LEASE bulldozer, the gate that speaks, DEV as the teammate (the reproduction used scripted throwaway repositories), the Rust port as a second agent and every note and whiteboard wording."
 
 ---
 ## What happened

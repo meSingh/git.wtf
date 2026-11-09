@@ -47,12 +47,11 @@ const incidents = defineCollection({
         // Who caused it (the scoreboard) and with what (the tally by tool). Content sets both (VOICE.md).
         actor: z.enum(ACTORS),
         tool: z.enum(TOOLS).optional(),
-        // The write-up's frame (Mandeep, 8 Nov 2026): one line for cards, lists and search snippets; the facts panel
-        // beside the write-up; and what the episode made up for the joke. The body itself is three parts under
+        // The write-up's frame (Mandeep, 8 Nov 2026): one line for cards, lists and search snippets and the facts panel
+        // beside the write-up. No "what we made up" note: it is a parody site, not a news site. The body is three parts under
         // "## What happened", "## Why it happened" and "## How it ended".
         summary: z.string().min(1).max(170).optional(),
         facts: z.object({ who: z.string().min(1), broke: z.string().min(1), saved: z.string().min(1), fix: z.string().min(1) }).partial().optional(),
-        invented: z.string().min(1).optional(),
         // Set by scripts/render-video.mjs once the video is uploaded (phase 2). Absent until then.
         video: z.string().url().optional(),
         poster: z.string().url().optional(),
