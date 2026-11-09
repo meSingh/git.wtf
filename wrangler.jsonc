@@ -10,7 +10,8 @@
         "not_found_handling": "404-page",
         "html_handling": "auto-trailing-slash"
     },
-    "workers_dev": true,
+    // git.wtf and www.git.wtf are custom domains on the Worker; the workers.dev address is closed (9 Nov 2026)
+    "workers_dev": false,
     "preview_urls": false,
     // Workers Builds runs `npx wrangler preview` for pull request branches, which needs this block (it can stay empty)
     "previews": {}
