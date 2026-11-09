@@ -34,11 +34,3 @@ node scripts/publish-incident.mjs drafts/2026-11-07-slug.md
 ```
 
 It validates the file, moves it into `incidents/`, builds, commits the file and pushes.
-
-Build the archive from a Ghost export:
-
-```bash
-node scripts/ghost-to-archive.mjs ~/path/to/ghost-export.json --images ~/path/to/ghost/content/images
-```
-
-The Laravel version that ran here from 2016 to 2021 is tagged `laravel-2021`.
